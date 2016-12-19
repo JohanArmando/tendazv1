@@ -3,56 +3,32 @@
 namespace Tendaz\Models\Order;
 
 use Illuminate\Database\Eloquent\Model;
-use Tendaz\Models\User;
+use Tendaz\Models\Customer;
+use Tendaz\Traits\UuidAndShopTrait;
+use Tendaz\Traits\WhereShopTrait;
 
 class Consult extends Model
 {
+    use WhereShopTrait, UuidAndShopTrait;
+
     protected $table = 'consults';
-    protected $fillable = ['allowed' , 'message' ,'phone' , 'user_id'];
+    protected $fillable = ['uuid', 'message' ,'phone' , 'allowed', 'customer_id','shop_id'];
 
-    public function user(){
-        return $this->belongsTo('Tendaz\User');
-    }
-
-    public static function findOrCreateUser($data){
-        $user = Consult::findUser($data['email']);
-        if($user){
-            Consult::createNews($user);
-        }else{
-            $user = Consult::createUser($data);
-            Consult::createNews($user);
-        }
-    }
-    
-    public static function createUser($data){
-        $user = User::create([
-            'email' => $data['email'],
-            'type' => 'users',
-        ]);
-        return $user;
-    }
-    
-    public static function findUser($email){
-        return User::where('email' , $email)->first();
+    public function getRouteKeyName()
+    {
+        return 'uuid';
     }
 
-    public static function createNews($user){
-        Consult::create([
-            'user_id' => $user->id,
-            'message' => ''
-        ]);
+    public function customer(){
+        return $this->belongsTo(Customer::class);
     }
 
     public function setMessageAttribute($value){
         if(empty($value)){
             $this->attributes['message'] = 'Pedido de inscripci&oacute;n a newsletter';
+        }else{
+            $this->attributes['message'] = $value;
         }
     }
 
-    public function setPhoneAttribute($value){
-        $this->phone = '';
-    }
-    public function setAllowedAttribute($value){
-        $this->allowed = 0;
-    }
 }

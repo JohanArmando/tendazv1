@@ -57,34 +57,40 @@
 							</div>
 						@endif
 						{!! Form::open(['url' => url('contact/email') , 'method' => 'POST' , 'class' => 'contact-form']) !!}
-							<div class="row">
-								<div class="col-md-4">
-									<div class="form-group">
-										<label for="inputName">Nombre <sup>*</sup></label>
-										<input type="text" class="form-control" id="inputName" name="name" value="{{ old('name') }}" required>
-									  </div>
-								</div>
-								<div class="col-md-4">
-									<div class="form-group">
-										<label for="inputEmail">Email <sup>*</sup></label>
-										<input type="email" class="form-control" id="inputEmail" name="email"  value="{{ old('email') }}" required>
-									  </div>
-								</div>
-								<div class="col-md-4">
-									<div class="form-group">
-										<label for="inputPhone">Asunto</label>
-										<input type="text" class="form-control" id="inputasunto" name="subject"  value="{{ old('subject') }}">
-									  </div>
+						<div class="row">
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="inputName">Nombre <sup>*</sup></label>
+									<input type="text" class="form-control" id="inputName" name="name" value="{{ old('name') }}" required>
 								</div>
 							</div>
-							<div class="form-group">
-								<label for="textareaMessage">Mensaje<sup>*</sup></label>
-								<textarea class="form-control" rows="12"  name="message"  value="{{ old('message') }}" required></textarea>
-						   </div>
-						   <div class="pull-right note">* Campos importantes</div>
-						   <button class="btn btn--ys btn--xl btn-top" type="submit">Enviar Mensaje
-							   <i class="fa fa-envelope"></i>
-						   </button>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="inputEmail">Email <sup>*</sup></label>
+									<input type="email" class="form-control" id="inputEmail" name="email"  value="{{ old('email') }}" required>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="inputPhone">Asunto</label>
+									<input type="text" class="form-control" id="inputasunto" name="subject"  value="{{ old('subject') }}">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="inputPhone">Telefono </label>
+									<input type="number" class="form-control" id="inputPhone" name="phone" value="{{ old('phone') }}">
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="textareaMessage">Mensaje<sup>*</sup></label>
+							<textarea class="form-control" rows="12"  name="message"  value="{{ old('message') }}" required></textarea>
+						</div>
+						<div class="pull-right note">* Campos importantes</div>
+						<button class="btn btn--ys btn--xl btn-top" type="submit">Enviar Mensaje
+							<i class="fa fa-envelope"></i>
+						</button>
 						{!! Form::close() !!}
 					</div>
 				</div>

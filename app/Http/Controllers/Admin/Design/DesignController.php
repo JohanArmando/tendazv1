@@ -55,10 +55,11 @@ class DesignController extends Controller
             return redirect()->back()->with('message',array('type' => 'warning' , 'message' => 'Tu tienda no tiene logo.'));
     }
 
-    public function slider(Request $request )
+    public function slider($subdomain , Request $request )
     {
         $store = $request->shop;
         $id = $request->shop->id;
+
         /** @var  $slider1 */
         $slider1 = $request->file('slider1');
         if(!$slider1 == "") {
@@ -85,10 +86,8 @@ class DesignController extends Controller
         }
         /** save */
         $store->save();
-        if($store->slider1 && $store->slider2 && $store->slider3 )
-            return redirect()->back()->with('message',array('type' => 'success' , 'message' => 'Las imagenes del slider de tu tienda an cambiado'));
-        else
-            return redirect()->back()->with('message',array('type' => 'warning' , 'message' => 'Tu tienda no tiene imagenes para el slider.'));
+        Cache::forget($subdomain.'_store');
+        return redirect()->back()->with('message',array('type' => 'success' , 'message' => 'Las imagenes del slider de tu tienda han cambiado'));
     }
 
     public function build()

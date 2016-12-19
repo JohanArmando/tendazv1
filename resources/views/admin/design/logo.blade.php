@@ -14,7 +14,7 @@ Elige tu logo
                 <div class="toolbar">
                     <ol class="breadcrumb breadcrumb-transparent nm">
                         <li><a href="{{url('admin')}}" style="color: darkgrey;"> Inicio</a></li>
-                        <li><a href="#" style="color: darkgrey;">Marketing</a></li>
+                        <li><a href="#" style="color: darkgrey;">Dise&ntilde;o</a></li>
                         <li class="active"><a href="#" style="color: orange;">Logo</a></li>
                     </ol>
                 </div>
@@ -68,7 +68,7 @@ Elige tu logo
                         <div class="panel-body">
                             {!! Form::model($logo , ['url' => "admin/design/sliders/".$logo->uuid , 'method' => 'PUT','files' => true]) !!}
                             <div class="col-md-12">
-                                <p>Para que tus imagenes se adapten bien en los templates, se recomienda imagenes con tama&ntilde;o de 1200x600.</p>
+                                <p>Para que tus imagenes se adapten bien en los templates, se recomienda con tama&ntilde;o de 1200x600.</p>
                             </div>
 
                             <div class="row">

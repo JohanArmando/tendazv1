@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Tendaz\Models\Cart\Cart;
 use Tendaz\Models\Customer;
+use Tendaz\Models\Order\Consult;
 use Tendaz\Models\Payment_method\PaymentValue;
 use Tendaz\Models\Products\Product;
 use Tendaz\Models\Products\Variant;
@@ -47,6 +48,29 @@ class HomeController extends Controller
     }
 
     public function email (Request $request){
+
+        $customer = Customer::where('email',$request->get('email'))->first();
+        if(Customer::where('email',$request->get('email'))->exists()){
+            Consult::create([
+                'phone'       => $request->get('phone'),
+                'message'     => $request->get('message'),
+                'allowed'     => $request->get('subject'),
+                'customer_id' => $customer->id
+            ]);
+        }else{
+            $customer = Customer::create([
+                'name'        => $request->get('name'),
+                'phone'       => $request->get('phone'),
+                'email'       => $request->get('email')
+            ]);
+            Consult::create([
+                'phone'       => $request->get('phone'),
+                'message'     => $request->get('message'),
+                'allowed'     => $request->get('subject'),
+                'customer_id' => $customer->id
+            ]);
+        }
+        /*;*/
         return redirect()->to('contact')->with('message' , array('message' =>
             'El mensaje ha sido enviado con exito, muchas gracias.' , 'type' => 'info'));
     }
