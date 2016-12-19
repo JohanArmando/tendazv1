@@ -53,20 +53,20 @@
                        </a>
                        <!-- START 2nd Level Menu -->
                        <ul id="layout" class="submenu collapse ">
-                         <li >
+                          <li>
                              <a href="{{ url('admin/products') }}">
                                  <span class="text">Mis Productos</span>
                              </a>
-                         </li>
-                         <li >
-                               <a href="{{ url('admin/products/create') }}">
-                                   <span class="text">Agregar Productos</span>
-                               </a>
                            </li>
-                           <li >
+                           <li>
                                <a href="{{ url('admin/categories')}}">
                                    <span class="text">Categorias</span>
 
+                               </a>
+                           </li>
+                           <li>
+                               <a href="{{ url('admin/products/create') }}">
+                                   <span class="text">Agregar Productos</span>
                                </a>
                            </li>
                            <li >

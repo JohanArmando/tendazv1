@@ -1,6 +1,8 @@
 /node_modules
 /public/storage
 /public/images-products
+/public/sliders
+/public/logos
 /public/tendaz
 /public/new-checkout
 /vendor

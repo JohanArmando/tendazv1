@@ -13,7 +13,7 @@
                             </ol>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-3 col-sm-12">
+                    <div class="hidden col-lg-3 col-md-3 col-sm-12">
                         <div class="no-padding">
                             <span class="title"><strong>Productos Relacionados</strong></span>
                         </div>
@@ -54,9 +54,9 @@
                                     </div>
                                     <!-- End Main Image -->
                                     <!-- Thumbnail Image -->
-                                    <div class="product-thumb-image" ng-if="images.length > 0" style="margin-top: 10px">
-                                        <a class="image-click thumbnail col-xs-3" ng-repeat="image in images | limitTo:4">
-                                            <img ng-src="<% product.images.data[0].url %>" alt=""
+                                    <div class="product-thumb-image" ng-repeat="image in product.images.data | limitTo:3" ng-if="image" style="margin-top: 10px">
+                                        <a class="image-click thumbnail col-xs-3">
+                                            <img ng-src="<% image.url %>" alt=""
                                                  style="max-height: 100px; min-height: 100px; width: 80px">
                                         </a>
                                     </div>
@@ -92,7 +92,10 @@
                                                 <div class="col-xs-4"><strong>SKU</strong></div>
                                                 <div class="col-xs-8"><span class="green"><% product.sku ? product.sku : 'NONE' %></span><hr></div>
                                                 <div class="col-xs-4"><strong>Disponible</strong></div>
-                                                <div class="col-xs-8"><span class="green"><% product.stock ? 'En Stock' : 'Sin Stock' %></span><hr></div>
+                                                <div class="col-xs-8"><span class="green">
+                                                    <% product.stock == none || product.stock > 0 || product.stock == unlimited
+                                                    ? 'En Stock ' + '(' + product.stock + ')' : 'Sin Stock' %>
+                                                    </span><hr></div>
                                                 <div class="col-xs-4"><strong>Medios de Pago</strong></div>
                                                 <div class="col-xs-8">
                                                     <span class="green">
@@ -151,7 +154,7 @@
 
                                 <div class="clearfix"></div><br clear="all">
 
-                                <div class="col-xs-12 product-detail-tab" ng-if="detail.product.description">
+                                <div class="col-xs-12 product-detail-tab" ng-if="product.description">
                                     <!-- Nav tabs -->
                                     <ul class="nav nav-tabs">
                                         <li class="active"><a href="#desc" data-toggle="tab" aria-expanded="true">Descripcion</a></li>
@@ -162,7 +165,7 @@
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="desc">
                                             <div class="well">
-                                                <p align="justify" ng-bind-html="detail.product.description | limitTo:250"></p>
+                                                <p align="justify" ng-bind-html="product.description | limitTo:250"></p>
                                             </div>
                                         </div>
 
@@ -222,5 +225,13 @@
             </div>
            @endsection
     @section('script')
-
+        <script type="text/javascript">
+            $(document).on('ready' , function(){
+                $('div').on('click','.image-click', function(e){
+                    e.preventDefault();
+                    var image = $(this).find('img').attr('src');
+                    $('#matrix').attr('src', image);
+                });
+            });
+        </script>
     @stop

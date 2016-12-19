@@ -15,6 +15,10 @@
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
+                                <label for="inputPhone">Telefono </label>
+                                <input type="number" class="form-control" id="inputPhone" placeholder="Telefono" name="phone" value="{{ old('phone') }}">
+                            </div>
+                            <div class="form-group">
                                 <label for="emailInput">Email (*)</label>
                                 <input type="email" class="form-control" name="email" placeholder="Email" required>
                                 <div class="help-block with-errors"></div>

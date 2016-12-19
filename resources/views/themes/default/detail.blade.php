@@ -8,6 +8,7 @@
                         <ol class="breadcrumb breadcrumb--ys pull-left">
                             <li class="home-link"><a href="{{ url('/') }}" class="fa fa-home"></a></li>
                             <li><a href="{{ url('/products') }}">Todos</a></li>
+                            <li><% product.categories.name %></li>
                             <li class="active"><% product.name %> <% product.variants.data[0].values.data[0].value %></li>
                         </ol>
                     </div>
@@ -19,13 +20,21 @@
                         <img id="matrix" ng-src="<% product.images.data[0].url %>"
                               alt="" style="min-height: 400px;max-height: 400px"></a>
                     </div>
-                    <div ng-if="images.length > 0">
-                        <a ng-repeat="image in images | limitTo:4" class="image-click" href="<% BASEURL + '/detail/' + product.slug %>">
-                            <img  ng-src="<% product.images.data[0].url %>" alt="" class="img-thumbnail"
-                                    style="max-height: 100px; min-height: 100px; width: 80px">
-                        </a>
-                    </div>
 
+                    <!-- sliders image --->
+                    <div  class="products-slider-detail owl-carousel owl-theme owl-loaded owl-text-select-on">
+                        <div class="owl-stage-outer">
+                            <div class="owl-stage" >
+                                <div ng-repeat="image in product.images.data | limitTo:3" ng-if="image"
+                                     class="owl-item active" style="width: 100px; margin-right: 5px;">
+                                    <a class="img-click" href="#">
+                                        <img  ng-src="<% image.url %>"  alt="" class="img-thumbnail"
+                                             style="min-height: 120px;max-height: 120px;">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-sm-8">
                     <div class="title-detail"><h2><% product.name %></h2></div>
@@ -39,7 +48,8 @@
                             <td>Disponible</td>
                             <td>
                                 <div class="input-qty">
-                                    <% product.stock ? 'En Stock' : 'Sin Stock' %>
+                                    <% product.stock == none || product.stock > 0 || product.stock == unlimited
+                                    ? 'En Stock ' + '(' + product.stock + ')' : 'Sin Stock' %>
                                 </div>
                             </td>
                         </tr>
@@ -124,14 +134,14 @@
 
 
             <!-- products relations-->
-            <div class="row row-related" ng-controller="detailProductController" ng-cloak="">
+            <div class="hidden row row-related" ng-controller="detailProductController" ng-cloak="">
                 <div class="col-xs-12">
                     <div class="title">Productos Relacionados</div>
                     <div class="col-sm-3 col-md-2 box-product-outer" ng-repeat="relation in relations ">
                         <div class="box-product" style="min-height: 270px !important;">
                             <div class="img-wrapper">
-                                <a href="<% BASEURL + '/detail/' + relation.slug %>">
-                                <img src="<% relation.attributes.image%>"
+                                <a href="<% BASEURL + '/detail/' + product.slug %>">
+                                <img src=""
                                      style="max-height: 200px; min-height: 200px" alt="">
                                 </a>
                                 <div class="option">
@@ -139,7 +149,7 @@
                                 </div>
                             </div>
                             <h6 class="text-center">
-                                <a href="<% BASEURL + '/detail/' + relation.slug %>"><% relation.name %>
+                                <a href="<% BASEURL + '/detail/' + product.slug %>"><% product.name %>
                                 </a>
                             </h6>
                             <div class="price text-center"  ng-if="relation.promotion">
@@ -158,14 +168,13 @@
            @endsection
     @section('script')
         <script type="text/javascript">
-
             $(document).on('ready' , function(){
                 $('div').on('click','.image-click', function(e){
+                    alert('click');
                     e.preventDefault();
                     var image = $(this).find('img').attr('src');
                     $('#matrix').attr('src', image);
                 });
-            })
-
+            });
         </script>
            @stop
