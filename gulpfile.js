@@ -45,6 +45,7 @@ elixir(mix => {
  
     mix.copy('resources/views/vendor/tendaz/images/slider/*.gif', 'public/tendaz/images/img_slider/');
     mix.copy('resources/views/vendor/tendaz/images/icons/**.*', 'public/tendaz/images/icons/');
+    mix.copy('resources/views/vendor/tendaz/images/**.*', 'public/tendaz/images/');
     mix.copy('resources/views/vendor/tendaz/img/**.*', 'public/tendaz/img/');
     mix.copy('node_modules/font-awesome/fonts/**.*', 'public/tendaz/fonts/');
     
