@@ -78,4 +78,11 @@ Route::group(['domain' => env('APP_API_URL') , 'namespace' => 'Api'] , function 
     Route::resource('payments' , 'Payment\\PaymentsController' ,[
         'only' => ['index']
     ]);
+
+    //Routes coupons
+    Route::group(['prefix' => '' , 'namespace' => 'Coupon'] , function (){
+        Route::resource('carts.coupons' , 'CouponController' , [
+            'only'  => ['show']
+        ]);
+    });
 });
