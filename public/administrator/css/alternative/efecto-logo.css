@@ -1,0 +1,16 @@
+ .tendaz{
+                color: #f26522;
+            }
+            .tendaz-notify{
+                color:  #00c6a3;
+            }
+            .tendaz-btn-notify{
+                background-color: #4f8ecc;
+                border: 1px solid #4f8ecc;
+                color: white;
+            }
+            .tendaz-btn-notify:hover{
+                color: #ffffff !important;
+                background-color: #1f5b96;
+                border: 1px solid #4f8ecc;
+            }

@@ -1,0 +1,89 @@
+.grayNotBorder{
+    background-color: darkgray;
+    border: hidden;
+    margin-bottom: 20px;
+}
+.grayNotBorder a{
+    color: #fff;
+}
+.grayNotBorder a:hover{
+    color: #000;
+}
+.navThank h4{
+    width: 100%;
+    margin-top: 6%;
+    color: white;
+    text-align: center;
+}
+.btn-default-Tendaz{
+    background-color: #ff6600;
+}
+.colorFacebook{height: 80px}
+.colorFacebook a{color: white;text-decoration: none}
+.colorFacebook a strong{visibility: hidden;}
+.colorFacebook a:hover strong{visibility: visible}
+.colorFacebook a{color: white}
+.colorFacebook a:hover{color: #3b5998}
+
+.colorTwitter a{color: white;text-decoration: none}
+.colorTwitter a strong{visibility: hidden;}
+.colorTwitter a:hover strong{visibility: visible}
+.colorTwitter a{color: white}
+.colorTwitter a:hover{color: #DC4638}
+.colorFacebook .sb-facebook:hover{
+    background-color: white;
+    border-color:#3b5998;
+    cursor: pointer;
+}
+.colorTwitter .sb-twitter:hover{
+    width: 100px;
+    background-color: white;
+    border-color:#DC4638;
+    cursor: pointer;
+}
+.colorFacebook .sb-facebook:hover{
+    width: 100px;
+    background-color: white;
+    border-color:#3b5998;
+    cursor: pointer;
+}
+.sb-facebook {
+    width: 32px;
+    height: 32px;
+    color: white;
+    text-decoration: none;
+    line-height: 100%;
+    white-space: nowrap;
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    margin: 5px 2px 5px 0;
+    background-color: #3b5998;
+    border: solid 1px #3b5998;
+    border-radius: 10px 1px 10px 1px;
+}
+
+.sb-facebook .fa {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.sb-twitter {
+    width: 32px;
+    height: 32px;
+    color: white;
+    text-decoration: none;
+    line-height: 100%;
+    white-space: nowrap;
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    margin: 5px 2px 5px 0;
+    background-color: #DC4638;
+    border: solid 1px #DC4638;
+    border-radius: 10px 1px 10px 1px;
+}
+.sb-twitter .fa {
+    margin-top: 10px;
+    margin-left: 8px;
+}

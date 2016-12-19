@@ -1,0 +1,248 @@
+@section('title')
+Estadisticas basicas
+@stop
+@extends('layouts.administrator')
+
+@section('css')
+<link rel="stylesheet" type="text/css" href="{{asset('administrator/plugins/flot/css/flot.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('administrator/plugins/datatables/css/datatables.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('administrator/css/custom_tendaz.css')}}">
+<style type="text/css">
+
+thead {
+    display: none;
+}
+input, select {
+    max-height: 25px;
+}
+tr {
+    line-height: 5;
+}
+.paginate_button 
+{
+    padding-right: 2px;
+    padding-left: 2px;
+}
+.dataTables_wrapper .dataTables_paginate {
+    text-align: left;
+    padding: 10px 0px;
+    line-height: 32px;
+}
+.dataTables_wrapper .dataTables_length  > label {
+    margin: 0px;
+    color: #5e5e5e;
+    font-weight: normal;
+    line-height: 25px;
+}
+.dataTables_wrapper .dataTables_filter > label {
+    margin: 0px;
+    color: #5e5e5e;
+    font-weight: normal;
+    line-height: 25px;
+}
+.paginate_button {
+    cursor: pointer;
+    border: 1px solid #DBE3E5;
+    padding: 5px;
+    margin-right: 2%;
+    border-radius: 3px;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+
+    background-color: #f2f2f2 !important;
+}
+.dataTables_wrapper .dataTables_length {
+    text-align: left;
+    padding: 10px 0px;
+}
+</style>
+@stop
+
+@section('content')
+	<div class="page-header page-header-block">
+		<div class="page-header-section">
+        <h4 class="title">
+            <img class="page-header-section-icon" src="{{asset('administrator/image/icons/icons-base/bar-chart.png')}}">&nbsp; Estadisticas basicas  
+        </h4>
+    </div>
+		<div class="page-header-section">
+ 			<div class="toolbar">
+				<ol class="breadcrumb breadcrumb-transparent nm">
+					<li><a href="{{url('admin')}}" style="color: darkgrey;">Inicio</a></li>
+					<li><a href="{{url('#')}}" style="color: orange;">Estadísticas Basicas</a></li>
+				</ol>
+			</div>
+		</div>
+	</div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget panel text-center">
+                <blockquote>
+                  <p>Acá encontraras reportes relevantes para tener en cuenta y analizar el desempeño de tu tienda. Los datos se actualizan cada 24 horas aproximadamente. </p>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+	<div class="row">
+                    <div class="col-lg-4">
+                         <div class="widget panel bgcolor-tendaz">
+                             <div class="panel-body" >
+                                <div class="clearfix">
+                                    <p class="text-center semibold" style="font-size: 20px;">Ventas</p>
+                                </div>
+                                <div class="text-center mt15 mb15">
+                                    <h1 class="semibold">
+                                        <i class="fa fa-money"></i>
+                                        <span class="">${{ $sold }}</span>
+                                    </h1>
+                                </div>
+                            </div>
+                         </div>
+                     </div>
+ 
+                    <div class="col-lg-4">
+                         <div class="widget panel bgcolor-tendaz">
+                             <div class="panel-body" >
+                                <div class="clearfix">
+                                    <p class="text-center semibold" style="font-size: 20px;">Ordenes</p>
+                                </div>
+                                <div class="text-center mt15 mb15">
+                                    <h1 class="semibold">
+                                        <i class="fa fa-shopping-cart"></i>
+                                        <span class="">{{ $ordersTotal }}</span>
+                                    </h1>
+                                </div>
+                            </div>
+                         </div>
+                     </div>
+                    <div class="col-lg-4">
+                         <div class="widget panel bgcolor-tendaz">
+                             <div class="panel-body" >
+                                <div class="clearfix">
+                                    <p class="text-center semibold" style="font-size: 20px;">Facturaci&oacute;n promedio</p>
+                                </div>
+                                <div class="text-center mt15 mb15">
+                                    <h1 class="semibold">
+                                        <i class="fa fa-ticket"></i>
+                                            <span class="">${{ $average }}</span>
+                                    </h1>
+                                </div>
+                            </div>
+                         </div>
+                     </div>
+         </div>
+         <div class="row">
+         	        <div class="col-lg-6">
+                        <div class="widget panel">
+                            <div class="panel-body">
+                                <ul class="list-table">
+                                    <li style="width: 75%"><h4 class="semibold nm text-left">Productos con mayor facturaci&oacute;n</h4></li>
+                                </ul>
+                            </div>
+                            <div class="panel-footer">
+                                <table class="table-responsive list-table table-products" id="statics-products">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($higherBilling as $higher)
+                                        <tr>
+                                            <td><b>{{ ucfirst(strtolower($higher['name'])) }}</b></td>
+                                            <td class="text-tendaz-green">$ {{ number_format(($higher['total'] * $higher['count'] ),2,',','.') }}</td>
+                                            <td align="center"><img class="img-circle" src="" width="50px" height="50px" alt=""></td>
+                                        </tr>
+                                    </hr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="widget panel">
+                             <div class="panel-body">
+                                <ul class="list-table">
+                                    <li style="width: 75%"><h4 class="semibold nm text-left">Productos m&aacute;s vendidos</h4></li>
+                                </ul>
+                             </div>
+                             <div class="panel-footer">
+                               <table class="table-responsive list-table table-products" id="statics-products-2" >
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($higherSell as $mas)
+                                        <tr>
+                                            <td><b>{{ ucfirst(strtolower($mas['name'])) }}</b></td>
+                                            <td>{{ $mas['total'] }} Ventas</td>
+                                            <td align="center"><img class="img-circle" src="" width="50px" height="50px" alt=""></td>
+                        
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                         </div>
+                    </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="page-end-space"></div>
+       </div>
+
+@endsection
+@section('scripts')
+<script src="{{asset('administrator/js/jquery.dataTables.js')}}"></script>
+<script type="text/javascript">
+ $(document).ready(function() {
+     $('#statics-products').dataTable({
+                 "pageLength": 5,
+                 "order": [],
+                 "language": {
+                            "search": "Buscar: ",
+                            "lengthMenu":     "Mostrar _MENU_ resultados",
+                            "info":           "Mostrando _START_ a _END_ de _TOTAL_ productos",
+                            "infoEmpty":      "Mostrando 0 a 0 de 0 resultados",
+                            "paginate": {
+                                "first":      "Primero",
+                                "last":       "Ultimo",
+                                "next":       "Siguiente",
+                                "previous":   "Anterior",
+                                
+                            }
+                        }
+              });
+});
+
+ 
+</script>
+<script type="text/javascript">
+$(document).ready(function() 
+{
+     $('#statics-products-2').dataTable({
+                 "pageLength": 5,
+                 "order": [],
+                 "language": {
+                            "search": "Buscar: ",
+                            "lengthMenu":     "Mostrar _MENU_ resultados",
+                            "info":           "Mostrando _START_ a _END_ de _TOTAL_ productos",
+                            "infoEmpty":      "Mostrando 0 a 0 de 0 resultados",
+                            "paginate": {
+                                "first":      "Primero",
+                                "last":       "Ultimo",
+                                "next":       "Siguiente",
+                                "previous":   "Anterior",
+                                
+                            }
+                        }
+              });
+});
+</script>
+@stop

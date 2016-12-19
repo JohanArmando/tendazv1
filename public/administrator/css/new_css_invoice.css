@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
+
+	a, button, h4, p input[type=text] {
+		font-family: 'Josefin Sans', sans-serif;
+		font-size: 17px;
+	}
+
+	.triangulo-equilatero-bottom-left {
+		width: 0;
+		height: 0;
+		border-right: 50px solid transparent;
+		border-top: 50px solid transparent;
+		border-left: 50px solid #F26522;
+		border-bottom: 50px solid #F26522;
+		position: absolute;
+		right: -31%;
+		top: 0;
+	}
+	#tab_invoice {
+		background: transparent; 
+	}
+	#new_li_tab {
+		font-size: 16px; 
+		background-color: #F26522; 
+		color: white; 
+		height: 45px; 
+		width: 322px;
+	}
+	#new_panel{
+		-webkit-box-shadow: -5px 6px 36px -5px rgba(0,0,0,0.75);
+		-moz-box-shadow: -5px 6px 36px -5px rgba(0,0,0,0.75);
+		box-shadow: -5px 6px 36px -5px rgba(0,0,0,0.75);
+	}
+	#new_input_text {
+		border-top: 0;
+		border-right: 0;
+		border-left: 0;
+		border-radius: 0px;
+		border-bottom-color: #D0D0D0 !important;
+		font-size: 16px;
+	}
+	#new_text_area_invoice {
+		height: 60px; 
+		border-top: 0; 
+		border-left: 0; 
+		border-right: 0; 
+		border-radius: 0px; 
+		border-color: #D0D0D0 !important;
+		font-size: 15px;
+		font-family: 'Josefin Sans', sans-serif !important;
+	}
+	#btn-invoices {
+		border-radius: 0 !important;
+		width: auto;
+		height: 45px;
+		font-size: 15px;
+	}
+	#panel_blue_title {
+		font-size: 18px;
+		text-align: center;
+	}
+	#line_horizontal{
+		margin-bottom:  2px solid;
+		color: grey;
+	}

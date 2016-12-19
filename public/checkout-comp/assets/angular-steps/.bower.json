@@ -1,0 +1,29 @@
+{
+  "name": "angular-steps",
+  "version": "0.2.3",
+  "main": "dist/angular-steps.js",
+  "description": "Split your UI into (wizard-like) steps in AngularJS.",
+  "dependencies": {
+    "angular": "*"
+  },
+  "ignore": [
+    ".gitignore",
+    "bower.json",
+    "package.json",
+    "gulpfile.js",
+    "README.md",
+    "license.md",
+    "demo",
+    "test"
+  ],
+  "homepage": "https://github.com/omichelsen/angular-steps",
+  "_release": "0.2.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.2.3",
+    "commit": "691b4e2ab39350cf8acebb64d0ee2745e95e3405"
+  },
+  "_source": "https://github.com/omichelsen/angular-steps.git",
+  "_target": "*",
+  "_originalSource": "angular-steps"
+}

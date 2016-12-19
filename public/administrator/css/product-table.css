@@ -1,0 +1,85 @@
+  .destacar{
+            width: 10px;
+        }
+        img {
+            vertical-align: middle;
+        }
+        img {
+            border: 0;
+        }
+        #t_misproductos .sub-col {
+            display: inline-block;
+            min-width: 65px;
+           margin-left: 15px
+        }
+        .values-heading {
+            margin-left: 5px;
+        }
+        .m-right {
+            margin-right: 10px;
+            margin-left: 15px !important;
+        }
+        th.variants {
+            min-width: 180px;
+        }
+        #t_misproductos tbody tr td ul{
+            list-style: none;
+        }
+
+        #t_misproductos tbody tr td input{
+            width: 70px;
+            padding: 1px 3px 2px;
+            margin: 0 8px 5px 5px;
+            text-align: center;
+            height: 25px;
+            border-radius: 4px 4px 4px 4px;
+            background-color: darkgray;
+            color: white;
+            min-width: 70px;
+        }
+        input[type='text']:focus{
+            border-color: transparent;
+            background-color: white !important;
+            border-color: orange;
+            color: black !important;
+        }
+        input[type='text']:hover{
+            cursor: pointer;
+        }
+
+        .variantes{
+            width: 100px;
+            float: left;
+            text-align: left;
+            margin: 28px 0 4px 23px;
+        }
+        .destacar{
+            margin-left: 10%;
+        }
+        .star{
+            margin-top: 25px;
+            color: #F26522;
+        }
+        .sin-star{
+            margin-top: 25px;
+        }
+        .star:hover{
+            color: darkgray;
+            cursor: pointer;
+        }
+        .sin-star:hover{
+            color: darkgray;
+            cursor: pointer;
+        }
+        .correr{
+            margin-left: 3%;
+        }
+        .mostrar{
+            margin-left: 25px;
+        }
+        .check{
+            margin-top: 25px !important;
+        }
+        .custom-checkbox-inverse{
+            color: orange !important;
+        }

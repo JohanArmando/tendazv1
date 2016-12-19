@@ -1,0 +1,96 @@
+<?php
+
+namespace Tendaz\Http\Controllers\Api\Payment;
+
+use Tendaz\Api\Mercadopago;
+use Tendaz\Http\Controllers\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Tendaz\Models\Cart\Cart;
+use Tendaz\Models\Payment_method\PaymentValue;
+use Tendaz\Transformers\PaymentValueTransformer;
+
+class PaymentsController extends Controller
+{
+    public function index()
+    {
+        $payent_values =  PaymentValue::all();
+        return fractal()
+                ->collection($payent_values , new PaymentValueTransformer())
+                ->toJson();
+    }
+
+    public function show(PaymentValue $paymentValue  , Cart $cart, Request $request)
+    {
+        $method = $paymentValue->paymentMethod;
+        $cart->status = 'closed';
+        $cart->save();
+        switch ($method->id){
+            case 1:
+                $mp = new Mercadopago($paymentValue->client_id, $paymentValue->client_secret);
+
+                $preference_data = array(
+                    "items" => array(
+                    ),
+                    "payer" => array(
+                        "name" => $cart->order->name,
+                        "surname" => $cart->order->last_name,
+                        "email" => $cart->customer->email,
+                        "date_created" => $cart->order->created_at->format('Y-m-d H:m:s'),
+                        "phone" => array(
+                            "area_code" => "57",
+                            "number" => $cart->order->phone
+                        ),
+                        "identification" => array(
+                            "type" => "CC",
+                            "number" => $cart->order->indentification
+                        ),
+                    ),
+                    "back_urls" => array(
+                        "success" => $request->shop->domains->where('main', 1)->first()->domain.'/checkout/success',
+                        "failure" => $request->shop->domains->where('main', 1)->first()->domain.'/checkout/failure',
+                        "pending" => $request->shop->domains->where('main', 1)->first()->domain.'/checkout/pending'
+                    ),
+                    "auto_return" => "approved",
+                    "payment_methods" => array(
+                        "excluded_payment_methods" => array(
+                        ),
+                        "excluded_payment_types" => array(
+                        ),
+                        "installments" => 24,
+                        "default_payment_method_id" => null,
+                        "default_installments" => null,
+                    ),
+                    "shipments" => array(
+                        "mode" => "custom",
+                        "cost" => (int) $cart->order->shippingMethod->cost,
+                        "receiver_address" => array(
+                            "zip_code" => 111461,
+                            "street_number"=> $cart->order->shippingAddress->street,
+                            "street_name"=> $cart->order->shippingAddress->name,
+                            "floor"=> '',
+                            "apartment"=> $cart->order->shippingAddress->complement
+                        )
+                    ),
+                    "notification_url" => env('APP_URL').'/notifications/mercadopago',
+                    "external_reference" => $cart->order->uuid,
+                    "expires" => false,
+                    "expiration_date_from" => null,
+                    "expiration_date_to" => null
+                );
+                foreach ($cart->products as $product){
+                    array_push($preference_data['items'], [
+                        'id'    => $product->uuid,
+                        'title' => $product->product->title,
+                        'currency_id' => 'COL',
+                        'picture_url' => $product->product->MainImage(),
+                        'description' => $product->product->description,
+                        'quantity' =>$product->pivot->quantity,
+                        'unit_price' => $product->promotional_price > 0 ? $product->promotional_price : $product->price
+                    ]);
+                }
+                $preference = $mp->create_preference($preference_data);
+                return ['url' => $preference['response']['init_point']];
+                break;
+        }
+    }
+}

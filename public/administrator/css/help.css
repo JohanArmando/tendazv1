@@ -1,0 +1,80 @@
+.col-md-6 >.col-md-6 {
+    height: 275px!important;
+    background: #fff!important;
+    overflow: hidden !important;
+    border: 4px solid #f2f2f2;
+}
+.one {
+    -webkit-border-radius: 100% 0 0 0; -webkit-box-shadow: -9px 0px 29px -5px rgba(203,203,203,1);
+    -moz-box-shadow: -9px 0px 29px -5px rgba(203,203,203,1);
+    box-shadow: -9px 0px 29px -5px rgba(203,203,203,1);
+}
+.two {
+    -webkit-border-radius: 0 100% 0 0; -webkit-box-shadow: 9px 0px 29px -5px rgba(203,203,203,1);
+    -moz-box-shadow: 9px 0px 29px -5px rgba(203,203,203,1);
+    box-shadow: 9px 0px 29px -5px rgba(203,203,203,1);
+}
+.three {
+    -webkit-border-radius: 0 0 0 100%; -webkit-box-shadow: -9px 0px 29px -5px rgba(203,203,203,1);
+    -moz-box-shadow: -9px 0px 29px -5px rgba(203,203,203,1);
+    box-shadow: -9px 0px 29px -5px rgba(203,203,203,1);
+}
+.four {
+    -webkit-border-radius: 0 0 100% 0; -webkit-box-shadow: 9px 0px 29px -5px rgba(203,203,203,1);
+    -moz-box-shadow: 9px 0px 29px -5px rgba(203,203,203,1);
+    box-shadow: 9px 0px 29px -5px rgba(203,203,203,1);
+}
+.circle {
+    width: 100px;
+    height: 100px;
+    background: #3C3C3C !important;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    margin-top: 120px;
+    margin-left: 90px;
+}
+.circle:hover {
+    background: #f26522 !important;
+}
+
+.help:hover {
+    transition: 0.6s;
+    border-left: 7px solid #f26522 !important;
+}
+.help:hover .circle {
+    width: 100px;
+    height: 100px;
+    background: #f26522 !important;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    margin-top: 120px;
+    margin-left: 90px;
+}
+.helpRight:hover .circle {
+    width: 100px;
+    height: 100px;
+    background: #f26522 !important;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    margin-top: 120px;
+    margin-left: 90px;
+}
+.helpRight:hover {
+    transition: 0.6s;
+    border-right: 7px solid #f26522 !important;
+}
+.triangulo_izq {
+    width: 0;
+    height: 0;
+    border-top: 43px solid transparent;
+    border-right: 33px solid #ff6800;
+    border-bottom: 0px solid transparent;
+    margin-left: 472px;
+}
+.marginLeft {
+    margin-left: 10px;
+}
+.close{
+    background-color: #f26522;
+    border-radius: 10px 10px 10px 10px;
+}

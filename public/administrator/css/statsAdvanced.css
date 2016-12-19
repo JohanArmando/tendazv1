@@ -1,0 +1,143 @@
+.stats{  background-color: white;  margin-bottom: 70px;  padding: 20px 20px 20px 20px;  }
+.inputAdvanced {  background-color: #F2F2F2;  border: 0;  text-align: center;  height: 30px;  }
+#link_tab{  background-color: #f26522;  color: white !important;  }
+#link_tab .active{  background-color: #f26522;  color: white !important;  }
+#link_tab a {  color: white;  }
+#link_tab a:hover {  color: white;  }
+select {  height: 30px;  }
+.triangle {  width: 0;  height: 0;  border-left: 20px solid #f26522;  border-top: 40px solid transparent; }
+.visitAll {max-height: 500px}
+.visit {text-align: center; min-height: 170px;max-height: 170px}
+p {margin-bottom: 0}
+.circle {  width: 60px;  height: 60px;  -moz-border-radius: 50%;  -webkit-border-radius: 50%;  border-radius: 50%;  border: 3px solid #f26522;  background: white;  padding: 14px 14px 14px 14px;  }
+.pie {  display: inline-block;  position: relative;  width: 1em;  height: 1em;  background-color: #2f3e46;  font-size: 7em;  text-align: center;  -moz-border-radius: 50%;  -webkit-border-radius: 50%;  border-radius: 50%;  }
+.slice-right {  position: absolute;  z-index: 11;  background-color: #f26522;  width: 100%;  height: 100%;  clip: rect(0, 0.5em, 0.5em, 0.5em);  -moz-border-radius: 50%;  -webkit-border-radius: 50%;  border-radius: 50%;  }
+.slice-left {  position: absolute;  z-index: 11;  background-color: #f26522;  width: 100%;  height: 100%;  clip: rect(0.5em, 0.5em, 1em, 0.5em);  -moz-border-radius: 50%;  -webkit-border-radius: 50%;  border-radius: 50%;  }
+.percent {  position: absolute;  z-index: 20;  top: 3px;  right: 3px;  bottom: 3px;  left: 3px;  background: white;  -moz-border-radius: 50%;  -webkit-border-radius: 50%;  border-radius: 50%;  }
+.number {  position: absolute;  z-index: 30;  width: 100%;  height: 100%;  padding-top: 50%;  line-height: 0;  font-size: .3em;  color: #485c65;  }
+.slice-right {  -webkit-animation-delay: 1.2s;  -webkit-animation-duration: 0.3s;  -webkit-animation-name: right-slice;  -webkit-animation-iteration-count: 1;  -webkit-animation-fill-mode: forwards;  }
+.slice-left {  -webkit-animation-delay: 1.5s;  -webkit-animation-duration: 0.3s;  -webkit-animation-name: left-slice;  -webkit-animation-iteration-count: 1;  -webkit-animation-timing-function: ease-out;  -webkit-animation-fill-mode: forwards;  }
+@-webkit-keyframes right-slice {
+    from {  clip: rect(0, 0.5em, 0.5em, 0.5em);  }
+    50% {  clip: rect(0, 1em, 0.5em, 0.5em);
+    } to {  clip: rect(0, 1em, 1em, 0.5em);  }
+}
+@-webkit-keyframes left-slice {
+    from {  clip: rect(0.5em, 0.5em, 1em, 0.5em);
+    }
+    50% {  clip: rect(0.5em, 0.5em, 1em, 0);
+    } to {  clip: rect(0.3em, 0.5em, 1em, 0);
+      }
+}
+.visitNumber {color: black; font-size: 22px}
+.cssToolTip {  position: relative;  color: black;  }
+.cssToolTip span {
+    background: rgba(255, 255, 255, 0.9) url('../image/icons/icons-nav/statistics.png') center left 15px no-repeat;
+    border: 2px solid #f26522;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #333;
+    color: #f26522;
+    display: none;
+    font-size: 0.8em;
+    padding: 10px 10px 10px 35px;
+    max-width: 600px;
+    position: absolute; /* El tooltip se posiciona de forma absoluta para no modificar el aspezto del resto de la pagina */
+    top: 0; /* Posicion apartir de la parte superior del primer elemento padre con posicion relativa */
+    left: -100px; /* Posicion apartir de la parte izquierda del primer elemento padre con posicion relativa */
+    z-index: 100; /* Poner un z-index alto para que aparezca por encima del resto de elementos */
+}
+
+.cssToolTip:hover span {
+    display: inline;
+}
+
+.module {  background-color: #3D3B3D;  color: white;  height: 200px;  width: 200px; margin-right: 10px }
+.moduleCircle {  margin: 10px 10px 10px;  width: 150px;  height: 150px;  -moz-border-radius: 50%;  -webkit-border-radius: 50%;  border-radius: 50%;  background: white; }
+.modalModule {width: 50%; background-color: white}
+.selectVideo i {color: black}
+.selectSpan {font-size: 24px !important; color: black; margin-left: 40px; margin-right: 100px}
+.selectVideo a {text-decoration: none}
+.selectVideo a:hover span {color: #f26522 !important;}
+.selectVideo a:hover i {color: #f26522 !important;}
+
+.carousel-control.left {
+    width: 12px;
+    background-image: -o-linear-gradient(left, rgba(255, 255, 255, 0.5) 0%, rgba(0, 0, 0, .0001) 100%);
+    background-image: -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, 0.5)), to(rgba(0, 0, 0, .0001)));
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.5) 0%, rgba(0, 0, 0, .0001) 100%);
+}
+.carousel-control.right {
+    right: 0;
+    left: auto;
+    width: 12px;
+    background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, .0001) 0%, rgba(255, 255, 255, 0.5) 100%);
+    background-image: -o-linear-gradient(left, rgba(0, 0, 0, .0001) 0%, rgba(255, 255, 255, 0.5) 100%);
+    background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, .0001)), to(rgba(255, 255, 255, 0.5)));
+    background-image: linear-gradient(to right, rgba(0, 0, 0, .0001) 0%, rgba(255, 255, 255, 0.5) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
+    background-repeat: repeat-x;
+}
+.chats{  background-color: white;  margin-bottom: 70px;  padding: 0 14px 0 14px;  }
+.triangle-big {
+    width: 0;
+    height: 0;
+    border-right: 50px solid transparent;
+    border-top: 49px solid transparent;
+    border-left: 50px solid #f26522;
+    border-bottom: 50px solid #f26522;}
+.letter { font-size: 18px}
+.adviser {
+    padding: 20px 0 20px 0;
+    color: white;
+    width: 58.5%;
+    font-size: 25px;
+    text-align: center;
+    position: absolute;
+    z-index: 2;
+    margin-top: 48px;
+    background-color: #3c3c3c;
+    height: 50px;
+}
+.triangle-small {
+    padding: 0 0 0 0;
+    width: 0;
+    height: 0;
+    margin-left: 0;
+    margin-top: 0;
+    border-right: 50px solid #3c3c3c;
+    border-top: 0 solid transparent;
+    border-bottom: 50px solid transparent;
+}
+.chatUser{
+    margin-top: 15px;
+    border-radius: 5px 5px 5px 5px;
+    border: 1px solid #f26522;
+    width: 100%;
+    height: 30%;
+    padding: 10px 10px 10px 10px;
+}
+.footer-chat{
+    margin-top: 20px;
+    padding: 15px 15px 15px 15px;
+    width: 100%;
+    background-color: #3c3c3c;
+    height: 70px;
+}
+.btn-circle {
+    border: 1px solid black;
+    background-color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 30px 30px 30px 30px;
+}
+.btn-circle:hover {color: #f26522}
+
+.content-messages {
+    display: inline-block; height: 250px; overflow-y: scroll; margin-right: 10px
+}
+.banner-messages {
+    border: 1px solid #3C3C3C;
+    margin: 10px 20px 10px 20px;
+    padding: 0 0 10px 0;
+    border-radius: 5px 5px 5px 5px;
+}

@@ -1,0 +1,39 @@
+<section class="section">
+    <br>
+<div class="col col-md-7 col-sm-6 col-xs-12">
+    <div  class="contact card" style="min-height: 250px !important;">
+        <br><h6 class="text-uppercase text-center">Registro</h6>
+        <form id="register-form"  name="registerForm" ng-submit="doRegister(registerForm)" novalidate>
+            <div class="input-field">
+                <input id="name" name="email" type="text" class="validate" ng-model="register.name"   required>
+                <label for="name">Nombres</label>
+            </div>
+            <div class="input-field">
+                <input id="last_name" name="email" type="text" class="validate"  ng-model="register.last_name" required>
+                <label for="last_name">Apellidos</label>
+            </div>
+            <div class="input-field">
+                <input id="email" name="email" type="email" class="validate" ng-model="register.email"  required>
+                <label for="email">Correo</label>
+            </div>
+            <div class="input-field">
+                <input id="password" name="email" type="password" class="validate" ng-model="register.password"  required>
+                <label for="password">Password</label>
+            </div>
+            <div class="input-field">
+                <input id="confirm_password" name="email" type="password" class="validate" ng-model="register.password_confirmation"  required>
+                <label for="confirm_password">Repetir Password</label>
+            </div>
+            <div class="row">
+                <div class="col col-md-12 col-sm-12 col-xs-12 text-center">
+                    <button type="submit" id="submit" name="submit-data" value="Submit" class="btn waves-effect waves-light btn-primary custom-btn">
+                        <!-- Button value here -->
+                        </i>Registrarme</button>
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+</div>
+</section>

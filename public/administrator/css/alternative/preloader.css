@@ -1,0 +1,32 @@
+.preloader_general {
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: #033855;
+				z-index: 13000;
+				height: 100%;
+				opacity: 0.8;
+			}
+
+			.preloader_image_general {
+				width: 250px;
+				height: 100px;
+				position: absolute;
+				left: 42%;
+				top: 45%;
+				background: url("{{ asset('tendaz/img/domain.gif') }}") no-repeat 50% 50% transparent;
+				background-size: 100px 100px;
+				margin: -20px 0 0 -20px;
+			}
+			.preloader_p{
+				font-size: 2.9em;
+				width: 500px;
+				color: white;
+				height: 100px;
+				position: absolute;
+				left: 42%;
+				top: 45%;
+				margin-left: -50px;
+			}
