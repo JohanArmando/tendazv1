@@ -3,6 +3,7 @@
 namespace Tendaz\Models\Cart;
 
 use Illuminate\Database\Eloquent\Model;
+use Tendaz\Models\Coupon\Coupon;
 use Tendaz\Models\Customer;
 use Tendaz\Models\Order\Order;
 use Tendaz\Models\Products\Variant;
@@ -128,5 +129,10 @@ class Cart extends Model
     public function shop()
     {
         return $this->belongsTo(Shop::class);
+    }
+
+    public function coupon()
+    {
+        return $this->belongsTo(Coupon::class);
     }
 }

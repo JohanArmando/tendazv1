@@ -23,6 +23,7 @@ elixir(mix => {
         'checkout/Controllers/globalController.js',
         'checkout/Controllers/navController.js',
         'checkout/Controllers/cartController.js',
+        'checkout/Controllers/couponsController.js',
         'checkout/Controllers/EmailsController.js',
         'checkout/Controllers/ProfilesController.js',
         'checkout/Controllers/ShippingController.js',
@@ -32,6 +33,7 @@ elixir(mix => {
     mix.scripts([
         'checkout/Models/User.js',
         'checkout/Models/Cart.js',
+        'checkout/Models/Coupon.js',
         'checkout/Models/Email.js',
         'checkout/Models/Profile.js',
         'checkout/Models/Shipping.js',

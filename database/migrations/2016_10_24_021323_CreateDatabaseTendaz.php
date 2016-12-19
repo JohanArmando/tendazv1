@@ -41,6 +41,7 @@ class CreateDatabaseTendaz extends Migration
             $table->integer('address_shipping_id')->unsigned()->nullable();
             $table->integer('customer_id')->unsigned()->nullable();
             $table->integer('shop_id')->unsigned();
+            $table->integer('coupon_id')->unsigned()->nullable();
             $table->enum('status' , ['open' , 'closed'])->default('open');
             $table->timestamps();
         });
@@ -1339,6 +1340,7 @@ class CreateDatabaseTendaz extends Migration
             $table->foreign('address_shipping_id')->references('id')->on('customer_address');
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->foreign('shop_id')->references('id')->on('shops')->onDelete('cascade');
+            $table->foreign('coupon_id')->references('id')->on('coupons');
         });
 
         //
