@@ -98,6 +98,7 @@ class Domain extends Model
             $url = explode('.' , $request->capture()->getHost());
             $this->subdomain = $url[0];
         }
+
         return  is_null($this->store) ?
             self::getShopByDomain($request->capture()->getHost()):
             $this->store;

@@ -4,11 +4,13 @@
         <div class="main-header">
             <div class="row">
                 <div class="col-md-3">
-                    @if($shop->logo)
-                        <img src="{{asset('logos/'.$shop->id.'/'.$shop->logo)}}" alt="" height="80" width="160">
+                    <a href="{{url('/')}}" style="text-decoration: none">
+                        @if($shop->logo)
+                            <img class="logo replace-2x img-responsive" src="{{ asset("logos/$shop->id/$shop->logo") }}"  alt="Logo de la tienda {{ $shop->name_store }}" />
                         @else
-                        <h2>{{$shop->name_store}}</h2>
-                    @endif
+                            <h1>{{ $shop->name }}</h1>
+                        @endif
+                    </a>
                 </div>
                 <div class="col-sm-8 col-md-6 search-box">
                     <form class="form-inline">
@@ -23,7 +25,7 @@
                 @if(!Request::is('cart/buy'))
                 <div class="col-sm-4 col-md-3 cart-btn hidden-xs"  ng-controller="cartGlobalController" ng-cloak="">
                     <button type="button" class="btn btn-default dropdown-toggle" id="dropdown-cart" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        <i class="fa fa-shopping-cart"></i> Carrito de compras : <% size(carts) ? size(carts)  :  0 %> item(s) <i class="fa fa-caret-down"></i>
+                        <i class="fa fa-shopping-cart"></i> Carrito de compras : <% carts.original_qty %> item(s) <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-cart">
 

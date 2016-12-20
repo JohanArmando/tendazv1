@@ -5,11 +5,13 @@
 	        	<!-- Logo -->
 	            <div class="col-lg-4 col-md-3">
 	            	<div>
-						@if($shop->logo)
-							<img src="{{asset('logos/'.$shop->id.'/'.$shop->logo)}}" alt="" height="70" width="160">
-						@else
-							<h2>{{$shop->name_store}}</h2>
-						@endif
+						<a href="{{url('/')}}" style="text-decoration: none">
+							@if($shop->logo)
+								<img class="logo replace-2x img-responsive" src="{{ asset("logos/$shop->id/$shop->logo") }}"  alt="Logo de la tienda {{ $shop->name_store }}" />
+							@else
+								<h1>{{ $shop->name }}</h1>
+							@endif
+						</a>
 	            	</div>
 	            </div>
 	            <!-- End Logo -->
@@ -38,7 +40,7 @@
 	                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 	                            <span class="pull-left"><i class="fa fa-shopping-cart icon-cart"></i></span>
 	                            <span class="pull-left">Carrito de compras:
-									<strong><% size(carts) ? size(carts)  :  0 %> item(s)</strong>
+									<strong><% carts.original_qty %> item(s)</strong>
 								</span>
 	                            <span class="pull-right"><i class="fa fa-caret-down"></i></span>
 	                        </button>

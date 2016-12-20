@@ -50,6 +50,7 @@ Mis provedores
                                 <th>Correo</th>
                                 <th>Celular</th>
                                 <th>Ubicaci&oacute;n</th>
+                                <th class="text-center">Editar</th>
                                 <th class="text-center">Eliminar</th>
                             </tr>
                             </thead>
@@ -60,7 +61,7 @@ Mis provedores
                                     {{$loop->iteration}}
                                 </td>
                                 <td>
-                                    <a href="">{{$provider->full_name}}</a>
+                                    <strong>{{$provider->full_name}}</strong>
                                 </td>
                                 <td>
                                     {{$provider->email}}
@@ -69,7 +70,23 @@ Mis provedores
                                     {{$provider->phone}}
                                 </td>
                                 <td>
-                                    ({{$provider->department_id}}-{{$provider->country_id}})
+                                    @foreach($cities as $city)
+                                        @if( $city->id == $provider->city_id )
+                                            {{ $city->name }}
+                                        @endif
+                                    @endforeach
+                                    -
+                                    @foreach($departments as $department)
+                                        @if( $department->id == $provider->state_id )
+                                            {{ $department->name }}
+                                        @endif
+                                    @endforeach
+                                </td>
+                                <td class="text-center">
+                                    <form action="{{url('admin/providers/'.$provider->uuid)}}" method="GET">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <button type="submit" class="btn btn-warning"><i class="fa fa-edit"></i></button>
+                                    </form>
                                 </td>
                                 <td class="text-center">
                                     <form action="{{url('admin/providers/'.$provider->uuid)}}" method="POST">
@@ -129,7 +146,7 @@ Mis provedores
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Departamento:</label>
-                                    <select name="department_id" class="form-control" >
+                                    <select name="state_id" class="form-control" >
                                         @foreach($departments as $departament)
                                         <option value="{{$departament->id}}">{{$departament->name}}</option>
                                         @endforeach
@@ -139,7 +156,11 @@ Mis provedores
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Ciudad:</label>
-                                    {!! Form::select('country_id' , $countries , null ,['class' =>'form-control']) !!}
+                                    <select name="city_id" class="form-control" >
+                                        @foreach($cities as $city)
+                                            <option value="{{$city->id}}">{{$city->name}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>

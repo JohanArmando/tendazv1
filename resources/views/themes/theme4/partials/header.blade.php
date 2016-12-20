@@ -4,7 +4,7 @@
 		<div class="container offset-top-5">
 			<div class="row">
 				<div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 col-sm-3">
-					<a href="{{url('/')}}">
+					<a href="{{url('/')}}" style="text-decoration: none">
 						@if($shop->logo)
 							<img class="logo replace-2x img-responsive" src="{{ asset("logos/$shop->id/$shop->logo") }}"  alt="Logo de la tienda {{ $shop->name_store }}" />
 						@else

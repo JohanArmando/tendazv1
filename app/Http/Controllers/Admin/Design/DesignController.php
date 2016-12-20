@@ -46,10 +46,10 @@ class DesignController extends Controller
     public function postLogo($subdomain , Request $request , $id)
     {
         Cache::forget($subdomain.'_store');
-        $store = $request->shop;
-        $store->logo = $request->file('path');
-        $store->save();
-        if($store->logo)
+        $request->shop->logo = $request->file('path');
+        $request->shop->save();
+        Cache::forever($subdomain.'_store' , $request->shop );
+        if($request->shop->logo)
             return redirect()->back()->with('message',array('type' => 'success' , 'message' => 'El logo de tu tienda a cambiado'));
         else
             return redirect()->back()->with('message',array('type' => 'warning' , 'message' => 'Tu tienda no tiene logo.'));
@@ -67,6 +67,8 @@ class DesignController extends Controller
             if (!\Storage::disk('sliders')->has( $id . '/' . $name1))
                 \Storage::disk('sliders')->put( $id . '/' . $name1, \File::get($slider1));
             $store->slider1 = $name1;
+        }else{
+            $store->slider1 = '';
         }
         /** @var  $slider2 */
         $slider2 = $request->file('slider2');
@@ -75,6 +77,8 @@ class DesignController extends Controller
             if(!\Storage::disk('sliders')->has( $id.'/'.$name2))
                 \Storage::disk('sliders')->put( $id.'/'.$name2, \File::get($slider2));
             $store->slider2 = $name2;
+        }else{
+            $store->slider2 = '';
         }
         /** @var  $slider3 */
         $slider3 = $request->file('slider3');
@@ -83,10 +87,13 @@ class DesignController extends Controller
             if (!\Storage::disk('sliders')->has( $id . '/' . $name3))
                 \Storage::disk('sliders')->put( $id . '/' . $name3, \File::get($slider3));
             $store->slider3 = $name3;
+        }else{
+            $store->slider3 = '';
         }
         /** save */
-        $store->save();
         Cache::forget($subdomain.'_store');
+        $store->save();
+        Cache::forever($subdomain.'_store' , $request->shop );
         return redirect()->back()->with('message',array('type' => 'success' , 'message' => 'Las imagenes del slider de tu tienda han cambiado'));
     }
 

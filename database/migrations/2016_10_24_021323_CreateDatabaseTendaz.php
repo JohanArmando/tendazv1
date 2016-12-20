@@ -979,8 +979,9 @@ class CreateDatabaseTendaz extends Migration
             $table->string('last_name', 255)->nullable();
             $table->string('phone', 255)->nullable();
             $table->string('email', 255)->unique();
-            $table->unsignedInteger('department_id')->unsigned();
             $table->unsignedInteger('country_id')->unsigned();
+            $table->unsignedInteger('state_id')->unsigned();
+            $table->unsignedInteger('city_id')->unsigned();
             $table->unsignedInteger('shop_id')->nullable()->unsigned();
             $table->timestamp('created_at')->default(\Carbon\Carbon::now());
             $table->timestamp('updated_at')->default(\Carbon\Carbon::now());
@@ -1043,7 +1044,8 @@ class CreateDatabaseTendaz extends Migration
 
         Schema::table('providers', function($table) {
             $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade') ;
-            $table->foreign('department_id')->references('id')->on('states')->onDelete('cascade') ;
+            $table->foreign('state_id')->references('id')->on('states')->onDelete('cascade') ;
+            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade') ;
             $table->foreign('shop_id')->references('id')->on('shops')->onDelete('cascade');
         });
 

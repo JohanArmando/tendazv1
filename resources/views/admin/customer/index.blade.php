@@ -1,6 +1,3 @@
-@section('title')
-Mis clientes
-@stop
 @extends('layouts.administrator')
     @section('css')
         <link rel="stylesheet" href="{{asset('admin/plugins/datatables/css/tabletools.css')}}">
@@ -26,7 +23,6 @@ Mis clientes
                     <ol class="breadcrumb breadcrumb-transparent nm">
                         <li><a href="{{url('admin')}}" style="color: darkgrey;">Inicio</a></li>
                         <li><a href="#" style="color: orange;">Clientes</a></li>
-                        <li class="active" style="color: orange;">Principal</li>
                     </ol>
                 </div>
              </div>
@@ -86,9 +82,12 @@ Mis clientes
                                 @foreach($customers as $customer)
                                     <tr>
                                         <td>
-                                            <a href="{{ url('admin/customers') }}">
-                                                <strong>{{ $customer->name  }}</strong>
-                                            </a>
+                                            <form action="{{url('admin/customers/'.$customer->uuid)}}" method="GET">
+                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                <button type="submit" class="btn btn-tendaz">
+                                                    <strong>{{ $customer->full_name  }}</strong>
+                                                </button>
+                                            </form>
                                         </td>
                                         <td>
                                             {{$customer->phone}}

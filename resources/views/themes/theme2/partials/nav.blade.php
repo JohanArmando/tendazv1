@@ -1,11 +1,11 @@
 <div class="navbar navbar-default yamm" role="navigation" id="navbar" ng-controller="cartGlobalController" ng-cloak="">
     <div class="container">
         <div class="navbar-header">
-            <a href="{{url('/')}}" data-animate-hover="bounce">
-                @if($shop->path)
-                    <img src="{{asset('logos/'.$shop->id.'/'.$shop->path)}}" alt="" height="70" width="140" class="hidden-xs">
+            <a href="{{url('/')}}" style="text-decoration: none">
+                @if($shop->logo)
+                    <img style="margin-top: 10px; width:220px" height="70px" class="hidden-xs logo replace-2x img-responsive" src="{{ asset("logos/$shop->id/$shop->logo") }}"  alt="Logo de la tienda {{ $shop->name_store }}" />
                 @else
-                    <h2>{{$shop->name_store}}</h2>
+                    <h1>{{ $shop->name }}</h1>
                 @endif
             </a>
             <div class="navbar-buttons">
@@ -67,7 +67,7 @@ Cerrar Sesion</a>
             @if(!Request::is('cart/buy'))
             <div class="navbar-collapse collapse right" id="basket-overview">
                 <a href="{{url('/cart/buy')}}" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i>
-                    <span class="hidden-sm"><% size(carts) ? size(carts)  :  0 %> item(s) en el carro</span></a>
+                    <span class="hidden-sm"><% carts.original_qty %> item(s) en el carro</span></a>
             </div>
             @endif
 
