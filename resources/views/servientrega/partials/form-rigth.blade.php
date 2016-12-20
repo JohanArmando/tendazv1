@@ -4,7 +4,7 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" align="center">
-                    {!! Form::open(['url' => url('auth/register') , 'method' => 'POST' , 'name' => "form-register" , 'data-toggle'=> "validator" , 'role'=>"form"]) !!}
+                    <form method="POST" action="http://tendaz.local/auth/register" accept-charset="UTF-8" name="form-register" data-toggle="validator" role="form" novalidate="true">
                         <h2>REGISTRATE</h2>
                         <div class="form-group  text-left">
                             <label>Correo electronico :</label>
@@ -40,7 +40,7 @@
                         </div>
                         <div class="form-group">
                             <input required="required" name="term" type="checkbox">
-                            <strong>Acepto los terminos y condiciones</strong>
+                            <strong><a href="{{asset('servientrega/TERMINOSYCONDICIONES.pdf')}}" target="_blank">Acepto los terminos y condiciones</a></strong>
                             <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group">
@@ -49,7 +49,7 @@
                             </button>
                         </div>
                         <input type="hidden" value="1" name="remember">
-                    {!! Form::close() !!}
+                    </form>
                 </div>
             </div>
         </div>

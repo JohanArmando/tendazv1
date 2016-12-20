@@ -1,4 +1,4 @@
-  <div class="row">
+
         <div class="col-md-6  text-center">
              <div class="container-fluid">
                <div class="row">
@@ -9,7 +9,7 @@
                        <img class="img-responsive" src="{{asset('servientrega/img/centro.png')}}">
                      </div>
                   </div>
-                   <ul class="row container-menu nopad"  >
+                   <ul class="row container-menu nopad menu_part"  >
                        <li data-menuanchor="firstPage">
                             <a href="#se_container-2"  class="col-md-2 nopad icon_servi" id="90">
                               <img class="img-responsive" src="{{asset('servientrega/img/icon_9.png')}}">

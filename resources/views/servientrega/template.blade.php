@@ -23,8 +23,14 @@
 				<div class="row">
 					@include('servientrega.partials.image-spin')
 					@include('servientrega.partials.form-rigth')
+				
 				</div>
 			</div>
+	<div class="container-fluid aa_container-fluid section pp-scrollable" id="se_container-2">
+					@include('servientrega.partials.about')
+					
+			</div>
+			@include('servientrega.partials.footer')
 		</section>
 			<script type="text/javascript" src="{{asset('servientrega/js/jquery-1.11.3.min.js')}}"></script>
 			<script type="text/javascript" src="{{asset('servientrega/js/TweenMax.min.js')}}"></script>
