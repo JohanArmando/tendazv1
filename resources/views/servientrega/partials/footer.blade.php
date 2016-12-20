@@ -1,5 +1,5 @@
  <link rel="stylesheet" type="text/css" href="{{asset('Servientrega/css/footer.css')}}">
- <footer class="col-md-12">
+ <footer class="col-md-12 nopad">
     <div class="footer" id="footer">
         <div class="container">
             <div class="row">

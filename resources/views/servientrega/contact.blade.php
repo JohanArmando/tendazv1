@@ -1,8 +1,14 @@
 @extends('servientrega.template')
 	@section('css')
+    <link rel="stylesheet" type="text/css" href="{{asset('servientrega/css/other-sections.css')}}">
 		@stop
+        <div class="container-fluid">
+            @include('servientrega.partials.top')
+               
+        </div>
+         @include('servientrega.partials.nav')
 	@section('content')
-		<div class="container" >
+		<div class="container principal container-fluid" >
         <section class="text-center heading-description">
             <h1>Contactanos</h1>
             <p class="MainByline">
@@ -90,8 +96,11 @@
                     </div>
                 </div>
             </div>
+
         </section>
     </div>
+    @include('servientrega.partials.footer')
 		@endsection
+
 	@section('script')
 		@stop

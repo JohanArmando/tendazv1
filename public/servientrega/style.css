@@ -14,6 +14,60 @@ Version: 0.1
 .container_steps{
     height: 100vh
 }
+.navbar-default {
+    background-color: #008834;
+    border-color: #008834;
+    border-radius: 0px;
+}
+.brand_logo_image{
+    width: 75px;
+}
+.navbar-default .navbar-nav > li > a {
+    color: #fff;
+     transition: .4s;
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus ,.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    color: #008834;
+    background-color: #91dfa9;
+    outline: none;
+    transition: .4s;
+}
+.nopad_left{
+    padding-left: 0px;
+}
+
+.make_store_btn {
+    background: #008834;
+    border-radius: 0px;
+    width: 300px;
+    transition: .4s;
+}
+.make_store_btn:hover {
+    background: rgba(145, 223, 169, 0.36);
+    border-radius: 0px;
+    width: 300px;
+    transition: .4s;
+    color: #008834;
+    border-color: #008834;
+}
+.container_content {
+    width: 100vw;
+    height: calc(80vh - 175px);
+    display: table-cell;
+    vertical-align: middle;
+    margin: 0 auto;
+    float: none;
+    padding-left: 10vw;
+}
+.hei_serv{
+        height: 500px;
+    display: table-cell;
+    vertical-align: middle;
+}
+.social>li {
+    display: inline-block;
+    margin-right: 24px;
+}
 .icon_servi img.img-responsive {
     width: 112px;
 }
@@ -21,7 +75,29 @@ Version: 0.1
     width: 200px;
 }
 .border_servi{
-        border-bottom: 10px solid #008834;
+        /*border-bottom: 10px solid #008834;*/
+        background: url('../servientrega/img/iconos_fondo.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+
+}
+.conctent_truk{
+    background: url(../servientrega/img/camion.png);
+    background-repeat: no-repeat;
+            padding-top: 30px;
+            padding-bottom: 30px;
+             animation: camion 8s infinite;
+}
+/* Standard syntax */
+@keyframes camion {
+    0%   {background-position-x: -134px;
+    background-position-y: 85px;}
+    /*45%  {    background-position-x: 108%;
+    background-position-y: 85px;}
+    50%  {    background-position-x: 108%;
+    background-position-y: 85px;}*/
+    100% {background-position-x: 108%;
+    background-position-y: 85px;}
 }
 .make_tendaz{
     background: #008834;
@@ -52,22 +128,44 @@ Version: 0.1
     position: absolute;
 }
 .container-menu{
-    opacity: .4;
     height: 100%;
     width: 100%;
-    transform: rotate(0deg);
     transition: 1s;
     position: absolute;
 }
+ul.row.container-menu.nopad.menu_part {
+    opacity: .4;
+    transition: .4s;
+}
+ul.row.container-menu.nopad.menu_part:hover {
+    opacity: 1;
+}
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    color: #fff;
+    background-color: #008f3d;
+    outline: none;
+    transition: .4s;
+}
 .container_steps:hover > .container-fluid > .container-menu{
     opacity: 1;
-    transform: rotate(360deg);
     transform-origin: center;
     transition: 1s;
 
 }
+.icon_servi>img{
+    transition: .4s;    
+}
+.icon_servi:hover>img {
+    width: 133px;
+}
 .nopad{
-    padding: 0px;
+    padding: 0px!important;
+}
+.brand_anchor{
+    padding-top: 6px!important;
+    padding-bottom: 5px!important;
+    padding-left: 5px!important;
+    padding-right: 5px!important;
 }
 
 .panel-default_servi {
