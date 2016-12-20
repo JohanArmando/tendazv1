@@ -19,11 +19,11 @@
                                 <span></span>
                             </div>
                         </div>
-                        <a href="{{url('/')}}" class="navbar-brand">
-                            @if($shop->path)
-                                <img class="hidden-xs" src="{{asset('logos/'.$shop->id.'/'.$shop->path)}}" alt="" height="80" width="160" >
+                        <a href="{{url('/')}}" style="text-decoration: none">
+                            @if($shop->logo)
+                                <img style="margin-top: 10px" class="logo replace-2x img-responsive" src="{{ asset("logos/$shop->id/$shop->logo") }}"  alt="Logo de la tienda {{ $shop->name_store }}" />
                             @else
-                                <h2>{{$shop->name_store}}</h2>
+                                <h1>{{ $shop->name }}</h1>
                             @endif
                         </a>
                     </div>

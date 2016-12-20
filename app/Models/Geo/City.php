@@ -5,12 +5,9 @@ namespace Tendaz\Models\Geo;
 use Illuminate\Database\Eloquent\Model;
 use Tendaz\Models\Order\Provider;
 
-class State extends Model
+class City extends Model
 {
-    public function cities()
-    {
-        return $this->hasMany(City::class);
-    }
+    protected $table = 'cities';
 
     public function provider(){
         return $this->hasOne(Provider::class);

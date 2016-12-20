@@ -84,11 +84,21 @@
 				<div class="divider divider--md"></div>
 				<div class="social-links social-links--large social-links-layout-02">
 					<ul>
-						<li><a class="icon fa fa-facebook" href=""></a></li>
-						<li><a class="icon fa fa-twitter" href=""></a></li>
-						<li><a class="icon fa fa-google-plus" href=""></a></li>
-						<li><a class="icon fa fa-instagram" href=""></a></li>
-						<li><a class="icon fa fa-youtube-square" href=""></a></li>
+						@if(!$shop->store->facebook == '')
+							<li><a class="icon fa fa-facebook" href="{{url('https://'.$shop->store->facebook)}}"></a></li>
+						@endif
+						@if(!$shop->store->twitter == '')
+							<li><a class="icon fa fa-twitter" href="{{url('https://'.$shop->store->twitter)}}"></a></li>
+						@endif
+						@if(!$shop->store->google_plus == '')
+							<li><a class="icon fa fa-google-plus" href="{{url('https://'.$shop->store->google_plus)}}"></a></li>
+						@endif
+						@if(!$shop->store->instagram == '')
+							<li><a class="icon fa fa-instagram" href="{{url('https://'.$shop->store->instagram)}}"></a></li>
+						@endif
+						@if(!$shop->store->blog == '')
+							<li><a class="icon fa fa-twitc+h" href="{{url('https://'.$shop->store->blog)}}"></a></li>
+						@endif
 					</ul>
 				</div>
 			</div>

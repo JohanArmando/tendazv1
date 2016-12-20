@@ -66,21 +66,21 @@
 									</div>
 									<div class="product-info col-sm-6 col-md-6 col-lg-6 col-xl-6">
 										<div class="wrapper hidden-xs">
-											<div class="product-info__sku pull-left">SKU: <strong><% product.sku ? product.sku : 'NONE' %></strong></div>
+											<div class="product-info__sku pull-left" ng-if="product.sku" >SKU: <strong><% product.sku ? product.sku : 'NONE' %></strong></div>
 											<div class="product-info__availability pull-right">Disponible:   <strong class="color"><% product.stock == none || product.stock > 0 || product.stock == unlimited  ? 'En Stock ' + '(' + product.stock + ')' : 'Sin Stock' %></strong></div>
 										</div>
 										<div class="product-info__title">
 											<h2><% product.name %></h2>
 										</div>
 										<div class="wrapper visible-xs">
-											<div class="product-info__sku pull-left">SKU: <strong><% product.sku ? product.sku : 'NONE' %></strong></div>
+											<div class="product-info__sku pull-left" ng-if="product.sku" >SKU: <strong><% product.sku ? product.sku : 'NONE' %></strong></div>
 											<div class="product-info__availability pull-right">Disponible:   <strong class="color"><% product.stock == none || product.stock > 0 || product.stock == unlimited  ? 'En Stock ' + '(' + product.stock + ')' : 'Sin Stock' %></strong></div>
 										</div>
 										<div class="visible-xs">
 											<div class="clearfix"></div>
 												<span>
 													<slick  class="product-images-carousel" ng-if="images.length > 0" current-index="index" responsive="breakpoints" slides-to-show=1 slides-to-scroll=1>
-														<div ng-repeat="image in images "style="margin: 0 10px 0  10px !important;">
+														<div ng-repeat="image in images" style="margin: 0 10px 0  10px !important;">
 															<a href="#" data-image="<% image.url %>" data-zoom-image="<% image.url %>">
 																<img src="<% image.url %>" alt="" height="700" />
 															</a>

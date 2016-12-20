@@ -24,6 +24,4 @@ class Store extends Model
     {
         return 'uuid';
     }
-    
-  
 }

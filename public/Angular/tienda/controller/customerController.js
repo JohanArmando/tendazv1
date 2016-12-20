@@ -50,7 +50,7 @@
         doRegister : function (registerForm) {
             if (registerForm.$valid){
                 var cartId = localStorage.getItem('cart_id') ? '/'+localStorage.getItem('cart_id') : '';
-                alert(cartId);
+                //alert(cartId);
                         var toLog = {
             method: 'POST',
             url: BASEURL + '/auth/register' + cartId + '?client_secret=' + client_secret + '&client_id=' + client_id,

@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Tema defualt, tienda creada con tendaz.com">
     <meta name="author" content="tendaz.com">
-    <link rel="icon" type="image/png" href="{{asset('logos/'.$shop->id.'/'.$shop->path)}}" />
-    <title>{{$shop->name_store}}</title>
+    <link rel="icon" type="image/png" href="{{asset('logos/'.$shop->id.'/'.$shop->logo)}}" />
+    <title>Tienda online de {{ $shop->name }}</title>
     <!--Styles-->
     <link href="{{asset('themes_tendaz/default/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('themes_tendaz/default/css/font-awesome.min.css')}}" rel="stylesheet">
