@@ -11,7 +11,6 @@ myApp.factory("Shipping" , ["$http" , "User", "$rootScope" , "Cart", function ($
             method: "GET",
         }).then(function(response) {
             $rootScope.addresses = response.data.data;
-             $rootScope.add.dat = response.data.data[0]._id;
         }).catch(function(response) {
             $rootScope.states = response.data;
         }).finally(function() {});
@@ -27,9 +26,6 @@ myApp.factory("Shipping" , ["$http" , "User", "$rootScope" , "Cart", function ($
             method: "GET",
         }).then(function(response) {
             $rootScope.states = response.data.states;
-            console.log($rootScope.states);     
-
-
         }).catch(function(response) {
             console.log(response);
         }).finally(function() {});
@@ -74,7 +70,6 @@ myApp.factory("Shipping" , ["$http" , "User", "$rootScope" , "Cart", function ($
             url: baseUrl + '/carts/' + Cart.getCartId() +'/shipping?client_secret='  + client_secret + '&client_id=' + client_id,
             method: "GET"
         }).then(function(response) {
-            console.log(response);  
             $rootScope.shipping_methods = response.data.data;
         }).catch(function(response) {
             console.log(response);

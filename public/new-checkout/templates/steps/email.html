@@ -1,0 +1,45 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-4">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Ingresa tu mail para continuar la compra. </h2>
+                        <h8>Rápido. Fácil. Seguro.</h8>
+                    </div>
+                    <div class="form group col-md-12">
+                        <form name="emailForm" ng-submit="sendEmail(emailForm)" novalidate class="form-horizontal">
+                            <input type="email" class="mailInput" ng-model="email" placeholder="Ingresa tu correo aquí!" name="email" required>
+                            <p class="error" ng-show="emailForm.email.$invalid && formSubmited">Debes introducir un email valido</p>
+                            <button type="submit" class="btn btn_checkout">Entrar</button>
+                        </form>
+                        <h3>¿Para que ingresar tu correo?</h3>
+                        <div class="col-md-12">
+                            <span><i class="glyphicon glyphicon-ok"></i> Almacenar tus datos</span>
+                        </div>
+                        <div class="col-md-12">
+                            <span><i class="glyphicon glyphicon-ok"></i> Generar una compra segura</span>
+                        </div>
+                        <div class="col-md-12">
+                            <span><i class="glyphicon glyphicon-ok"></i> Facilitar tus proximas compras</span>
+                        </div>
+                        <div class="col-md-12">
+                            <span><i class="glyphicon glyphicon-ok"></i> Llevar un registro de tus compras realizadas</span>
+                        </div>
+                        <div class="col-md-12">
+                            <span><i class="glyphicon glyphicon-ok"></i> Guardar tus direcciones favoritas de envio</span>
+                        </div>
+                        <div class="col-md-12">
+                            <span><i class="glyphicon glyphicon-ok"></i> Guardar las facturas de tus compras en tu perfil</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 divider"></div>
+    </div>
+</div>

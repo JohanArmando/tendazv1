@@ -15,7 +15,9 @@ use Tendaz\Traits\WhereShopTrait;
 class Customer extends Authenticatable
 {
     use Notifiable , UuidAndShopTrait, WhereShopTrait;
+    
     protected static $user = false;
+    
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new CustomerResetPassword($token));

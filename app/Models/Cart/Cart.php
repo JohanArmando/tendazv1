@@ -64,13 +64,13 @@ class Cart extends Model
         return (int) ($this->order->shippingMethod ? $this->order->shippingMethod->cost : 0);
     }
 
-    public function scopeTotal(){
-        return (int) $this->order->total;
+    public function total(){
+        return (float) $this->order->total;
     }
     
-    public function scopeWeight(){
-        return (int) $this->products->sum(function($product){
-                return $product->weight * $product->pivot->quantity;
+    public function weight(){
+        return (float) $this->products->sum(function($product){
+                return $product->weight * $product->pivot->quantity ;
         });
     }
 

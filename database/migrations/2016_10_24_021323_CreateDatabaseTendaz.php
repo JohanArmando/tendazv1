@@ -887,7 +887,7 @@ class CreateDatabaseTendaz extends Migration
             //$table->enum('type', array('customer', "reseller" , "tendaz" ,'admin'))->default("customer");
             $table->string('phone', 255)->nullable();
             $table->boolean('active')->default("1");
-            $table->string('email', 255)->unique();
+            $table->string('email', 255);
             $table->string('password', 60)->nullable();
             $table->string('identification', 60)->nullable();
             $table->text('notes')->nullable();

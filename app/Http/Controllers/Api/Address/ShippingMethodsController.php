@@ -12,6 +12,7 @@ class ShippingMethodsController extends Controller
 {
     public function index(Cart $cart)
     {
+        
         return fractal()
             ->collection(ShippingMethod::OptionsByCart($cart)->get(), new ShippingMethodTransformer())
             ->withResourceName('shipping_methods')

@@ -3,6 +3,7 @@
 namespace Tendaz\Http\Controllers\Api\Auth;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Tendaz\Http\Controllers\Controller;
 use Tendaz\Models\Cart\Cart;
 use Tendaz\Models\Customer;
@@ -18,7 +19,7 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
 
 
-        if (! auth('web')->attempt($credentials)) {
+        if (! auth('web')->attempt(['email' => $credentials['email'], 'password' => $credentials['password'], 'shop_id' => $request->shop->id])) {
             return   response(["Username password does not match"], 401  );
         }
 

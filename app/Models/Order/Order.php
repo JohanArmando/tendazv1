@@ -20,25 +20,24 @@ class Order extends Model
     use WhereShopTrait , CacheTagsTrait , UuidAndShopTrait;
 
     protected $table = 'orders';
-    public static $mo = 'orders';
-
-    public function __construct(array $attributes = [])
-    {
-        if (count($attributes) > 0){
-            parent::__construct($attributes);
-        }
-    }
     
-
     protected $fillable = [
         'uuid' , 'total' , 'name' , 'shipping_address_id', 'last_name' , 'phone' , 'identification' , 'email' ,'total_discount' , 'total_tax' , 'total_inc_tax' , 'shipping_method_id' , 'total_exec_tax' , 'total_products' , 'total_shipping' , 'total_shipping_exec_tax' , 'total_shipping_inc_tax' , 'note' , 'shipping' , 'cart_id' , 'order_status' , 'shop_id'
     ];
+
+    public function scopeNotInitOrders($query)
+    {
+        return $query->whereHas('status' , function ($q){
+            $q->where('id' , '<>' , 1)->orWhereNull('orders.order_status');
+        });
+    }
 
     public function getRouteKeyName()
     {
         return 'uuid';
     }
-
+    
+    
     /**
      * RELATIONSHIP 
      */
@@ -142,35 +141,35 @@ class Order extends Model
      */
     
     public static function TotalMonth(){
-        return Order::Monthly()->withoutGlobalScope(OrderStatusScope::class)->sum('total');
+        return Order::Monthly()->NotInitOrders()->sum('total');
     }
 
     public static function TotalDay(){
-        return Order::Day()->withoutGlobalScope(OrderStatusScope::class)->sum('total');
+        return Order::Day()->NotInitOrders()->sum('total');
     }
 
     public static function TotalCountMonth(){
-        return Order::Monthly()->withoutGlobalScope(OrderStatusScope::class)->count();
+        return Order::Monthly()->NotInitOrders()->count();
     }
     
     public static function TotalCountDay(){
-        return Order::Day()->withoutGlobalScope(OrderStatusScope::class)->count();
+        return Order::Day()->NotInitOrders()->count();
     }
 
     public static function TotalWeek(){
-        return Order::Weekly()->withoutGlobalScope(OrderStatusScope::class)->sum('total');
+        return Order::Weekly()->NotInitOrders()->sum('total');
     }
 
     public static function TotalCountWeek(){
-        return Order::Weekly()->withoutGlobalScope(OrderStatusScope::class)->count();
+        return Order::Weekly()->NotInitOrders()->count();
     }
 
     public static  function CountWeekly(){
-        return Order::LastestWeekly()->ByDateAndCount()->get()->toArray();
+        return Order::LastestWeekly()->ByDateAndCount()->NotInitOrders()->get()->toArray();
     }
 
     public  static function SalesWeekly(){
-        return Order::LastestWeekly()->ByDateAndTotal()->get()->toArray();
+        return Order::LastestWeekly()->ByDateAndTotal()->NotInitOrders()->get()->toArray();
     }
 
     public  static function ByStatus(){
@@ -178,6 +177,7 @@ class Order extends Model
             ->select('current_state', DB::raw('count(*) as total'))
             ->group('current_state')
             ->order('current_state')
+            ->NotInitOrders()
             ->get()
             ->toArray();
     }
@@ -186,32 +186,36 @@ class Order extends Model
         return   Order::select(DB::raw('count(*) as total, DATE(created_at) as day'))
             ->group('day')
             ->order('day')
+            ->NotInitOrders()
             ->get()
             ->toArray();
     }
 
     public  static function OrderPendingDay(){
         return      Order::pending()
-            ->day()
-            ->count();
+                    ->day()
+                    ->NotInitOrders()
+                    ->count();
     }   
     
     public  static function OrderPendingYesterday(){
         return  Order::pending()
             ->yesterday()
+            ->NotInitOrders()
             ->count();
     } 
     
     public  static function OrderPendingMore(){
         return   Order::pending()
             ->more()
+            ->NotInitOrders()
             ->count();
     }
     public  static function totalSold(){
-        return (int) Order::withoutGlobalScopes([OrderStatusScope::class])->sum('total');
+        return (int) Order::NotInitOrders()->sum('total');
     }
 
     public  static function totalOrders(){
-        return  (int) Order::withoutGlobalScopes([OrderStatusScope::class])->count();
+        return  (int) Order::NotInitOrders()->count();
     }
 }
