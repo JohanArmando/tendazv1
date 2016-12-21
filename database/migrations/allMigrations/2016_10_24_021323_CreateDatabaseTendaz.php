@@ -151,7 +151,7 @@ class CreateDatabaseTendaz extends Migration
             $table->enum('phone_type' , ['mobile' , 'fax' ,  'work' , 'home' ,'other']);
             $table->string('number_phone')->nullable();
             $table->string('code_country')->nullable();
-            $table->string('business_size')->nullable();
+            $table->text('conditions')->nullable();
             $table->string('number_local')->nullable();
             $table->string('address_1')->nullable();
             $table->string('address_2')->nullable();

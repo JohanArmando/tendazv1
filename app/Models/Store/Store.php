@@ -14,7 +14,7 @@ class Store extends Model
      * @var array
      */
     protected $fillable = [
-        'uuid', 'name','phone_type', 'number_phone', 'code_country', 'business_size', 'number_local', 'address_1' , 'address_2'  , 'lat' , 'lon' ,'blog' , 'pinterest' , 'instagram' , 'google_plus' , 'twitter' , 'facebook' , 'enabled' , 'shop_id' , 'category_shop_id','build', 'message'
+        'uuid', 'name','phone_type', 'number_phone', 'code_country', 'conditions', 'number_local', 'address_1' , 'address_2'  , 'lat' , 'lon' ,'blog' , 'pinterest' , 'instagram' , 'google_plus' , 'twitter' , 'facebook' , 'enabled' , 'shop_id' , 'category_shop_id','build', 'message'
     ];
     
     /**

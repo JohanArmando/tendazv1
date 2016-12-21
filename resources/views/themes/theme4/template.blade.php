@@ -165,6 +165,7 @@
 	@yield('script')
 	<!--- iframe -->
 	@include('globalPartials.iframeAdmin')
+	@include('themes.theme4.partials.conditions')
 	<script>
 		$j(document).on('ready' , function () {
 			$j('.register').click(function () {
