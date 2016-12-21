@@ -1,28 +1,39 @@
 @extends('servientrega.template')
 	@section('css')
+	<link rel="stylesheet" type="text/css" href="{{asset('servientrega/css/login.css')}}">
 	@stop
 @section('content')
-<div class="container" style="width: 100%; background-color: #f7f7f7;color: #1f2836;">
-	<div class="row" style="margin: 5% 0 5% 0">
-		<div class="text-center" style="margin-bottom: 2%">
+<div class="container-fluid nopad ">
+<div class="row nomarserv">
+<div class="col-md-12 nopad">
+	@include('servientrega.partials.top')
+				@include('servientrega.partials.nav')
+</div>
+	
+</div>
+	
+</div>
+<div class="container-fluid serv_back" >
+	<div class="row" >
+		<div class="text-center" >
 			<!-- <img src="/tendaz/images/icons/login.png" alt="" style="width: 100px; height:auto; "> -->
 		</div>
 		<div class="col-sm-1 col-lg-1"></div>
 		<div class="col-sm-5 col-sm-offset-1 col-lg-4 col-lg-offset-1">
 			<div class="panel panel-default">
-				<div class="panel-heading text-center" style="background-color: #fff">
+				<div class="panel-heading text-center" >
 					<span class="panel-title">Ingresa a tu tienda</span>
 				</div>
 				<div class="panel-body">
 					<div class="account-box login-box login-with-help">
-						<div style="color: palevioletred; font-size: 1.1em" id="error-div" ></div>
+						<div  id="error-div" ></div>
 						<form method="POST" action="https://tendaz.com/auth/login" accept-charset="UTF-8" class="form-horizontal" id="form-login" data-toggle="validator" role="form"><input name="_token" type="hidden" value="442npyxzWkZPhKBvfsCxyPRBGpliytSEaxW1YUlO">
 							<div class="form-group ">
 								<label for="inputEmail" class="control-label sr-only"></label>
 								<div class="col-sm-12">
 									<div class="input-group">
 										<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-										<input style="border-radius: 0 5px 5px 0" type="email" class="form-control" name="email" placeholder="Email" required id="email" value="">
+										<input  type="email" class="form-control" name="email" placeholder="Email" required id="email" value="">
 									</div>
 								</div>
 							</div>			
@@ -31,7 +42,7 @@
 								<div class="col-sm-12">
 									<div class="input-group">
 										<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-										<input style="border-radius: 0 5px 5px 0" type="password" class="form-control" id="password" name="password"
+										<input  type="password" class="form-control" id="password" name="password"
 										placeholder="Contrase&ntilde;a" data-minlength="6" required>
 									</div>
 								</div>
@@ -48,7 +59,7 @@
 								<div class="col-md-12 text-left">
 									<p>&iquest;No tiene cuenta todavia?<a href="#"> <strong>Registrate</strong></a> </p>
 									<div class="clearfix"></div>
-									<div style="margin-bottom: 10px;"></div>
+									<div ></div>
 									<button type="button" class="btn btn-primary make_tendaz" href="#" data-toggle="modal" data-target="#mymodal"><em>&iquest;Olvidaste tu contrase&ntilde;a?</em>
 									</button>
 								</div>
@@ -59,7 +70,7 @@
 			</div>
 			<div class="col-sm-5 col-lg-4">
 				<div class="panel panel-default">
-					<div class="panel-heading text-center" style="background-color: #fff">
+					<div class="panel-heading text-center" >
 						<span class="panel-title "><i class="fa fa-thumbs-o-up"></i> Cuentale a tus amigos</span>
 					</div>
 					<div class="panel-body">

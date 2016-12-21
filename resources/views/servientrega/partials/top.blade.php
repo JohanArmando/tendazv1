@@ -1,4 +1,4 @@
-<div class="row border_servi">
+<div class="row border_servi nomarserv">
 	<div class="container-fluid conctent_truk">
 		<div class="row">
 				<div class="col-md-8 col-md-offset-2">
