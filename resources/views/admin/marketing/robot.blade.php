@@ -138,14 +138,26 @@ MaxI Bot
 <script type="text/javascript">
 	$('select[id="products"]').select2({
 		placeholder: 'Selecciona los productos'
-	}).select2('val',[{{$products_black}}]
+	}).select2('val',[
+	@foreach($products as $product)
+			@if($product->blacklist==1)
+				{{$product->id}},
+			@endif
+	@endforeach
+	]
 	);
 </script>
 <script type="text/javascript">
 	$('select[id="category"]').select2({
 		placeholder: 'Selecciona las Categorias'
 	}).select2(
-		'val',[{{$categories_black}}]
+		'val',[
+		@foreach($categories as $cate)
+			@if($cate->blacklist==1)
+				{{$cate->id}},
+			@endif
+		@endforeach
+		]
 	);
 </script>
 @endsection

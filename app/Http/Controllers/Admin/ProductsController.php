@@ -217,12 +217,50 @@ class ProductsController extends Controller
     }
 
     public function putProduct($subdomain,$id, Request $request){
+        $publish    =   $request->publish;
+        $cat_arrray =   $request->category_id;
+        if (is_null($request->publish)) {   $publish    =   11;  }
+
         $product = Product::where('uuid',$id)->first();
-        $product->fill($request->all());
-        $product->save();
+        $product->update([
+            'name' => $request->name,
+            'slug' => $request->slug,
+            'seo_title' => $request->seo_title,
+            'seo_description' => $request->seo_description,
+            'description' => $request->description,
+            'publish' => $publish
+            ]);
+
         $variant = Variant::where('product_id',$product->id)->first();
-        $variant->fill($request->all());
-        $variant->save();
+
+        
+        $variant->update([
+            'sku' => $request->sku,
+            'price' => $request->price,
+            'price_declared' => $request->price_declared,
+            'promotional_price' => $request->promotional_price,
+            'weight'    => $request->weight,
+            'stock'     => $request->stock,
+            'show'      => $request->show
+            ]);
+        
+
+        $check_cat_db = Categorypro::where('product_id',$product->id)->pluck('category_id')->toArray();    
+        foreach ($cat_arrray as $cat) {
+            $check_cat  = Categorypro::where('category_id',$cat)->where('product_id',$product->id)->first();
+            if (empty($check_cat)) {
+                Categorypro::Create([
+                    'product_id'    => $product->id,
+                    'category_id'   => $cat
+                    ]);
+            }   elseif (!in_array($cat,$check_cat_db)) {
+                    $check_cat->delete();
+            }
+            else{
+
+            }
+        }
+        // dd($check_cat_db);
         return redirect()->to('admin/products')->with('message', array('type' => 'success' , 'message' => 'Editado correctamente'));
 
     }

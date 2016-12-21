@@ -1,7 +1,5 @@
 <?php
-
 namespace Tendaz\Http\Controllers\Admin\Marketing;
-
 
 use Symfony\Component\HttpFoundation\Request;
 use Tendaz\Http\Controllers\Controller;
@@ -28,69 +26,42 @@ class MarketingController extends Controller
     public function robot()
     {
         $current_config     =   Trends::where('shop_id',auth('admins')->user()->shop->id)->first();
-        $categories_black   =    unserialize($current_config['categories_black']);
-        $products_black     =    $current_config['products_black'];
-        // dd($categories_black);
-        if (!count($current_config)) {
-            $current_config =   0;
-            // dd($current_config);
-        }
+        
         $products   = Product::where('shop_id',auth('admins')->user()->shop->id)->get();
         $categories = Category::where('shop_id',auth('admins')->user()->shop->id)->get();
         $coupons    = Coupon::where('shop_id',auth('admins')->user()->shop->id)->get();
-        return view('admin.marketing.robot',compact('products','categories','coupons','products_black','current_config','categories_black'));
+        return view('admin.marketing.robot',compact('products','categories','coupons','current_config'));
     }
 
     public function postRobot(Request $request){
         $current_config         = Trends::where('shop_id',auth('admins')->user()->shop->id)->first();
+        $products_array         = Product::where('shop_id',auth('admins')->user()->shop->id)->pluck('id');
+        $categories_array       = Category::where('shop_id',auth('admins')->user()->shop->id)->pluck('id');
         $trend_config           = $request->all();
-        $trend_config_coupon    = $trend_config['coupon'];
-    
-        if (!array_key_exists('coupon',$trend_config)) {
-            return redirect()->back()->with('message',array('type' => 'warning' , 'message' => 'Debes crear al menos 1 cupon para poder activar a Maxi'));
-        }
-        if (!array_key_exists('categories',$trend_config)) {
-            $trend_config_cats    = '';
-        }
-        else{
-            $trend_config_cats  = serialize($trend_config['categories']);
-        }
-        if (!array_key_exists('products_black',$trend_config)) {
-            $trend_config_products    = '';
-        }
-        else{
-            $trend_config_products  = serialize($trend_config['products_black']);
-        }
 
-        if (!count($current_config)) {
-            Trends::create([
-                'products_black'    => $trend_config_products,
-                'coupon_id'         => $trend_config_coupon,
-                'categories_black'  => $trend_config_cats       
-                ]);
-            return redirect()->back()->with('message',array('type' => 'success' , 'message' => 'Datos guardados correctamente'));
-        }  
-
-        else{
-            if(!empty($trend_config['products_black'])) { 
-            $trend_config_products  = implode(",",$trend_config['products_black']);
-            } else {
-                $trend_config_products=null;
-            };
-
-            if(!empty($trend_config['categories'])) { 
-                $trend_config_cats  = implode(",",$trend_config['categories']);
-            } else {
-                $trend_config_cats=null;
-            };
-            $current_config->update([
-            'products_black' => $trend_config_products,
-            'coupon_id' => $trend_config_coupon,
-            'categories_black' => $trend_config_cats
-            ]);
-            return redirect()->back()->with('message',array('type' => 'success' , 'message' => 'Datos actualizados correctamente'));
+        foreach ($categories_array as $key => $cate) {
+                    $cateU   =   Category::where('id',$cate)->first();
+                    $cateU->update(['blacklist' => 0]);
         }
-        
+        if (isset($trend_config['categories'])) {
+            foreach ($trend_config['categories'] as $cate) {
+                $categories     =   Category::where('id',$cate)->first();
+                $categories->update([
+                        'blacklist' => 1
+                    ]);
+            }
+        }
+        foreach ($products_array as $key => $pro) {
+                    $proU   =   Product::where('id',$pro)->first();
+                    $proU->update(['blacklist' => 0]);
+        }
+        if (isset($trend_config['products_black'])) {
+            foreach ($trend_config['products_black'] as $products) {
+                $product     =   Product::where('id',$products)->first();
+                $product->update(['blacklist' => 1]);
+            }
+        }
+        return redirect()->back()->with('message',array('type' => 'success' , 'message' => 'Datos actualizados correctamente'));
     }
 
     public function social()
