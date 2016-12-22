@@ -16,7 +16,7 @@ conviértalos en ventas..</p>
 	
 </div>	
 <div class="col-md-6">
-	 <img class="featurette-image img-responsive " src="{{asset('servientrega/img/ACOMPANAMIENTO.png')}}" >
+	 <img class="featurette-image img-responsive " src="{{asset('servientrega/img/POSICIONAMIENTODIGITA.png')}}" >
 </div>
 	</div>
 </div>

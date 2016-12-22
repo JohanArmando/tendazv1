@@ -10,8 +10,8 @@ $( document ).ready(function() {
 })
  $('#pagepiling').pagepiling({
      direction: 'horizontal',
-     anchors: ['se_container-1','about','almacenamiento','posicionamientodigital'],
-    menu: '.container-menu'
+     anchors: ['se_container-1','about','almacenamiento','posicionamientodigital','acompanamiento','lamarca','logisticacobro','store','inversa','especializada','internacional'],
+    menu: '.container-menu_icons'
  });
 
  var items = document.querySelectorAll('.container-menu .icon_servi');

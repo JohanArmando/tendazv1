@@ -11,6 +11,23 @@ Version: 0.1
     font-size: 19px;
     list-style: none;
 }
+.nomarserv{
+    margin-right: 0px;
+    margin-left: 0px;
+}
+.icon_timeline_servi {
+    position: relative;
+    width: 50px;
+    transition: .4s;
+}
+#icons_menu{
+    min-height: 70px;
+}
+.icon_timeline_servi:hover {
+    position: relative;
+    width: 55px;
+    transition: .4s;
+}
 .container_steps{
     height: 100vh
 }
@@ -79,6 +96,7 @@ Version: 0.1
         background: url('../servientrega/img/iconos_fondo.png');
         background-size: cover;
         background-repeat: no-repeat;
+        background-color: #c4e9d2;
 
 }
 .conctent_truk{
@@ -88,6 +106,7 @@ Version: 0.1
             padding-bottom: 30px;
              animation: camion 8s infinite;
 }
+
 /* Standard syntax */
 @keyframes camion {
     0%   {background-position-x: -134px;
@@ -96,7 +115,7 @@ Version: 0.1
     background-position-y: 85px;}
     50%  {    background-position-x: 108%;
     background-position-y: 85px;}*/
-    100% {background-position-x: 108%;
+    100% {background-position-x: 112%;
     background-position-y: 85px;}
 }
 .make_tendaz{

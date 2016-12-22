@@ -13,7 +13,7 @@
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse menu_part nopad_left" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav container-menu">
+        <ul class="nav navbar-nav container-menu container-menu_icons">
    <li  data-menuanchor="se_container-1"><a  class="nopad brand_anchor" href="#se_container-1" ><img src="{{asset('servientrega/img/icono_servi.png')}}" class="brand_logo_image img-responsive"></a></li> 
           <li  data-menuanchor="se_container-2"><a href="#about">Nosotros <span class="sr-only">(current)</span></a></li>
           <li><a href="{{url('planes')}}">Planes</a><li>
