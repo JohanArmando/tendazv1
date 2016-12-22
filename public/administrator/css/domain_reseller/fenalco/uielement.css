@@ -13853,7 +13853,7 @@ a.list-group-item:focus {
   height: 40px;
   line-height: 40px;
   border-radius: 50%;
-  background-color: rgba(0, 182, 173, 0.8);
+  background-color: #F26522;
   color: rgba(255, 255, 255, 0.8);
   text-align: center;
   text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
@@ -13867,7 +13867,7 @@ a.list-group-item:focus {
 .totop:active,
 .totop:focus {
   color: rgba(255, 255, 255, 0.9);
-  background-color: rgba(0, 182, 173, 0.9);
+  background-color: #F26522;
   outline: 0;
 }
 /* hide on sidebar open */

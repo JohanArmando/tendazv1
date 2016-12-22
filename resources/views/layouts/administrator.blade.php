@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="backend">
+<html class="backend csstransforms3d">
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -198,5 +198,9 @@ function check_nav(){
 </script>-->
 
 @include('admin.partials.message')
+<style>.totop {  background-color: #F26522 !important;  }
+</style>
+<a href="#" class="totop animation" data-toggle="waypoints totop" data-showanim="bounceIn"
+   data-hideanim="bounceOut" data-offset="50%"><i class="ico-angle-up"></i></a>
 </body>
 </html>
