@@ -49,6 +49,9 @@
 							@if(!$shop->store->number_phone == '')
 							<li><a href="">Direcci&oacute;n: </a><span> {{$shop->store->address_2}}</span></li>
 							@endif
+							@if(!$shop->store->conditions == '')
+							<li><a href="#" data-toggle="modal" data-target="#modalConditions">Terminos  y condiciones</a></li>
+							@endif
 						</ul>
 					</div>
 				</div>

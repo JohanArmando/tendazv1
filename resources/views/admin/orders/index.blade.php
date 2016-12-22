@@ -32,7 +32,7 @@ Mis ventas
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="panel-title" style="margin-right: 20px;">
-                            <a href="{{asset('admin/export/orders')}}" ><i class="fa fa-cloud-download"></i>&nbsp; Exportar lista de ventas</a>
+                            <a href="{{asset('admin/orders/export')}}" ><i class="fa fa-cloud-download"></i>&nbsp; Exportar lista de ventas</a>
                         </div>
                     </div>
                 </div>

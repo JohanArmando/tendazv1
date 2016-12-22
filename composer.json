@@ -16,9 +16,10 @@
         "spatie/laravel-fractal": "^2.0",
         "igaster/laravel-theme": "~1.0",
         "predis/predis": "^1.1",
-        "maatwebsite/excel": "~2.1.0",
+        "maatwebsite/excel": "^2.1",
         "barryvdh/laravel-cors": "^0.8.2",
-        "santigraviano/laravel-mercadopago": "^1.0"
+        "santigraviano/laravel-mercadopago": "^1.0",
+        "doctrine/dbal": "^2.5"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
