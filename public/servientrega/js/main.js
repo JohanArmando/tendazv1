@@ -10,7 +10,7 @@ $( document ).ready(function() {
 })
  $('#pagepiling').pagepiling({
      direction: 'horizontal',
-     anchors: ['se_container-1','se_container-2'],
+     anchors: ['se_container-1','about','almacenamiento','posicionamientodigital'],
     menu: '.container-menu'
  });
 

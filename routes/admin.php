@@ -70,10 +70,10 @@ Route::group(['domain' => '{subdomain}.'.$domain->getDomain() ,'middleware' => [
     });
 
     //Route Customer
-    Route::group(['prefix' => 'customers', 'namespace' => 'Customer'], function() {
-        Route::resource('/', 'CustomerController');
-        Route::get('/export', 'CustomerController@export');
-        Route::get('/contact', 'CustomerController@contact');
+    Route::group(['prefix' => '', 'namespace' => 'Customer'], function() {
+        Route::resource('/customers', 'CustomerController');
+        Route::get('customers/export', 'CustomerController@export');
+        Route::get('customers/contact', 'CustomerController@contact');
     });
 
     //Route Setting

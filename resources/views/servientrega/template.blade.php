@@ -8,24 +8,16 @@
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
 			<title>Store Sevientrega</title>
 			<link rel="stylesheet" type="text/css" href="{{asset('servientrega/css/jquery-ui.css')}}">
-			<link rel="stylesheet" type="text/css" href="{{asset('servientrega/css/jquery.pagepilling.css')}}">
 			<link rel="stylesheet" type="text/css" href="{{asset('servientrega/css/bootstrap.css')}}">
 			<link rel="stylesheet" type="text/css" href="{{asset('servientrega/fonts/stylesheet.css')}}">
 			<link rel="stylesheet" type="text/css" href="{{asset('servientrega/css/normalize.css')}}">
-			<link rel="stylesheet" type="text/css" href="{{asset('servientrega/style.css')}}">			
+			<link rel="stylesheet" type="text/css" href="{{asset('servientrega/style.css')}}">	
+			<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">		
 			@yield('css')
 
     </head>
 	<body> 	
-		<section id="pagepiling">
-			<div class="container-fluid aa_container-fluid section pp-scrollable" id="se_container-1">
-				@include('servientrega.partials.top')
-				<div class="row">
-					@include('servientrega.partials.image-spin')
-					@include('servientrega.partials.form-rigth')
-				</div>
-			</div>
-		</section>
+	@yield('content')
 			<script type="text/javascript" src="{{asset('servientrega/js/jquery-1.11.3.min.js')}}"></script>
 			<script type="text/javascript" src="{{asset('servientrega/js/TweenMax.min.js')}}"></script>
 			<script type="text/javascript" src="{{asset('servientrega/js/ScrollMagic.js')}}"></script>
