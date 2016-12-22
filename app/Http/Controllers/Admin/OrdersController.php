@@ -15,7 +15,7 @@ class OrdersController extends Controller
 {
     public function index($subdomain , Request $request)
     {
-        $orders = Order::where('order_status' , '<>' , 1)->orderBy('id' , 'DESC')->get();
+        $orders = Order::where('shop_id' , $request->shop->id)->orderBy('id' , 'DESC')->get();
         return view('admin.orders.index',compact('orders'));
     }
 
@@ -45,67 +45,73 @@ class OrdersController extends Controller
         return view('admin.orders.export-orders');
     }
 
-    public function filterDate($date , $from ,$to){
-        $all = '';
-        if($date == 'last'){
-            $all = $this->orders->whereBetween('orders.created_at',[Carbon::yesterday(),Carbon::now()]);
-        }elseif($date == 'eight'){
-            $all = $this->orders->whereBetween('orders.created_at',[Carbon::today()->subDays(8),Carbon::now()]);
-        }elseif($date == 'month'){
-            $all = $this->orders->whereBetween('orders.created_at',[Carbon::today()->subMonth(1),Carbon::now()]);
-        }elseif($date == 'custom'){
-            if(!empty($from) && !empty($to) && isset($from) &&  isset($to)){
-                $all = $this->orders->whereBetween('orders.created_at',[Carbon::parse($from),Carbon::parse($to)]);
-            }
-        }
-        return   $all;
-    }
-
-    public function postExport(Request $request){
-
-        //status
-        $state = $request->get('state');
-        //type download
-        $request->get('so') == 'Mac' ? $so = 'csv' : $so = 'xls';
-        //type de filter
-        $date = $request->get('date');
-        //input filter
-        $filter = $request->get('filter');
-        //custom from and to
-        $request->has('from') ? $from = $request->get('from') : '' ;
-        $request->has('to') ? $to = $request->get('to') : $from = '';
+    public function postExport($subdomain , Request $request)
+    {
+        $request->get('so') == 'Mac' ? $so = 'csv' : $so = 'xls'; //type download
+        $rangeDate = $request->get('range-date'); //type de filter
+        $filter = $request->get('filter'); //input filter
+        $from = $request->get('from'); //custom from
+        $to = $request->get('to'); //custom to
 
         //all orders
-            $filters = Order::join('customers','customers.id','=','orders.customer_id')
-                ->join('order_item','order_item.order_id','=','orders.id')
-                ->join('order_status','order_status.id','=','orders.order_status')
-                ->join('variants','variants.id','=','order_item.variant_id')
-                ->select('customers.*' , 'orders.*' , 'order_item.*','order_status.*',
-                    'customers.name as name_customer','order_status.name as name_status')->get();
-            return $this->generateExcel($filters , $so);
+        if($rangeDate == 'all' && $filter == '') {
+            $filters = Order::where('orders.shop_id' , $request->shop->id)
+                ->join('customers', 'customers.id', '=', 'orders.customer_id')
+                ->select('customers.*', 'orders.*', 'customers.name as name_customer')->get();
+        }
+        //input orders
+        if($rangeDate == 'all' && !$filter == ''){
+            $filters = Order::where('orders.shop_id' , $request->shop->id)
+                ->join('customers', 'customers.id', '=', 'orders.customer_id')
+                ->orWhere('orders.id','=',$filter)
+                ->orWhere('customers.name','like','%'.$filter.'%')
+                ->orWhere('customers.email','like','%'.$filter.'%')
+                ->orWhere('orders.total','=', $filter)->get();
+        }
+        //date last
+        if($rangeDate == 'last' && $filter == ''){
+            $filters = Order::where('shop_id' , $request->shop->id)
+                ->whereBetween('created_at',[Carbon::yesterday(),Carbon::now()])->get();
+        }
+        //date last
+        if($rangeDate == 'eight' && $filter == ''){
+            $filters = Order::where('shop_id' , $request->shop->id)
+                ->whereBetween('created_at',[Carbon::today()->subDays(8),Carbon::now()])->get();
+        }
+        //date last
+        if($rangeDate == 'month' && $filter == ''){
+            $filters = Order::where('shop_id' , $request->shop->id)
+                ->whereBetween('created_at',[Carbon::today()->subMonth(1),Carbon::now()])->get();
+        }
+        //date custom
+        if($rangeDate == 'custom' && $filter == ''){
+            $filters = Order::where('shop_id' , $request->shop->id)
+                ->whereBetween('created_at',[Carbon::parse($to),Carbon::parse($from)])->get();
+        }
+
+        return $this->generateExcel($filters , $so);
     }
 
 
     public function generateExcel($data ,$so){
-        Excel::create('orders', function($excel) use($data ) {
+        \Excel::create('ordenes', function($excel) use($data ) {
             $excel->setTitle('Listado  ordenes : ');
-            $excel->sheet('Sheetname', function($sheet) use($data) {
+            $excel->sheet('ordenes', function($sheet) use($data) {
                 $rows = array();
                 //dd($data);
-                foreach ($data as $key => $model) {
-                    $rows[] = array(
-                        'Numero de orden' => ($key + 1)+100,
-                        'fecha' => ($model->created_at),
-                        'Estado de la orden' => $model->name_status,
-                        'Subtotal' => number_format($model->total,2,',','.'),
-                        'Envio' => number_format($model->shipping,2,',','.'),
-                        'Total' => number_format($model->total,2,',','.'),
-                        'Nombre del comprador' => $model->name_customer,
-                        'Telefono' => $model->phone,
-                        'Medio de pago' => $model->shipping_method_id,
-                        'Notas del vendedor' => $model->notes,
-                    );
-
+                foreach ($data as $model) {
+                        $rows[] =  array(
+                            'Numero de orden'       => ($model->id),
+                            'fecha'                 => ($model->created_at),
+                            'Estado de la orden'    => $model->order_status,
+                            'Subtotal'              => number_format($model->total,2,',','.'),
+                            'Envio'                 => number_format($model->shipping,2,',','.'),
+                            'Total'                 => number_format($model->total,2,',','.'),
+                            'Nombre del comprador'  => $model->name_customer,
+                            'Telefono'              => $model->phone,
+                            'Medio de pago'         => $model->shipping_method_id,
+                            'Notas del vendedor'    => $model->notes,
+                        );
                 }$sheet->fromArray($rows);
             });
         })->store($so);

@@ -45,20 +45,7 @@
                                         <label>Filtrar por dato especifico</label>
                                     <input type="text" class="form-control" name="filter" placeholder="Filtrar por numero de orden, nombre, email de cliente o valor exacto de la compra">
                                     </div>
-                                        <div class="col-md-6 col-lg-12 col-sm-12">
-                                        <label>Estado de la orden</label>
-                                        <select class="form-control" name="state" id="state">
-                                            <option value="" disabled>Estado de la orden</option>
-                                            <option selected value="all">Todas</option>
-                                            <option value="open">Todas(salvo archivadas y canceladas)</option>
-                                            <option value="archivada">Archivadas</option>
-                                            <option value="cancelar">Canceladas</option>
-                                            <option value="wait">Esperando confirmacion de pago</option>
-                                            <option value="pagada">Esperando que empaquetes la orden</option>
-                                            <option value="empaquetar">Esperando confirmacion de envio</option>
-                                            <option value="retirado">Listas para archivar</option>
-                                        </select>
-                                    </div>
+
                                     <div class="col-md-6">
                                         <label>Rango de fechas</label>
                                         <select class="form-control" name="range-date" id="range-date">
@@ -73,11 +60,11 @@
                                     <div class="row" style="margin-top: 10%" id="range">
                                         <div class="col-md-3 pull-right ">
                                                 <label for="">Hasta</label>
-                                                <input type="text" style="" class="form-control " id="date-to">
+                                                <input type="text" style="" name="from" class="form-control " id="date-to">
                                         </div>
                                         <div class="col-md-3 pull-right ">
                                             <label for="">Desde</label>
-                                            <input type="text"  style="" class="form-control " id="date-from">
+                                            <input type="text"  style="" name="to" class="form-control " id="date-from">
                                         </div>
                                     </div>
                                 </div>
