@@ -88,7 +88,7 @@
 								</tbody>
 							</table>
 						</div>
-						<div  ng-show="size(carts) >= 1" ng-cloak="">
+						<div  ng-show="size(carts.products.data) >= 1" ng-cloak="">
 							<div class="divider divider--xs"></div>
 							<div class="row shopping-cart-btns">
 								<div class="col-xs-12 col-sm-4 col-md-4">

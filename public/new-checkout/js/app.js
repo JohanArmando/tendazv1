@@ -1,1 +1,107 @@
-var myApp=angular.module("checkout",["ngRoute","ngCookies"]);myApp.config(["$routeProvider",function(e){e.when("/cart",{templateUrl:"new-checkout/templates/steps/cart.html",controller:"cartController"}),e.when("/email",{templateUrl:"new-checkout/templates/steps/email.html",controller:"emailController"}),e.when("/profile",{templateUrl:"new-checkout/templates/steps/profile.html",controller:"profileController"}),e.when("/shipping",{templateUrl:"new-checkout/templates/steps/shipping.html",controller:"shippingController"}),e.when("/payment",{templateUrl:"new-checkout/templates/steps/payment.html",controller:"paymentController"}),e.otherwise("/cart")}]),myApp.run(["$rootScope","$location","User","Cart",function(e,t,o,r){angular.extend(e,{formLogin:$("#login-form"),formLost:$("#lost-form"),formRegister:$("#register-form"),divForms:$("#div-forms"),modalAnimateTime:300,msgAnimateTime:150,msgShowTime:2e3,states:{}}),angular.extend(e,{returnStep:function(){t.path("/profile")},modalAnimate:function(t,o){var r=$(t.selector).height(),n=$(o.selector).height();$(e.divForms.selector).css("height",r),$(t.selector).fadeToggle(e.modalAnimateTime,function(){$(e.divForms.selector).animate({height:n},e.modalAnimateTime,function(){$(o.selector).fadeToggle(e.modalAnimateTime)})})},init:function(){if(e.carts&&t.path("/cart"),e.user)t.path("/profile");else if(void 0==e.carts.customer.data._id)t.path("/email");else{var o=e.carts.customer.data;o.personal_info.first_name&&o.personal_info.last_name&&o.personal_info.phone&&o.personal_info.identification&&o.email?t.path("/shipping"):t.path("/profile")}}}),e.$on("$routeChangeStart",function(e,r,n){r.$$route.authenticated&&(o.getAuthStatus()||t.path("/"))})}]),myApp.directive("convertToString",function(){return{require:"ngModel",link:function(e,t,o,r){r.$parsers.push(function(e){return parseInt(e,10)}),r.$formatters.push(function(e){return""+e})}}});
+var myApp =  angular.module('checkout' , ['ngRoute' , 'ngCookies']);
+
+myApp.config(['$routeProvider' ,
+    function ($routeProvider) {
+        $routeProvider.when('/cart' , {
+            templateUrl : "new-checkout/templates/steps/cart.html",
+            controller : "cartController"
+        });
+
+        $routeProvider.when('/email' , {
+            templateUrl : "new-checkout/templates/steps/email.html",
+            controller : "emailController"
+        });
+
+        $routeProvider.when('/profile' , {
+            templateUrl : "new-checkout/templates/steps/profile.html",
+            controller : "profileController"
+        });
+
+        $routeProvider.when('/shipping' , {
+            templateUrl :  "new-checkout/templates/steps/shipping.html",
+            controller : "shippingController"
+        });
+
+        $routeProvider.when('/payment' , {
+            templateUrl : "new-checkout/templates/steps/payment.html",
+            controller : "paymentController"
+        });
+        
+        $routeProvider.otherwise('/cart');
+    }
+]);
+
+myApp.run(["$rootScope", "$location", 'User', "Cart",
+
+    function($rootScope, $location, User, Cart) {
+        /*GLOBAL VARIABLES*/
+        angular.extend($rootScope , {
+            formLogin : $('#login-form'),
+            formLost  :   $('#lost-form'),
+            formRegister : $('#register-form'),
+            divForms : $('#div-forms'),
+            modalAnimateTime : 300,
+            msgAnimateTime : 150,
+            msgShowTime : 2000,
+            states : {}
+        });
+        /*Global Methods*/
+        angular.extend($rootScope , {
+            returnStep : function () {
+               $location.path('/profile');
+            },
+            modalAnimate : function ($oldForm, $newForm) {
+                var $oldH = $($oldForm.selector).height();
+                var $newH = $($newForm.selector).height();
+                $($rootScope.divForms.selector).css("height",$oldH);
+                $($oldForm.selector).fadeToggle($rootScope.modalAnimateTime, function(){
+                    $($rootScope.divForms.selector).animate({height: $newH}, $rootScope.modalAnimateTime, function(){
+                        $($newForm.selector).fadeToggle($rootScope.modalAnimateTime);
+                    });
+                });
+            },
+            init : function () {
+                if($rootScope.carts){
+                    $location.path('/cart');
+                }
+                if (!$rootScope.user){
+                    if ($rootScope.carts.customer.data._id == undefined){
+                        $location.path('/email');
+                    }else{
+                        var user = $rootScope.carts.customer.data;
+                        if (user.personal_info.first_name && user.personal_info.last_name &&  user.personal_info.phone &&  user.personal_info.identification &&  user.email){
+                            $location.path('/shipping');
+                        }else{
+                            $location.path('/profile');
+                        }
+                    }
+                }else{
+                    $location.path('/profile');
+                }
+            }
+        });
+        $rootScope.$on("$routeChangeStart",
+            function(event, next, current) {
+                if (next.$$route.authenticated) {
+                    if (!User.getAuthStatus()) {
+                        $location.path('/');
+                    }
+                }
+            });
+    }
+]);
+myApp.directive('convertToString', function() {
+    return {
+        require: 'ngModel',
+        link: function(scope, element, attrs, ngModel) {
+            ngModel.$parsers.push(function(val) {
+                return parseInt(val, 10);
+            });
+            ngModel.$formatters.push(function(val) {
+                return '' + val;
+            });
+        }
+    };
+});
+
+//# sourceMappingURL=app.js.map

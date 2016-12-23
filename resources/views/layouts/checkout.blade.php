@@ -28,7 +28,9 @@
    <div class="modal-dialog">
       <div class="modal-content">
          <div class="modal-header" align="center">
-            <img class="img-rounded" id="img_logo" src="https://k32.kn3.net/A/D/4/3/0/D/029.png">
+              <div class="col-md-12" ng-controller="cartController">
+         <img ng-src="@{{shopData.logo}}" class="img-responsive marg_auto logo_check">
+    </div>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="closeModalLogin()">
                <span class="glyphicon glyphicon-remove" aria-hidden="true" ></span>
             </button>

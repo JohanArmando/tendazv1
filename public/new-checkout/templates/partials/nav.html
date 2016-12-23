@@ -1,8 +1,11 @@
-<div class="container-fluid" ng-controller="navController">
+<div class="container-fluid" >
     <div class="row text-center">
-                                    <img src="https://static.festisite.com/static/partylogo/img/logos/nike.png" class="img-responsive marg_auto logo_check">
+    <div class="col-md-12" ng-controller="cartController">
+         <img ng-src="{{shopData.logo}}" class="img-responsive marg_auto logo_check">
+    </div>
+                                   
                                
-        <div class="col-md-12 header_he">
+        <div class="col-md-12 header_he" ng-controller="navController">
             <nav class="navbar navbar-default menu_checkout">
                 <div class="container-fluid">
                     <div class="navbar-header">
@@ -13,13 +16,20 @@
                                         <i class="glyphicon glyphicon-user"></i>
                                         Iniciar sesi&oacute;n
                                     </a>
+
+                                    <a  href="/" class="btn btn_checkout" >
+                                        <i class="glyphicon glyphicon glyphicon-tag"></i>
+                                        Volver a la tienda
+                                    </a>
+                                    
                                 </div>
                                 
                                 <div class="col-md-12" ng-show="user">
                                     <div class="container-fluid">
                                         <div class="row">
                                             <div class="col-md-2">
-                                                <img src="https://pickaface.net/assets/images/slides/slide2.png"  class="avatar img-responsive" alt="TendazAvatar"/>
+                                                <!-- <img src="https://pickaface.net/assets/images/slides/slide2.png"  class="avatar img-responsive" alt="TendazAvatar"/> -->
+                                                <i class="glyphicon glyphicon-user"></i>
                                             </div>
 
                                             <div class="col-md-4">

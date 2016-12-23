@@ -12,7 +12,7 @@
 				</div>
 			</div>
 			<div class="content">
-				<div class="container" ng-cloak="" >
+				<div class="container " ng-cloak="" >
 					@include(Theme::current()->viewsPath.'.partials.new-product')
 				</div>
 			</div>

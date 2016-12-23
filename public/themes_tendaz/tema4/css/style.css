@@ -25652,3 +25652,14 @@ body.modal-open {
     
     transition: .4s;
 }
+@media (max-width: 720px){
+  .stick_responsive > div > .slick-track{
+    width: 100%!important;
+}
+.stick_responsive > div > .slick-track > .slick-slide {
+    width: 100%!important;
+}
+.responsive_slide{
+  max-height: 100%!important;
+}
+}

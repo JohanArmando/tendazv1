@@ -118,7 +118,8 @@
 											</div>
 
 											<ul class="options-swatch options-swatch--size options-swatch--lg" ng-if="value.name == 'Talle'">
-												<li><a ng-repeat="v in value.values" ng-class="{'active' : product.variants.data[0].values.data[0].value == v ||  product.variants.data[0].values.data[1].value == v }"><% v | lowercase %></a></li>
+												<li><a ng-repeat="v in value.values" ng-class="{'active' : product.variants.data[0].values.data[0].value == v ||  product.variants.data[0].values.data[1].value == v }">
+														<% v | lowercase %></a></li>
 											</ul>
 											<ul class="options-swatch options-swatch--color options-swatch--lg" ng-if="value.name == 'Color'">
 												<li ng-repeat="v in value.values">
@@ -138,11 +139,11 @@
 										<br>
 										<div class="divider divider--sm"></div>
 										<div class="wrapper" ng-if="!product.stock == 0">
-											<div class="pull-left"><span class="qty-label">QTY:</span></div>
+											<div class="pull-left"><span class="qty-label">CANT:</span></div>
 											<div class="pull-left">
 												<div class="number input-counter">
-													<span class="minus-btn"  ng-click="product.quantity = product.quantity - 1 "></span>
-													<input type="text" name="quantity" ng-model="product.quantity" value="<% product.quantity %>"  size="5">
+													<span class="minus-btn"  ng-click="product.quantity = product.quantity > 1 ? product.quantity - 1 : 1	"></span>
+													<input type="text" name="quantity" ng-model="product.quantity ? product.quantity : 1 " value="<% product.quantity ? product.quantity : 1 %>"  size="5">
 													<span class="plus-btn"  ng-click="product.quantity = product.quantity + 1"></span>
 												</div>
 											</div>
@@ -156,7 +157,7 @@
 								<div class="content">
 									<ul class="nav nav-tabs nav-tabs--ys1" role="tablist">
 										<li class="active"><a href="#Tab1"  role="tab" data-toggle="tab" class="text-uppercase">DESCRIPTION</a></li>
-										<li><a href="#Tab2" role="tab" data-toggle="tab" class="text-uppercase">Comentarios</a></li>
+										<li class="hidden"><a href="#Tab2" role="tab" data-toggle="tab" class="text-uppercase">Comentarios</a></li>
 									</ul>
 									<div class="tab-content tab-content--ys nav-stacked">
 										<div role="tabpanel" class="tab-pane active" id="Tab1">
@@ -164,7 +165,7 @@
 											<div class="divider divider--md"></div>
 										</div>
 										<div role="tabpanel" class="tab-pane" id="Tab2">
-											<h5><strong class="color">COMENTARIOS DE <% detail.product.name | uppercase%></strong></h5>
+											<h5><strong class="color">COMENTARIOS DE <% product.name | uppercase%></strong></h5>
 										</div>
 									</div>
 								</div>
