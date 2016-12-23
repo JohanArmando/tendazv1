@@ -5,7 +5,7 @@
                 <div class="row">
                     <button class="btn_edit" ng-click="prev('/profile')"><i class="glyphicon glyphicon-pencil" ></i></button>
                     <div class="col-md-12">
-                        <h3><i class="glyphicon glyphicon-user"></i> Identificación</h3>
+                        <h3><i class="glyphicon glyphicon-user"></i> Identificaci&oacute;n</h3>
                         <label>
                             {{ carts.order.data.client.first_name}}
                         </label>
@@ -22,14 +22,14 @@
                 <div class="row">
                     <button class="btn_edit" ng-click="prev('/shipping')"><i class="glyphicon glyphicon-pencil" ></i></button>
                     <div class="col-md-12">
-                        <h3><i class="glyphicon glyphicon-home"></i> Dirección de envío</h3>
+                        <h3><i class="glyphicon glyphicon-home"></i> Direcci&oacute;n de env&iacute;o</h3>
                         <span class="col-md-12">{{ carts.shippingAddress.data.name }}</span>
                         <span class="col-md-12">{{ carts.shippingAddress.data.neighborhood  }}</span>
                         <span class="col-md-12">{{ carts.shippingAddress.data.street}}</span>
                         <span class="col-md-12">{{ carts.shippingAddress.data.receiverName }}</span>
                     </div>
                     <div class="col-md-12">
-                        <h3><i class="glyphicon glyphicon-home"></i> Metodo de envío</h3>
+                        <h3><i class="glyphicon glyphicon-home"></i> Metodo de env&iacute;o</h3>
                         <span class="col-md-12">{{ carts.shippingMethod.data.name }}</span>
                         <span class="col-md-12">{{ carts.shippingMethod.data.cost| currency:"":0  }}</span>
                     </div>
