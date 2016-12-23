@@ -29,7 +29,7 @@ class ProductTransformer extends TransformerAbstract
             'name'               => $variant->product->name,
             'price'              => $variant->price,
             'slug'               => $variant->product->slug,
-            'special_price'      => $variant->product->collection->first()->promotion ? $variant->promotional_price : null,
+            'special_price'      => $variant->product->collection->promotion ? $variant->promotional_price : null,
             'stock'              => $variant->stock,
             'sku'                => $variant->sku,
             'visible'            => $variant->product->publish,
