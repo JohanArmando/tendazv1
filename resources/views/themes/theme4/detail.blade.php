@@ -139,7 +139,7 @@
 										<br>
 										<div class="divider divider--sm"></div>
 										<div class="wrapper" ng-if="!product.stock == 0">
-											<div class="pull-left"><span class="qty-label">QTY:</span></div>
+											<div class="pull-left"><span class="qty-label">CANT:</span></div>
 											<div class="pull-left">
 												<div class="number input-counter">
 													<span class="minus-btn"  ng-click="product.quantity = product.quantity - 1 "></span>
