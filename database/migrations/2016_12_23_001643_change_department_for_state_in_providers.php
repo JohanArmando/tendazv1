@@ -15,7 +15,7 @@ class ChangeDepartmentForStateInProviders extends Migration
     {
         Schema::table('providers' , function (Blueprint $table){
             $table->renameColumn('department_id' ,'state_id');
-            $table->integer('city_id')->unsigned();
+            $table->integer('city_id')->unsigned()->nullable();
             $table->foreign('city_id')->references('id')->on('cities');
         });
     }
