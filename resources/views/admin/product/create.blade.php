@@ -770,7 +770,7 @@
                         $select.closest('.option-name').find('.input-helper').addClass('input-propiedad');
                         break;
                     case "tamanho":
-                    case "talle":
+                    case "talla":
                     case "size":
                         $select.closest('.option-name').find('.snipplet_size').show();
                         $select.closest('.option-name').find('.snipplet_colors').hide();
