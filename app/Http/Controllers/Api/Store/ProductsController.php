@@ -15,23 +15,23 @@ class ProductsController extends Controller
 {
     public function __construct()
     {
-        
+
     }
-    
+
         public function index(Request $request, $subdomain , $slug = null)
         {
             $resource = $request->shop->products();
-            
+
             if($slug){
                 $resource->byCategory($slug);
             }
-            
+
             if($request->get('limit')){
                 $resource->limit($request->get('limit' , 10));
             }
-            
+
                 $paginator = $resource->paginate($request->get('per_page' , 10));
-            
+
             return fractal()
                     ->collection($paginator->getCollection(), new ProductTransfomer($request->get('values')))
                     ->serializeWith(new ArraySerializer())

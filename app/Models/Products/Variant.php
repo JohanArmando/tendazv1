@@ -2,6 +2,7 @@
 
 namespace Tendaz\Models\Products;
 
+use Tendaz\Models\Cart\Cart;
 use Tendaz\Models\Order\Order;
 use Tendaz\Models\Images\Image;
 use Illuminate\Database\Eloquent\Model;
@@ -24,6 +25,10 @@ class Variant extends Model
     /**
      * RELATHIONSHIP
      */
+    public function cart()
+    {
+        return $this->belongsToMany(Cart::class , 'cart_products');
+    }
 
     public function product()
     {
