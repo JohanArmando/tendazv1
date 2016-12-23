@@ -142,7 +142,7 @@
 											<div class="pull-left"><span class="qty-label">CANT:</span></div>
 											<div class="pull-left">
 												<div class="number input-counter">
-													<span class="minus-btn"  ng-click="product.quantity = product.quantity - 1 "></span>
+													<span class="minus-btn"  ng-click="product.quantity = product.quantity > 1 ? product.quantity - 1 : 1	"></span>
 													<input type="text" name="quantity" ng-model="product.quantity ? product.quantity : 1 " value="<%product.quantity%>"  size="5">
 													<span class="plus-btn"  ng-click="product.quantity = product.quantity + 1"></span>
 												</div>
