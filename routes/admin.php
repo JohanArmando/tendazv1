@@ -73,19 +73,13 @@ Route::group(['domain' => '{subdomain}.'.$domain->getDomain() ,'middleware' => [
 
     //Route Customer
     Route::group(['prefix' => '', 'namespace' => 'Customer'], function() {
-        Route::resource('/customers', 'CustomerController');
         Route::get('customers/export', 'CustomerController@export');
         Route::get('customers/contact', 'CustomerController@contact');
+        Route::resource('/customers', 'CustomerController');
     });
 
     //Route Setting
     Route::group(['prefix' => 'setting', 'namespace' => 'Setting'], function() {
-
-        Route::get('/payments/active', 'PaymentController@active');
-        Route::get('/payments/index','PaymentController@getAll');
-        Route::get('/payments/desactivar/{account}','PaymentController@deActivate');
-        Route::put('/payments/{account}','PaymentController@update');
-        Route::get('/payments/{account}','PaymentController@show');
         Route::resource('/payments','PaymentController');
         
         Route::resource('shippings', 'ShippingController',

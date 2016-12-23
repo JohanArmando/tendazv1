@@ -76,13 +76,25 @@ Route::group(['domain' => env('APP_API_URL') , 'namespace' => 'Api'] , function 
     //Route payments
     Route::get('payments/{paymentValue}/carts/{cart}', 'Payment\\PaymentsController@show');
     Route::resource('payments' , 'Payment\\PaymentsController' ,[
-        'only' => ['index']
+        'only' => ['index' , 'update' , 'store']
     ]);
-
+    
     //Routes coupons
     Route::group(['prefix' => '' , 'namespace' => 'Coupon'] , function (){
         Route::resource('carts.coupons' , 'CouponsController' , [
             'only'  => ['show']
         ]);
     });
+
+      //Routes geo
+    Route::group(['prefix' => '' , 'namespace' => 'Geo'] , function (){
+        Route::resource('countries.states' , 'StatesController' , [
+            'only'  => ['index']
+        ]);  
+        Route::resource('states.cities' , 'CitiesController' , [
+            'only'  => ['index']
+        ]);
+    });
+
+
 });

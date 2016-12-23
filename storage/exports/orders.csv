@@ -1,2 +1,4 @@
-"Numero de orden","fecha","Estado de la orden","Subtotal","Envio","Total","Nombre del comprador","Telefono","Medio de pago","Notas del vendedor"
-"101","2016-12-20 15:58:49","iniciada","160.000,00","0,00","160.000,00","gjfgjfg","","",""
+"Numero de orden","fecha","Estado de la orden ID","Subtotal","Envio","Total","Nombre del comprador","Telefono","Medio de pago ID","Notas del vendedor"
+"101","12/21/2016","1","160.000,00","0,00","160.000,00","gjfgjfg","","",""
+"102","10/04/2016","1","100.000,00","0,00","100.000,00","gjfgjfg","","",""
+"103","12/08/2016","1","200.000,00","0,00","200.000,00","gjfgjfg","","",""

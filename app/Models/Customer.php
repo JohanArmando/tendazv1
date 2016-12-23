@@ -19,7 +19,7 @@ class Customer extends Authenticatable
     
     protected static $user = false;
 
-    protected $with = 'shipping';   
+    protected $with = 'shipping';
 
     public function sendPasswordResetNotification($token)
     {

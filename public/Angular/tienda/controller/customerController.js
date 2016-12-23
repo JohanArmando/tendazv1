@@ -3,6 +3,10 @@
     angular.module('app.customerStoreController',[])
         .controller('customerStoreController' , ["$http", "$location", "$cookies" ,"User", "$rootScope" , function ($http , $location , $cookies , $rootScope ,$scope,User) {
           /*Variables*/
+            $scope.errores = false;
+            $scope.hideErrors = function(){
+                $scope.errores = false;
+            }
     angular.extend($scope , {
         errorDiv : false,
         errorMessages : []
@@ -30,7 +34,7 @@
             },
             data: {
                  email :$scope.formLog.loginMail,
-            password :$scope.formLog.loginPassword
+                password :$scope.formLog.loginPassword
             }
         }
 
@@ -39,12 +43,14 @@
              localStorage.setItem('cart_id',response.data.cart_id);
                location.reload();
         }, function(error) {
-            console.log(error);
-            console.log("Awwww no ingresó  :(");
+            $scope.erroreslogin = error.data;
+            console.log($scope.errores);
+            $scope.errormail = $scope.errores.email;
+            $scope.errorpassword = $scope.errores.password;
+            $scope.errores = true;
         });
 
 
-   
        
        },
         doRegister : function (registerForm) {
@@ -60,10 +66,10 @@
             },
             data: {
                     email         : $scope.registerFormR.RegisterMail,
-    password                  : $scope.registerFormR.RegisterPassword,
-    password_confirmation     : $scope.registerFormR.RegisterPasswordConfirm,
-    name          : $scope.registerFormR.RegisterName,
-    last_name     : $scope.registerFormR.RegisterLastName
+                    password                  : $scope.registerFormR.RegisterPassword,
+                    password_confirmation     : $scope.registerFormR.RegisterPasswordConfirm,
+                    name          : $scope.registerFormR.RegisterName,
+                    last_name     : $scope.registerFormR.RegisterLastName
             }
         }
 
@@ -72,8 +78,12 @@
              localStorage.setItem('cart_id',response.data.cart_id);
                location.reload();
         }, function(error) {
-            console.log(error);
-            console.log("Awwww no ingresó  :(");
+            $scope.errores = error.data;
+            $scope.errorname = $scope.errores.name;
+            $scope.errorlast = $scope.errores.last_name;
+            $scope.errormail = $scope.errores.email;
+            $scope.errorpassword = $scope.errores.password;
+            $scope.errores = true;
         });
 
             }else{

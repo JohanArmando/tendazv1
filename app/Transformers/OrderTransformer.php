@@ -18,7 +18,7 @@ class OrderTransformer extends TransformerAbstract
     {
         return [
             'id'     => $order->id,
-            'order'  => $order->created_at->format('Y-m-d H:m:s'),
+            'order'  => $order->created_atN,
             'total'  => $order->total,
             'users'  => $order->user,
             'client' => [

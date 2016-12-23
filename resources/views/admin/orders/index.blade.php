@@ -86,7 +86,7 @@ Mis ventas
                                                 </div>
                                             </td>
                                             <td><a class="text-tendaz"  href="{{ url('admin/orders')."/".$order->id }}">
-                                                    #000{{  $order->id }}</a></td>
+                                                    #{{  $order->id }}</a></td>
                                             <td>
                                                 <div class="text-center">
                                                     {{ $order->created_at}}

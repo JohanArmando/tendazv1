@@ -33,14 +33,6 @@ class PaymentMethodsSeeder extends Seeder
             ),
             array(
                 'uuid' => $faker->uuid,
-                'name' => 'Paypal',
-                'path' => '../../../',
-                'cost_by_trans_deb' => '',
-                'cost_by_trans_cre' => '',
-			    'days' => '0'
-		    ),
-            array(
-                'uuid' => $faker->uuid,
                 'name' => 'Personalizado',
                 'path' => 'personal.png',
                 'cost_by_trans_deb' => '',

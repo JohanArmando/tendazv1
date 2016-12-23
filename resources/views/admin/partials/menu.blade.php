@@ -23,17 +23,16 @@
         <ul class="nav navbar-nav navbar-left">
             <li class="hidden-xs hidden-sm">
                 <a href="javascript:void(0);" class="sidebar-minimize" data-toggle="minimize" title="Minimize sidebar" onclick="check_nav();">
-                    <span class="meta"> 
-
+                    <span class="meta">
                         <span class="icon"></span>
                     </span>
                 </a>
             </li>
             <li class="navbar-main hidden-lg hidden-md hidden-sm">
                 <a href="javascript:void(0);" data-toggle="sidebar" data-direction="ltr" rel="tooltip" title="Menu sidebar">
-                    <span class="meta">
-                        <span class="icon"><i class="ico-paragraph-justify3"></i></span>
-                    </span>
+                            <span class="meta">
+                                <span class="icon"><i class="ico-paragraph-justify3"></i></span>
+                            </span>
                 </a>
             </li>
         </ul>

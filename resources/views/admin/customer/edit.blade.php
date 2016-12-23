@@ -57,4 +57,51 @@ Editar cliente
     <script type="text/javascript" src="{{asset('admin/js/backend/forms/element.js')}}"></script>
     <script type="text/javascript" src="{{asset('admin/plugins/summernote/js/summernote.js')}}"></script>
     <script type="text/javascript" src="{{asset('admin/js/backend/forms/wysiwyg.js')}}"></script>
+    <script>
+        $('#country_id').on('change' , function () {
+            $.ajax({
+                'url' : apiUrl + '/countries/' + $('#country_id').val() +'/states?client_secret=' + client_secret + '&client_id=' + client_id,
+                'dataType' : 'JSON',
+                'method' : 'GET',
+                headers : {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                'success' : function (response) {
+                    $('#state_id').hide();
+                    if (response.length > 0){
+                        $('#state_id').show();
+                        $('#state_id').find('option').remove().end();
+                        $.each(response, function (i, item) {
+                            $.each(item, function (i, v) {
+                                console.log(v);
+                                $('#state_id').append('<option value="' + v.id +'">' + v.name +'</option>')
+                            });
+                        });
+                    }
+                }
+            })
+        });
+
+        $('#state_id').on('change' , function () {
+            $.ajax({
+                'url' : apiUrl + '/states/' + $('#state_id').val() +'/cities?client_secret=' + client_secret + '&client_id=' + client_id,
+                'dataType' : 'JSON',
+                'method' : 'GET',
+                headers : {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                'success' : function (response) {
+                    $('#city_id').removeClass('hidden   ');
+                    $('#city_id').find('option').remove().end();
+                    $.each(response, function (i, item) {
+                        $.each(item, function (i, v) {
+                            $('#city_id').append('<option value="' + v.id +'">' + v.name +'</option>')
+                        });
+                    });
+                }
+            })
+        });
+    </script>
 @stop

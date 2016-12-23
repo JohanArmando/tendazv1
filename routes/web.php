@@ -39,6 +39,9 @@ $appRoute = function (){
     //login
     Route::get('auth/login', 'HomeController@login');
 
+    //profile
+    Route::get('profile', 'HomeController@profile');
+
     //Route checkout
     Route::get('checkout2' , 'HomeController@checkout');
     Route::get('checkout' , 'HomeController@checkout');

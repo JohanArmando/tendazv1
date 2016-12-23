@@ -61,6 +61,12 @@
             {!! Form::text('shipping[0][complement]',null,['class'=>'form-control']) !!}
             <label for="">Barrio</label>
             {!! Form::text('shipping[0][neighborhood]',null,['class'=>'form-control']) !!}
+            <label for="">Pais</label>
+            {!! Form::select('shipping[0][country_id]',$countries, 50,['class'=>'form-control' , 'id' => 'country_id']) !!}
+            <label for="">Estado</label>
+            {!! Form::select('shipping[0][state_id]',$states, 50,['class'=>'form-control' , 'id' => 'state_id']) !!}
+            <label for="">Ciudad</label>
+            {!! Form::select('shipping[0][city_id]',[], null,['class'=>'form-control hidden' , 'id' => 'city_id']) !!}
 
         </div>
     </div>

@@ -99,8 +99,8 @@
                    </li>
                    <li @if(Request::is('admin/customers')
                         || Request::is('admin/customers/contact')
-                        || Request::is('admin/customers/export')) 
-                        class="active" 
+                        || Request::is('admin/customers/export'))
+                        class="active"
                         @endif>
                        <a href="javascript:void(0);" data-target="#components" data-toggle="submenu" data-parent=".topmenu">
                            <span class="figure"><img class="img-responsive" src="{{asset('administrator/image/icons/icons-nav/team.png')}}"></span>
@@ -191,7 +191,7 @@
                             </li>
                         </ul>
                    </li>
-                   
+
                    <li  @if(Request::is('admin/setting/payments')
                          || Request::is('admin/setting/shipping')
                          || Request::is('admin/setting/mercadolibre/')

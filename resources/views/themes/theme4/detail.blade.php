@@ -37,7 +37,7 @@
 						<div class="row product-info-outer">
 							<div class="col-sm-12 col-md-12 col-lg-12 col-xl-8">
 								<div class="row">
-									<div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 hidden-xs">
+									<div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
 									<div class="container-fluid">
 										<div class="row">
 											<div class="col-md-2 nopad carou_tend">
@@ -50,7 +50,7 @@
 											</div>
 										</div>												
 											</div>
-											<div class="col-md-10">
+											<div class="col-md-10 hidden-xs">
 											<div class="product-main-image">
 											<div class="product-main-image__item">
 												<img id="matrix" class="image-responsive" ng-src="<% product.images.data[0].url %>"
@@ -98,6 +98,16 @@
 										<div class="divider divider--xs product-info__divider hidden-xs" ng-show="product.description"></div>
 										<div class="product-info__description hidden-xs">
 											<div class="product-info__description__text" ng-bind-html="product.description | limitTo:50"></div>
+										</div>
+										<div class="divider divider--xs product-info__divider"></div>
+										<div>
+											<span>
+												<img src="{{asset('administrator/imagesMediosdePago/payment-1.png')}}" alt="">
+												<img src="{{asset('administrator/imagesMediosdePago/payment-2.png')}}" alt="">
+												<img src="{{asset('administrator/imagesMediosdePago/payment-3.png')}}" alt="">
+												<img src="{{asset('administrator/imagesMediosdePago/payment-4.png')}}" alt="">
+											</span><br>
+											<small>Opciones de Pago</small>
 										</div>
 										<div class="divider divider--xs product-info__divider"></div>
 										<div ng-repeat="value in values">
