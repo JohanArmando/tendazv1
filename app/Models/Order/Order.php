@@ -169,7 +169,7 @@ class Order extends Model
     }
 
     public  static function SalesWeekly(){
-        return Order::LastestWeekly()->ByDateAndTotal()->NotInitOrders()->get()->toArray();
+            return Order::LastestWeekly()->ByDateAndTotal()->NotInitOrders()->get()->toArray();
     }
 
     public  static function ByStatus(){
@@ -217,5 +217,10 @@ class Order extends Model
 
     public  static function totalOrders(){
         return  (int) Order::NotInitOrders()->count();
+    }  
+    
+    public  function getCreatedAtAttribute(){
+        return  Carbon::parse($this->attributes['created_at'])->format('m/d/Y');
     }
+    
 }

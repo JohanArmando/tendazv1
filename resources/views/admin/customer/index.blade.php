@@ -82,30 +82,20 @@
                                 @foreach($customers as $customer)
                                     <tr>
                                         <td>
-                                            <form action="{{url('admin/customers/'.$customer->uuid)}}" method="GET">
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                <button type="submit" class="btn btn-tendaz">
-                                                    <strong>{{ $customer->full_name  }}</strong>
-                                                </button>
-                                            </form>
+                                            <a href="{{ url("admin/customers/$customer->uuid") }}">{{ $customer->full_name  }}  </a>
                                         </td>
                                         <td>
-                                            {{$customer->phone}}
+                                            {{ $customer->phone }}
                                         </td>
                                         <td>
-                                            ${{ $customer->total() }}
+                                            $ {{ $customer->eagerTotal->first()== null ? '0' : number_format($customer->eagerTotal->first()->total , 2 , '.' , ',') }}
                                         </td>
                                         <td class="hidden-sm hidden-xs">
                                             {{ $customer->totalOrder() }}
                                         </td>
                                         <td class="hidden-sm hidden-xs">
                                             <strong>
-                                                @if($customer->lastOrder() == '')
-                                                    Sin ordenes
-                                                    @else
-                                                        <a href="{{ url('admin/orders/'.$customer->last_order) }}">
-                                                            #{{ $customer->lastOrder() }}</a>
-                                                @endif
+                                                <a href="#">{{ $customer->latestOrder->first() == null ? 'Ninguna' : $customer->latestOrder->first()->id }}</a>
                                             </strong>
                                         </td>
                                     </tr>

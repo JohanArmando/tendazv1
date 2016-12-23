@@ -3,6 +3,7 @@
 namespace Tendaz\Models;
 
 use Tendaz\Models\Cart\Cart;
+use Tendaz\Models\Order\Consult;
 use Tendaz\Models\Order\Order;
 use Tendaz\Models\Store\Shop;
 use Tendaz\Notifications\CustomerResetPassword;
@@ -17,7 +18,9 @@ class Customer extends Authenticatable
     use Notifiable , UuidAndShopTrait, WhereShopTrait;
     
     protected static $user = false;
-    
+
+    protected $with = 'shipping';   
+
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new CustomerResetPassword($token));
@@ -73,8 +76,12 @@ class Customer extends Authenticatable
     }
 
     public function addressesForShipping(){
-        return $this->addresses()->where('isActive' , 1)->where('isBilling',0);
+        return $this->addresses()->where('isActive' , 1)->where('isShipping' , 1);
     }
+    public function shipping(){
+        return $this->addresses()->wherePivot('isPrimary' , 1);
+    }
+    
 
     public function addressesForBilling(){
         return $this->addresses()->where('isActive' , 1)->where('isShipping',0);
@@ -111,14 +118,35 @@ class Customer extends Authenticatable
     }
 
     public function total(){
-        return (int) $this->orders()->sum('total');
+        return (float) $this->orders()->sum('total');
+    }
+
+    public function eagerTotal(){
+            return $this->hasMany(Order::class)
+                ->selectRaw('sum(total) as total, customer_id')
+                ->groupBy('customer_id');
     }
 
     public function totalOrder(){
         return (int) $this->orders()->count();
     }
-
-    public function lastOrder(){
-        return $this->orders->first() ? $this->orders()->orderBy('id', 'desc')->first()->id : '';
+    public function latestOrder()
+    {
+        return $this->hasMany(Order::class)->latest();
+    }
+    
+    public function consults()
+    {
+        return $this->hasMany(Consult::class);
+    }
+    
+    public function totalConsult()
+    {
+        return (int) $this->consults()->count();
+    }  
+    
+    public function minOrder()
+    {
+        return $this->orders()->min('created_at');
     }
 }

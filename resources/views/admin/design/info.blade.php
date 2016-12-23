@@ -43,7 +43,7 @@ Informacion de contacto
                         </div>
                         <div class="form-group">
                             <label for="">Direccion de tu local</label>
-                            {!! Form::textarea('address_2' ,$store->address_2 ,['class' => 'form-control' , 'placeholder' => '' ,'style' => 'height:50px']) !!}
+                            {!! Form::text('address_2' ,$store->address_2 ,['class' => 'form-control' , 'placeholder' => '' ,'style' => 'height:50px']) !!}
                         </div>
                         <div class="form-group">
                             <label for="telf">Telefono de tu local</label>
@@ -51,8 +51,8 @@ Informacion de contacto
                             'onkeypress'=>'return justNumbers(event);'])!!}
                         </div>
                         <div class="form-group">
-                            <label for="text_informativo">Cantidad de Empleados</label>
-                            {!! Form::number('business_size' ,$store->business_size ,['class' => 'form-control' , 'placeholder' => '' , 'style' => 'height:50px']) !!}
+                            <label for="text_informativo">Terminos y Condiciones</label>
+                            {!! Form::textarea('conditions' ,$store->conditions ,['class' => 'form-control' , 'placeholder' => '' , 'style' => 'height:50px']) !!}
                         </div>
                         <div class="panel-footer">
                             <div class="text-center">
@@ -74,13 +74,8 @@ Informacion de contacto
     @endsection
 @section('scripts')
     <script type="text/javascript" src="{{asset('administrator/plugins/inputmask/js/inputmask.js')}}"></script>
-    <script>
-        function justNumbers(e)
-        {
-            var keynum = window.event ? window.event.keyCode : e.which;
-            if ((keynum == 8) || (keynum == 46))
-                return true;
-            return /\d/.test(String.fromCharCode(keynum));
-        }
+    <script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>
+    <script type="text/javascript">
+        bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
     </script>
     @stop

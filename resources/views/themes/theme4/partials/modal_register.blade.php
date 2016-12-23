@@ -58,7 +58,7 @@
                         <label for="checkBox4">
                             <span class="check"></span>
                             <span class="box"></span>
-                             Acepto los terminos  y condiciones
+                            <a href="#" data-toggle="modal" data-target="#modalConditions">Acepto los terminos  y condiciones</a>
                         </label>
                     </div>
                 </div>

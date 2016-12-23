@@ -1,4 +1,4 @@
-  <div class="row">
+
         <div class="col-md-6  text-center">
              <div class="container-fluid">
                <div class="row">
@@ -9,49 +9,49 @@
                        <img class="img-responsive" src="{{asset('servientrega/img/centro.png')}}">
                      </div>
                   </div>
-                   <ul class="row container-menu nopad"  >
+                   <ul class="row container-menu container-menu_icons nopad menu_part"  >
                        <li data-menuanchor="firstPage">
-                            <a href="#se_container-2"  class="col-md-2 nopad icon_servi" id="90">
+                            <a href="#almacenamiento"  class="col-md-2 nopad icon_servi" id="90">
                               <img class="img-responsive" src="{{asset('servientrega/img/icon_9.png')}}">
                             </a>
                          </li>
                          <li data-menuanchor="firstPage">
-                              <a class="col-md-2 nopad icon_servi" id="10">
+                              <a  href="#posicionamientodigital" class="col-md-2 nopad icon_servi" id="10">
                                 <img class="img-responsive" src="{{asset('servientrega/img/icon_1.png')}}">
                               </a>
                          </li>
                          <li data-menuanchor="firstPage">
-                              <a class="col-md-2 nopad icon_servi" id="20">
+                              <a href="#acompanamiento" class="col-md-2 nopad icon_servi" id="20">
                                 <img class="img-responsive" src="{{asset('servientrega/img/icon_2.png')}}">
                               </a>
                          </li>
                          <li data-menuanchor="firstPage">
-                              <a class="col-md-2 nopad icon_servi" id="30">
+                              <a href="#lamarca" class="col-md-2 nopad icon_servi" id="30">
                                 <img class="img-responsive" src="{{asset('servientrega/img/icon_3.png')}}">
                               </a>
                          </li>
                          <li data-menuanchor="firstPage">
-                              <a class="col-md-2 nopad icon_servi" id="40">
+                              <a href="#logisticacobro" class="col-md-2 nopad icon_servi" id="40">
                                 <img class="img-responsive" src="{{asset('servientrega/img/icon_4.png')}}">
                               </a>
                          </li>
                          <li data-menuanchor="firstPage">
-                              <a class="col-md-2 nopad icon_servi" id="50">
+                              <a href="#store" class="col-md-2 nopad icon_servi" id="50">
                                 <img class="img-responsive" src="{{asset('servientrega/img/icon_5.png')}}">
                               </a>
                          </li>
                          <li data-menuanchor="firstPage">
-                            <a class="col-md-2 nopad icon_servi" id="60">
+                            <a href="#inversa" class="col-md-2 nopad icon_servi" id="60">
                               <img class="img-responsive" src="{{asset('servientrega/img/icon_6.png')}}">
                             </a>
                          </li>
                          <li data-menuanchor="firstPage">
-                              <a class="col-md-2 nopad icon_servi" id="70">
+                              <a href="#especializada" class="col-md-2 nopad icon_servi" id="70">
                                 <img class="img-responsive" src="{{asset('servientrega/img/icon_7.png')}}">
                               </a>
                          </li>
                          <li data-menuanchor="firstPage">
-                              <a class="col-md-2 nopad icon_servi" id="80">
+                              <a href="#internacional" class="col-md-2 nopad icon_servi" id="80">
                                 <img class="img-responsive" src="{{asset('servientrega/img/icon_8.png')}}">
                               </a>
                          </li>

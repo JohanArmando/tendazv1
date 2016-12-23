@@ -13,11 +13,14 @@ class CustomerController extends Controller
 {
     public function index()
     {
-        $customers = Customer::all();
+        $customers = Customer::orderBy('id' , 'DESC')->with('latestOrder' , 'eagerTotal')->get();
         return view('admin.customer.index',compact('customers'));
     }
-    public function show(){
-
+    public function show($subdomain , Customer $customer)
+    {
+        $address = $customer->addressesForShipping->first();
+        $orders = $customer->orders()->paginate(10);
+        return view('admin.customer.show' , ['customer' => $customer , 'address' => $address , 'orders' => $orders]);
     }
 
     public function create()
@@ -49,6 +52,18 @@ class CustomerController extends Controller
     public function export()
     {
         return view('admin.customer.export');
+    }
+
+    public function update($subdomain , Customer $customer , Request $request)
+    {
+        dd($request->all());
+        $customer->update($request->all());
+        return redirect()->back()->with('message' , ['type' => 'info' , 'message' => 'Enhorabuena!. Perfil actualizado.']);
+    }
+
+    public function edit($sudomain , Customer $customer)
+    {
+        return view('admin.customer.edit' , compact('customer'));
     }
 
     public function contact()

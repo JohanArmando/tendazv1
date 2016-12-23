@@ -29,6 +29,8 @@ Route::group(['domain' => '{subdomain}.'.$domain->getDomain() ,'middleware' => [
 
     //Route orders
     Route::get('orders/status' , 'OrdersController@status');
+    Route::get('orders/export' , 'OrdersController@getExport');
+    Route::post('orders/export/post' , 'OrdersController@postExport');
     Route::resource('orders' , 'OrdersController');
 
     //Route Providers
@@ -70,10 +72,10 @@ Route::group(['domain' => '{subdomain}.'.$domain->getDomain() ,'middleware' => [
     });
 
     //Route Customer
-    Route::group(['prefix' => 'customers', 'namespace' => 'Customer'], function() {
-        Route::resource('/', 'CustomerController');
-        Route::get('/export', 'CustomerController@export');
-        Route::get('/contact', 'CustomerController@contact');
+    Route::group(['prefix' => '', 'namespace' => 'Customer'], function() {
+        Route::resource('/customers', 'CustomerController');
+        Route::get('customers/export', 'CustomerController@export');
+        Route::get('customers/contact', 'CustomerController@contact');
     });
 
     //Route Setting

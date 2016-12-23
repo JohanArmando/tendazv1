@@ -5,6 +5,7 @@ namespace Tendaz\Models\Address;
 use Illuminate\Database\Eloquent\Model;
 use Tendaz\Models\Country;
 use Tendaz\Models\Customer;
+use Tendaz\Models\Geo\City;
 use Tendaz\Models\Geo\State;
 use Webpatser\Uuid\Uuid;
 
@@ -29,6 +30,10 @@ class Address extends Model
 
     public function state(){
         return $this->belongsTo(State::class);
+    }
+    
+    public function city(){
+        return $this->belongsTo(City::class);
     }
 
     public function customerAddress(){

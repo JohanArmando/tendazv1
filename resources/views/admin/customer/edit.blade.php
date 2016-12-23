@@ -1,7 +1,7 @@
 @section('title')
 Editar cliente
 @stop
-@extends('admin.template')
+@extends('layouts.administrator')
 @section('css')
     <link rel="stylesheet" href="{{asset('admin/plugins/jquery-ui/css/jquery-ui.css')}}">
     <link rel="stylesheet" href="{{asset('admin/plugins/selectize/css/selectize.css')}}">
@@ -19,7 +19,7 @@ Editar cliente
             <div class="toolbar">
                 <ol class="breadcrumb breadcrumb-transparent nm">
                     <li><a href="{{ url('admin/customers') }}" style="color: orange;">Clientes</a></li>
-                    <li class="active">Edicion de {{ $data->full_name }}</li>
+                    <li class="active">Edicion de {{ $customer->full_name }}</li>
                 </ol>
             </div>
             <!--/ Toolbar -->
@@ -34,7 +34,7 @@ Editar cliente
                     </div>
                 </div>
                 <div class="panel-body">
-                    {!! Form::model($data, ['url' => ['admin/customers',$data ->id], 'method' => 'PUT' ]) !!}
+                    {!! Form::model($customer, ['url' => ['admin/customers',$customer->uuid], 'method' => 'PUT' ]) !!}
                     @include('admin.partials.client.form')
                     <div class="col-md-12">
 
