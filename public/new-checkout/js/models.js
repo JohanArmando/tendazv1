@@ -116,7 +116,8 @@ myApp.factory("Cart" , [ "$http" , "$rootScope", function ($http , $rootScope) {
             method: "GET",
         }).then(function(response) {
            $rootScope.carts = response.data.data;
-                console.log(response);
+           $rootScope.shopData = $rootScope.carts.shop.data;
+           console.log( $rootScope.shopData);
         }).catch(function(response) {
             console.log(response);
         }).finally(function() {});
