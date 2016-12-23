@@ -105,6 +105,7 @@
 </section>
 
 <script>
+    var apiUrl = "{{ App::environment('local') ? 'http://'.env('APP_API_URL').env('APP_API_PORT') : 'https://'.env('APP_API_URL').env('APP_API_PORT') }}";
     var BASEURL = "{{ url('/') }}";
     var store = "{{ auth('admins')->user()->shop->id }}";
     var STRIPE_PUBLIC_KEY = "{{ env('STRIPE_PUBLIC_KEY' , 'sk_live_G1Y1j4Vx7M8HgMu4ozdBNyer') }}";

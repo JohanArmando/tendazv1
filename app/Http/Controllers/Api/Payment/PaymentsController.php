@@ -6,8 +6,10 @@ use Tendaz\Api\Mercadopago;
 use Tendaz\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Tendaz\Models\Cart\Cart;
+use Tendaz\Models\Payment_method\PaymentMethod;
 use Tendaz\Models\Payment_method\PaymentValue;
 use Tendaz\Transformers\PaymentValueTransformer;
+use Webpatser\Uuid\Uuid;
 
 class PaymentsController extends Controller
 {
@@ -26,7 +28,7 @@ class PaymentsController extends Controller
         $cart->save();
         switch ($method->id){
             case 1:
-                $mp = new Mercadopago($paymentValue->client_id, $paymentValue->client_secret);
+                $mp = new Mercadopago($paymentValue->api_id, $paymentValue->api_key);
 
                 $preference_data = array(
                     "items" => array(
@@ -35,7 +37,7 @@ class PaymentsController extends Controller
                         "name" => $cart->order->name,
                         "surname" => $cart->order->last_name,
                         "email" => $cart->customer->email,
-                        "date_created" => $cart->order->created_at->format('Y-m-d H:m:s'),
+                        "date_created" => $cart->order->created_at,
                         "phone" => array(
                             "area_code" => "57",
                             "number" => $cart->order->phone
@@ -92,5 +94,22 @@ class PaymentsController extends Controller
                 return ['url' => $preference['response']['init_point']];
                 break;
         }
+    }
+    
+    public function update($uuid , Request $request)
+    {
+        $method = PaymentMethod::where('uuid' , $request->payment_method_id)->first();
+        $data = $request->except(['payment_method_id' , 'client_secret' , 'client_id']);
+        $request->shop->payments_values()->updateExistingPivot($method->id , $data);
+
+    }
+    
+    public function store(Request $request)
+    {
+        $method = PaymentMethod::where('uuid' , $request->payment_method_id)->first();
+        $data = $request->except(['payment_method_id' , 'client_secret' , 'client_id']);
+        $data['uuid'] = Uuid::generate(4)->string;
+        $request->shop->payments_values()->attach($method->id , $data);
+        return response()->json($request->except('payment_method_id'));
     }
 }

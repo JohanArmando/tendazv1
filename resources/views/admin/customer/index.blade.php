@@ -1,4 +1,7 @@
 @extends('layouts.administrator')
+    @section('title')
+        Clientes
+    @endsection
     @section('css')
         <link rel="stylesheet" href="{{asset('admin/plugins/datatables/css/tabletools.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('admin/css/stylePersonal.css')}}">

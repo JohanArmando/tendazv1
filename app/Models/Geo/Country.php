@@ -10,4 +10,9 @@ class Country extends Model
     public function provider(){
         return $this->hasOne(Provider::class);
     }
+
+    public function states()
+    {
+        return $this->hasMany(State::class);
+    }
 }

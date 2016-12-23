@@ -3,7 +3,8 @@
 namespace Tendaz\Models\Address;
 
 use Illuminate\Database\Eloquent\Model;
-use Tendaz\Models\Country;
+use Tendaz\Models\Addres\AddressHistory;
+use Tendaz\Models\Geo\Country;
 use Tendaz\Models\Customer;
 use Tendaz\Models\Geo\City;
 use Tendaz\Models\Geo\State;

@@ -40,13 +40,13 @@ Medios de pago
                                     Tiempo para retirar el dinero : 
                                     <strong>@{{ payment.days }} Dias</strong>
                                 </p>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPayment" ng-click="modal_payment(payment , true)" ng-if="payment.data == null || payment.data.avaliable == 0">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPayment" ng-click="modal_payment(payment , true);create =  true" ng-if="payment.data == null || payment.data.avaliable == 0">
                                     Activar medio de Pago
                                 </button>
                                 <button type="button" class="btn btn-danger"  ng-click="deactive(payment)" ng-if="payment.data != null && payment.data.avaliable == 1">
                                     Desactivar medio de Pago
                                 </button>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPayment" ng-click="modal_payment(payment , false)" ng-if="payment.data != null && payment.data.avaliable == 1">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPayment" ng-click="modal_payment(payment , false) ; " ng-if="payment.data != null && payment.data.avaliable == 1">
                                     Modificar datos
                                 </button>
                             </div>
@@ -70,7 +70,8 @@ Medios de pago
                         <div class="modal-footer">
                             <div class="text-center">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                <button type="button" class="btn btn-primary" ng-click="submit()">@{{ payment.accion }} @{{ payment.name }}</button>
+                                <button type="button" class="btn btn-primary"  ng-show="create" ng-click="submit()">Activar @{{ payment.name }}</button>
+                                <button type="button" class="btn btn-primary" ng-hide="create" ng-click="update()">Actualizar @{{ payment.name }}</button>
                             </div>
                         </div>
                     </div>

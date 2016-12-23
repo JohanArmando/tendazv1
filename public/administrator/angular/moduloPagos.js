@@ -12,10 +12,28 @@
                 return $http.get(BASEURL + '/admin/setting/payments/'+ '?client_secret='  + client_secret + '&client_id=' + client_id, config);
             },
             update : function (id , data) {
-                return $http.put(BASEURL + '/admin/setting/payments/'+ id + '?client_secret='  + client_secret + '&client_id=' + client_id, config);
+                return $http({
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    url: apiUrl + '/payments/' + id  + '?client_secret='  + client_secret + '&client_id=' + client_id,
+                    method: "PUT",
+                    data : data
+                });
+            },   create : function ( data) {
+                return $http({
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    url: apiUrl + '/payments' +  '?client_secret='  + client_secret + '&client_id=' + client_id,
+                    method: "POST",
+                    data : data
+                });
             },
             show : function (id) {
-                return $http.get(BASEURL + '/admin/setting/payments/'+ id , data +'?client_secret='  + client_secret + '&client_id=' + client_id, config);
+                return $http.get(BASEURL + '/admin/setting/payments/'+ id + '?client_secret='  + client_secret + '&client_id=' + client_id, config);
             },
             deactivate : function(id){
                 return $http.get(BASEURL + '/admin/setting/payments/desactivar/'+ id + '?client_secret='  + client_secret + '&client_id=' + client_id, config);
@@ -23,10 +41,10 @@
         }
     });
     app.controller('controladorPagos',['$scope','servicioPagos', function ($scope , servicioPagos) {
+        $scope.create = true;
         servicioPagos.index()
             .success(function (response) {
-               $scope.payments = response.data;
-               console.log($scope.payments);
+                $scope.payments = response.data;
             })
             .error(function(){
 
@@ -45,24 +63,22 @@
                 });
         }
         $scope.modal_payment = function (payment , active) {
-               $scope.payment = [];
-               $scope.payment = payment;
-               active == true ? $scope.payment['accion'] = 'Activar' : $scope.payment['accion'] =  'Modificar';
-                var uuid = payment.data ? payment.data.uuid : null;
-               servicioPagos.show(uuid)
-                   .success(function(response){
-                       console.log(response);
-                           createForm(payment.name , response.payment);
-                   })
-                   .error(function(){
+            $scope.payment = [];
+            $scope.payment = payment;
+            $scope.create = active;
+            active == true ? $scope.payment['accion'] = 'Activar' : $scope.payment['accion'] =  'Modificar';
+            var uuid = payment.data ? payment.data.id : null;
+            servicioPagos.show(uuid)
+                    .success(function(response){
+                        createForm(payment.name , response);
+                    })
+                    .error(function(){
 
-                   });
+                });
         }
-
         $scope.submit = function(){
             spinner(true);
-
-            servicioPagos.update($scope.payment.data ? $scope.payment.data.uuid : null , $('#modalPayment').find('form').serializeObject($scope.payment.idReal))
+            servicioPagos.create($('#modalPayment').find('form').serializeObject($scope.payment.idReal))
                 .success(function (response) {
                     spinner(false);
                     $scope.payments = response.data;
@@ -70,15 +86,33 @@
                     var data = '';
                     $scope.payment['accion'] == 'Activar' ?  data = 'activados' :  data = 'actualizados';
                     toas('info' , '<h4>Datos de <strong>' + $scope.payment.name + '</strong> ' + data +' correctamente.</h4>');
+                    location.reload();
                 })
-                .error(function(){
+                .error(function(response){
                     spinner(false);
                     toas('info' , '<h4>Hubo un error al ' + $scope.payment.accion + ' <strong>' + $scope.payment.name + '</strong> .</h4>');
                 });
-        }
+        };
+        $scope.update = function(){
+            spinner(true);
+            servicioPagos.update($scope.payment.data ? $scope.payment.data.uuid : null  , $('#modalPayment').find('form').serializeObject($scope.payment.idReal))
+                .success(function (response) {
+                    spinner(false);
+                    $scope.payments = response.data;
+                    $('#modalPayment').modal('toggle');
+                    var data = '';
+                    $scope.payment['accion'] == 'Activar' ?  data = 'activados' :  data = 'actualizados';
+                    toas('info' , '<h4>Datos de <strong>' + $scope.payment.name + '</strong> ' + data +' correctamente.</h4>');
+                    location.reload();
+                })
+                .error(function(response){
+                    spinner(false);
+                    toas('info' , '<h4>Hubo un error al ' + $scope.payment.accion + ' <strong>' + $scope.payment.name + '</strong> .</h4>');
+                });
+        };
         function spinner(show){
             show ?
-            $('.preload').removeClass('hide') : $('.preload').addClass('hide');
+                $('.preload').removeClass('hide') : $('.preload').addClass('hide');
         }
         function toas(type , message){
             toastr.options = {
@@ -107,55 +141,39 @@
             var form = $('<form></form>');
             form.attr("action", BASEURL);
             form.attr("method", "POST");
-            form.attr("id", type);
+            form.attr("id", type.replace(/\s/g,""));
             $("#modalPayment").find('.modal-body').html('');
             $("#modalPayment").find('.modal-body').append(form);
-            data(type , dataForm);
+            data(type.replace(/\s/g,"") , dataForm);
         }
 
         function data(form , dataForm){
             $scope.form = dataForm;
             if(form == 'Payu'){
                 var data = {
-                        'merchant_id': {
-                            'label' : 'Id Comercio' ,
-                            'value' : dataForm ? dataForm.merchant_id : '',
-                        },
-                        'account_id': {
-                            'label' : 'Id Cuenta' ,
-                            'value' : dataForm ? dataForm.account_id : '',
-                        },
-                        'api_key': {
-                            'label' : 'Api Key' ,
-                            'value' : dataForm ? dataForm.api_key : '',
-                        },
-                }
-            }
-            if(form == 'Epay'){
-                var data = {
                     'merchant_id': {
                         'label' : 'Id Comercio' ,
-                        'value' : dataForm ? dataForm.merchant_id : '' ,
+                        'value' : dataForm ? dataForm.merchant_id : '',
                     },
-                    'account_id': {
+                    'api_id': {
                         'label' : 'Id Cuenta' ,
-                        'value' : dataForm ? dataForm.account_id : '',
+                        'value' : dataForm ? dataForm.api_id : '',
                     },
                     'api_key': {
                         'label' : 'Api Key' ,
-                        'value' : dataForm ?  dataForm.api_key : '',
+                        'value' : dataForm ? dataForm.api_key : '',
                     },
                 }
             }
-            if(form == 'Personal'){
+            if(form == 'Personalizado'){
                 var data = {
-                    'payment_form': {
+                    'custom_name': {
                         'label' : 'Forma De Pago' ,
-                        'value' : dataForm ? dataForm.payment_form : 'A convenir' ,
+                        'value' : dataForm ? dataForm.custom_name : 'A convenir' ,
                     },
-                    'description': {
+                    'instructions': {
                         'label' : 'Instrucciones para el comprador' ,
-                        'value' : dataForm ? dataForm.description : 'Gracias por tu compra, nos pondremos en contacto por email para arreglar los detalles del pago.',
+                        'value' : dataForm ? dataForm.instructions : 'Gracias por tu compra, nos pondremos en contacto por email para arreglar los detalles del pago.',
                     },
                     'discount': {
                         'label' : 'Descuento a ofrecer a los clientes' ,
@@ -163,23 +181,19 @@
                     },
                 }
             }
-            if(form == 'Mercado pago'){
+            if(form == 'MercadoPago'){
                 var data = {
-                    'client_id': {
+                    'api_id': {
                         'label' : 'Client Id' ,
-                        'value' : dataForm ? dataForm.client_id : '' ,
+                        'value' : dataForm ? dataForm.api_id : '' ,
                     },
-                    'client_secret': {
+                    'api_key': {
                         'label' : 'Client Secret' ,
-                        'value' : dataForm ? dataForm.client_secret : '',
-                    },
-                    'country': {
-                        'label' : 'Country' ,
-                        'value' : dataForm ?  dataForm.options : 'Brasil',
+                        'value' : dataForm ? dataForm.api_key : '',
                     },
                 }
             }
-            addFormFields(data , form);
+            addFormFields(data , form.replace(/\s/g,""));
         }
 
         function addFormFields(data , form){
@@ -191,7 +205,7 @@
                         var form_group = $('<div></div>').addClass('form-group');
                         var label = $('<label></label>').text(value.label);
                         var  a = $('<a href=""><i class="fa fa-exclamation-circle"></i></a>');
-                        if(value.label == 'Country'){
+                        if(value.label == 'country'){
                             var input = $('<select name="options" id="country"></select>').attr("ng-model", name).val(value.value).addClass('form-control');
                             var split = [ {'BRL' : 'Brasil'} , {'ARS' : 'Argentina'}, { 'CLP' : 'Chile'},{ 'COP' : 'Colombia'},{'MXN' : 'Mexico'}, {'VEF' : 'Venezuela'}];
                             $.each(split, function(index, v) {
@@ -201,6 +215,7 @@
                                     if(value.value == v){
                                         option.attr('selected' , true);
                                     }
+                                    option.text(v);
                                     option.text(v);
                                     option.val(i);
                                     input.append(option);
@@ -216,6 +231,7 @@
                         formulario.append(form_group);
                     }
                 });
+                formulario.append($("<input class='hidden' />").attr("name", 'payment_method_id').attr("ng-model", 'payment_method_id').val($scope.payment._id));
             }
         }
     }]);

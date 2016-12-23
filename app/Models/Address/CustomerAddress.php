@@ -9,8 +9,8 @@ class CustomerAddress extends Model
 {
     
     protected $table = 'customer_address';
-    
-    protected $fillable = ['uuid' , 'customer_id' , 'address_id' , 'isActive' , 'isShipping' , 'isBilling' , 'isPrimary' , 'created_at' , 'updated_at'];
+    public $timestamps = false;
+    protected $fillable = ['uuid' , 'customer_id' , 'address_id' , 'isActive' , 'isShipping' , 'isBilling' , 'isPrimary'];
 
     public function __construct(array $attributes = null){
         if(count($attributes) > 0){

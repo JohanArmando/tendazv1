@@ -23,7 +23,8 @@ class PaymentMethodsTransformers extends TransformerAbstract
             'path'              => $paymentMethod->path,
             'cost_by_trans_deb' => $paymentMethod->cost_by_trans_deb,
             'cost_by_trans_cre' => $paymentMethod->cost_by_trans_cre,
-            'days'              => $paymentMethod->days
+            'days'              => $paymentMethod->days,
+            'data'              => $paymentMethod->payment_value->first()
         ];
     }
 

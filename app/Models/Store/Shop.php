@@ -139,5 +139,8 @@ class Shop extends Model
     public function mercadopago(){
         return $this->belongsToMany(PaymentMethod::class, 'payment_values')->where('payment_methods.id' , 1)->withPivot('client_id' , 'client_secret');
     }
+      public function payments_values(){
+        return $this->belongsToMany(PaymentMethod::class, 'payment_values');
+    }
     
 }
