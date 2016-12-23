@@ -71,7 +71,7 @@
                                     </div>
                                     <div class="row">
                                         <div id="custom_variant_option" class="col-xs-12 p-right">
-                                            <input type="text" tabindex="1399" class="option_values-edit"  style="width: 85% !important;" "/>
+                                            <input type="text" tabindex="1399" class="option_values-edit"  style="width: 85% !important;"/>
                                             <span class="input-helper" >Escribe el valor (ej: negro, blanco..etc.) y luego aprieta enter, así con cada uno.</span>
                                         </div>
                                     </div>

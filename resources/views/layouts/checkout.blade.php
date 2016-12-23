@@ -52,7 +52,7 @@
                         </div>
                         <div class="form-group" ng-class="{'has-error has-feedback' : loginForm.password.$invalid && formSubmited }">
                            <input id="login_password" name="password" ng-model="login.password" class="form-control" type="password" placeholder="Password" required>
-                           <p ng-show="loginForm.password.$invalid && formSubmited" class="error">la Contraseña es requerida</p>
+                           <p ng-show="loginForm.password.$invalid && formSubmited" class="error">la Contrase&ntilde;a es requerida</p>
                         </div>
                      </div>
                      <div class="modal-footer">
