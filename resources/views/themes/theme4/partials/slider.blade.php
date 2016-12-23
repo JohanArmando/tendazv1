@@ -79,6 +79,7 @@
 													<span class="hidden block text-uppercase font-medium font-size62">Registrate</span>
 												</span>
 											</span>
+											</span>
 									</span>
 					</a>
 				</div>

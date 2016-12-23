@@ -9,7 +9,7 @@
 	@stop
 	@section('content')
 		<div id="pageContent">
-			<div class="container">
+			<div class="container hidden">
 				<br><br>
 				<div class="title-box">
 					<h1 class="text-center text-uppercase title-under">CREA TU CUENTA E INICIA SESION</h1>
@@ -30,19 +30,19 @@
 					<section class="col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xl-offset-2">
 						 <div class="login-form-box">
 							 <h3 class="color small text-center">CREAR USUARIO</h3>
-
+{{--
 							 {!! Form::open(['url' => 'auth/register' , 'method' => 'POST' , 'id' =>'form-register']) !!}
 								 <div class="form-group">
 									 <label>Nombres</label>
-									 {!! Form::text('name' , $user->name ,['class' => 'form-control']) !!}
+									 {!! Form::text('name' ,['class' => 'form-control']) !!}
 								 </div>
 								 <div class="form-group">
 									 <label>Apellidos</label>
-									 {!! Form::text('last_name' , $user->last_name ,['class' => 'form-control']) !!}
+									 {!! Form::text('last_name' ,['class' => 'form-control']) !!}
 								 </div>
 								 <div class="form-group">
 									 <label>Correo</label>
-									 {!! Form::email('email' , $user->email ,['class' => 'form-control']) !!}
+									 {!! Form::email('email' ,['class' => 'form-control']) !!}
 								 </div>
 
 								 <div class="form-group">
@@ -87,7 +87,7 @@
 									</button>
 									<br><br>
 								</div>
-							{!! Form::close() !!}
+							{!! Form::close() !!}--}}
 						</div>
 					</section>
 				</div>
