@@ -50,7 +50,7 @@ class DesignController extends Controller
         $request->shop->save();
         Cache::forever($subdomain.'_store' , $request->shop );
         if($request->shop->logo)
-            return redirect()->back()->with('message',array('type' => 'success' , 'message' => 'El logo de tu tienda a cambiado'));
+            return redirect()->back()->with('message',array('type' => 'success' , 'message' => 'El logo de tu tienda ha cambiado'));
         else
             return redirect()->back()->with('message',array('type' => 'warning' , 'message' => 'Tu tienda no tiene logo.'));
     }

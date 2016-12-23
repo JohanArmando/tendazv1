@@ -48,7 +48,7 @@
                                   type="password" placeholder="" required>
                         </div>
                          <div class="checkbox-group">
-                        <input type="checkbox" id="checkBox3" name="remember">
+                        <input type="checkbox" id="checkBox3" name="remember" checked>
                         <label for="checkBox3">
                             <span class="check"></span>
                             <span class="box"></span>
@@ -56,7 +56,7 @@
                         </label>
                     </div>
                      <div class="checkbox-group">
-                        <input type="checkbox" id="checkBox4" name="remember">
+                        <input type="checkbox" id="checkBox4" name="remember" checked>
                         <label for="checkBox4">
                             <span class="check"></span>
                             <span class="box"></span>

@@ -61,8 +61,8 @@
 					<h4 class="text-left  title-under  mobile-collapse__title">MI CUENTA</h4>
 					<div class="v-links-list mobile-collapse__content">
 						<ul>
-							<li><a href="{{url('auth/login')}}">Registrate</a></li>
-							<li><a href="{{url('auth/login')}}">Inicio sesion</a></li>
+							<li><a href="#" data-toggle="modal" data-target="#modalRegisterForm">Registrate</a></li>
+							<li><a href="#" data-toggle="modal" data-target="#modalLoginForm" >Inicio sesion</a></li>
 						</ul>
 					</div>
 				</div>
