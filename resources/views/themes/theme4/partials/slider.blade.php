@@ -58,7 +58,7 @@
 		</div>
 		<!-- /col-left -->
 		<!-- col-right -->
-		<div class="col-xs-12 col-sm-12 col-md-6">
+		<div class="col-xs-12 col-sm-12 col-md-6 hidden-xs">
 			<div class="row">
 				<div class="col-sm-6 col-md-6">
 					<a data-toggle="modal" data-target="#modalRegisterForm" class="banner zoom-in">
@@ -66,7 +66,7 @@
 										@foreach($sliders as $slider)
 											@if($slider->id == $shop->id)
 												@if(!$slider->slider1 == '')
-													<img src="{{ asset("sliders/".$slider->id.'/'.$slider->slider1) }}" alt="Slider"
+													<img class="responsive_slide" src="{{ asset("sliders/".$slider->id.'/'.$slider->slider1) }}" alt="Slider"
 														 style="min-height: 286px;max-height: 286px">
 												@else
 													<img src="themes_tendaz/tema4/images/custom/banner-07.jpg" alt=""/>
@@ -83,7 +83,7 @@
 									</span>
 					</a>
 				</div>
-				<div class="col-sm-6  col-md-6">
+				<div class="col-sm-6  col-md-6 hidden-xs">
 					<a href="{{url('products')}}" class="banner zoom-in">
 									<span class="figure">
 										@foreach($sliders as $slider)
