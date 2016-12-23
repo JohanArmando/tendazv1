@@ -73,19 +73,32 @@
                      <div id="icon-lost-msg" class="glyphicon glyphicon-chevron-right"></div>
                      <span id="text-lost-msg">Type your e-mail.</span>
                   </div>
-                  <input id="lost_email" class="form-control" type="text" placeholder="E-Mail (type ERROR for error effect)" required>
-               </div>
-               <div class="modal-footer">
-                  <div>
-                     <button type="submit" class="btn btn-primary btn-lg btn-block">Send</button>
-                  </div>
-                  <div>
-                     <button id="lost_login_btn" type="button" class="btn btn-link">Log In</button>
-                     <button id="lost_register_btn" type="button" class="btn btn-link">Register</button>
-                  </div>
-               </div>
-            </form>
-            <!-- End | Lost Password Form -->
+                  <!-- Begin # Login Form -->
+                  <form id="login-form" name="loginForm" accept-charset="utf-8" autocomplete="off" role="form" class="form-horizontal" ng-submit="doLogin(loginForm)" novalidate>
+                     <div class="modal-body">
+                        <div id="div-login-msg">
+                           <div id="icon-lo|gin-msg" style="color: orange" class="glyphicon glyphicon-chevron-right"></div>
+                           <span id="text-login-msg">Type your email and password.</span>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error has-feedback' : loginForm.email.$invalid && formSubmited }">
+                           <input id="login_username" name="email" ng-model="login.email" class="form-control" type="text" placeholder="email" required>
+                           <p ng-show="loginForm.email.$invalid && formSubmited" class="error">El email es requerido</p>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error has-feedback' : loginForm.password.$invalid && formSubmited }">
+                           <input id="login_password" name="password" ng-model="login.password" class="form-control" type="password" placeholder="Password" required>
+                           <p ng-show="loginForm.password.$invalid && formSubmited" class="error">la Contrase&ntilde;a es requerida</p>
+                        </div>
+                     </div>
+                     <div class="modal-footer">
+                        <div>
+                              <button type="submit" class="btn btn-primary btn-lg btn-block">Entrar</button>
+                        </div>
+                        <div>
+                           <button id="login_register_btn" type="button" class="btn btn-link" ng-click="showFormRegister()">Registrate</button>
+                        </div>
+                     </div>
+                  </form>
+                  <!-- End # Login Form -->
 
             <!-- Begin | Register Form -->
             <form id="register-form"  style="display:none;" name="registerForm"  accept-charset="utf-8" autocomplete="off" role="form" class="form-horizontal" ng-submit="doRegister(registerForm)" novalidate>

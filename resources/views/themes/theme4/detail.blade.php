@@ -93,7 +93,7 @@
 											<span class="price-box__old">$ <% product.price | currency:"":0  %></span>
 										</div>
 										<div class="price-box product-info__price" ng-if="!product.special_price">
-											<span class="price-box__new">$ <% product.price %></span>
+											<span class="price-box__new">$ <% product.price | currency:"":0 %></span>
 										</div>
 										<div class="divider divider--xs product-info__divider hidden-xs" ng-show="product.description"></div>
 										<div class="product-info__description hidden-xs">
@@ -137,7 +137,7 @@
 										</div>
 										<br>
 										<div class="divider divider--sm"></div>
-										<div class="wrapper">
+										<div class="wrapper" ng-if="!product.stock == 0">
 											<div class="pull-left"><span class="qty-label">QTY:</span></div>
 											<div class="pull-left">
 												<div class="number input-counter">
