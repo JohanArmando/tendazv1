@@ -130,7 +130,7 @@
               </span>
 				</div>
 				<div class="product__inside__name">
-					<h2><a href="{{ url('/') }}<%'detail/' + product.slug %>"><% product.name %></a></h2>
+					<h2><a href="<%'/detail/' + product.slug %>"><% product.name %></a></h2>
 				</div>
 				<div class="product__inside__price price-box" ng-if="product.special_price">
 					$<% product.special_price | currency:"":0 %>
