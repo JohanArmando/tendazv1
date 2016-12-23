@@ -25,7 +25,7 @@
                     return $http.get( BASEURL + '/products/' + slug + '?client_secret=' + client_secret + '&client_id=' +client_id , config);
                 },
                 getAncestorCategory : function (category) {
-                    return $http.get( BASEURL + '/categories' + category + '?client_secret=' + client_secret + '&client_id=' +client_id , config);
+                    return $http.get( BASEURL + '/categories/' + category + '?client_secret=' + client_secret + '&client_id=' +client_id , config);
                 }
             }
         });
