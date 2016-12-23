@@ -76,7 +76,7 @@
 											<span class="figcaption">
 											<span class="block-table">
 												<span class="block-table-cell">
-													<span class="block text-uppercase font-medium font-size62">Registrate</span>
+													<span class="hidden block text-uppercase font-medium font-size62">Registrate</span>
 												</span>
 											</span>
 									</span>
@@ -98,7 +98,7 @@
 											<span class="figcaption">
 											<span class="block-table">
 												<span class="block-table-cell">
-													<span class="block text-uppercase font-medium font-size62">Excelentes Precios</span>
+													<span class="hidden block text-uppercase font-medium font-size62">Excelentes Precios</span>
 												</span>
 											</span>
 										</span>
@@ -123,8 +123,8 @@
 										<span class="figcaption">
 											<span class="block-table">
 												<span class="block-table-cell">
-													<span class="block text-uppercase font-medium font-size62">Nuevas Colecciones</span>
-													<span class="block text-uppercase font-medium font-size26">conoce nuestros nuevos productos</span>
+													<span class="hidden block text-uppercase font-medium font-size62">Nuevas Colecciones</span>
+													<span class="hidden block text-uppercase font-medium font-size26">conoce nuestros nuevos productos</span>
 												</span>
 											</span>
 										</span>
