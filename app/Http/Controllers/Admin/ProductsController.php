@@ -76,7 +76,7 @@ class ProductsController extends Controller
     }
 
 
-        public function destroy($subdomain , Product $product , Request $request)
+    public function destroy($subdomain , Product $product , Request $request)
     {
         if($request->wantsJson()){
             $this->dispatch(new DeleteImagesProductJob($product));
