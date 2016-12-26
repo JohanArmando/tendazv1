@@ -17,4 +17,17 @@ class RemoveUpdateAtInCustomerAddress extends Migration
             $table->dropColumn('updated_at');
         });
     }
+
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('customer_address', function (Blueprint $table) {
+            $table->dateTime('updated_at')->nullable();
+        });
+    }
 }

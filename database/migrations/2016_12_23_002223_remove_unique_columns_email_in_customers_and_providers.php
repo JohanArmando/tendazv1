@@ -16,6 +16,7 @@ class RemoveUniqueColumnsEmailInCustomersAndProviders extends Migration
         Schema::table('providers' , function (Blueprint $table){
             $table->dropUnique('providers_email_unique');
         });
+        
         Schema::table('customers' , function (Blueprint $table){
             $table->dropUnique('customers_email_unique');
         });
@@ -28,6 +29,12 @@ class RemoveUniqueColumnsEmailInCustomersAndProviders extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('providers' , function (Blueprint $table){
+            $table->unique('email');
+        });
+
+        Schema::table('customers' , function (Blueprint $table){
+            $table->unique('email');
+        });
     }
 }

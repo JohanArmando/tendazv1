@@ -27,6 +27,10 @@ class ChangeDepartmentForStateInProviders extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('providers' , function (Blueprint $table){
+            $table->renameColumn('state_id' , 'department_id');
+            $table->dropForeign('providers_city_id_foreign');
+            $table->dropColumn('city_id');
+        });
     }
 }
