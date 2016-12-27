@@ -16,15 +16,15 @@ class updateShippingOrderEvent
     use InteractsWithSockets, SerializesModels;
     
     public $order;
-    public $method;
+    public $cost;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Order $order , ShippingMethod $method)
+    public function __construct(Order $order , $cost)
     {
         $this->order = $order;
-        $this->method = $method;
+        $this->cost = $cost;
     }
 }

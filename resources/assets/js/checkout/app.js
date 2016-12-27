@@ -9,22 +9,26 @@ myApp.config(['$routeProvider' ,
 
         $routeProvider.when('/email' , {
             templateUrl : "new-checkout/templates/steps/email.html",
-            controller : "emailController"
+            controller : "emailController",
+            authenticated : true
         });
 
         $routeProvider.when('/profile' , {
             templateUrl : "new-checkout/templates/steps/profile.html",
-            controller : "profileController"
+            controller : "profileController",
+            authenticated : true
         });
 
         $routeProvider.when('/shipping' , {
             templateUrl :  "new-checkout/templates/steps/shipping.html",
-            controller : "shippingController"
+            controller : "shippingController",
+            authenticated : true
         });
 
         $routeProvider.when('/payment' , {
             templateUrl : "new-checkout/templates/steps/payment.html",
-            controller : "paymentController"
+            controller : "paymentController",
+            authenticated : true
         });
         
         $routeProvider.otherwise('/cart');
@@ -84,7 +88,8 @@ myApp.run(["$rootScope", "$location", 'User', "Cart",
             function(event, next, current) {
                 if (next.$$route.authenticated) {
                     if (!User.getAuthStatus()) {
-                        $location.path('/');
+                        alert('Debes Registrarte o Iniciar Sesion');
+                        $location.path('/cart');
                     }
                 }
             });

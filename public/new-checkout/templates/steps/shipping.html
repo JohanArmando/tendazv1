@@ -83,19 +83,16 @@
                     </form>
                     <br><br>
                     <div class="form-group col-md-12" ng-if="shipping_methods.length">
-                        <label for="exampleInputPassword1">Elige el metodo de envio</label>
-                        <div ng-repeat="method in shipping_methods">
-                            <input type="radio" id="shippingMethod{{ method._id }}" name="shippingMethod" ng-model="carts.shippingMethod.data._id" ng-change="changeShipping()" value="{{ method._id }}" ch/>
-                            <label for="shippingMethod{{ method._id }}">
-                                <span><i class="glyphicon glyphicon-ok"></i></span>{{ method.name }} - $ {{ method.cost | currency:"":0 }}
-                            </label>
-                        </div>
+                        <label for="exampleInputPassword1">Total del envio:</label>
+                        <label >
+                            <span><i class="glyphicon glyphicon-ok"></i></span>1000
+                        </label>
                     </div>
-                    <div class="form-group col-md-12" ng-if="!shipping_methods.length">
-                        Upps No envio disponibles para este carrito =(
+                    <div class="form-group col-md-12" >
+                        El costo del envio es : $ {{ carts.totalizers.shipping.value | currency:"":0 }}
                     </div>
                     <div class="col-md-12">
-                        <button  type="submit" class="btn btn_checkout pull-right" ng-if="shipping_methods.length" ng-click="goToPay()">IR AL PAGO</button>
+                        <button  type="submit" class="btn btn_checkout pull-right" ng-click="goToPay()">IR AL PAGO</button>
                     </div>
                 </div>
             </div>

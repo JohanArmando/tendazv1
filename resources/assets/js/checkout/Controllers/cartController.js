@@ -11,16 +11,12 @@ myApp.controller("cartController" , [ "$scope" , 'Cart' , "User" , "$location" ,
             Cart.updateItem($scope.cartId , item );   
         },
         next : function () {
-            if (User.getUserObject()){
-                var client = $rootScope.carts.order.data.client;
-                if (client.first_name && client.last_name && client.phone && client.identification)
-                {
-                    $location.path('/shipping');
-                }else{
-                    $location.path('/profile');
-                }
+            var client = $rootScope.carts.order.data.client;
+            if (client.first_name && client.last_name && client.phone && client.identification)
+            {
+                $location.path('/shipping');
             }else{
-                alert('Debes Registrarte o Iniciar Sesion');
+                $location.path('/profile');
             }
         }
     });
