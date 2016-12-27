@@ -5,7 +5,7 @@
                 <div class="container-fluid">
                     <div class="row separator_product_cart" ng-repeat="item in carts.products.data">
                         <div class="col-md-4 nopad text-center ">
-                            <img class="img-responsive" src="{{ item.images.data[0].url }}">
+                            <img class="img-responsive" ng-src="{{ item.images.data[0].url }}">
                         </div>
                         <div class="col-md-8 pad_top_prod">
                             <p><b>{{ item.name }}</b></p>

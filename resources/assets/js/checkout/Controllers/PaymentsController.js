@@ -2,6 +2,8 @@ myApp.controller("paymentController" , ["$scope" , "Payment" , "$location" , "$r
     Payment.getPaymentMethod();
 
     $scope.doPayment = function (method) {
+        $('#'+method).attr('disabled' , 'disabled');
+        $('#'+method).text("Pagando");
         Payment.doPayment('/'+method);
     }
 }]);

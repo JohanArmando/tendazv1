@@ -61,7 +61,7 @@ class Cart extends Model
     }
 
     public function totalShipping(){
-        return (int) ($this->order->shippingMethod ? $this->order->shippingMethod->cost : 0);
+        return (int) $this->order->total_shipping;
     }
 
     public function total(){
@@ -83,13 +83,18 @@ class Cart extends Model
     }
 
     public static function AssignUser($cart , $user)
-        {
+    {
         if (!$cart['customer_id'])
-
+        {
             $cart->update([
                 'customer_id' => $user['id']
             ]);
 
+            $cart->order()->update([
+                'customer_id' => $user['id']
+            ]);
+
+        }
         else if($cart['customer_id'] != $user['id'])
             self::createWithOutSession($user->shop->id , $user);
     }

@@ -19,10 +19,10 @@ class ShopTransformer extends  TransformerAbstract
         return [
             '_id' => $shop->uuid,
             'name' => $shop->name,
-            'logo' => $shop->domainMain->first()->ssl.'/logos/'.$shop->logo,
+            'logo' => $shop->logo ? $shop->domainMain->first()->ssl.'/logos/'.$shop->id.'/'.$shop->logo : '',
             'instagram' => $shop->store->instagram,
             'twitter'   => $shop->store->twitter,
-            'phone'   => $shop->store->phone,
+            'phone'   => $shop->store->number_phone,
             'correo'   => $shop->store->address_1,
             'facebook'   => $shop->store->facebook,
             'address_2'   => $shop->store->address_2,

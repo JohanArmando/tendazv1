@@ -27,14 +27,12 @@
                 <label class="control-label" style="font-size: 1.2em; color: black;">Imagenes
                 <small style="color: #a9a9a9">(Opcional)</small>
                 </label>
-                <input id='file-1' class='file' type='file' name="product[images][]" multiple="multiple" data-overwrite-initial="false" "data-min-file-count"="2">
+                <input id='file-1' class='file' type='file' name="product[images][]" multiple="multiple" data-overwrite-initial="false" data-min-file-count="2">
             </div>
         </div>
     </span>
 </a>
 <br>
-
-{{-- DIV tab con variante y sin variante --}}
 
 <div class="media-body box">
     <div class="row"  align="center">
@@ -105,42 +103,60 @@
             </tfoot>
         </table>
     </div>
-{{--Estar list tabs --}}
-<!--<ul class="nav nav-tabs text-center" style="height: 100px; font-size: 2.0em; background-color: transparent">
-        <li class="active">
-            <a style="padding-top: 7.5%;" href="#sinVariante" data-toggle="tab">
-                <i class="fa fa-shopping-cart text-tendaz" style="margin-right: 5%; font-size: 1.9em;"></i>Sin Variante
-            </a>
-        </li>
-        <li class="hidden">
-            <a style="padding-top: 7.5%;" href="#conVariante" data-toggle="tab">
-                <i  class="fa fa-shopping-cart text-tendaz" style="margin-right: 5%; font-size: 1.9em;"></i>Con Variante
-            </a>
-        </li>
-    </ul>
 
-    <div class="tab-content panel">
+</div>
+<br>
+<div class="media-body box hidden">
+    <div class="row"  align="center">
+        <h4>Editar Variantes</h4>
+        <hr>
+        <table class="table-responsive table-product-no-variante">
+            <thead>
+            <tr>
+                <th style="text-align: center">Nombre</th>
+                <th style="text-align: center">Precio</th>
+                <th style="text-align: center">Stock</th>
+                <th style="text-align: center">Peso</th>
+            </tr>
+            </thead>
+            <tbody>
+            <div class="form-group" >
+                <tr>
+                    <td>
+                        <span>{{$variant->variants}}</span>
+                    </td>
+                    <td>
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            {!! Form::text('price',isset($variant)? $variant->price : null ,['class'=>'form-control','id'=>'price','style'=>'height: 30px;']) !!}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            {!! Form::text('promotional_price',isset($variant)? $variant->promotional_price : null ,['class'=>'form-control','id'=>'price','style'=>"height: 30px; text-align: center" ]) !!}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="input-group ">
+                            {!! Form::text('weight',isset($variant)? $variant->weight : null ,['class'=>'form-control','id'=>'kilo']) !!}
+                            <span class="input-group-addon">Kg.</span>
+                        </div>
+                    </td>
 
-        {{-- Start tab sin variante --}}
-        <div class="tab-pane active np" id="sinVariante">
-            <div class="media-list">
-                <a href="javascript:void(0);" class="media border-dotted">
-
-                </a>
+                </tr>
             </div>
-        </div>
-        {{-- Endt tab sin variante --}}
-
-        <!--<div class="tab-pane np" id="conVariante">
-            <div class="media-list">
-                <a href="javascript:void(0);" class="media border-dotted">
-                    {{--@include('admin.partials.con-variante')--}}
-        </a>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+            </tfoot>
+        </table>
     </div>
-</div>
-</div>-->
-</div>
 
+</div>
 <br>
 <a href="javascript:void(0);" class="media border-dotted">
 

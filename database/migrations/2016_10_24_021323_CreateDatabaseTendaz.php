@@ -151,7 +151,7 @@ class CreateDatabaseTendaz extends Migration
             $table->enum('phone_type' , ['mobile' , 'fax' ,  'work' , 'home' ,'other']);
             $table->string('number_phone')->nullable();
             $table->string('code_country')->nullable();
-            $table->text('conditions')->nullable();
+            $table->text('business_size')->nullable();
             $table->string('number_local')->nullable();
             $table->string('address_1')->nullable();
             $table->string('address_2')->nullable();
@@ -887,7 +887,7 @@ class CreateDatabaseTendaz extends Migration
             //$table->enum('type', array('customer', "reseller" , "tendaz" ,'admin'))->default("customer");
             $table->string('phone', 255)->nullable();
             $table->boolean('active')->default("1");
-            $table->string('email', 255);
+            $table->string('email', 255)->unique();
             $table->string('password', 60)->nullable();
             $table->string('identification', 60)->nullable();
             $table->text('notes')->nullable();
@@ -980,8 +980,7 @@ class CreateDatabaseTendaz extends Migration
             $table->string('phone', 255)->nullable();
             $table->string('email', 255)->unique();
             $table->unsignedInteger('country_id')->unsigned();
-            $table->unsignedInteger('state_id')->unsigned();
-            $table->unsignedInteger('city_id')->unsigned();
+            $table->unsignedInteger('department_id')->unsigned();
             $table->unsignedInteger('shop_id')->nullable()->unsigned();
             $table->timestamp('created_at')->default(\Carbon\Carbon::now());
             $table->timestamp('updated_at')->default(\Carbon\Carbon::now());
@@ -1044,8 +1043,7 @@ class CreateDatabaseTendaz extends Migration
 
         Schema::table('providers', function($table) {
             $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade') ;
-            $table->foreign('state_id')->references('id')->on('states')->onDelete('cascade') ;
-            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade') ;
+            $table->foreign('department_id')->references('id')->on('states')->onDelete('cascade') ;
             $table->foreign('shop_id')->references('id')->on('shops')->onDelete('cascade');
         });
 
@@ -1426,7 +1424,6 @@ class CreateDatabaseTendaz extends Migration
      */
     public function down()
     {
-        Schema::drop('cities');
         Schema::drop('option_value_variant');
         Schema::drop('option_values');
         Schema::drop('tax_order_item');
@@ -1451,6 +1448,7 @@ class CreateDatabaseTendaz extends Migration
         Schema::drop('address_history');
         Schema::drop('addresses');
         Schema::drop('consults');
+        Schema::drop('trends_preferences');
         Schema::drop('coupons');
         Schema::drop('social_auths');
         Schema::drop('customers');
@@ -1468,8 +1466,8 @@ class CreateDatabaseTendaz extends Migration
         Schema::drop('payment_values');
         Schema::drop('payment_methods');
         Schema::drop('locals');
-        Schema::drop('trends_preferences');
         Schema::drop('providers');
+        Schema::drop('cities');
         Schema::drop('shops');
         Schema::drop('themes');
         Schema::drop('tickets_comments');

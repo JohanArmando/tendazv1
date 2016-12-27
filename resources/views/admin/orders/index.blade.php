@@ -93,7 +93,7 @@ Mis ventas
                                                 </div>
                                             </td>
                                             <td>
-                                                $ {{ $order->total }}
+                                                $ {{ number_format($order->total , 2        ) }}
                                             </td>
                                             <td>
                                                 @if(empty($order->user->name))
@@ -101,7 +101,7 @@ Mis ventas
                                                 @endif
                                             </td>
                                             <td>
-                                               <span>{{ $order->status->name }}</span>
+                                               <span>{{ $order->status->description }}</span>
                                             </td>
                                             <td>
                                                 <a href="#">

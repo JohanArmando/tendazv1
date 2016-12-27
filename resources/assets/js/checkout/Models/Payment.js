@@ -24,8 +24,9 @@ myApp.factory('Payment' ,['$http', '$location' , "$rootScope" , "Cart",  functio
             url: baseUrl + '/payments' +  method + '/carts/' + Cart.getCartId()  + '?client_secret='  + client_secret + '&client_id=' + client_id,
             method: "GET"
         }).then(function(response) {
+            $('#'+ method.replace('/','')).attr('disabled' , false);
+            $('#'+ method.replace('/','')).text("Pagar Ahora");
             if (response.data.url){
-                localStorage.removeItem('cart_id');
                 $MPC.openCheckout({
                     url: response.data.url,
                     mode: "modal",

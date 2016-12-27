@@ -117,7 +117,6 @@ myApp.factory("Cart" , [ "$http" , "$rootScope", function ($http , $rootScope) {
         }).then(function(response) {
            $rootScope.carts = response.data.data;
            $rootScope.shopData = $rootScope.carts.shop.data;
-           console.log( $rootScope.shopData);
         }).catch(function(response) {
             console.log(response);
         }).finally(function() {});
@@ -132,8 +131,7 @@ myApp.factory("Cart" , [ "$http" , "$rootScope", function ($http , $rootScope) {
             url: baseUrl + '/carts/'+ cartId +'/items/'+ item._id + '?client_secret=' + client_secret + '&client_id=' +client_id,
             method: "DELETE",
         }).then(function(response) {
-            var index= $rootScope.carts.products.data.indexOf(item);
-            $rootScope.carts.products.data.splice(index,1);
+            $rootScope.carts = response.data.data;
         }).catch(function(response) {
             var index= $rootScope.carts.products.data.indexOf(item);
             $rootScope.carts.products.data.splice(index,1);
@@ -221,12 +219,15 @@ myApp.factory("Profile" , ["$http" , "$rootScope" , "$location" , function ($htt
             data : data
         }).then(function(response) {
             $rootScope.carts = response.data.data;
+            localStorage.setItem('orderData' , JSON.stringify($rootScope.carts.order.data.client));
             $location.path('/shipping');
         }).catch(function(response) {
             console.log(response);
         }).finally(function() {});
     }; 
-    
+    profileModel.getData = function () {
+        return localStorage.getItem('orderData');
+    };
     return profileModel;
 }]);
 myApp.factory("Shipping" , ["$http" , "User", "$rootScope" , "Cart", function ($http , User , $rootScope , Cart) {
@@ -287,12 +288,14 @@ myApp.factory("Shipping" , ["$http" , "User", "$rootScope" , "Cart", function ($
             method: "POST",
             data : data
         }).then(function(response) {
-            $rootScope.addresses = response.data.data;
+            console.log(response);
+            $rootScope.addresses = response.data.addresses.data;
+            $rootScope.carts = response.data.cart.data;
         }).catch(function(response) {
             console.log(response);
         }).finally(function() {});  
     };
-     address.getShippingMethod = function () {
+     address.getShippingValue = function () {
         return $http({
             headers: {
                 'Accept': 'application/json',
@@ -301,7 +304,8 @@ myApp.factory("Shipping" , ["$http" , "User", "$rootScope" , "Cart", function ($
             url: baseUrl + '/carts/' + Cart.getCartId() +'/shipping?client_secret='  + client_secret + '&client_id=' + client_id,
             method: "GET"
         }).then(function(response) {
-            $rootScope.shipping_methods = response.data.data;
+            console.log(response);
+            $rootScope.carts = response.data.data;
         }).catch(function(response) {
             console.log(response);
         }).finally(function() {});
@@ -368,8 +372,9 @@ myApp.factory('Payment' ,['$http', '$location' , "$rootScope" , "Cart",  functio
             url: baseUrl + '/payments' +  method + '/carts/' + Cart.getCartId()  + '?client_secret='  + client_secret + '&client_id=' + client_id,
             method: "GET"
         }).then(function(response) {
+            $('#'+ method.replace('/','')).attr('disabled' , false);
+            $('#'+ method.replace('/','')).text("Pagar Ahora");
             if (response.data.url){
-                localStorage.removeItem('cart_id');
                 $MPC.openCheckout({
                     url: response.data.url,
                     mode: "modal",

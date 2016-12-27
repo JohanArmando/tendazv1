@@ -106,16 +106,12 @@ myApp.controller("cartController" , [ "$scope" , 'Cart' , "User" , "$location" ,
             Cart.updateItem($scope.cartId , item );   
         },
         next : function () {
-            if (User.getUserObject()){
-                var client = $rootScope.carts.order.data.client;
-                if (client.first_name && client.last_name && client.phone && client.identification)
-                {
-                    $location.path('/shipping');
-                }else{
-                    $location.path('/profile');
-                }
+            var client = $rootScope.carts.order.data.client;
+            if (client.first_name && client.last_name && client.phone && client.identification)
+            {
+                $location.path('/shipping');
             }else{
-                alert('Debes Registrarte o Iniciar Sesion');
+                $location.path('/profile');
             }
         }
     });
@@ -149,7 +145,7 @@ myApp.controller("emailController" , ["$scope" , "Email" , "$location" , "User" 
 }]);
 
 myApp.controller("profileController" , [ "$scope", "$rootScope" , "Profile", function ($scope , $rootScope , Profile ) {
-    
+    console.log($rootScope.carts);
     angular.extend($scope , {
        'sendDataClient' : function () {
            var usrObject = {
@@ -181,18 +177,14 @@ myApp.controller("shippingController" , ["$scope" , "Shipping" , "$location" , "
                 Shipping.assignShipping(ordObject)
                 $location.path('/payment');
             }else{
-                if(!$rootScope.carts.shippingMethod.data._id){
-                    alert('Escoge un metodo de pago');
-                }else{
-                    alert('Escoge una direccion');
-                }
+                alert('Escoge una direccion');
             }
         },
        'getAddresses' : function () {
            Shipping.getAddresses();
        },
-        'getShippingMethods' : function () {
-            Shipping.getShippingMethod();
+        'getShippingValue' : function () {
+            Shipping.getShippingValue();
         },
         'addressCreate' : function () {
            $scope.newAddress = !$scope.newAddress;
@@ -224,16 +216,19 @@ myApp.controller("shippingController" , ["$scope" , "Shipping" , "$location" , "
             Shipping.doShippingMethod(ordObject);
         }
     });
-
+    /*GET TOTAL SHIPPING*/
+    $scope.getShippingValue();
+    
     /*VARIABLES*/
     $scope.getStates();
     $scope.getAddresses();
-    $scope.getShippingMethods();
 }]);
 myApp.controller("paymentController" , ["$scope" , "Payment" , "$location" , "$rootScope",   function ($scope , Payment  , $location , $rootScope) {
     Payment.getPaymentMethod();
 
     $scope.doPayment = function (method) {
+        $('#'+method).attr('disabled' , 'disabled');
+        $('#'+method).text("Pagando");
         Payment.doPayment('/'+method);
     }
 }]);

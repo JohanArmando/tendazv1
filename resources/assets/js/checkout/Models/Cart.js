@@ -22,7 +22,6 @@ myApp.factory("Cart" , [ "$http" , "$rootScope", function ($http , $rootScope) {
         }).then(function(response) {
            $rootScope.carts = response.data.data;
            $rootScope.shopData = $rootScope.carts.shop.data;
-           console.log( $rootScope.shopData);
         }).catch(function(response) {
             console.log(response);
         }).finally(function() {});
@@ -37,8 +36,7 @@ myApp.factory("Cart" , [ "$http" , "$rootScope", function ($http , $rootScope) {
             url: baseUrl + '/carts/'+ cartId +'/items/'+ item._id + '?client_secret=' + client_secret + '&client_id=' +client_id,
             method: "DELETE",
         }).then(function(response) {
-            var index= $rootScope.carts.products.data.indexOf(item);
-            $rootScope.carts.products.data.splice(index,1);
+            $rootScope.carts = response.data.data;
         }).catch(function(response) {
             var index= $rootScope.carts.products.data.indexOf(item);
             $rootScope.carts.products.data.splice(index,1);

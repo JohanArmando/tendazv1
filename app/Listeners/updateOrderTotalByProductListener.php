@@ -27,6 +27,7 @@ class updateOrderTotalByProductListener
     public function handle($event)
     {
         $event->order->total_products = $event->cart->totalProducts();
+        $event->order->total_shipping = 0;
         $event->order->total = $event->order->total_products + $event->order->total_shipping;
         $event->order->save();
     }

@@ -29,7 +29,10 @@ class RenameColumnInPaymentValuesClientSecretClientId extends Migration
     public function down()
     {
         Schema::table('payment_values', function (Blueprint $table) {
-            //
+            $table->renameColumn('api_id' , 'client_id' );
+            $table->renameColumn('api_key' , 'client_secret' );
+            $table = Schema::getConnection()->getDoctrineSchemaManager()->getDatabasePlatform();
+            $table->registerDoctrineTypeMapping('enum', 'string');
         });
     }
 }

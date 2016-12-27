@@ -103,7 +103,7 @@
                     <div class="col-md-6" ng-controller="couponController">
                         <div class="col-md-12">
                             <p>Cup&oacute;n de descuento</p>
-                            <div class="alert bg-danger hidden" id="no-coupon">
+                            <div class="alert alert-danger hidden" id="no-coupon">
                                 Lo siento este cupon no es aplicable.
                             </div>
                             <div class="alert alert-success hidden" id="yes-coupon">
@@ -137,4 +137,4 @@
         </div>
     </div>
 </div>
-<button class="btn btn_checkout pull-right" ng-if="carts.products.data.length > 0" ng-click="next()">Continuar compra</button>
+<a class="btn btn_checkout pull-right" ng-if="carts.products.data.length > 0" ng-click="next()">Continuar compra <i class="glyphicon glyphicon-chevron-right"></i></a>

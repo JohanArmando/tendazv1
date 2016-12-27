@@ -56,12 +56,14 @@ myApp.factory("Shipping" , ["$http" , "User", "$rootScope" , "Cart", function ($
             method: "POST",
             data : data
         }).then(function(response) {
-            $rootScope.addresses = response.data.data;
+            console.log(response);
+            $rootScope.addresses = response.data.addresses.data;
+            $rootScope.carts = response.data.cart.data;
         }).catch(function(response) {
             console.log(response);
         }).finally(function() {});  
     };
-     address.getShippingMethod = function () {
+     address.getShippingValue = function () {
         return $http({
             headers: {
                 'Accept': 'application/json',
@@ -70,7 +72,8 @@ myApp.factory("Shipping" , ["$http" , "User", "$rootScope" , "Cart", function ($
             url: baseUrl + '/carts/' + Cart.getCartId() +'/shipping?client_secret='  + client_secret + '&client_id=' + client_id,
             method: "GET"
         }).then(function(response) {
-            $rootScope.shipping_methods = response.data.data;
+            console.log(response);
+            $rootScope.carts = response.data.data;
         }).catch(function(response) {
             console.log(response);
         }).finally(function() {});

@@ -16,18 +16,14 @@ myApp.controller("shippingController" , ["$scope" , "Shipping" , "$location" , "
                 Shipping.assignShipping(ordObject)
                 $location.path('/payment');
             }else{
-                if(!$rootScope.carts.shippingMethod.data._id){
-                    alert('Escoge un metodo de pago');
-                }else{
-                    alert('Escoge una direccion');
-                }
+                alert('Escoge una direccion');
             }
         },
        'getAddresses' : function () {
            Shipping.getAddresses();
        },
-        'getShippingMethods' : function () {
-            Shipping.getShippingMethod();
+        'getShippingValue' : function () {
+            Shipping.getShippingValue();
         },
         'addressCreate' : function () {
            $scope.newAddress = !$scope.newAddress;
@@ -59,9 +55,10 @@ myApp.controller("shippingController" , ["$scope" , "Shipping" , "$location" , "
             Shipping.doShippingMethod(ordObject);
         }
     });
-
+    /*GET TOTAL SHIPPING*/
+    $scope.getShippingValue();
+    
     /*VARIABLES*/
     $scope.getStates();
     $scope.getAddresses();
-    $scope.getShippingMethods();
 }]);

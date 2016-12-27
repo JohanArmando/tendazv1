@@ -3,8 +3,6 @@
 namespace Tendaz\Listeners;
 
 use Tendaz\Events\updateShippingOrderEvent;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class updateShippingOrderListener
 {
@@ -26,7 +24,7 @@ class updateShippingOrderListener
      */
     public function handle(updateShippingOrderEvent $event)
     {
-        $event->order->total_shipping = $event->method->cost;
+        $event->order->total_shipping = $event->cost;
         $event->order->total =   $event->order->total_products + $event->order->total_shipping;
         $event->order->save();
     }

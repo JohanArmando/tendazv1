@@ -22,10 +22,10 @@ class OrderTransformer extends TransformerAbstract
             'total'  => $order->total,
             'users'  => $order->user,
             'client' => [
-                'first_name'     => $order->name,
-                'last_name'      => $order->last_name,
-                'phone'          => $order->phone,
-                'identification' => $order->identification,
+                'first_name'     => $order->user && !$order->name ? $order->user->name : $order->name,
+                'last_name'      => $order->user && !$order->last_name  ? $order->user->last_name : $order->last_name,
+                'phone'          => $order->user && !$order->phone ? $order->user->phone : $order->phone,
+                'identification' => $order->user && !$order->identification ? $order->user->identification : $order->identification,
             ],
             'status' => [ 'name' => $order->status->name, 'id' => $order->order_status]
         ];

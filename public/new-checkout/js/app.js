@@ -9,31 +9,41 @@ myApp.config(['$routeProvider' ,
 
         $routeProvider.when('/email' , {
             templateUrl : "new-checkout/templates/steps/email.html",
-            controller : "emailController"
+            controller : "emailController",
+            authenticated : true
         });
 
         $routeProvider.when('/profile' , {
             templateUrl : "new-checkout/templates/steps/profile.html",
-            controller : "profileController"
+            controller : "profileController",
+            authenticated : true,
+            cart : true
         });
 
         $routeProvider.when('/shipping' , {
             templateUrl :  "new-checkout/templates/steps/shipping.html",
-            controller : "shippingController"
+            controller : "shippingController",
+            authenticated : true,
+            cart : true,
+            profile : true
         });
 
         $routeProvider.when('/payment' , {
             templateUrl : "new-checkout/templates/steps/payment.html",
-            controller : "paymentController"
+            controller : "paymentController",
+            authenticated : true,
+            cart : true,
+            profile : true,
+            shipping : true
         });
         
         $routeProvider.otherwise('/cart');
     }
 ]);
 
-myApp.run(["$rootScope", "$location", 'User', "Cart",
+myApp.run(["$rootScope", "$location", 'User', "Cart", "Profile",
 
-    function($rootScope, $location, User, Cart) {
+    function($rootScope, $location, User, Cart , Profile) {
         /*GLOBAL VARIABLES*/
         angular.extend($rootScope , {
             formLogin : $('#login-form'),
@@ -51,6 +61,8 @@ myApp.run(["$rootScope", "$location", 'User', "Cart",
                $location.path('/profile');
             },
             modalAnimate : function ($oldForm, $newForm) {
+                $('.bg-danger').html('');
+                $('.bg-danger').addClass('hidden');
                 var $oldH = $($oldForm.selector).height();
                 var $newH = $($newForm.selector).height();
                 $($rootScope.divForms.selector).css("height",$oldH);
@@ -84,7 +96,21 @@ myApp.run(["$rootScope", "$location", 'User', "Cart",
             function(event, next, current) {
                 if (next.$$route.authenticated) {
                     if (!User.getAuthStatus()) {
-                        $location.path('/');
+                        $location.path('/cart');
+                        $('#sign-up').modal('toggle');
+                        $('.bg-danger').html('Por favor registrate o inicia sesion');
+                        $('.bg-danger').removeClass('hidden');
+                    }
+                }
+                if(next.$$route.cart){
+                    if (!Cart.getCartId()) {
+                            $location.path('/cart');
+                    }
+                }
+
+                if(next.$$route.profile){
+                    if(Profile.getData() == null  || Profile.getData().first_name || Profile.getData().name  || Profile.getData().phone  || Profile.getData().identification ){
+                        $location.path('/profile');
                     }
                 }
             });
