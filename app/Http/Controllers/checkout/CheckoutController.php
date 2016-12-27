@@ -13,21 +13,24 @@ class CheckoutController extends Controller
     {
         //en order guardar mco
         $order = Order::where('uuid' , $request->external_reference)->first();
-        foreach ($order->cart->products as $product){
-            $order->products()->attach($product->id , ['quantity' => $product->pivot->quantity]);
-            if($product->stock > 0){
-                $product->stock = $product->stock - $product->pivot->quantity;
-                $product->save();
+        if (!$order)
+            return redirect(url('/'));
+        if($order->cart->status == 'open'){
+            foreach ($order->cart->products as $product){
+                $order->products()->attach($product->id , ['quantity' => $product->pivot->quantity]);
+                if($product->stock > 0){
+                    $product->stock = $product->stock - $product->pivot->quantity;
+                    $product->save();
+                }
             }
+
+            $order->cart->update([
+                'status' => 'closed'
+            ]);
         }
 
-        $order->cart->update([
-            'status' => 'closed'
-        ]);
-
-        $mp = new Mercadopago($request->shop->mercadoPago->first()->pivot->client_id, $request->shop->mercadoPago->first()->pivot->client_secret);
+        $mp = new Mercadopago($request->shop->mercadoPago->first()->pivot->api_id, $request->shop->mercadoPago->first()->pivot->api_key);
         // Sets the filters you want
-
         $filters = array(
             "site_id" => "MCO", // Argentina: MLA; Brasil: MLB,
             "status" => "approved",
@@ -49,17 +52,19 @@ class CheckoutController extends Controller
         //en order guardar mco
         $order = Order::where('uuid' , $request->external_reference)->first();
 
-        foreach ($order->cart->products as $product){
-            $order->products()->attach($product->id , ['quantity' => $product->pivot->quantity]);
-            if($product->stock > 0){
-                $product->stock = $product->stock - $product->pivot->quantity;
-                $product->save();
+        if($order->cart->status == 'open'){
+            foreach ($order->cart->products as $product){
+                $order->products()->attach($product->id , ['quantity' => $product->pivot->quantity]);
+                if($product->stock > 0){
+                    $product->stock = $product->stock - $product->pivot->quantity;
+                    $product->save();
+                }
             }
-        }
 
-        $order->cart->update([
-            'status' => 'closed'
-        ]);
+            $order->cart->update([
+                'status' => 'closed'
+            ]);
+        }
 
         $mp = new Mercadopago($request->shop->mercadoPago->first()->pivot->api_id, $request->shop->mercadoPago->first()->pivot->api_key);
 
