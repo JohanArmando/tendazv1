@@ -20,7 +20,8 @@ class AppServiceProvider extends ServiceProvider
             $cart->order()->create([
                 'order_status' => 1,
                 'uuid'         =>  Uuid::generate(4)->string,
-                'shop_id'      => $cart->shop_id
+                'shop_id'      => $cart->shop_id,
+                'customer_id'  => $cart->customer ? $cart->customer->id : null
             ]);
         });
     }

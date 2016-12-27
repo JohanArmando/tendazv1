@@ -16,11 +16,7 @@ myApp.controller("shippingController" , ["$scope" , "Shipping" , "$location" , "
                 Shipping.assignShipping(ordObject)
                 $location.path('/payment');
             }else{
-                if(!$rootScope.carts.shippingMethod.data._id){
-                    alert('Escoge un metodo de envio');
-                }else{
-                    alert('Escoge una direccion');
-                }
+                alert('Escoge una direccion');
             }
         },
        'getAddresses' : function () {

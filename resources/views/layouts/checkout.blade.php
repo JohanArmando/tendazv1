@@ -7,6 +7,7 @@
    <link href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
    <link rel="stylesheet" type="text/css" href="{{ asset('new-checkout/css/modal-checkout.css') }}">
    <link href="{{ asset('/checkout-comp/assets/css/main.css') }}" rel="stylesheet">
+   <link href="{{ asset('bower_components/sweetalert/dist/sweetalert.css')}}" rel="stylesheet">
    <script>
       var client_secret = "{{ $shop->uuid }}";
 
@@ -14,7 +15,7 @@
 
       var baseUrl = "{{ App::environment('local') ? 'http://'.env('APP_API_URL').env('APP_API_PORT') : 'https://'.env('APP_API_URL').env('APP_API_PORT') }}";
    </script>
-
+   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 </head>
 <body ng-controller="globalController">
 <div class="container">
@@ -28,9 +29,10 @@
    <div class="modal-dialog">
       <div class="modal-content">
          <div class="modal-header" align="center">
-              <div class="col-md-12" ng-controller="cartController">
-         <img ng-src="@{{shopData.logo}}" class="img-responsive marg_auto logo_check">
-    </div>
+            <div class="col-md-12" ng-controller="cartController">
+               <img ng-src="@{{shopData.logo}}" class="img-responsive marg_auto logo_check" ng-show="shopData.logo">
+               <h2 ng-hide="shopData.logo != ''"> @{{ shopData.name }}</h2>
+            </div>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="closeModalLogin()">
                <span class="glyphicon glyphicon-remove" aria-hidden="true" ></span>
             </button>
@@ -46,7 +48,7 @@
                <div class="modal-body">
                   <div id="div-login-msg">
                      <div id="icon-lo|gin-msg" style="color: orange" class="glyphicon glyphicon-chevron-right"></div>
-                     <span id="text-login-msg">Type your email and password.</span>
+                     <span id="text-login-msg">Escribe tu email y contraseña.</span>
                   </div>
                   <div class="form-group" ng-class="{'has-error has-feedback' : loginForm.email.$invalid && formSubmited }">
                      <input id="login_username" name="email" ng-model="login.email" class="form-control" type="text" placeholder="email" required>
@@ -69,7 +71,7 @@
             <!-- End # Login Form -->
 
             <!-- Begin | Lost Password Form -->
-            <form id="lost-form" style="display:none;">
+            <div id="lost-form" style="display:none;">
                <div class="modal-body">
                   <div id="div-lost-msg">
                      <div id="icon-lost-msg" class="glyphicon glyphicon-chevron-right"></div>
@@ -100,6 +102,8 @@
                         </div>
                      </div>
                   </form>
+               </div>
+            </div>
                   <!-- End # Login Form -->
 
             <!-- Begin | Register Form -->
@@ -148,15 +152,12 @@
                </div>
             </form>
             <!-- End | Register Form -->
-
          </div>
          <!-- End # DIV Form -->
-
       </div>
    </div>
 </div>
 <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
-
 <script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('checkout-comp/assets/js/main.js') }}"></script>
 <script src="{{ asset('bower_components/angular/angular.min.js') }}"></script>
@@ -166,8 +167,44 @@
 <script src="{{ asset('new-checkout/js/controllers.js') }}"></script>
 <script src="{{ asset('new-checkout/js/models.js') }}"></script>
 <script src="{{ asset('new-checkout/js/controllers.js') }}"></script>
+<script src="{{ asset('bower_components/sweetalert/dist/sweetalert.min.js') }}"></script>
 <script type="text/javascript" src="https://www.mercadopago.com/org-img/jsapi/mptools/buttons/render.js"></script>
-
-
+@if(isset($_GET['status'] ))
+   @if($_GET['status'] == 'pending' )
+      <script>
+         swal({
+            title: "Pendiente!",
+            text: "Enhorabuena!Tu pago esta pendiente de confirmacion",
+            type: "success",
+            confirmButtonText: "OK",
+            closeOnConfirm: false,
+         },function(isConfirm){
+            if (isConfirm) {
+               localStorage.removeItem('orderData');
+               localStorage.removeItem('cart_id');
+               location.href = "{{ url('/') }}"
+            }
+         });
+      </script>
+   @elseif($_GET['status'] == 'success' )
+      <script>
+         swal({
+            title: "Felicidades!",
+            text: "Enhorabuena! Pago realizado de forma correcta",
+            type: "success",
+            confirmButtonText: "OK"
+         });
+      </script>
+   @else
+      <script>
+         swal({
+            title: "Upps!",
+            text: "hubo un problema al realizar el pago",
+            type: "error",
+            confirmButtonText: "OK"
+         });
+      </script>
+   @endif
+@endif
 </body>
 </html>

@@ -22,7 +22,6 @@ myApp.factory("Cart" , [ "$http" , "$rootScope", function ($http , $rootScope) {
         }).then(function(response) {
            $rootScope.carts = response.data.data;
            $rootScope.shopData = $rootScope.carts.shop.data;
-           console.log( $rootScope.shopData);
         }).catch(function(response) {
             console.log(response);
         }).finally(function() {});

@@ -1,5 +1,5 @@
 myApp.controller("profileController" , [ "$scope", "$rootScope" , "Profile", function ($scope , $rootScope , Profile ) {
-    
+    console.log($rootScope.carts);
     angular.extend($scope , {
        'sendDataClient' : function () {
            var usrObject = {

@@ -83,13 +83,18 @@ class Cart extends Model
     }
 
     public static function AssignUser($cart , $user)
-        {
+    {
         if (!$cart['customer_id'])
-
+        {
             $cart->update([
                 'customer_id' => $user['id']
             ]);
 
+            $cart->order()->update([
+                'customer_id' => $user['id']
+            ]);
+
+        }
         else if($cart['customer_id'] != $user['id'])
             self::createWithOutSession($user->shop->id , $user);
     }

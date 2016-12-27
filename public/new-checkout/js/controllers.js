@@ -145,7 +145,7 @@ myApp.controller("emailController" , ["$scope" , "Email" , "$location" , "User" 
 }]);
 
 myApp.controller("profileController" , [ "$scope", "$rootScope" , "Profile", function ($scope , $rootScope , Profile ) {
-    
+    console.log($rootScope.carts);
     angular.extend($scope , {
        'sendDataClient' : function () {
            var usrObject = {
@@ -177,11 +177,7 @@ myApp.controller("shippingController" , ["$scope" , "Shipping" , "$location" , "
                 Shipping.assignShipping(ordObject)
                 $location.path('/payment');
             }else{
-                if(!$rootScope.carts.shippingMethod.data._id){
-                    alert('Escoge un metodo de envio');
-                }else{
-                    alert('Escoge una direccion');
-                }
+                alert('Escoge una direccion');
             }
         },
        'getAddresses' : function () {
@@ -231,6 +227,8 @@ myApp.controller("paymentController" , ["$scope" , "Payment" , "$location" , "$r
     Payment.getPaymentMethod();
 
     $scope.doPayment = function (method) {
+        $('#'+method).attr('disabled' , 'disabled');
+        $('#'+method).text("Pagando");
         Payment.doPayment('/'+method);
     }
 }]);

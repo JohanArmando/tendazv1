@@ -54,7 +54,7 @@
                                            <!-- <div class="col-md-12">
                                                 <input type="radio" name="optionsRadios"  value="option1" checked>
                                             </div>-->
-                                            <button type="button" class="col-md-12 btn btn_checkout " ng-click="doPayment(method._id)">
+                                            <button type="button" class="col-md-12 btn btn_checkout" id="{{method._id  }}" ng-click="doPayment(method._id)">
                                                Pagar ahora
                                             </button>
                                             <div class="col-md-12 col-md-12">
@@ -71,18 +71,6 @@
             </div>
         </div>
         <div ng-include="global.resumeUrl"></div>
-         <div class="col-md-12">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-3">
-                        <a  href="/checkout#!/cart" class="btn btn_checkout" >
-                                        <i class="glyphicon glyphicon-shopping-cart"></i>
-                                        Volver al carrito
-                                    </a>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 <script type="text/javascript">

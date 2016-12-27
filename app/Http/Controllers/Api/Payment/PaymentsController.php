@@ -23,16 +23,35 @@ class PaymentsController extends Controller
 
     public function show(PaymentValue $paymentValue  , Cart $cart, Request $request)
     {
+
         $method = $paymentValue->paymentMethod;
         $cart->status = 'closed';
         $cart->save();
         switch ($method->id){
             case 1:
                 $mp = new Mercadopago($paymentValue->api_id, $paymentValue->api_key);
-
+                $title = '';
+                $description = '';
+                $quantity = 0;
+                $price = 0;
+                foreach ($cart->products as $product){
+                    $title .=  $product->pivot->quantity.' '.$product->product->name.' - ';
+                    $description .=  ' '.$product->product->description;
+                    $quantity = 1;
+                    $price +=  ($product->product->collection->promotion ? $product->promotional_price : $product->price) * $product->pivot->quantity;
+                }
                 $preference_data = array(
-                    "items" => array(
-                    ),
+                    "items" => [
+                        array(
+                                'id'    => $cart->secure_key,
+                                'title' => $title,
+                                'currency_id' => 'COL',
+                                'picture_url' => $cart->products[0]->product->MainImage(),
+                                'description' => $description,
+                                'quantity' => $quantity,
+                                'unit_price' => $price
+                        )
+                    ],
                     "payer" => array(
                         "name" => $cart->order->name,
                         "surname" => $cart->order->last_name,
@@ -64,7 +83,7 @@ class PaymentsController extends Controller
                     ),
                     "shipments" => array(
                         "mode" => "custom",
-                        "cost" => (int) $cart->order->shippingMethod->cost,
+                        "cost" => (int) $cart->order->total_shipping,
                         "receiver_address" => array(
                             "zip_code" => 111461,
                             "street_number"=> $cart->order->shippingAddress->street,
@@ -79,17 +98,6 @@ class PaymentsController extends Controller
                     "expiration_date_from" => null,
                     "expiration_date_to" => null
                 );
-                foreach ($cart->products as $product){
-                    array_push($preference_data['items'], [
-                        'id'    => $product->uuid,
-                        'title' => $product->product->title,
-                        'currency_id' => 'COL',
-                        'picture_url' => $product->product->MainImage(),
-                        'description' => $product->product->description,
-                        'quantity' =>$product->pivot->quantity,
-                        'unit_price' => $product->promotional_price > 0 ? $product->promotional_price : $product->price
-                    ]);
-                }
                 $preference = $mp->create_preference($preference_data);
                 return ['url' => $preference['response']['init_point']];
                 break;

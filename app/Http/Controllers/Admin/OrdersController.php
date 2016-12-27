@@ -15,7 +15,7 @@ class OrdersController extends Controller
 {
     public function index($subdomain , Request $request)
     {
-        $orders = Order::where('shop_id' , $request->shop->id)->orderBy('id' , 'DESC')->get();
+        $orders = Order::orderBy('id' , 'DESC')->NotInitOrders()->get();
         return view('admin.orders.index',compact('orders'));
     }
 

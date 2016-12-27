@@ -56,7 +56,9 @@ myApp.factory("Shipping" , ["$http" , "User", "$rootScope" , "Cart", function ($
             method: "POST",
             data : data
         }).then(function(response) {
-            $rootScope.addresses = response.data.data;
+            console.log(response);
+            $rootScope.addresses = response.data.addresses.data;
+            $rootScope.carts = response.data.cart.data;
         }).catch(function(response) {
             console.log(response);
         }).finally(function() {});  
