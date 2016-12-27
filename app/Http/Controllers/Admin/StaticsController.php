@@ -30,8 +30,8 @@ class StaticsController extends Controller
     public function advanced(){
         $products = Product::all();
         $hits = Trend::where('trend_type','product')->selectRaw('*, sum(hits) as sum')->groupBy('trend_id')->get();
-        $totalOrders = Order::all()->count();
-        $money = Order::all()->sum('total');
+        $totalOrders = Order::NotInitOrders()->count();
+        $money = Order::NotInitOrders()->sum('total');
         if(!$totalOrders == 0) $avg = $money/$totalOrders; else $avg = 0;
         $date = 'Todas las Fechas';
         return view('admin.stats.advanced',compact('products','totalOrders','money','avg','date','hits'));
