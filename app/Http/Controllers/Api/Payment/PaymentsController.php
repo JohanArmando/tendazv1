@@ -25,8 +25,6 @@ class PaymentsController extends Controller
     {
 
         $method = $paymentValue->paymentMethod;
-        $cart->status = 'closed';
-        $cart->save();
         switch ($method->id){
             case 1:
                 $mp = new Mercadopago($paymentValue->api_id, $paymentValue->api_key);

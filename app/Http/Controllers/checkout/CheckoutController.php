@@ -51,7 +51,6 @@ class CheckoutController extends Controller
     {
         //en order guardar mco
         $order = Order::where('uuid' , $request->external_reference)->first();
-
         if($order->cart->status == 'open'){
             foreach ($order->cart->products as $product){
                 $order->products()->attach($product->id , ['quantity' => $product->pivot->quantity]);
