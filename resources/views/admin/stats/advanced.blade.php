@@ -69,20 +69,20 @@
 										<span>Monto Total de Ventas</span>
 									</div>
 									<br>
-									<p><strong>$ 25.000</strong></p><br>
+									<p><strong>$ {{number_format($money,2,'.',',')}}</strong></p><br>
 									<div class="circle cssToolTip">
 										<i class="fa fa-shopping-cart fa-2x"></i>
 											<span>Total de Ordenes Realizadas</span>
 									</div>
 									<br>
-									<p><strong>30</strong></p>
+									<p><strong>{{$totalOrders}}</strong></p>
 									<br>
 									<div class="circle cssToolTip">
     										<i class="fa fa-percent fa-2x"></i>
 										<span>Facturaci&oacute;n Promedio</span>
 									</div>
 									<br>
-									<p><strong>$ 250.000</strong></p><br>
+									<p><strong>$ {{number_format($avg,2,'.',',')}}</strong></p><br>
 								</center>
 							</div>
 						</div>

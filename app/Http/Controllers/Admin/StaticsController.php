@@ -2,13 +2,9 @@
 
 namespace Tendaz\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use Tendaz\Http\Controllers\Controller;
-use Tendaz\Models\Customer;
 use Tendaz\Models\Order\Order;
 use Tendaz\Models\Products\Product;
-use Tendaz\Scopes\OrderStatusScope;
-use Tymon\JWTAuth\Claims\Custom;
 
 class StaticsController extends Controller
 {
@@ -30,7 +26,9 @@ class StaticsController extends Controller
 
     public function advanced(){
         $products = Product::all();
-        $totalOrders = Order::all();
-        return view('admin.stats.advanced',compact('products'));
+        $totalOrders = Order::all()->count();
+        $money = Order::all()->sum('total');
+        $avg = $money/$totalOrders;
+        return view('admin.stats.advanced',compact('products','totalOrders','money','avg'));
     }
 }
