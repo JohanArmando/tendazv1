@@ -3,6 +3,7 @@
 namespace Tendaz\Models\Shipping;
 
 use Illuminate\Database\Eloquent\Model;
+use Tendaz\Events\updateShippingOrderEvent;
 use Tendaz\Models\Cart\Cart;
 use Tendaz\Models\Order\Order;
 use Tendaz\Traits\UuidAndShopTrait;
@@ -22,11 +23,17 @@ class ShippingMethod extends Model
     }
 
     public function scopeOptionsByCart($query ,Cart $cart){
-        $total = $cart->total();
-        $weight = $cart->weight();
-        return $query->filterByPrice($total)->filterByWeight($weight)->orderBy('id');
+        $total = 0;
+        foreach ($cart->products as $product) {
+            $price = $product->product->collection->first()->promotion ? $product->promotional_price : $product->price;
+            $method =  $this->filterByPrice($price)->filterByWeight($product->weight)->orderBy('id')->min('cost');
+            if (!$method)
+                event(new updateShippingOrderEvent($cart->order , 0));
+            $total += ($method * $product->pivot->quantity);
+        }
+        event(new updateShippingOrderEvent($cart->order , $total));
     }
-
+    
     public function scopeFilterByPrice($query , $total){
         $query->FilterByPriceMin($total)->FilterByPriceMax($total);
     }
@@ -63,6 +70,8 @@ class ShippingMethod extends Model
     {
         if (!empty($value)){
             $this->attributes['max_price'] = is_numeric($value) ? $value : -1;
+        }else{
+            $this->attributes['max_price'] = 0;
         }
     }  
     
@@ -70,6 +79,8 @@ class ShippingMethod extends Model
     {
         if (!empty($value)){
             $this->attributes['min_price'] = is_numeric($value) ? $value : -1;
+        }else{
+            $this->attributes['min_price'] = 0;
         }
     }  
     
@@ -77,6 +88,8 @@ class ShippingMethod extends Model
     {
         if (!empty($value)){
             $this->attributes['max_weight'] = is_numeric($value) ? $value : -1;
+        }else{
+            $this->attributes['max_weight'] = 0;
         }
     }
     
@@ -84,6 +97,8 @@ class ShippingMethod extends Model
     {
         if (!empty($value)){
             $this->attributes['min_weight'] = is_numeric($value) ? $value : -1;
+        }else{
+            $this->attributes['min_weight'] = 0;
         }
     }
 
@@ -114,13 +129,12 @@ class ShippingMethod extends Model
 
     public function getPriceRangAttribute()
     {
-        if ($this->attributes['max_price'] < 0 && $this->attributes['min_price'] < 0)
-        {
+        if ($this->attributes['max_price'] < 0 && $this->attributes['min_price'] < 0) {
             return "Siempre";
-        }elseif ($this->attributes['max_price'] >= 0 && $this->attributes['min_price'] < 0){
-            return ("Desde ".number_format($this->attributes['max_price'], 2,',','.'));
         }elseif ($this->attributes['max_price'] < 0 && $this->attributes['min_price'] >= 0){
-            return ("Hasta ".number_format($this->attributes['min_price'], 2,',','.'));
+            return ("Desde ".number_format($this->attributes['min_price'], 2,',','.'));
+        }elseif ($this->attributes['max_price'] >= 0 && $this->attributes['min_price'] < 0){
+            return ("Hasta ".number_format($this->attributes['max_price'], 2,',','.'));
         }else{
             return (number_format($this->attributes['min_price'], 2,',','.').' - '.number_format($this->attributes['max_price'], 2,',','.'));
         }
@@ -128,13 +142,12 @@ class ShippingMethod extends Model
 
     public function getWeightRangAttribute()
     {
-        if ($this->attributes['max_weight'] < 0 && $this->attributes['min_weight'] < 0)
-        {
+        if ($this->attributes['max_weight'] < 0 && $this->attributes['min_weight'] < 0) {
             return "Siempre";
-        }elseif ($this->attributes['max_price'] >= 0 && $this->attributes['min_weight'] < 0){
-            return ("Desde ".number_format($this->attributes['max_weight'], 2,',','.'));
         }elseif ($this->attributes['max_weight'] < 0 && $this->attributes['min_weight'] >= 0){
-            return ("Hasta ".number_format($this->attributes['min_price'], 2,',','.'));
+            return ("Desde ".number_format($this->attributes['min_weight'], 2,',','.'));
+        }elseif ($this->attributes['max_weight'] >= 0 && $this->attributes['min_weight'] < 0){
+            return ("Hasta ".number_format($this->attributes['max_weight'], 2,',','.'));
         }else{
             return (number_format($this->attributes['min_weight'], 2,',','.').' - '.number_format($this->attributes['max_weight'], 2,',','.'));
         }

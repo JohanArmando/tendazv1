@@ -132,8 +132,7 @@ myApp.factory("Cart" , [ "$http" , "$rootScope", function ($http , $rootScope) {
             url: baseUrl + '/carts/'+ cartId +'/items/'+ item._id + '?client_secret=' + client_secret + '&client_id=' +client_id,
             method: "DELETE",
         }).then(function(response) {
-            var index= $rootScope.carts.products.data.indexOf(item);
-            $rootScope.carts.products.data.splice(index,1);
+            $rootScope.carts = response.data.data;
         }).catch(function(response) {
             var index= $rootScope.carts.products.data.indexOf(item);
             $rootScope.carts.products.data.splice(index,1);
@@ -292,7 +291,7 @@ myApp.factory("Shipping" , ["$http" , "User", "$rootScope" , "Cart", function ($
             console.log(response);
         }).finally(function() {});  
     };
-     address.getShippingMethod = function () {
+     address.getShippingValue = function () {
         return $http({
             headers: {
                 'Accept': 'application/json',
@@ -301,7 +300,8 @@ myApp.factory("Shipping" , ["$http" , "User", "$rootScope" , "Cart", function ($
             url: baseUrl + '/carts/' + Cart.getCartId() +'/shipping?client_secret='  + client_secret + '&client_id=' + client_id,
             method: "GET"
         }).then(function(response) {
-            $rootScope.shipping_methods = response.data.data;
+            console.log(response);
+            $rootScope.carts = response.data.data;
         }).catch(function(response) {
             console.log(response);
         }).finally(function() {});

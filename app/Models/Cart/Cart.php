@@ -61,7 +61,7 @@ class Cart extends Model
     }
 
     public function totalShipping(){
-        return (int) ($this->order->shippingMethod ? $this->order->shippingMethod->cost : 0);
+        return (int) $this->order->total_shipping;
     }
 
     public function total(){

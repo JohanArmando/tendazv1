@@ -25,6 +25,8 @@ class AddColumnAvaliableToPaymentValues extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('payment_values' , function (Blueprint $table){
+            $table->dropColumn('avaliable');
+        });
     }
 }

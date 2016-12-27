@@ -20,4 +20,17 @@ class UpdateCaracteresConditionsStores extends Migration
         });
     }
 
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('stores', function (Blueprint $table) {
+            $table->string('conditions')->change();
+            $table = Schema::getConnection()->getDoctrineSchemaManager()->getDatabasePlatform();
+            $table->registerDoctrineTypeMapping('enum', 'string');
+        });
+    }
 }

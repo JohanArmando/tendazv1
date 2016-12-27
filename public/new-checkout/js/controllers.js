@@ -84,6 +84,7 @@ myApp.controller('globalController' , ["$scope" , "User", "$rootScope" , "$locat
 }]);
 myApp.controller("navController" , ["$scope" , "User" , "$location" ,  function ($scope , User , $location ) {
     angular.extend($scope , {
+    	
        doLogout : function () {
            User.doUserLogout();
            $location.path('/cart');
@@ -105,16 +106,12 @@ myApp.controller("cartController" , [ "$scope" , 'Cart' , "User" , "$location" ,
             Cart.updateItem($scope.cartId , item );   
         },
         next : function () {
-            if (User.getUserObject()){
-                var client = $rootScope.carts.order.data.client;
-                if (client.first_name && client.last_name && client.phone && client.identification)
-                {
-                    $location.path('/shipping');
-                }else{
-                    $location.path('/profile');
-                }
+            var client = $rootScope.carts.order.data.client;
+            if (client.first_name && client.last_name && client.phone && client.identification)
+            {
+                $location.path('/shipping');
             }else{
-                alert('Debes Registrarte o Iniciar Sesion');
+                $location.path('/profile');
             }
         }
     });
@@ -181,7 +178,7 @@ myApp.controller("shippingController" , ["$scope" , "Shipping" , "$location" , "
                 $location.path('/payment');
             }else{
                 if(!$rootScope.carts.shippingMethod.data._id){
-                    alert('Escoge un metodo de pago');
+                    alert('Escoge un metodo de envio');
                 }else{
                     alert('Escoge una direccion');
                 }
@@ -190,8 +187,8 @@ myApp.controller("shippingController" , ["$scope" , "Shipping" , "$location" , "
        'getAddresses' : function () {
            Shipping.getAddresses();
        },
-        'getShippingMethods' : function () {
-            Shipping.getShippingMethod();
+        'getShippingValue' : function () {
+            Shipping.getShippingValue();
         },
         'addressCreate' : function () {
            $scope.newAddress = !$scope.newAddress;
@@ -223,11 +220,12 @@ myApp.controller("shippingController" , ["$scope" , "Shipping" , "$location" , "
             Shipping.doShippingMethod(ordObject);
         }
     });
-
+    /*GET TOTAL SHIPPING*/
+    $scope.getShippingValue();
+    
     /*VARIABLES*/
     $scope.getStates();
     $scope.getAddresses();
-    $scope.getShippingMethods();
 }]);
 myApp.controller("paymentController" , ["$scope" , "Payment" , "$location" , "$rootScope",   function ($scope , Payment  , $location , $rootScope) {
     Payment.getPaymentMethod();

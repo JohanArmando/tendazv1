@@ -19,4 +19,18 @@ class RenameColumnBusinnesSizeTableStores extends Migration
             $table->registerDoctrineTypeMapping('enum', 'string');
         });
     }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('stores', function (Blueprint $table) {
+            $table->renameColumn('conditions' , 'business_size');
+            $table = Schema::getConnection()->getDoctrineSchemaManager()->getDatabasePlatform();
+            $table->registerDoctrineTypeMapping('enum', 'string');
+        });
+    }
 }

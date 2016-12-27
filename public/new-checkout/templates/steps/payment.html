@@ -29,9 +29,9 @@
                         <span class="col-md-12">{{ carts.shippingAddress.data.receiverName }}</span>
                     </div>
                     <div class="col-md-12">
-                        <h3><i class="glyphicon glyphicon-home"></i> Metodo de env&iacute;o</h3>
+                        <h3><i class="glyphicon glyphicon-globe"></i> Costo de env&iacute;o</h3>
                         <span class="col-md-12">{{ carts.shippingMethod.data.name }}</span>
-                        <span class="col-md-12">{{ carts.shippingMethod.data.cost| currency:"":0  }}</span>
+                        <span class="col-md-12">$ {{ carts.totalizers.shipping.value | currency:"":0 }}</span>
                     </div>
                 </div>
             </div>
