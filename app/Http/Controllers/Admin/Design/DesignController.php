@@ -57,7 +57,7 @@ class DesignController extends Controller
 
     public function slider($subdomain , Request $request )
     {
-        $store = $request->shop;
+        Cache::forget($subdomain.'_store');
         $id = $request->shop->id;
 
         /** @var  $slider1 */
@@ -66,9 +66,7 @@ class DesignController extends Controller
             $name1 = $slider1->getClientOriginalName();
             if (!\Storage::disk('sliders')->has( $id . '/' . $name1))
                 \Storage::disk('sliders')->put( $id . '/' . $name1, \File::get($slider1));
-            $store->slider1 = $name1;
-        }else{
-            $store->slider1 = '';
+            $request->shop->slider1 = $name1;
         }
         /** @var  $slider2 */
         $slider2 = $request->file('slider2');
@@ -76,9 +74,7 @@ class DesignController extends Controller
             $name2 = $slider2->getClientOriginalName();
             if(!\Storage::disk('sliders')->has( $id.'/'.$name2))
                 \Storage::disk('sliders')->put( $id.'/'.$name2, \File::get($slider2));
-            $store->slider2 = $name2;
-        }else{
-            $store->slider2 = '';
+            $request->shop->slider2 = $name2;
         }
         /** @var  $slider3 */
         $slider3 = $request->file('slider3');
@@ -86,13 +82,10 @@ class DesignController extends Controller
             $name3 = $slider3->getClientOriginalName();
             if (!\Storage::disk('sliders')->has( $id . '/' . $name3))
                 \Storage::disk('sliders')->put( $id . '/' . $name3, \File::get($slider3));
-            $store->slider3 = $name3;
-        }else{
-            $store->slider3 = '';
+            $request->shop->slider3 = $name3;
         }
         /** save */
-        Cache::forget($subdomain.'_store');
-        $store->save();
+        $request->shop->save();
         Cache::forever($subdomain.'_store' , $request->shop );
         return redirect()->back()->with('message',array('type' => 'success' , 'message' => 'Las imagenes del slider de tu tienda han cambiado'));
     }

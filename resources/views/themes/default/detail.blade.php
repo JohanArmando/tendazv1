@@ -16,7 +16,7 @@
 
                 <div class="col-sm-4">
                     <div class="image-detail">
-                        <a href="<% BASEURL + '/detail/' + product.slug %>">
+                        <a href="<% image.url %>">
                         <img id="matrix" ng-src="<% product.images.data[0].url %>"
                               alt="" style="min-height: 400px;max-height: 400px"></a>
                     </div>
@@ -66,17 +66,17 @@
                             <span class="price-box__new">$ <% product.price | number:0%></span>
                             </td>
                         </tr>
-                        <tr class="hidden">
+                        <tr>
                             <td>Cantidad</td>
                             <td>
                                 <div class="pull-left">
-                                    <button class="btn btn-default bootstrap-touchspin-down" type="button">-</button>
+                                    <button ng-click="product.quantity = product.quantity > 1 ? product.quantity - 1 : 1" class="btn btn-default bootstrap-touchspin-down" type="button">-</button>
                                 </div>
                                 <div class="pull-left">
-                                    <input type="text" class="form-control input-qty text-center" value="1">
+                                    <input type="text" class="form-control input-qty text-center" ng-model="product.quantity ? product.quantity : 1 " value="<% product.quantity ? product.quantity : 1 %>">
                                 </div>
                                 <div class="pull-left">
-                                    <button class="btn btn-default bootstrap-touchspin-up" type="button">+</button>
+                                    <button class="btn btn-default bootstrap-touchspin-up" type="button" ng-click="product.quantity = product.quantity + 1">+</button>
                                 </div>
                             </td>
                         </tr>
@@ -97,7 +97,7 @@
                                 </select>
                             </td>
                         </tr>
-                        <tr ng-controller="productIndexController" ng-cloak="">
+                        <tr ng-if="!product.stock == 0" ng-controller="productIndexController" ng-cloak="">
                             <td class="btn-action"></td>
                             <td class="text-left">
                                 <a class="btn btn-sm"  ng-click="add(cartId , product)">

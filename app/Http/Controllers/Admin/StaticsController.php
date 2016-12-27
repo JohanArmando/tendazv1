@@ -27,4 +27,10 @@ class StaticsController extends Controller
             'higherSell' => $higherSell
         ]);
     }
+
+    public function advanced(){
+        $products = Product::all();
+        $totalOrders = Order::all();
+        return view('admin.stats.advanced',compact('products'));
+    }
 }

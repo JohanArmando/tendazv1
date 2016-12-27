@@ -297,7 +297,7 @@ Mis productos
                                                                   title="Modificar precio"
                                                                   ng-show="!variant.span.price"
                                                                   ng-click="showInput(variant , 'price')"
-                                                                  data-content="Haz click para poder modificarlo">$ @{{ variant.price}}
+                                                                  data-content="Haz click para poder modificarlo">$ @{{ variant.price | currency:"":0}}
                                                             </span>
                                                             <div class="attribute-edit" ng-show="variant.span.price">
                                                                 <input type="text"
@@ -308,36 +308,36 @@ Mis productos
                                                                        name="price"
                                                                        ng-blur="update(variant , 'price')"
                                                                        my-enter="update(variant , 'price')"
-                                                                       value="@{{ variant.price }}" >
+                                                                       value="@{{ variant.price | currency:"":0 }}" >
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class=" ">
-                                                        <div class="attribute-form price-form" ng-class="{'v-hidden' : variant.promotional_price == 0 || variant.promotional_price == null}">
+                                                        <div class="attribute-form price-form" ng-class="{'v-hidden' : variant.promotion_price == 0 || variant.promotion_price == null}">
                                                             <span class="attribute-value price-promotional label"
                                                                   title="Modificar precio promocional"
-                                                                  ng-show="!variant.span.price_promotion"
-                                                                  ng-click="showInput(variant , 'price_promotion')"
+                                                                  ng-show="!variant.span.promotion_price"
+                                                                  ng-click="showInput(variant , 'promotion_price')"
                                                                   data-content="Haz click para poder modificarlo">
-                                                                $@{{ variant.information.promotional_price | currency:"":0}}
+                                                                $@{{ variant.promotion_price | currency:"":0}}
                                                             </span>
-                                                            <div class="attribute-edit" ng-show="variant.promotional_price">
+                                                            <div class="attribute-edit" ng-show="variant.span.promotion_price">
                                                                 <input type="text"
                                                                        onfocus="this.select();"
                                                                        id="variant_price_promotion@{{ variant.id }}"
                                                                        class="form-control price_promotion"
                                                                        name="price_promotion"
-                                                                       ng-blur="update(variant , 'price_promotion')"
-                                                                       my-enter="update(variant , 'price_promotion')"
-                                                                       value="@{{ variant.promotional_price }}"
-                                                                       focus-if="variant.span.price_promotion">
+                                                                       ng-blur="update(variant , 'promotion_price')"
+                                                                       my-enter="update(variant , 'promotion_price')"
+                                                                       value="@{{ variant.promotion_price | currency:"":0}}"
+                                                                       focus-if="variant.span.promotion_price">
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-2 col-sm-1 col-xs-2" ng-if="variant.option_value.length > 0">
+                                                <div class="col-md-2 col-sm-1 col-xs-2" ng-if="variant.data.length > 0">
                                                     <div class="values">
-                                                        <p class="note" ng-repeat="value in variant.values.data">@{{ value.value + ' | ' }} </p>
+                                                        <p class="note" ng-repeat="value in variant.data">@{{ value.value + ' | ' }} </p>
                                                     </div>
                                                 </div>
                                             </li>
