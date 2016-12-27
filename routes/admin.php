@@ -9,6 +9,7 @@ Route::group(['domain' => '{subdomain}.'.$domain->getDomain() ,'middleware' => [
     //Routes statics
     Route::get('/stats' , 'StaticsController@basic');
     Route::get('/stats/advanced' , 'StaticsController@advanced');
+    Route::get('/stats/update' , 'StaticsController@update');
 
     //Route logout
     Route::post('logout' , 'LoginController@logout');

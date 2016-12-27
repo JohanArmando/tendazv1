@@ -7,9 +7,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Tendaz\Http\Controllers\Controller;
 use Tendaz\Models\Categories\Category;
 use Tendaz\Models\Coupon\Coupon;
+use Tendaz\Models\Marketing\TrendsPreference;
 use Tendaz\Models\Products\Product;
 use Tendaz\Models\Social\SocialLogin;
-use Tendaz\Models\Marketing\Trends;
 
 class MarketingController extends Controller
 {
@@ -27,7 +27,7 @@ class MarketingController extends Controller
 
     public function robot()
     {
-        $current_config     =   Trends::where('shop_id',auth('admins')->user()->shop->id)->first();
+        $current_config     =   TrendsPreference::where('shop_id',auth('admins')->user()->shop->id)->first();
         $categories_black   =    unserialize($current_config['categories_black']);
         $products_black     =    $current_config['products_black'];
         // dd($categories_black);
@@ -42,7 +42,7 @@ class MarketingController extends Controller
     }
 
     public function postRobot(Request $request){
-        $current_config         = Trends::where('shop_id',auth('admins')->user()->shop->id)->first();
+        $current_config         = TrendsPreference::where('shop_id',auth('admins')->user()->shop->id)->first();
         $trend_config           = $request->all();
         $trend_config_coupon    = $trend_config['coupon'];
     
@@ -63,7 +63,7 @@ class MarketingController extends Controller
         }
 
         if (!count($current_config)) {
-            Trends::create([
+            TrendsPreference::create([
                 'products_black'    => $trend_config_products,
                 'coupon_id'         => $trend_config_coupon,
                 'categories_black'  => $trend_config_cats       

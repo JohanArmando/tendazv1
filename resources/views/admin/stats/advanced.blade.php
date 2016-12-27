@@ -32,32 +32,36 @@
 					<li class="triangle"></li>
 				</ul>
 			<div id="tab" class="stats">
+					<form action="{{url('admin/stats/update')}}" method="get">
 						<div class="col-xs-12 col-sm-12 col-md-3 col-lg-4 ">
 							<div class="form-group">
 								<div class="clearfix" style="margin-bottom: 10px;"></div>
 								<label>De</label>
-								<input type="date" name="categories" id="dateStart" class="inputAdvanced"/>
+								<input type="date" name="dateStart" id="dateStart" class="inputAdvanced"/>
 							</div>
 						</div>
 						<div class="col-xs-12 col-sm-12 col-md-3 col-lg-4 ">
 							<div class="form-group">
 								<div class="clearfix" style="margin-bottom: 10px;"></div>
 								<label>Hasta</label>
-								<input type="date" name="categories" id="dateEnd" class="inputAdvanced"/>
+								<input type="date" name="dateEnd" id="dateEnd" class="inputAdvanced" onchange="this.form.submit()"/>
 							</div>
 						</div>
 						<div class="col-xs-12 col-sm-12 col-md-3 col-lg-4 ">
 							<div class="form-group">
 								<div class="clearfix" style="margin-bottom: 10px;"></div>
 								<label>Por</label>
-								<select name="dates" id="dateEnd" class="inputAdvanced">
-									<option value="1" disabled>Seleccione una opcion</option>
+								<select name="dates" id="dateEnd" class="inputAdvanced" onchange="this.form.submit()">
+									<option value="">Seleccione una opcion</option>
 									<option value="a">Ultimos 7 Dias</option>
 									<option value="b">Ultimas 2 Semanas</option>
 									<option value="c">Ultimo Mes</option>
 								</select>
 							</div>
 						</div>
+					</form>
+
+
 						<div class="row">
 							<div class="col-md-10">
 								<div id="order"></div>
@@ -72,10 +76,10 @@
 									<p><strong>$ {{number_format($money,2,'.',',')}}</strong></p><br>
 									<div class="circle cssToolTip">
 										<i class="fa fa-shopping-cart fa-2x"></i>
-											<span>Total de Ordenes Realizadas</span>
+											<span>Total de Ventas Realizadas</span>
 									</div>
 									<br>
-									<p><strong>{{$totalOrders}}</strong></p>
+									<p><strong>{{$totalOrders}} Ventas</strong></p>
 									<br>
 									<div class="circle cssToolTip">
     										<i class="fa fa-percent fa-2x"></i>
@@ -90,7 +94,7 @@
 		</div>
 	</div>
 
-	<div class="container-fluid">
+	<div class="hidden container-fluid">
 		<div class="col-md-12">
 			<ul class="nav nav-tabs" style="background-color: transparent;">
 				<li id="link_tab">
@@ -103,7 +107,7 @@
 			<div id="tab" class="stats">
 				<div class="row">
 					<div class="col-md-12">
-						<div class="col-md-6">
+						<div class="col-md-12">
 							<iframe width="100%" height="520" frameborder="0" src="https://angelesrr.carto.com/builder/cd518bdc-b003-11e6-9a70-0e05a8b3e3d7/embed"
 									allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
 						</div>
@@ -143,17 +147,17 @@
 			<div id="tab" class="stats">
 				<div class="row">
 					<div class="col-md-12">
-						<div class="col-md-6">
+						<div class="col-md-12">
 							<div class="text-center" style="height: 450px !important;overflow-y:scroll; ">
 							<table class="table table-striped">
 								<tr>
-									<th colspan="3">Productos </th>
+									<th colspan="3">Visitas de los Productos De: {{$date}}</th>
 								</tr>
 								@foreach($products as $product)
 									<tr style="height: 120px">
 										<td>
 											@if($product->mainImage())
-												<img src="{{$product->mainImage()}}" alt="" height="100px" width="130px">
+												<img src="{{$product->mainImage()}}" alt="" height="70px" width="60px">
 											@else
 												<img src="http://www.sanitas.cl/wp-content/uploads/2015/07/sin.jpg" alt="" height="100px" width="130px">
 											@endif
@@ -164,15 +168,19 @@
 										</td>
 										<td class="cssToolTip">
 											<p>Visitas</p>
-											<p class="visitNumber">20</p>
-											<span>Tu producto ha sido visto 20 veces.</span>
+											@foreach($hits as $hit)
+												@if($hit->trend_id == $product->id)
+													<p class="visitNumber">{{$hit->sum}}</p>
+													<span>Tu producto ha sido visto {{$hit->sum}} veces.</span>
+												@endif
+											@endforeach
 										</td>
 									</tr>
 								@endforeach
 							</table>
 							</div>
 						</div>
-						<div class="col-md-6">
+						<div class="hidden col-md-6">
 							<div style="height: 450px !important;overflow-y:scroll; ">
 							<table class="table table-striped">
 								<tr>
@@ -182,7 +190,7 @@
 									<tr style="height: 200px">
 										<td>
 											@if($product->mainImage())
-												<img src="{{$product->mainImage()}}" alt="" height="180px" width="210px">
+												<img src="{{$product->mainImage()}}" alt="" height="140px" width="130px">
 											@else
 												<img src="http://www.sanitas.cl/wp-content/uploads/2015/07/sin.jpg" alt="" height="180px" width="210px">
 											@endif
@@ -224,16 +232,15 @@
 					x: -20 //center
 				},
 				subtitle: {
-					text: 'De: nombretienda.com',
+					text: 'De: '+"{{$date}}",
 					x: -20
 				},
 				xAxis: {
-					categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-						'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+					categories: ['{{$date}}']
 				},
 				yAxis: {
 					title: {
-						text: 'Valor (°V)'
+						text: 'Cantidad (Ventas)'
 					},
 					plotLines: [{
 						value: 0,
@@ -242,7 +249,7 @@
 					}]
 				},
 				tooltip: {
-					valueSuffix: '°C'
+					valueSuffix: ' Ventas'
 				},
 				legend: {
 					layout: 'vertical',
@@ -251,23 +258,10 @@
 					borderWidth: 0
 				},
 				series: [{
-					name: 'Tokyo',
-					data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-				}, {
-					name: 'New York',
-					data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
-				}, {
-					name: 'Berlin',
-					data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
-				}, {
-					name: 'London',
-					data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+					name: 'Ventas',
+					data: [{{$totalOrders}}]
 				}]
 			});
 		});
 	</script>
-	<script src="{{ asset('admin/angular/angular.min.js') }}"></script>
-	<script src="{{ asset('admin/angular/pagination.js') }}"></script>
-	<script src="{{ asset('admin/angular/moduloVentas.js') }}"></script>
-	<script src="https://code.angularjs.org/1.5.3/i18n/angular-locale_es-es.js"></script>
 @stop
