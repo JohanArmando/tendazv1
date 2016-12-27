@@ -1,13 +1,13 @@
-@extends('admin.template')
+@extends('layouts.administrator')
 
 @section('css')
-	<link rel="stylesheet" href="{{asset('admin/css/statsAdvanced.css')}}">
+	<link rel="stylesheet" href="{{asset('administrator/css/statsAdvanced.css')}}">
 @stop
 
 @section('content')
 	<div class="page-header page-header-block">
 		<div class="page-header-section">
-			<h4 class="title semibold"><img src="{{asset('administrator')}}">&nbsp; Estad&iacute;sticas Avanzadas</h4>
+			<h4 class="title semibold"><img class="page-header-section-icon" src="{{asset('administrator/image/icons/icons-base/bar-chart.png')}}">&nbsp; Estad&iacute;sticas Avanzadas</h4>
 		</div>
 		<div class="page-header-section">
  			<div class="toolbar">
@@ -69,20 +69,20 @@
 										<span>Monto Total de Ventas</span>
 									</div>
 									<br>
-									<p><strong>$ 25.000</strong></p><br>
+									<p><strong>$ {{number_format($money,2,'.',',')}}</strong></p><br>
 									<div class="circle cssToolTip">
 										<i class="fa fa-shopping-cart fa-2x"></i>
 											<span>Total de Ordenes Realizadas</span>
 									</div>
 									<br>
-									<p><strong>30</strong></p>
+									<p><strong>{{$totalOrders}}</strong></p>
 									<br>
 									<div class="circle cssToolTip">
     										<i class="fa fa-percent fa-2x"></i>
 										<span>Facturaci&oacute;n Promedio</span>
 									</div>
 									<br>
-									<p><strong>$ 250.000</strong></p><br>
+									<p><strong>$ {{number_format($avg,2,'.',',')}}</strong></p><br>
 								</center>
 							</div>
 						</div>
@@ -152,16 +152,20 @@
 								@foreach($products as $product)
 									<tr style="height: 120px">
 										<td>
-											<img src="http://www.sanitas.cl/wp-content/uploads/2015/07/sin.jpg" alt="" height="100px" width="130px">
+											@if($product->mainImage())
+												<img src="{{$product->mainImage()}}" alt="" height="100px" width="130px">
+											@else
+												<img src="http://www.sanitas.cl/wp-content/uploads/2015/07/sin.jpg" alt="" height="100px" width="130px">
+											@endif
 										</td>
 										<td style="padding: 5px 5px 5px 5px">
 											<p><strong style="color: #f26522">{{$product->name}}</strong></p>
-											<p>$ {{number_format($product->price)}}</p>
+											<p>$ {{number_format($product->variants->first()->price)}}</p>
 										</td>
 										<td class="cssToolTip">
 											<p>Visitas</p>
 											<p class="visitNumber">20</p>
-											<span>Tu producto ah sido visto 20 veces.</span>
+											<span>Tu producto ha sido visto 20 veces.</span>
 										</td>
 									</tr>
 								@endforeach
@@ -177,7 +181,11 @@
 								@foreach($products as $product)
 									<tr style="height: 200px">
 										<td>
-											<img src="http://www.sanitas.cl/wp-content/uploads/2015/07/sin.jpg" alt="" height="180px" width="210px">
+											@if($product->mainImage())
+												<img src="{{$product->mainImage()}}" alt="" height="180px" width="210px">
+											@else
+												<img src="http://www.sanitas.cl/wp-content/uploads/2015/07/sin.jpg" alt="" height="180px" width="210px">
+											@endif
 										</td>
 										<td style="padding: 5px 5px 5px 5px">
 											<div class="text-center">
@@ -257,33 +265,6 @@
 				}]
 			});
 		});
-	</script>
-	<script>
-		var mapconfig = {
-			"version": "1.3.1",
-			"layers": [{
-				"type": "cartodb",
-				"options": {
-					"cartocss_version": "2.1.1",
-					"cartocss": "#layer { polygon-fill: #FFF; }",
-					"sql": "select * from users"
-				}
-			}]
-		}
-
-		$.ajax({
-			crossOrigin: true,
-			type: 'POST',
-			dataType: 'json',
-			contentType: 'application/json',
-			url: 'https://angelesrr.carto.com/api/v1/map',
-			data: JSON.stringify(mapconfig),
-			success: function(data) {
-				var templateUrl = 'https://angelesrr.carto.com/api/v1/map/' + data.layergroupid + '/{z}/{x}/{y}.png'
-				console.log(templateUrl);
-				//alert(templateUrl);
-			}
-		})
 	</script>
 	<script src="{{ asset('admin/angular/angular.min.js') }}"></script>
 	<script src="{{ asset('admin/angular/pagination.js') }}"></script>

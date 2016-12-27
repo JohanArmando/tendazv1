@@ -108,9 +108,11 @@
 </a>
 <br>
 <a href="javascript:void(0);" class="media border-dotted">
-
     <span class="media-body box">
         <div class="form-group">
+            <div class="col-md-9 col-simple">
+
+            </div>
             <div class="col-md-3 col-simple">
                 <label class="control-label" style="font-size: 1.2em; color: black">Categorias</label>
                 <button class="btn btn-block btn-primary modalCategory" data-toggle="modal" data-target="#modalCategory" type="button"><i class="fa fa-plus"></i> Nueva categoria</button>

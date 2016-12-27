@@ -14,7 +14,7 @@
                         $scope.BASEURL = BASEURL;
                         angular.forEach(response.products , function(value , index){
                             if(value.special_price > 0){
-                                response.products[index]['promotion_price_percent'] =  (((value.special_price * 100) / value.price)  * - 1);
+                                response.products[index]['promotion_price_percent'] =  ((((value.special_price * 100) / value.price)-100)  * - 1);
                             }
                         });
                         $scope.sortBy = function(propertyName) {
@@ -32,7 +32,7 @@
                    $scope.cate = category;
                         angular.forEach(response.data.products , function(value , index){
                             if(value.special_price > 0){
-                                response.data.products[index]['promotion_price_percent'] =  (((value.special_price * 100) / value.price)  * - 1);
+                                response.data.products[index]['promotion_price_percent'] =  ((((value.special_price * 100) / value.price)-100)  * - 1);
                             }
                         });
                         $scope.products = response.data.products;

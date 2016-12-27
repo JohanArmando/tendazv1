@@ -10,7 +10,9 @@
                 <div class="col-md-9">
                     <div class="title">
                         <span><a href="{{ url('/products') }}">Todos los Productos</a></span>
-                        <span ng-repeat="ancestor in ancestors" > | <a  ng-class="{active : cate == ancestor.slug }" href="<% BASEURL + '/products/' + ancestor.slugable %>"><% ancestor.name %></a></span>
+                        <span ng-repeat="ancestor in ancestors" > |
+                            <a  ng-class="{active : cate == ancestor.slug }"
+                                href="<% BASEURL + '/products/' + ancestor.slugable %>"><% ancest  .name %></a></span>
                     </div>
                     <div class="title-box">
                         <h2 class="text-center text-uppercase title-under"><% cate ? cate : 'Todos los productos' %></h2>

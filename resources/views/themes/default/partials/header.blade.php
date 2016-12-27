@@ -6,7 +6,7 @@
                 <div class="col-md-3">
                     <a href="{{url('/')}}" style="text-decoration: none">
                         @if($shop->logo)
-                            <img class="logo replace-2x img-responsive" src="{{ asset("logos/$shop->id/$shop->logo") }}"  alt="Logo de la tienda {{ $shop->name_store }}" />
+                            <img style="max-height: 100px" class="logo replace-2x img-responsive" src="{{ asset("logos/$shop->id/$shop->logo") }}"  alt="Logo de la tienda {{ $shop->name_store }}" />
                         @else
                             <h1>{{ $shop->name }}</h1>
                         @endif

@@ -13,15 +13,7 @@
                        </a>
                    </li>
 
-                   <li @if(Request::is('admin/stats')) class="active" @endif>
-                       <a href="{{url('admin/stats')}}"  >
-                          <span class="figure">
-                              <img class="img-responsive" src="{{asset('administrator/image/icons/icons-nav/analytics.png')}}">
-                          </span>
-                           <span class="text">Estad&iacute;sticas</span>
-                       </a>
-                   </li>
-                   <!--<li @if(Request::is('admin/stats/basic')) class="active" @endif>
+                   <li @if(Request::is('admin/stats/basic')) class="active" @endif>
                        <a href="javascript:void(0);"  data-toggle="submenu" data-target="#dashboard" data-parent=".topmenu">
                            <span class="figure">
                               <img class="img-responsive" src="{{asset('administrator/image/icons/icons-nav/analytics.png')}}"></span>
@@ -41,8 +33,7 @@
                                </a>
                            </li>
                        </ul>
-
-                   </li>-->
+                   </li>
                    <li @if(Request::is('admin/products') || Request::is('admin/products/create') || Request::is('admin/categories') || Request::is('admin/products/import'))  class="active" @endif>
                        <a href="javascript:void(0);" data-toggle="submenu" data-target="#layout" data-parent=".topmenu">
                            <span class="figure"><img class="img-responsive" src="{{asset('administrator/image/icons/icons-nav/trolley.png')}}"></span>

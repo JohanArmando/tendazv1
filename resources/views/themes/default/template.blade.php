@@ -89,7 +89,15 @@
         <script  type="text/ng-template" id="tpl.html">
             <div class="box-product" ng-class="{ ' sold-out' : product.stock == 0 , ' product--zoom' : !product.promotion && !product.feature} " style="min-height: 270px !important;">
                 <div class="img-wrapper">
-                    <a href="<% BASEURL + '/detail/' + product.slug %>">
+                    <div class="tags">
+                        <span class="label-tags" ng-show="product.stock == 0">
+                            <span class="label label-danger">Sin Stock</span>
+                        </span>
+                        <span class="label-tags" ng-if="product.special_price">
+                            <span class="label label-info">Sale <% product.promotion_price_percent | number:0 %>%</span>
+                        </span>
+                    </div>
+                    <a href="{{ url('/') }}<% '/detail/' + product.slug %>">
                         <img ng-src="<% product.images.data[0].url %>" alt="" ng-show="product.images.data"  style="max-height: 200px; min-height: 200px">
                         <img ng-src="<% BASEURL + '/administrator/image/noImage.png' %>" alt=""  style="max-height: 200px; min-height: 200px"  ng-hide="product.images.data">
                     </a>
@@ -103,7 +111,7 @@
                                 Sale <% product.special_price | number:0 %>%</span></span>
                     </div>
                 </div>
-                <h6><a href="<% BASEURL + '/detail/' + product.slug %>"><div class="text-center"><% product.name %></div></a></h6>
+                <h6><a href="{{ url('/') }}<% '/detail/' + product.slug %>"><div class="text-center"><% product.name %></div></a></h6>
                 <div class="price text-center" ng-if="product.special_price">
                     <strong>$<% product.special_price %></strong>
                     <span class="price-old">$<% product.price  %></span>
