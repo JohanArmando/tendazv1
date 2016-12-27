@@ -23,16 +23,19 @@
                                     <div class="container-fluid">
                                         <div class="row">
                                             <div class="col-md-2">
-                                                <!-- <img src="https://pickaface.net/assets/images/slides/slide2.png"  class="avatar img-responsive" alt="TendazAvatar"/> -->
-                                                <i class="glyphicon glyphicon-user"></i>
+                                                <img src="../../../administrator/image/avatar/avatar.png"
+                                                     class="avatar img-responsive" alt="TendazAvatar"/>
                                             </div>
 
-                                            <div class="col-md-4">
-                                                <p><b>{{user.personal_info.first_name}}</b> {{user.personal_info.last_name}}</p>
+                                            <div class="col-md-4" style="text-align: left">
+                                                <p>{{user.personal_info.first_name}} {{user.personal_info.last_name}}</p>
                                                 <p><b>Productos en carrito:</b> {{ carts.original_qty }}</p>
+                                                <button class="btn btn_checkout" ng-click="doLogout()">
+                                                    Cerrar Sesion
+                                                </button>
                                             </div>
-                                            <div class="col-md-2 pull-right text-right">
-                                                <button class="btn btn_checkout" ng-click="doLogout()"><i class="glyphicon glyphicon-log-out"></i></button>
+                                            <div class="col-md-1 pull-right text-right">
+
                                             </div>
                                         </div>
                                     </div>

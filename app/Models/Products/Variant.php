@@ -123,7 +123,7 @@ class Variant extends Model
     }
 
     public function setStockAttribute($value){
-        if(!empty($value)){
+        if($value >= 0){
             $this->attributes['stock'] = $value < 0 || !is_numeric($value) ? 0 : $value;
         }else{
             $this->attributes['stock'] = -1;
