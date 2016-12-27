@@ -193,6 +193,12 @@
             text: "Enhorabuena! Pago realizado de forma correcta",
             type: "success",
             confirmButtonText: "OK"
+         },function(isConfirm){
+            if (isConfirm) {
+               localStorage.removeItem('orderData');
+               localStorage.removeItem('cart_id');
+               location.href = "{{ url('/') }}"
+            }
          });
       </script>
    @else

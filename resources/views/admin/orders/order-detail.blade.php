@@ -102,47 +102,41 @@
                                                             <img src="{{ $producto->product->mainImage() }}" width="50px"  height="50px" class="thumbnail" alt="">
                                                         </td>
                                                         <td>
-                                                            {{ $producto->product->name }}
-                                                            @if(!empty($producto->option_name_1))
-                                                                ({{ $producto->option_value_1 }})
-                                                            @endif
 
-                                                            @if(!empty($producto->option_name_2))
-                                                                /({{ $producto->option_value_2 }})
-                                                            @endif
-
-                                                            @if(!empty($producto->option_name_3))
-                                                               /({{ $producto->option_value_3 }})
-                                                            @endif
                                                         </td>
-                                                        @if(($producto->price_promotion_amount) != 0)
-                                                            <td>$ {{ number_format($producto->price_promotion_amount,2,',','.') }}</td>
+                                                        @if($producto->product->collection->promotion)
+                                                            <td>$ {{ number_format($producto->promotional_price,2,',','.') }}</td>
                                                             <td style="text-align: center !important;">{{ $producto->pivot->quantity }}</td>
-                                                            <td>{{ $t = number_format(($producto->pivot->quantity * $producto->price_promotion_amount),2,',','.')  }}</td>
-                                                            <?php $sub += $t ?>
-                                                            <?php $total += $t ?>
+                                                            <td>{{ $t = number_format(($producto->pivot->quantity * $producto->promotional_price),2,',','.')  }}</td>
+
                                                         @else
                                                             <td>{{ number_format($producto->price , 2 ,',' , '.') }}</td>
                                                             <td style="text-align: center !important;">{{ $producto->pivot->quantity }}</td>
                                                             <td>{{ $t = number_format(($producto->pivot->quantity * $producto->price),2,',','.')  }}</td>
-                                                            <?php $total += $t ?>
-                                                            <?php $sub += $t ?>
+
                                                         @endif
                                                     </tr>
                                                 @endforeach
+
                                                 <tr>
                                                     <td></td>
                                                     <td></td>
                                                     <td></td>
                                                     <td><strong>Sub:</strong></td>
-                                                    <td><strong>$ {{ number_format($sub,2,',','.') }}</strong></td>
+                                                    <td><strong>$ {{ number_format($orders->total_products,2,',','.') }}</strong></td>
+                                                </tr><tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td><strong>Envio:</strong></td>
+                                                    <td><strong>$ {{ number_format($orders->total_shipping,2,',','.') }}</strong></td>
                                                 </tr>
                                                 <tr>
                                                     <td></td>
                                                     <td></td>
                                                     <td></td>
                                                     <td><strong>Total:</strong></td>
-                                                    <td><strong>$ {{ number_format($total , 2 , ',' , '.') }}</strong></td>
+                                                    <td><strong>$ {{ number_format($orders->total , 2 , ',' , '.') }}</strong></td>
                                                 </tr>
                                             </tbody>
                                         </table>
