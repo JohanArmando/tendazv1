@@ -10,7 +10,7 @@
             <br>
             <p>{{ shopData.name }}</p>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4" ng-show="shopData.facebook || shopData.twitter || shopData.instagram">
             <small>Encuentranos en:</small>
             <ul>
                 <li style="background-color: transparent" ng-show="shopData.facebook">
@@ -24,14 +24,14 @@
                 </li>
             </ul>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4" ng-show="shopData.phone || shopData.correo ">
             <small>Contacto:</small>
             <ul>
                 <li style="background-color: transparent">
-                    <i class="fa fa-phone-square fa-2x" aria-hidden="true" style="background-color: transparent; color: whitesmoke"></i> {{ shopData.phone }}
+                    <i ng-show="shopData.phone" class="fa fa-phone-square fa-2x" aria-hidden="true" style="background-color: transparent; color: whitesmoke"></i> {{ shopData.phone }}
                 </li>
                 <li  style="background-color: transparent">
-                    <i class="fa fa-envelope-o fa-2x" aria-hidden="true" style="background-color: transparent; color: whitesmoke"></i> {{ shopData.correo }}
+                    <i ng-show="shopData.correo" class="fa fa-envelope-o fa-2x" aria-hidden="true" style="background-color: transparent; color: whitesmoke"></i> {{ shopData.correo }}
                 </li>
             </ul>
 
