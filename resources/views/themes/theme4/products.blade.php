@@ -9,7 +9,7 @@
 	@stop
 
 	@section('content')
-	<div  ng-controller="productController" ng-cloak="">
+	<div ng-controller="productController" ng-cloak="">
 		<div class="breadcrumbs">
 			<div class="container">
 				<ol class="breadcrumb breadcrumb--ys pull-left" ng-cloak="">
@@ -99,8 +99,9 @@
 								</div>
 							</div>
 						</div>
+						<input type="text" ng-model="search">
 						<div class="product-listing row" >
-							<div class="col-xs-6 col-sm-4 col-md-3 col-lg- col-xl-one-fifth" dir-paginate="product in filtered = (products  | itemsPerPage: itemsPerPage | orderBy:propertyName:reverse)">
+							<div class="col-xs-6 col-sm-4 col-md-3 col-lg- col-xl-one-fifth" dir-paginate="product in filtered = (products  | itemsPerPage: itemsPerPage | filter:search | orderBy:propertyName:reverse)">
 								<div ng-include="'tpl.html'"></div>
 							</div>
 						</div>

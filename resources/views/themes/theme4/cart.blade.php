@@ -16,9 +16,9 @@
 									<tr>
 										<th>Producto</th>
 										<th>&nbsp;</th>
-										<th style="border: 1px solid #E5E5E5">Precio unitario</th>
+										<th style="width: 25%;border: 1px solid #E5E5E5">Precio unitario</th>
 										<th>Cantidad</th>
-										<th>Subtotal</th>
+										<th style="width: 25%">Subtotal</th>
 										<th>&nbsp;</th>
 									</tr>
 								</thead>

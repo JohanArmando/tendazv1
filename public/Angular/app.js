@@ -28,7 +28,6 @@
 
     myApp.run(function($rootScope ,  $http,cartService  ,$cookies) {
        $rootScope.cartId = localStorage.getItem('cart_id');
-
         $rootScope.cate = category;
         $rootScope.size = function(obj) {
             var size = 0, key;
