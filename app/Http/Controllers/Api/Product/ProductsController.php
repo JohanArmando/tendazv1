@@ -7,6 +7,7 @@ use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 use League\Fractal\Serializer\ArraySerializer;
 use Tendaz\Http\Controllers\Controller;
 use Tendaz\Models\Products\Product;
+use Tendaz\Models\Products\Variant;
 use Tendaz\Transformers\ProductTransformer;
 
 class ProductsController extends Controller
@@ -34,11 +35,19 @@ class ProductsController extends Controller
 
     public function all(Request $request)
     {
-        $resource = Product::orderBy('id' , 'DESC')->get();
-        return  fractal()
-            ->collection($resource, new ProductTransformer())
+        $resources =  Variant::whereHas('product' , function ($q) use ($request) {
+            $q->where('shop_id' , $request->shop->id);
+        })->groupBy('product_id')->orderBy('id' ,'DESC')->get();
+
+        //$paginator = $resource->paginate($request->get('per_page' , 10));
+
+        return fractal()
+            ->collection($resources, new ProductTransformer($request->get('values')))
             ->serializeWith(new ArraySerializer())
+            ->parseIncludes($request->get('include'))
+            ->parseExcludes($request->get('exclude'))
             ->withResourceName('products')
-            ->toJson();
+            //->paginateWith(new IlluminatePaginatorAdapter($paginator))
+            ->toArray();
     }
 }

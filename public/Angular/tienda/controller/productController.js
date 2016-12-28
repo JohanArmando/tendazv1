@@ -6,10 +6,11 @@
                 "preventDuplicates": true,
                 "closeButton": true
             };
-
+        
             if (!category){
                 productService.getAllProducts()
                 .then(function(response) {
+                    console.log(response);
                 $scope.products = response.data.products;
                         $scope.BASEURL = BASEURL;
                         angular.forEach(response.products , function(value , index){
@@ -24,7 +25,6 @@
                 console.log(response);
             });
 
-           
                     
             }else{
                 productService.getProductsByCategory(category)
