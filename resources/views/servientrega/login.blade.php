@@ -27,7 +27,7 @@
 				<div class="panel-body">
 					<div class="account-box login-box login-with-help">
 						<div  id="error-div" ></div>
-						<form method="POST" action="https://servientregastore.com/auth/login" accept-charset="UTF-8" class="form-horizontal" id="form-login" data-toggle="validator" role="form"><input name="_token" type="hidden" value="442npyxzWkZPhKBvfsCxyPRBGpliytSEaxW1YUlO">
+						{!! Form::open(['url' => url('auth/login') , 'method' => 'POST' , 'class' => 'form-horizontal' , 'id' => "form-login", 'data-toggle'=>"validator" , 'role'=>"form"]) !!}
 							<div class="form-group ">
 								<label for="inputEmail" class="control-label sr-only"></label>
 								<div class="col-sm-12">
@@ -64,7 +64,8 @@
 									</button>
 								</div>
 							</div>
-						</form>                            </div>
+						{!! Form::close() !!}
+					</div>
 					</div>
 				</div>
 			</div>
