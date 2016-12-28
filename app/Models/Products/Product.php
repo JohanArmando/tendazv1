@@ -212,7 +212,7 @@ class Product extends Model
         $products = [];
         switch ($collection){
             case 'new' :
-                $products = Variant::whereHas('product')->where('created_at',  '>' , Carbon::now()->subDays(8));
+                $products = Variant::whereHas('product')->lastest()->take(8);
                 break;
             case 'promotion' :
                 $products = Variant::whereHas('product' , function($product){
