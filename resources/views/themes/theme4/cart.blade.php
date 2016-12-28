@@ -40,7 +40,7 @@
 											<h5 class="shopping-cart-table__product-name text-left text-uppercase">
 												<a href="{{url('#')}}"><% cart.name %></a>
 											</h5>
-											<ul class="shopping-cart-table__list-parameters" >
+											<ul class="hidden shopping-cart-table__list-parameters" >
 												<li ng-repeat="value in cart.values.data ">
 													<span><% value.property | capitalize %>:</span> <% value.value %>
 												</li>
