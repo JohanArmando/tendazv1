@@ -1,4 +1,4 @@
-@extends('tema4')
+@extends(Theme::current()->viewsPath.'.template')
 	@section('css')
 		@stop
 	@section('content')
@@ -12,9 +12,9 @@
                                       <div style="margin-top: 10px;"></div>
                                       <img src="http://placehold.it/150x150" alt="" class="img-circle" />
                                         <br>
-                                    <h3><strong style="color: #1FC0A0"> {{Auth::user()->get()->name}} {{Auth::user()->get()->last_name}}</strong></h3>
-                                    <h5>Email: <a href="mailto: info@tendaz.com">{{Auth::user()->get()->email}}</a></h5>
-                                    <h5>Telefono: <a class="active">{{Auth::user()->get()->phone ? Auth::user()->get()->phone : "Sin numero de telefono" }}</a></h5>
+                                    <h3><strong style="color: #1FC0A0"> NAME CLIENT</strong></h3>
+                                    <h5>Email: <a href="mailto: info@tendaz.com">EMAIL CLIENT</a></h5>
+                                    <h5>Telefono: <a class="active">PHONE CLIENT</a></h5>
 								 	<hr style="color: grey;" />
                                         <p align="center" style="color: black;"> CR 55a numweo 123 # 122a-33, Mirandela, Bogota D.C, Colombia.</p>
                                        <div class="clearfix"></div>
@@ -26,7 +26,7 @@
                          </div>
                     </div>
           		</div>	
-						<div class="col-md-7 col-lg-7  col-xs-12 hidden">
+						<div class="col-md-12 col-lg-12  col-xs-12">
 							<div class="panel">
 								 <div class="text-center">
 				 					<h4 class="text-center text-uppercase title-under">Direcciones</h4>			
@@ -80,8 +80,8 @@
 						</div>
 					</div>
 				</div>
-				@include('partials.add-dir')
-				@include('partials.edit-dir')
+				@include(Theme::current()->viewsPath.'.partials.add-dir')
+				@include(Theme::current()->viewsPath.'.partials.edit-dir')
 
 				<!--MODAL PARA EL CAMBIO DE NOMBRE-->
 					<div id="modalActualizar" class="fade modal" tabindex="-1" role="dialog">
@@ -92,19 +92,19 @@
 									<h4 class="modal-title">Editar datos del perfil</h4>
 								</div>
 								<div class="modal-body">
-									{!! Form::open(['url' => [ "myProfile",Auth::user()->get()->id ], 'method' => 'PUT', 'files' => 'true', 'data-toggle' => 'validator', 'role' => 'form']) !!}
+									{!! Form::open(['url' => [ "myProfile"], 'method' => 'PUT', 'files' => 'true', 'data-toggle' => 'validator', 'role' => 'form']) !!}
 									<!--<form role="form">-->
 										<div class="form-group">
 											<label>Nombre</label>
-											<input type="text" name="name" class="form-control" value="{{Auth::user()->get()->name}}">
+											<input type="text" name="name" class="form-control" value="name">
 										</div>
 										<div class="form-group">
 											<label>Apellido</label>
-											<input type="text" name="last_name" class="form-control" value="{{Auth::user()->get()->last_name}}">
+											<input type="text" name="last_name" class="form-control" value="last_name">
 										</div>
 										<div class="form-group">
 											<label>Apellido</label>
-											<input type="text" name="phone" class="form-control" value="{{Auth::user()->get()->phone}}">
+											<input type="text" name="phone" class="form-control" value="phone">
 										</div>
 									<div class="modal-footer">
 										<div class="pull-right">
