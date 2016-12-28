@@ -5,19 +5,7 @@
         </div>
         <div class="col-sm-9 col-md-9 col-lg-9 col-xl-9 text-right">
        
-            <div class="{{ Request::is('products')  || Request::is('products/*') ? : 'hidden'}} search link-inline pull-right mobile-menu-off">
-                <a href="#" class="search__open"><span class="icon icon-search"></span></a>
-                <div class="search-dropdown">
-                    <form  action="#" method="get" ng-controller="productController">
-                        <div class="input-outer">
-                            <input type="search" name="search" ng-model="search" value="" maxlength="128" placeholder="BUSCAR:">
-                            <button type="submit" title="" class="icon icon-search"></button>
-                            <% search %>
-                        </div>
-                        <a href="#" class="search__close"><span class="icon icon-close"></span></a>
-                    </form>
-                </div>
-            </div>
+
             <div class="account link-inline  hidden mobile-menu-on">
              
                 <div class="dropdown text-right">
