@@ -52,7 +52,7 @@ class Cart extends Model
 
     public function totalProducts(){
         return (int) $this->products->sum( function($product){
-            if($product->product->collection->first()->promotion){
+            if($product->product->collection->promotion){
                 return $product->promotional_price * $product->pivot->quantity;
             }else{
                 return $product->price * $product->pivot->quantity;
