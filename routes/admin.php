@@ -32,6 +32,7 @@ Route::group(['domain' => '{subdomain}.'.$domain->getDomain() ,'middleware' => [
     Route::get('orders/status' , 'OrdersController@status');
     Route::get('orders/export' , 'OrdersController@getExport');
     Route::post('orders/export/post' , 'OrdersController@postExport');
+    Route::put('orders/update/note/{id}' , 'OrdersController@updateNote');
     Route::resource('orders' , 'OrdersController');
 
     //Route Providers

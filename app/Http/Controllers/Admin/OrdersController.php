@@ -118,4 +118,12 @@ class OrdersController extends Controller
         return redirect()->to('/exports/ordenes.'.$so);
 
     }
+
+    public function updateNote(Request $request , $id){
+        dd($request->all());
+        $order = Order::where('id',$id)->first();
+        $order->note = $request->get('note');
+        $order->save();
+        return response()->json($order->note);
+    }
 }

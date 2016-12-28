@@ -40,7 +40,8 @@ $appRoute = function (){
     Route::get('auth/login', 'HomeController@login');
 
     //profile
-    Route::get('profile', 'HomeController@profile');
+    Route::get('myProfile', 'HomeController@profile');
+    Route::get('change_password', 'HomeController@change_password');
 
     //Route checkout
     Route::get('checkout2' , 'HomeController@checkout');
