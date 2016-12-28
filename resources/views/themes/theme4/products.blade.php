@@ -115,7 +115,7 @@
 						</div>
 
 						<div class="product-listing row" >
-							<div class="col-xs-6 col-sm-4 col-md-3 col-lg- col-xl-one-fifth" dir-paginate="product in filtered = (products  | itemsPerPage: itemsPerPage | filter:search | orderBy:propertyName:reverse)">
+							<div class="col-xs-6 col-sm-4 col-md-3 col-lg- col-xl-one-fifth" dir-paginate="product in filtered = (products  | itemsPerPage: 15 | filter:search | orderBy:propertyName:reverse)">
 								<div ng-include="'tpl.html'"></div>
 							</div>
 						</div>

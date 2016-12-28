@@ -15,7 +15,7 @@
                 },
 
                 getAllProducts : function () {
-                    return $http.get(BASEURL + '/products?client_secret=' + client_secret + '&client_id=' +client_id , config);
+                    return $http.get(BASEURL + '/products/all?client_secret=' + client_secret + '&client_id=' +client_id , config);
                 },
 
                 getProductsByCategory : function (category) {
