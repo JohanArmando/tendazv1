@@ -65,7 +65,7 @@
 							</div>
 						</nav>
 					</div>
-					<div class="pull-right col-sm-2 col-md-2 col-lg-2 col-xl-1 text-right">
+					<div class="{{ !Request::is('/products') ? 'hidden' : ''}} pull-right col-sm-2 col-md-2 col-lg-2 col-xl-1 text-right">
 						<div class="search link-inline">
 							<a href="#" class="search__open"><span class="icon icon-search"></span></a>
 							<div class="search-dropdown">
@@ -79,6 +79,7 @@
 							</div>
 						</div>
 					</div>
+
 				</div>
 			</div>
 		</div>
