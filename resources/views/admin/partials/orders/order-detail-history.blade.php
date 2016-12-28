@@ -1,5 +1,4 @@
-<div class="row">
-    <div class="order-history panel panel-default info-box">
+<div class="order-history panel panel-default info-box">
         <div class="panel-heading">
             Historial de la orden
         </div>
@@ -32,5 +31,4 @@
                 </ul>
             </div>
         </div>
-    </div>
 </div>

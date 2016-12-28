@@ -49,7 +49,7 @@ Cliente {{ $customer->full_name }}
                             </div>
                             <div class="col-md-12 col-md-offset-1">
                                 <li class="text-left mb15">
-                                    <a href="{{ url("admin/customers",$customer->uuid."/edit") }}"><i class="fa fa-pencil"></i> Editar cliente</a>
+                                    <a href="{{ url("admin/customers/".$customer->uuid."/edit") }}"><i class="fa fa-pencil"></i> Editar cliente</a>
                                     <h5><b>Correo: {{ $customer->email }}</b></h5>
                                     <h5>Direccion de envio:</h5>
                                     @if($address)

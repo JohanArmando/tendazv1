@@ -1,4 +1,4 @@
-@extends('tema4')
+@extends(Theme::current()->viewsPath.'.template')
 	@section('css')
 		<style type="text/css">
 			.form-app {

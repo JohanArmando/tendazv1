@@ -51,7 +51,8 @@ class CustomerController extends Controller
     public function update($subdomain , Customer $customer , Request $request)
     {
         $customer->update($request->all());
-        $customer->shipping()->update($request->shipping[0]);
+        if($request->has('shipping'))
+            $customer->shipping()->update($request->shipping[0]);
         return redirect()->back()->with('message' , ['type' => 'info' , 'message' => 'Enhorabuena!. Perfil actualizado.']);
     }
 
