@@ -121,7 +121,7 @@
 												<li><a ng-repeat="v in value.values" ng-class="{'active' : product.variants.data[0].values.data[0].value == v ||  product.variants.data[0].values.data[1].value == v }">
 														<% v | lowercase %></a></li>
 											</ul>
-											<ul class="options-swatch options-swatch--color options-swatch--lg" ng-if="value.name == 'Color'">
+											<ul class="hidden options-swatch options-swatch--color options-swatch--lg" ng-if="value.name == 'Color'">
 												<li ng-repeat="v in value.values">
 													<a href="#" >
 											<span class="swatch-label">
