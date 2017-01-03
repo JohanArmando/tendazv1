@@ -8,6 +8,7 @@ use Tendaz\Models\Cart\Cart;
 use Tendaz\Models\Order\Order;
 use Tendaz\Traits\UuidAndShopTrait;
 use Tendaz\Traits\WhereShopTrait;
+use Tendaz\Transformers\CartTransformer;
 
 class ShippingMethod extends Model
 {
@@ -27,11 +28,14 @@ class ShippingMethod extends Model
         foreach ($cart->products as $product) {
             $price = $product->product->collection->first()->promotion ? $product->promotional_price : $product->price;
             $method =  $this->filterByPrice($price)->filterByWeight($product->weight)->orderBy('id')->min('cost');
-            if (!$method)
+            if (!$method){
                 event(new updateShippingOrderEvent($cart->order , 0));
+                return response()->json(['message' => 'El producto ' . $product->product->name .' no tiene envio disponible.' , 'cart' => fractal()->item($cart, new CartTransformer()) ] , 404);
+            }
             $total += ($method * $product->pivot->quantity);
         }
         event(new updateShippingOrderEvent($cart->order , $total));
+        return response()->json(['message' => "Perfecto ya calculamos tu envio :$ ".number_format($total , 2) , 'cart' => fractal()->item($cart, new CartTransformer()) ] , 201);
     }
     
     public function scopeFilterByPrice($query , $total){

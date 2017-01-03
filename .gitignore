@@ -4,7 +4,8 @@
 /public/sliders
 /public/logos
 /public/tendaz
-/public/new-checkout
+/public/new-checkout/css
+/public/new-checkout/js
 /vendor
 /.idea
 Homestead.json

@@ -95,6 +95,5 @@ Route::group(['domain' => env('APP_API_URL') , 'namespace' => 'Api'] , function 
             'only'  => ['index']
         ]);
     });
-
-
+    
 });

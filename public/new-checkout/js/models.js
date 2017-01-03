@@ -24,6 +24,7 @@ myApp.factory('User' ,['$http', '$location', '$cookies' , "$rootScope" , "Cart",
                 $('.bg-danger').removeClass('hidden').text(response.data);
         })
     };
+
     userModel.doRegister = function (data) {
         var cartId = localStorage.getItem('cart_id') ? '/'+localStorage.getItem('cart_id') : '';
         return $http({
@@ -49,6 +50,7 @@ myApp.factory('User' ,['$http', '$location', '$cookies' , "$rootScope" , "Cart",
             });
         }).finally(function() {});  
     };
+
     userModel.getAuthStatus = function() {
         var status = $cookies.get('auth');
         if (status) {
@@ -90,7 +92,7 @@ myApp.factory('User' ,['$http', '$location', '$cookies' , "$rootScope" , "Cart",
           return Cart.getItems(Cart.getCartId()).data.data.customer.data._id;
       } 
     };
-    //guardar el customer id en una cookie par evitar una peticion mass
+   
     return userModel;
 }]);
 myApp.factory("Cart" , [ "$http" , "$rootScope", function ($http , $rootScope) {
@@ -230,7 +232,7 @@ myApp.factory("Profile" , ["$http" , "$rootScope" , "$location" , function ($htt
     };
     return profileModel;
 }]);
-myApp.factory("Shipping" , ["$http" , "User", "$rootScope" , "Cart", function ($http , User , $rootScope , Cart) {
+myApp.factory("Shipping" , ["$http" , "User", "$rootScope" , "Cart", "$location" ,function ($http , User , $rootScope , Cart , $location) {
    var address = {};
 
     address.getAddresses = function () {
@@ -305,9 +307,15 @@ myApp.factory("Shipping" , ["$http" , "User", "$rootScope" , "Cart", function ($
             method: "GET"
         }).then(function(response) {
             console.log(response);
-            $rootScope.carts = response.data.data;
+            $rootScope.carts = response.data.cart.data;
         }).catch(function(response) {
-            console.log(response);
+            swal({
+                title: "Upps!",
+                text: response.data.message,
+                type: "error",
+                confirmButtonText: "OK"
+            });
+            $rootScope.carts = response.data.cart.data;
         }).finally(function() {});
     };
 
