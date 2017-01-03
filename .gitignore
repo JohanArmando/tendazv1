@@ -17,3 +17,5 @@ Homestead.yaml
 /storage/framework/cache/*
 .DS_Store
 .composer.lock
+app/Http/Controllers/Api/Auth/ForgotPasswordController.php
+database/test/

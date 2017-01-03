@@ -140,7 +140,7 @@ $style = [
 
                                         <!-- Salutation -->
                                         <p style="{{ $style['paragraph'] }}">
-                                            Gracias,<br>{{ session()->has('users') ? session()->get('users')['name'] : 'Sin Nombre'  }}
+                                            Gracias,<br>{{ session()->has('users') ? session()->get('users')['name'] : $customerName  }}
                                         </p>
 
                                         <!-- Sub Copy -->

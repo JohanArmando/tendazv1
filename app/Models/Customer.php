@@ -24,7 +24,7 @@ class Customer extends Authenticatable
 
     public function sendPasswordResetNotification($token)
     {
-        $this->notify(new CustomerResetPassword($token));
+        $this->notify(new CustomerResetPassword($token , $this->shop->name , $this->full_name));
     }
 
     /**

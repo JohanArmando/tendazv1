@@ -10,15 +10,21 @@ use Illuminate\Notifications\Messages\MailMessage;
 class CustomerResetPassword extends Notification
 {
     use Queueable;
+
     public $token;
+    public $shopName;
+    public $customerName;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($token)
+    public function __construct($token , $shopName , $customerName)
     {
         $this->token = $token;
+        $this->shopName = $shopName;
+        $this->customerName = $customerName;
     }
 
     /**
@@ -41,7 +47,7 @@ class CustomerResetPassword extends Notification
     public function toMail($notifiable)
     {
         $url = url('/password/reset/'.$this->token);
-        $gretting = session()->has('users') ? 'Hola'.session()->get('users')['name'] : 'Sin Nombre';
+        $gretting = session()->has('users') ? 'Hola '.session()->get('users')['name'] :  'Hola '.$this->customerName ;
 
         return (new MailMessage)
             ->subject('Restablecer contraseña tienda')
@@ -60,7 +66,6 @@ class CustomerResetPassword extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
         ];
     }
 }

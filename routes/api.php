@@ -17,6 +17,10 @@ use Illuminate\Http\Request;
 
 Route::group(['domain' => env('APP_API_URL') , 'namespace' => 'Api'] , function (){
 
+    Route::post('password/email' , [
+        'uses' => 'Auth\\ForgotPasswordController@sendResetLinkEmail'
+    ]);
+
     //Routes auth
     Route::group(['prefix' => 'auth' , 'namespace' => 'Auth'] , function (){
         Route::post('login/{cart?}' , [
