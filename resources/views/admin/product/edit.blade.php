@@ -123,7 +123,7 @@ Editar {{ucfirst($product->name)}}
         showUpload: true,
         showRemove: true,
         initialPreview: [
-        @foreach($product->images as $productI)
+        @foreach($product->images as $productI) 
             "{{ $productI['url'] }}",
         @endforeach
         ],
@@ -131,7 +131,7 @@ Editar {{ucfirst($product->name)}}
         initialPreviewFileType: 'image', // image is the default and can be overridden in config below
         initialPreviewConfig: [
             @foreach($product->images as $productI)
-            {caption: "{{$productI['name']}}", size: false, width: "120px", url: "/site/file-delete", key: 1},
+            {caption: "{{$productI['name']}}", size: false, width: "120px", url: "/products/file-delete/{{$productI['id']}}", key: 1},
             @endforeach 
             ],
         allowedFileTypes: ['image', 'video', 'flash'],

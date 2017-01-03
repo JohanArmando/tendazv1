@@ -276,4 +276,7 @@ class ProductsController extends Controller
             'product' => $product
         ));
     }
+    public function ajaxDelete($product_id){
+        
+    }
 }
