@@ -2,6 +2,7 @@
 
 namespace Tendaz\Models;
 
+use Carbon\Carbon;
 use Tendaz\Models\Cart\Cart;
 use Tendaz\Models\Order\Consult;
 use Tendaz\Models\Order\Order;
@@ -32,7 +33,7 @@ class Customer extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'uuid', 'name', 'last_name', 'type', 'phone', 'active', 'email', 'password', 'identification', 'notes', 'profile', 'country_id' , 'shop_id' , 'social' , 'remember_token'
+        'uuid', 'name', 'last_name', 'type', 'phone', 'active', 'email', 'password', 'identification', 'notes', 'avatar', 'country_id' , 'shop_id' , 'social' , 'remember_token'
     ];
     public function getFullNameAttribute()
     {
@@ -114,6 +115,15 @@ class Customer extends Authenticatable
             $this->attributes['password'] = bcrypt($value);
         }else{
             $this->attributes['password'] = '';
+        }
+    }
+
+    public function setAvatarAttribute($value)
+    {
+        if(! empty($value)){
+            $name = Carbon::now()->second.$value->getClientOriginalName();
+            $this->attributes['image'] = $name;
+            \Storage::disk('profile')->put($name, \File::get($value));
         }
     }
 

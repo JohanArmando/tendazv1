@@ -24,6 +24,11 @@ Route::group(['domain' => env('APP_API_URL') , 'namespace' => 'Api'] , function 
             'middleware' => ['custom_api' , 'cors']
         ]);
 
+        Route::put('{customer}' , [
+            'uses'       => 'AccountController@update',
+            'middleware' => 'custom_api'
+        ]);
+
         Route::post('register/{cart?}' , [
             'uses'       => 'RegisterController@register',
             'middleware' => 'custom_api'
@@ -31,6 +36,11 @@ Route::group(['domain' => env('APP_API_URL') , 'namespace' => 'Api'] , function 
 
         Route::get('email/{email}/{cart}' , [
             'uses'       => 'LoginController@assignUserToOrder',
+            'middleware' => 'custom_api'
+        ]);
+
+        Route::put('{customer}/password' ,[
+            'uses' => 'PasswordController@change',
             'middleware' => 'custom_api'
         ]);
     });

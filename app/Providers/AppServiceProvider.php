@@ -2,6 +2,8 @@
 
 namespace Tendaz\Providers;
 
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Tendaz\Models\Customer;
 use Webpatser\Uuid\Uuid;
 use Tendaz\Models\Cart\Cart;
@@ -16,6 +18,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Validator::extend('hash_check', function($attribute, $value, $parameters, $validator) {
+            return Hash::check($value, $parameters[0]);
+        });
+        
+        Validator::extend('sameData', function($attribute, $value, $parameters, $validator) {
+
+            return ! ($value == $parameters[0]);
+
+        });
+
         Cart::created(function ($cart){
             $cart->order()->create([
                 'order_status' => 1,
