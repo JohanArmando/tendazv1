@@ -1,5 +1,4 @@
 #PASOS PARA INSTALAR DESDE CERO
-
 1)Composer update
 2)npm install
 3)gulp --production
