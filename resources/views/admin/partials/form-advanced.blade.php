@@ -63,7 +63,7 @@
                 <i class="fa fa-shopping-cart text-tendaz" style="margin-right: 5%; font-size: 1.9em;"></i>Sin Variante
             </a>
         </li>
-        <li>
+        <li class="hidden">
             <a style="padding-top: 7.5%;" href="#conVariante" data-toggle="tab">
                 <i  class="fa fa-shopping-cart text-tendaz" style="margin-right: 5%; font-size: 1.9em;"></i>Con Variante
             </a>
@@ -74,15 +74,16 @@
 
         {{-- Start tab sin variante --}}
         <div class="tab-pane active np" id="sinVariante">
+            @include('admin.partials.sin-variante')
             <div class="media-list">
                 <a href="javascript:void(0);" class="media border-dotted">
-                    @include('admin.partials.sin-variante')
+
                 </a>
             </div>
         </div>
         {{-- Endt tab sin variante --}}
 
-        <div class="tab-pane np" id="conVariante">
+        <div class="hidden tab-pane np" id="conVariante">
             <div class="media-list">
                 <a href="javascript:void(0);" class="media border-dotted">
                     @include('admin.partials.con-variante')
@@ -108,9 +109,11 @@
 </a>
 <br>
 <a href="javascript:void(0);" class="media border-dotted">
-
     <span class="media-body box">
         <div class="form-group">
+            <div class="col-md-9 col-simple">
+
+            </div>
             <div class="col-md-3 col-simple">
                 <label class="control-label" style="font-size: 1.2em; color: black">Categorias</label>
                 <button class="btn btn-block btn-primary modalCategory" data-toggle="modal" data-target="#modalCategory" type="button"><i class="fa fa-plus"></i> Nueva categoria</button>

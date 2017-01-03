@@ -38,7 +38,8 @@ class Shop extends Model
      * @var array
      */
     protected $fillable = [
-        'uuid', 'name', 'logo', 'active', 'user_id', 'theme_id', 'country_base_operation_id' , 'original' , 'slug'
+        'uuid', 'name', 'logo', 'active', 'user_id', 'theme_id', 'country_base_operation_id' ,
+        'original' , 'slug' , 'slider1' , 'slider2' , 'slider3'
     ];
 
     /**
@@ -73,7 +74,7 @@ class Shop extends Model
             if(!\Storage::disk('logos')->has( $this->attributes['id'].'/'.$name))
                 \Storage::disk('logos')->put( $this->attributes['id'].'/'.$name, \File::get($path));
         }else{
-            $this->attributes['path'] = '';
+            $this->attributes['logo'] = '';
         }
     }
 
@@ -136,7 +137,10 @@ class Shop extends Model
     }
 
     public function mercadopago(){
-        return $this->belongsToMany(PaymentMethod::class, 'payment_values')->where('payment_methods.id' , 1)->withPivot('client_id' , 'client_secret');
+        return $this->belongsToMany(PaymentMethod::class, 'payment_values')->where('payment_methods.id' , 1)->withPivot('api_id' , 'api_key');
+    }
+      public function payments_values(){
+        return $this->belongsToMany(PaymentMethod::class, 'payment_values');
     }
     
 }

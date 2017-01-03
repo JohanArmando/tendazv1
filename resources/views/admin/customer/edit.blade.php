@@ -1,7 +1,7 @@
 @section('title')
 Editar cliente
 @stop
-@extends('admin.template')
+@extends('layouts.administrator')
 @section('css')
     <link rel="stylesheet" href="{{asset('admin/plugins/jquery-ui/css/jquery-ui.css')}}">
     <link rel="stylesheet" href="{{asset('admin/plugins/selectize/css/selectize.css')}}">
@@ -19,7 +19,7 @@ Editar cliente
             <div class="toolbar">
                 <ol class="breadcrumb breadcrumb-transparent nm">
                     <li><a href="{{ url('admin/customers') }}" style="color: orange;">Clientes</a></li>
-                    <li class="active">Edicion de {{ $data->full_name }}</li>
+                    <li class="active">Edicion de {{ $customer->full_name }}</li>
                 </ol>
             </div>
             <!--/ Toolbar -->
@@ -34,7 +34,7 @@ Editar cliente
                     </div>
                 </div>
                 <div class="panel-body">
-                    {!! Form::model($data, ['url' => ['admin/customers',$data ->id], 'method' => 'PUT' ]) !!}
+                    {!! Form::model($customer, ['url' => ['admin/customers',$customer->uuid], 'method' => 'PUT' ]) !!}
                     @include('admin.partials.client.form')
                     <div class="col-md-12">
 
@@ -57,4 +57,51 @@ Editar cliente
     <script type="text/javascript" src="{{asset('admin/js/backend/forms/element.js')}}"></script>
     <script type="text/javascript" src="{{asset('admin/plugins/summernote/js/summernote.js')}}"></script>
     <script type="text/javascript" src="{{asset('admin/js/backend/forms/wysiwyg.js')}}"></script>
+    <script>
+        $('#country_id').on('change' , function () {
+            $.ajax({
+                'url' : apiUrl + '/countries/' + $('#country_id').val() +'/states?client_secret=' + client_secret + '&client_id=' + client_id,
+                'dataType' : 'JSON',
+                'method' : 'GET',
+                headers : {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                'success' : function (response) {
+                    $('#state_id').hide();
+                    if (response.length > 0){
+                        $('#state_id').show();
+                        $('#state_id').find('option').remove().end();
+                        $.each(response, function (i, item) {
+                            $.each(item, function (i, v) {
+                                console.log(v);
+                                $('#state_id').append('<option value="' + v.id +'">' + v.name +'</option>')
+                            });
+                        });
+                    }
+                }
+            })
+        });
+
+        $('#state_id').on('change' , function () {
+            $.ajax({
+                'url' : apiUrl + '/states/' + $('#state_id').val() +'/cities?client_secret=' + client_secret + '&client_id=' + client_id,
+                'dataType' : 'JSON',
+                'method' : 'GET',
+                headers : {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                'success' : function (response) {
+                    $('#city_id').removeClass('hidden   ');
+                    $('#city_id').find('option').remove().end();
+                    $.each(response, function (i, item) {
+                        $.each(item, function (i, v) {
+                            $('#city_id').append('<option value="' + v.id +'">' + v.name +'</option>')
+                        });
+                    });
+                }
+            })
+        });
+    </script>
 @stop

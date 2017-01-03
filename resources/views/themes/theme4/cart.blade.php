@@ -16,9 +16,9 @@
 									<tr>
 										<th>Producto</th>
 										<th>&nbsp;</th>
-										<th style="border: 1px solid #E5E5E5">Precio unitario</th>
+										<th style="width: 25%;border: 1px solid #E5E5E5">Precio unitario</th>
 										<th>Cantidad</th>
-										<th>Subtotal</th>
+										<th style="width: 25%">Subtotal</th>
 										<th>&nbsp;</th>
 									</tr>
 								</thead>
@@ -40,7 +40,7 @@
 											<h5 class="shopping-cart-table__product-name text-left text-uppercase">
 												<a href="{{url('#')}}"><% cart.name %></a>
 											</h5>
-											<ul class="shopping-cart-table__list-parameters" >
+											<ul class="hidden shopping-cart-table__list-parameters" >
 												<li ng-repeat="value in cart.values.data ">
 													<span><% value.property | capitalize %>:</span> <% value.value %>
 												</li>
@@ -88,7 +88,7 @@
 								</tbody>
 							</table>
 						</div>
-						<div  ng-show="size(carts) >= 1" ng-cloak="">
+						<div  ng-show="size(carts.products.data) >= 1" ng-cloak="">
 							<div class="divider divider--xs"></div>
 							<div class="row shopping-cart-btns">
 								<div class="col-xs-12 col-sm-4 col-md-4">

@@ -1,0 +1,40 @@
+
+<a  href="/" class="btn btn-primary" >
+    <i class="glyphicon glyphicon-chevron-left"></i>
+    Volver a la tienda
+</a>
+<br>
+<footer class="container-fluid footer_checkout" style="height: 75px; margin-bottom: 10px; padding: 1%">
+    <div class="row">
+        <div class="col-md-4">
+            <br>
+            <p>{{ shopData.name }}</p>
+        </div>
+        <div class="col-md-4" ng-show="shopData.facebook || shopData.twitter || shopData.instagram">
+            <small>Encuentranos en:</small>
+            <ul>
+                <li style="background-color: transparent" ng-show="shopData.facebook">
+                    <a href="{{ shopData.facebook }}"><i class="fa fa-facebook-square fa-2x" style="background-color: transparent; color: #3b5998" aria-hidden="true"></i></a>
+                </li>
+                <li style="background-color: transparent"  ng-show="shopData.twitter">
+                    <a href="{{ shopData.twitter }}"><i class="fa fa-twitter-square fa-2x" style="background-color: transparent; color: #1da1f2" aria-hidden="true"></i></a>
+                </li>
+                <li style="background-color: transparent"  ng-show="shopData.instagram">
+                    <a href="{{ shopData.instagram }}"><i class="fa fa-instagram fa-2x" style="background-color: transparent; color: black" aria-hidden="true"></i></a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-4" ng-show="shopData.phone || shopData.correo ">
+            <small>Contacto:</small>
+            <ul>
+                <li style="background-color: transparent">
+                    <i ng-show="shopData.phone" class="fa fa-phone-square fa-2x" aria-hidden="true" style="background-color: transparent; color: whitesmoke"></i> {{ shopData.phone }}
+                </li>
+                <li  style="background-color: transparent">
+                    <i ng-show="shopData.correo" class="fa fa-envelope-o fa-2x" aria-hidden="true" style="background-color: transparent; color: whitesmoke"></i> {{ shopData.correo }}
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</footer>

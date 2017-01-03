@@ -9,6 +9,7 @@ Route::group(['domain' => '{subdomain}.'.$domain->getDomain() ,'middleware' => [
     //Routes statics
     Route::get('/stats' , 'StaticsController@basic');
     Route::get('/stats/advanced' , 'StaticsController@advanced');
+    Route::get('/stats/update' , 'StaticsController@update');
 
     //Route logout
     Route::post('logout' , 'LoginController@logout');
@@ -29,6 +30,9 @@ Route::group(['domain' => '{subdomain}.'.$domain->getDomain() ,'middleware' => [
 
     //Route orders
     Route::get('orders/status' , 'OrdersController@status');
+    Route::get('orders/export' , 'OrdersController@getExport');
+    Route::post('orders/export/post' , 'OrdersController@postExport');
+    Route::put('orders/update/note/{id}' , 'OrdersController@updateNote');
     Route::resource('orders' , 'OrdersController');
 
     //Route Providers
@@ -70,20 +74,14 @@ Route::group(['domain' => '{subdomain}.'.$domain->getDomain() ,'middleware' => [
     });
 
     //Route Customer
-    Route::group(['prefix' => 'customers', 'namespace' => 'Customer'], function() {
-        Route::resource('/', 'CustomerController');
-        Route::get('/export', 'CustomerController@export');
-        Route::get('/contact', 'CustomerController@contact');
+    Route::group(['prefix' => '', 'namespace' => 'Customer'], function() {
+        Route::get('customers/export', 'CustomerController@export');
+        Route::get('customers/contact', 'CustomerController@contact');
+        Route::resource('/customers', 'CustomerController');
     });
 
     //Route Setting
     Route::group(['prefix' => 'setting', 'namespace' => 'Setting'], function() {
-
-        Route::get('/payments/active', 'PaymentController@active');
-        Route::get('/payments/index','PaymentController@getAll');
-        Route::get('/payments/desactivar/{account}','PaymentController@deActivate');
-        Route::put('/payments/{account}','PaymentController@update');
-        Route::get('/payments/{account}','PaymentController@show');
         Route::resource('/payments','PaymentController');
         
         Route::resource('shippings', 'ShippingController',

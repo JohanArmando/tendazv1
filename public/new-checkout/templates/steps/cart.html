@@ -1,0 +1,140 @@
+<div class="container-fluid" ng-if="carts.products.data.length <= 0 ||  carts.length <= 0">
+    <div class="alert alert-info" role="alert">Upps!! No hay productos en este carrito</div>
+    <a class="btn btn_checkout" href="/">ELEGIR PRODUCTOS</a>
+</div>
+<div class="container-fluid" ng-if="carts.products.data.length > 0 ">
+    <div class="row">
+        <div class="row hidden updateItem">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="alert alert-info" style="text-align: center"></div>
+            </div>
+        </div>
+        <div class="col-md-4 text-center">
+            <p>
+                <b>PRODUCTO</b>
+            </p>
+        </div>
+        <div class="col-md-8">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-2 text-center">
+                        <p>
+                            <b>
+                                ENV&Iacute;O
+                            </b>
+                        </p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <p>
+                            <b>
+                                PRECIO
+                            </b>
+                        </p>
+                    </div>
+                    <div class="col-md-2 text-center">
+                        <p>
+                            <b>
+                                CANTIDAD
+                            </b>
+                        </p>
+                    </div>
+                    <div class="col-md-2 text-center">
+                        <p>
+                            <b>
+                                TOTAL
+                            </b>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row separator_product_cart" ng-repeat="item in carts.products.data">
+        <div class="col-md-4">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="{{ item.images.data[0].url }}" >
+                    </div>
+                    <div class="col-md-8 padd_prod_cart">
+                        <p class="product_cart_title">{{ item.name }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-2 text-center padd_prod_cart">
+                        A calcular
+                    </div>
+                    <div class="col-md-4 text-center padd_prod_cart" ng-if="item.special_price">
+                    <p class="oldPrice">$ {{ item.price | currency:"":0 }}</p>
+                    <p class="newPrice">$ {{ item.special_price | currency:"":0}}</p>
+                     </div>
+                    <div class="col-md-4 text-center padd_prod_cart" ng-if="!item.special_price">
+                        $ {{ item.price| currency:"":0 }}
+                    </div>
+                    <div class="col-md-2 text-center padd_prod_cart">
+                        <span class="minus" ng-click="item.quantity = item.quantity - 1 ;update(item)">-</span>
+                        <input type="text"  style="text-align: center" class="counter" name="quantity" ng-model="item.quantity">
+                        <span class="plus" ng-click="item.quantity = item.quantity + 1 ;update(item)">+</span>
+                    </div>
+                    <div class="col-md-2 text-center padd_prod_cart">
+                        $  {{ ((item.special_price > 0  ? item.special_price : item.price) * item.quantity) | currency:"":0 }}
+                    </div>
+                    <div class="col-md-2 text-center padd_prod_cart">
+                        <span class="remove glyphicon glyphicon-remove" ng-click="remove(item)"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 divider"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-4">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6" ng-controller="couponController">
+                        <div class="col-md-12">
+                            <p>Cup&oacute;n de descuento</p>
+                            <div class="alert alert-danger hidden" id="no-coupon">
+                                Lo siento este cupon no es aplicable.
+                            </div>
+                            <div class="alert alert-success hidden" id="yes-coupon">
+                                Cupon agregado correctamente.
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" class="disc_input" name="" ng-model="coupon.code">
+                        </div>
+                        <div class="col-md-4 nopad">
+                            <button class="btn btn_checkout btn-default"  ng-click="useCoupon()">Agregar</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h3>Resumen de la compra</h3>
+                        <div class="col-md-12">
+                            <p><b>Sub total:</b></p>
+                        </div>
+                        <div class="col-md-8 text-right">
+                            <span>$ {{ carts.totalizers.items.value | currency:"":0}}</span>
+                        </div>
+                        <div class="col-md-8">
+                            <p><b>Total:</b></p>
+                        </div>
+                        <div class="col-md-8 text-right">
+                            <span>$ {{ carts.original_total| currency:"":0 }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<a class="btn btn_checkout pull-right" ng-if="carts.products.data.length > 0" ng-click="next()">Continuar compra <i class="glyphicon glyphicon-chevron-right"></i></a>

@@ -8,7 +8,6 @@
 
 namespace Tendaz\Traits;
 
-
 use Tendaz\Scopes\WhereShopScope;
 
 trait WhereShopTrait

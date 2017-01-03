@@ -34,10 +34,13 @@ class AddressesController extends Controller
         $cart->order->shipping_address_id = $pivot->id;
         $cart->order->billing_address_id = $pivot->id;
         $cart->order->save();
-        return response()->json(
-                fractal()
+        return response()->json([
+                'addresses' => fractal()
                 ->collection(  $customer->addresses, new AddressTransformer())
-                ->withResourceName('addresses')    , 200);
+                ->withResourceName('addresses'),
+                'cart' =>  fractal()
+                    ->item($cart ,  new CartTransformer())
+                    ->withResourceName('addresses')   ], 200);
     }
 
     public function getAddress()

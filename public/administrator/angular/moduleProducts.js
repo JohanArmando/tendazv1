@@ -213,7 +213,7 @@
             });
             if($scope.accion == 'destroy'){
                 angular.forEach(data , function (value , index) {
-                    serviceProduct.delete(value._id)
+                    serviceProduct.delete(value.product_id)
                         .success(function(response){
                             $scope.preload = false;
                             toastr["success"]("Producto " + $scope.products[$index].name + " eliminado de forma correcta!")

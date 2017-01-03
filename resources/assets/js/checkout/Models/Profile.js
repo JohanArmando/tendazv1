@@ -11,11 +11,14 @@ myApp.factory("Profile" , ["$http" , "$rootScope" , "$location" , function ($htt
             data : data
         }).then(function(response) {
             $rootScope.carts = response.data.data;
+            localStorage.setItem('orderData' , JSON.stringify($rootScope.carts.order.data.client));
             $location.path('/shipping');
         }).catch(function(response) {
             console.log(response);
         }).finally(function() {});
     }; 
-    
+    profileModel.getData = function () {
+        return localStorage.getItem('orderData');
+    };
     return profileModel;
 }]);

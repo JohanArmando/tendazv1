@@ -11,8 +11,8 @@ namespace Tendaz\Traits;
 
 use Illuminate\Support\Facades\Schema;
 use Tendaz\Helpers\GeoClass;
-use Tendaz\Models\Country;
 use Tendaz\Models\Domain\Domain;
+use Tendaz\Models\Geo\Country;
 use Tendaz\Scopes\OrderStatusScope;
 use Webpatser\Uuid\Uuid;
 

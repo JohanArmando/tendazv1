@@ -82,6 +82,11 @@ return [
             'root'   => public_path('/profile'),
         ],
 
+        'exports' => [
+            'driver' => 'local',
+            'root'   => public_path('/exports'),
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => 'your-key',

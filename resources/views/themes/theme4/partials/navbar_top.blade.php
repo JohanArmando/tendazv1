@@ -5,18 +5,7 @@
         </div>
         <div class="col-sm-9 col-md-9 col-lg-9 col-xl-9 text-right">
        
-            <div class="search link-inline pull-right mobile-menu-off">
-                <a href="#" class="search__open"><span class="icon icon-search"></span></a>
-                <div class="search-dropdown">
-                    <form  action="#" method="get">
-                        <div class="input-outer">
-                            <input type="search" name="search" value="" maxlength="128" placeholder="BUSCAR:">
-                            <button type="submit" title="" class="icon icon-search"></button>
-                        </div>
-                        <a href="#" class="search__close"><span class="icon icon-close"></span></a>
-                    </form>
-                </div>
-            </div>
+
             <div class="account link-inline  hidden mobile-menu-on">
              
                 <div class="dropdown text-right">
@@ -62,7 +51,7 @@
                                         </li>
 
                                         <li>
-                                            <a href="{{url('myProfile/change_password')}}">
+                                            <a href="{{url('change_password')}}">
                                             <i class="fa fa-lock"></i>
                                              &nbsp; &nbsp; &nbsp;Cambiar Contraseña</a>
                                         </li>

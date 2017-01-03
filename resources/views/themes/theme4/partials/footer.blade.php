@@ -49,6 +49,9 @@
 							@if(!$shop->store->number_phone == '')
 							<li><a href="">Direcci&oacute;n: </a><span> {{$shop->store->address_2}}</span></li>
 							@endif
+							@if(!$shop->store->conditions == '')
+							<li><a href="#" data-toggle="modal" data-target="#modalConditions">Terminos  y condiciones</a></li>
+							@endif
 						</ul>
 					</div>
 				</div>
@@ -58,8 +61,8 @@
 					<h4 class="text-left  title-under  mobile-collapse__title">MI CUENTA</h4>
 					<div class="v-links-list mobile-collapse__content">
 						<ul>
-							<li><a href="{{url('auth/login')}}">Registrate</a></li>
-							<li><a href="{{url('auth/login')}}">Inicio sesion</a></li>
+							<li><a href="#" data-toggle="modal" data-target="#modalRegisterForm">Registrate</a></li>
+							<li><a href="#" data-toggle="modal" data-target="#modalLoginForm" >Inicio sesion</a></li>
 						</ul>
 					</div>
 				</div>
@@ -84,11 +87,21 @@
 				<div class="divider divider--md"></div>
 				<div class="social-links social-links--large social-links-layout-02">
 					<ul>
-						<li><a class="icon fa fa-facebook" href=""></a></li>
-						<li><a class="icon fa fa-twitter" href=""></a></li>
-						<li><a class="icon fa fa-google-plus" href=""></a></li>
-						<li><a class="icon fa fa-instagram" href=""></a></li>
-						<li><a class="icon fa fa-youtube-square" href=""></a></li>
+						@if(!$shop->store->facebook == '')
+							<li><a class="icon fa fa-facebook" href="{{url('https://'.$shop->store->facebook)}}"></a></li>
+						@endif
+						@if(!$shop->store->twitter == '')
+							<li><a class="icon fa fa-twitter" href="{{url('https://'.$shop->store->twitter)}}"></a></li>
+						@endif
+						@if(!$shop->store->google_plus == '')
+							<li><a class="icon fa fa-google-plus" href="{{url('https://'.$shop->store->google_plus)}}"></a></li>
+						@endif
+						@if(!$shop->store->instagram == '')
+							<li><a class="icon fa fa-instagram" href="{{url('https://'.$shop->store->instagram)}}"></a></li>
+						@endif
+						@if(!$shop->store->blog == '')
+							<li><a class="icon fa fa-twitc+h" href="{{url('https://'.$shop->store->blog)}}"></a></li>
+						@endif
 					</ul>
 				</div>
 			</div>

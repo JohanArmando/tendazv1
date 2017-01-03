@@ -21,12 +21,6 @@
 			</li>
 			<li>
 				<span class="name">
-					<a href="{{url('/auth/login')}}"><span class="act-underline">INICIA SESION</span></a>
-				</span>
-
-			</li>
-			<li>
-				<span class="name">
 					<a href="{{url('/contact')}}"><span class="act-underline">CONTACTENOS</span></a>
 				</span>
 

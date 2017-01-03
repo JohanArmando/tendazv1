@@ -1,5 +1,5 @@
-<nav class="navbar navbar-default " role="navigation">
-    <div class="container">
+<nav class="navbar navbar-default row" role="navigation">
+    <div class="container-fluid nopad">
         <div class="navbar-header">
             <a  href="#" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav">
                 <i style="color: white; font-size: 16px" class="fa fa-bars" aria-hidden="true"></i>

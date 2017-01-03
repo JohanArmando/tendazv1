@@ -86,7 +86,7 @@
                     <h4 class="modal-title">Editando <span id="variant-modal-values"></span></h4>
                 </div>
                 <div class="modal-body">
-                    <div class="row" class="phone-input">
+                    <div class="row phone-input">
                         <div class="col-xs-4">
                             <label>Precio</label>
                             <div class="input-group">
@@ -106,7 +106,7 @@
                             <input class="form-control" name="stock" size="30" type="text" value="" />
                         </div>
                     </div>
-                    <div class="row m-top" class="phone-input">
+                    <div class="row m-top phone-input">
                         <div class="col-xs-4">
                             <label>Precio Promocional</label>
                             <div class="input-group">
@@ -770,7 +770,7 @@
                         $select.closest('.option-name').find('.input-helper').addClass('input-propiedad');
                         break;
                     case "tamanho":
-                    case "talle":
+                    case "talla":
                     case "size":
                         $select.closest('.option-name').find('.snipplet_size').show();
                         $select.closest('.option-name').find('.snipplet_colors').hide();

@@ -1,7 +1,7 @@
-@section('title')
-Mis clientes
-@stop
 @extends('layouts.administrator')
+    @section('title')
+        Clientes
+    @endsection
     @section('css')
         <link rel="stylesheet" href="{{asset('admin/plugins/datatables/css/tabletools.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('admin/css/stylePersonal.css')}}">
@@ -26,7 +26,6 @@ Mis clientes
                     <ol class="breadcrumb breadcrumb-transparent nm">
                         <li><a href="{{url('admin')}}" style="color: darkgrey;">Inicio</a></li>
                         <li><a href="#" style="color: orange;">Clientes</a></li>
-                        <li class="active" style="color: orange;">Principal</li>
                     </ol>
                 </div>
              </div>
@@ -86,27 +85,20 @@ Mis clientes
                                 @foreach($customers as $customer)
                                     <tr>
                                         <td>
-                                            <a href="{{ url('admin/customers') }}">
-                                                <strong>{{ $customer->name  }}</strong>
-                                            </a>
+                                            <a href="{{ url("admin/customers/$customer->uuid") }}">{{ $customer->full_name  }}  </a>
                                         </td>
                                         <td>
-                                            {{$customer->phone}}
+                                            {{ $customer->phone }}
                                         </td>
                                         <td>
-                                            ${{ $customer->total() }}
+                                            $ {{ $customer->eagerTotal->first()== null ? '0' : number_format($customer->eagerTotal->first()->total , 2 , '.' , ',') }}
                                         </td>
                                         <td class="hidden-sm hidden-xs">
                                             {{ $customer->totalOrder() }}
                                         </td>
                                         <td class="hidden-sm hidden-xs">
                                             <strong>
-                                                @if($customer->lastOrder() == '')
-                                                    Sin ordenes
-                                                    @else
-                                                        <a href="{{ url('admin/orders/'.$customer->last_order) }}">
-                                                            #{{ $customer->lastOrder() }}</a>
-                                                @endif
+                                                <a href="#">{{ $customer->latestOrder->first() == null ? 'Ninguna' : $customer->latestOrder->first()->id }}</a>
                                             </strong>
                                         </td>
                                     </tr>

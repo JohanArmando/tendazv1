@@ -23,17 +23,18 @@ class ProductTransformer extends TransformerAbstract
 
         return [
             '_id'                => $variant->uuid,
-            'product_id'          => $variant->product->uuid,
+            'product_id'         => $variant->product->uuid,
             'active'             => $variant->active,
             'categories'         => $variant->product ? $this->parse($variant->product->categories) : [],
             'name'               => $variant->product->name,
             'price'              => $variant->price,
             'slug'               => $variant->product->slug,
-            'special_price'      => $variant->product->collection->first()->promotion ? $variant->promotional_price : null,
+            'special_price'      => $variant->product->collection->promotion ? $variant->promotional_price : null,
             'stock'              => $variant->stock,
+            'sku'                => $variant->sku,
             'visible'            => $variant->product->publish,
-            'quantity'           => $variant->pivot ? $variant->pivot->quantity : null,
-            'description'        =>  $variant->product->description
+            'quantity'           => $variant->pivot  ? $variant->pivot->quantity : null,
+            'description'        => $variant->product->description
         ];
     }
 

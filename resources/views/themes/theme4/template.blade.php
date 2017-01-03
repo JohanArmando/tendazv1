@@ -105,7 +105,7 @@
 	<script src="{{asset('components/js/angularSanitize.min.js') }}"></script>
 
 	<script type="text/ng-template" id="tpl.html">
-		<div class="product" ng-class="{ ' sold-out' : product.stock == 0 , ' product--zoom' : !product.promotion && !product.feature} ">
+		<div id="megaMenuCarousel1" class="product" ng-class="{ ' sold-out' : product.stock == 0 , ' product--zoom' : !product.promotion && !product.feature} ">
 			<div class="product__inside">
 				<div class="product__inside__image">
 					<a href="{{ url('/') }}<% '/detail/' + product.slug %>">
@@ -130,7 +130,7 @@
               </span>
 				</div>
 				<div class="product__inside__name">
-					<h2><a href="{{ url('/') }}<%'detail/' + product.slug %>"><% product.name %></a></h2>
+					<h2><a href="<%'/detail/' + product.slug %>"><% product.name %></a></h2>
 				</div>
 				<div class="product__inside__price price-box" ng-if="product.special_price">
 					$<% product.special_price | currency:"":0 %>
@@ -165,6 +165,7 @@
 	@yield('script')
 	<!--- iframe -->
 	@include('globalPartials.iframeAdmin')
+	@include('themes.theme4.partials.conditions')
 	<script>
 		$j(document).on('ready' , function () {
 			$j('.register').click(function () {

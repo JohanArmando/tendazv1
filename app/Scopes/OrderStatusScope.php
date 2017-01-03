@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
-class OrderStatusScope implements Scope
+class   OrderStatusScope implements Scope
 {
 
     /**
@@ -26,7 +26,7 @@ class OrderStatusScope implements Scope
     public function apply(Builder $builder, Model $model)
     {
         $builder->whereHas('status' , function ($query){
-            $query->where('id' , '<>' , 1)->orWhereNull('orders.current_state');
+            $query->where('id' , '<>' , 1)->orWhereNull('orders.order_status');
         });
     }
     

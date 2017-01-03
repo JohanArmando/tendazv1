@@ -151,7 +151,7 @@ class CreateDatabaseTendaz extends Migration
             $table->enum('phone_type' , ['mobile' , 'fax' ,  'work' , 'home' ,'other']);
             $table->string('number_phone')->nullable();
             $table->string('code_country')->nullable();
-            $table->string('business_size')->nullable();
+            $table->text('business_size')->nullable();
             $table->string('number_local')->nullable();
             $table->string('address_1')->nullable();
             $table->string('address_2')->nullable();
@@ -979,8 +979,8 @@ class CreateDatabaseTendaz extends Migration
             $table->string('last_name', 255)->nullable();
             $table->string('phone', 255)->nullable();
             $table->string('email', 255)->unique();
-            $table->unsignedInteger('department_id')->unsigned();
             $table->unsignedInteger('country_id')->unsigned();
+            $table->unsignedInteger('department_id')->unsigned();
             $table->unsignedInteger('shop_id')->nullable()->unsigned();
             $table->timestamp('created_at')->default(\Carbon\Carbon::now());
             $table->timestamp('updated_at')->default(\Carbon\Carbon::now());
@@ -1424,7 +1424,6 @@ class CreateDatabaseTendaz extends Migration
      */
     public function down()
     {
-        Schema::drop('cities');
         Schema::drop('option_value_variant');
         Schema::drop('option_values');
         Schema::drop('tax_order_item');
@@ -1449,6 +1448,7 @@ class CreateDatabaseTendaz extends Migration
         Schema::drop('address_history');
         Schema::drop('addresses');
         Schema::drop('consults');
+        Schema::drop('trends_preferences');
         Schema::drop('coupons');
         Schema::drop('social_auths');
         Schema::drop('customers');
@@ -1466,8 +1466,8 @@ class CreateDatabaseTendaz extends Migration
         Schema::drop('payment_values');
         Schema::drop('payment_methods');
         Schema::drop('locals');
-        Schema::drop('trends_preferences');
         Schema::drop('providers');
+        Schema::drop('cities');
         Schema::drop('shops');
         Schema::drop('themes');
         Schema::drop('tickets_comments');

@@ -28,8 +28,8 @@
                         $scope.carts = response.data.data;
                     })
                     .catch(function (response) {
-                        $scope.carts = response.data;
-                        toastr["info"]("No hay suficiente stock para el producto " + item.name);
+                        $scope.carts = response.data.data;
+                        toastr["warning"]("No hay suficiente stock para el producto " + item.name);
                     });
                 $timeout(function () {
                     $scope.toggleLoading(false);

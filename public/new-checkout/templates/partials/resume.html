@@ -1,0 +1,45 @@
+<div class="col-md-3">
+    <div class="container-fluid form_separator">
+        <div class="row pad_top">
+            <div class="col-md-12">
+                <div class="container-fluid">
+                    <div class="row separator_product_cart" ng-repeat="item in carts.products.data">
+                        <div class="col-md-4 nopad text-center ">
+                            <img class="img-responsive" ng-src="{{ item.images.data[0].url }}">
+                        </div>
+                        <div class="col-md-8 pad_top_prod">
+                            <p><b>{{ item.name }}</b></p>
+                            <div  ng-if="item.special_price">
+                    <p class="oldPrice">$ {{ item.price | currency:"":0}}</p>
+                    <p class="newPrice">$ {{ item.special_price | currency:"":0}}</p>
+                     </div>
+                    <div ng-if="!item.special_price">
+                        $ {{ item.price | currency:"":0}}
+                    </div>
+
+                           
+                            <p><b>Cantidad : </b>{{ item.quantity }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid content_resume text-right" >
+                    <a href="" class="back-to-cart" ng-click="prev('/cart')">Volver al carrito</a>
+                    <p class="subtotal">
+                        <b>Subtotal :</b>
+                        $ {{ carts.totalizers.items.value | currency:"":0}}
+                    </p>
+                    <p class="shipping" ng-if="carts.totalizers.shipping">
+                        <b>Costo del envio :</b>
+                        $ {{ carts.totalizers.shipping.value| currency:"":0 }}
+                    </p>
+                    <p class="total">
+                        <b>Total :</b>
+                        $ {{ carts.original_total | currency:"":0}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-3">
+</div>

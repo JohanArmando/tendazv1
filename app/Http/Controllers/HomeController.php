@@ -90,4 +90,12 @@ class HomeController extends Controller
     {
         return view(Theme::current()->viewsPath.'.buildpage');
     }
+
+    public function profile(){
+        return view(Theme::current()->viewsPath.'.account.profile');
+    }
+    public function change_password(){
+        return view(Theme::current()->viewsPath.'.account.change_password');
+    }
+
 }

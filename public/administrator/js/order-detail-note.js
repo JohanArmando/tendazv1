@@ -13,10 +13,13 @@ $(document).on('ready', function () {
         var id = $('#id-order').val();
         var data = {'note':note , 'id': id};
         $.ajax({
-            url : route + '/' + id,
+            'headers': {
+                'X-CSRF-TOKEN': token,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            url : route + '/' + id + '?client_secret='  + client_secret + '&client_id=' + client_id ,
             'type' :'PUT',
-            'dataType':'json',
-            'headers':{'X-CSRF-TOKEN':token},
             'data': data,
             success : function (response) {
                 if(response == ''){

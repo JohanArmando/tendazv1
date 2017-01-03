@@ -24,6 +24,7 @@ myApp.factory('User' ,['$http', '$location', '$cookies' , "$rootScope" , "Cart",
                 $('.bg-danger').removeClass('hidden').text(response.data);
         })
     };
+
     userModel.doRegister = function (data) {
         var cartId = localStorage.getItem('cart_id') ? '/'+localStorage.getItem('cart_id') : '';
         return $http({
@@ -49,6 +50,7 @@ myApp.factory('User' ,['$http', '$location', '$cookies' , "$rootScope" , "Cart",
             });
         }).finally(function() {});  
     };
+
     userModel.getAuthStatus = function() {
         var status = $cookies.get('auth');
         if (status) {
@@ -90,6 +92,6 @@ myApp.factory('User' ,['$http', '$location', '$cookies' , "$rootScope" , "Cart",
           return Cart.getItems(Cart.getCartId()).data.data.customer.data._id;
       } 
     };
-    //guardar el customer id en una cookie par evitar una peticion mass
+   
     return userModel;
 }]);

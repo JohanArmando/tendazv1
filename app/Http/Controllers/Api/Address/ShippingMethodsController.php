@@ -3,18 +3,16 @@
 namespace Tendaz\Http\Controllers\Api\Address;
 
 use Illuminate\Http\Request;
-use Tendaz\Http\Controllers\Controller;
 use Tendaz\Models\Cart\Cart;
+use Tendaz\Http\Controllers\Controller;
 use Tendaz\Models\Shipping\ShippingMethod;
-use Tendaz\Transformers\ShippingMethodTransformer;
+use Tendaz\Transformers\CartTransformer;
 
 class ShippingMethodsController extends Controller
 {
     public function index(Cart $cart)
     {
-        return fractal()
-            ->collection(ShippingMethod::OptionsByCart($cart)->get(), new ShippingMethodTransformer())
-            ->withResourceName('shipping_methods')
-            ->toJson();
+        ShippingMethod::OptionsByCart($cart);
+        return response()->json( fractal()->item($cart, new CartTransformer()), 201);
     }
 }

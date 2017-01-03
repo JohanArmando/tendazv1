@@ -52,7 +52,7 @@ class Cart extends Model
 
     public function totalProducts(){
         return (int) $this->products->sum( function($product){
-            if($product->product->collection->first()->promotion){
+            if($product->product->collection->promotion){
                 return $product->promotional_price * $product->pivot->quantity;
             }else{
                 return $product->price * $product->pivot->quantity;
@@ -61,16 +61,16 @@ class Cart extends Model
     }
 
     public function totalShipping(){
-        return (int) ($this->order->shippingMethod ? $this->order->shippingMethod->cost : 0);
+        return (int) $this->order->total_shipping;
     }
 
-    public function scopeTotal(){
-        return (int) $this->order->total;
+    public function total(){
+        return (float) $this->order->total;
     }
     
-    public function scopeWeight(){
-        return (int) $this->products->sum(function($product){
-                return $product->weight * $product->pivot->quantity;
+    public function weight(){
+        return (float) $this->products->sum(function($product){
+                return $product->weight * $product->pivot->quantity ;
         });
     }
 
@@ -83,13 +83,18 @@ class Cart extends Model
     }
 
     public static function AssignUser($cart , $user)
-        {
+    {
         if (!$cart['customer_id'])
-
+        {
             $cart->update([
                 'customer_id' => $user['id']
             ]);
 
+            $cart->order()->update([
+                'customer_id' => $user['id']
+            ]);
+
+        }
         else if($cart['customer_id'] != $user['id'])
             self::createWithOutSession($user->shop->id , $user);
     }

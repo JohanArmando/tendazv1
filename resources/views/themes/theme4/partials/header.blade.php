@@ -4,7 +4,7 @@
 		<div class="container offset-top-5">
 			<div class="row">
 				<div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 col-sm-3">
-					<a href="{{url('/')}}">
+					<a href="{{url('/')}}" style="text-decoration: none">
 						@if($shop->logo)
 							<img class="logo replace-2x img-responsive" src="{{ asset("logos/$shop->id/$shop->logo") }}"  alt="Logo de la tienda {{ $shop->name_store }}" />
 						@else
@@ -57,14 +57,15 @@
 									<li class="{{ Request::is('/') ? 'active' : '' }}"><a href="{{url('/')}}" ><span class="act-underline">Inicio</span></a></li>
 									<li class="{{ Request::is('products') ? 'active' : '' }}"><a href="{{ url('/products') }}"><span class="act-underline">Productos</span></a></li>
 									@include(Theme::current()->viewsPath.'.partials.categories_tree')
-									<li class="{{ Request::is('cart/buy') ? 'active' : '' }}"><a href="{{url('/cart/buy')}}"><span class="act-underline">Carrito de compras</span></a></li>
-									<li ng-if="!usuario" class="{{ Request::is('auth/login') ? 'active' : '' }}"><a href="#" data-toggle="modal" data-target="#modalLoginForm"><span class="act-underline">Iniciar sesion</span></a></li>
-									<li class="{{ Request::is('contact') ? 'active' : '' }}"><a href="{{url('/contact')}}"><span class="act-underline">Contactenos</span></a></li>
+									<li class="{{ Request::is('contact') ? 'active' : '' }}">
+										<a href="{{url('/contact')}}"><span class="act-underline">Contactenos</span></a></li>
+									<li class="{{ Request::is('cart/buy') ? 'active' : '' }}"><a href="{{url('/cart/buy')}}">
+											<i class="fa fa-shopping-cart">&nbsp;</i><span class="act-underline">  Carrito de compras</span></a></li>
 								</ul>
 							</div>
 						</nav>
 					</div>
-					<div class="pull-right col-sm-2 col-md-2 col-lg-2 col-xl-1 text-right">
+					<div class="{{ !Request::is('/products') ? 'hidden' : ''}} pull-right col-sm-2 col-md-2 col-lg-2 col-xl-1 text-right">
 						<div class="search link-inline">
 							<a href="#" class="search__open"><span class="icon icon-search"></span></a>
 							<div class="search-dropdown">
@@ -78,6 +79,7 @@
 							</div>
 						</div>
 					</div>
+
 				</div>
 			</div>
 		</div>

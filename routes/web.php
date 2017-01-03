@@ -39,14 +39,18 @@ $appRoute = function (){
     //login
     Route::get('auth/login', 'HomeController@login');
 
+    //profile
+    Route::get('myProfile', 'HomeController@profile');
+    Route::get('change_password', 'HomeController@change_password');
+
     //Route checkout
     Route::get('checkout2' , 'HomeController@checkout');
     Route::get('checkout' , 'HomeController@checkout');
 
     //Route Checkout Mercadopago
-    Route::get('checkout/success' , 'Checkout\\CheckoutController@successMercadopago');
-    Route::get('checkout/failure' , 'Checkout\\CheckoutController@failureMercadopago');
-    Route::get('checkout/pending' , 'Checkout\\CheckoutController@pendingMercadopago');
+    Route::get('checkout/success' , 'checkout\\CheckoutController@successMercadopago');
+    Route::get('checkout/failure' , 'checkout\\CheckoutController@failureMercadopago');
+    Route::get('checkout/pending' , 'checkout\\CheckoutController@pendingMercadopago');
 
     //Route page build
     Route::get('build' ,'HomeController@build');

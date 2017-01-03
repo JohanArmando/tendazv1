@@ -32,7 +32,7 @@ Mis ventas
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="panel-title" style="margin-right: 20px;">
-                            <a href="{{asset('admin/export/orders')}}" ><i class="fa fa-cloud-download"></i>&nbsp; Exportar lista de ventas</a>
+                            <a href="{{asset('admin/orders/export')}}" ><i class="fa fa-cloud-download"></i>&nbsp; Exportar lista de ventas</a>
                         </div>
                     </div>
                 </div>
@@ -86,14 +86,14 @@ Mis ventas
                                                 </div>
                                             </td>
                                             <td><a class="text-tendaz"  href="{{ url('admin/orders')."/".$order->id }}">
-                                                    #000{{  $order->id }}</a></td>
+                                                    #{{  $order->id }}</a></td>
                                             <td>
                                                 <div class="text-center">
                                                     {{ $order->created_at}}
                                                 </div>
                                             </td>
                                             <td>
-                                                $ {{ $order->total }}
+                                                $ {{ number_format($order->total , 2        ) }}
                                             </td>
                                             <td>
                                                 @if(empty($order->user->name))
@@ -101,7 +101,7 @@ Mis ventas
                                                 @endif
                                             </td>
                                             <td>
-                                               <span>{{ $order->status->name }}</span>
+                                               <span>{{ $order->status->description }}</span>
                                             </td>
                                             <td>
                                                 <a href="#">

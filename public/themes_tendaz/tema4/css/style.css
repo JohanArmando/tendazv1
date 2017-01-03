@@ -15565,7 +15565,7 @@ aside .recent-post-box {
   width: 100%;
   height: 51px;
   border: 1px solid #e5e5e5;
-  padding: 14px 15px;
+  padding: 19px 33px;
   line-height: 21px;
 }
 @media (max-width: 1024px) {
@@ -25651,4 +25651,15 @@ body.modal-open {
 .product-listing:not(.row-view) .product.product--zoom:hover .product__inside,.carousel-products .product.product--zoom:hover .product__inside, .product-listing:not(.row-view) .product.product--zoom.hovered .product__inside, .carousel-products .product.product--zoom.hovered .product__inside {
     
     transition: .4s;
+}
+@media (max-width: 720px){
+  .stick_responsive > div > .slick-track{
+    width: 100%!important;
+}
+.stick_responsive > div > .slick-track > .slick-slide {
+    width: 100%!important;
+}
+.responsive_slide{
+  max-height: 100%!important;
+}
 }

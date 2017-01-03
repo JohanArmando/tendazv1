@@ -27,8 +27,7 @@
     });
 
     myApp.run(function($rootScope ,  $http,cartService  ,$cookies) {
-       $rootScope.cartId = localStorage.getItem('cart_id');;
-
+       $rootScope.cartId = localStorage.getItem('cart_id');
         $rootScope.cate = category;
         $rootScope.size = function(obj) {
             var size = 0, key;
@@ -70,6 +69,9 @@
             cartService.updateItemQuantity(cartId , data)
                 .then(function (response) {
                     toastr["info"]("Item agregado al carrito");
+                }).catch(function (response) {
+                toastr["warning"]("No hay suficiente cantidad del producto");
+                item.quantity = 1 ;
                 });
         }
     });

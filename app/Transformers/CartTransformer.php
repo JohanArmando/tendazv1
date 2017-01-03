@@ -18,7 +18,7 @@ class CartTransformer extends  TransformerAbstract
 {
 
     protected $defaultIncludes = [
-        'products' , 'customer' , 'shippingAddress' , 'order' , 'shippingMethod' , 'coupon'
+        'products' , 'customer' , 'shippingAddress' , 'order' , 'shippingMethod' , 'coupon' , 'shop'
     ];
     
     public function transform(Cart $cart)
@@ -66,6 +66,12 @@ class CartTransformer extends  TransformerAbstract
     public function includeCoupon(Cart $cart){
         return $cart->coupon ?
                 $this->item($cart->coupon, new  CouponTransformer())
+            : $this->null();
+    }  
+    
+    public function includeShop(Cart $cart){
+        return $cart->shop ?
+                $this->item($cart->shop, new  ShopTransformer())
             : $this->null();
     }
 
