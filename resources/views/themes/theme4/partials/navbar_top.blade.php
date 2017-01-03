@@ -1,41 +1,51 @@
 <div class="container" >
     <div class="row">
         <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3" >
-        
+
         </div>
         <div class="col-sm-9 col-md-9 col-lg-9 col-xl-9 text-right">
-       
-
-            <div class="account link-inline  hidden mobile-menu-on">
-             
+            <div class="account link-inline  hidden mobile-menu-on"  ng-if="usuario">
                 <div class="dropdown text-right">
                     <a class="dropdown-toggle" data-toggle="dropdown">
                         <span class="icon icon-person "></span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu--xs-full">
-                        <li><a href="#"><span class="icon icon-person"></span>
-                    
-                        </a></li>
-                        <li class="dropdown-menu__close"><a href="{{ url('/auth/logout/simple') }}"
-                                                            onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">
+                        <li>
+                            <a href="{{url('/')}}">
+                            <i class="icon icon-face"></i>&nbsp;<%usuario.personal_info.first_name%>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{url('myProfile')}}">
+                                <i class="icon icon-person"></i>&nbsp;Perfil
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{url('change_password')}}">
+                                <i class="icon icon-lock"></i>&nbsp;Cambiar Contraseña</a>
+                        </li>
+                        <li>
+                            <a  class="hidden" href="{{url('orders')}}">
+                                <i class="icon icon-list"></i>&nbsp;Mis Ordenes
+                            </a>
+                        </li>
+                        <li ng-click="cerrarSesion()">
+                            <a href="">
+                                <i class="icon icon-close"></i>&nbsp;Cerrar Sesion
+                            </a>
+                            <form id="logout-form" action="{{ url('/auth/logout/simple') }}" method="GET" style="display: none;">
+                            </form>
+                        </li>
+                        <li class="dropdown-menu__close">
+                            <a href="{{ url('/') }}">
                                 <span class="icon icon-close"></span>Cerrar</a>
                         </li>
                     </ul>
                 </div>
-                
-                    <ul>
-                        <li>
-                            <a href="{{ url('auth/login') }}" class="color">
-                                Inicia Sesion
-                            </a>
-                        </li>
-                    </ul>
-                
             </div>
             <div class="account-row-list pull-right mobile-menu-off">
-                <ul >
-                   
+                <ul>
                         <li ng-if="usuario">
                             <div class="account link-inline">
                                 <div class="dropdown text-right">

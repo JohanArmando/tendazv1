@@ -46,7 +46,7 @@
 							@if(!$shop->store->number_phone == '')
 							<li><a href="">Telefono: </a><span> {{$shop->store->number_phone}}</span></li>
 							@endif
-							@if(!$shop->store->number_phone == '')
+							@if(!$shop->store->address_2 == '')
 							<li><a href="">Direcci&oacute;n: </a><span> {{$shop->store->address_2}}</span></li>
 							@endif
 							@if(!$shop->store->conditions == '')
@@ -75,7 +75,7 @@
 						<div class="mobile-collapse__content">
 							<form class="form-inline" name="userForm" ng-submit="sendSubscriber(userForm.$valid)" ng-show="!letter.news" novalidate>
 								<input class="subscribe-form__input" type="email"  name="subscribe" ng-model="letter.email" required>
-								<button type="submit" class="btn btn--ys btn--xl">SUBSCRIBE</button>
+								<button type="submit" class="btn btn--ys btn--xl">SUSCRIBIR</button>
 							</form>
 							<div class="contact-ok alert alert-success text-center-xs" ng-show="letter.news">
 								<i class="fa fa-check-circle fa-2x d-inline pull-left m-half-right m-none-xs m-quarter-bottom-xs"></i>
@@ -110,7 +110,7 @@
 	<div class="divider divider-md visible-sm"></div>
 	<div class="container footer-copyright">
 		<div class="row">
-			<div class="col-lg-12"> <a href="index.html"><span>Tendaz</span>Store</a> &copy; 2016 .Todos lo derechos reservador Maxcorp Inc. </div>
+			<div class="col-lg-12"> <a href="#"><span>Tendaz.</span>Store</a> &copy; 2017 .Todos lo derechos reservados, Maxcorp.Inc. </div>
 		</div>
 	</div>
 	<a href="#" class="btn btn--ys btn--full visible-xs" id="backToTop">Back to top <span class="icon icon-expand_less"></span></a>

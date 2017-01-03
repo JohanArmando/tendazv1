@@ -122,7 +122,7 @@ class Customer extends Authenticatable
     {
         if(! empty($value)){
             $name = Carbon::now()->second.$value->getClientOriginalName();
-            $this->attributes['image'] = $name;
+            $this->attributes['avatar'] = $name;
             \Storage::disk('profile')->put($name, \File::get($value));
         }
     }

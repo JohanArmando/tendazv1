@@ -156,7 +156,7 @@
 								</div>
 								<div class="content">
 									<ul class="nav nav-tabs nav-tabs--ys1" role="tablist">
-										<li class="active"><a href="#Tab1"  role="tab" data-toggle="tab" class="text-uppercase">DESCRIPTION</a></li>
+										<li class="active"><a href="#Tab1"  role="tab" data-toggle="tab" class="text-uppercase">Descripci&oacute;n</a></li>
 										<li class="hidden"><a href="#Tab2" role="tab" data-toggle="tab" class="text-uppercase">Comentarios</a></li>
 									</ul>
 									<div class="tab-content tab-content--ys nav-stacked">
