@@ -4,9 +4,9 @@ namespace Tendaz\Http\Controllers\Tendaz;
 
 use Illuminate\Support\Str;
 use Tendaz\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 use Tendaz\Http\Requests;
+use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
 

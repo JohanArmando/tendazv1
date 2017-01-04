@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Tendaz\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Tendaz\Models\Customer;
 
 class ForgotPasswordController extends Controller
 {
@@ -37,7 +38,7 @@ class ForgotPasswordController extends Controller
     {
         $this->validate($request, ['email' => 'required|email']);
 
-        $response = $this->broker()->sendResetLink(
+        $response = $this->sendResetLink(
             $request->only('email')
         );
 
@@ -48,6 +49,11 @@ class ForgotPasswordController extends Controller
         return back()->withErrors(
             ['email' => trans($response)]
         );
+    }
+
+    public function getUser($credentials)
+    {
+        Customer::where('email' , $credentials['email']);
     }
 
     public function broker()

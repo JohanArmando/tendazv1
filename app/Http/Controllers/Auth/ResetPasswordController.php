@@ -37,7 +37,7 @@ class ResetPasswordController extends Controller
 
         $this->validate($request, $this->rules(), $this->validationErrorMessages());
         $response = $this->broker()->reset(
-            $this->credentials($request), function ($user, $password) {
+            $this->credentials($request), function ($user, $password) use ($request) {
                 $this->resetPassword($user, $password);
             }
         );
