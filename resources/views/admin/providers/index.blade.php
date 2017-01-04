@@ -9,7 +9,7 @@ Mis provedores
     <div class="page-header page-header-block">
         <div class="page-header-section">
                 <h4 class="title">
-                    <img class="page-header-section-icon" src="{{asset('administrator/image/icons/icons-base/provider.png')}}">&nbsp; Mis provedores
+                    <img class="page-header-section-icon" src="{{asset('administrator/image/icons/icons-base/provider.png')}}">&nbsp; Mis proveedores
                 </h4>
         </div>
         <div class="page-header-section">
@@ -17,7 +17,7 @@ Mis provedores
                 <ol class="breadcrumb breadcrumb-transparent nm">
                     <li><a href="{{url('admin')}}" style="color: darkgrey;">Inicio</a></li>
                     <li><a href="{{url('admin/orders')}}" style="color: orange;">Ventas</a></li>
-                    <li class="active" style="color: orange;">Mis Provedores</li>
+                    <li class="active" style="color: orange;">Mis Proveedores</li>
                 </ol>
             </div>
         </div>
@@ -28,7 +28,7 @@ Mis provedores
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="panel-title" style="margin-right: 20px;">
-                        <a data-toggle="modal" data-target="#provider" href="{{asset('admin/export/orders')}}" ><i class="fa fa-plus"></i>&nbsp; Crear Provedor</a>
+                        <a data-toggle="modal" data-target="#provider" href="{{asset('admin/export/orders')}}" ><i class="fa fa-plus"></i>&nbsp; Crear Proveedor</a>
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@ Mis provedores
         <div class="col-md-12">
             <div class="panel panel-default" >
                 <div class="panel-heading">
-                    <h3 class="panel-title">Provedores</h3>
+                    <h3 class="panel-title">Proveedores</h3>
                 </div>
                 <div class="panel-body">
                     <br><br>
@@ -113,7 +113,7 @@ Mis provedores
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Crear Provedor</h4>
+                    <h4 class="modal-title" id="myModalLabel">Crear Proveedor</h4>
                 </div>
                 <form action="{{url('admin/providers')}}" method="post">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">

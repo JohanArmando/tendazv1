@@ -6,6 +6,9 @@
 <div class="container">
     <div class="row">
         <div class="clearfix"></div>
+        <div class="col-md-12 text-center">
+            <h2>{{$shop->store->message}}</h2>
+        </div>
         <div class="col-md-12">
             <div class="text-center" style="margin-left: 250px;">
                 <img class="img-responsive" src="{{asset('themes_tendaz/default/images/buildpage.png')}}">

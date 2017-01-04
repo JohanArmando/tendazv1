@@ -85,7 +85,7 @@ Cupones de descuento
                                             @if(!$coupon->limit_dates)
                                                 Disponible siempre
                                             @else
-                                                {{ $coupon->start_date  ?  'Desde :'.$coupon->start_date :'Siempre' }} {{ $coupon->end_date ? 'Hasta :'.$gif->EndTime  :'Siempre'}}
+                                                {{ $coupon->start_date  ?  'Desde :'.$coupon->start_date :'Siempre' }} {{ $coupon->end_date ? 'Hasta :'.$coupon->end_date  :'Siempre'}}
                                             @endif
                                         </td>
                                         <td>

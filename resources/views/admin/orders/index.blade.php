@@ -47,6 +47,16 @@ Mis ventas
                     </div>
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-info"></i>&nbsp; Conocer Estados de una orden</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="col-md-12">
                     <div class="panel panel-default" >
                         <div class="panel-heading">
@@ -71,7 +81,7 @@ Mis ventas
                                             <th>Fecha</th>
                                             <th>Total</th>
                                             <th>Comprador</th>
-                                            <th>Estado de la order</th>
+                                            <th>Estado de la orden</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -119,7 +129,32 @@ Mis ventas
                 </div>
             </div>
             <div class="page-end-space"></div>
-
+        <!-- modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Estados de una Orden</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            @foreach($status as $state)
+                                <div class="col-md-6">
+                                    <p><strong>{{$state->id}} : {{$state->name}} </strong>- ({{$state->accion}})</p>
+                                    <p>{{$state->description}}</p>
+                                    <hr>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
         @endsection
         @section('scripts')
 

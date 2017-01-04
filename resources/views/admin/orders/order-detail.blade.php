@@ -55,25 +55,23 @@
                                             <?php $sub = 0;?>
                                             <?php $total = 0;?>
                                             @foreach($orders->products as $producto)
-                                                <tr>
-<<<<<<< HEAD
-                                                    <th style="width: 150px;"></th>
-                                                    <th style="width: 100px;">Producto</th>
-                                                    <th style="width: 100px;">Precio</th>
-                                                    <th style="width: 50px; text-align: center;">Cantidad</th>
-                                                    <th style="width: 150px;">Total</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php $sub = 0;?>
-                                                <?php $total = 0;?>
-                                                @foreach($orders->products as $producto)
                                                     <tr>
                                                         <td>
                                                             <img src="{{ $producto->product->mainImage() }}" width="50px"  height="50px" class="thumbnail" alt="">
                                                         </td>
                                                         <td>
+                                                            {{ $producto->product->name }}
+                                                            @if(!empty($producto->option_name_1))
+                                                                ({{ $producto->option_value_1 }})
+                                                            @endif
 
+                                                            @if(!empty($producto->option_name_2))
+                                                                /({{ $producto->option_value_2 }})
+                                                            @endif
+
+                                                            @if(!empty($producto->option_name_3))
+                                                                /({{ $producto->option_value_3 }})
+                                                            @endif
                                                         </td>
                                                         @if($producto->product->collection->promotion)
                                                             <td>$ {{ number_format($producto->promotional_price,2,',','.') }}</td>
@@ -87,75 +85,21 @@
 
                                                         @endif
                                                     </tr>
-                                                @endforeach
-
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td><strong>Sub:</strong></td>
-                                                    <td><strong>$ {{ number_format($orders->total_products,2,',','.') }}</strong></td>
-                                                </tr><tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td><strong>Envio:</strong></td>
-                                                    <td><strong>$ {{ number_format($orders->total_shipping,2,',','.') }}</strong></td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                            @endforeach
+                                                    <tr>
+                                                        <td></td><td></td><td></td>
+                                                        <td><strong>Sub:</strong></td>
+                                                        <td><strong>$ {{ number_format($orders->total_products,2,',','.') }}</strong></td>
+                                                    </tr><tr>
+                                                        <td></td><td></td><td></td>
+                                                        <td><strong>Envio:</strong></td>
+                                                        <td><strong>$ {{ number_format($orders->total_shipping,2,',','.') }}</strong></td>
+                                                    </tr>
+                                                    <tr>
+                                                    <td></td><td></td><td></td>
                                                     <td><strong>Total:</strong></td>
                                                     <td><strong>$ {{ number_format($orders->total , 2 , ',' , '.') }}</strong></td>
-=======
-                                                    <td>
-                                                        <img src="{{ $producto->product->mainImage() }}" width="50px"  height="50px" class="thumbnail" alt="">
-                                                    </td>
-                                                    <td>
-                                                        {{ $producto->product->name }}
-                                                        @if(!empty($producto->option_name_1))
-                                                            ({{ $producto->option_value_1 }})
-                                                        @endif
-
-                                                        @if(!empty($producto->option_name_2))
-                                                            /({{ $producto->option_value_2 }})
-                                                        @endif
-
-                                                        @if(!empty($producto->option_name_3))
-                                                           /({{ $producto->option_value_3 }})
-                                                        @endif
-                                                    </td>
-                                                    @if(($producto->price_promotion_amount) != 0)
-                                                        <td>$ {{ number_format($producto->price_promotion_amount,2,',','.') }}</td>
-                                                        <td style="text-align: center !important;">{{ $producto->pivot->quantity }}</td>
-                                                        <td>{{ $t = number_format(($producto->pivot->quantity * $producto->price_promotion_amount),2,',','.')  }}</td>
-                                                        <?php $sub += $t ?>
-                                                        <?php $total += $t ?>
-                                                    @else
-                                                        <td>{{ number_format($producto->price , 2 ,',' , '.') }}</td>
-                                                        <td style="text-align: center !important;">{{ $producto->pivot->quantity }}</td>
-                                                        <td>{{ $t = number_format(($producto->pivot->quantity * $producto->price),2,',','.')  }}</td>
-                                                        <?php $total += $t ?>
-                                                        <?php $sub += $t ?>
-                                                    @endif
->>>>>>> f9c13c21be84a6f9038db966bb7a8e27eb4608bb
                                                 </tr>
-                                            @endforeach
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td><strong>Sub:</strong></td>
-                                                <td><strong>$ {{ number_format($sub,2,',','.') }}</strong></td>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td><strong>Total:</strong></td>
-                                                <td><strong>$ {{ number_format($total , 2 , ',' , '.') }}</strong></td>
-                                            </tr>
                                         </tbody>
                                     </table>
                                     <br>
@@ -167,16 +111,16 @@
                                 <div class="panel-body">
                                     <ul class="list-unstyled">
                                         <li class="text-center">
-                                            @if(isset($orders->user->path) && !empty($orders->user->path))
-                                                <img class="img-rounded img-bordered-primary" src="{{ asset("users/images/$orders->user->path") }}" alt width="100px" height="100px">
+                                            @if(isset($orders->user->avatar) && !empty($orders->user->avatar))
+                                                <img class="img-rounded img-bordered-inverse" src="{{ asset("profile/".$orders->user->avatar) }}" alt width="100px" height="100px">
                                             @else
-                                                <img class="img-rounded img-bordered-primary" src="{{ asset('administrator/image/avatar/avatar7.jpg') }}" alt width="100px" height="100px">
+                                                <img class="img-rounded img-bordered-inverse" src="{{ asset('administrator/image/avatar/avatar7.jpg') }}" alt width="100px" height="100px">
                                             @endif
                                         </li>
                                         <li class="text-center">
 
                                             <h4 class="semibold ellipsis">
-                                                <a href="{{asset("admin/customers/").'/'.$orders->user->id}}">
+                                                <a href="{{asset("admin/customers/").'/'.$orders->user->uuid}}">
                                                     {{ $orders->user->name }}
                                                 </a>
                                             </h4>
@@ -186,8 +130,8 @@
                                         </li>
                                         <li class="text-center">
                                             <p class="text-center">
-                                                <strong><a href="#">@if(empty($orders->user->email))
-                                                        @else {{ $orders->user->email }} @endif</a></strong>
+                                                <strong>Correo:</strong>@if(empty($orders->user->email))
+                                                        @else {{ $orders->user->email }} @endif
                                                 <br>
                                                 <strong>Identificaci&oacute;n:</strong> @if(empty($orders->user->identification))N.N
                                                 @else {{ $orders->user->identification }} @endif

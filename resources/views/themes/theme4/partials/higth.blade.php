@@ -7,7 +7,8 @@
         </div>
         <h2 class="text-center text-uppercase title-under">Lo mas destacado</h2>
     </div>
-    <slick ng-if="features.length > 0" class="carousel-products row stick_responsive" current-index="index" responsive="breakpoints" slides-to-show=3 slides-to-scroll=1  prev-arrow=".btn-prev" next-arrow=".btn-next">
+    <slick ng-if="features.length > 0" class="carousel-products row stick_responsive" current-index="index" responsive="breakpoints"
+           slides-to-show=3 slides-to-scroll=1  prev-arrow=".btn-prev-hight" next-arrow=".btn-next-hight">
         <div   ng-repeat="product in features">
             <div ng-include="'tpl.html'"></div>
         </div>

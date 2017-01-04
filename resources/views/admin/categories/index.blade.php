@@ -1,3 +1,6 @@
+@section('css')
+    <link rel="stylesheet" href="{{asset('administrator/css/categories.css')}}">
+@stop
 @section('title')
 Crear categorias
 @stop
@@ -10,7 +13,7 @@ Crear categorias
                     <img class="page-header-section-icon" src="{{asset('administrator/image/icons/icons-base/category.png')}}">
                     &nbsp; Categorias
                 </h4>
-            </div>
+                </div>
                 <div class="page-header-section">
                     <div class="toolbar">
                         <ol class="breadcrumb breadcrumb-transparent nm">
@@ -36,14 +39,13 @@ Crear categorias
                                 @include('admin.partials.edit-category')
                                 <script type="text/ng-template" id="nodes_renderer2.html">
                                     <div class="tree-node">
-                                        <div class="pull-left tree-handle" ui-tree-handle style="margin-left: 15%">
+                                        <div data-tooltip="Modificar Posicion" class="pull-left tree-handle" ui-tree-handle style="margin-left: 15%">
                                             <span class="fa fa-list fa-2x" style="margin-top: 30%" ng-click="cambiar()"></span>
                                         </div>
                                         <div class="tree-node-content">
                                             <div class="row" style="margin: 2% 10% 2% 15%">
                                                 <div class="col-md-1">
-                                                    <a class="btn btn-primary btn-lg" data-nodrag ng-click="toggle(this)"
-                                                            style="background-color: #808080;border-color: #cccccc">
+                                                    <a data-tooltip="Minimizar Categoria" class="btn-category btn btn-primary btn-lg" data-nodrag ng-click="toggle(this)">
                                                         <span class="glyphicon" ng-class="{
                                                                 'glyphicon-chevron-right': collapsed,
                                                                 'glyphicon-chevron-down': !collapsed
@@ -56,12 +58,10 @@ Crear categorias
                                                               style="height: 42px; width: 117%;margin-left: 10px" required>
                                                    </div>
                                                 <div class="col-md-4">
-                                                    <a class="pull-right btn btn-primary btn-lg"  data-nodrag ng-click="newSubItem(this)"
-                                                       style="background-color:#3c3c3c; margin-left:2px;border-color:#3c3c3c;margin-right: 8px; color: white">
+                                                    <a data-tooltip="Editar Categoria" class="pull-right btn btn-edit-category btn-primary btn-lg"  data-nodrag ng-click="newSubItem(this)">
                                                         <span class="fa fa-plus" title="Agregar SubCategorias"></span>
                                                     </a>
-                                                    <a class="pull-right btn btn-primary btn-lg"  data-nodrag ng-click="actualizar(this)"
-                                                       style="background-color:#cccccc;border-color:#cccccc;margin-right: 8px; color: white"
+                                                    <a data-tooltip="Agregar Subcategoria" class="pull-right btn btn-subcategory btn-primary btn-lg"  data-nodrag ng-click="actualizar(this)"
                                                        data-toggle="modal" data-target="#editModalCategory">
                                                         <span class="fa fa-pencil" title="Editar"></span>
                                                     </a>
@@ -107,14 +107,13 @@ Crear categorias
                                     </div>
                                 </div>
                             </div>
+                        </form>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
         <div class="page-end-space"></div>
         </div>
-        <div>
     @endsection
     @section('scripts')
         <script src="{{ asset('administrator/angular/angular.min.js') }}"></script>

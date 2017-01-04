@@ -74,7 +74,7 @@ Informacion de contacto
     @endsection
 @section('scripts')
     <script type="text/javascript" src="{{asset('administrator/plugins/inputmask/js/inputmask.js')}}"></script>
-    <script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>
+    <script type="text/javascript" src="{{asset('administrator/js/nicEdit-latest.js')}}"></script>
     <script type="text/javascript">
         bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
     </script>

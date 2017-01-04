@@ -98,7 +98,7 @@
                                         </td>
                                         <td class="hidden-sm hidden-xs">
                                             <strong>
-                                                <a href="#">{{ $customer->latestOrder->first() == null ? 'Ninguna' : $customer->latestOrder->first()->id }}</a>
+                                                <a href="{{url('orders/')}}">{{ $customer->latestOrder->first() == null ? 'Ninguna' : $customer->latestOrder->first()->id }}</a>
                                             </strong>
                                         </td>
                                     </tr>
