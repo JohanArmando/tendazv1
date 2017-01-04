@@ -26,7 +26,7 @@ class UpdateLastIpOnlogin
     public function handle($event)
     {
         $user = $event->user;
-        $user->last_sign_in_ip = $user->current_sign_in_ip ? $user->current_sign_in_at : Carbon::now() ;
+        $user->last_sign_in_ip = !$user->current_sign_in_ip ?:  $user->current_sign_in_ip ;
         $user->current_sign_in_ip = Request::ip();
         $user->save();
     }

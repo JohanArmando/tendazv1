@@ -12,19 +12,14 @@ class CustomerResetPassword extends Notification
     use Queueable;
 
     public $token;
-    public $shopName;
-    public $customerName;
-
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($token , $shopName , $customerName)
+    public function __construct($token)
     {
         $this->token = $token;
-        $this->shopName = $shopName;
-        $this->customerName = $customerName;
     }
 
     /**
@@ -46,15 +41,19 @@ class CustomerResetPassword extends Notification
      */
     public function toMail($notifiable)
     {
-        $url = url('/password/reset/'.$this->token);
-        $gretting = session()->has('users') ? 'Hola '.session()->get('users')['name'] :  'Hola '.$this->customerName ;
+        $domain = $notifiable->shop->domainMain->first()->ssl;
+        $url = $domain.'/password/reset/'.$this->token."?email=$notifiable->email";
+        $gretting = 'Hola '.$notifiable->full_name;
 
         return (new MailMessage)
             ->subject('Restablecer contraseña tienda')
+            ->success()
             ->greeting($gretting)
             ->line('Usted está recibiendo este correo electrónico porque hemos recibido una solicitud de restablecimiento de contraseña de su cuenta.!')
-            ->action('Reestable Contraseña', $url)
-            ->line('Si no has solicitado un restablecimiento de contraseña, no se requiere ninguna acción adicional.!');
+            ->action('Reestablecer Contraseña', $url)
+            ->line('Si no has solicitado un restablecimiento de contraseña, no se requiere ninguna acción adicional.!')
+            ->line("Te inivtamos a visitar nuestra tienda <a href='". $domain ."'>" .  $notifiable->shop->name ."</a>!.<br>Gracias $notifiable->full_name");
+
     }
 
     /**

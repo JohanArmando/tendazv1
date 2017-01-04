@@ -2,7 +2,10 @@
 
 namespace Tendaz\Http\Controllers\Auth;
 
+use igaster\laravelTheme\Facades\Theme;
+use Illuminate\Http\Request;
 use Tendaz\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
 class ForgotPasswordController extends Controller
@@ -20,13 +23,35 @@ class ForgotPasswordController extends Controller
 
     use SendsPasswordResetEmails;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    public function showLinkRequestForm()
+    {
+        return view(Theme::current()->viewsPath.".password.email");
+    }
+
+    public function sendResetLinkEmail(Request $request)
+    {
+        $this->validate($request, ['email' => 'required|email']);
+
+        $response = $this->broker()->sendResetLink(
+            $request->only('email')
+        );
+
+        if ($response === Password::RESET_LINK_SENT) {
+            return back()->with('status', trans($response));
+        }
+
+        return back()->withErrors(
+            ['email' => trans($response)]
+        );
+    }
+
+    public function broker()
+    {
+        return Password::broker();
     }
 }
