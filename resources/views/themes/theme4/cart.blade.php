@@ -15,29 +15,27 @@
 								<thead>
 									<tr>
 										<th>Producto</th>
-										<th>&nbsp;</th>
-										<th style="width: 25%;border: 1px solid #E5E5E5">Precio unitario</th>
+										<th>Precio unitario</th>
 										<th>Cantidad</th>
-										<th style="width: 25%">Subtotal</th>
-										<th>&nbsp;</th>
+										<th>Subtotal</th>
+										<th>Acciones</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr ng-repeat="cart in carts.products.data" ng-cloak="">
 										<td>
-											<div class="shopping-cart-table__product-image">
+											<div class="shopping-cart-table__product-image text-center">
 												<a href="{{url('#')}}" ng-show="size(cart.images.data[0].url) > 0">
-													<img ng-src="<% cart.images.data[0].url %>" alt="" width="100" height="125"/>
+													<img ng-src="<% cart.images.data[0].url %>" alt="" class="img-circle" width="50" height="50"/>
 												</a>
 											</div>
 											<div class="shopping-cart-table__product-image">
 												<a href="{{url('#')}}" ng-show="size(cart.images.data[0].url) == 0">
-														<img ng-src="http://www.jimdunlop.com/images/products/default-product-5.5.jpg" alt="" width="100" height="100"/>
+														<img ng-src="http://www.jimdunlop.com/images/products/default-product-5.5.jpg" alt="" class="img-circle" width="50" height="50"/>
 												</a>
 											</div>
-										</td>
-										<td>
-											<h5 class="shopping-cart-table__product-name text-left text-uppercase">
+											<br>
+											<h5 class="shopping-cart-table__product-name text-center text-uppercase">
 												<a href="{{url('#')}}"><% cart.name %></a>
 											</h5>
 											<ul class="hidden shopping-cart-table__list-parameters" >
@@ -47,19 +45,19 @@
 												<li class="visible-xs">
 													<span>Cantidad:</span>
 													<div class="number input-counter">
-													    <span class="minus-btn"></span>
-													    <input type="text" value="1" size="5"/>
-													    <span class="plus-btn"></span>
+														<span class="minus-btn"></span>
+														<input type="text" value="1" size="5"/>
+														<span class="plus-btn"></span>
 													</div>
 												</li>
 											</ul>
 										</td>
-										<td style="border: 1px solid black">
-											<div class="shopping-cart-table__product-price unit-price" ng-hide="cart.special_price">
-												$ <% cart.price | currency:"":0 %>
+										<td>
+											<div class="shopping-cart-table__product-price text-center" ng-hide="cart.special_price">
+												$<% cart.price | currency:"":0 %>
 											</div>
-											<div class="shopping-cart-table__product-price unit-price" ng-show="cart.special_price">
-												$ <% cart.special_price| currency:"":0 %>
+											<div class="shopping-cart-table__product-price text-center" ng-show="cart.special_price">
+												$<% cart.special_price| currency:"":0 %>
 											</div>
 										</td>
 										<td>
@@ -74,11 +72,11 @@
 										</td>
 										<td>
 											<div class="shopping-cart-table__product-price subtotal" ng-hide="cart.special_price">
-												$ <% (cart.price * cart.quantity )| currency:"":0%>
+												$<% (cart.price * cart.quantity )| currency:"":0%>
 											</div>
 
 											<div class="shopping-cart-table__product-price subtotal" ng-show="cart.special_price">
-												$ <%( cart.special_price * cart.quantity)| currency:"":0  %>
+												$<%( cart.special_price * cart.quantity)| currency:"":0  %>
 											</div>
 										</td>
 										<td>
@@ -123,10 +121,6 @@
 									<tr>
 										<th class="text-left">Subtotal:</th>
 										<td class="text-right">$<% carts.totalizers.items.value| currency:"":0 %></td>
-									</tr>
-									<tr>
-										<th class="text-left">Envio:</th>
-										<td class="text-right">$ <% carts.totalizers.shipping.value| currency:"":0 %></td>
 									</tr>
 								</tbody>
 								<tfoot>

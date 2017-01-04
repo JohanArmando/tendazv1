@@ -109,8 +109,8 @@
 			<div class="product__inside">
 				<div class="product__inside__image">
 					<a href="{{ url('/') }}<% '/detail/' + product.slug %>">
-							<img ng-src="<% product.images.data[0].url %>" alt="" ng-show="product.images.data" height="400">
-						<img ng-src="<% BASEURL + '/administrator/image/noImage.png' %>" alt="" height="400"  ng-hide="product.images.data">
+							<img ng-src="<% product.images.data[0].url %>" alt="" ng-show="product.images.data"  >
+						<img ng-src="<% BASEURL + '/administrator/image/noImage.png' %>" ng-hide="product.images.data" >
 					</a>
 					<!--<a href="#" ng-hide="product.stock == 0" ng-click="viewProduct(product)"  data-toggle="modal" data-target="#quickViewModal" class="quick-view">
 						<b>
