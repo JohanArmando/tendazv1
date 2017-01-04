@@ -25,7 +25,7 @@ class CustomerTransformer extends TransformerAbstract
                     'last_name'     => $customer->last_name,
                     'phone'         => $customer->phone,
                     'identification'=> $customer->identification,
-                    'profile'       => $customer->avatar
+                    'avatar'       => $customer->avatar
                 ]
             ];
         }

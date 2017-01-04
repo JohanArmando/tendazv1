@@ -73,7 +73,7 @@ class Customer extends Authenticatable
 
     public function addresses(){
         return $this->belongsToMany(Address::class , 'customer_address' , 'customer_id' , 'address_id')
-            ->withPivot('id' , 'uuid' , 'isActive' , 'isShipping' , 'isBilling' , 'isPrimary');
+            ->withPivot('id'  , 'isActive' , 'isShipping' , 'isBilling' , 'isPrimary');
     }
 
     public function addressesForShipping(){
@@ -121,9 +121,13 @@ class Customer extends Authenticatable
     public function setAvatarAttribute($value)
     {
         if(! empty($value)){
-            $name = Carbon::now()->second.$value->getClientOriginalName();
-            $this->attributes['avatar'] = $name;
-            \Storage::disk('profile')->put($name, \File::get($value));
+            if (is_string($value)){
+                $this->attributes['avatar'] = $value;
+            }else{
+                $name = Carbon::now()->second.$value->getClientOriginalName();
+                $this->attributes['avatar'] = $name;
+                \Storage::disk('profile')->put($name, \File::get($value));
+            }
         }
     }
 

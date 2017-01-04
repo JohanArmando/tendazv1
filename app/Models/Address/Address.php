@@ -13,14 +13,18 @@ use Webpatser\Uuid\Uuid;
 class Address extends Model
 {
     protected $fillable = ['uuid' ,'name' , 'street' , 'complement' , 'neighborhood' , 'state_id' , 'city_id' , 'country_id' , 'receiverName' , 'longitude'];
-
+    
     public function __construct(array $attributes = null){
         if(count($attributes) > 0){
             $this->attributes['uuid'] = Uuid::generate(4)->string;
             parent::__construct($attributes);
         }
     }
-
+    
+    public function getRouteKeyName()
+    {
+        return 'uuid';
+    }
     public function customer(){
         return $this->belongsToMany(Customer::class , 'customer_address'  , 'address_id' , 'customer_id')->withPivot('id');
     }

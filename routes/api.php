@@ -20,9 +20,17 @@ Route::group(['domain' => env('APP_API_URL') , 'namespace' => 'Api'] , function 
     Route::post('password/email' , [
         'uses' => 'Auth\\ForgotPasswordController@sendResetLinkEmail'
     ]);
+    
+    Route::get('customers/{customer}/addresses/{address}/main' , [
+        'uses' => 'Auth\\AddressesController@main'
+    ]);
 
+    Route::resource('customers.addresses' , 'Auth\\AddressesController', [
+        'only' => ['index' , 'store' , 'show' , 'update' , 'destroy']
+    ]);
     //Routes auth
     Route::group(['prefix' => 'auth' , 'namespace' => 'Auth'] , function (){
+
         Route::post('login/{cart?}' , [
             'uses'       => 'LoginController@auth',
             'middleware' => ['custom_api' , 'cors']
