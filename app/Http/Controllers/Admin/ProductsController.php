@@ -9,7 +9,9 @@ use Illuminate\Http\Request;
 use Tendaz\Models\Products\Option;
 use Tendaz\Models\Products\Product;
 use Tendaz\Models\Products\Variant;
+use Tendaz\Models\Products\Section;
 use Tendaz\Models\Categories\Category;
+use Tendaz\Models\Categories\Categorypro;
 use Tendaz\Http\Controllers\Controller;
 use Tendaz\Jobs\DeleteImagesProductJob;
 use Tendaz\Components\ProductListImport;
@@ -210,18 +212,20 @@ class ProductsController extends Controller
     }
 
     public function editProduct($subdomain , $id, Request $request){
-        $categories = Category::where('shop_id',$request->shop->id)->get();
-        $product = Product::where('uuid',$id)->first();
-        $variant = Variant::where('product_id',$product->id)->first();
-        return view('admin.product.edit',compact('product','categories','variant'));
+        $product        =   Product::where('uuid',$id)->first();
+        $variant        =   Variant::where('product_id',$product->id)->first();
+        $categories     =   Category::where('shop_id',$request->shop->id)->get();
+        return view('admin.product.edit',compact('product','variant','categories'));
     }
 
     public function putProduct($subdomain,$id, Request $request){
-        $publish    =   $request->publish;
-        $cat_arrray =   $request->category_id;
-        if (is_null($request->publish)) {   $publish    =   11;  }
-
         $product = Product::where('uuid',$id)->first();
+        $publish            =   $request->publish;
+        $cat_arrray         =   $request->category_id;
+        $current_cats       =   $product->categories->pluck('id')->toArray();
+        $variant = Variant::where('product_id',$product->id)->first();
+        $section    =   Section::where('product_id',$product->id)->first();
+        if (is_null($request->publish)) {   $publish    =   11;  }
         $product->update([
             'name' => $request->name,
             'slug' => $request->slug,
@@ -230,9 +234,6 @@ class ProductsController extends Controller
             'description' => $request->description,
             'publish' => $publish
             ]);
-
-        $variant = Variant::where('product_id',$product->id)->first();
-
         
         $variant->update([
             'sku' => $request->sku,
@@ -243,24 +244,32 @@ class ProductsController extends Controller
             'stock'     => $request->stock,
             'show'      => $request->show
             ]);
+
         
-
-        $check_cat_db = Categorypro::where('product_id',$product->id)->pluck('category_id')->toArray();    
-        foreach ($cat_arrray as $cat) {
-            $check_cat  = Categorypro::where('category_id',$cat)->where('product_id',$product->id)->first();
-            if (empty($check_cat)) {
-                Categorypro::Create([
-                    'product_id'    => $product->id,
-                    'category_id'   => $cat
-                    ]);
-            }   elseif (!in_array($cat,$check_cat_db)) {
-                    $check_cat->delete();
-            }
-            else{
-
+        $section->update([
+            'primary' => $request->primary,
+            'shipping_free' => $request->shipping_free,
+            'promotion' => $request->promotion
+            ]);
+        if (count($cat_arrray) > 0) {
+            foreach ($cat_arrray as $new_cat) {
+            if(!in_array($new_cat, $current_cats)){
+                $product->categories()->attach($new_cat);
+            }else{
+                foreach ($current_cats as $current_cat) {
+                    if (!in_array($current_cat, $cat_arrray)) {
+                        $product->categories()->detach($current_cat);
+                    }
+                }
+                
             }
         }
-        // dd($check_cat_db);
+        }else{
+            foreach ($product->categories as $current_cat) {
+                $product->categories()->detach($current_cat);
+            }
+        }
+       
         return redirect()->to('admin/products')->with('message', array('type' => 'success' , 'message' => 'Editado correctamente'));
 
     }

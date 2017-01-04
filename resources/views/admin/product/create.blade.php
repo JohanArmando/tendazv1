@@ -61,9 +61,7 @@
                                     <div class="tab-pane np" id="comments">
                                         <div class="media-list">
                                             {!! Form::open(['url' => url ("admin/products"."?client_secret=".$shop->uuid."&client_id=".$shop->id)  , 'method' => 'POST' , 'class' => 'dropzone hidden-xs hidden-sm' ,'id' => 'my-dropzone-avanzado' , 'files' => true,'role'=>'form', 'data-toggle'=> 'validator']) !!}
-
-                                            @include('admin.partials.form-advanced')
-
+                                                @include('admin.partials.form-advanced')
                                             {!! Form::close() !!}
                                         </div>
                                     </div>
@@ -97,8 +95,9 @@
                         <div class="col-xs-4">
                             <label>Peso</label>
                             <div class="input-group">
-                                <input class="form-control" name="weight" size="30" type="text" value="" />
                                 <div class="input-group-addon">kg</div>
+                                <input class="form-control" name="weight" size="30" type="text" value="" />
+                                
                             </div>
                         </div>
                         <div class="col-xs-4">
