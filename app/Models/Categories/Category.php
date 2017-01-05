@@ -13,7 +13,7 @@ class Category extends Node
     use UuidAndShopTrait , WhereShopTrait;
 
     protected $table = "categories";
-    protected $fillable = ['name','title','description','slug' , 'uuid'];
+    protected $fillable = ['name','title','description','slug' , 'uuid','blacklist'];
 
     // 'parent_id' column name
     protected $parentColumn = 'parent_id';

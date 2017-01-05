@@ -41,7 +41,7 @@
 
     <!--Estilos Opcionales-->
     <link rel="stylesheet" href="{{asset('administrator/plugins/selectize/css/selectize.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('administrator/plugins/select2/css/select2.css')}}">
+    
     <!-- fin de los estilos opcionales-->
 
     <!--Estilo importantes del Dash-->
@@ -49,7 +49,7 @@
     <link rel="stylesheet" href="{{asset('administrator/css/layout.css')}}" media="screen"     charset="utf-8">
     <link rel="stylesheet" href="{{asset('administrator/css/uielement.css')}}" media="screen"  charset="utf-8">
     <!--Fin-->
-
+    <link rel="stylesheet" type="text/css" href="{{asset('administrator/plugins/select2/css/select2.css')}}">
     <!--Normalize-->
     <link rel="stylesheet" type="text/css" href="{{asset('administrator/css/normalize.css')}}">
     <!--fin-->
@@ -73,7 +73,6 @@
     <!--Fin-->
 
     <link rel="stylesheet" href="{{ asset('administrator/angular/css/angular-ui-tree.min.css') }}">
-    <link href="{{ asset('components/css/select2.min.css') }}" rel="stylesheet" type="text/css" media="all" />
     <link href="{{ asset('administrator/css/dropify.min.css') }}" rel="stylesheet" type="text/css" media="all" />
     <link rel="stylesheet" type="text/css" href="{{asset('administrator/plugins/colorpicker/css/bootstrap-colorpicker.css')}}">
 

@@ -1,8 +1,6 @@
 <?php
 $domain = new \Tendaz\Models\Domain\Domain();
-Route::group(['domain' => '{subdomain}.'.$domain->getDomain() ,'middleware' => ['store' , 'auth:admins']], function () {
-
-
+    Route::group(['domain' => '{subdomain}.'.$domain->getDomain() ,'middleware' => ['store' , 'auth:admins']], function () {
     //Route home
     Route::get('/' , 'HomeController@home');
 
@@ -24,7 +22,7 @@ Route::group(['domain' => '{subdomain}.'.$domain->getDomain() ,'middleware' => [
     Route::resource('products' , 'ProductsController');
     Route::get('products/edit/{id}' , 'ProductsController@editProduct');
     Route::put('products/edit/{id}' , 'ProductsController@putProduct');
-
+    Route::post('products/file-delete/{id}' , 'ProductsController@ajaxDelete');
     //Route Categories
     Route::resource('categories' , 'CategoriesController');
 
