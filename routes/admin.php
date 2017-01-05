@@ -1,8 +1,6 @@
 <?php
 $domain = new \Tendaz\Models\Domain\Domain();
     Route::group(['domain' => '{subdomain}.'.$domain->getDomain() ,'middleware' => ['store' , 'auth:admins']], function () {
-
-
     //Route home
     Route::get('/' , 'HomeController@home');
 

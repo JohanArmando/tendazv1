@@ -23,7 +23,8 @@ class Product extends Model
     protected $table = 'products';
 
     protected $fillable = [
-        'name', 'slug', 'seo_title', 'seo_description', 'description', 'publish', 'shop_id', 'uuid' , 'blacklist' , 'large' , 'height' , 'width' ,'dimension'
+        'name', 'slug', 'seo_title', 'seo_description', 'description', 'publish', 
+         'shop_id', 'uuid' , 'blacklist' , 'large' , 'height' , 'width' ,'dimension'
     ];
 
     protected $hidden = [
@@ -41,13 +42,7 @@ class Product extends Model
      *
      * @param string $name
      */
-    public function setPublishAttribute($value)
-    {
-        if(!empty($value)){
-
-            $this->attributes['publish'] = $value == 'Si' || $value == 1 || $value == 'si' ? 1 : 0 ;
-        }
-    }
+    
 
     public function setDescriptionAttribute($value)
     {
@@ -109,10 +104,7 @@ class Product extends Model
         return Carbon::parse($this->created_at)->addDays(8)->isFuture();
     }
     
-    public function getShowInStoreAttribute()
-    {
-        return $this->publish ? 'Si' : 'No';
-    } 
+    
     
     public function getDescriptionAttribute()
     {
@@ -264,9 +256,9 @@ class Product extends Model
         $product = static::create((array) $request);
         $product->collection()->create([
             'uuid' => Uuid::generate(4)->string,
-            'promotion' =>  isset($request->product['variants'][0]['promotional_price'])
-            && $request->product['variants'][0]['promotional_price'] > 0 ? : 0,
-            'primary'   => !isset($request->collection['primary']) ?  : $request->collection['primary']
+            'shipping_free' =>  isset($request->shipping_free),
+            'promotion' =>  isset($request->promotion),
+            'primary'   =>  isset($request->primary)
         ]);
         $sellable = self::addVariants($product, $request);
         self::addCategories($request, $product);
@@ -282,7 +274,6 @@ class Product extends Model
         }
 
         self::addImages($request, $product->variant());
-
         return $product->variant;
     }
 

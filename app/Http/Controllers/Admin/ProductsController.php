@@ -41,7 +41,7 @@ class ProductsController extends Controller
 
     public function create()
     {
-        $categories = Category::pluck('name' , 'id');
+        $categories = Category::pluck('name' , 'id')->toArray();
         $options = Option::get(['id' , 'name']);
         return view('admin.product.create',compact('categories' , 'options'));
     }

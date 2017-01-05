@@ -3,12 +3,7 @@ MaxI Bot
 @stop
 @extends('layouts.administrator')
 @section('css')
-<link rel="stylesheet" type="text/css" href="{{asset('administrator/plugins/selectize/css/selectize.css')}}">
-<link rel="stylesheet" type="text/css" href="{{asset('administrator/plugins/select2/css/select2.css')}}">
-<style type="text/css">
-	.select2-container-multi .select2-choices {  border: 1px solid #f26522;  }
-	#select {  border: 1px solid #f26522;  min-height: 34px;  }
-</style>
+
 @stop
 
 @section('content')
@@ -51,11 +46,13 @@ MaxI Bot
 						<p align="left" style="font-size: 14px;">
 							Selecciona las <strong>CATEGORIAS</strong> para lista negra.
 						</p>
-							<select name="categories[]" id="category" multiple="multiple">
-							@foreach($categories as $category)
-								<option value="{{$category->id}}">{{$category->name}}</option>
-							@endforeach
-						</select>
+						<div class="col-md-12">
+							<select name="categories[]" class=" " id="category" multiple="multiple" style="width: 100%">
+								@foreach($categories as $category)
+									<option value="{{$category->id}}">{{$category->name}}</option>
+								@endforeach
+							</select>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -134,7 +131,6 @@ MaxI Bot
 @endsection
 @section('scripts')
 <script type="text/javascript" src="{{asset('administrator/plugins/selectize/js/selectize.js')}}"></script>
-<script type="text/javascript" src="{{asset('administrator/plugins/select2/js/select2.js')}}"></script>
 <script type="text/javascript">
 	$('select[id="products"]').select2({
 		placeholder: 'Selecciona los productos'
