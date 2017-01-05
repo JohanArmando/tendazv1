@@ -20,8 +20,8 @@
         <span class="media-body box">
             <div class="form-group">
                 <div class="col-sm-9 col-simple">
-                    <label class="control-label" style="font-size: 1.2em; color: black;">Imagenes 
-                            <small style="color: darkgray">(Opcional)</small>
+                    <label class="control-label" style="font-size: 1.2em; color: black;">Imagenes
+                        <small style="color: darkgray">(Opcional)</small>
                     </label>
                     <div class="dz-message" style="height:190px;border-width: 2px; border-style: dashed; border-color: #F26522; ">
                         <h1 style="font-size: 80px !important; color: #F26522; "><i class="ico-cloud-upload2"></i></h1>
@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div class="text-center col-sm-9 col-simple">
-                        <div class="dropzone-previews-avanzado"></div>
+                    <div class="dropzone-previews-avanzado"></div>
                 </div>
             </div>
         </span>
@@ -41,52 +41,21 @@
             <div class="form-group">
                 @include('admin.partials.sin-variante')
             </div>
-<<<<<<< HEAD
-        </div>
-    </span>
-</a>
-<br>
-{{-- DIV tab con variante y sin variante --}}
-
-<div  class="media-body box" >
-    {{--Estar list tabs --}}
-    <ul class="nav nav-tabs text-center" style="height: 100px; font-size: 2.0em; background-color: transparent">
-        <li class="hidden">
-            <a style="padding-top: 7.5%;" href="#sinVariante" data-toggle="tab" >
-                <i class="fa fa-shopping-cart text-tendaz" style="margin-right: 5%; font-size: 1.9em;"></i>Sin Variante
-            </a>
-        </li>
-        <li class="hidden">
-            <a style="padding-top: 7.5%;" href="#conVariante" data-toggle="tab">
-                <i  class="fa fa-shopping-cart text-tendaz" style="margin-right: 5%; font-size: 1.9em;"></i>Con Variante
-            </a>
-        </li>
-    </ul>
-
-    <div class="tab-content panel">
-
-        {{-- Start tab sin variante --}}
-        <div class="tab-pane active np" id="sinVariante">
-            @include('admin.partials.sin-variante')
-            <div class="media-list">
-                <a href="javascript:void(0);" class="media border-dotted">
-=======
         </span>
     </div>
 </div>
->>>>>>> de56f50f23a9e6d447d5c0fa96b55b8cda2a162c
 
 <div class="media border-dotted">
     <div class="row">
         <span class="media-body box">
             <div class="form-group">
                 <div class="col-sm-9 col-simple">
-                <label class="control-label" style="font-size: 1.2em; color: black;">Descripcion
-                    <small style="color: darkgray">(Menciona todas las caracteristicas de tu producto)</small>
-                </label>
-                <br>
+                    <label class="control-label" style="font-size: 1.2em; color: black;">Descripcion
+                        <small style="color: darkgray">(Menciona todas las caracteristicas de tu producto)</small>
+                    </label>
+                    <br>
                     {!!  Form::textarea('description', null , ['id' => 'simple-description' ,  'data-parsley-type'=>"alphanum" , 'required' => 'required' , 'class' => 'form-control']) !!}
-            </div>
+                </div>
             </div>
         </span>
     </div>
@@ -130,7 +99,7 @@
         <span class="media-body box">
             <div class="form-group">
                 <div class="col-sm-6 col-simple">
-                    <label class="control-label" style="font-size: 1.2em; color: black">Envio 
+                    <label class="control-label" style="font-size: 1.2em; color: black">Envio
                     </label>
                     <span class="checkbox custom-checkbox">
                         {!! Form::checkbox('shipping_free' , 1 , null , ['id' => 'shipping_free' , 'class' => 'checkbox']) !!}
@@ -191,7 +160,7 @@
     </div>
 </div>
 <div class="media border-dotted">
-    <div class="row">                                     
+    <div class="row">
         <span class="media-body box">
             <div class="form-group">
                 <div class="col-md-9 col-simple">

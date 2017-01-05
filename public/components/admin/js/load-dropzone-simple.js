@@ -50,9 +50,6 @@ Dropzone.options.myDropzone = {
             });
             file.previewElement.appendChild(removeButton);
         });
-        this.on("complete", function(file) {
-            myDropzone.removeFile(file);
-        });
         var toas = '';
         this.on("sendingmultiple",function(totalBytesSent){
                 $('#loading').addClass('show');
@@ -62,6 +59,7 @@ Dropzone.options.myDropzone = {
             myDropzone.processQueue.bind(myDropzone);
             $('#loading').addClass('hide');
             $('#loading').removeClass('show');
+            myDropzone.removeFile(file);
             $(this).closest('#my-dropzone ').find("input[type=text], textarea").val("");
             toastr.options = {
                 "closeButton": true,
@@ -87,6 +85,14 @@ Dropzone.options.myDropzone = {
             $('#simple-description').trumbowyg('empty');
         });
         this.on("errormultiple", function(files, response) {
+            $.each(response , function (i , v) {
+                $('#loading').addClass('hide');
+                $('#loading').removeClass('show');
+                $('div.help-block#'+i).html('');
+                $.each(v , function (index , value) {
+                    $('div.help-block#'+i).append(value);
+                })
+            });
             toastr.options = {
                 "closeButton": true,
                 "debug": false,

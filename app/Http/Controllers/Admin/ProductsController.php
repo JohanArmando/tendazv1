@@ -49,7 +49,11 @@ class ProductsController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request , [
+           'name' => 'required',
+        ]);
         $response = Product::createWithVariant($request->all());
+
         return response()->json($response , 200);
     }
 
