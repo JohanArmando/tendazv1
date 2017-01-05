@@ -12,10 +12,10 @@
 				</div>
 			</div>
 			<div class="content">
-				<div class="container hidden-xs hidden-sm" ng-cloak="" >
+				<div class="container" ng-cloak="" >
 					@include(Theme::current()->viewsPath.'.partials.new-product')
 				</div>
-				<div class="container hidden-lg hidden-md" ng-cloak="" >
+				<div class="container" ng-cloak="" >
 					<div class="col-xs-12"  ng-repeat="product in news">
 						<div ng-include="'tpl.html'"></div>
 					</div>
@@ -29,7 +29,7 @@
 
 			<div class="content">
 				<div class="container">
-					<div class="row hidden-xs hidden-sm">
+					<div class="row">
 						@include(Theme::current()->viewsPath.'.partials.higth')
 						<div class="divider divider--lg hidden  visible-sm visible-xs"></div>
 						@include(Theme::current()->viewsPath.'.partials.onsale')
