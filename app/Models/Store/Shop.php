@@ -142,5 +142,8 @@ class Shop extends Model
       public function payments_values(){
         return $this->belongsToMany(PaymentMethod::class, 'payment_values');
     }
-    
+
+    public function originalSubscription(){
+        return $this->hasMany(Subscription::class);
+    }
 }

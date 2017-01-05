@@ -29,6 +29,7 @@
                     </div>
                     <button  type="submit" class="btn btn--ys btn--full btn--lg ">Iniciar sesion</button>
                     <div class="divider divider--xs"></div>
+                    <a href="{{url('password/reset')}}">Olvidaste tu Contrase&ntilde;a?</a>
                 </form>
           
         </div>

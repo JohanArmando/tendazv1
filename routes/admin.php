@@ -86,8 +86,11 @@ Route::group(['domain' => '{subdomain}.'.$domain->getDomain() ,'middleware' => [
         
         Route::resource('shippings', 'ShippingController',
             ['only' => ['index', 'store', 'update', 'destroy']]);
-        
-        Route::resource('/domain', 'SettingController@domain');
+        //setting domain
+        Route::resource('/domain', 'NameCheapController@getIndex');
+        Route::delete('/domain/destroy/{account}', 'NameCheapController@postDelete');
+        Route::get('/domain/settings/{account}', 'NameCheapController@getVerify');
+        Route::get('/domain/verify/{account}', 'NameCheapController@postVerify');
         
         Route::resource('/locals', 'LocalController',
             ['only' => ['index', 'store', 'update', 'destroy']]);

@@ -3,11 +3,11 @@
 <a href="javascript:void(0);" class="media border-dotted">
 
      <span class="media-body box col-lg-offset-0">
-         <div class="form-group">
-             <div class="col-sm-9 col-simple">
-                <label class="control-label" style="font-size: 1.2em; color: black">Nombre del producto
+         <div class="col-sm-9 col-simple">
+             <div class="form-group">
+                <label class="control-label" for="inputName" style="font-size: 1.2em; color: black">Nombre del producto
                     <small style="color: darkgray">(Obligatorio)</small></label>
-                <input type="text" name="name" class="form-control" placeholder="Ejemplo: Zapato de cuero" required>
+                <input type="text" name="name" id="inputName" class="form-control" placeholder="Ejemplo: Zapato de cuero" required>
                  <div class="help-block with-errors"></div>
              </div>
          </div>
@@ -101,10 +101,12 @@
 <br>
 <div class="row" style="padding: 2.5%">
     <div class="col-md-4 " style="margin-left: 13%">
-        <button type="submit" id="submit" class="pull-left btn  btn-primary" ><i class="fa fa-check"></i> Crear Producto</button>
+        <div class="form-group">
+            <button type="submit" id="submit" class="pull-left btn  btn-primary" ><i class="fa fa-check"></i> Crear Producto</button>
+        </div>
     </div>
     <div class="col-md-5" style="margin-left: -1.5%">
         <a href="{{ url('admin/products') }}" class="pull-right btn  btn-default"><i class="fa fa-times"></i> Cancelar</a>
     </div>
 </div>
-{!! Form::close() !!}                            
+{!! Form::close() !!}

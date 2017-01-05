@@ -94,7 +94,7 @@
 		</div>
 	</div>
 
-	<div class="hidden container-fluid">
+	<div class="container-fluid">
 		<div class="col-md-12">
 			<ul class="nav nav-tabs" style="background-color: transparent;">
 				<li id="link_tab">
@@ -108,11 +108,10 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="col-md-12">
-							<iframe width="100%" height="520" frameborder="0" src="https://angelesrr.carto.com/builder/cd518bdc-b003-11e6-9a70-0e05a8b3e3d7/embed"
-									allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+
 						</div>
-						<div class="col-md-6">
-							<div class="visitAll">
+						<div class="col-md-6 ">
+							<div class="visitAll hidden">
 								@foreach($products as $product)
 									<div class="visit col-md-3">
 										<div class="pie">
@@ -221,7 +220,6 @@
 
 @endsection
 @section('scripts')
-	<script src="http://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
 	<script src="https://code.highcharts.com/highcharts.js"></script>
 	<script src="https://code.highcharts.com/modules/exporting.js"></script>
 	<script>

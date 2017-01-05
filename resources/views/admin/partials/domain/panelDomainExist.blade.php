@@ -10,8 +10,8 @@
                 Cuando est&eacute;n disponibles , los dominios comprados a tendaz.com incluyen la privacidad de WHOIS ( valor aproximado de USD 15 $ / a&ntilde;o) . Su informaci&otilde;n personal no se mostrar&acute; en los registros de inscripci&oacute;n de dominio p&uacute;blico.
             </p>
             <br>
-            @if(Auth::client()->get()->originalSubscription->first()->active)
-                @if(Auth::client()->get()->shop->domains->count() < 2)
+            @if($shop->originalSubscription->first()->active)
+                @if($shop->domains->count() < 2)
                     <div class="text-center">
                         <button type="button" id="btn-domain" class="btn btn-primary" data-toggle="modal"  data-target="#bs-modal-add">
                             <i class="fa fa-plus"></i> Agregar dominio Existente
@@ -19,7 +19,7 @@
                     </div>
                 @endif
             @else
-                @if(Auth::client()->get()->originalSubscription->first()->status == 'free' && Auth::client()->get()->shop->domains->count() < 2)
+                @if($shop->originalSubscription->first()->state == 'active' && $shop->domains->count() < 2)
                     <div class="text-center">
                         <button type="button" id="btn-domain" class="btn btn-primary"  data-toggle="modal" data-target="#bs-modal-add">
                             <i class="fa fa-plus"></i> Agregar dominio Existente

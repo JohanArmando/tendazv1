@@ -53,66 +53,66 @@ Configura tu dominio
 						<div class="row">
 							<div class="clearfix"></div>
 							<div class="col-sm-8 col-sm-offset-2">
-								{{--}}@include('admin.partials.domain.panelDomainNew')--}}
+								@include('admin.partials.domain.panelDomainNew')
 							</div>
 						</div>
 					</div>
-					<div class="tab-pane" id="tabtwo">
+						<div class="tab-pane" id="tabtwo">
 						<div class="row">
 							<div class="clearfix"></div>
 							<div class="col-sm-8 col-sm-offset-2">
-	{{--@include('admin.partials.domain.panelDomainExist')--}}
-			</div>
-			</div>
-			</div>
-			<div class="tab-pane" id="tabthree">
-			<div class="row">
-			<div class="clearfix"></div>
-			<div class="col-sm-8 col-sm-offset-2">
-				<div class="col-md-12 text-center">
-					<p align="justify">
-						Puedes gestionar el reenvio de correo electronico, renovar dominios que has comprado y elimina dominios de su tienda.
-					</p>
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h4 class="panel-title text-center">ADMINISTRA TUS DOMINIOS</h4>
-						</div>
-						<table class="table table-bordered table-striped table-hover">
-							<thead>
-							<tr class="text-center">
-								<td style="background: #FF3D00; color: white;">Nombre Dominio</td>
-								<td style="background: #FF8C00; color: white;">Status</td>
-							</tr>
-							</thead>
-							<tbody>
-							<tr class="text-center">
-								<td><a href="#">dominio1.com</a></td>
-								<td><img src="{{asset('administrator/image/tick.png')}}"></td>
-							</tr>
-							<tr class="text-center">
-								<td><a href="#">dominio2.com</a></td>
-								<td><img src="{{asset('administrator/image/forbidden.png')}}"></td>
-							</tr>
-							<tr class="text-center">
-								<td><a href="#">dominio3.com</a></td>
-								<td><img src="{{asset('administrator/image/download.png')}}"></td>
-							</tr>
-							</tbody>
-						</table>
-					</div>
+							@include('admin.partials.domain.panelDomainExist')
+							</div>
+							</div>
+							</div>
+							<div class="tab-pane" id="tabthree">
+							<div class="row">
+							<div class="clearfix"></div>
+							<div class="col-sm-8 col-sm-offset-2">
+								<div class="col-md-12 text-center">
+								<p align="justify">
+									Puedes gestionar el reenvio de correo electronico, renovar dominios que has comprado y elimina dominios de su tienda.
+								</p>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title text-center">ADMINISTRA TUS DOMINIOS</h4>
+									</div>
+									<table class="table table-bordered table-striped table-hover">
+										<thead>
+										<tr class="text-center">
+											<td style="background: #FF3D00; color: white;">Nombre Dominio</td>
+											<td style="background: #FF8C00; color: white;">Status</td>
+										</tr>
+										</thead>
+										<tbody>
+										<tr class="text-center">
+											<td><a href="#">dominio1.com</a></td>
+											<td><img src="{{asset('administrator/image/tick.png')}}"></td>
+										</tr>
+										<tr class="text-center">
+											<td><a href="#">dominio2.com</a></td>
+											<td><img src="{{asset('administrator/image/forbidden.png')}}"></td>
+										</tr>
+										<tr class="text-center">
+											<td><a href="#">dominio3.com</a></td>
+											<td><img src="{{asset('administrator/image/download.png')}}"></td>
+										</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							</div>
+							</div>
+							</div>
 				</div>
-			</div>
 		</div>
-	</div>
-	</div>
-	</div>
 	</div>
 </div>
 <div class="payment-form"></div>
-{{--@include('admin.partials.domain.modalAddDomain')
+@include('admin.partials.domain.modalAddDomain')
 @include('admin.partials.domain.modalBuyDomain')
 @include('admin.partials.domain.modalDeleteDomain')
-@include('admin.partials.domain.modalCompleteInstall')--}}
+@include('admin.partials.domain.modalCompleteInstall')
 @endsection
 @section('scripts')
 @stop
