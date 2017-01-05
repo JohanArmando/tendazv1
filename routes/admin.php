@@ -35,6 +35,7 @@ $domain = new \Tendaz\Models\Domain\Domain();
 
     //Route Providers
     Route::resource('providers' , 'ProvidersController');
+    Route::get('providers/selectCity/{id}' , 'ProvidersController@select');
 
     //Route help
     Route::group(['prefix' => 'help' , 'namespace' => 'Help'], function() {

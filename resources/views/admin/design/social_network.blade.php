@@ -46,7 +46,7 @@ Redes sociales
                         <div class="form-group">
                             <label for="twitter">Cuenta de Twitter</label>
                             <div class="input-group">
-                                <span class="input-group-addon">@</span>
+                                <span class="input-group-addon">https://</span>
                                 {!! Form::text('twitter' ,$store->twitter , ['class' => 'form-control'] ) !!}
                             </div>
                             <p class="help-block"> 
@@ -67,7 +67,7 @@ Redes sociales
                         <div class="form-group">
                             <label for="instagram">Usuario de instagram</label>
                             <div class="input-group">
-                                <span class="input-group-addon">@</span>
+                                <span class="input-group-addon">https://</span>
                                 {!! Form::text('instagram' ,$store->instagram , ['class' => 'form-control'] ) !!}
                             </div>
                             <p class="help-block">
@@ -78,7 +78,7 @@ Redes sociales
                         <div class="form-group">
                             <label for="blog">Blog</label>
                             <div class="input-group">
-                                <span class="input-group-addon">http://</span>
+                                <span class="input-group-addon">https://</span>
                                 {!! Form::text('blog' ,$store->blog , ['class' => 'form-control'] ) !!}
                             </div>
                             <p class="help-block">

@@ -140,23 +140,24 @@ Mis provedores
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Telefono:</label>
-                                    <input type="text" name="phone" class="form-control" data-mask="999-9999-999" required>
+                                    <input type="text" name="phone" class="form-control" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Departamento:</label>
-                                    <select name="state_id" class="form-control" >
-                                        @foreach($departments as $departament)
-                                        <option value="{{$departament->id}}">{{$departament->name}}</option>
+                                    <select name="state_id" id="id_department" class="form-control" onchange="filterCity()">
+                                        @foreach($departments as $department)
+                                        <option value="{{$department->id}}">{{$department->name}}</option>
                                         @endforeach
                                     </select>
+                                    <input type="hidden"  name="_token" value="{{ csrf_token() }}" id="token">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Ciudad:</label>
-                                    <select name="city_id" class="form-control" >
+                                    <select name="city_id" id="city" class="form-control" >
                                         @foreach($cities as $city)
                                             <option value="{{$city->id}}">{{$city->name}}</option>
                                         @endforeach
@@ -164,7 +165,7 @@ Mis provedores
                                 </div>
                             </div>
                         </div>
-                </div>
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Agregar</button>
@@ -178,4 +179,28 @@ Mis provedores
     <script type="text/javascript" src="{{asset('administrator/plugins/inputmask/js/inputmask.js')}}"></script>
     <script type="text/javascript" src="{{asset('administrator/plugins/parsley/js/parsley.js')}}"></script>
     <script type="text/javascript" src="{{asset('administrator/js/backend/forms/validation.js')}}"></script>
+    <script>
+        function filterCity(){
+            var token = $('#token').val();
+            var id = $('#id_department').val();
+            $.ajax({
+                url: "{{url('admin/providers/selectCity')}}"+"/"+ id + '?client_secret='  + client_secret + '&client_id=' + client_id,
+                'type' : 'GET',
+                'dataType': 'json',
+                'headers' : {'X-CSRF-TOKEN' : token,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                success: function( result ) {
+                    $('#city').find('option').remove().end();
+                    $.each(result, function (i, item) {
+                        $.each(item, function (i, v) {
+                            console.log(v);
+                            $('#city').append('<option value="' + i +'">' + v +'</option>')
+                        });
+                    });
+                }
+            });
+        }
+    </script>
 @stop

@@ -4,6 +4,30 @@
 
         </div>
         <div class="col-sm-9 col-md-9 col-lg-9 col-xl-9 text-right">
+            <div class="account link-inline  hidden mobile-menu-on"  ng-if="!usuario">
+                <div class="dropdown text-right">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="icon icon-person "></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu--xs-full">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#modalRegisterForm">
+                                <i class="icon icon-create"></i>&nbsp;REGISTRARME
+                            </a>
+
+                        </li>
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#modalLoginForm">
+                                <i class="icon icon-person"></i>&nbsp;INICIAR SESION
+                            </a>
+                        </li>
+                        <li class="dropdown-menu__close">
+                            <a href="{{ url('/') }}">
+                                <span class="icon icon-close"></span>Cerrar</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             <div class="account link-inline  hidden mobile-menu-on"  ng-if="usuario">
                 <div class="dropdown text-right">
                     <a class="dropdown-toggle" data-toggle="dropdown">

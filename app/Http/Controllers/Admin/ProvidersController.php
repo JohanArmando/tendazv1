@@ -51,4 +51,11 @@ class ProvidersController extends Controller
         return back()->with('message', array('type' => 'success' , 'message' => 'Provedor eliminado correctamente'));
     }
 
+    public function select($subdomain , $id){
+        $cities =  City::where('state_id',$id)->pluck('name','id');
+        return response()->json(array(
+            'cities' => $cities,
+        ));
+    }
+
 }

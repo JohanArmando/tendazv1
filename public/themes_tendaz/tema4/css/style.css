@@ -11151,6 +11151,7 @@ footer.layout-7 .footer-copyright .row {
 }
 .product-listing.row-view > div .product__inside__info__btns {
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 .product-listing.row-view > div .product__inside__info__link {
   margin-top: 15px;
