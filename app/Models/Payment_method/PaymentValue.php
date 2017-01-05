@@ -21,6 +21,7 @@ class PaymentValue extends Model
     {
         return $this->belongsTo(PaymentMethod::class );
     }
+
     public function updateOrCreate(array $attributes, array $values = [])
     {
         $instance = $this->firstOrNew($attributes);
@@ -31,4 +32,5 @@ class PaymentValue extends Model
 
         return $instance;
     }
+    
 }

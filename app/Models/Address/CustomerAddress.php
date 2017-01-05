@@ -12,13 +12,6 @@ class CustomerAddress extends Model
     public $timestamps = false;
     protected $fillable = ['uuid' , 'customer_id' , 'address_id' , 'isActive' , 'isShipping' , 'isBilling' , 'isPrimary'];
 
-    public function __construct(array $attributes = null){
-        if(count($attributes) > 0){
-            $this->attributes['uuid'] = Uuid::generate(4)->string;
-            parent::__construct($attributes);
-        }
-    }
-
     public function address(){
         return $this->belongsTo(Address::class);
     }

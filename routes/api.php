@@ -17,6 +17,25 @@ use Illuminate\Http\Request;
 
 Route::group(['domain' => env('APP_API_URL') , 'namespace' => 'Api'] , function (){
 
+    /**
+     * Routes Payments
+     */
+
+    //-----------------------------------  MERCADOPAGO ----------------------------------//
+    //Primero solicitar los datos
+    //luego pasar la orden o el cart para armar los datos
+    //segun el tipo de pago hacer una peticion
+    //client secret client id
+    //mercadopago = client secret client id , token
+    //token mercadopago
+    //pse efectivo tarjeta credito
+    //cart payment_method = cc dat = 123456465465 nombre
+    // cart payment id
+
+    Route::get('carts/{cart}/payments/{payment}' , [
+        'uses' => 'Checkout\\PaymentMethodController@checkPayment'
+    ]);
+
     Route::post('password/email' , [
         'uses' => 'Auth\\ForgotPasswordController@sendResetLinkEmail'
     ]);
