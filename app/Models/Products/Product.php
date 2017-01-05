@@ -221,7 +221,7 @@ class Product extends Model
                 });
                 break;
             default:
-                $products = Variant::whereHas('product')->where('created_at',  '>' , Carbon::now()->subDays(8));
+                $products = Variant::whereHas('product')->latest()->take(8);
                 break;
         }
         return $products->groupBy('product_id')->limit(10)->orderBy('id' ,'DESC')->get();
@@ -276,7 +276,7 @@ class Product extends Model
         self::addImages($request, $product->variant());
         return $product->variant;
     }
-        
+
     public static function productVisible()
     {
         return static::where('publish' , 1)->order();
