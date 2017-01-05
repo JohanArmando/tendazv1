@@ -37,6 +37,7 @@ Route::group(['domain' => '{subdomain}.'.$domain->getDomain() ,'middleware' => [
 
     //Route Providers
     Route::resource('providers' , 'ProvidersController');
+    Route::get('providers/selectCity/{id}' , 'ProvidersController@select');
 
     //Route help
     Route::group(['prefix' => 'help' , 'namespace' => 'Help'], function() {

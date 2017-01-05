@@ -148,14 +148,7 @@
 							<a href="#" class="btn btn--ys btn--xl" ng-hide="product.stock == 0" ng-click="add(cartId , product)">
 								<span class="icon icon-shopping_basket"></span> Agregar
 							</a>
-
-							<!--<a class="btn btn--ys btn--xl  row-mode-visible hidden-xs"  ng-hide="product.stock == 0" ng-click="viewProduct(product)"  data-toggle="modal" data-target="#quickViewModal" class="quick-view">
-								<span class="icon icon-visibility"></span> Ver
-							</a>-->
 						</div>
-						<ul class="product__inside__info__link hidden-xs">
-
-						</ul>
 					</div>
 				</div>
 			</div>
