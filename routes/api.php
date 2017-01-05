@@ -17,11 +17,50 @@ use Illuminate\Http\Request;
 
 Route::group(['domain' => env('APP_API_URL') , 'namespace' => 'Api'] , function (){
 
+    /**
+     * Routes Payments
+     */
+
+    //-----------------------------------  MERCADOPAGO ----------------------------------//
+    //Primero solicitar los datos
+    //luego pasar la orden o el cart para armar los datos
+    //segun el tipo de pago hacer una peticion
+    //client secret client id
+    //mercadopago = client secret client id , token
+    //token mercadopago
+    //pse efectivo tarjeta credito
+    //cart payment_method = cc dat = 123456465465 nombre
+    // cart payment id
+
+    Route::get('carts/{cart}/payments/{payment}' , [
+        'uses' => 'Checkout\\PaymentMethodController@checkPayment'
+    ]);
+
+    Route::post('password/email' , [
+        'uses' => 'Auth\\ForgotPasswordController@sendResetLinkEmail'
+    ]);
+    
+    Route::get('customers/{customer}/addresses/{address}/main' , [
+        'uses' => 'Auth\\AddressesController@main'
+    ]);
+    Route::resource('customers.orders' , 'Auth\\Orders\\OrdersController' ,[
+        'only' => ['index' , 'show']
+    ]);
+    
+    Route::resource('customers.addresses' , 'Auth\\AddressesController', [
+        'only' => ['index' , 'store' , 'show' , 'update' , 'destroy']
+    ]);
     //Routes auth
     Route::group(['prefix' => 'auth' , 'namespace' => 'Auth'] , function (){
+
         Route::post('login/{cart?}' , [
             'uses'       => 'LoginController@auth',
             'middleware' => ['custom_api' , 'cors']
+        ]);
+
+        Route::put('{customer}' , [
+            'uses'       => 'AccountController@update',
+            'middleware' => 'custom_api'
         ]);
 
         Route::post('register/{cart?}' , [
@@ -31,6 +70,11 @@ Route::group(['domain' => env('APP_API_URL') , 'namespace' => 'Api'] , function 
 
         Route::get('email/{email}/{cart}' , [
             'uses'       => 'LoginController@assignUserToOrder',
+            'middleware' => 'custom_api'
+        ]);
+
+        Route::put('{customer}/password' ,[
+            'uses' => 'PasswordController@change',
             'middleware' => 'custom_api'
         ]);
     });
@@ -95,6 +139,5 @@ Route::group(['domain' => env('APP_API_URL') , 'namespace' => 'Api'] , function 
             'only'  => ['index']
         ]);
     });
-
-
+    
 });

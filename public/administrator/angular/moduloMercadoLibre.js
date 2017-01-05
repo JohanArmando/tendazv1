@@ -80,30 +80,6 @@
             console.log('exportara');
             $scope.showProducts = true;
         }
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 1b073c0dc83dfa11c62433d50e0d6cb5e6ddc41b
-        $scope.productosAgregados = [];
-
-        $scope.agregarALista = function(producto) {
-            console.log(producto);
-            $scope.productosAgregados.push({
-                title: producto.name,
-                price: 10000,
-                description: producto.description,
-                listing_type_id: "gold_premium",
-                condition: "new",
-                pictures: [{
-                    source: producto.image
-                }],
-                category_id: "MCO3530",
-                currency_id: "COP",
-                available_quantity: 2
-            });
-<<<<<<< HEAD
-=======
        $scope.productosAgregados = [];
     
          $scope.agregarALista = function(producto){
@@ -123,9 +99,6 @@
                 currency_id:"COP",
                 available_quantity:producto.stock
               });
->>>>>>> parent of 1173280... meli 05
-=======
->>>>>>> 1b073c0dc83dfa11c62433d50e0d6cb5e6ddc41b
             console.log('Agrego!');
             console.log($scope.productosAgregados);
         }
@@ -136,7 +109,7 @@
         $scope.sendToBack = function() {
             var datos = $scope.productosAgregados;
             $http.post(BASEURL + '/admin/mercadolibre/products', {
-                datos
+
             })
 
             .then(function(response) {
@@ -153,28 +126,21 @@
         $scope.SelectCategories = [];
         $scope.editPrincipal = false;
         $scope.principal = false;
-<<<<<<< HEAD
         $scope.selectCat = function(option,producto) {
            $scope.pinner_loading = true;
            console.log(producto);
            $scope.llave = producto;
            console.log($scope.llave);
-=======
-        $scope.selectCat = function(option) {
-           $scope.pinner_loading = true;
->>>>>>> 1b073c0dc83dfa11c62433d50e0d6cb5e6ddc41b
 
             // Simple GET request example:
             $http.get('https://api.mercadolibre.com/categories/' + option.id)
                 .success(function(data, status, headers, config) {
                     $scope.catSelected = data;
-<<<<<<< HEAD
+
                     console.log("Break Point");
                     $scope.llave.promotion_price = data;
                     console.log($scope.llave);
-=======
 
->>>>>>> 1b073c0dc83dfa11c62433d50e0d6cb5e6ddc41b
                     $scope.SelectCategories.push($scope.catSelected);
                     $scope.editPrincipal = true;
                      $scope.pinner_loading = false;

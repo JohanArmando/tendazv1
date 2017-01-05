@@ -3,7 +3,6 @@
 namespace Tendaz\Models\Address;
 
 use Illuminate\Database\Eloquent\Model;
-use Tendaz\Models\Addres\AddressHistory;
 use Tendaz\Models\Geo\Country;
 use Tendaz\Models\Customer;
 use Tendaz\Models\Geo\City;
@@ -13,7 +12,7 @@ use Webpatser\Uuid\Uuid;
 class Address extends Model
 {
     protected $fillable = ['uuid' ,'name' , 'street' , 'complement' , 'neighborhood' , 'state_id' , 'city_id' , 'country_id' , 'receiverName' , 'longitude'];
-
+    
     public function __construct(array $attributes = null){
         if(count($attributes) > 0){
             $this->attributes['uuid'] = Uuid::generate(4)->string;
@@ -21,6 +20,10 @@ class Address extends Model
         }
     }
 
+    public function getRouteKeyName()
+    {
+        return 'uuid';
+    }
     public function customer(){
         return $this->belongsToMany(Customer::class , 'customer_address'  , 'address_id' , 'customer_id')->withPivot('id');
     }

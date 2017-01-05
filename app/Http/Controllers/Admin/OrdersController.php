@@ -16,7 +16,8 @@ class OrdersController extends Controller
     public function index($subdomain , Request $request)
     {
         $orders = Order::orderBy('id' , 'DESC')->NotInitOrders()->get();
-        return view('admin.orders.index',compact('orders'));
+        $status = OrderStatus::all();
+        return view('admin.orders.index',compact('orders','status'));
     }
 
     public function status()

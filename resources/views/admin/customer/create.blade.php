@@ -108,7 +108,7 @@ Crear nuevo cliente
                     'Content-Type': 'application/json'
                 },
                 'success' : function (response) {
-                    $('#city_id').removeClass('hidden   ');
+                    $('#city_id').removeClass('hidden');
                     $('#city_id').find('option').remove().end();
                     $.each(response, function (i, item) {
                         $.each(item, function (i, v) {

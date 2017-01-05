@@ -4,7 +4,8 @@
 /public/sliders
 /public/logos
 /public/tendaz
-/public/new-checkout
+/public/new-checkout/css
+/public/new-checkout/js
 /vendor
 /.idea
 Homestead.json
@@ -16,3 +17,5 @@ Homestead.yaml
 /storage/framework/cache/*
 .DS_Store
 .composer.lock
+app/Http/Controllers/Api/Auth/ForgotPasswordController.php
+database/test/

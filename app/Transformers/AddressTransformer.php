@@ -26,6 +26,7 @@ class AddressTransformer extends TransformerAbstract
                     '_id' => $address->country->uuid,
                     'name' => $address->country->name,
                 ],
+                'isPrimary' => !$address->pivot ? null :$address->pivot->isPrimary,
                 'neighborhood' => $address->neighborhood,
                 'postalCode'   => $address->postalCode,
                 'number'   => $address->number,

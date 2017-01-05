@@ -220,7 +220,7 @@ Mis productos
                             <table class="table table-striped" id="product-table"  ng-hide="preload">
                                 <thead>
                                     <tr>
-                                        <th >
+                                        <th>
                                             <div class="checkbox custom-checkbox pull-left"
                                                  data-original-title="Seleccionar todos"
                                                  data-toggle="tooltip"
@@ -235,7 +235,7 @@ Mis productos
                                             <span class="sub-col">Stock</span><span></span>
                                             <span class="sub-col m-half-right ">Precio Original</span><span></span>
                                             <span class="sub-col m-half-right  ">Precio Promocional</span><span></span>
-                                            <span class="values-heading  ">Variante</span>
+                                            <!-- <span class="values-heading  ">Variante</span> -->
                                         </th>
                                         <th  class="total actions">Acciones</th>
                                     </tr>
@@ -250,11 +250,11 @@ Mis productos
                                         | filter: {visible : show}  " class="ng-cloak" ng-show="product.show">
                                     <td class="vm">
                                         <div class="checkbox custom-checkbox pull-left check" data-original-title="Seleccionar @{{ product.name }}" data-toggle="tooltip" data-placement="right">
-                                            <input id="product_@{{ product.id }}"  ng-model="product.select" type="checkbox"  ng-checked="all">
+                                            <input id="product_@{{ product.product_id }}"  ng-model="product.select" type="checkbox"  ng-checked="all">
                                             <label for="product_@{{ product.id }}"></label>
                                         </div>
                                     </td>
-                                    <td class="image vm c ">
+                                    <td class="image vm c">
                                         <label for="1">
                                             <img ng-src="@{{ product.images.data[0].url }}" alt="" title="" width="50"  height="50" ng-if="product.images.data[0] && !product.meli" class="img-circle">
                                             <img ng-src="{{ asset('administrator/image/noImage.png') }}" alt="" title="" width="50"  height="50" ng-if="!product.images.data[0]">

@@ -697,6 +697,7 @@ class CreateDatabaseTendaz extends Migration
             $table->string('uuid', 255)->index();
             $table->boolean('primary')->default('1');
             $table->boolean('promotion')->default('1');
+            $table->boolean('shipping_free')->default('1');
             $table->unsignedInteger('product_id')->nullable()->unsigned();
             $table->timestamp('created_at')->default(\Carbon\Carbon::now());
             $table->timestamp('updated_at')->default(\Carbon\Carbon::now());

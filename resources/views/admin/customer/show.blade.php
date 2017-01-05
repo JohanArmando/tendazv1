@@ -32,7 +32,11 @@ Cliente {{ $customer->full_name }}
                         <ul class="list-unstyled">
                             <div class="col-md-12 text-center">
                                 <p>
-                                    <img class="img-rounded img-bordered-primary" width="100px;" height="100px;" alt src="{{asset('administrator/image/avatar/avatar7.jpg')}}">
+                                    @if(isset($customer->avatar) && !empty($customer->avatar))
+                                        <img class="img-rounded img-bordered-inverse" src="{{ asset("profile/".$customer->avatar) }}" alt width="100px" height="100px">
+                                    @else
+                                        <img class="img-rounded img-bordered-inverse" src="{{ asset('administrator/image/avatar/avatar7.jpg') }}" alt width="100px" height="100px">
+                                    @endif
                                 </p>
                                 <p>{{$customer->email}}</p>
                                 <p>{{$customer->phone}}</p>
@@ -244,10 +248,11 @@ Cliente {{ $customer->full_name }}
                                  <label>Imagen de Perfil</label>
                                  <div class="form-group">
                                      <label for="file-upload" class="custom-file-upload">
-                                         <i class="fa fa-upload"></i> Carga foto de Perfil
+                                         <i class="fa fa-upload"></i> Selecciona foto de Perfil
                                      </label>
-                                     <input id="file-upload" type="file"/>
+                                     <input id="file-upload" type="file" name="avatar" onchange="readURL(this);"/>
                                  </div>
+                                 <img id="blah" src="#" alt="Image Select"/>
                              </div>
                          </div>
                      </div>
@@ -298,4 +303,15 @@ Cliente {{ $customer->full_name }}
          </div>
     @endsection
     @section('scripts')
+        <script>
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#blah').attr('src', e.target.result).width(50).height(50);
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+        </script>
     @stop

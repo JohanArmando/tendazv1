@@ -179,6 +179,7 @@ return [
         Barryvdh\Cors\ServiceProvider::class,
         SantiGraviano\LaravelMercadoPago\Providers\MercadoPagoServiceProvider::class,
 
+
         /*
          * Application Service Providers...
          */
@@ -244,7 +245,6 @@ return [
         'Theme' => igaster\laravelTheme\Facades\Theme::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'MP' => SantiGraviano\LaravelMercadoPago\Facades\MP::class,
-
     ],
 
 ];

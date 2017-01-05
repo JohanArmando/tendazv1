@@ -7,9 +7,12 @@ use Tendaz\Models\Store\Shop;
 use Webpatser\Uuid\Uuid;
 use Illuminate\Http\Request;
 use Tendaz\Models\Products\Option;
+use Tendaz\Models\Order\Provider;
 use Tendaz\Models\Products\Product;
 use Tendaz\Models\Products\Variant;
+use Tendaz\Models\Products\Section;
 use Tendaz\Models\Categories\Category;
+use Tendaz\Models\Categories\Categorypro;
 use Tendaz\Http\Controllers\Controller;
 use Tendaz\Jobs\DeleteImagesProductJob;
 use Tendaz\Components\ProductListImport;
@@ -37,17 +40,22 @@ class ProductsController extends Controller
        return view('admin.product.index');
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        $categories = Category::pluck('name' , 'id');
+        $categories = Category::pluck('name' , 'id')->toArray();
+        $providers  =   Provider::where('shop_id',$request->shop->id)->pluck('name','id');
         $options = Option::get(['id' , 'name']);
-        return view('admin.product.create',compact('categories' , 'options'));
+        return view('admin.product.create',compact('categories' , 'options','providers'));
     }
 
 
     public function store(Request $request)
     {
+        $this->validate($request , [
+           'name' => 'required',
+        ]);
         $response = Product::createWithVariant($request->all());
+
         return response()->json($response , 200);
     }
 
@@ -210,19 +218,64 @@ class ProductsController extends Controller
     }
 
     public function editProduct($subdomain , $id, Request $request){
-        $categories = Category::where('shop_id',$request->shop->id)->get();
-        $product = Product::where('uuid',$id)->first();
-        $variant = Variant::where('product_id',$product->id)->first();
-        return view('admin.product.edit',compact('product','categories','variant'));
+        $product        =   Product::where('uuid',$id)->first();
+        $variant        =   Variant::where('product_id',$product->id)->first();
+        $categories     =   Category::where('shop_id',$request->shop->id)->get();
+        return view('admin.product.edit',compact('product','variant','categories'));
     }
 
     public function putProduct($subdomain,$id, Request $request){
         $product = Product::where('uuid',$id)->first();
-        $product->fill($request->all());
-        $product->save();
+        $publish            =   $request->publish;
+        $cat_arrray         =   $request->category_id;
+        $current_cats       =   $product->categories->pluck('id')->toArray();
         $variant = Variant::where('product_id',$product->id)->first();
-        $variant->fill($request->all());
-        $variant->save();
+        $section    =   Section::where('product_id',$product->id)->first();
+        if (is_null($request->publish)) {   $publish    =   11;  }
+        $product->update([
+            'name' => $request->name,
+            'slug' => $request->slug,
+            'seo_title' => $request->seo_title,
+            'seo_description' => $request->seo_description,
+            'description' => $request->description,
+            'publish' => $publish
+            ]);
+        
+        $variant->update([
+            'sku' => $request->sku,
+            'price' => $request->price,
+            'price_declared' => $request->price_declared,
+            'promotional_price' => $request->promotional_price,
+            'weight'    => $request->weight,
+            'stock'     => $request->stock,
+            'show'      => $request->show
+            ]);
+
+        
+        $section->update([
+            'primary' => $request->primary,
+            'shipping_free' => $request->shipping_free,
+            'promotion' => $request->promotion
+            ]);
+        if (count($cat_arrray) > 0) {
+            foreach ($cat_arrray as $new_cat) {
+            if(!in_array($new_cat, $current_cats)){
+                $product->categories()->attach($new_cat);
+            }else{
+                foreach ($current_cats as $current_cat) {
+                    if (!in_array($current_cat, $cat_arrray)) {
+                        $product->categories()->detach($current_cat);
+                    }
+                }
+                
+            }
+        }
+        }else{
+            foreach ($product->categories as $current_cat) {
+                $product->categories()->detach($current_cat);
+            }
+        }
+       
         return redirect()->to('admin/products')->with('message', array('type' => 'success' , 'message' => 'Editado correctamente'));
 
     }
@@ -237,5 +290,8 @@ class ProductsController extends Controller
         return response()->json(array(
             'product' => $product
         ));
+    }
+    public function ajaxDelete($product_id){
+        
     }
 }

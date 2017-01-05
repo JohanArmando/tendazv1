@@ -109,8 +109,8 @@
 			<div class="product__inside">
 				<div class="product__inside__image">
 					<a href="{{ url('/') }}<% '/detail/' + product.slug %>">
-							<img ng-src="<% product.images.data[0].url %>" alt="" ng-show="product.images.data" height="400">
-						<img ng-src="<% BASEURL + '/administrator/image/noImage.png' %>" alt="" height="400"  ng-hide="product.images.data">
+							<img ng-src="<% product.images.data[0].url %>" alt="" ng-show="product.images.data"  >
+						<img ng-src="<% BASEURL + '/administrator/image/noImage.png' %>" ng-hide="product.images.data" >
 					</a>
 					<!--<a href="#" ng-hide="product.stock == 0" ng-click="viewProduct(product)"  data-toggle="modal" data-target="#quickViewModal" class="quick-view">
 						<b>
@@ -148,14 +148,7 @@
 							<a href="#" class="btn btn--ys btn--xl" ng-hide="product.stock == 0" ng-click="add(cartId , product)">
 								<span class="icon icon-shopping_basket"></span> Agregar
 							</a>
-
-							<!--<a class="btn btn--ys btn--xl  row-mode-visible hidden-xs"  ng-hide="product.stock == 0" ng-click="viewProduct(product)"  data-toggle="modal" data-target="#quickViewModal" class="quick-view">
-								<span class="icon icon-visibility"></span> Ver
-							</a>-->
 						</div>
-						<ul class="product__inside__info__link hidden-xs">
-
-						</ul>
 					</div>
 				</div>
 			</div>

@@ -36,10 +36,10 @@ Editar {{ucfirst($product->name)}}
                                 <div class="tab-content panel" style="padding: 2.5%; border-top: 1px solid #cfd9db;">
                                     <div class="tab-pane active np" id="popular">
                                       <div class="media-list">
-                                          {!! Form::model($product ,['url' => url("admin/products/edit/$product->uuid"), 'method' => 'PUT'  , 'files' => true]) !!}
-                                          <input type="hidden" id="producto_id" name="uuid" value="{{ $product->uuid }}">
-                                              @include('admin.partials.form-advanced-edit')
-                                          {!! Form::close() !!}
+                                        {!! Form::model($product ,['url' => url("admin/products/edit/$product->uuid"."?client_secret=".$shop->uuid."&client_id=".$shop->id), 'method' => 'PUT'  , 'files' => true]) !!}
+                                            <input type="hidden" id="producto_id" name="uuid" value="{{ $product->uuid }}">
+                                            @include('admin.partials.form-advanced-edit')
+                                        {!! Form::close() !!}
                                       </div>
                                     </div>
                                 </div>
@@ -113,25 +113,37 @@ Editar {{ucfirst($product->name)}}
           </tr>
 </script>
     <script>
+
     $("#file-1").fileinput({
+
+        dataType : "json",
+        contentType: "application/json; charset=utf-8",
+
         uploadUrl: '#',
         language: 'es',
         allowedFileExtensions : ['jpg', 'png','gif'],
         overwriteInitial: false,
         maxFileSize: 1000,
         maxFilesNum: 5,
+        
         showUpload: true,
         showRemove: true,
         initialPreview: [
-        @foreach($product->images as $productI)
+        @foreach($product->images as $productI) 
             "{{ $productI['url'] }}",
         @endforeach
         ],
+        accepts: 'appliSSSSScation/json',
+        dataType : "json",
+            contentType: "application/json; charset=utf-8",
         initialPreviewAsData: true, // identify if you are sending preview data only and not the raw markup
         initialPreviewFileType: 'image', // image is the default and can be overridden in config below
         initialPreviewConfig: [
             @foreach($product->images as $productI)
-            {caption: "{{$productI['name']}}", size: false, width: "120px", url: "/site/file-delete", key: 1},
+            {caption: "{{$productI['name']}}", size: false, width: "120px", url: "/products/file-delete/{{$productI['id']}}?client_secret={{$shop->uuid}}&client_id={{$shop->id}}", key: 1,
+            extra: {contentType: "application/json; charset=utf-8"} 
+            },
+
             @endforeach 
             ],
         allowedFileTypes: ['image', 'video', 'flash'],

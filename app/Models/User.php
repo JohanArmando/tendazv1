@@ -115,10 +115,6 @@ class User extends Authenticatable
         return $this->name.' '.$this->last_name;
     }
 
-    public function originalSubscription(){
-        return $this->hasMany(Subscription::class)->orderBy('created_at','DESC');
-    }
-
     /**
      * @param $path
      */

@@ -95,7 +95,7 @@
 							<div class="pull-right">
 								<div class="filters-row__items hidden-sm hidden-xs">Mostrando <% filtered.length %>  de <% products.length %> Item(s)</div>
 								<div class="filters-row__select hidden-sm hidden-xs">
-									<label>Show: </label>
+									<label>Mostrar: </label>
 									<div class="select-wrapper">
 										<select class="select--ys show-qty" ng-model="itemsPerPage">
 											<option value="10">10</option>

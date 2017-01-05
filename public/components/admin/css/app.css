@@ -116,42 +116,11 @@ ul.nav.nav-tabs  li a h2 i{
 .col-simple{
     margin-left: 12%;
 }
-#kilo{
-    height: 30px;
-    text-align: center;
-}
 
-#peso{
-    font-size: 1.2em;
-    color: black;
-}
-#label-stock{
-    font-size: 1.2em;
-    color: black;
-}
-#label-precio{
-    font-size: 1.2em;
-    color: black;
-}
-#stock{
-    height: 30px;
-    text-align: center;
-}
 ul.nav li a:hover{
     cursor: pointer !important;
 }
-#price{
-    border-color: #F26522;
-    text-align: center;
-}
 
-#stock{
-    border-color: #F26522;
-}
-
-#kilo{
-    border-color: #F26522;
-}
 .ck-button .check-box {
     float: left;
     margin-top: 10%;
@@ -367,41 +336,7 @@ ul.nav.nav-tabs  li a h2 i{
 .col-simple{
     margin-left: 12%;
 }
-#kilo{
-    height: 30px;
-    text-align: center;
-}
 
-#peso{
-    font-size: 1.2em;
-    color: black;
-}
-#label-stock{
-    font-size: 1.2em;
-    color: black;
-}
-#label-precio{
-    font-size: 1.2em;
-    color: black;
-}
-#stock{
-    height: 30px;
-    text-align: center;
-}
-ul.nav li a:hover{
-    cursor: pointer !important;
-}
-#price{
-    border-color: #F26522;
-}
-
-#stock{
-    border-color: #F26522;
-}
-
-#kilo{
-    border-color: #F26522;
-}
 .ck-button .check-box {
     float: left;
     margin-top: 10%;
@@ -462,3 +397,11 @@ ul.nav li a:hover{
 .dz-progress {
     display: none;
 }
+
+
+.product_variants{
+    height: 30px;
+    text-align: center;
+    border-color: #F26522;
+}
+

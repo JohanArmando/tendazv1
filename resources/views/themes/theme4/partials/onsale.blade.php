@@ -7,7 +7,7 @@
 		<h2 class="text-center text-uppercase title-under">En Promocion</h2>
 	</div>
 	<slick ng-if="promotions" class="carousel-products row" current-index="index" responsive="breakpoints"
-		   slides-to-show=3 slides-to-scroll=1  prev-arrow=".btn-prev" next-arrow=".btn-next">
+		   slides-to-show=3 slides-to-scroll=1  prev-arrow=".btn-prev-promotion" next-arrow=".btn-next-promotion">
 		<div   ng-repeat="product in promotions">
 			<div ng-include="'tpl.html'"></div>
 		</div>

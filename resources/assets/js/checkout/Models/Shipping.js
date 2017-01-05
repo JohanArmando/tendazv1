@@ -1,4 +1,4 @@
-myApp.factory("Shipping" , ["$http" , "User", "$rootScope" , "Cart", function ($http , User , $rootScope , Cart) {
+myApp.factory("Shipping" , ["$http" , "User", "$rootScope" , "Cart", "$location" ,function ($http , User , $rootScope , Cart , $location) {
    var address = {};
 
     address.getAddresses = function () {
@@ -73,9 +73,15 @@ myApp.factory("Shipping" , ["$http" , "User", "$rootScope" , "Cart", function ($
             method: "GET"
         }).then(function(response) {
             console.log(response);
-            $rootScope.carts = response.data.data;
+            $rootScope.carts = response.data.cart.data;
         }).catch(function(response) {
-            console.log(response);
+            swal({
+                title: "Upps!",
+                text: response.data.message,
+                type: "error",
+                confirmButtonText: "OK"
+            });
+            $rootScope.carts = response.data.cart.data;
         }).finally(function() {});
     };
 

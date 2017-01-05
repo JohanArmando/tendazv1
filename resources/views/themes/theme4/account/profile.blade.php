@@ -5,7 +5,7 @@
 			<div class="content">
 				<div class="container">
 					<div class="row">
-						<div class="col-md-5 col-sm-12 col-xs-2 col-md-offset-4">
+						<div class="col-md-5 col-sm-12 col-xs-12 col-md-offset-4">
               <div class=" col-xs-10 text-center">
                          <div class="panel panel-default panel-content">
 							 <div class="panel panel-default panel-content">

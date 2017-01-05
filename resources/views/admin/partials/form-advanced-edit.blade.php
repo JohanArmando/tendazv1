@@ -3,7 +3,7 @@
         <div class="form-group">
             <div class="col-sm-9 col-simple">
                 <label class="control-label" style="font-size: 1.2em; color: black">Nombre del producto <small style="color: darkgray">(Obligatorio)</small></label>
-                {!!Form::text('name',$product->name,['class'=>'form-control', 'placeholder'=>'Ingresa el Nombre de la pelicula'])!!}
+                {!!Form::text('name',$product->name,['class'=>'form-control', 'placeholder'=>'Ingresa el Nombre del producto'])!!}
             </div>
         </div>
     </span>
@@ -11,14 +11,9 @@
 
 <br>
 
-<!-- indicator image load -->
-<div class="indicator hide" id="loading"><img style="
-  position: absolute;
-  z-index: 999;
-  left: 37%;
-  top: 35%;
- opacity: 0.5" src="{{ asset('administrator/image/loading/cloud_loading.gif') }}" alt=""></div>
-<!--/ indicator -->
+<div class="indicator hide" id="loading">
+    <img style="position: absolute;z-index: 999;left: 37%;top: 35%;opacity: 0.5" src="{{ asset('administrator/image/loading/cloud_loading.gif') }}" alt="">
+</div>
 
 <a href="javascript:void(0);" class="media border-dotted">
     <span class="media-body box">
@@ -34,7 +29,7 @@
 </a>
 <br>
 
-<div class="media-body box">
+<div class="media-body box ">
     <div class="row"  align="center">
         <table class="table-responsive table-product-no-variante">
             <thead>
@@ -50,7 +45,7 @@
                     <td>
                         <div class="input-group">
                             <span class="input-group-addon">$</span>
-                            {!! Form::text('price',isset($variant)? $variant->price : null ,['class'=>'form-control','id'=>'price','style'=>'height: 30px;']) !!}
+                            {!! Form::number('price',isset($product->variants)? $product->variants->first()->price : null ,['class'=>'form-control','id'=>'price','style'=>"height: 30px; text-align: center" ]) !!}
                         </div>
                     </td>
 
@@ -60,7 +55,7 @@
                     <td>
                         <div class="input-group">
                             <span class="input-group-addon">$</span>
-                            {!! Form::text('promotional_price',isset($variant)? $variant->promotional_price : null ,['class'=>'form-control','id'=>'price','style'=>"height: 30px; text-align: center" ]) !!}
+                            {!! Form::number('promotional_price',isset($product->variants)? $product->variants->first()->promotional_price : null ,['class'=>'form-control','id'=>'promotional_price','style'=>"height: 30px; text-align: center" ]) !!}
                         </div>
                     </td>
                 </tr>
@@ -68,8 +63,9 @@
                     <td><label class="col-md-6 control-label" id="peso">Peso</label></td>
                     <td>
                         <div class="input-group ">
-                            {!! Form::text('weight',isset($variant)? $variant->weight : null ,['class'=>'form-control','id'=>'kilo']) !!}
                             <span class="input-group-addon">Kg.</span>
+                            {!! Form::number('weight',isset($product->variants)? $product->variants->first()->weight : null ,['class'=>'form-control','id'=>'weight']) !!}
+                            
                         </div>
                     </td>
                 </tr>
@@ -77,74 +73,22 @@
                     <td><label class="col-md-6 control-label" id="label-stock">Stock</label></td>
                     <td>
                         <div class="input-group">
-                            {!! Form::text('stock',isset($variant)? $variant->stock : null ,['class'=>'form-control','id'=>'stock']) !!}
+                            {!! Form::number('stock',isset($product->variants)? $product->variants->first()->stock : null ,['class'=>'form-control','id'=>'stock']) !!}
                         </div>
                     </td>
                 </tr>
-
-
-
-                <tr>
-                    <td><label class="col-md-6 control-label" id="label-stock">SKU</label></td>
-                    <td>
-                        <div class="input-group">
-                            {!! Form::text('sku',isset($variant)? $variant->sku : null ,['class'=>'form-control','id'=>'price','style'=>"height: 30px; text-align: center" ]) !!}
-                        </div>
-                    </td>
-                </tr>
-
-            </div>
-            </tbody>
-            <tfoot>
-            <tr>
-                <td></td>
-                <td></td>
-            </tr>
-            </tfoot>
-        </table>
-    </div>
-
-</div>
-<br>
-<div class="media-body box hidden">
-    <div class="row"  align="center">
-        <h4>Editar Variantes</h4>
-        <hr>
-        <table class="table-responsive table-product-no-variante">
-            <thead>
-            <tr>
-                <th style="text-align: center">Nombre</th>
-                <th style="text-align: center">Precio</th>
-                <th style="text-align: center">Stock</th>
-                <th style="text-align: center">Peso</th>
-            </tr>
-            </thead>
-            <tbody>
-            <div class="form-group" >
                 <tr>
                     <td>
-                        <span>{{$variant->variants}}</span>
+                        <label class="col-md-6 control-label" id="label-stock">SKU
+                        </label>
                     </td>
                     <td>
                         <div class="input-group">
-                            <span class="input-group-addon">$</span>
-                            {!! Form::text('price',isset($variant)? $variant->price : null ,['class'=>'form-control','id'=>'price','style'=>'height: 30px;']) !!}
+                            {!! Form::text('sku',isset($product->variants)? $product->variants->first()->sku : null ,['class'=>'form-control','id'=>'sku']) !!}
                         </div>
                     </td>
-                    <td>
-                        <div class="input-group">
-                            <span class="input-group-addon">$</span>
-                            {!! Form::text('promotional_price',isset($variant)? $variant->promotional_price : null ,['class'=>'form-control','id'=>'price','style'=>"height: 30px; text-align: center" ]) !!}
-                        </div>
-                    </td>
-                    <td>
-                        <div class="input-group ">
-                            {!! Form::text('weight',isset($variant)? $variant->weight : null ,['class'=>'form-control','id'=>'kilo']) !!}
-                            <span class="input-group-addon">Kg.</span>
-                        </div>
-                    </td>
-
                 </tr>
+
             </div>
             </tbody>
             <tfoot>
@@ -187,13 +131,11 @@
                 <label for="control-label" style="font-size: 1.2em; color: black">O Selecciona una de las categorias que ya creaste</label>
                 <select  class="select2" style="width: 100%" name="category_id[]" id="selectCategory" multiple>
                     @foreach($product->categories  as $c)
-                        <option value="{{ $c->id }}" selected>{{$c->name}}</option>
+                            <option value="{{ $c->id }}" selected>{{$c->name}}</option>
                     @endforeach
-                    @if(count($categories) > 0)
-                        @foreach($categories  as $c)
-                            <option value="{{ $c->id }}" >{{$c->name}}</option>
-                        @endforeach
-                    @endif
+                    @foreach($categories  as $cat)
+                            <option value="{{ $cat->id }}" >{{$cat->name}}</option>
+                    @endforeach
                 </select>
             </div>
         </div>
@@ -208,7 +150,7 @@
             <div class="col-sm-6 col-simple">
                 <label class="control-label" style="font-size: 1.2em; color: black;">Envio </label>
                 <span class="checkbox custom-checkbox">
-                    {!! Form::checkbox('shipping_free',1,$product->shipping_free,['class'=> 'checkbox' , 'id' => 'successcheckbox1']) !!}
+                    {!! Form::checkbox('shipping_free',1,$product->collection->shipping_free,['class'=> 'checkbox' , 'id' => 'successcheckbox1']) !!}
                     <label for="successcheckbox1" style="color: #7b7b7b">&nbsp;&nbsp;Este producto no tiene costo de envio</label>
                 </span>
             </div>
@@ -241,8 +183,8 @@
             </label>
             <br><br>
             <div class="checkbox custom-checkbox" >
-                {!! Form::checkbox('highlight',1,$product->highlight , ['id'=> 'highlight']) !!}
-                <label for="highlight" style="color: #7b7b7b">&nbsp;&nbsp;Productos Destacados</label>
+                {!! Form::checkbox('primary',1,$product->collection->primary , ['id'=> 'primary']) !!}
+                <label for="primary" style="color: #7b7b7b">&nbsp;&nbsp;Productos Destacados</label>
                 <div class="row">
                     <div class="col-md-12">
                         <small style="color: black; ">Pon aqui los productos que apreceran de primera
@@ -258,8 +200,8 @@
                     </div>
                 </div>
                 <br>
-                {!! Form::checkbox('price_declared',1,$variant->price_declared , ['id'=> 'price_declared']) !!}
-                <label for="price_declared" style="color: #7b7b7b">&nbsp;&nbsp;Productos En Oferta</label>
+                {!! Form::checkbox('promotion',1,$product->collection->promotion , ['id'=> 'promotion']) !!}
+                <label for="promotion" style="color: #7b7b7b">&nbsp;&nbsp;Productos En Oferta</label>
                 <div class="row">
                     <div class="col-md-12">
                         <small style="color: black; ">Pon aqui los productos en oferta</small>

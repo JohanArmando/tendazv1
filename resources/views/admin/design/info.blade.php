@@ -47,7 +47,7 @@ Informacion de contacto
                         </div>
                         <div class="form-group">
                             <label for="telf">Telefono de tu local</label>
-                            {!! Form::text('number_phone' ,$store->number_phone ,['class' => 'form-control' , 'placeholder' => '(+57) - xxxx-xxxx', 'data-mask' => '(99) 999-9999',
+                            {!! Form::number('number_phone' ,$store->number_phone ,['class' => 'form-control',
                             'onkeypress'=>'return justNumbers(event);'])!!}
                         </div>
                         <div class="form-group">
@@ -74,7 +74,7 @@ Informacion de contacto
     @endsection
 @section('scripts')
     <script type="text/javascript" src="{{asset('administrator/plugins/inputmask/js/inputmask.js')}}"></script>
-    <script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>
+    <script type="text/javascript" src="{{asset('administrator/js/nicEdit-latest.js')}}"></script>
     <script type="text/javascript">
         bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
     </script>

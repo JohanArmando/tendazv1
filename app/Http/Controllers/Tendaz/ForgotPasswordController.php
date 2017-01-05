@@ -11,13 +11,10 @@ use Illuminate\Support\Facades\Password;
 class ForgotPasswordController extends Controller
 {
     use SendsPasswordResetEmails;
+    
     protected $linkRequestView = 'administrator.passwords.email';
     protected $guard = 'admins';
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+    
     public function __construct()
     {
         $this->middleware('guest:admins');
@@ -27,3 +24,4 @@ class ForgotPasswordController extends Controller
         return Password::broker('admins');
     }
 }
+    

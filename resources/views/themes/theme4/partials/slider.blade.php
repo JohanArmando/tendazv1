@@ -6,7 +6,7 @@
 			<!-- banner-slider -->
 			<div class="banner-slider banner-slider-button">
 				<div>
-					<a href="#" class="banner zoom-in font-size-responsive">
+					<a  href="{{url('products')}}" class="banner zoom-in font-size-responsive">
 									<span class="figure">
 										 @foreach($sliders as $slider)
 											@if($slider->id == $shop->id)
@@ -22,7 +22,7 @@
 					</a>
 				</div>
 				<div>
-					<a href="#" class="banner zoom-in font-size-responsive">
+					<a  href="{{url('products')}}" class="banner zoom-in font-size-responsive">
 									<span class="figure">
 										@foreach($sliders as $slider)
 											@if($slider->id == $shop->id)
@@ -38,7 +38,7 @@
 					</a>
 				</div>
 				<div>
-					<a href="#" class="banner zoom-in font-size-responsive">
+					<a  href="{{url('products')}}" class="banner zoom-in font-size-responsive">
 									<span class="figure">
 										@foreach($sliders as $slider)
 											@if($slider->id == $shop->id)
@@ -61,7 +61,7 @@
 		<div class="col-xs-12 col-sm-12 col-md-6 hidden-xs">
 			<div class="row">
 				<div class="col-sm-6 col-md-6">
-					<a data-toggle="modal" data-target="#modalRegisterForm" class="banner zoom-in">
+					<a href="{{url('products')}}" class="banner zoom-in">
 									<span class="figure">
 										@foreach($sliders as $slider)
 											@if($slider->id == $shop->id)

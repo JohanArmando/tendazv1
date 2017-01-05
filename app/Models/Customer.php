@@ -2,6 +2,7 @@
 
 namespace Tendaz\Models;
 
+use Carbon\Carbon;
 use Tendaz\Models\Cart\Cart;
 use Tendaz\Models\Order\Consult;
 use Tendaz\Models\Order\Order;
@@ -32,7 +33,7 @@ class Customer extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'uuid', 'name', 'last_name', 'type', 'phone', 'active', 'email', 'password', 'identification', 'notes', 'profile', 'country_id' , 'shop_id' , 'social' , 'remember_token'
+        'uuid', 'name', 'last_name', 'type', 'phone', 'active', 'email', 'password', 'identification', 'notes', 'avatar', 'country_id' , 'shop_id' , 'social' , 'remember_token'
     ];
     public function getFullNameAttribute()
     {
@@ -72,7 +73,7 @@ class Customer extends Authenticatable
 
     public function addresses(){
         return $this->belongsToMany(Address::class , 'customer_address' , 'customer_id' , 'address_id')
-            ->withPivot('id' , 'uuid' , 'isActive' , 'isShipping' , 'isBilling' , 'isPrimary');
+            ->withPivot('id'  , 'isActive' , 'isShipping' , 'isBilling' , 'isPrimary');
     }
 
     public function addressesForShipping(){
@@ -114,6 +115,19 @@ class Customer extends Authenticatable
             $this->attributes['password'] = bcrypt($value);
         }else{
             $this->attributes['password'] = '';
+        }
+    }
+
+    public function setAvatarAttribute($value)
+    {
+        if(! empty($value)){
+            if (is_string($value)){
+                $this->attributes['avatar'] = $value;
+            }else{
+                $name = Carbon::now()->second.$value->getClientOriginalName();
+                $this->attributes['avatar'] = $name;
+                \Storage::disk('profile')->put($name, \File::get($value));
+            }
         }
     }
 

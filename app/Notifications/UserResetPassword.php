@@ -42,8 +42,9 @@ class UserResetPassword extends Notification
      */
     public function toMail($notifiable)
     {
-        $url = url('/password/reset/' . $this->token);
-        $gretting = session()->get('users')['name'] ? 'Hola ' . session()->get('users')['name'] : session()->get('store')['name'];
+        $url = url('/password/reset/' . $this->token."?email=$notifiable->email");
+        $gretting = empty($notifiable->full_name) ? 'Hola '.$notifiable->full_name : 'Hola '.$notifiable->shop->name;
+
         return (new MailMessage)
             ->subject('Restablecer contraseña de tu tienda. TENDAZ')
             ->greeting($gretting)

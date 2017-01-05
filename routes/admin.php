@@ -1,8 +1,6 @@
 <?php
 $domain = new \Tendaz\Models\Domain\Domain();
-Route::group(['domain' => '{subdomain}.'.$domain->getDomain() ,'middleware' => ['store' , 'auth:admins']], function () {
-
-
+    Route::group(['domain' => '{subdomain}.'.$domain->getDomain() ,'middleware' => ['store' , 'auth:admins']], function () {
     //Route home
     Route::get('/' , 'HomeController@home');
 
@@ -24,7 +22,7 @@ Route::group(['domain' => '{subdomain}.'.$domain->getDomain() ,'middleware' => [
     Route::resource('products' , 'ProductsController');
     Route::get('products/edit/{id}' , 'ProductsController@editProduct');
     Route::put('products/edit/{id}' , 'ProductsController@putProduct');
-
+    Route::post('products/file-delete/{id}' , 'ProductsController@ajaxDelete');
     //Route Categories
     Route::resource('categories' , 'CategoriesController');
 
@@ -37,6 +35,7 @@ Route::group(['domain' => '{subdomain}.'.$domain->getDomain() ,'middleware' => [
 
     //Route Providers
     Route::resource('providers' , 'ProvidersController');
+    Route::get('providers/selectCity/{id}' , 'ProvidersController@select');
 
     //Route help
     Route::group(['prefix' => 'help' , 'namespace' => 'Help'], function() {
@@ -86,8 +85,11 @@ Route::group(['domain' => '{subdomain}.'.$domain->getDomain() ,'middleware' => [
         
         Route::resource('shippings', 'ShippingController',
             ['only' => ['index', 'store', 'update', 'destroy']]);
-        
-        Route::resource('/domain', 'SettingController@domain');
+        //setting domain
+        Route::resource('/domain', 'NameCheapController@getIndex');
+        Route::delete('/domain/destroy/{account}', 'NameCheapController@postDelete');
+        Route::get('/domain/settings/{account}', 'NameCheapController@getVerify');
+        Route::get('/domain/verify/{account}', 'NameCheapController@postVerify');
         
         Route::resource('/locals', 'LocalController',
             ['only' => ['index', 'store', 'update', 'destroy']]);

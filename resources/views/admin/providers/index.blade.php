@@ -9,7 +9,7 @@ Mis provedores
     <div class="page-header page-header-block">
         <div class="page-header-section">
                 <h4 class="title">
-                    <img class="page-header-section-icon" src="{{asset('administrator/image/icons/icons-base/provider.png')}}">&nbsp; Mis provedores
+                    <img class="page-header-section-icon" src="{{asset('administrator/image/icons/icons-base/provider.png')}}">&nbsp; Mis proveedores
                 </h4>
         </div>
         <div class="page-header-section">
@@ -17,7 +17,7 @@ Mis provedores
                 <ol class="breadcrumb breadcrumb-transparent nm">
                     <li><a href="{{url('admin')}}" style="color: darkgrey;">Inicio</a></li>
                     <li><a href="{{url('admin/orders')}}" style="color: orange;">Ventas</a></li>
-                    <li class="active" style="color: orange;">Mis Provedores</li>
+                    <li class="active" style="color: orange;">Mis Proveedores</li>
                 </ol>
             </div>
         </div>
@@ -28,7 +28,7 @@ Mis provedores
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="panel-title" style="margin-right: 20px;">
-                        <a data-toggle="modal" data-target="#provider" href="{{asset('admin/export/orders')}}" ><i class="fa fa-plus"></i>&nbsp; Crear Provedor</a>
+                        <a data-toggle="modal" data-target="#provider" href="{{asset('admin/export/orders')}}" ><i class="fa fa-plus"></i>&nbsp; Crear Proveedor</a>
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@ Mis provedores
         <div class="col-md-12">
             <div class="panel panel-default" >
                 <div class="panel-heading">
-                    <h3 class="panel-title">Provedores</h3>
+                    <h3 class="panel-title">Proveedores</h3>
                 </div>
                 <div class="panel-body">
                     <br><br>
@@ -113,7 +113,7 @@ Mis provedores
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Crear Provedor</h4>
+                    <h4 class="modal-title" id="myModalLabel">Crear Proveedor</h4>
                 </div>
                 <form action="{{url('admin/providers')}}" method="post">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -140,23 +140,24 @@ Mis provedores
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Telefono:</label>
-                                    <input type="text" name="phone" class="form-control" data-mask="999-9999-999" required>
+                                    <input type="text" name="phone" class="form-control" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Departamento:</label>
-                                    <select name="state_id" class="form-control" >
-                                        @foreach($departments as $departament)
-                                        <option value="{{$departament->id}}">{{$departament->name}}</option>
+                                    <select name="state_id" id="id_department" class="form-control" onchange="filterCity()">
+                                        @foreach($departments as $department)
+                                        <option value="{{$department->id}}">{{$department->name}}</option>
                                         @endforeach
                                     </select>
+                                    <input type="hidden"  name="_token" value="{{ csrf_token() }}" id="token">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Ciudad:</label>
-                                    <select name="city_id" class="form-control" >
+                                    <select name="city_id" id="city" class="form-control" >
                                         @foreach($cities as $city)
                                             <option value="{{$city->id}}">{{$city->name}}</option>
                                         @endforeach
@@ -164,7 +165,7 @@ Mis provedores
                                 </div>
                             </div>
                         </div>
-                </div>
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Agregar</button>
@@ -178,4 +179,28 @@ Mis provedores
     <script type="text/javascript" src="{{asset('administrator/plugins/inputmask/js/inputmask.js')}}"></script>
     <script type="text/javascript" src="{{asset('administrator/plugins/parsley/js/parsley.js')}}"></script>
     <script type="text/javascript" src="{{asset('administrator/js/backend/forms/validation.js')}}"></script>
+    <script>
+        function filterCity(){
+            var token = $('#token').val();
+            var id = $('#id_department').val();
+            $.ajax({
+                url: "{{url('admin/providers/selectCity')}}"+"/"+ id + '?client_secret='  + client_secret + '&client_id=' + client_id,
+                'type' : 'GET',
+                'dataType': 'json',
+                'headers' : {'X-CSRF-TOKEN' : token,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                success: function( result ) {
+                    $('#city').find('option').remove().end();
+                    $.each(result, function (i, item) {
+                        $.each(item, function (i, v) {
+                            console.log(v);
+                            $('#city').append('<option value="' + i +'">' + v +'</option>')
+                        });
+                    });
+                }
+            });
+        }
+    </script>
 @stop

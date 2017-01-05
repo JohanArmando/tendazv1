@@ -83,7 +83,7 @@
                             </li>
                            <li>
                                <a href="{{ url('admin/providers')}}">
-                                   <span class="text">Mis Provedores</span>
+                                   <span class="text">Mis Proveedores</span>
                                </a>
                            </li>
                        </ul>

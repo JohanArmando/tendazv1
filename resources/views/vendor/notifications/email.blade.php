@@ -134,14 +134,9 @@ $style = [
                                         <!-- Outro -->
                                         @foreach ($outroLines as $line)
                                             <p style="{{ $style['paragraph'] }}">
-                                                {{ $line }}
+                                                {!!  $line !!}
                                             </p>
                                         @endforeach
-
-                                        <!-- Salutation -->
-                                        <p style="{{ $style['paragraph'] }}">
-                                            Gracias,<br>{{ session()->has('users') ? session()->get('users')['name'] : 'Sin Nombre'  }}
-                                        </p>
 
                                         <!-- Sub Copy -->
                                         @if (isset($actionText))

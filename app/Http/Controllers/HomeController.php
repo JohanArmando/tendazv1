@@ -4,15 +4,8 @@ namespace Tendaz\Http\Controllers;
 
 
 use igaster\laravelTheme\Facades\Theme;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Validator;
-use Tendaz\Models\Cart\Cart;
 use Tendaz\Models\Customer;
 use Tendaz\Models\Order\Consult;
-use Tendaz\Models\Payment_method\PaymentValue;
-use Tendaz\Models\Products\Product;
-use Tendaz\Models\Products\Variant;
-use Tendaz\Models\Shipping\ShippingMethod;
 use Tendaz\Models\Store\Shop;
 use Illuminate\Http\Request;
 

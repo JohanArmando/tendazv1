@@ -12,7 +12,7 @@ class ShippingMethodsController extends Controller
 {
     public function index(Cart $cart)
     {
-        ShippingMethod::OptionsByCart($cart);
-        return response()->json( fractal()->item($cart, new CartTransformer()), 201);
+        return ShippingMethod::OptionsByCart($cart);
+       
     }
 }
