@@ -3,7 +3,6 @@
 namespace Tendaz\Models\Address;
 
 use Illuminate\Database\Eloquent\Model;
-use Tendaz\Models\Addres\AddressHistory;
 use Tendaz\Models\Geo\Country;
 use Tendaz\Models\Customer;
 use Tendaz\Models\Geo\City;
@@ -20,7 +19,7 @@ class Address extends Model
             parent::__construct($attributes);
         }
     }
-    
+
     public function getRouteKeyName()
     {
         return 'uuid';

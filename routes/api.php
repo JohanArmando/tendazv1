@@ -24,7 +24,10 @@ Route::group(['domain' => env('APP_API_URL') , 'namespace' => 'Api'] , function 
     Route::get('customers/{customer}/addresses/{address}/main' , [
         'uses' => 'Auth\\AddressesController@main'
     ]);
-
+    Route::resource('customers.orders' , 'Auth\\Orders\\OrdersController' ,[
+        'only' => ['index' , 'show']
+    ]);
+    
     Route::resource('customers.addresses' , 'Auth\\AddressesController', [
         'only' => ['index' , 'store' , 'show' , 'update' , 'destroy']
     ]);
