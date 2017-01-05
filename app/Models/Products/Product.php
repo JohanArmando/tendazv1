@@ -276,7 +276,7 @@ class Product extends Model
         self::addImages($request, $product->variant());
         return $product->variant;
     }
-    
+        
     public static function productVisible()
     {
         return static::where('publish' , 1)->order();
