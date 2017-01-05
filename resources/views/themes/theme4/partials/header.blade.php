@@ -16,6 +16,7 @@
 				@if(!Request::is('cart/buy'))
 					<div class="col-sm-6 col-md-8 col-lg-8 col-xl-8 pull-right text-right" ng-controller="cartGlobalController" ng-cloak="">
 						<div class="row-functional-link">
+							<img class="hidden-xs hidden-sm" src="{{asset('administrator/image/servientrega-banner.png')}}" style="margin: 10px 20px" alt="">
 							<!-- shopping cart start -->
 							<div class="cart link-inline">
 								<div class="dropdown text-right">

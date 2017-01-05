@@ -12691,7 +12691,7 @@ table .input-counter .plus-btn:before {
 * blog carousel  
 *****************************************/
 .content-bg-1 {
-  background: url('..') center center no-repeat;
+  background: url('../images/content-bg-1.jpg') center center no-repeat;
   padding: 100px 0 35px;
 }
 @media (max-width: 991px) {

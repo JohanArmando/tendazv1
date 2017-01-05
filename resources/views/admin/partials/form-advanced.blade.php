@@ -58,7 +58,7 @@
 <div  class="media-body box" >
     {{--Estar list tabs --}}
     <ul class="nav nav-tabs text-center" style="height: 100px; font-size: 2.0em; background-color: transparent">
-        <li class="active">
+        <li class="hidden">
             <a style="padding-top: 7.5%;" href="#sinVariante" data-toggle="tab" >
                 <i class="fa fa-shopping-cart text-tendaz" style="margin-right: 5%; font-size: 1.9em;"></i>Sin Variante
             </a>

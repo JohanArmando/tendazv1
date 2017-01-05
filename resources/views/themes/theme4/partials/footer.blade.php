@@ -110,7 +110,10 @@
 	<div class="divider divider-md visible-sm"></div>
 	<div class="container footer-copyright">
 		<div class="row">
-			<div class="col-lg-12"> <a href="#"><span>Tendaz.</span>Store</a> &copy; 2017 .Todos lo derechos reservados, Maxcorp.Inc. </div>
+			<div class="col-lg-12">
+				<img src="{{asset('administrator/image/servientrega-footer.jpg')}}" alt="">
+				&copy; 2017 .Todos lo derechos reservados.
+			</div>
 		</div>
 	</div>
 	<a href="#" class="btn btn--ys btn--full visible-xs" id="backToTop">Back to top <span class="icon icon-expand_less"></span></a>
