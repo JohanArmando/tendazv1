@@ -16,7 +16,6 @@ class OrdersController extends Controller
         //en el detalle de la orden resumen de productos
         //resumen de cupon
         //resumen de envio y costo id medio de apgo pago estado fecha
-        
         return  [$orders];
     }
 }
