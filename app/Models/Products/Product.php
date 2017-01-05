@@ -23,7 +23,7 @@ class Product extends Model
     protected $table = 'products';
 
     protected $fillable = [
-        'name', 'slug', 'seo_title', 'seo_description', 'description', 'publish', 
+        'name', 'slug', 'seo_title', 'seo_description', 'description', 'publish','provider_id', 
          'shop_id', 'uuid' , 'blacklist' , 'large' , 'height' , 'width' ,'dimension'
     ];
 
@@ -276,7 +276,9 @@ class Product extends Model
         self::addImages($request, $product->variant());
         return $product->variant;
     }
+    public function setPublishAttribute(value){
 
+    }
     public static function productVisible()
     {
         return static::where('publish' , 1)->order();
