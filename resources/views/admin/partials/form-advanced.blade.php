@@ -88,7 +88,7 @@
                 <div class="col-md-9 col-simple" >
                     <label for="control-label" style="font-size: 1.2em; color: black">Asigna un provedor para este producto</label>
 
-                    {!! Form::select('provider_id',$categories, isset($product) ? $product->categories->pluck('id')->toArray() : null, ['class' => "", "id" => "providers"])!!}
+                    {!! Form::select('provider_id',$providers, isset($providers) ? $providers : null, ['class' => "", "id" => "providers"])!!}
                 </div>
             </div>
         </span>
@@ -119,7 +119,7 @@
                     <label class="control-label" style="font-size: 1.2em; color: black">Visibilidad del producto en tu tienda
                     </label>
                     <div class="checkbox custom-checkbox" >
-                        {!! Form::checkbox('publish' , 1 , 1 , ['id' => 'publish' , 'class' => 'checkbox']) !!}
+                        {!! Form::checkbox('publish' , 1 , null, ['id' => 'publish' , 'class' => 'checkbox']) !!}
                         <label for="publish" style="color: #7b7b7b">&nbsp;&nbsp;Quiero que este producto se muestre en mi tienda
                         </label>
                         <div class="row">
