@@ -112,11 +112,6 @@
 							<img ng-src="<% product.images.data[0].url %>" alt="" ng-show="product.images.data"  >
 						<img ng-src="<% BASEURL + '/administrator/image/noImage.png' %>" ng-hide="product.images.data" >
 					</a>
-					<!--<a href="#" ng-hide="product.stock == 0" ng-click="viewProduct(product)"  data-toggle="modal" data-target="#quickViewModal" class="quick-view">
-						<b>
-							<span class="icon icon-visibility"></span> Ver
-						</b>
-					</a>-->
 					<div class="product__label--sold-out" ng-show="product.stock == 0">
                         <span>
                             Sin<br>

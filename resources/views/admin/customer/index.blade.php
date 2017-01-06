@@ -3,8 +3,8 @@
         Clientes
     @endsection
     @section('css')
-        <link rel="stylesheet" href="{{asset('admin/plugins/datatables/css/tabletools.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{asset('admin/css/stylePersonal.css')}}">
+        <link rel="stylesheet" href="{{asset('administrator/plugins/datatables/css/tabletools.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('administrator/css/stylePersonal.css')}}">
         <style>
             [ng\:cloak], [ng-cloak], .ng-cloak {
                 display: none !important;
@@ -116,8 +116,8 @@
        </div>
     @endsection
     @section('scripts')
-        <script src="{{ asset('admin/angular/angular.min.js') }}"></script>
-        <script src="{{ asset('admin/angular/pagination.js') }}"></script>
-        <script src="{{ asset('admin/angular/moduloClientes.js') }}"></script>
-        <script src="{{ asset('admin/js/angular-locale-es_es.js')}}"></script>
+        <script src="{{ asset('administrator/angular/angular.min.js') }}"></script>
+        <script src="{{ asset('administrator/angular/pagination.js') }}"></script>
+        <script src="{{ asset('administrator/angular/moduloClientes.js') }}"></script>
+        <script src="{{ asset('administrator/js/angular-locale-es_es.js')}}"></script>
      @stop

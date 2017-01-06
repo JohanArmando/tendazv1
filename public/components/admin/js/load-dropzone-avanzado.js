@@ -26,6 +26,7 @@ Dropzone.options.myDropzoneAvanzado = {
         var submitBtn = document.querySelector("#submit-avanzado");
         myDropzoneAvanzado = this;
         var id = $('#producto_id').val();
+/*
         $.get( BASEURL + '/admin/products/images/'+ id , function(data) {
             $.each(data, function(key,value){
                 var removeButton = Dropzone.createElement("<button class='btn btn-block btn-primary' id='remove' style='margin-top: 3%; cursor: pointer'>Remove</button>");
@@ -49,6 +50,7 @@ Dropzone.options.myDropzoneAvanzado = {
                 mockFile.previewElement.appendChild(removeButton);
             });
         });
+        */
         submitBtn.addEventListener("click", function(e){
             e.preventDefault();
             e.stopPropagation();

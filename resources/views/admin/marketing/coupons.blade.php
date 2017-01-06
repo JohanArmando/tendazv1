@@ -5,7 +5,6 @@ Cupones de descuento
 	@section('css')
         <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css">
         <link rel="stylesheet" href="{{ asset('administrator/plugins/timepicker/css/bootstrap-datetimepicker.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('components/admin/css/select2.css') }}">
 	@stop
 @section('content')
 	 <div class="page-header page-header-block">
