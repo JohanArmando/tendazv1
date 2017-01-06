@@ -7,14 +7,12 @@
             <h4 class="title semibold"><i class="fa fa-credit-card"></i>&nbsp; Planes y pagos</h4>
         </div>
         <div class="page-header-section">
-            <!-- Toolbar -->
             <div class="toolbar">
                 <ol class="breadcrumb breadcrumb-transparent nm">
                     <li><a href="{{url('admin/home')}}">Home</a></li>
                     <li class="active">Planes y pagos</li>
                 </ol>
             </div>
-            <!--/ Toolbar -->
         </div>
 </div>
 <br>
@@ -39,10 +37,8 @@
 	</div>
 	<div class="col-md-8">
 		<div class="panel panel-default">
-                            <!-- panel heading/header -->
                             <div class="panel-heading">
                                 <h3 class="panel-title">Seleccione el tipo y el tiempo de facturacion.</h3>
-                                <!-- panel toolbar -->
                                 <div class="panel-toolbar text-right">
                                     <!-- option -->
                                     <div class="option">

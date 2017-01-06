@@ -2,87 +2,159 @@
     'id' => 'my-dropzone' , 'files' => true,'role'=>'form', 'data-toggle'=> 'validator']) !!}
 <div class="media border-dotted">
     <div class="row">
-             <span class="media-body box col-lg-offset-0">
-                 <div class="form-group">
-                     <div class="col-sm-9 col-simple">
-                         <label class="control-label" style="font-size: 1.2em; color: black">Nombre del producto
-                             <small style="color: darkgray">(Obligatorio)</small></label>
-                         <input type="text" name="name" class="form-control" placeholder="Ejemplo: Zapato de cuero" required>
-                         <div class="help-block with-errors" id="name"></div>
-                     </div>
-                 </div>
-             </span>
+      <span class="media-body box col-lg-offset-0">
+         <div class="form-group">
+            <div class="row">
+             <div class="col-sm-9 col-simple">
+                 <label class="control-label" style="font-size: 1.2em; color: black">Nombre del producto
+                     <small style="color: darkgray">(Obligatorio)</small></label>
+                 <input type="text" name="name" class="form-control" placeholder="Ejemplo: Zapato de cuero" required>
+                 <div class="help-block with-errors" id="name"></div>
+             </div>
+            </div>
+         </div>
+      </span>
     </div>
 </div>
 
 <div class="media border-dotted">
     <div class="row">
-                <span class="media-body box">
-                    <div class="form-group">
-                        <div class="col-md-9 col-simple">
-                            <label class="control-label" style="font-size: 1.2em; color: black;">Imagenes
-                                <small style="color: darkgray">(Opcional)</small>
-                            </label>
-                            <div class="dz-message" style="height:190px; border-width: 2px; border-style: dashed; border-color: #F26522; ">
-                                <h1 style="font-size: 80px !important; color: #F26522; "><i class="ico-cloud-upload2"></i></h1>
-                                <label>Arrastra tus imagenes </label>
-                            </div>
-                        </div>
-                        <div class="text-center col-md-9 col-simple">
-                            <div  class="dropzone-previews"></div>
-                        </div>
-                    </div>
-                </span>
-    </div>
-</div>
-<div class="media border-dotted">
-    <div class="row">
-            <span class="media-body box">
-                <div class="form-group" >
-                    <div class="col-md-2 col-simple">
-
-                        <div class="input-group">
-                            <label class="col-md-6 control-label" id="label-precio">Precio</label>
-                            <span class="input-group-addon">$</span>
-                            <input type="text" style=" height: 30px; width: 85px; text-align: center;" id="price" name="product[variants][0][price]" class="form-control"
-                                   onkeypress="return justNumbers(event);" placeholder="0,00">
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-simple" style="margin-left: 6.5%">
-                        <div class="input-group">
-                            <label class="col-md-6 control-label" id="peso">Peso</label>
-                            <span class="input-group-addon">Kg.</span>
-                            <input type="text"  id="kilo"  name="product[variants][0][weight]" class="form-control" data-parsley-type="digits"
-                                   style="width: 55px;" onkeypress="return justNumbers(event);">
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-simple" style="margin-left: 6.5%">
-                        <div class="input-group">
-                            <label class="col-md-6 control-label" id="label-stock">Stock</label>
-                            <span class="input-group-addon">Cantidad</span>
-                            <input type="text"  id="stock" name="product[variants][0][stock]" class="form-control" data-parsley-type="number"
-                                   style="width: 55px;  text-align: center;" onkeypress="return justNumbers(event);">
-                        </div>
-                    </div>
+      <span class="media-body box">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-9 col-simple">
+                <label class="control-label" style="font-size: 1.2em; color: black;">Imagenes
+                    <small style="color: darkgray">(Opcional)</small>
+                </label>
+                <div class="dz-message" style="height:190px; border-width: 2px; border-style: dashed; border-color: #F26522; ">
+                    <h1 style="font-size: 80px !important; color: #F26522; "><i class="ico-cloud-upload2"></i></h1>
+                    <label>Arrastra tus imagenes </label>
                 </div>
-            </span>
+            </div>
+            <div class="text-center col-md-9 col-simple">
+                <div  class="dropzone-previews"></div>
+            </div>
+          </div>
+        </div>
+      </span>
     </div>
 </div>
 <div class="media border-dotted">
     <div class="row">
-              <span class="media-body box">
-                <div class="form-group">
-                    <div class="col-sm-9 col-simple">
-                        <label class="control-label" style="font-size: 1.2em; color: black;">Descripcion
-                            <small style="color: darkgray">(Menciona todas las caracteristicas de tu producto)</small>
-                        </label>
-                        <br>
-                     <textarea  class="form-control" name="description" id="simple-description" data-parsley-type="alphanum">
-                     </textarea>
-                    </div>
+      <span class="media-body box">
+        <div class="form-group" >
+          <div class="row">
+            <div class="col-md-12 col-simple">
+              <label class="control-label" style="font-size: 1.2em; color: black;">Dimensiones
+              <small style="color: darkgray">(Es importante completar tus dimensiones para calcular el valor del envio)</small>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group" >
+          <div class="row">
+            <div class="col-md-12  col-simple">
+              <div class="col-md-3">
+                  <div class="input-group">
+                      <label class="col-md-6 control-label" id="label-precio">
+                        Largo
+                      </label>
+                      <span class="input-group-addon">
+                        Cm.
+                      </span>
+                      <input type="number" id="price" name="large" class="form-control" placeholder="1.0 CM">
+                  </div>
+              </div>
+              <div class="col-md-3">
+                  <div class="input-group">
+                      <label class="col-md-6 control-label" id="peso">
+                        Alto
+                      </label>
+                      <span class="input-group-addon">
+                        Cm
+                      </span>
+                      <input type="number"  id="kilo"  name="height" class="form-control" data-parsley-type="digits" placeholder="1.0 CM">
+                  </div>
+              </div>
+              <div class="col-md-3">
+                  <div class="input-group">
+                      <label class="col-md-6 control-label" id="label-stock">
+                        Ancho
+                      </label>
+                      <span class="input-group-addon">
+                        Cm
+                      </span>
+                      <input type="number" id="stock" name="width" class="form-control" data-parsley-type="number" placeholder="1.0 CM">
+                  </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </span>
+    </div>
+</div>
+<div class="media border-dotted">
+  <div class="row">
+    <span class="media-body box">
+      <div class="form-group" >
+        <div class="row">
+          <div class="col-md-12  col-simple">
+            <div class="col-md-3">
+                <div class="input-group">
+                    <label class="col-md-6 control-label" id="label-precio">
+                      Precio
+                    </label>
+                    <span class="input-group-addon">
+                      $
+                    </span>
+                    <input type="number" id="price" name="product[variants][0][price]" class="form-control" placeholder="$12000">
                 </div>
-             </span>
-
+            </div>
+            <div class="col-md-3">
+                <div class="input-group">
+                    <label class="col-md-6 control-label" id="peso">
+                      Peso
+                    </label>
+                    <span class="input-group-addon">
+                      Kg.
+                    </span>
+                    <input type="number"  id="kilo"  name="product[variants][0][weight]" class="form-control" data-parsley-type="digits" placeholder="1.0 Kg">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="input-group">
+                    <label class="col-md-6 control-label" id="label-stock">
+                      Stock
+                    </label>
+                    <span class="input-group-addon">
+                      #
+                    </span>
+                    <input type="number" id="stock" name="product[variants][0][stock]" class="form-control" data-parsley-type="number" placeholder="12">
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+<div class="media border-dotted">
+    <div class="row">
+      <span class="media-body box">
+        <div class="form-group">
+        <div class="row">
+            <div class="col-sm-9 col-simple">
+                <label class="control-label" style="font-size: 1.2em; color: black;">Descripcion
+                    <small style="color: darkgray">(Menciona todas las caracteristicas de tu producto)</small>
+                </label>
+                <br>
+             <textarea  class="form-control" name="description" id="simple-description" data-parsley-type="alphanum">
+             </textarea>
+            </div>
+        </div>
+        </div>
+     </span>
     </div>
 </div>
 <div class="row" style="padding: 2.5%">
