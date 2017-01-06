@@ -58,10 +58,10 @@ Crear categorias
                                                               style="height: 42px; width: 117%;margin-left: 10px" required>
                                                    </div>
                                                 <div class="col-md-4">
-                                                    <a data-tooltip="Editar Categoria" class="pull-right btn btn-edit-category btn-primary btn-lg"  data-nodrag ng-click="newSubItem(this)">
+                                                    <a data-tooltip="Agregar Subcategoria" class="pull-right btn btn-edit-category btn-primary btn-lg"  data-nodrag ng-click="newSubItem(this)">
                                                         <span class="fa fa-plus" title="Agregar SubCategorias"></span>
                                                     </a>
-                                                    <a data-tooltip="Agregar Subcategoria" class="pull-right btn btn-subcategory btn-primary btn-lg"  data-nodrag ng-click="actualizar(this)"
+                                                    <a data-tooltip="Editar Categoria" class="pull-right btn btn-subcategory btn-primary btn-lg"  data-nodrag ng-click="actualizar(this)"
                                                        data-toggle="modal" data-target="#editModalCategory">
                                                         <span class="fa fa-pencil" title="Editar"></span>
                                                     </a>

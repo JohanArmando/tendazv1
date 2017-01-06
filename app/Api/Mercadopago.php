@@ -421,6 +421,8 @@ class Mercadopago
 class MPRestClient {
     const API_BASE_URL = "https://api.mercadopago.com";
 
+    const trans = 'payments.mercadopago.';
+
     private static function build_request($request) {
         if (!extension_loaded ("curl")) {
             throw new MercadoPagoException("cURL extension not found. You need to enable cURL in your php.ini or another configuration you have.");
@@ -528,13 +530,25 @@ class MPRestClient {
                     }
                 }
             }
-
-            throw new MercadoPagoException ($message, $response['status']);
+            return self::errorResponse($response);
         }
 
         curl_close($connect);
 
         return $response;
+    }
+
+    public static function errorResponse(array  $response = null)
+    {
+        if (!$response)
+            return;
+
+        return response([
+            'cause' => [
+                "code"          => $response['response']['cause'][0]['code'],
+                "description"   => trans(self::trans.$response['response']['cause'][0]['code'])
+            ]
+        ], $response['status']);
     }
 
     private static function build_query($params) {

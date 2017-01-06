@@ -20,7 +20,10 @@ class AddressTransformer extends TransformerAbstract
             return [
                 '_id'  => $address->uuid,
                 'name' => $address->name,
-                'city' => 'Bogota',
+                'city' => [
+                    '_id' => $address->city->id,
+                    'name' => $address->city->name,
+                ],
                 'complement' => $address->complement,
                 'country'    => [
                     '_id' => $address->country->uuid,
@@ -32,7 +35,7 @@ class AddressTransformer extends TransformerAbstract
                 'number'   => $address->number,
                 'receiverName'   => $address->receiverName,
                 'state'   => [
-                    '_id' => $address->state->uuid,
+                    '_id' => $address->state->id,
                     'name' => $address->state->name,
                 ],
                 'street' => $address->street
