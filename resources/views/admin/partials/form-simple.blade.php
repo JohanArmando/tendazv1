@@ -8,7 +8,7 @@
                          <label class="control-label" style="font-size: 1.2em; color: black">Nombre del producto
                              <small style="color: darkgray">(Obligatorio)</small></label>
                          <input type="text" name="name" class="form-control" placeholder="Ejemplo: Zapato de cuero" required>
-                         <div class="help-block with-errors"></div>
+                         <div class="help-block with-errors" id="name"></div>
                      </div>
                  </div>
              </span>

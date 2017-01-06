@@ -19,12 +19,13 @@ class PaymentMethodController extends Controller
 
     public function mercadopago(Request $request ,  PaymentValue $payment)
     {
-        $mp = new Mercadopago("ACCESS_TOKEN");
-
-        $payment = $mp->get ("/v1/payments/[ID]");
-
-        print_r ($payment);
         $mp = new Mercadopago($payment->api_id , $payment->api_key);
-        return [$mp];
+        $access_token = $mp->get_access_token();
+
+        $mp = new Mercadopago($access_token);
+
+        $response = $mp->post("/v1/payments");
+        
+        return $response;
     }
 }

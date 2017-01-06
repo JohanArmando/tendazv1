@@ -7,6 +7,7 @@ use Tendaz\Models\Store\Shop;
 use Webpatser\Uuid\Uuid;
 use Illuminate\Http\Request;
 use Tendaz\Models\Products\Option;
+use Tendaz\Models\Order\Provider;
 use Tendaz\Models\Products\Product;
 use Tendaz\Models\Products\Variant;
 use Tendaz\Models\Products\Section;
@@ -39,17 +40,22 @@ class ProductsController extends Controller
        return view('admin.product.index');
     }
 
-    public function create()
+    public function create(Request $request)
     {
         $categories = Category::pluck('name' , 'id')->toArray();
+        $providers  =   Provider::where('shop_id',$request->shop->id)->pluck('name','id');
         $options = Option::get(['id' , 'name']);
-        return view('admin.product.create',compact('categories' , 'options'));
+        return view('admin.product.create',compact('categories' , 'options','providers'));
     }
 
 
     public function store(Request $request)
     {
+        $this->validate($request , [
+           'name' => 'required',
+        ]);
         $response = Product::createWithVariant($request->all());
+
         return response()->json($response , 200);
     }
 

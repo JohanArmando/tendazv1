@@ -23,7 +23,7 @@ class Product extends Model
     protected $table = 'products';
 
     protected $fillable = [
-        'name', 'slug', 'seo_title', 'seo_description', 'description', 'publish', 
+        'name', 'slug', 'seo_title', 'seo_description', 'description', 'publish','provider_id', 
          'shop_id', 'uuid' , 'blacklist' , 'large' , 'height' , 'width' ,'dimension'
     ];
 
@@ -221,7 +221,7 @@ class Product extends Model
                 });
                 break;
             default:
-                $products = Variant::whereHas('product')->where('created_at',  '>' , Carbon::now()->subDays(8));
+                $products = Variant::whereHas('product')->latest()->take(8);
                 break;
         }
         return $products->groupBy('product_id')->limit(10)->orderBy('id' ,'DESC')->get();
