@@ -1,22 +1,5 @@
 'use strict';
 (function(){
-    toastr.options = {
-        "closeButton": true,
-        "debug": false,
-        "newestOnTop": false,
-        "progressBar": false,
-        "positionClass": "toast-top-full-width",
-        "preventDuplicates": false,
-        "onclick": null,
-        "showDuration": "300",
-        "hideDuration": "1000",
-        "timeOut": "5000",
-        "extendedTimeOut": "1000",
-        "showEasing": "swing",
-        "hideEasing": "linear",
-        "showMethod": "slideDown",
-        "hideMethod": "slideUp"
-    };
     var app = angular.module('MyApp', ['confirm-click','ui.tree']);
     app.factory('servicioCategoria',['$http', function ($http) {
 
@@ -107,7 +90,7 @@
                     .success(function (response) {
                         console.log(response);
                         $scope.tree2 = response;
-                        toastr["warning"]("<center><h4>Datos agregados correctamente</h4></center>");
+                        toastr["success"]("Datos agregados correctamente");
                         $scope.mostrar = 0;
                         $scope.msj = { 'title' : 'Guardar datos' , 'disabled' : 0};
                     });
@@ -119,7 +102,6 @@
                 $scope.mostrar = 1;
                 var nodeData = scope.$modelValue;
                 nodeData.children.push({
-                    id: nodeData.id * 10 + nodeData.children.length,
                     name: nodeData.name + '.' + (nodeData.children.length + 1),
                     children: []
                 });
