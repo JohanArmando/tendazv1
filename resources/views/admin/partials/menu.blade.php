@@ -2,20 +2,20 @@
     <div class="navbar-header ">
         <div class="visible-sm">
             <div class="logo-sm-responsive">
-                <img src="{{ asset('administrator/image/logo/logo_header_responsive.png') }}" class="img-responsive" >
+                <img src="{{ asset('administrator/image/logo/logo_header_responsiveBAK.png') }}" class="img-responsive" >
             </div>
         </div>
         <a class="navbar-brand" href="{{ url('/admin/').'/' }}">
             <span class="logo-text">
                 <div class="col-md-12 col-xs-10 hidden-xs">
-                    <img  src="{{ asset('administrator/image/logo/logo_header.png') }}" class="img-responsive" >
+                    <img  src="{{ asset('administrator/image/logo/logo_headerBAK.png') }}" class="img-responsive" >
                 </div>
                 <div class="col-md-12 col-xs-10 visible-xs">
                     <img src="{{ asset('administrator/image/logo/logo_xs_white.png') }}" class="img-responsive" >
                 </div>
             </span>
             <span id="LittleLogo" style="visibility: hidden;" class="logo-figure">
-                <img src="{{ asset('administrator/image/logo/logo_header_responsive.png') }}" class="img-responsive" >
+                <img src="{{ asset('administrator/image/logo/logo_header_responsiveBAK.png') }}" class="img-responsive" >
             </span>
         </a>
     </div>
