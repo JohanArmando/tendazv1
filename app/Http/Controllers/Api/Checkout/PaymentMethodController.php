@@ -21,11 +21,8 @@ class PaymentMethodController extends Controller
     {
         $mp = new Mercadopago($payment->api_id , $payment->api_key);
         $access_token = $mp->get_access_token();
-
-        $mp = new Mercadopago($access_token);
-
-        $response = $mp->post("/v1/payments");
-        
-        return $response;
+        //$mp = new Mercadopago($access_token);
+        //$response = $mp->post("/v1/payments");
+        return $access_token;
     }
 }

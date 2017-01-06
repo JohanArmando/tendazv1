@@ -84,6 +84,7 @@ Route::group(['domain' => env('APP_API_URL') , 'namespace' => 'Api'] , function 
         Route::resource('carts' , 'CartController' , [
             'only' => ['destroy' , 'store' ,'update']
         ]);
+        
         Route::resource('carts.items' , 'InShoppingCartController' , [
             'only' => ['store' , 'destroy' , 'index']
         ]);

@@ -28,6 +28,7 @@ class InShoppingCartController extends Controller
             Cart::createOrAssignUser($cart , Customer::where('uuid' , $request->customer_id)->first());   
         }
         $item = Variant::where('uuid' , $request->item_id)->first();
+        
         $inShoppingCart =  $cart->products()->where('item_id' , $item->id)->first();
         $quantity = $request->get('quantity' , !$inShoppingCart ? 1 : $inShoppingCart->pivot->quantity + 1 );
         $quantity = $quantity <= 0 ? 1 : $quantity;
