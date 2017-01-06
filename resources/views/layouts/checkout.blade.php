@@ -2,8 +2,8 @@
 <html lang="en" ng-app="checkout">
 <head>
    <meta charset="UTF-8">
+   <link rel="icon" type="image/png" href="{{asset('logos/'.$shop->id.'/'.$shop->logo)}}" />
    <title>Checkout</title>
-
    <link href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
    <link rel="stylesheet" type="text/css" href="{{ asset('new-checkout/css/modal-checkout.css') }}">
    <link href="{{ asset('/checkout-comp/assets/css/main.css') }}" rel="stylesheet">

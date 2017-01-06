@@ -9,7 +9,6 @@
                     <div class="input-group">
                         {!! Form::text('name' , null , ['class' => 'form-control' ,"placeholder" => "Ejemplo: Zapato de cuero"]) !!}
                     </div>
-                    <div class="help-block with-errors"></div>
                 </div>
             </div>
         </span>
@@ -54,7 +53,7 @@
                         <small style="color: darkgray">(Menciona todas las caracteristicas de tu producto)</small>
                     </label>
                     <br>
-                    {!!  Form::textarea('description', null , ['id' => 'simple-description' ,  'data-parsley-type'=>"alphanum" , 'required' => 'required' , 'class' => 'form-control']) !!}
+                    {!!  Form::textarea('description', null , ['id' => 'simple-description' ,  'data-parsley-type'=>"alphanum" , 'class' => 'form-control']) !!}
                 </div>
             </div>
         </span>
@@ -86,8 +85,7 @@
         <span class="media-body box">
             <div class="form-group">
                 <div class="col-md-9 col-simple" >
-                    <label for="control-label" style="font-size: 1.2em; color: black">Asigna un provedor para este producto</label>
-
+                    <label for="control-label" style="font-size: 1.2em; color: black">Asigna un proveedor para este producto</label>
                     {!! Form::select('provider_id',$providers, isset($providers) ? $providers : null, ['class' => "", "id" => "providers"])!!}
                 </div>
             </div>
@@ -190,6 +188,9 @@
     </div>
     <div class="col-md-5" style="margin-left: -1.5%" >
         <a href="{{url('admin/products')}}" class="pull-right btn btn-default">Cancelar</a>
+    </div>
+    <div class="col-md-4">
+        <div class="help-block-create with-errors hidden" id="name"></div>
     </div>
 </div>
 <div class="indicator hide" id="loading">

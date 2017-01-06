@@ -4,6 +4,7 @@ namespace Tendaz\Models\Products;
 
 use Carbon\Carbon;
 use Tendaz\Models\Cart\CartProductPivot;
+use Tendaz\Models\Order\Provider;
 use Webpatser\Uuid\Uuid;
 use Tendaz\Models\Images\Image;
 use Tendaz\Models\Domain\Domain;
@@ -399,6 +400,10 @@ class Product extends Model
     public function stringCategories()
     {
         return implode(',' , $this->categories->pluck('name')->toArray());
+    }
+
+    public function provider(){
+        return $this->hasOne(Provider::class);
     }
 
 }

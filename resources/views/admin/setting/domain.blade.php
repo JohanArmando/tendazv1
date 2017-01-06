@@ -13,6 +13,7 @@ Configura tu dominio
 		.tab-content {border-radius: 0 0 20px 20px}
 		/*.border-content {background-color: #3C3C3C; padding: 5px 5px 10px 5px;border-radius: 20px 20px 20px 20px}*/
 	</style>
+	<link rel="stylesheet" href="{{asset('administrator/css/categories.css')}}">
 @stop
 @section('content')
 <!--HEADER-->
@@ -68,11 +69,12 @@ Configura tu dominio
 							<div class="tab-pane" id="tabthree">
 							<div class="row">
 							<div class="clearfix"></div>
-							<div class="col-sm-8 col-sm-offset-2">
-								<div class="col-md-12 text-center">
+							<div class="col-md-10 col-md-offset-2 text-center">
 								<p align="justify">
 									Puedes gestionar el reenvio de correo electronico, renovar dominios que has comprado y elimina dominios de su tienda.
 								</p>
+							</div>
+							<div class="col-md-8 col-md-offset-2 text-center">
 								<div class="panel panel-default">
 									<div class="panel-heading">
 										<h4 class="panel-title text-center">ADMINISTRA TUS DOMINIOS</h4>
@@ -85,25 +87,38 @@ Configura tu dominio
 										</tr>
 										</thead>
 										<tbody>
-										<tr class="text-center">
-											<td><a href="#">dominio1.com</a></td>
-											<td><img src="{{asset('administrator/image/tick.png')}}"></td>
-										</tr>
-										<tr class="text-center">
-											<td><a href="#">dominio2.com</a></td>
-											<td><img src="{{asset('administrator/image/forbidden.png')}}"></td>
-										</tr>
-										<tr class="text-center">
-											<td><a href="#">dominio3.com</a></td>
-											<td><img src="{{asset('administrator/image/download.png')}}"></td>
-										</tr>
+										@foreach($domains as $domain)
+											<tr class="text-center">
+												<td><a href="#">{{$domain->name}}</a></td>
+												@if($domain->state == 'OK')
+													<td>
+														<a href="#" data-tooltip="Dominio Activo">
+															<img src="{{asset('administrator/image/tick.png')}}">
+														</a>
+													</td>
+													@else
+														@if($domain->state == 'NOT')
+															<td>
+																<a href="#" data-tooltip="Dominio Activo">
+																<img src="{{asset('administrator/image/forbidden.png')}}">
+																</a>
+															</td>
+															@else
+																<td>
+																	<a href="#" data-tooltip="Dominio Activo">
+																	<img src="{{asset('administrator/image/download.png')}}">
+																	</a>
+																</td>
+														@endif
+												@endif
+											</tr>
+										@endforeach
 										</tbody>
 									</table>
 								</div>
 							</div>
-							</div>
-							</div>
-							</div>
+						</div>
+					</div>
 				</div>
 		</div>
 	</div>

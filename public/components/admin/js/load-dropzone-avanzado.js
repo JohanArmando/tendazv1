@@ -25,32 +25,6 @@ Dropzone.options.myDropzoneAvanzado = {
     init: function() {
         var submitBtn = document.querySelector("#submit-avanzado");
         myDropzoneAvanzado = this;
-        var id = $('#producto_id').val();
-/*
-        $.get( BASEURL + '/admin/products/images/'+ id , function(data) {
-            $.each(data, function(key,value){
-                var removeButton = Dropzone.createElement("<button class='btn btn-block btn-primary' id='remove' style='margin-top: 3%; cursor: pointer'>Remove</button>");
-                var mockFile = { name: value.name, size: value.size };
-                myDropzoneAvanzado.options.addedfile.call(myDropzoneAvanzado, mockFile);
-                myDropzoneAvanzado.options.thumbnail.call(myDropzoneAvanzado, mockFile, value.url);
-                $('.dz-message img').attr({'width':'120px' , 'height' : '120px'});
-                mockFile.previewElement.appendChild(removeButton);
-                removeButton.addEventListener("click", function (e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    var prev = $('#images-delete').val();
-                    if(prev != ''){
-                        $('#images-delete').val(prev + ',' + mockFile.name);
-                    }else{
-                        $('#images-delete').val(mockFile.name);
-                    }
-                    var _ref;
-                    return (_ref = mockFile.previewElement) != null ? _ref.parentNode.removeChild(mockFile.previewElement) : void 0;
-                });
-                mockFile.previewElement.appendChild(removeButton);
-            });
-        });
-        */
         submitBtn.addEventListener("click", function(e){
             e.preventDefault();
             e.stopPropagation();
@@ -103,10 +77,10 @@ Dropzone.options.myDropzoneAvanzado = {
             }
         );
         this.on("successmultiple",function(files,response) {
-                    console.log(response);
             myDropzone.processQueue.bind(myDropzone);
             $('#loading').addClass('hide');
             $('#loading').removeClass('show');
+            myDropzone.removeFile(files);
             $(this).closest('#my-dropzone ').find("input[type=text], textarea").val("");
             toastr.options = {
                 "closeButton": true,
@@ -128,9 +102,20 @@ Dropzone.options.myDropzoneAvanzado = {
             }
 
             toastr["success"]("Tu producto fue agregado correctamente");
+            $('div.help-block-create').addClass('hidden');
             limpiaForm($("#my-dropzone"));
         });
         this.on("errormultiple", function(files, response) {
+            console.log(response);
+            $('#loading').addClass('hide');
+            $('#loading').removeClass('show');
+            $.each(response , function (i , v) {
+                $('div.help-block-create').removeClass('hidden');
+                $('div.help-block-create#'+i).html('');
+                $.each(v , function (index , value) {
+                    $('div.help-block-create#'+i).append(value);
+                })
+            });
             toastr.options = {
                 "closeButton": true,
                 "debug": false,
