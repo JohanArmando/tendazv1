@@ -47,7 +47,7 @@ class Coupon extends Model
     }
 
     public function categories(){
-        return $this->belongsToMany(Category::class , 'coupon_categories' , 'coupon_id' , 'category_id')->withPivot('category_id');
+        return $this->belongsToMany(Category::class , 'coupon_category' , 'coupon_id' , 'category_id')->withPivot('category_id');
     }
 
     public function orders(){
@@ -62,6 +62,11 @@ class Coupon extends Model
     public static function CreateWithRestrictions($array){
         $coupon =  Coupon::create($array);
         $restrictions = isset($array['restrictions']) ? $array['restrictions'] : ['min_price' => 0];
+        if (isset($array['restrictions']['categories'])){
+            foreach($array['restrictions']['categories'] as $category){
+                $coupon->categories()->attach($category);
+            }
+        }
         $coupon->restrictions()->save(new Restriction($restrictions));
         return $coupon;
     }
