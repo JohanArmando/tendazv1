@@ -52,11 +52,7 @@
         </div>
     </div>
 </div>
-<<<<<<< HEAD
 <div class="row hidden">
-=======
-<!-- <div class="row">
->>>>>>> de56f50f23a9e6d447d5c0fa96b55b8cda2a162c
     <div class="col-md-12">
         <article class="panel overflow-hidden">
             <header class="container">
@@ -68,4 +64,4 @@
             </section>
         </article>
     </div>
-</div> -->
+</div>

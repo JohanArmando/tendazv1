@@ -4,10 +4,13 @@
     <div class="row">
         <span class="media-body box">
             <div class="form-group">
-                <div class="col-sm-9 col-simple">
-                    <label class="control-label" style="font-size: 1.2em; color: black;">Nombre del producto <small style="color: darkgray">(Obligatorio)</small></label>
-                    <div class="input-group">
-                        {!! Form::text('name' , null , ['class' => 'form-control' ,"placeholder" => "Ejemplo: Zapato de cuero"]) !!}
+                <div class="row">
+                    <div class="col-sm-9 col-simple">
+                        <label class="control-label" style="font-size: 1.2em; color: black;">Nombre del producto <small style="color: darkgray">(Obligatorio)</small></label>
+                        <div class="input-group">
+                            {!! Form::text('name' , null , ['class' => 'form-control' ,"placeholder" => "Ejemplo: Zapato de cuero"]) !!}
+                        </div>
+                        <div class="help-block with-errors"></div>
                     </div>
                 </div>
             </div>
@@ -18,17 +21,30 @@
     <div class="row">
         <span class="media-body box">
             <div class="form-group">
-                <div class="col-sm-9 col-simple">
-                    <label class="control-label" style="font-size: 1.2em; color: black;">Imagenes
-                        <small style="color: darkgray">(Opcional)</small>
-                    </label>
-                    <div class="dz-message" style="height:190px;border-width: 2px; border-style: dashed; border-color: #F26522; ">
-                        <h1 style="font-size: 80px !important; color: #F26522; "><i class="ico-cloud-upload2"></i></h1>
-                        <label>Arrastra tus imagenes </label>
+                <div class="row">
+                    <div class="col-sm-9 col-simple">
+                        <label class="control-label" style="font-size: 1.2em; color: black;">Imagenes
+                            <small style="color: darkgray">(Opcional)</small>
+                        </label>
+                        <div class="dz-message" style="height:190px;border-width: 2px; border-style: dashed; border-color: #F26522; ">
+                            <h1 style="font-size: 80px !important; color: #F26522; "><i class="ico-cloud-upload2"></i></h1>
+                            <label>Arrastra tus imagenes </label>
+                        </div>
+                    </div>
+                    <div class="text-center col-sm-9 col-simple">
+                        <div class="dropzone-previews-avanzado"></div>
                     </div>
                 </div>
-                <div class="text-center col-sm-9 col-simple">
-                    <div class="dropzone-previews-avanzado"></div>
+            </div>
+        </span>
+    </div>
+</div>
+<div class="media border-dotted">
+    <div class="row">
+        <span class="media-body box">
+            <div class="form-group">
+                <div class="row">
+                    @include('admin.partials.sin-variante')
                 </div>
             </div>
         </span>
@@ -36,24 +52,80 @@
 </div>
 <div class="media border-dotted">
     <div class="row">
-        <span class="media-body box">
-            <div class="form-group">
-                @include('admin.partials.sin-variante')
+      <span class="media-body box">
+        <div class="form-group" >
+          <div class="row">
+            <div class="col-md-12 col-simple">
+              <label class="control-label" style="font-size: 1.2em; color: black;">Dimensiones
+              <small style="color: darkgray">(Es importante completar tus dimensiones para calcular el valor del envio)</small>
+              </label>
             </div>
-        </span>
+          </div>
+        </div>
+        <div class="form-group" >
+          <div class="row">
+            <div class="col-md-12  col-simple">
+              <div class="col-md-3">
+                  <div class="input-group">
+                      <label class="col-md-6 control-label" id="label-precio">
+                        Largo
+                      </label>
+                      <span class="input-group-addon">
+                        Cm.
+                      </span>
+                      <input type="number" id="price" name="large" class="form-control" placeholder="1.0 CM">
+                  </div>
+              </div>
+              <div class="col-md-3">
+                  <div class="input-group">
+                      <label class="col-md-6 control-label" id="peso">
+                        Alto
+                      </label>
+                      <span class="input-group-addon">
+                        Cm
+                      </span>
+                      <input type="number"  id="kilo"  name="height" class="form-control" data-parsley-type="digits" placeholder="1.0 CM">
+                  </div>
+              </div>
+              <div class="col-md-3">
+                  <div class="input-group">
+                      <label class="col-md-6 control-label" id="label-stock">
+                        Ancho
+                      </label>
+                      <span class="input-group-addon">
+                        Cm
+                      </span>
+                      <input type="number" id="stock" name="width" class="form-control" data-parsley-type="number" placeholder="1.0 CM">
+                  </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </span>
     </div>
 </div>
-
 <div class="media border-dotted">
     <div class="row">
         <span class="media-body box">
             <div class="form-group">
+<<<<<<< HEAD
                 <div class="col-sm-9 col-simple">
                     <label class="control-label" style="font-size: 1.2em; color: black;">Descripcion
                         <small style="color: darkgray">(Menciona todas las caracteristicas de tu producto)</small>
                     </label>
                     <br>
                     {!!  Form::textarea('description', null , ['id' => 'simple-description' ,  'data-parsley-type'=>"alphanum" , 'class' => 'form-control']) !!}
+=======
+                <div class="row">
+                    <div class="col-sm-9 col-simple">
+                        <label class="control-label" style="font-size: 1.2em; color: black;">Descripción
+                            <small style="color: darkgray">(Menciona todas las caracteristicas de tu producto)</small>
+                        </label>
+                        <br>
+                        {!!  Form::textarea('description', null , ['id' => 'simple-description' ,  'data-parsley-type'=>"alphanum" , 'required' => 'required' , 'class' => 'form-control']) !!}
+                    </div>
+>>>>>>> 3faf3f1a70040e7cbc7e4003d38d114bf5417efc
                 </div>
             </div>
         </span>
@@ -63,18 +135,24 @@
     <div class="row">
         <span class="media-body box">
             <div class="form-group">
-                <div class="col-md-9 col-simple">
+                <div class="row">
+                    <div class="col-md-9 col-simple">
 
-                </div>
-                <div class="col-md-3 col-simple">
-                    <label class="control-label" style="font-size: 1.2em; color: black">Categorias</label>
-                    <button class="btn btn-block btn-primary modalCategory" data-toggle="modal" data-target="#modalCategory" type="button"><i class="fa fa-plus"></i> Nueva categoria</button>
-                </div>
-                <div class="col-md-9 col-simple" style="margin-top: 2%;">
-                    <label for="control-label" style="font-size: 1.2em; color: black">
-                        O Selecciona una de las categorias que ya creaste
-                    </label>
-                    {!! Form::select('category_id[]',$categories, isset($product) ? $product->categories->pluck('id')->toArray() : null, ['multiple' => true , 'style' => 'width: 100%' ,'class' => "select2", "id" => "selectCategory"])!!}
+                    </div>
+                    <div class="col-md-3 col-simple">
+                        <label class="control-label" style="font-size: 1.2em; color: black">
+                            Categorias
+                        </label>
+                        <button class="btn btn-block btn-primary modalCategory" data-toggle="modal" data-target="#modalCategory" type="button">
+                            <i class="fa fa-plus"></i> Nueva categoria
+                        </button>
+                    </div>
+                    <div class="col-md-9 col-simple" style="margin-top: 2%;">
+                        <label for="control-label" style="font-size: 1.2em; color: black">
+                            O Selecciona una de las categorias que ya creaste
+                        </label>
+                        {!! Form::select('category_id[]',$categories, isset($product) ? $product->categories->pluck('id')->toArray() : null, ['multiple' => true , 'style' => 'width: 100%' ,'class' => "select2", "id" => "selectCategory"])!!}
+                    </div>
                 </div>
             </div>
         </span>
@@ -84,9 +162,18 @@
     <div class="row">
         <span class="media-body box">
             <div class="form-group">
+<<<<<<< HEAD
                 <div class="col-md-9 col-simple" >
                     <label for="control-label" style="font-size: 1.2em; color: black">Asigna un proveedor para este producto</label>
                     {!! Form::select('provider_id',$providers, isset($providers) ? $providers : null, ['class' => "", "id" => "providers"])!!}
+=======
+                <div class="row">
+                    <div class="col-md-9 col-simple" >
+                        <label for="control-label" style="font-size: 1.2em; color: black">Asigna un provedor para este producto</label>
+
+                        {!! Form::select('provider_id',$providers, isset($providers) ? $providers : null, ['class' => "", "id" => "providers"])!!}
+                    </div>
+>>>>>>> 3faf3f1a70040e7cbc7e4003d38d114bf5417efc
                 </div>
             </div>
         </span>
@@ -96,14 +183,16 @@
     <div class="row">
         <span class="media-body box">
             <div class="form-group">
-                <div class="col-sm-6 col-simple">
-                    <label class="control-label" style="font-size: 1.2em; color: black">Envio
-                    </label>
-                    <span class="checkbox custom-checkbox">
-                        {!! Form::checkbox('shipping_free' , 1 , null , ['id' => 'shipping_free' , 'class' => 'checkbox']) !!}
-                        <label for="shipping_free" style="color: #7b7b7b">&nbsp;&nbsp;Este producto no tiene costo de envio
+                <div class="row">
+                    <div class="col-sm-6 col-simple">
+                        <label class="control-label" style="font-size: 1.2em; color: black">Envio
                         </label>
-                    </span>
+                        <span class="checkbox custom-checkbox">
+                            {!! Form::checkbox('shipping_free' , 1 , null , ['id' => 'shipping_free' , 'class' => 'checkbox']) !!}
+                            <label for="shipping_free" style="color: #7b7b7b">&nbsp;&nbsp;Este producto no tiene costo de envio
+                            </label>
+                        </span>
+                    </div>
                 </div>
             </div>
         </span>
@@ -114,41 +203,45 @@
         <span class="media-body box">
             <div class="col-md-12 col-simple">
                 <div class="form-group">
-                    <label class="control-label" style="font-size: 1.2em; color: black">Visibilidad del producto en tu tienda
-                    </label>
-                    <div class="checkbox custom-checkbox" >
-                        {!! Form::checkbox('publish' , 1 , null, ['id' => 'publish' , 'class' => 'checkbox']) !!}
-                        <label for="publish" style="color: #7b7b7b">&nbsp;&nbsp;Quiero que este producto se muestre en mi tienda
+                    <div class="row">
+                        <label class="control-label" style="font-size: 1.2em; color: black">Visibilidad del producto en tu tienda
                         </label>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <small style="color: black; ">Decide si tu producto va a ser visible en tu tienda o no
-                                </small>
+                        <div class="checkbox custom-checkbox" >
+                            {!! Form::checkbox('publish' , 1 , null, ['id' => 'publish' , 'class' => 'checkbox']) !!}
+                            <label for="publish" style="color: #7b7b7b">&nbsp;&nbsp;Quiero que este producto se muestre en mi tienda
+                            </label>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <small style="color: black; ">Decide si tu producto va a ser visible en tu tienda o no
+                                    </small>
+                                </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label" style="font-size: 1.2em; color: black">
-                        Destacar este producto en tu tienda
-                    </label>
-                    <br><br>
-                    <div class="checkbox custom-checkbox" >
-                        {!! Form::checkbox('primary' , 1 , null , ['id' => 'primary' , 'class' => 'checkbox']) !!}
-                        <label for="primary" style="color: #7b7b7b">&nbsp;&nbsp;Productos Destacados</label>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <small style="color: black; ">Pon aqui los productos que apreceran de primera
-                                </small>
+                    <div class="row">
+                        <label class="control-label" style="font-size: 1.2em; color: black">
+                            Destacar este producto en tu tienda
+                        </label>
+                        <br><br>
+                        <div class="checkbox custom-checkbox" >
+                            {!! Form::checkbox('primary' , 1 , null , ['id' => 'primary' , 'class' => 'checkbox']) !!}
+                            <label for="primary" style="color: #7b7b7b">&nbsp;&nbsp;Productos Destacados</label>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <small style="color: black; ">Pon aqui los productos que apreceran de primera
+                                    </small>
+                                </div>
                             </div>
-                        </div>
-                        <br>
-                        {!! Form::checkbox('promotion' , 1 , null , ['id' => 'promotion' , 'class' => 'checkbox']) !!}
-                        <label for="promotion" style="color: #7b7b7b">&nbsp;&nbsp;Productos En Oferta</label>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <small style="color: black; ">Pon aqui los productos en oferta</small>
+                            <br>
+                            {!! Form::checkbox('promotion' , 1 , null , ['id' => 'promotion' , 'class' => 'checkbox']) !!}
+                            <label for="promotion" style="color: #7b7b7b">&nbsp;&nbsp;Productos En Oferta</label>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <small style="color: black; ">Pon aqui los productos en oferta</small>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -161,21 +254,23 @@
     <div class="row">
         <span class="media-body box">
             <div class="form-group">
-                <div class="col-md-9 col-simple">
-                    <label class="control-label" style="font-size: 1.2em; color: black;">Configuraciones avanzadas para SEO</label>
-                    <br>
-                    <label class="control-label" style="font-size: 0.8em; color: darkslategray">Titulo para SEO</label>
-                    {!! Form::text('seo_title' , null , ['class' => 'form-control']) !!}
-                    <br>
-                    <label class="control-label" style="font-size: 0.8em; color: darkslategray">Descripcion SEO</label>
-                    {!! Form::text('seo_description' , null , ['class' => 'form-control']) !!}
-                    <br>
-                    <label class="control-label" style="font-size: 0.8em; color: darkslategray">URL del producto</label>
+                <div class="row">
+                    <div class="col-md-9 col-simple">
+                        <label class="control-label" style="font-size: 1.2em; color: black;">Configuraciones avanzadas para SEO</label>
+                        <br>
+                        <label class="control-label" style="font-size: 0.8em; color: darkslategray">Titulo para SEO</label>
+                        {!! Form::text('seo_title' , null , ['class' => 'form-control']) !!}
+                        <br>
+                        <label class="control-label" style="font-size: 0.8em; color: darkslategray">Descripcion SEO</label>
+                        {!! Form::text('seo_description' , null , ['class' => 'form-control']) !!}
+                        <br>
+                        <label class="control-label" style="font-size: 0.8em; color: darkslategray">URL del producto</label>
 
-                    <span class="input-group">
-                        <span class="input-group-addon">{{ url('products/') }}</span>
-                        {!! Form::text('slug' , null , ['class' => 'form-control']) !!}
-                    </span>
+                        <span class="input-group">
+                            <span class="input-group-addon">{{ url('products/') }}</span>
+                            {!! Form::text('slug' , null , ['class' => 'form-control']) !!}
+                        </span>
+                    </div>
                 </div>
             </div>
         </span>
