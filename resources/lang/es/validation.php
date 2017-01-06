@@ -108,7 +108,8 @@ return [
 
     'attributes' => [
         'current_password' => 'Contraseña actual',
-        'password' => 'Contraseña'
+        'password' => 'Contraseña',
+        'name'     => 'Nombre'
     ],
 
 ];

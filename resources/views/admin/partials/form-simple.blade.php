@@ -1,14 +1,13 @@
-{!! Form::open(['url' => "admin/products?client_secret=$shop->uuid&client_id=$shop->id" , 'method' => 'POST' , 'class' => 'dropzone hidden-xs hidden-sm' ,
-    'id' => 'my-dropzone' , 'files' => true,'role'=>'form', 'data-toggle'=> 'validator']) !!}
+{!! Form::open(['url' => "admin/products?client_secret=$shop->uuid&client_id=$shop->id" ,
+'method' => 'POST' , 'class' => 'dropzone hidden-xs hidden-sm' ,'id' => 'my-dropzone' , 'files' => true]) !!}
 <div class="media border-dotted">
     <div class="row">
              <span class="media-body box col-lg-offset-0">
-                 <div class="form-group">
-                     <div class="col-sm-9 col-simple">
+                 <div class="col-sm-9 col-simple">
+                         <div class="form-group">
                          <label class="control-label" style="font-size: 1.2em; color: black">Nombre del producto
                              <small style="color: darkgray">(Obligatorio)</small></label>
-                         <input type="text" name="name" class="form-control" placeholder="Ejemplo: Zapato de cuero" required>
-                         <div class="help-block with-errors" id="name"></div>
+                         <input type="text" name="name" class="form-control" placeholder="Ejemplo: Zapato de cuero">
                      </div>
                  </div>
              </span>
@@ -91,6 +90,9 @@
     </div>
     <div class="col-md-5" style="margin-left: -1.5%">
         <a href="{{ url('admin/products') }}" class="pull-right btn  btn-default"><i class="fa fa-times"></i> Cancelar</a>
+    </div>
+    <div class="col-md-4">
+        <div class="help-block-create  with-errors hidden" id="name"></div>
     </div>
 </div>
 <div class="indicator hide" id="loading"><img style="

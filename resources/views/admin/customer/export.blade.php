@@ -73,5 +73,5 @@ Exportar clientes
     @endsection
 
     @section('scripts')
-        <script type="text/javascript" src="{{asset('admin/js/alternative/gift-control.js')}}"></script>
+        <script type="text/javascript" src="{{asset('administrator/js/alternative/gift-control.js')}}"></script>
     @stop

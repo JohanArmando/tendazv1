@@ -125,7 +125,6 @@
 			</div>
 		</div>
 	</div>
-	@include(Theme::current()->viewsPath.'.partials.modal_product')
 	@endsection
 
 	@section('script')

@@ -4,16 +4,14 @@ namespace Tendaz\Http\Controllers\Admin\Setting;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Cookie;
-use Tendaz\CategoryTld;
-use Tendaz\Country;
 use Tendaz\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Routing\Route;
 use Illuminate\Http\Request;
-use Tendaz\Domain;
+use Tendaz\Models\Domain\Domain;
+use Tendaz\Models\Domain\Tld;
 use Tendaz\Models\Store\Shop;
-use Tendaz\Tld;
 
 
 class NameCheapController extends Controller
@@ -43,14 +41,27 @@ class NameCheapController extends Controller
      */
 
 
-    public function getIndex($subdomain , Shop $shop){
-        $domains = $shop->getDomainsNotWww;
-        $countDomains = $shop->domains;
+    public function getIndex($subdomain , Request $request){
+        $domains = Domain::where('shop_id',$request->shop->id)->get();
         $tlds = Cache::get('tlds');
         if(!$tlds)
             $tlds = Tld::all();
         Cache::put('tlds' , $tlds , 1440);
-        return view('admin.setting.domain' , compact('domains' , 'countDomains' , 'tlds'));
+        return view('admin.setting.domain' , compact('domains', 'tlds'));
+    }
+
+    public function store($subdomain, Request $request)
+    {
+        Domain::create([
+            'domain' => 'http://'.$request->get('domain'),
+            'name' => $request->get('domain'),
+            'ssl' => 'http://'.$request->get('domain'),
+            'main' => 0,
+            'active' => 0,
+            'state' => 'OK',
+            'shop_id' => $request->shop->id
+        ]);
+        return redirect()->back()->with('message', array('type' => 'success', 'message' => 'El dominio ' . $request->get('domain') . '  fue agregado correctamente!'));
     }
 
     /**
