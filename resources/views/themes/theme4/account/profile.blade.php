@@ -6,27 +6,29 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-5 col-sm-12 col-xs-12 col-md-offset-4">
-              <div class=" col-xs-10 text-center">
+              <div class=" col-xs-10 text-center" ng-if="usuario">
                          <div class="panel panel-default panel-content">
 							 <div class="panel panel-default panel-content">
                                       <div style="margin-top: 10px;"></div>
                                       <img src="http://placehold.it/150x150" alt="" class="img-circle" />
                                         <br>
-                                    <h3><strong style="color: #1FC0A0"> NAME CLIENT</strong></h3>
-                                    <h5>Email: <a href="mailto: info@tendaz.com">EMAIL CLIENT</a></h5>
-                                    <h5>Telefono: <a class="active">PHONE CLIENT</a></h5>
+                                    <h3><strong style="color: #1FC0A0"> <%usuario.personal_info.first_name%></strong></h3>
+                                    <h5>Email: <span><%usuario.personal_info.email%></span></h5>
+                                    <h5>Telefono: <span><%usuario.personal_info.phone%></span></h5>
+									<div class="hidden">
 								 	<hr style="color: grey;" />
                                         <p align="center" style="color: black;"> CR 55a numweo 123 # 122a-33, Mirandela, Bogota D.C, Colombia.</p>
                                        <div class="clearfix"></div>
-                                    </div>
-	                                    <button type="button" class="btn btn--ys" data-toggle="modal" data-target="#modalActualizar">
-	                                        <i class="fa fa-edit"></i> Cambiar Datos Personales
-	                                    </button>
+									</div>
+							</div>
+							<button type="button" class="btn btn--ys" data-toggle="modal" data-target="#modalActualizar">
+								<i class="fa fa-edit"></i> Cambiar Datos Personales
+							</button>
 							 <div style="margin-bottom: 10px;"></div>
                          </div>
                     </div>
           		</div>	
-						<div class="col-md-12 col-lg-12  col-xs-12">
+						<div class="col-md-12 col-lg-12  col-xs-12 hidden">
 							<div class="panel">
 								 <div class="text-center">
 				 					<h4 class="text-center text-uppercase title-under">Direcciones</h4>			

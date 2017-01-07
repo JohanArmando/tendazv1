@@ -94,11 +94,15 @@
                                             $ {{ $customer->eagerTotal->first()== null ? '0' : number_format($customer->eagerTotal->first()->total , 2 , '.' , ',') }}
                                         </td>
                                         <td class="hidden-sm hidden-xs">
-                                            {{ $customer->totalOrder() }}
+                                            {{ $customer->total_exc_tax}}
                                         </td>
                                         <td class="hidden-sm hidden-xs">
                                             <strong>
-                                                <a href="{{url('orders/')}}">{{ $customer->latestOrder->first() == null ? 'Ninguna' : $customer->latestOrder->first()->id }}</a>
+                                                @if(!$customer->latestOrder->first() == null)
+                                                <a href="{{url('admin/orders/'.$customer->id)}}">{{ $customer->latestOrder->first()->id }}</a>
+                                                    @else
+                                                        <strong>Ninguna</strong>
+                                                @endif
                                             </strong>
                                         </td>
                                     </tr>

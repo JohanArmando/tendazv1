@@ -29,6 +29,7 @@ $domain = new \Tendaz\Models\Domain\Domain();
     //Route orders
     Route::get('orders/status' , 'OrdersController@status');
     Route::get('orders/export' , 'OrdersController@getExport');
+    Route::get('orders/print/{id}' , 'OrdersController@printOrder');
     Route::post('orders/export/post' , 'OrdersController@postExport');
     Route::put('orders/update/note/{id}' , 'OrdersController@updateNote');
     Route::resource('orders' , 'OrdersController');
@@ -75,6 +76,7 @@ $domain = new \Tendaz\Models\Domain\Domain();
     //Route Customer
     Route::group(['prefix' => '', 'namespace' => 'Customer'], function() {
         Route::get('customers/export', 'CustomerController@export');
+        Route::post('customers/export', 'CustomerController@postExport');
         Route::get('customers/contact', 'CustomerController@contact');
         Route::resource('/customers', 'CustomerController');
     });
