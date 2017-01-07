@@ -50,16 +50,20 @@ Dropzone.options.myDropzone = {
             });
             file.previewElement.appendChild(removeButton);
         });
+        this.on("complete", function(file) {
+            myDropzoneAvanzado.removeFile(file);
+        });
         var toas = '';
         this.on("sendingmultiple",function(totalBytesSent){
                 $('#loading').addClass('show');
             }
         );
         this.on("successmultiple",function(files,response) {
+            console.log(response);
             myDropzone.processQueue.bind(myDropzone);
             $('#loading').addClass('hide');
             $('#loading').removeClass('show');
-            myDropzone.removeFile(file);
+            myDropzone.removeFile(files);
             $(this).closest('#my-dropzone ').find("input[type=text], textarea").val("");
             toastr.options = {
                 "closeButton": true,
@@ -81,16 +85,18 @@ Dropzone.options.myDropzone = {
             }
 
             toastr["success"]("Tu producto fue agregado correctamente");
+            $('div.help-block-create').addClass('hidden');
             limpiaForm($("#my-dropzone"));
             $('#simple-description').trumbowyg('empty');
         });
         this.on("errormultiple", function(files, response) {
+            $('#loading').addClass('hide');
+            $('#loading').removeClass('show');
             $.each(response , function (i , v) {
-                $('#loading').addClass('hide');
-                $('#loading').removeClass('show');
-                $('div.help-block#'+i).html('');
+                $('div.help-block-create').removeClass('hidden');
+                $('div.help-block-create#'+i).html('');
                 $.each(v , function (index , value) {
-                    $('div.help-block#'+i).append(value);
+                    $('div.help-block-create#'+i).append(value);
                 })
             });
             toastr.options = {

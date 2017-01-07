@@ -8,15 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Tendaz\Traits\UuidAndShopTrait;
+use Tendaz\Traits\WhereShopTrait;
 
 class Domain extends Model
 {
-    use  UuidAndShopTrait;
+    use  UuidAndShopTrait,WhereShopTrait;
     
     public static $SHOP_ID;
     
     protected   $fillable = [
-        'uuid' ,  'name','domain'  , 'ssl' , 'main' , 'active' , 'state' , 'domain_id'
+        'uuid' ,  'name','domain'  , 'ssl' , 'main' , 'active' , 'state' , 'domain_id' , 'shop_id'
     ];
 
     protected $subdomain;

@@ -58,8 +58,13 @@
                                     </div>
                                     <div class="tab-pane np " id="comments">
                                         <div class="media-list">
+<<<<<<< HEAD
+                                            {!! Form::open(['url' => url ("admin/products?client_secret=".$shop->uuid."&client_id=".$shop->id)  , 'method' => 'POST' , 'class' => 'dropzone hidden-xs hidden-sm' ,'id' => 'my-dropzone-avanzado' , 'files' => true]) !!}
+                                            @include('admin.partials.form-advanced')
+=======
                                             {!! Form::open(['url' => url ("admin/products"."?client_secret=".$shop->uuid."&client_id=".$shop->id)  , 'method' => 'POST' , 'class' => 'dropzone hidden-xs hidden-sm' ,'id' => 'my-dropzone-avanzado' , 'files' => true,'role'=>'form', 'data-toggle'=> 'validator']) !!}
                                                 @include('admin.partials.form-advanced')
+>>>>>>> 3faf3f1a70040e7cbc7e4003d38d114bf5417efc
                                             {!! Form::close() !!}
                                         </div>
                                     </div>

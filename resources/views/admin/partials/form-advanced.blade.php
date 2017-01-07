@@ -109,6 +109,14 @@
     <div class="row">
         <span class="media-body box">
             <div class="form-group">
+<<<<<<< HEAD
+                <div class="col-sm-9 col-simple">
+                    <label class="control-label" style="font-size: 1.2em; color: black;">Descripcion
+                        <small style="color: darkgray">(Menciona todas las caracteristicas de tu producto)</small>
+                    </label>
+                    <br>
+                    {!!  Form::textarea('description', null , ['id' => 'simple-description' ,  'data-parsley-type'=>"alphanum" , 'class' => 'form-control']) !!}
+=======
                 <div class="row">
                     <div class="col-sm-9 col-simple">
                         <label class="control-label" style="font-size: 1.2em; color: black;">Descripción
@@ -117,6 +125,7 @@
                         <br>
                         {!!  Form::textarea('description', null , ['id' => 'simple-description' ,  'data-parsley-type'=>"alphanum" , 'required' => 'required' , 'class' => 'form-control']) !!}
                     </div>
+>>>>>>> 3faf3f1a70040e7cbc7e4003d38d114bf5417efc
                 </div>
             </div>
         </span>
@@ -153,12 +162,18 @@
     <div class="row">
         <span class="media-body box">
             <div class="form-group">
+<<<<<<< HEAD
+                <div class="col-md-9 col-simple" >
+                    <label for="control-label" style="font-size: 1.2em; color: black">Asigna un proveedor para este producto</label>
+                    {!! Form::select('provider_id',$providers, isset($providers) ? $providers : null, ['class' => "", "id" => "providers"])!!}
+=======
                 <div class="row">
                     <div class="col-md-9 col-simple" >
                         <label for="control-label" style="font-size: 1.2em; color: black">Asigna un provedor para este producto</label>
 
                         {!! Form::select('provider_id',$providers, isset($providers) ? $providers : null, ['class' => "", "id" => "providers"])!!}
                     </div>
+>>>>>>> 3faf3f1a70040e7cbc7e4003d38d114bf5417efc
                 </div>
             </div>
         </span>
@@ -268,6 +283,9 @@
     </div>
     <div class="col-md-5" style="margin-left: -1.5%" >
         <a href="{{url('admin/products')}}" class="pull-right btn btn-default">Cancelar</a>
+    </div>
+    <div class="col-md-4">
+        <div class="help-block-create with-errors hidden" id="name"></div>
     </div>
 </div>
 <div class="indicator hide" id="loading">

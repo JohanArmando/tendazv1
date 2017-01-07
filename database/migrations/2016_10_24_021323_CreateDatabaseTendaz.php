@@ -1452,7 +1452,6 @@ class CreateDatabaseTendaz extends Migration
         Schema::drop('trends_preferences');
         Schema::drop('coupons');
         Schema::drop('social_auths');
-        Schema::drop('customers');
         Schema::drop('social_login');
         Schema::drop('stores');
         Schema::drop('category_shop');
@@ -1469,11 +1468,12 @@ class CreateDatabaseTendaz extends Migration
         Schema::drop('locals');
         Schema::drop('providers');
         Schema::drop('cities');
+        Schema::drop('trends');
+        Schema::drop('customers');
         Schema::drop('shops');
         Schema::drop('themes');
         Schema::drop('tickets_comments');
         Schema::drop('tickets');
-        Schema::drop('trends');
         Schema::drop('config_ser');
         Schema::drop('code_ser');
         Schema::drop('users');

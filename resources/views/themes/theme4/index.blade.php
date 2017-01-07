@@ -37,7 +37,7 @@
 					<br><br><br>
 				</div>
 			</div>
-			@include(Theme::current()->viewsPath.'.partials.modal_product')
+			{{--@include(Theme::current()->viewsPath.'.partials.modal_product')--}}
 		</div>
 	@endsection
 

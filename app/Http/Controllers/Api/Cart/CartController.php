@@ -14,7 +14,6 @@ class CartController extends Controller
 
     public function store(Request $request)
     {
-        
         $shopping_cart_id = $request->cart_id;
 
         $shopping_cart = Cart::findOrCreateBySessionID($shopping_cart_id , $request->shop->id);

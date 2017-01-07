@@ -144,11 +144,10 @@ function check_nav(){
     }
 }
 </script>
-
-<!--<script type="text/javascript">
+<script type="text/javascript">
     $('.dropify').dropify();
     $('.select2').select2();
-</script>-->
+</script>
 <!--<script type="text/javascript">
     new Card({
         form: document.querySelector('form'),

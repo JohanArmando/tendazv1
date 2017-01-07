@@ -86,7 +86,8 @@ $domain = new \Tendaz\Models\Domain\Domain();
         Route::resource('shippings', 'ShippingController',
             ['only' => ['index', 'store', 'update', 'destroy']]);
         //setting domain
-        Route::resource('/domain', 'NameCheapController@getIndex');
+        Route::get('/domain', 'NameCheapController@getIndex');
+        Route::get('/domain/create', 'NameCheapController@store');
         Route::delete('/domain/destroy/{account}', 'NameCheapController@postDelete');
         Route::get('/domain/settings/{account}', 'NameCheapController@getVerify');
         Route::get('/domain/verify/{account}', 'NameCheapController@postVerify');
