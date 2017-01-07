@@ -17,23 +17,33 @@ use Tendaz\Models\Shipping\ShippingMethod;
 class CartTransformer extends  TransformerAbstract
 {
 
+    private $token;
+
+    public function __construct($access_token = null)
+    {
+        $this->token = $access_token;
+    }
+
     protected $defaultIncludes = [
-        'products' , 'customer' , 'shippingAddress' , 'order' , 'shippingMethod' , 'coupon' , 'shop'
+        'products' , 'customer' , 'shippingAddress' , 'order' , 'shippingMethod' , 'coupon' , 'shop' , 'paymentPreferences'
     ];
     
     public function transform(Cart $cart)
     {
-        return [
-            '_id'                   => $cart->secure_key,
+            return [
+                '_id'                   => $cart->secure_key,
             'created'               => $cart->created_at->format('Y-m-d H:m:s'),
-            'discount_applied'      => 'Pendiente para cuando creemos la tabla descuento carrito',
+            'discount_applied'      => '' , //aqui iteramos el descuento mas especificamente como fue aplicado[detalle descuento copun, detalle descuento _pago] y  si es por productos'Pendiente para cuando creemos la tabla descuento carrito',
             'original_qty'          => $cart->productsSize(),
             'original_total'        => $cart->total(),
             'order_id'              => $cart->order->uuid,
             'totalizers'            => [
                 'items'  => [ 'id' => 'items' , 'name' => 'Total De Los Items' , 'value' => $cart->totalProducts()],
                 'shipping'  => [ 'id' => 'Shipping' , 'name' => 'Costo total del envío' , 'value' => $cart->totalShipping()],
-              //  'Discounts'  => [ 'id' => 'Shipping' , 'name' => 'Costo total del envío' , 'value' => $cart->totalDiscount()],
+                //  'Discounts'  => [ 'id' => 'Shipping' , 'name' => 'Costo total del envío' , 'value' => $cart->totalDiscount()],
+                // tax => [ 'id' => 'taxing' , 'name' => 'Costo total del envío' , 'value' => $cart->totalDiscount()
+                //hay que agregar columna total descuento por payment total_discount_payment
+                //shipping_tax
             ]
         ];
     }
@@ -72,6 +82,12 @@ class CartTransformer extends  TransformerAbstract
     public function includeShop(Cart $cart){
         return $cart->shop ?
                 $this->item($cart->shop, new  ShopTransformer())
+            : $this->null();
+    }  
+    
+    public function includePaymentPreferences(Cart $cart){
+        return $cart->order->payment ?
+                $this->item($cart->order->payment, new  PaymentValueTransformer($this->token))
             : $this->null();
     }
 

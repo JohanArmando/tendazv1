@@ -14,15 +14,20 @@ use Tendaz\Models\Payment_method\PaymentValue;
 
 class PaymentValueTransformer extends TransformerAbstract
 {
+    private $token;
+    
+    public function __construct($token = null)
+    {
+        $this->token = $token;
+    }
+
     public function transform(PaymentValue $paymentValue)
     {
         switch ($paymentValue->paymentMethod->id){
             case 1:
                 return [
                     '_id' => $paymentValue->uuid,
-                    'client_secret' => $paymentValue->client_secret,
-                    'client_id' => $paymentValue->client_id,
-                    'merchant_id' => $paymentValue->merchant_id,
+                    'token' => $this->token,
                     'type'         => 'mercadopago',
                     'name'          => $paymentValue->paymentMethod->name
                 ];
