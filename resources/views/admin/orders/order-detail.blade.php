@@ -25,7 +25,7 @@
                     <div class="panel-heading">
                         <div class="panel-title">
                             <h5><i class="fa fa-list-alt"></i>&nbsp;
-                                <strong>Detalles de la Orden  #{{ ($orders->id)}}.</strong></h5>
+                                <strong>Detalles de la Orden  #{{ ($order->id)}}.</strong></h5>
                         </div>
                     </div>
                     <div class="panel-body">
@@ -35,7 +35,7 @@
                                     <br>
                                     <div class="text-left">
                                         <p style="float: left !important;">
-                                            <?php  setlocale(LC_TIME, 'ES'); $dt = \Carbon\Carbon::parse($orders->created_at) ?>
+                                            <?php  setlocale(LC_TIME, 'ES'); $dt = \Carbon\Carbon::parse($order->created_at) ?>
                                             <strong>Fecha de solicitud&nbsp;</strong><input class="form-control" type="text"
                                                                                             value="{{ $dt->formatLocalized('%A %d %B %Y') }}" width="150px;" disabled>
                                         </p>
@@ -54,7 +54,7 @@
                                         <tbody>
                                             <?php $sub = 0;?>
                                             <?php $total = 0;?>
-                                            @foreach($orders->products as $producto)
+                                            @foreach($order->products as $producto)
                                                     <tr>
                                                         <td>
                                                             <img src="{{ $producto->product->mainImage() }}" width="50px"  height="50px" class="thumbnail" alt="">
@@ -89,16 +89,16 @@
                                                     <tr>
                                                         <td></td><td></td><td></td>
                                                         <td><strong>Sub:</strong></td>
-                                                        <td><strong>$ {{ number_format($orders->total_products,2,',','.') }}</strong></td>
+                                                        <td><strong>$ {{ number_format($order->total_products,2,',','.') }}</strong></td>
                                                     </tr><tr>
                                                         <td></td><td></td><td></td>
                                                         <td><strong>Envio:</strong></td>
-                                                        <td><strong>$ {{ number_format($orders->total_shipping,2,',','.') }}</strong></td>
+                                                        <td><strong>$ {{ number_format($order->total_shipping,2,',','.') }}</strong></td>
                                                     </tr>
                                                     <tr>
                                                     <td></td><td></td><td></td>
                                                     <td><strong>Total:</strong></td>
-                                                    <td><strong>$ {{ number_format($orders->total , 2 , ',' , '.') }}</strong></td>
+                                                    <td><strong>$ {{ number_format($order->total , 2 , ',' , '.') }}</strong></td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -110,36 +110,37 @@
                             <div class="widget">
                                 <div class="panel-body">
                                     <ul class="list-unstyled">
-                                        <li class="text-center">
-                                            @if(isset($orders->user->avatar) && !empty($orders->user->avatar))
-                                                <img class="img-rounded img-bordered-inverse" src="{{ asset("profile/".$orders->user->avatar) }}" alt width="100px" height="100px">
-                                            @else
-                                                <img class="img-rounded img-bordered-inverse" src="{{ asset('administrator/image/avatar/avatar7.jpg') }}" alt width="100px" height="100px">
-                                            @endif
-                                        </li>
-                                        <li class="text-center">
-
-                                            <h4 class="semibold ellipsis">
-                                                <a href="{{asset("admin/customers/").'/'.$orders->user->uuid}}">
-                                                    {{ $orders->user->name }}
-                                                </a>
-                                            </h4>
-
-                                            <h4 class="semibold ellipsis"><a href="{{asset('admin/resumenCliente')}}">{{ $orders->full_name }}</a></h4>
-
-                                        </li>
-                                        <li class="text-center">
+                                            <li class="text-center">
+                                                @if(isset($customer->avatar) && !empty($customer->avatar))
+                                                    <img class="img-rounded img-bordered-inverse" src="{{ asset("profile/".$customer->avatar) }}" alt width="100px" height="100px">
+                                                @else
+                                                    <img class="img-rounded img-bordered-inverse" src="{{ asset('administrator/image/avatar/avatar7.jpg') }}" alt width="100px" height="100px">
+                                                @endif
+                                            </li>
+                                            <li class="text-center">
+                                                <h4 class="semibold ellipsis">
+                                                    <a href="{{asset("admin/customers/").'/'.$order->user->uuid}}">
+                                                        {{ $customer->name }}
+                                                    </a>
+                                                </h4>
+                                                <h4 class="semibold ellipsis"><a href="{{asset('admin/resumenCliente')}}">{{ $order->full_name }}</a></h4>
+                                            </li>
+                                            <li class="text-center">
                                             <p class="text-center">
-                                                <strong>Correo:</strong>@if(empty($orders->user->email))
-                                                        @else {{ $orders->user->email }} @endif
+                                                <strong>Correo:</strong>
+                                                @if(empty($customer->email))
+                                                        @else {{ $customer->email }}
+                                                @endif
                                                 <br>
-                                                <strong>Identificaci&oacute;n:</strong> @if(empty($orders->user->identification))N.N
-                                                @else {{ $orders->user->identification }} @endif
+                                                <strong>Identificaci&oacute;n:</strong>
+                                                @if(empty($customer->identification))N.N
+                                                @else {{ $customer->identification }}
+                                                @endif
                                                 <br>
                                                 <strong>Telefono:</strong>
-                                                @if(empty($orders->user->phone))
+                                                @if(empty($customer->phone))
                                                     @else
-                                                    {{$orders->user->phone}}
+                                                    {{$customer->phone}}
                                                 @endif
                                             </p>
                                         </li>
@@ -156,29 +157,29 @@
                         </div>
                         <div class="col-md-12">
                             <hr>
-                            <a style="margin-left: 10px" onclick='printDiv();' class="btn btn-success pull-right" >
-                                <i class="fa fa-print"></i>&nbsp;Imprimir Orden</a>
+                            <a style="margin-left: 10px" href="{{url('admin/orders/print/'.$order->id)}}" class="btn btn-success pull-right" >
+                                <i class="fa fa-print"></i>&nbsp;ver Formato Para Imprimir Orden</a>
                             &nbsp;&nbsp;
-                            @if($orders->status->name == 'marcar' )
-                                {!! Form::open(['url' => ['admin/orders',$orders->id],'method'=> 'PUT','style'=>'display:inline']) !!}
+                            @if($order->status->name == 'marcar' )
+                                {!! Form::open(['url' => ['admin/orders',$order->id],'method'=> 'PUT','style'=>'display:inline']) !!}
                                 <button type="submit" class="btn btn-warning  pull-right"><i class="fa fa-lock"></i>&nbsp; Archivar </button>
                                 <input type="hidden" name="status[name]" value="archivada">
                                 {!! Form::close() !!}
-                            @elseif($orders->status->name == 'Re abrir')
-                                {!! Form::open(['url' => ['admin/orders',$orders->id],'method'=> 'PUT','style'=>'display:inline']) !!}
+                            @elseif($order->status->name == 'Re abrir')
+                                {!! Form::open(['url' => ['admin/orders',$order->id],'method'=> 'PUT','style'=>'display:inline']) !!}
                                 <button type="submit" class="btn btn-primary  pull-right"><i class="fa fa-lock"></i>&nbsp; Archivar</button>
                                 <input type="hidden" name="status[name]" value="archivada">
                                 {!! Form::close() !!}
                             @endif
-                            @if($orders->status->name == 'archivada' || $orders->status->name == 'Cancelar' )
-                                {!! Form::open(['url' => ['admin/orders',$orders->id],'method'=> 'PUT','style'=>'display:inline']) !!}
+                            @if($order->status->name == 'archivada' || $order->status->name == 'Cancelar' )
+                                {!! Form::open(['url' => ['admin/orders',$order->id],'method'=> 'PUT','style'=>'display:inline']) !!}
                                 <button type="submit" class="btn btn-warning  pull-right"><i class="fa fa-unlock"></i>&nbsp; Re abrir </button>
                                 <input type="hidden" name="status[name]" value="Re abrir">
                                 {!! Form::close() !!}
                             @endif
                             &nbsp;&nbsp;
-                            @if($orders->status->name != 'Cancelar')
-                                {!! Form::open(['url' => ['admin/orders',$orders->id],'method'=> 'PUT','style'=>'display:inline']) !!}
+                            @if($order->status->name != 'Cancelar')
+                                {!! Form::open(['url' => ['admin/orders',$order->id],'method'=> 'PUT','style'=>'display:inline']) !!}
                                 <button type="submit" class="btn btn-danger  pull-right"><i class="fa fa-ban"></i>&nbsp; Cancelar Orden</button>
                                 <input type="hidden" name="status[name]" value="Cancelar">
                                 {!! Form::close() !!}
@@ -189,7 +190,7 @@
             </div>
             <br>
             <input type="hidden" value="{{ url('admin/orders/update/note') }}" id="note-route">
-            <input type="hidden" value="{{ $orders->id }}" id="id-order">
+            <input type="hidden" value="{{ $order->id }}" id="id-order">
             <input type="hidden" value="{{ csrf_token()  }}" id="note-token">
 
         </div>
@@ -197,17 +198,5 @@
     @endsection
 
     @section('scripts')
-        <script>
-            function printDiv()
-            {
-                var divToPrint=document.getElementById('print');
-                var newWin=window.open('','Print-Window');
-                newWin.document.open();
-                newWin.document.write('<html><body onload="window.print()">'+divToPrint.innerHTML+'</body></html>');
-                newWin.document.close();
-                setTimeout(function(){newWin.close();},10);
-
-            }
-        </script>
         <script src="{{ asset('administrator/js/order-detail-note.js') }}"></script>
     @stop

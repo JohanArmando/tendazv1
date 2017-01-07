@@ -45,7 +45,7 @@ Cliente {{ $customer->full_name }}
                                         <i class="fa fa-pencil"></i>
                                         Editar Datos</button>
                                 </p>
-                                <p>
+                                <p class="hidden">
                                     <button data-target="#modalCorreo" data-toggle="modal" class="btn btn-primary" style="background-color: #3C3C3C; border-color: #3C3C3C">
                                         <i class="fa fa-envelope"></i>
                                         Enviar Correo</button>
@@ -113,8 +113,8 @@ Cliente {{ $customer->full_name }}
                                 <tr>
                                     <td  style="font-size: 18px !important;">Total Gastado</td>
                                     <td  style="font-size: 18px !important;">Ventas</td>
-                                    <td  style="font-size: 18px !important;">Cosultas</td>
-                                    <td  style="font-size: 18px !important;">Primera iteraccion</td>
+                                    <td  style="font-size: 18px !important;">Consultas</td>
+                                    <td  style="font-size: 18px !important;">Primera iteraci&oacute;n</td>
                                 </tr>
                              </tbody>
                          </table>

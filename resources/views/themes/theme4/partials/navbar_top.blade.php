@@ -45,7 +45,7 @@
                             </a>
                         </li>
 
-                        <li>
+                        <li class="hidden">
                             <a href="{{url('change_password')}}">
                                 <i class="icon icon-lock"></i>&nbsp;Cambiar Contraseña</a>
                         </li>
@@ -84,7 +84,7 @@
                                             </a>
                                         </li>
 
-                                        <li>
+                                        <li class="hidden">
                                             <a href="{{url('change_password')}}">
                                             <i class="fa fa-lock"></i>
                                              &nbsp; &nbsp; &nbsp;Cambiar Contraseña</a>
