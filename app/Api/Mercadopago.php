@@ -542,7 +542,7 @@ class MPRestClient {
     {
         if (!$response)
             return;
-
+        
         return response([
             'cause' => [
                 "code"          => $response['response']['cause'][0]['code'],

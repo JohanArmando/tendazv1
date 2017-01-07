@@ -2,30 +2,15 @@
 'method' => 'POST' , 'class' => 'dropzone hidden-xs hidden-sm' ,'id' => 'my-dropzone' , 'files' => true]) !!}
 <div class="media border-dotted">
     <div class="row">
-<<<<<<< HEAD
-             <span class="media-body box col-lg-offset-0">
-                 <div class="col-sm-9 col-simple">
-                         <div class="form-group">
-                         <label class="control-label" style="font-size: 1.2em; color: black">Nombre del producto
-                             <small style="color: darkgray">(Obligatorio)</small></label>
-                         <input type="text" name="name" class="form-control" placeholder="Ejemplo: Zapato de cuero">
-                     </div>
-                 </div>
-             </span>
-=======
-      <span class="media-body box col-lg-offset-0">
-         <div class="form-group">
-            <div class="row">
+         <span class="media-body box col-lg-offset-0">
              <div class="col-sm-9 col-simple">
-                 <label class="control-label" style="font-size: 1.2em; color: black">Nombre del producto
-                     <small style="color: darkgray">(Obligatorio)</small></label>
-                 <input type="text" name="name" class="form-control" placeholder="Ejemplo: Zapato de cuero" required>
-                 <div class="help-block with-errors" id="name"></div>
+                     <div class="form-group">
+                     <label class="control-label" style="font-size: 1.2em; color: black">Nombre del producto
+                         <small style="color: darkgray">(Obligatorio)</small></label>
+                     <input type="text" name="name" class="form-control" placeholder="Ejemplo: Zapato de cuero">
+                 </div>
              </div>
-            </div>
-         </div>
-      </span>
->>>>>>> 3faf3f1a70040e7cbc7e4003d38d114bf5417efc
+         </span>
     </div>
 </div>
 

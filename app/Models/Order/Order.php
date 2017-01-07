@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Tendaz\Models\Address\CustomerAddress;
 use Tendaz\Models\Cart\Cart;
 use Tendaz\Models\Customer;
+use Tendaz\Models\Payment_method\PaymentValue;
 use Tendaz\Models\Products\Variant;
 use Tendaz\Models\Shipping\ShippingMethod;
 use Tendaz\Traits\CacheTagsTrait;
@@ -67,6 +68,11 @@ class Order extends Model
     public function shippingAddress()
     {
         return $this->belongsTo(CustomerAddress::class , 'shipping_address_id');
+    }
+
+    public function payment()
+    {
+        return $this->belongsTo(PaymentValue::class , 'payment_method');
     }
 
     public function cart()

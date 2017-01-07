@@ -24,7 +24,7 @@ class Cart extends Model
     {
         return $this->hasMany(InShoppingCart::class , 'cart_products');
     }
-
+    
     public function products()
     {
         return $this->belongsToMany(Variant::class , 'cart_products' , 'cart_id' , 'item_id')

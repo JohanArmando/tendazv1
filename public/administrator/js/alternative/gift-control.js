@@ -7,10 +7,10 @@
                     var so = $('input[name=so]:checked').val();
                         var data = { 'so' : so};
                     $.ajax({
-                        'url': route,
+                        'headers' : { 'Accept': 'application/json','Content-Type': 'application/json','X-CSRF-TOKEN':token},
+                        'url': route + '?client_secret='  + client_secret + '&client_id=' + client_id,
                         'type' : 'POST',
                         'dataType' :'json',
-                        'headers' : {'X-CSRF-TOKEN':token},
                         'data' : data,
                         beforeSend: function () {
                             $('#gif-download').show();
