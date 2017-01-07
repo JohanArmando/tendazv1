@@ -231,13 +231,16 @@ class ProductsController extends Controller
         $current_cats       =   $product->categories->pluck('id')->toArray();
         $variant = Variant::where('product_id',$product->id)->first();
         $section    =   Section::where('product_id',$product->id)->first();
-        if (is_null($request->publish)) {   $publish    =   11;  }
+        if (!is_null($request->publish)) {   $publish    =   11;  }
         $product->update([
             'name' => $request->name,
             'slug' => $request->slug,
             'seo_title' => $request->seo_title,
             'seo_description' => $request->seo_description,
             'description' => $request->description,
+            'large'     => $request->large,
+            'height'     => $request->height,
+            'width'     => $request->width,
             'publish' => $publish
             ]);
         
