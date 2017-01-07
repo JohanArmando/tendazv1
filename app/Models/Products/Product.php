@@ -253,6 +253,9 @@ class Product extends Model
     public static function createWithVariant($array)
     {
         $request = (object) $array;
+        if (empty($request->provider_id)) {
+            $request->provider_id   =   null;
+        }
         $product = static::create((array) $request);
         $product->collection()->create([
             'uuid' => Uuid::generate(4)->string,

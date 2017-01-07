@@ -186,7 +186,24 @@
             </div>  
         </div>
     </span>
-
+</div>
+<div class="media border-dotted">
+    <span class="media-body box">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-9 col-simple" >
+                    <label for="control-label" style="font-size: 1.2em; color: black">Asigna un provedor para este producto</label>
+                    <select name="provider_id" id="providers">
+                        
+                        @foreach($providers as $provi)
+                            <option value="{{$provi->id}}" >{{$provi->name}}</option>
+                        @endforeach
+                        
+                    </select>
+                </div>
+            </div>
+        </div>
+    </span>
 </div>
 <div class="media border-dotted">
     <span class="media-body box">

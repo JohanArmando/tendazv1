@@ -62,9 +62,9 @@ class ProductsController extends Controller
 
     public function edit($subdomain ,Product $product)
     {
-        $categories = Category::pluck('name' , 'id');
-        $options = Option::get(['id' , 'name']);
-        return view('admin.product.edit',compact('product' , 'categories' , 'options'));
+        $categories =   Category::pluck('name' , 'id');
+        $options    =   Option::get(['id' , 'name']);
+        return view('admin.product.edit',compact('product' , 'categories' , 'options','providers'));
     }
 
     public function update($subdomain, Product $product , Request $request)
@@ -220,8 +220,9 @@ class ProductsController extends Controller
     public function editProduct($subdomain , $id, Request $request){
         $product        =   Product::where('uuid',$id)->first();
         $variant        =   Variant::where('product_id',$product->id)->first();
+        $providers      =   Provider::where('shop_id',$product->shop_id)->get();
         $categories     =   Category::where('shop_id',$request->shop->id)->get();
-        return view('admin.product.edit',compact('product','variant','categories'));
+        return view('admin.product.edit',compact('product','variant','categories','providers'));
     }
 
     public function putProduct($subdomain,$id, Request $request){
