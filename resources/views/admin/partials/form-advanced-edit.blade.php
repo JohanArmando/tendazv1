@@ -194,11 +194,14 @@
                 <div class="col-md-9 col-simple" >
                     <label for="control-label" style="font-size: 1.2em; color: black">Asigna un provedor para este producto</label>
                     <select name="provider_id" id="providers">
-                        
+                        @if(is_null($product->provider_id))
+                            <option selected></option>
+                        @else
+                            <option value="{{$product->provider->id}}" selected>{{$product->provider->name}}</option>
+                        @endif
                         @foreach($providers as $provi)
                             <option value="{{$provi->id}}" >{{$provi->name}}</option>
                         @endforeach
-                        
                     </select>
                 </div>
             </div>

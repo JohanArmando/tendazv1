@@ -110,8 +110,8 @@ Editar {{ucfirst($product->name)}}
           </tr>
 </script>
     <script>
-    $('#providers').select2().val({{$product->provider_id}}).trigger("change");
-
+    $('#providers').select2();
+    // .val({{$product->provider_id}}).trigger("change")
     $("#file-1").fileinput({
 
         dataType : "json",

@@ -406,7 +406,7 @@ class Product extends Model
     }
 
     public function provider(){
-        return $this->hasOne(Provider::class);
+        return $this->belongsTo(Provider::class);
     }
 
 }

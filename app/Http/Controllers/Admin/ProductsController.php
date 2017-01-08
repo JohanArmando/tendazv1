@@ -43,8 +43,9 @@ class ProductsController extends Controller
     public function create(Request $request)
     {
         $categories = Category::pluck('name' , 'id')->toArray();
-        $providers  =   Provider::where('shop_id',$request->shop->id)->pluck('name','id');
-        $options = Option::get(['id' , 'name']);
+        $providers  =   Provider::where('shop_id',$request->shop->id)->get();
+        // dd($providers);
+        $options    = Option::get(['id' , 'name']);
         return view('admin.product.create',compact('categories' , 'options','providers'));
     }
 
@@ -242,6 +243,7 @@ class ProductsController extends Controller
             'large'     => $request->large,
             'height'     => $request->height,
             'width'     => $request->width,
+            'provider_id'     => $request->provider_id,
             'publish' => $publish
             ]);
         

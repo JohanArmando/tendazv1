@@ -3,10 +3,13 @@
 <div class="media border-dotted">
     <div class="row">
         <span class="media-body box">
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-sm-9 col-simple">
-                        <label class="control-label" style="font-size: 1.2em; color: black;">Nombre del producto <small style="color: darkgray">(Obligatorio)</small></label>
+            <div class="col-sm-9 col-simple">
+                <div class="form-group">
+                    <div class="row">
+                    
+                        <label class="control-label" style="font-size: 1.2em; color: black;">
+                            Nombre del producto <small style="color: darkgray">(Obligatorio)</small>
+                        </label>
                         <div class="input-group">
                             {!! Form::text('name' , null , ['class' => 'form-control' ,"placeholder" => "Ejemplo: Zapato de cuero"]) !!}
                         </div>
@@ -20,9 +23,10 @@
 <div class="media border-dotted">
     <div class="row">
         <span class="media-body box">
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-sm-9 col-simple">
+            <div class="col-sm-9 col-simple">
+                <div class="form-group">
+                    <div class="row">
+                    
                         <label class="control-label" style="font-size: 1.2em; color: black;">Imagenes
                             <small style="color: darkgray">(Opcional)</small>
                         </label>
@@ -53,18 +57,20 @@
 <div class="media border-dotted">
     <div class="row">
       <span class="media-body box">
-        <div class="form-group" >
-          <div class="row">
-            <div class="col-md-12 col-simple">
+        <div class="col-md-12 col-simple">
+            <div class="form-group" >
+              <div class="row">
+            
               <label class="control-label" style="font-size: 1.2em; color: black;">Dimensiones
               <small style="color: darkgray">(Es importante completar tus dimensiones para calcular el valor del envio)</small>
               </label>
             </div>
           </div>
         </div>
-        <div class="form-group" >
-          <div class="row">
-            <div class="col-md-12  col-simple">
+        <div class="col-md-12  col-simple">
+            <div class="form-group" >
+              <div class="row">
+            
               <div class="col-md-3">
                   <div class="input-group">
                       <label class="col-md-6 control-label" id="label-precio">
@@ -108,13 +114,16 @@
 <div class="media border-dotted">
     <div class="row">
         <span class="media-body box">
-            <div class="form-group">
-                <div class="col-sm-9 col-simple">
-                    <label class="control-label" style="font-size: 1.2em; color: black;">Descripcion
-                        <small style="color: darkgray">(Menciona todas las caracteristicas de tu producto)</small>
-                    </label>
-                    <br>
-                    {!!  Form::textarea('description', null , ['id' => 'simple-description' ,  'data-parsley-type'=>"alphanum" , 'class' => 'form-control']) !!}
+            <div class="col-md-9 col-simple">
+                <div class="form-group">
+                    <div class="row">
+                    
+                        <label class="control-label" style="font-size: 1.2em; color: black;">Descripcion
+                            <small style="color: darkgray">(Menciona todas las caracteristicas de tu producto)</small>
+                        </label>
+                        <br>
+                        {!!  Form::textarea('description', null , ['id' => 'simple-description' ,  'data-parsley-type'=>"alphanum" , 'class' => 'form-control']) !!}
+                    </div>
                 </div>
             </div>
         </span>
@@ -123,24 +132,36 @@
 <div class="media border-dotted">
     <div class="row">
         <span class="media-body box">
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-9 col-simple">
+            <div class="col-md-9 col-simple">
+                <div class="form-group">
+                    <div class="row">
+                    
+                        <div class="col-md-12">
+                            
+                            <div class="row">
+                                <label class="control-label" style="font-size: 1.2em; color: black">
+                                    Categorias
+                                </label>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                <div class="row">
+                                <button class="btn btn-block btn-primary modalCategory" data-toggle="modal" data-target="#modalCategory" type="button">
+                                    <i class="fa fa-plus"></i> Nueva categoria
+                                </button>
+                                </div>
+                                </div>
+                            </div>
 
-                    </div>
-                    <div class="col-md-3 col-simple">
-                        <label class="control-label" style="font-size: 1.2em; color: black">
-                            Categorias
-                        </label>
-                        <button class="btn btn-block btn-primary modalCategory" data-toggle="modal" data-target="#modalCategory" type="button">
-                            <i class="fa fa-plus"></i> Nueva categoria
-                        </button>
-                    </div>
-                    <div class="col-md-9 col-simple" style="margin-top: 2%;">
-                        <label for="control-label" style="font-size: 1.2em; color: black">
-                            O Selecciona una de las categorias que ya creaste
-                        </label>
-                        {!! Form::select('category_id[]',$categories, isset($product) ? $product->categories->pluck('id')->toArray() : null, ['multiple' => true , 'style' => 'width: 100%' ,'class' => "select2", "id" => "selectCategory"])!!}
+                        </div>
+                        <div class="col-md-12" >
+                            <div class="row">
+                                <label for="control-label" style="font-size: 1.2em; color: black">
+                                    O Selecciona una de las categorias que ya creaste
+                                </label>
+                                {!! Form::select('category_id[]',$categories, isset($product) ? $product->categories->pluck('id')->toArray() : null, ['multiple' => true , 'style' => 'width: 100%' ,'class' => "select2", "id" => "selectCategory"])!!}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -150,12 +171,16 @@
 <div class="media border-dotted">
     <div class="row">
         <span class="media-body box">
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-9 col-simple" >
+            <div class="col-md-9 col-simple" >
+                <div class="form-group">
+                    <div class="row">
                         <label for="control-label" style="font-size: 1.2em; color: black">Asigna un provedor para este producto</label>
-
-                        {!! Form::select('provider_id',$providers, isset($providers) ? $providers : null, ['class' => "", "id" => "providers"])!!}
+                        <select name="provider_id" id="providers">
+                            <option selected></option>
+                            @foreach($providers as $provi)
+                                <option id="{{$provi->id}}">{{$provi->name}}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
             </div>
@@ -164,10 +189,11 @@
 </div>
 <div class="media border-dotted">
     <div class="row">
-        <span class="media-body box">
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-sm-6 col-simple">
+        <span class="media-body box">   
+            <div class="col-sm-6 col-simple">
+                <div class="form-group">
+                    <div class="row">
+                    
                         <label class="control-label" style="font-size: 1.2em; color: black">Envio
                         </label>
                         <span class="checkbox custom-checkbox">
@@ -236,12 +262,13 @@
 <div class="media border-dotted">
     <div class="row">
         <span class="media-body box">
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-9 col-simple">
+            <div class="col-md-9 col-simple">
+                <div class="form-group">
+                    <div class="row">
+                    
                         <label class="control-label" style="font-size: 1.2em; color: black;">Configuraciones avanzadas para SEO</label>
                         <br>
-                        <label class="control-label" style="font-size: 0.8em; color: darkslategray">Titulo para SEO</label>
+                        <label class="control-label" style="font-size: 0.8em; color:darkslategray">Titulo para SEO</label>
                         {!! Form::text('seo_title' , null , ['class' => 'form-control']) !!}
                         <br>
                         <label class="control-label" style="font-size: 0.8em; color: darkslategray">Descripcion SEO</label>
