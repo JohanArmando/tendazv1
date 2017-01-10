@@ -25,7 +25,8 @@ class ProductsController extends Controller
     {
         $request = (object) $request;
         return  fractal()
-                    ->collection(Variant::orderBy('id' , 'desc')->whereHas('product')->with('product')->groupBy('product_id')->get(), new ProductTransformer())
+                ->collection(Variant::orderBy('id' , 'desc')->whereHas('product')->with('product')->groupBy('product_id')
+                ->get(), new ProductTransformer())
                 ->serializeWith(new ArraySerializer())
                 ->withResourceName('products')
                 ->parseIncludes($request->get('include'))

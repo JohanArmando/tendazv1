@@ -25,7 +25,7 @@ class CustomerController extends Controller
     public function show($subdomain , Customer $customer)
     {
         $address = $customer->addressesForShipping->first();
-        $orders = $customer->orders()->paginate(10);
+        $orders = $customer->orders()->NotInitOrders()->paginate(10);
         return view('admin.customer.show' , ['customer' => $customer , 'address' => $address , 'orders' => $orders]);
     }
 
