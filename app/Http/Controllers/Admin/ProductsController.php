@@ -229,11 +229,13 @@ class ProductsController extends Controller
     public function putProduct($subdomain,$id, Request $request){
         $product = Product::where('uuid',$id)->first();
         $publish            =   $request->publish;
+        $provider_id        =   $request->provider_id;
         $cat_arrray         =   $request->category_id;
         $current_cats       =   $product->categories->pluck('id')->toArray();
         $variant = Variant::where('product_id',$product->id)->first();
         $section    =   Section::where('product_id',$product->id)->first();
         if (!is_null($request->publish)) {   $publish    =   11;  }
+        if (empty($request->provider_id)) {   $provider_id    =   null;  }
         $product->update([
             'name' => $request->name,
             'slug' => $request->slug,
@@ -243,7 +245,7 @@ class ProductsController extends Controller
             'large'     => $request->large,
             'height'     => $request->height,
             'width'     => $request->width,
-            'provider_id'     => $request->provider_id,
+            'provider_id'     => $provider_id,
             'publish' => $publish
             ]);
         
