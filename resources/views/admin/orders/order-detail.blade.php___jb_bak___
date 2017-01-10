@@ -35,7 +35,7 @@
                                     <br>
                                     <div class="text-left">
                                         <p style="float: left !important;">
-                                            <?php  setlocale(LC_TIME, 'ES'); $dt = \Carbon\Carbon::parse($order->created_at) ?>
+                                            <?php  setlocale(LC_TIME, 'ES'); $dt = \Carbon::parse($order->created_at) ?>
                                             <strong>Fecha de solicitud&nbsp;</strong><input class="form-control" type="text"
                                                                                             value="{{ $dt->formatLocalized('%A %d %B %Y') }}" width="150px;" disabled>
                                         </p>
@@ -119,11 +119,13 @@
                                             </li>
                                             <li class="text-center">
                                                 <h4 class="semibold ellipsis">
-                                                    <a href="{{asset("admin/customers/")}}">
-                                                        {{ $customer }}
-                                                    </a>
+                                                    @if(empty($customer->uuid))
+                                                        @else
+                                                        <a href="{{asset("admin/customers/".$customer->uuid)}}">
+                                                            @if(empty($customer->name))@else{{ $customer->name }}@endif
+                                                        </a>
+                                                    @endif
                                                 </h4>
-                                                <h4 class="semibold ellipsis"><a href="{{asset('admin/resumenCliente')}}">{{ $customer->full_name }}</a></h4>
                                             </li>
                                             <li class="text-center">
                                             <p class="text-center">
