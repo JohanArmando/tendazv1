@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
         $this->call(OPtionValueTableSeeder::class);
         $this->call(OrderStatusSeed::class);
         $this->call(PaymentMethodsSeeder::class);
+        $this->call(CategoryTldSeeder::class);
+        $this->call(TldSeeder::class);
         Model::unguard();
         /*factory(\App\Models\User::class , 10)->create()->each(function ($users) use ($faker){
             $shop = $users->shop()->save(factory(\App\Models\Store\Shop::class)->make());

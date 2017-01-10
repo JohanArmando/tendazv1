@@ -102,8 +102,4 @@ Elige tu logo
         </div>
 @endsection
 @section('scripts')
-<script type="text/javascript">
-    $('.dropify').dropify();
-    $('.select2').select2();
-</script>
 @stop

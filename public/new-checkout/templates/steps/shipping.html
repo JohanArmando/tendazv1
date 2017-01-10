@@ -6,13 +6,11 @@
                 <button class="btn_edit" ng-click="prev('/profile')"><i class="glyphicon glyphicon-pencil" ></i></button>
                     <div class="col-md-12">
                         <h3><i class="glyphicon glyphicon-user"></i> Identificaci&oacute;n</h3>
-                        <label>
-                            {{ carts.order.data.client.first_name}}
-                        </label>
-                        <span class="col-md-12">{{ carts.order.data.client.last_name }}</span>
-                        <span class="col-md-12">{{ carts.order.data.client.phone }}</span>
-                        <span class="col-md-12">{{ carts.order.data.client.email }}</span>
-                        <span class="col-md-12">{{ carts.order.data.client.identification }}</span>
+                        <span class="col-md-12"><strong>Nombre: </strong> {{ carts.order.data.client.first_name}}</span>
+                        <span class="col-md-12"><strong>Apellidos: </strong> {{ carts.order.data.client.last_name }}</span>
+                        <span class="col-md-12"><strong>Telefono: </strong> {{ carts.order.data.client.phone }}</span>
+                        <span class="col-md-12"><strong>Correo: </strong> {{ carts.order.data.client.email }}</span>
+                        <span class="col-md-12"><strong>Identificaci&oacute;n: </strong> {{ carts.order.data.client.identification }}</span>
                     </div>
                 </div>
             </div>
@@ -73,7 +71,7 @@
                             <label>Ciudad</label>
                             <select ng-model="defaultCity" ng-options="city.name for city in cities track by city.id" class="form-control"></select>
                         </div>
-                        <div class="form-group col-md-12">
+                        <div class="form-group col-md-12 hidden">
                             <label for="exampleInputPassword1">Nombre persona remitente</label>
                             <input type="text" name="state" ng-model="  address.receiverName" class="form-control">
                         </div>

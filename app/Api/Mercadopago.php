@@ -44,7 +44,6 @@ class Mercadopago
         if (!is_null($enable)) {
             $this->sandbox = $enable === TRUE;
         }
-
         return $this->sandbox;
     }
 
@@ -344,6 +343,7 @@ class Mercadopago
      * @param params (deprecated)
      */
     public function post($request, $data = null, $params = null) {
+
         if (is_string ($request)) {
             $request = array(
                 "uri" => $request,
@@ -354,9 +354,10 @@ class Mercadopago
 
         $request["params"] = isset ($request["params"]) && is_array ($request["params"]) ? $request["params"] : array();
 
+
         if (!isset ($request["authenticate"]) || $request["authenticate"] !== false) {
-            $request["params"]["access_token"] = $this->get_access_token();
-        }
+            $request["params"]["access_token"] = isset($this->ll_access_token) ? $this->ll_access_token :$this->get_access_token()  ;
+            }
 
         $result = MPRestClient::post($request);
         return $result;
@@ -504,7 +505,6 @@ class MPRestClient {
 
     private static function exec($request) {
         // private static function exec($method, $uri, $data, $content_type) {
-
         $connect = self::build_request($request);
 
         $api_result = curl_exec($connect);
@@ -530,6 +530,7 @@ class MPRestClient {
                     }
                 }
             }
+            return $response;
             return self::errorResponse($response);
         }
 

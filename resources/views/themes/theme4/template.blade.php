@@ -104,19 +104,14 @@
 	<script src="{{asset('components/js/rzslider.min.js') }}"></script>
 	<script src="{{asset('components/js/angularSanitize.min.js') }}"></script>
 
-	<script type="text/ng-template" id="tpl.html">
-		<div id="megaMenuCarousel1" class="product" ng-class="{ ' sold-out' : product.stock == 0 , ' product--zoom' : !product.promotion && !product.feature} ">
+	<script type="text/ng-template" id="tpl.html" >
+		<div id="megaMenuCarousel1" class="product"  ng-class="{ ' sold-out' : product.stock == 0 , ' product--zoom' : !product.promotion && !product.feature} ">
 			<div class="product__inside">
 				<div class="product__inside__image">
 					<a href="{{ url('/') }}<% '/detail/' + product.slug %>">
 							<img ng-src="<% product.images.data[0].url %>" alt="" ng-show="product.images.data"  >
 						<img ng-src="<% BASEURL + '/administrator/image/noImage.png' %>" ng-hide="product.images.data" >
 					</a>
-					<!--<a href="#" ng-hide="product.stock == 0" ng-click="viewProduct(product)"  data-toggle="modal" data-target="#quickViewModal" class="quick-view">
-						<b>
-							<span class="icon icon-visibility"></span> Ver
-						</b>
-					</a>-->
 					<div class="product__label--sold-out" ng-show="product.stock == 0">
                         <span>
                             Sin<br>

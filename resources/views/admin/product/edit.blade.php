@@ -6,7 +6,6 @@ Editar {{ucfirst($product->name)}}
 @section('css')
     <link rel="stylesheet" href="{{ asset('components/admin/css/trumbowyg.min.css') }}">
     <link rel="stylesheet" href="{{ asset('components/admin/css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('components/admin/css/select2.css') }}">
     <link rel="stylesheet" href="{{ asset('components/admin/css/fileinput.min.css') }}">
 @stop
 @section('content')
@@ -52,10 +51,8 @@ Editar {{ucfirst($product->name)}}
     </div>
 @endsection
 @section('scripts')
-
-    {{-- Script para creacion del formulario de producto--}}
-    <script type="text/javascript" src="{{ asset('admin/plugins/summernote/js/summernote.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('admin/js/backend/forms/wysiwyg.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('administrator/plugins/summernote/js/summernote.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('administrator/js/backend/forms/wysiwyg.js') }}"></script>
     <script type="text/javascript" src="{{ asset('components/admin/js/fileinput.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('components/admin/js/locales/es.js') }}"></script>
     <!-- <script type="text/javascript" src="{{ asset('components/admin/js/load-dropzone-simple.js') }}"></script> -->
@@ -113,7 +110,8 @@ Editar {{ucfirst($product->name)}}
           </tr>
 </script>
     <script>
-
+    $('#providers').select2();
+    // .val({{$product->provider_id}}).trigger("change")
     $("#file-1").fileinput({
 
         dataType : "json",

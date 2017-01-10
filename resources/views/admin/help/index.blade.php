@@ -45,7 +45,7 @@ Herramientas y ayuda
                 <div class="col-md-6 helpRight two">
                     <div class="text-center">
                         <div class="circle" style="margin-left: 40px">
-                            <a href="{{url('admin/help/video')}}">
+                            <a href="{{--url('admin/help/video')--}}" data-toggle="modal" data-target="#myModal">
                             <img src="{{asset('administrator/image/icono_video_tutorial.png')}}" style="width: 64px; margin-top: 20px;">
                             </a>
                             <p style="margin-top: 20px">Video Tutoriales</p>
@@ -68,7 +68,7 @@ Herramientas y ayuda
                 <div class="col-md-6 helpRight four">
                         <div class="text-center">
                             <div class="circle" style="margin-top: 70px !important; margin-left: 40px !important;">
-                                <a href="{{url('admin/help/chat')}}">
+                                <a href="{{--url('admin/help/chat')--}}" data-toggle="modal" data-target="#myModal">
                                     <img src="{{asset('administrator/image/chat-support.png')}}" style="width: 64px; margin-top: 20px;">
                                 </a>
                                 <p style="margin-top: 20px">Chat</p>
@@ -90,7 +90,7 @@ Herramientas y ayuda
                 <!-- TWO -->
                 <div class="col-md-12" style="margin-bottom:10px">
                         <div class="text-center" style="background-color: #f26522;padding: 10px">
-                            <a href="{{url('admin/help/video')}}">
+                            <a href="{{--url('admin/help/video')--}}" data-toggle="modal" data-target="#myModal">
                                 <img src="{{asset('administrator/image/icono_video_tutorial.png')}}">
                             </a>
                             <h3 style="margin-top: 20px;color: white">Video Tutoriales</h3>
@@ -112,7 +112,7 @@ Herramientas y ayuda
                 <div class="col-md-12" style="margin-bottom:10px">
                     <div class="text-center">
                         <div class="text-center" style="background-color: #f26522;padding: 10px">
-                            <a href="{{url('admin/help/chat')}}">
+                            <a href="{{--url('admin/help/chat')--}}" data-toggle="modal" data-target="#myModal">
                                 <img src="{{asset('administrator/image/chat-support.png')}}">
                             </a>
                             <h3 style="margin-top: 20px;color: white">Chat</h3>
@@ -195,6 +195,24 @@ Herramientas y ayuda
         </div>
     </div>
 </div>
+<!-- Modal PROXIMAMENTE-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Anuncio</h4>
+            </div>
+            <div class="modal-body">
+                Esta opcion estara habilitada proximamente!.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal END PROXIMAMENTE-->
 @endsection 
 @section('scripts')
 @stop

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use League\Fractal\Serializer\ArraySerializer;
 use Maatwebsite\Excel\Facades\Excel;
 use Tendaz\Http\Controllers\Controller;
+use Tendaz\Models\Customer;
 use Tendaz\Models\Order\Order;
 use Tendaz\Models\Order\OrderStatus;
 use Tendaz\Transformers\OrderTransformer;
@@ -26,11 +27,12 @@ class OrdersController extends Controller
     }
 
     public function show($subdomain , $id){
-        $orders= Order::findOrFail($id);
-        $histories= $orders->histories->groupBy(function($date) {
+        $order= Order::where('id',$id)->first();
+        $customer = Customer::where('id',$order->customer_id)->first();
+        $histories= $order->histories->groupBy(function($date) {
             return Carbon::parse($date->created_at)->format('Y-m-d');
         })->toArray();
-        return view('admin.orders.order-detail',compact('orders' , 'histories'));
+        return view('admin.orders.order-detail',compact('order','customer','histories'));
     }
     
     public function update($subdomain ,$id , Request $request)
@@ -58,7 +60,7 @@ class OrdersController extends Controller
         if($rangeDate == 'all' && $filter == '') {
             $filters = Order::where('orders.shop_id' , $request->shop->id)
                 ->join('customers', 'customers.id', '=', 'orders.customer_id')
-                ->select('customers.*', 'orders.*', 'customers.name as name_customer')->get();
+                ->select('customers.*', 'orders.*', 'customers.name as name_customer')->NotInitOrders()->get();
         }
         //input orders
         if($rangeDate == 'all' && !$filter == ''){
@@ -67,27 +69,27 @@ class OrdersController extends Controller
                 ->orWhere('orders.id','=',$filter)
                 ->orWhere('customers.name','like','%'.$filter.'%')
                 ->orWhere('customers.email','like','%'.$filter.'%')
-                ->orWhere('orders.total','=', $filter)->get();
+                ->orWhere('orders.total','=', $filter)->NotInitOrders()->get();
         }
         //date last
         if($rangeDate == 'last' && $filter == ''){
             $filters = Order::where('shop_id' , $request->shop->id)
-                ->whereBetween('created_at',[Carbon::yesterday(),Carbon::now()])->get();
+                ->whereBetween('created_at',[Carbon::yesterday(),Carbon::now()])->NotInitOrders()->get();
         }
         //date last
         if($rangeDate == 'eight' && $filter == ''){
             $filters = Order::where('shop_id' , $request->shop->id)
-                ->whereBetween('created_at',[Carbon::today()->subDays(8),Carbon::now()])->get();
+                ->whereBetween('created_at',[Carbon::today()->subDays(8),Carbon::now()])->NotInitOrders()->get();
         }
         //date last
         if($rangeDate == 'month' && $filter == ''){
             $filters = Order::where('shop_id' , $request->shop->id)
-                ->whereBetween('created_at',[Carbon::today()->subMonth(1),Carbon::now()])->get();
+                ->whereBetween('created_at',[Carbon::today()->subMonth(1),Carbon::now()])->NotInitOrders()->get();
         }
         //date custom
         if($rangeDate == 'custom' && $filter == ''){
             $filters = Order::where('shop_id' , $request->shop->id)
-                ->whereBetween('created_at',[Carbon::parse($to),Carbon::parse($from)])->get();
+                ->whereBetween('created_at',[Carbon::parse($to),Carbon::parse($from)])->NotInitOrders()->get();
         }
 
         return $this->generateExcel($filters , $so);
@@ -120,11 +122,28 @@ class OrdersController extends Controller
 
     }
 
-    public function updateNote(Request $request , $id){
-        dd($request->all());
-        $order = Order::where('id',$id)->first();
+    public function updateNote($subdomain , $id ,Request $request){
+        $order = Order::where('uuid',$id)->first();
         $order->note = $request->get('note');
         $order->save();
-        return response()->json($order->note);
+        return redirect()->back()->with('message', array('type' => 'success' , 'message' => 'Nota editada correctamente'));
+    }
+
+    public function printOrder($subdomain , $id){
+        $order= Order::where('id',$id)->first();
+        $customer = Customer::where('id',$order->customer_id)->first();
+        return view('admin.orders.printOrder',compact('order','customer'));
+    }
+
+    public function search($subdomain , Request $request){
+        $data = $request->get('search');
+        $orders = Order::where('orders.shop_id' , $request->shop->id)
+            ->join('customers', 'customers.id', '=', 'orders.customer_id')
+            ->where('orders.id','=',$data)
+            ->orWhere('customers.name','like','%'.$data.'%')
+            ->orWhere('orders.total','=', $data)
+            ->NotInitOrders()->get();
+        $status = OrderStatus::all();
+        return view('admin.orders.index',compact('orders','status'));
     }
 }

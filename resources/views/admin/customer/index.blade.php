@@ -3,8 +3,8 @@
         Clientes
     @endsection
     @section('css')
-        <link rel="stylesheet" href="{{asset('admin/plugins/datatables/css/tabletools.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{asset('admin/css/stylePersonal.css')}}">
+        <link rel="stylesheet" href="{{asset('administrator/plugins/datatables/css/tabletools.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('administrator/css/stylePersonal.css')}}">
         <style>
             [ng\:cloak], [ng-cloak], .ng-cloak {
                 display: none !important;
@@ -94,11 +94,15 @@
                                             $ {{ $customer->eagerTotal->first()== null ? '0' : number_format($customer->eagerTotal->first()->total , 2 , '.' , ',') }}
                                         </td>
                                         <td class="hidden-sm hidden-xs">
-                                            {{ $customer->totalOrder() }}
+                                            {{ $customer->total_exc_tax}}
                                         </td>
                                         <td class="hidden-sm hidden-xs">
                                             <strong>
-                                                <a href="{{url('orders/')}}">{{ $customer->latestOrder->first() == null ? 'Ninguna' : $customer->latestOrder->first()->id }}</a>
+                                                @if(!$customer->latestOrder->first() == null)
+                                                <a href="{{url('admin/orders/'.$customer->id)}}">{{ $customer->latestOrder->first()->id }}</a>
+                                                    @else
+                                                        <strong>Ninguna</strong>
+                                                @endif
                                             </strong>
                                         </td>
                                     </tr>
@@ -116,8 +120,8 @@
        </div>
     @endsection
     @section('scripts')
-        <script src="{{ asset('admin/angular/angular.min.js') }}"></script>
-        <script src="{{ asset('admin/angular/pagination.js') }}"></script>
-        <script src="{{ asset('admin/angular/moduloClientes.js') }}"></script>
-        <script src="{{ asset('admin/js/angular-locale-es_es.js')}}"></script>
+        <script src="{{ asset('administrator/angular/angular.min.js') }}"></script>
+        <script src="{{ asset('administrator/angular/pagination.js') }}"></script>
+        <script src="{{ asset('administrator/angular/moduloClientes.js') }}"></script>
+        <script src="{{ asset('administrator/js/angular-locale-es_es.js')}}"></script>
      @stop

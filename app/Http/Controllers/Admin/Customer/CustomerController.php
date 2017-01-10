@@ -9,6 +9,7 @@ use Tendaz\Models\Customer;
 use Tendaz\Models\Geo\City;
 use Tendaz\Models\Geo\Country;
 use Tendaz\Models\Geo\State;
+use Tendaz\Models\Order\Order;
 use Tendaz\Models\User;
 use Tendaz\Models\Order\Consult;
 use Webpatser\Uuid\Uuid;
@@ -24,7 +25,7 @@ class CustomerController extends Controller
     public function show($subdomain , Customer $customer)
     {
         $address = $customer->addressesForShipping->first();
-        $orders = $customer->orders()->paginate(10);
+        $orders = $customer->orders()->NotInitOrders()->paginate(10);
         return view('admin.customer.show' , ['customer' => $customer , 'address' => $address , 'orders' => $orders]);
     }
 
@@ -68,6 +69,18 @@ class CustomerController extends Controller
     {
         $contacts = Consult::orderBy('created_at','DESC')->get();
         return view('admin.customer.contact',compact('contacts'));
+    }
+    public function postExport($subdomain , Request $request){
+        $so = !empty($request->get('so')) && $request->get('so') == 'Mac' ? $so = 'csv' : $so = 'xls';
+        \Excel::create('clientes', function($excel)  {
+            $excel->setTitle('Listado  de clientes : ');
+            $excel->sheet('Sheetname', function($sheet)  {
+                $clients = Customer::all();
+                $sheet->fromArray($clients);
+
+            });
+        })->store($so,'exports');
+        return response()->json(['path' => url('/').'/exports/clientes.'.$so]);
     }
 
 }

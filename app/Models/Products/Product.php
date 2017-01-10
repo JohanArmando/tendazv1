@@ -4,6 +4,7 @@ namespace Tendaz\Models\Products;
 
 use Carbon\Carbon;
 use Tendaz\Models\Cart\CartProductPivot;
+use Tendaz\Models\Order\Provider;
 use Webpatser\Uuid\Uuid;
 use Tendaz\Models\Images\Image;
 use Tendaz\Models\Domain\Domain;
@@ -253,6 +254,9 @@ class Product extends Model
     public static function createWithVariant($array)
     {
         $request = (object) $array;
+        if (empty($request->provider_id)) {
+            $request->provider_id   =   null;
+        }
         $product = static::create((array) $request);
         $product->collection()->create([
             'uuid' => Uuid::generate(4)->string,
@@ -399,6 +403,10 @@ class Product extends Model
     public function stringCategories()
     {
         return implode(',' , $this->categories->pluck('name')->toArray());
+    }
+
+    public function provider(){
+        return $this->belongsTo(Provider::class);
     }
 
 }

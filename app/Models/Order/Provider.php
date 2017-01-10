@@ -5,6 +5,7 @@ namespace Tendaz\Models\Order;
 use Tendaz\Models\Geo\City;
 use Tendaz\Models\Geo\Country;
 use Tendaz\Models\Geo\State;
+use Tendaz\Models\Products\Product;
 use Tendaz\Models\Store\Shop;
 use Tendaz\Traits\UuidAndShopTrait;
 use Illuminate\Database\Eloquent\Model;
@@ -85,4 +86,7 @@ class Provider extends Model
         return 'uuid';
     }
 
+    public function product(){
+        return $this->hasOne(Product::class);
+    }
 }
