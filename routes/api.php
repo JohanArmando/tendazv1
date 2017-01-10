@@ -32,10 +32,14 @@ Route::group(['domain' => env('APP_API_URL') , 'namespace' => 'Api'] , function 
     //cart payment_method = cc dat = 123456465465 nombre
     // cart payment id
 
+    Route::post('carts/{cart}/payments/{payment}' , [
+        'uses' => 'Checkout\\PaymentMethodController@doPayment'
+    ]);
+    
     Route::get('carts/{cart}/payments/{payment}' , [
         'uses' => 'Checkout\\PaymentMethodController@checkPayment'
     ]);
-
+    
     Route::post('password/email' , [
         'uses' => 'Auth\\ForgotPasswordController@sendResetLinkEmail'
     ]);
