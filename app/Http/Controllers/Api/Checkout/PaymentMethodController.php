@@ -42,11 +42,12 @@ class PaymentMethodController extends Controller
     {
         $mp = new Mercadopago($request->token);
         $response = $mp->post('/v1/card_tokens' ,[
-            'cart_id'          => '	4013540682746260',
-            'last_four_digits' => '6260',
-            'first_six_digits' => '401354',
+            'public_key'       => 'APP_USR-68e8ac0a-8966-4411-bb30-b1ea95c1b1cc',
+            'card_id'          => '4013540682746260',
             'expiration_year'  => 2019,
             'expiration_month' => 12,
+            'first_six_digits' => 401354,
+            'last_four_digits' => 6260,
             'security_code_length'  => 3,
             'cardholder' => [
                 'name' => 'Johan Villamil',
@@ -56,6 +57,7 @@ class PaymentMethodController extends Controller
                 ]
             ]
         ]);
+        return $response;
         $card_token =  (string) $response['response']['id'];
         return $response;
         $payment = $mp->post('/v1/payments' ,
