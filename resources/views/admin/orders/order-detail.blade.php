@@ -119,11 +119,11 @@
                                             </li>
                                             <li class="text-center">
                                                 <h4 class="semibold ellipsis">
-                                                    <a href="{{asset("admin/customers/").'/'.$order->user->uuid}}">
+                                                    <a href="{{asset("admin/customers/").'/'.$customer->uuid}}">
                                                         {{ $customer->name }}
                                                     </a>
                                                 </h4>
-                                                <h4 class="semibold ellipsis"><a href="{{asset('admin/resumenCliente')}}">{{ $order->full_name }}</a></h4>
+                                                <h4 class="semibold ellipsis"><a href="{{asset('admin/resumenCliente')}}">{{ $customer->full_name }}</a></h4>
                                             </li>
                                             <li class="text-center">
                                             <p class="text-center">
