@@ -65,10 +65,13 @@ Mis ventas
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-xs-6" style="margin-left: 71% !important;">
-                                    <label for="buscar"><div class=""><strong>Buscar:</strong></div></label>
-                                    <div role="form">
-                                        <input type="text" class="form-control" style="width:55%;" ng-model="search">
-                                    </div>
+                                    <form action="{{url('admin/orders/search')}}" method="POST">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <label for="buscar"><strong>Buscar:</strong></label>
+                                        <div role="form">
+                                            <input type="text" class="form-control" style="width:55%;" name="search" onchange="this.form.submit()">
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                             <br><br>
@@ -82,7 +85,6 @@ Mis ventas
                                             <th>Total</th>
                                             <th>Comprador</th>
                                             <th>Estado de la orden</th>
-                                            <th></th>
                                         </tr>
                                     </thead>
 
@@ -112,11 +114,6 @@ Mis ventas
                                             </td>
                                             <td>
                                                <span>{{ $order->status->description }}</span>
-                                            </td>
-                                            <td>
-                                                <a href="#">
-
-                                                </a>
                                             </td>
                                         </tr>
                                         @endforeach

@@ -119,11 +119,11 @@
                                             </li>
                                             <li class="text-center">
                                                 <h4 class="semibold ellipsis">
-                                                    <a href="{{asset("admin/customers/").'/'.$order->user->uuid}}">
+                                                    <a href="{{asset("admin/customers/").'/'.$customer->uuid}}">
                                                         {{ $customer->name }}
                                                     </a>
                                                 </h4>
-                                                <h4 class="semibold ellipsis"><a href="{{asset('admin/resumenCliente')}}">{{ $order->full_name }}</a></h4>
+                                                <h4 class="semibold ellipsis"><a href="{{asset('admin/resumenCliente')}}">{{ $customer->full_name }}</a></h4>
                                             </li>
                                             <li class="text-center">
                                             <p class="text-center">
@@ -157,46 +157,18 @@
                         </div>
                         <div class="col-md-12">
                             <hr>
-                            <a style="margin-left: 10px" href="{{url('admin/orders/print/'.$order->id)}}" class="btn btn-success pull-right" >
-                                <i class="fa fa-print"></i>&nbsp;ver Formato Para Imprimir Orden</a>
-                            &nbsp;&nbsp;
-                            @if($order->status->name == 'marcar' )
-                                {!! Form::open(['url' => ['admin/orders',$order->id],'method'=> 'PUT','style'=>'display:inline']) !!}
-                                <button type="submit" class="btn btn-warning  pull-right"><i class="fa fa-lock"></i>&nbsp; Archivar </button>
-                                <input type="hidden" name="status[name]" value="archivada">
-                                {!! Form::close() !!}
-                            @elseif($order->status->name == 'Re abrir')
-                                {!! Form::open(['url' => ['admin/orders',$order->id],'method'=> 'PUT','style'=>'display:inline']) !!}
-                                <button type="submit" class="btn btn-primary  pull-right"><i class="fa fa-lock"></i>&nbsp; Archivar</button>
-                                <input type="hidden" name="status[name]" value="archivada">
-                                {!! Form::close() !!}
-                            @endif
-                            @if($order->status->name == 'archivada' || $order->status->name == 'Cancelar' )
-                                {!! Form::open(['url' => ['admin/orders',$order->id],'method'=> 'PUT','style'=>'display:inline']) !!}
-                                <button type="submit" class="btn btn-warning  pull-right"><i class="fa fa-unlock"></i>&nbsp; Re abrir </button>
-                                <input type="hidden" name="status[name]" value="Re abrir">
-                                {!! Form::close() !!}
-                            @endif
-                            &nbsp;&nbsp;
-                            @if($order->status->name != 'Cancelar')
-                                {!! Form::open(['url' => ['admin/orders',$order->id],'method'=> 'PUT','style'=>'display:inline']) !!}
-                                <button type="submit" class="btn btn-danger  pull-right"><i class="fa fa-ban"></i>&nbsp; Cancelar Orden</button>
-                                <input type="hidden" name="status[name]" value="Cancelar">
-                                {!! Form::close() !!}
-                            @endif
+                            <a href="{{url('admin/orders/print/'.$order->id)}}" class="btn btn-success pull-right" >
+                                <i class="fa fa-print"></i>&nbsp;ver Formato Para Imprimir Orden
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
             <br>
-            <input type="hidden" value="{{ url('admin/orders/update/note') }}" id="note-route">
-            <input type="hidden" value="{{ $order->id }}" id="id-order">
-            <input type="hidden" value="{{ csrf_token()  }}" id="note-token">
-
         </div>
         <div class="page-end-space"></div>
     @endsection
 
     @section('scripts')
-        <script src="{{ asset('administrator/js/order-detail-note.js') }}"></script>
+
     @stop
