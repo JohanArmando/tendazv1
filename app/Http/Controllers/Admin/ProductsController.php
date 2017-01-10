@@ -44,8 +44,9 @@ class ProductsController extends Controller
     public function create(Request $request)
     {
         $categories = Category::pluck('name' , 'id')->toArray();
-        $providers  =   Provider::where('shop_id',$request->shop->id)->pluck('name','id');
-        $options = Option::get(['id' , 'name']);
+        $providers  =   Provider::where('shop_id',$request->shop->id)->get();
+        // dd($providers);
+        $options    = Option::get(['id' , 'name']);
         return view('admin.product.create',compact('categories' , 'options','providers'));
     }
 
@@ -63,9 +64,9 @@ class ProductsController extends Controller
 
     public function edit($subdomain ,Product $product)
     {
-        $categories = Category::pluck('name' , 'id');
-        $options = Option::get(['id' , 'name']);
-        return view('admin.product.edit',compact('product' , 'categories' , 'options'));
+        $categories =   Category::pluck('name' , 'id');
+        $options    =   Option::get(['id' , 'name']);
+        return view('admin.product.edit',compact('product' , 'categories' , 'options','providers'));
     }
 
     public function update($subdomain, Product $product , Request $request)
@@ -221,8 +222,9 @@ class ProductsController extends Controller
     public function editProduct($subdomain , $id, Request $request){
         $product        =   Product::where('uuid',$id)->first();
         $variant        =   Variant::where('product_id',$product->id)->first();
+        $providers      =   Provider::where('shop_id',$product->shop_id)->get();
         $categories     =   Category::where('shop_id',$request->shop->id)->get();
-        return view('admin.product.edit',compact('product','variant','categories'));
+        return view('admin.product.edit',compact('product','variant','categories','providers'));
     }
 
     public function putProduct($subdomain,$id, Request $request){
@@ -232,13 +234,17 @@ class ProductsController extends Controller
         $current_cats       =   $product->categories->pluck('id')->toArray();
         $variant = Variant::where('product_id',$product->id)->first();
         $section    =   Section::where('product_id',$product->id)->first();
-        if (is_null($request->publish)) {   $publish    =   11;  }
+        if (!is_null($request->publish)) {   $publish    =   11;  }
         $product->update([
             'name' => $request->name,
             'slug' => $request->slug,
             'seo_title' => $request->seo_title,
             'seo_description' => $request->seo_description,
             'description' => $request->description,
+            'large'     => $request->large,
+            'height'     => $request->height,
+            'width'     => $request->width,
+            'provider_id'     => $request->provider_id,
             'publish' => $publish
             ]);
         

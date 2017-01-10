@@ -1,25 +1,27 @@
 {!! Form::open(['url' => "admin/products?client_secret=$shop->uuid&client_id=$shop->id" ,
 'method' => 'POST' , 'class' => 'dropzone hidden-xs hidden-sm' ,'id' => 'my-dropzone' , 'files' => true]) !!}
 <div class="media border-dotted">
-    <div class="row">
-         <span class="media-body box col-lg-offset-0">
-             <div class="col-sm-9 col-simple">
-                     <div class="form-group">
-                     <label class="control-label" style="font-size: 1.2em; color: black">Nombre del producto
-                         <small style="color: darkgray">(Obligatorio)</small></label>
-                     <input type="text" name="name" class="form-control" placeholder="Ejemplo: Zapato de cuero">
-                 </div>
-             </div>
-         </span>
-    </div>
+  <div class="row">
+    <span class="media-body box">
+      <div class="col-md-9 col-simple">
+        <div class="form-group">
+          <div class="row">
+            <label class="control-label" style="font-size: 1.2em; color: black">Nombre del producto
+            <small style="color: darkgray">(Obligatorio)</small></label>
+            <input type="text" name="name" class="form-control" placeholder="Ejemplo: Zapato de cuero">
+          </div>
+        </div>
+      </div>
+    </span>
+  </div>
 </div>
 
 <div class="media border-dotted">
     <div class="row">
       <span class="media-body box">
-        <div class="form-group">
-          <div class="row">
-            <div class="col-md-9 col-simple">
+        <div class="col-md-9 col-simple">
+          <div class="form-group">
+            <div class="row">
                 <label class="control-label" style="font-size: 1.2em; color: black;">Imagenes
                     <small style="color: darkgray">(Opcional)</small>
                 </label>
@@ -39,9 +41,10 @@
 <div class="media border-dotted">
     <div class="row">
       <span class="media-body box">
-        <div class="form-group" >
-          <div class="row">
-            <div class="col-md-12 col-simple">
+        <div class="col-md-12 col-simple">
+          <div class="form-group" >
+            <div class="row">
+            
               <label class="control-label" style="font-size: 1.2em; color: black;">Dimensiones
               <small style="color: darkgray">(Es importante completar tus dimensiones para calcular el valor del envio)</small>
               </label>
@@ -94,9 +97,10 @@
 <div class="media border-dotted">
   <div class="row">
     <span class="media-body box">
-      <div class="form-group" >
-        <div class="row">
-          <div class="col-md-12  col-simple">
+      <div class="col-md-12  col-simple">
+        <div class="form-group" >
+          <div class="row">
+          
             <div class="col-md-3">
                 <div class="input-group">
                     <label class="col-md-6 control-label" id="label-precio">
@@ -139,9 +143,10 @@
 <div class="media border-dotted">
     <div class="row">
       <span class="media-body box">
-        <div class="form-group">
-        <div class="row">
-            <div class="col-sm-9 col-simple">
+        <div class="col-sm-9 col-simple">
+          <div class="form-group">
+            <div class="row">
+            
                 <label class="control-label" style="font-size: 1.2em; color: black;">Descripcion
                     <small style="color: darkgray">(Menciona todas las caracteristicas de tu producto)</small>
                 </label>

@@ -14,7 +14,7 @@ class RenameRelationProviderInProducts extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->dropForeign(['provider_id']);
+            // $table->dropForeign(['provider_id']);
             $table->foreign('provider_id')->references('id')->on('providers')->onDelete('cascade');
         });
     }
