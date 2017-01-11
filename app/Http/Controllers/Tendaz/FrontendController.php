@@ -4,6 +4,7 @@ namespace Tendaz\Http\Controllers\Tendaz;
 
 use Tendaz\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
+use Tendaz\Models\Store\Shop;
 use Tendaz\Models\Subscription\Plan;
 use Illuminate\Http\Request;
 use Validator;
