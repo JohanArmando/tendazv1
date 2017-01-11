@@ -119,11 +119,13 @@
                                             </li>
                                             <li class="text-center">
                                                 <h4 class="semibold ellipsis">
-                                                    <a href="{{asset("admin/customers/")}}">
-                                                        {{ $customer }}
-                                                    </a>
+                                                    @if(empty($customer->uuid))
+                                                        @else
+                                                        <a href="{{asset("admin/customers/".$customer->uuid)}}">
+                                                            @if(empty($customer->name))@else{{ $customer->name }}@endif
+                                                        </a>
+                                                    @endif
                                                 </h4>
-                                                <h4 class="semibold ellipsis"><a href="{{asset('admin/resumenCliente')}}">{{ $customer->full_name }}</a></h4>
                                             </li>
                                             <li class="text-center">
                                             <p class="text-center">

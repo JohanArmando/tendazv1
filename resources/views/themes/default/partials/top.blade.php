@@ -4,33 +4,34 @@
             <div class="col-xs-12">
                 <div class="pull-left hidden-xs">
                     <!-- number phone-->
-                    <a href="#" class="{{ !$shop->phone_number || !$shop->phone_country ? 'hidden' : '' }}">
-                        <i class="fa fa-phone"> </i> (+{{$shop->phone_country}}) {{$shop->phone_number}}</a>
+                    <a href="#" class="{{ !$shop->store->number_phone ? 'hidden' : '' }}">
+                        <i class="fa fa-phone"> </i> ({{$shop->store->number_phone}})</a>
                 </div>
                 <div class="pull-left hidden-xs">
                     <!-- email-->
-                    <a href="mailto:info@tendaz.com" class="{{ !$shop->email_contact ? 'hidden' : '' }}">
-                        <i class="fa fa-envelope"></i> {{$shop->email_contact}}</a>
+                    <a href="#" class="{{ !$shop->store->address_1 ? 'hidden' : '' }}">
+                        <i class="fa fa-envelope"></i> {{$shop->store->address_1}}</a>
                 </div>
                 <div class="pull-right header-account">
                     <!-- session -->
-                    <div class="dropdown">
-                        @if(auth('web')->check())
-                        <a href="#" class="dropdown-toggle" id="dropdownAccount" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span><i class="fa fa-user"> </i> {{auth('customers')->user()->full_name}} <i class="fa fa-caret-down"></i> </span>
+                    <div class="dropdown" ng-cloak="">
+                        <a ng-if="usuario" href="#" class="dropdown-toggle" id="dropdownAccount" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span><i class="fa fa-user"> </i> <%usuario.personal_info.first_name%> <i class="fa fa-caret-down"></i> </span>
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownAccount">
+                        <ul ng-if="usuario" class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownAccount">
                         <li><a href="{{url('myProfile')}}"><i class="fa fa-user"></i> Perfil</a></li>
-                        <li><a href="{{url('myProfile/change_password')}}"><i class="fa fa-lock"></i> Cambiar Contraseña</a></li>    
-                           <li><a href="{{ url('/auth/logout/simple') }}"><i class="fa fa-sign-in"> </i> &nbsp;Cerrar sesion </a></li>
-                        
-                        </ul>
-                            @else
-                            <a href="{{url('auth/login')}}" id="dropdownAccount" aria-haspopup="true" aria-expanded="false">
-                                <span><i class="fa fa-user"></i> Iniciar Sesion</span>
+                        <li><a href="{{url('change_password')}}"><i class="fa fa-lock"></i> Cambiar Contraseña</a></li>
+                        <li ng-click="cerrarSesion()">
+                            <a href="">
+                                <i class="fa fa-sign-in"></i>&nbsp;Cerrar Sesion
                             </a>
-                        @endif
+                            <form id="logout-form" action="{{ url('/auth/logout/simple') }}" method="GET" style="display: none;">
+                            </form>
+                        </ul>
                     </div>
+                    <a  ng-if="!usuario" href="{{url('auth/login')}}">
+                        <span><i class="fa fa-user"></i> Iniciar Sesion</span>
+                    </a>
                 </div>
             </div>
         </div>

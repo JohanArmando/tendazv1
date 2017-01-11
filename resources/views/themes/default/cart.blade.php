@@ -13,7 +13,7 @@
                         <div class="title"><span>Mi carrito de compras</span></div>
                         <div class="clearfix"></div>
                         <div class="table-responsive">
-                            <table class="table table-bordered table-cart" ng-show="size(carts) >= 1">
+                            <table class="table table-bordered table-cart" ng-show="size(carts.products.data) >= 1">
                                 <thead>
                                     <tr>
                                         <th colspan="2">Producto</th>
@@ -65,7 +65,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div>
+                        <div ng-show="size(carts.products.data) >= 1">
                             <a href="{{url('/products')}}" class="btn btn-primary"><i class="fa fa-arrow-circle-o-left"></i> Seguir comprando</a>
                             <button type="button" class="btn btn-primary" ng-click="emptyCart(cartId)">
                                 <i class="fa fa-trash-o"></i> Limpiar Carrito
@@ -76,7 +76,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div  ng-show="size(carts) < 1" ng-cloak="">
+                        <div  ng-show="size(carts.products.data) < 1" ng-cloak="">
                             <div class="alert alert-info" style="background-color: #337AB7; color: #000;">
                                 <h4><i class="fa fa-exclamation-circle fa-2x"></i> El carrito de compras est&aacute; vac&iacute;o.
                                     <strong><a href="{{ url('/products') }}" style="color: white;text-decoration: underline;">
@@ -86,7 +86,7 @@
                          </div>
                 </div>
 
-                    <div class="col-sm-12 col-md-3" ng-show="size(carts) >= 1">
+                    <div class="col-sm-12 col-md-3" ng-show="size(carts.products.data) >= 1">
                         <div class="title"><span><a href="#">Resumen de la Orden</a></span></div>
                         <div class="table-responsive">
                             <table class="table">

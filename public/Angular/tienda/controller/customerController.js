@@ -53,8 +53,8 @@
 
        
        },
-        doRegister : function (registerForm) {
-            if (registerForm.$valid){
+        doRegister : function (registerFormR) {
+            if (registerFormR.$valid){
                 var cartId = localStorage.getItem('cart_id') ? '/'+localStorage.getItem('cart_id') : '';
                 //alert(cartId);
                         var toLog = {

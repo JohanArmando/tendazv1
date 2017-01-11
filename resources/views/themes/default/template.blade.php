@@ -99,10 +99,12 @@
                     </div>
                     <a href="{{ url('/') }}<% '/detail/' + product.slug %>">
                         <img ng-src="<% product.images.data[0].url %>" alt="" ng-show="product.images.data"  style="max-height: 200px; min-height: 200px">
-                        <img ng-src="<% BASEURL + '/administrator/image/noImage.png' %>" alt=""  style="max-height: 200px; min-height: 200px"  ng-hide="product.images.data">
+                        <img ng-src="<% BASEURL + '/administrator/image/noImage.png' %>" alt=""  style="max-height: 200px; min-height: 200px"
+                             ng-hide="product.images.data">
                     </a>
-                    <div class="option" ng-click="add(cartId , product)">
-                        <a href="#" ng-hide="product.stock == 0" ng-click="add(cartId , product)" data-toggle="tooltip" data-placement="bottom" title="Agregar al carro">
+                    <div class="option" ng-hide="product.stock == 0" ng-click="add(cartId , product)">
+                        <a href="#" ng-click="add(cartId , product)" data-toggle="tooltip"
+                           data-placement="bottom" title="Agregar al carro">
                             <i class="ace-icon fa fa-shopping-cart"></i></a>
                     </div>
                     <div class="tags {{ !Request::is('/') ? : 'hidden'}}">

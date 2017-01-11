@@ -53,7 +53,7 @@
                                 <form class="form-inline" name="userForm" ng-submit="sendSubscriber(userForm.$valid)" ng-show="!letter.news" novalidate>
                                     <input class="form-control" type="email"  name="subscribe" style="width: 65%;" placeholder="correo electronico" ng-model="letter.email" required>
                                     <button type="submit" class="btn btn--ys btn--xl" style="background-color: #2196F3; color: white">
-                                        subscribete</button>
+                                        Subscribirse</button>
                                 </form>
                                 <div class="contact-ok alert alert-success text-center-xs" ng-show="letter.news">
                                     <i class="fa fa-check-circle fa-2x d-inline pull-left m-half-right m-none-xs m-quarter-bottom-xs"></i>
@@ -65,24 +65,33 @@
                     <div class="divider divider--md"></div>
                     <div class="col-sm-6 col-sm-offset-2">
                         <br>
-                        <a href="#">
-                            <img src="{{asset('themes_tendaz/default/images/facebook-logo.png')}}">
-                        </a>
-                        <a href="#">
-                            <img src="{{asset('themes_tendaz/default/images/twitter-letter-logo.png')}}">
-                        </a>
-                        <a href="#">
-                            <img src="{{asset('themes_tendaz/default/images/google-plus.png')}}">
-                        </a>
-                        <a href="#">
-                            <img src="{{asset('themes_tendaz/default/images/instagram.png')}}">
-                        </a>
+                        @if(!$shop->store->facebook == '')
+                            <a href="{{url('https://'.$shop->store->facebook)}}">
+                                <img src="{{asset('themes_tendaz/default/images/facebook-logo.png')}}">
+                            </a>
+                        @endif
+                        @if(!$shop->store->twitter == '')
+                            <a href="{{url('https://'.$shop->store->twitter)}}">
+                                <img src="{{asset('themes_tendaz/default/images/twitter-letter-logo.png')}}">
+                            </a>
+                        @endif
+                        @if(!$shop->store->google_plus == '')
+                            <a href="{{url('https://'.$shop->store->google_plus)}}">
+                                <img src="{{asset('themes_tendaz/default/images/google-plus.png')}}">
+                            </a>
+                        @endif
+                        @if(!$shop->store->instagram == '')
+                            <a href="{{url('https://'.$shop->store->instagram)}}">
+                                <img src="{{asset('themes_tendaz/default/images/instagram.png')}}">
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="text-center copyright">
-        Copyright @ 2016 <a href="http://tendaz.com" target="_blank" style="color: white;">tendaz.com</a> By Maxcorp Inc.
+        <img src="{{asset('administrator/image/servientrega-footer.gif')}}" alt="" height="20px">
+        Copyright @ 2017 By Maxcorp Inc.
     </div>
 </div>

@@ -12,15 +12,8 @@
                         @endif
                     </a>
                 </div>
-                <div class="col-sm-8 col-md-6 search-box">
-                    <form class="form-inline">
-                        <div class="form-group search-input">
-                            <input type="text" class="form-control" placeholder="Buscar productos...">
-                        </div><!--
-                            --><div class="form-group search-category hidden-xs">
-                        </div>
-                        <button type="submit" class="search-btn"> </button>
-                    </form>
+                <div class="col-sm-8 col-md-6">
+                    <img class="pull-right hidden-xs hidden-sm" src="{{asset('administrator/image/servientrega-banner.png')}}" style="margin: 10px 20px" alt="">
                 </div>
                 @if(!Request::is('cart/buy'))
                 <div class="col-sm-4 col-md-3 cart-btn hidden-xs"  ng-controller="cartGlobalController" ng-cloak="">

@@ -94,7 +94,7 @@
 		</div>
 	</div>
 
-	<div class="container-fluid">
+	<div class="container-fluid hidden">
 		<div class="col-md-12">
 			<ul class="nav nav-tabs" style="background-color: transparent;">
 				<li id="link_tab">
@@ -166,10 +166,9 @@
 											<p>$ {{number_format($product->variants->first()->price)}}</p>
 										</td>
 										<td class="cssToolTip">
-											<p>Visitas</p>
 											@foreach($hits as $hit)
 												@if($hit->trend_id == $product->id)
-													<p class="visitNumber">{{$hit->sum}}</p>
+													<p class="visitNumber">{{$hit->sum}} Visitas</p>
 													<span>Tu producto ha sido visto {{$hit->sum}} veces.</span>
 												@endif
 											@endforeach
