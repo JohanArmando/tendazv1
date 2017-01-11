@@ -531,7 +531,6 @@ class MPRestClient {
                     }
                 }
             }
-            return $response;
             return self::errorResponse($response);
         }
 

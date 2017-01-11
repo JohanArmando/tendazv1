@@ -3,6 +3,8 @@
 namespace Tendaz\Http\Controllers\Tendaz;
 
 
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Tendaz\Models\Subscription\Plan;
 use Illuminate\Foundation\Auth\RegistersUsers;
