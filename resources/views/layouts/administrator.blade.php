@@ -131,22 +131,34 @@
 
 
 <script type="text/javascript" src="{{asset('administrator/plugins/pickerfont/js/jquery.fontselect.js')}}"></script>
-
+<script type="text/javascript" src="{{asset('administrator/plugins/jquery-cookies/jquery.cookie.js')}}"></script>
 @yield('scripts')
 <!-- <script type="text/javascript" src="{{asset('administrator/js/xeditable.min.js')}}"></script> -->
 <script>
+
 function check_nav(){
     var esediv  =   $('.navbar-brand').width();
+    $.removeCookie('NavSize', { path: '/' });
     if (esediv >    100) {
         document.getElementById("LittleLogo").style.visibility = "visible";
+        $.cookie('NavSize', 'Mini', { expires: 7, path: '/' });
     }   else {
         document.getElementById("LittleLogo").style.visibility = "hidden";
+        $.cookie('NavSize', 'Wide', { expires: 7, path: '/' });
     }
 }
+
+$(document).on('ready', function () {
+    $.removeCookie('NavSize', { path: '/admin/customers' });
+    var cookie_nav  =   $.cookie('NavSize');
+    if (cookie_nav=='Mini') {
+        $('.sidebar-minimize').trigger( "click" );
+    }
+    
+});
 </script>
 <script type="text/javascript">
     $('.dropify').dropify();
-    $('.select2').select2();
 </script>
 <!--<script type="text/javascript">
     new Card({

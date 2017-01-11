@@ -10,8 +10,8 @@
 8)bower install
 #User test mercadopago
 <p>Cliente </p>
-<p>"id" => 240348855</p>
-<p>"nickname" => "TEST0Q13JZBB"</p>
-<p>"password" => "qatest5209"</p>
+<p>"id" => 240378513</p>
+<p>"nickname" => "TETE2512573"</p>
+<p>"password" => "qatest1540"</p>
 <p>"site_status" => "active"</p>
-<p>"email" => "test_user_89339222@testuser.com"</p>
+<p>"email" => "`test_user_65288166@testuser.com`"</p>

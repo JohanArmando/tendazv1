@@ -41,31 +41,56 @@ class PaymentMethodController extends Controller
     public function doPayment(Cart $cart , PaymentValue $payment , Request $request)
     {
         $mp = new Mercadopago($request->token);
+        //$customer = $mp->post('/users/test_user' , ["site_id" => "MCO"]);
+        //return $customer;
+
+        //$customer = $mp->get("/users/240378513");
+        //return $customer;
+        //$customer = $mp->post ("/v1/customers", array("email" => "test@test.com"));
+        //return $customer;
+
+       /* $filters = array (
+            "email" => "test@test.com"
+        );
+        $customer = $mp->get ("/v1/customers/search", $filters);
+        return $customer;*/
+        //$cards = $mp->get ("/v1/customers/240383382-LYLQ3cLTsa21O8/cards");
+        //return $cards;
+        //$customer = $mp->post ("/v1/customers", array("email" => "test4@test.com" , "first_name" => 'Johan' , 'last_name' => 'Villamil' ,  'identification' => [
+        //    'number' => '1013646891',
+        //    'type'   => 'CC'
+        //]));
+        //return $customer;
         $response = $mp->post('/v1/card_tokens' ,[
             'public_key'       => 'APP_USR-68e8ac0a-8966-4411-bb30-b1ea95c1b1cc',
-            'card_id'          => '4013540682746260',
             'expiration_year'  => 2019,
             'expiration_month' => 12,
-            'first_six_digits' => 401354,
-            'last_four_digits' => 6260,
+            'first_six_digits' => "450995",
+            'last_four_digits' => "3704",
             'security_code_length'  => 3,
             'cardholder' => [
-                'name' => 'Johan Villamil',
                 'identification' => [
                     'number' => '1013646891',
                     'type'   => 'CC'
                 ]
             ]
-        ]);
-        return $response;
+        ]);       return $response;
         $card_token =  (string) $response['response']['id'];
-        return $response;
+
+        //$card = $mp->post("/v1/customers/".$customer['response']['results'][0]['id']."/cards" ,array("token" => $card_token));
+        //return $card;
         $payment = $mp->post('/v1/payments' ,
-            [
-                'transaction_amount' => 10000 ,'payment_method_id' => "visa",
-                "payer" => ['email' => 'test_user_89339222@testuser.com'] ,
-                'token' => $card_token
-            ]);
+            array(
+                "transaction_amount" => 100,
+                "token" => $card_token,
+                "description" => "Title of what you are paying for",
+                "payer" => array (
+                    "email" => "test_user_19653727@testuser.com"
+                ),
+                "installments" => 3,
+                "payment_method_id" => "master",
+                "issuer_id" => 338
+            ));
         return $payment;
     }
 }
