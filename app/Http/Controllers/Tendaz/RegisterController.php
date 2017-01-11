@@ -90,6 +90,8 @@ class RegisterController extends Controller
         return $this->registered($request, $user)
             ?: redirect($this->redirectPath());
     }
+
+
     /**
      * Create a new users instance after a valid registration.
      *
