@@ -38,64 +38,63 @@ class MarketingController extends Controller
 
     public function postRobot(Request $request){
 
-        // $products_array         = Product::where('shop_id',auth('admins')->user()->shop->id)->pluck('id');
-        // $categories_array       = Category::where('shop_id',auth('admins')->user()->shop->id)->pluck('id');
+        $products_array         = Product::where('shop_id',auth('admins')->user()->shop->id)->pluck('id');
+        $categories_array       = Category::where('shop_id',auth('admins')->user()->shop->id)->pluck('id');
 
-        // $current_config         = TrendsPreference::where('shop_id',auth('admins')->user()->shop->id)->first();
+        $current_config         = TrendsPreference::where('shop_id',auth('admins')->user()->shop->id)->first();
 
-        // $trend_config           = $request->all();
+        $trend_config           = $request->all();
 
-        // foreach ($categories_array as $key => $cate) {
-        //             $cateU   =   Category::where('id',$cate)->first();
-        //             $cateU->update(['blacklist' => 0]);
-        // }
-        // if (isset($trend_config['categories'])) {
-        //     foreach ($trend_config['categories'] as $cate) {
-        //         $categories     =   Category::where('id',$cate)->first();
-        //         $categories->update([
-        //                 'blacklist' => 1
-        //             ]);
-        //     }
-        // }
-        // foreach ($products_array as $key => $pro) {
-        //             $proU   =   Product::where('id',$pro)->first();
-        //             $proU->update(['blacklist' => 0]);
-        // }
-        // if (isset($trend_config['products_black'])) {
-        //     foreach ($trend_config['products_black'] as $products) {
-        //         $product     =   Product::where('id',$products)->first();
-        //         $product->update(['blacklist' => 1]);
-        //     }
+        foreach ($categories_array as $key => $cate) {
+                    $cateU   =   Category::where('id',$cate)->first();
+                    $cateU->update(['blacklist' => 0]);
+        }
+        if (isset($trend_config['categories'])) {
+            foreach ($trend_config['categories'] as $cate) {
+                $categories     =   Category::where('id',$cate)->first();
+                $categories->update([
+                        'blacklist' => 1
+                    ]);
+            }
+        }
+        foreach ($products_array as $key => $pro) {
+                    $proU   =   Product::where('id',$pro)->first();
+                    $proU->update(['blacklist' => 0]);
+        }
+        if (isset($trend_config['products_black'])) {
+            foreach ($trend_config['products_black'] as $products) {
+                $product     =   Product::where('id',$products)->first();
+                $product->update(['blacklist' => 1]);
+            }
 
-        // if (!count($current_config)) {
-        //     TrendsPreference::create([
-        //         'products_black'    => $trend_config_products,
-        //         'coupon_id'         => $trend_config_coupon,
-        //         'categories_black'  => $trend_config_cats       
-        //         ]);
-        //     return redirect()->back()->with('message',array('type' => 'success' , 'message' => 'Datos guardados correctamente'));
-        // }  
+        if (!count($current_config)) {
+            TrendsPreference::create([
+                'products_black'    => $trend_config_products,
+                'coupon_id'         => $trend_config_coupon,
+                'categories_black'  => $trend_config_cats       
+                ]);
+            return redirect()->back()->with('message',array('type' => 'success' , 'message' => 'Datos guardados correctamente'));
+        }  else{
+            if(!empty($trend_config['products_black'])) { 
+            $trend_config_products  = implode(",",$trend_config['products_black']);
+            } else {
+                $trend_config_products=null;
+            };
 
-        // else{
-        //     if(!empty($trend_config['products_black'])) { 
-        //     $trend_config_products  = implode(",",$trend_config['products_black']);
-        //     } else {
-        //         $trend_config_products=null;
-        //     };
-
-        //     if(!empty($trend_config['categories'])) { 
-        //         $trend_config_cats  = implode(",",$trend_config['categories']);
-        //     } else {
-        //         $trend_config_cats=null;
-        //     };
-        //     $current_config->update([
-        //     'products_black' => $trend_config_products,
-        //     'coupon_id' => $trend_config_coupon,
-        //     'categories_black' => $trend_config_cats
-        //     ]);
-        //     return redirect()->back()->with('message',array('type' => 'success' , 'message' => 'Datos actualizados correctamente'));
-        // }
-        // return redirect()->back()->with('message',array('type' => 'success' , 'message' => 'Datos actualizados correctamente'));
+            if(!empty($trend_config['categories'])) { 
+                $trend_config_cats  = implode(",",$trend_config['categories']);
+            } else {
+                $trend_config_cats=null;
+            };
+            $current_config->update([
+            'products_black' => $trend_config_products,
+            'coupon_id' => $trend_config_coupon,
+            'categories_black' => $trend_config_cats
+            ]);
+            return redirect()->back()->with('message',array('type' => 'success' , 'message' => 'Datos actualizados correctamente'));
+        }
+    }
+        return redirect()->back()->with('message',array('type' => 'success' , 'message' => 'Datos actualizados correctamente'));
     }
 
     public function social()

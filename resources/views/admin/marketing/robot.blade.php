@@ -5,7 +5,6 @@ MaxI Bot
 @section('css')
 
 @stop
-
 @section('content')
 <div class="page-header page-header-block">
 	<div class="page-header-section">
@@ -36,18 +35,18 @@ MaxI Bot
 				<div class="row">
 					<div class="clearfix"></div>
 					<div style="margin-bottom: 10px !important;"></div>
-						<div class="col-sm-1">
-							<div style="margin-bottom: 10px !important;"></div>
-							<p style="margin-left: 25px !important;margin-top: 35px !important;" class="hidden-sm hidden-xs">
-								<i class="fa fa-caret-right fa-2x" aria-hidden="true" style="color:  #F97600;"></i>
-							</p>
-						</div>
+					<div class="col-sm-1">
+						<div style="margin-bottom: 10px !important;"></div>
+						<p style="margin-left: 25px !important;margin-top: 35px !important;" class="hidden-sm hidden-xs">
+							<i class="fa fa-caret-right fa-2x" aria-hidden="true" style="color:  #F97600;"></i>
+						</p>
+					</div>
 					<div class="col-md-10">
-						<p align="left" style="font-size: 14px;">
+						<p class="text-left">
 							Selecciona las <strong>CATEGORIAS</strong> para lista negra.
 						</p>
 						<div class="col-md-12">
-							<select name="categories[]" class=" " id="category" multiple="multiple" style="width: 100%">
+							<select name="categories[]" class="select2" id="category" multiple="1" style='width: 100%'>
 								@foreach($categories as $category)
 									<option value="{{$category->id}}">{{$category->name}}</option>
 								@endforeach
@@ -130,7 +129,21 @@ MaxI Bot
 </div>
 @endsection
 @section('scripts')
-<script type="text/javascript" src="{{asset('administrator/plugins/selectize/js/selectize.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('components/admin/js/flat-ui.js') }}" ></script>
+
+<script type="text/javascript">
+	$('#category').select2({
+		placeholder: 'Selecciona las Categorias'
+	}).select2(
+		'val',[
+		@foreach($categories as $cate)
+			@if($cate->blacklist==1)
+				{{$cate->id}},
+			@endif
+		@endforeach
+		]
+	);
+</script>
 <script type="text/javascript">
 	$('select[id="products"]').select2({
 		placeholder: 'Selecciona los productos'
@@ -143,17 +156,5 @@ MaxI Bot
 	]
 	);
 </script>
-<script type="text/javascript">
-	$('select[id="category"]').select2({
-		placeholder: 'Selecciona las Categorias'
-	}).select2(
-		'val',[
-		@foreach($categories as $cate)
-			@if($cate->blacklist==1)
-				{{$cate->id}},
-			@endif
-		@endforeach
-		]
-	);
-</script>
+
 @endsection
