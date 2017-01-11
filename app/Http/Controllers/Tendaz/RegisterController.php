@@ -3,6 +3,8 @@
 namespace Tendaz\Http\Controllers\Tendaz;
 
 
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Tendaz\Models\Subscription\Plan;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -77,7 +79,17 @@ class RegisterController extends Controller
             'password' => 'required|min:6',
         ]);
     }
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
 
+        event(new Registered($user = $this->create($request->all())));
+     
+        $this->guard()->login($user);
+
+        return $this->registered($request, $user)
+            ?: redirect($this->redirectPath());
+    }
     /**
      * Create a new users instance after a valid registration.
      *
