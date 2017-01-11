@@ -12,12 +12,12 @@ use Tendaz\Traits\WhereShopTrait;
 
 class Domain extends Model
 {
-    use  UuidAndShopTrait,WhereShopTrait;
-    
+    use  UuidAndShopTrait;
+
     public static $SHOP_ID;
-    
+
     protected   $fillable = [
-        'uuid' ,  'name','domain'  , 'ssl' , 'main' , 'active' , 'state' , 'domain_id' , 'shop_id'
+        'uuid' ,  'name','domain'  , 'ssl' , 'main' , 'active' , 'state' , 'domain_id'
     ];
 
     protected $subdomain;
@@ -38,12 +38,12 @@ class Domain extends Model
 
     public function getDomainSubTendaz(){
         return env('DOMAIN_TENDAZ_SUBDOMAIN' , 'tendaz.app:8000');
-    }  
-    
+    }
+
     public function getTendazWww(){
         return env('DOMAIN_TENDAZ_WWW' , 'www.tendaz.app');
     }
-    
+
     /**
      * RELATIONSHIPS
      */
@@ -55,7 +55,7 @@ class Domain extends Model
 
     public function domain()
     {
-        return $this->belongsTo(Domain::class);    
+        return $this->belongsTo(Domain::class);
     }
 
     public function shop(){
@@ -72,7 +72,7 @@ class Domain extends Model
             $this->attributes['name'] = $val;
         }
     }
-   public function setDomainAttribute($value){
+    public function setDomainAttribute($value){
         if(!empty($value)){
             $val = 'http://'.$value.'.'.self::getDomainSubTendaz();
             $this->attributes['domain'] = $val;
@@ -107,11 +107,11 @@ class Domain extends Model
 
     public function scopeDomainByCookie(){
         if (!Cookie::has('store')){
-           $this->subdomain = self::getSubdomain();
+            $this->subdomain = self::getSubdomain();
         }
         return  Domain::where('name' , $this->subdomain)->exists() ? Domain::where('name' , $this->subdomain)->first() : '';
     }
-    
+
     public static function getSubdomain(){
         $request = new Request();
         $url = explode('.' , $request->capture()->getHost());

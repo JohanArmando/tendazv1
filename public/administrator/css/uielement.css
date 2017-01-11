@@ -1177,7 +1177,7 @@ input[type="radio"]:checked ~ label .inputFrom {
   background-color: #FFF;
 }
 
-.select2-container--default .select2-selection--multiple .select2-selection__choice {
+.select22-container--default .select22-selection--multiple .select22-selection__choice {
   background-color: #f26522 !important;
   border: 1px solid #f26522 !important;
   border-radius: 4px;
@@ -1189,18 +1189,18 @@ input[type="radio"]:checked ~ label .inputFrom {
   padding: 0 5px;
 }
 
-.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+.select22-container--default .select22-selection--multiple .select22-selection__choice__remove {
   color: white !important;
   cursor: pointer;
   display: inline-block;
   font-weight: bold;
   margin-right: 2px;
 }
-.select2-container-multi.select2-container-active .select2-choices {
+.select22-container-multi.select22-container-active .select22-choices {
   border: 1px solid black;
   outline: none;
 }
-.select2-drop .select2-result-selectable .select2-result-label:focus, .select2-drop .select2-result-selectable .select2-result-label:hover, .select2-drop .select2-result-selectable .select2-result-label:active {
+.select22-drop .select22-result-selectable .select22-result-label:focus, .select22-drop .select22-result-selectable .select22-result-label:hover, .select22-drop .select22-result-selectable .select22-result-label:active {
   background-color: #f26522 !important;
   color: inherit;
   outline: none;

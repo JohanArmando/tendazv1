@@ -13,7 +13,6 @@ class PaymentMethodController extends Controller
 {
     public function checkPayment(Cart $cart , PaymentValue $payment , Request $request)
     {
-        //previamente en el carrito cargamos los metodos de pago disponibles para esa tienda
         if ($payment->payment_method_id  == 1){
             return $this->mercadopago($payment , $cart);
         }else{
@@ -25,9 +24,6 @@ class PaymentMethodController extends Controller
     {
         $mp = new Mercadopago($payment->api_id , $payment->api_key);
         $access_token = $mp->get_access_token();
-        //aqui retornamos el carrito cambiando las payment_preferences describiendo el metodo y el token(mas adelante otras coass custom como excluir metodos y iva y demas)
-        //include marcar la orden con el metodo de pago escogigo
-        //generar un evento para marcar la orden
         return fractal()
             ->item($cart, new CartTransformer($access_token))
             ->toJson();
@@ -41,31 +37,36 @@ class PaymentMethodController extends Controller
     public function doPayment(Cart $cart , PaymentValue $payment , Request $request)
     {
         $mp = new Mercadopago($request->token);
+        //Crear un token para la tarjeta
+        //crear url para responser el metodo de pago
+        //entonces debe de venir el equest
         $response = $mp->post('/v1/card_tokens' ,[
             'public_key'       => 'APP_USR-68e8ac0a-8966-4411-bb30-b1ea95c1b1cc',
-            'card_id'          => '4013540682746260',
-            'expiration_year'  => 2019,
-            'expiration_month' => 12,
-            'first_six_digits' => 401354,
-            'last_four_digits' => 6260,
-            'security_code_length'  => 3,
+            "expiration_month" => 12,
+            "expiration_year"  =>  2017,
+            "security_code"    => "123",
             'cardholder' => [
-                'name' => 'Johan Villamil',
                 'identification' => [
-                    'number' => '1013646891',
+                    'number' => "1013646891",
                     'type'   => 'CC'
-                ]
-            ]
+                ],
+                'name' => "APRO"
+            ],
+            "card_number" => "4013540682746260"
         ]);
-        return $response;
         $card_token =  (string) $response['response']['id'];
-        return $response;
+        //luego realizar el pago
         $payment = $mp->post('/v1/payments' ,
-            [
-                'transaction_amount' => 10000 ,'payment_method_id' => "visa",
-                "payer" => ['email' => 'test_user_89339222@testuser.com'] ,
-                'token' => $card_token
-            ]);
+            array(
+                "transaction_amount" => 100,
+                "token" => $card_token,
+                "description" => "Title of what you are paying for",
+                "installments" => 1,
+                "payment_method_id" => "visa",
+                "payer" => array (
+                    "email" => "info@tendaz.com"
+                )
+            ));
         return $payment;
     }
 }
