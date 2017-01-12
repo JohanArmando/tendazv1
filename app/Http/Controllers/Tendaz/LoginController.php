@@ -3,6 +3,7 @@
 namespace Tendaz\Http\Controllers\Tendaz;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 use Tendaz\Models\Domain\Domain;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -30,7 +31,7 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
+  
     public function showLoginForm()
     {
         $view =  property_exists($this , 'loginView') ?
@@ -42,7 +43,7 @@ class LoginController extends Controller
     }
 
     public function authenticated(Request $request, $user){
-        return redirect(Domain::DomainByUser().'/admin/');
+        return redirect(Domain::DomainByUser()."/admin/");
     }
 
     public function logout()

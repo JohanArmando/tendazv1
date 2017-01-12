@@ -2,15 +2,17 @@
 
 namespace Tendaz\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Symfony\Component\HttpFoundation\Request;
 use Tendaz\Http\Requests;
 use Tendaz\Models\Order\Order;
 use Tendaz\Http\Controllers\Controller;
-use Tendaz\Models\Products\Product;
 
 class HomeController extends Controller
 {
 
-    public function home(){
+    public function home(Request $request){
         $orderPendingDay = Order::OrderPendingDay();
         $orderPendingYesterday = Order::OrderPendingYesterday();
         $orderPendingMore = Order::OrderPendingMore();

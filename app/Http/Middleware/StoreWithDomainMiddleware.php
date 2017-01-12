@@ -29,7 +29,6 @@ class StoreWithDomainMiddleware
      */
     public function handle($request, Closure $next)
     {
-        
         $subdomain = $request->route('subdomain');
         $domain = $request->getHost();
         $request->subdomain = $subdomain;

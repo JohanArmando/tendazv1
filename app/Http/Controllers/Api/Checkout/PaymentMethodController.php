@@ -24,6 +24,10 @@ class PaymentMethodController extends Controller
     {
         $mp = new Mercadopago($payment->api_id , $payment->api_key);
         $access_token = $mp->get_access_token();
+        $cart->order->payment_method = $payment->id;
+
+        $cart->order->save();
+
         return fractal()
             ->item($cart, new CartTransformer($access_token))
             ->toJson();
@@ -41,7 +45,6 @@ class PaymentMethodController extends Controller
         //crear url para responser el metodo de pago
         //entonces debe de venir el equest
         $response = $mp->post('/v1/card_tokens' ,[
-            'public_key'       => 'APP_USR-68e8ac0a-8966-4411-bb30-b1ea95c1b1cc',
             "expiration_month" => 12,
             "expiration_year"  =>  2017,
             "security_code"    => "123",
@@ -54,6 +57,7 @@ class PaymentMethodController extends Controller
             ],
             "card_number" => "4013540682746260"
         ]);
+        
         $card_token =  (string) $response['response']['id'];
         //luego realizar el pago
         $payment = $mp->post('/v1/payments' ,
