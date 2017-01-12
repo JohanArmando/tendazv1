@@ -6,9 +6,6 @@
                                 <div class="sidebar-top-footer">
                                     <div class="widget widget_about">
                                         <div class="noo_about_widget">
-                                            <a href="#">
-                                                <img src="{{asset('tema3/images/logo-dark.png')}}" alt="">
-                                            </a>
                                             <p>
                                                 Maecenas tristique gravida, odio et sagi ttis justo. Suspendisse ultricies nisi vel quam suscipit, et rutrum odio porttitor. Donec dictum non nulla ut lobortis molestie tortor sapien ermentum libero ndisse ultricies nisi vel quam 
                                             </p>

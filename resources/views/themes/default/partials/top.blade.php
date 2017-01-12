@@ -19,14 +19,15 @@
                             <span><i class="fa fa-user"> </i> <%usuario.personal_info.first_name%> <i class="fa fa-caret-down"></i> </span>
                         </a>
                         <ul ng-if="usuario" class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownAccount">
-                        <li><a href="{{url('myProfile')}}"><i class="fa fa-user"></i> Perfil</a></li>
-                        <li><a href="{{url('change_password')}}"><i class="fa fa-lock"></i> Cambiar Contraseña</a></li>
-                        <li ng-click="cerrarSesion()">
-                            <a href="">
-                                <i class="fa fa-sign-in"></i>&nbsp;Cerrar Sesion
-                            </a>
-                            <form id="logout-form" action="{{ url('/auth/logout/simple') }}" method="GET" style="display: none;">
-                            </form>
+                            <li><a href="{{url('myProfile')}}"><i class="fa fa-user"></i> Perfil</a></li>
+                            <li><a href="{{url('change_password')}}"><i class="fa fa-lock"></i> Cambiar Contraseña</a></li>
+                            <li ng-click="cerrarSesion()">
+                                <a href="">
+                                    <i class="fa fa-sign-in"></i>&nbsp;Cerrar Sesion
+                                </a>
+                                <form id="logout-form" action="{{ url('/auth/logout/simple') }}" method="GET" style="display: none;">
+                                </form>
+                            </li>
                         </ul>
                     </div>
                     <a  ng-if="!usuario" href="{{url('auth/login')}}">

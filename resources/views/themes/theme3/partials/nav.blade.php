@@ -20,8 +20,9 @@
                             </div>
                         </div>
                         <a href="{{url('/')}}" style="text-decoration: none">
+                            <%usuario.personal_info.first_name%>
                             @if($shop->logo)
-                                <img style="margin-top: 10px; max-height: 70px" class="logo replace-2x img-responsive" src="{{ asset("logos/$shop->id/$shop->logo") }}"
+                                <img style="margin-top: 4px;margin-bottom: 4px; max-height: 60px" class="logo replace-2x img-responsive" src="{{ asset("logos/$shop->id/$shop->logo") }}"
                                      alt="Logo de la tienda {{ $shop->name_store }}" />
                             @else
                                 <h1>{{ $shop->name }}</h1>
@@ -31,16 +32,13 @@
                     <nav class="pull-right noo-main-menu">
                         <ul class="nav-collapse navbar-nav">
                             <li><a class="{{ Request::is('/') ? 'active' : '' }}" href="{{url('/')}}">Inicio</a></li>
-
                             <li><a class="{{ Request::is('products') ? 'active' : '' }}" href="{{url('/products')}}">Productos</a></li>
-
                             <li><a class="{{ Request::is('cart/buy') ? 'active' : '' }}" href="{{url('/cart/buy')}}">Carrito de Compras</a></li>
-
                             <li><a class="{{ Request::is('contact') ? 'active' : '' }}" href="{{url('/contact')}}">Contactenos</a></li>
-                            @if(!auth('web')->check())
-                                <li><a class="{{ Request::is('auth/login') ? 'active' : '' }}" href="{{url('/auth/login')}}">Iniciar Sesion</a></li>
-                            @else
-                                <li><a>{{auth('web')->user()->full_name}}</a>
+
+                            <li ng-if="!usuario"><a class="{{ Request::is('auth/login') ? 'active' : '' }}" href="{{url('/auth/login')}}">Iniciar Sesion</a></li>
+
+                                <li ng-if="usuario"><a> <%usuario.personal_info.first_name%></a>
                                     <ul class="sub-menu">
                                         <li>
                                             <a href="{{url('myProfile')}}">
@@ -49,7 +47,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{url('myProfile/change_password')}}">
+                                            <a href="{{url('change_password')}}">
                                                 <i class="fa fa-lock"></i>
                                                 Cambiar Contraseña
                                             </a>
@@ -60,14 +58,16 @@
                                                 Mis Ordenes
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="{{ url('/auth/logout/simple') }}">
-                                                <i class="fa fa-sign-out"> </i> Cerrar Sesion
+                                        <li ng-click="cerrarSesion()">
+                                            <a href="">
+                                                <i class="fa fa-sign-in"></i>&nbsp;Cerrar Sesion
                                             </a>
+                                            <form id="logout-form" action="{{ url('/auth/logout/simple') }}" method="GET" style="display: none;">
+                                            </form>
                                         </li>
                                     </ul>
                                 </li>
-                            @endif
+
                         </ul>
                     </nav>
                 </div>

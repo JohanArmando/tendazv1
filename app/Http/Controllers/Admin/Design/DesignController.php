@@ -84,6 +84,14 @@ class DesignController extends Controller
                 \Storage::disk('sliders')->put( $id . '/' . $name3, \File::get($slider3));
             $request->shop->slider3 = $name3;
         }
+        /** @var  $slider3 */
+        $slider4 = $request->file('slider4');
+        if(!$slider4 == "") {
+            $name4 = $slider4->getClientOriginalName();
+            if (!\Storage::disk('sliders')->has( $id . '/' . $name4))
+                \Storage::disk('sliders')->put( $id . '/' . $name4, \File::get($slider4));
+            $request->shop->slider4 = $name4;
+        }
         /** save */
         $request->shop->save();
         Cache::forever($subdomain.'_store' , $request->shop );

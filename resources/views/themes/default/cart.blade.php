@@ -51,16 +51,16 @@
                                         </div>
                                     </td>
 
-                                    <td class="unit">$<% cart.price %></td>
+                                    <td class="unit">$<% cart.price | number:2 %></td>
                                     <td class="sub">$<% cart.price * cart.quantity | number:2 %></td>
-                                    <td class="action">
+                                    <td class="action text-center">
                                         <a href="#" class="remove_cart" rel="2" data-placement="top" data-toggle="tooltip" data-original-title="Remove">
-                                            <i class="fa fa-trash-o" ng-click="destroy(cartId , cart )"></i></a>
+                                            <i class="fa fa-trash-o fa-2x" ng-click="destroy(cartId , cart )"></i></a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="4" align="right"><strong>Total</strong></td>
-                                    <td colspan="2"><b>$ <% carts.original_total %></b></td>
+                                    <td colspan="2"><b>$ <% carts.original_total | number:2 %></b></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -93,15 +93,11 @@
                                 <tbody>
                                 <tr>
                                     <th>Subtotal de Orden</th>
-                                    <td>$ <% carts.totalizers.items.value %></td>
-                                </tr>
-                                <tr>
-                                    <th>Envio y Manipulacion</th>
-                                    <td>$ <% carts.totalizers.shipping.value %></td>
+                                    <td>$ <% carts.totalizers.items.value | number:2%></td>
                                 </tr>
                                 <tr>
                                     <th>Total</th>
-                                    <td>$ <% carts.original_total %></td>
+                                    <td>$ <% carts.original_total | number:2%></td>
                                 </tr>
                                 </tbody>
                             </table>

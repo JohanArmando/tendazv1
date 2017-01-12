@@ -22,15 +22,11 @@
                             <tbody>
                             <tr>
                                 <th>Subtotal de Orden</th>
-                                <td>$ <% carts.totalizers.items.value %></td>
-                            </tr>
-                            <tr>
-                                <th>Envio y Manipulacion</th>
-                                <td>$ <% carts.totalizers.shipping.value %></td>
+                                <td>$ <% carts.totalizers.items.value | number:2 %></td>
                             </tr>
                             <tr>
                                 <th>Total</th>
-                                <td>$ <% carts.original_total %></td>
+                                <td>$ <% carts.original_total | number:2 %></td>
                             </tr>
                             </tbody>
                         </table>
@@ -80,7 +76,7 @@
                                             </span>
                                         </div>
                                     </td>
-                                    <td class="price">$<% cart.price %></td>
+                                    <td class="price">$<% cart.price | number:2 %></td>
                                     <td>$<% cart.price * cart.quantity | number:2 %></td>
                                     <td class="text-center">
                                         <a href="#" class="remove_cart" rel="2">
@@ -90,7 +86,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="4" align="right">Total</td>
-                                    <td class="total" colspan="2"><b>$ <% carts.original_total %></b>
+                                    <td class="total" colspan="2"><b>$ <% carts.original_total | number:2 %></b>
                                     </td>
                                 </tr>
                                 </tbody>

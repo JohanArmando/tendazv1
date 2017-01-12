@@ -3,7 +3,8 @@
         <div class="navbar-header">
             <a href="{{url('/')}}" style="text-decoration: none">
                 @if($shop->logo)
-                    <img style="margin-top: 10px; width:220px" height="70px" class="hidden-xs logo replace-2x img-responsive" src="{{ asset("logos/$shop->id/$shop->logo") }}"  alt="Logo de la tienda {{ $shop->name_store }}" />
+                    <img style="margin-top: 4px; height: 60px; margin-bottom: 4px" class="hidden-xs logo replace-2x img-responsive"
+                         src="{{ asset("logos/$shop->id/$shop->logo") }}"  alt="Logo de la tienda {{ $shop->name_store }}" />
                 @else
                     <h1>{{ $shop->name }}</h1>
                 @endif
@@ -31,12 +32,11 @@
                 <li class="{{ Request::is('products') ? 'active' : '' }}"><a href="{{url('/products')}}">Productos</a></li>
                 <li class="{{ Request::is('cart/buy') ? 'active' : '' }}"><a href="{{url('/cart/buy')}}">Carrito de Compras</a></li>
                 <li class="{{ Request::is('contact') ? 'active' : '' }}"><a href="{{url('/contact')}}">Contactenos</a></li>
-                @if(!auth('web')->check())
-                <li class="{{ Request::is('auth/login') ? 'active' : '' }}"><a href="{{url('/auth/login')}}">Iniciar Sesion</a></li>
-                @else
-                    <li class="dropdown">
+
+                <li ng-if="!usuario" class="{{ Request::is('auth/login') ? 'active' : '' }}"><a href="{{url('/auth/login')}}">Iniciar Sesion</a></li>
+                    <li ng-if="usuario" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">
-                            {{auth('web')->user()->full_name}}
+                            <%usuario.personal_info.first_name%>
                             <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
@@ -45,19 +45,21 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{url('myProfile/change_password')}}"><i class="fa fa-lock"></i> Cambiar contraseña</a>
+                                <a href="{{url('change_password')}}"><i class="fa fa-lock"></i> Cambiar contraseña</a>
                             </li>
                             <li class="hidden">
                                 <a href="{{url('orders')}}"><i class="fa fa-list"></i>Mis Ordenes</a>
                             </li>
                             <div class="divider"></div>
-                            <li>
-                                <a href="{{ url('/auth/logout/simple') }}"><i class="fa fa-sign-out" aria-hidden="true"></i>
-Cerrar Sesion</a>
+                            <li ng-click="cerrarSesion()">
+                                <a href="">
+                                    <i class="fa fa-sign-in"></i>&nbsp;Cerrar Sesion
+                                </a>
+                                <form id="logout-form" action="{{ url('/auth/logout/simple') }}" method="GET" style="display: none;">
+                                </form>
                             </li>
                         </ul>
                     </li>
-                @endif
             </ul>
 
         </div>

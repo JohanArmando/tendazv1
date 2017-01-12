@@ -8,40 +8,41 @@
                 <div class="white-container">
                     <span class="title"><strong>Registro</strong></span>
                     <!-- Form Register -->
-                    <form action="{{ url('auth/register') }}" method="post" role="form" data-toggle="validator">
-                        {!! csrf_field() !!}
+                    <form ng-submit="doRegister(registerForm)" name="registerForm" role="form" data-toggle="validator">
                         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                             <div class="form-group">
                                 <label for="first_name">Nombres (*)</label>
-                                <input type="text" class="form-control" value="{{ old('name') }}" name="name" required>
+                                <input type="text" class="form-control" name="name" ng-model="registerFormR.RegisterName" required>
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                             <div class="form-group">
                                 <label for="last_name">Apellidos (*)</label>
-                                <input type="text" class="form-control" value="{{ old('last_name') }}" name="last_name" required>
+                                <input type="text" class="form-control" name="last_name" ng-model="registerFormR.RegisterLastName" required>
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                             <div class="form-group">
                                 <label for="email">Email (*)</label>
-                                <input type="email" class="form-control" value="{{ old('email') }}" name="email" required>
+                                <input type="email" class="form-control" name="email" ng-model="registerFormR.RegisterMail" required>
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                             <div class="form-group">
                                 <label for="password">Contrase&ntilde;a (*)</label>
-                                <input type="password" class="form-control" id="inputPassword" name="password" required>
+                                <input type="password" class="form-control" id="inputPassword" name="password"
+                                       ng-model="registerFormR.RegisterPassword" required>
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                             <div class="form-group">
                                 <label for="confirm_password">Confirmar contrase&ntilde;a (*)</label>
-                                <input type="password" class="form-control"  name="password_confirmation" data-match-error="Upz, Contrase&ntilde;as no son iguales"
+                                <input type="password" class="form-control"  name="password_confirmation"
+                                       ng-model="registerFormR.RegisterPasswordConfirm" data-match-error="Upz, Contrase&ntilde;as no son iguales"
                                        id="inputPasswordConfirm" data-match="#inputPassword" required>
                                 <div class="help-block with-errors"></div>
                             </div>
@@ -61,19 +62,18 @@
                 <!-- Login Form -->
                 <div class="white-container">
                     <span class="title"><strong>Ya te encuentras registrado ?</strong></span>
-                    <form method="post" action="{{url('auth/login')}}" role="form" data-toggle="validator">
-                        {!! csrf_field() !!}
+                    <form name="loginForm" ng-submit="doLogin(loginForm)" role="form" data-toggle="validator">
                             <div class="form-group">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                    <input type="email" value="{{ old('email') }}" name="email" class="form-control" placeholder="Email" required>
+                                    <input type="email" ng-model="formLog.loginMail" name="email" class="form-control" placeholder="Email" required>
                                 </div>
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                    <input type="password" class="form-control" name="password" placeholder="Contrase&ntilde;a" required>
+                                    <input type="password" ng-model="formLog.loginPassword" class="form-control" name="password" placeholder="Contrase&ntilde;a" required>
                                 </div>
                                 <div class="help-block with-errors"></div>
                             </div>

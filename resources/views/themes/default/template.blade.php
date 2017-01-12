@@ -103,7 +103,7 @@
                              ng-hide="product.images.data">
                     </a>
                     <div class="option" ng-hide="product.stock == 0" ng-click="add(cartId , product)">
-                        <a href="#" ng-click="add(cartId , product)" data-toggle="tooltip"
+                        <a href="#" data-toggle="tooltip"
                            data-placement="bottom" title="Agregar al carro">
                             <i class="ace-icon fa fa-shopping-cart"></i></a>
                     </div>

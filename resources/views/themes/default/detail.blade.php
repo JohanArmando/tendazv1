@@ -26,8 +26,8 @@
                             <div class="owl-stage" >
                                 <div ng-repeat="image in product.images.data | limitTo:3" ng-if="image"
                                      class="owl-item active" style="width: 100px; margin-right: 5px;">
-                                    <a class="img-click" href="#">
-                                        <img  ng-src="<% image.url %>"  alt="" class="img-thumbnail"
+                                    <a>
+                                        <img ng-src="<% image.url %>"  alt="" onclick="updateImage(this)" class="img-thumbnail img-clickEa"
                                              style="min-height: 120px;max-height: 120px;">
                                     </a>
                                 </div>
@@ -168,12 +168,10 @@
     @section('script')
         <script type="text/javascript">
             $(document).on('ready' , function(){
-                $('div').on('click','.image-click', function(e){
-                    alert('click');
-                    e.preventDefault();
-                    var image = $(this).find('img').attr('src');
+                updateImage = function(img){
+                    var image = img.src;
                     $('#matrix').attr('src', image);
-                });
+                };
             });
         </script>
            @stop

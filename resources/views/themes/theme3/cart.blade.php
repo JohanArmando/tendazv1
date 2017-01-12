@@ -27,7 +27,7 @@
                                     <a href="#"><% cart.name %></a>
                                 </td>
                                 <td class="product-price hidden-xs">
-                                    <span class="amount">$<% cart.price %></span>
+                                    <span class="amount">$<% cart.price | number:2 %></span>
                                 </td>
                                 <td class="product-quantity hidden-xs">
                                     <div class="quantity">
@@ -83,7 +83,7 @@
                     </div>
                 </div>
                 <div class="cart-collaterals" ng-show="size(carts.products.data) >= 1">
-                    <div class="noocart-coupon">
+                    <div class="noocart-coupon hidden">
                         <label for="coupon_code">Cupon</label>
                         <p>Ingresa tu cupon si tienes alguno disponible</p>
                         <input type="text" name="noo_coupon_code" class="input-text" id="noo_coupon_code" value="" placeholder="Coupon code"/>
@@ -94,17 +94,11 @@
                         <table>
                             <tr class="cart-subtotal">
                                 <th>Subtotal</th>
-                                <td><span class="amount">$ <% carts.totalizers.items.value %></span></td>
-                            </tr>
-                            <tr class="shipping">
-                                <th>Envio</th>
-                                <td>
-                                    <p>Procede al checkout para editar estos datos.</p>
-                                </td>
+                                <td><span class="amount">$ <% carts.totalizers.items.value | number:2 %></span></td>
                             </tr>
                             <tr class="order-total">
                                 <th>Total</th>
-                                <td><strong><span class="amount">$ <% carts.original_total %></span></strong> </td>
+                                <td><strong><span class="amount">$ <% carts.original_total | number:2 %></span></strong> </td>
                             </tr>
                         </table>
                         <div class="wc-proceed-to-checkout">

@@ -11,24 +11,31 @@
                                 <p>{!! Session::get('message')['message'] !!}</p>
                             </div>
                         @endif
-                        <form action="{{url('/store/contact')}}" role="form" method="post" data-toggle="validator">
+                        <form action="{{url('contact/email')}}" role="form" method="post" data-toggle="validator">
                             {!! csrf_field() !!}
                             <div class="row">
                                 <div class="col-md-12">
                                 <h2>Contactenos</h2>
                                 <hr>
                                 </div>
-                                <div class="col-sm-12 col-md-5">
+                                <div class="col-sm-12 col-md-4">
                                     <div class="form-group">
                                         <label for="firstname">Nombres</label>
                                         <input type="text" class="form-control" name="name" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
-                                <div class="col-sm-12 col-md-7">
+                                <div class="col-sm-12 col-md-4">
                                     <div class="form-group">
                                         <label for="email">Email</label>
                                         <input type="email" class="form-control" name="email" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4">
+                                    <div class="form-group">
+                                        <label for="phone">Telefono</label>
+                                        <input type="number" class="form-control" name="phone" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
@@ -59,24 +66,25 @@
 
                 <div class="col-md-4">
 
-                    <div class="box" id="contact" style="display: inline-block" class="{{ ($shop->phone_number && $shop->phone_country) || $shop->email_contact || $shop->address_contact ? '' : 'hidden' }}">
+                    <div class="box {{ $shop->store->number_phone  || $shop->store->address_2 ||
+                            $shop->store->address_1 ? '' : 'hidden' }}" id="contact" style="display: inline-block">
 
                         <h2 class="text-center">
                             Mas Informaci&oacute;n</h2>
                         <hr>
-                        <div class="col-sm-12 col-md-12 {{ !$shop->address_contact ? '' : '' }}">
+                        <div class="col-sm-12 col-md-12 {{ !$shop->store->address_2 ? '' : '' }}">
                             <h4><i class="fa fa-map-marker"></i> Direccion</h4>
-                            <p>{{$shop->address_contact}}</p>
+                            <p>{{$shop->store->address_2}}</p>
                         </div>
                         <!-- /.col-sm-4 -->
-                        <div class="col-sm-12 col-md-12 {{ !$shop->phone_number || !$shop->phone_country ? '' : '' }}">
+                        <div class="col-sm-12 col-md-12 {{ !$shop->store->number_phone ? '' : '' }}">
                             <h4><i class="fa fa-phone"></i> Telefono</h4>
-                            <p>(+{{$shop->phone_country}}) {{$shop->phone_number}}</p>
+                            <p>(+{{$shop->phone_country}}) {{$shop->store->number_phone}}</p>
                         </div>
                         <!-- /.col-sm-4 -->
-                        <div class="col-sm-12 col-md-12 {{ !$shop->email_contact ? '' : '' }}">
+                        <div class="col-sm-12 col-md-12 {{ !$shop->store->address_1 ? '' : '' }}">
                             <h4><i class="fa fa-envelope"></i> Soporte Electronico</h4>
-                            <p>{{$shop->email_contact}}</p>
+                            <p>{{$shop->store->address_1}}</p>
                         </div>
                         <!-- /.col-sm-4 -->
                     </div>

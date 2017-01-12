@@ -46,14 +46,14 @@
             <ul class="product_list_widget">
                 <li>
                     <a href="{{url('/')}}">
-                        <img width="100" height="100" src="{{asset('tema3/images/product/thumb/product_1.png')}}" alt="" />
+                        <img width="100" height="100" src="{{asset('')}}" alt="" />
                         <span class="product-title">French Bread</span>
                     </a>
                     <span class="amount">&#36;10.00</span>
                 </li>
                 <li>
                     <a href="{{url('/')}}">
-                        <img width="100" height="100" src="{{asset('tema3/images/product/thumb/product_2.png')}}" alt="" />
+                        <img width="100" height="100" src="{{asset('')}}" alt="" />
                         <span class="product-title">Cookie</span>
                     </a>
                     <span class="amount">&#36;15.00</span>

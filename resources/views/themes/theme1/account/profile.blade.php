@@ -1,4 +1,4 @@
-@extends('tema1.template')
+@extends(Theme::current()->viewsPath.'.template')
 	@section('css')
 		@stop
 	@section('content')
@@ -18,11 +18,7 @@
 									<div class="panel-body">
 										<div class="row">
 										<div class="col-md-3 col-lg-3 hidden" align="center">
-											@if(Auth::user()->get()->path){
-											<img src='' class='img-responsive'>
-											@else
 											<img src='http://placehold.it/120x150' classs='img-responsive'>
-											@endif
 											<br>
 										</div>
 
@@ -31,15 +27,15 @@
 											<tbody>
 											<tr>
 												<th>Nombre</th>
-												<td>{{Auth::user()->get()->full_name}}</td>
+												<td>NAME CLIENT</td>
 											</tr>
 											<tr>
 												<th>Telefono</th>
-												<td>{{Auth::user()->get()->phone ? Auth::user()->get()->phone :'Sin numero '}}</td>
+												<td>PHONE CLIENT</td>
 											</tr>
 											<tr>
 												<th>Email</th>
-												<td><a href="mailto:info@tendaz.com" class="active">{{Auth::user()->get()->email}}</a></td>
+												<td><a href="#" class="active">EMAIL CLIENT</a></td>
 											</tr>
 											<tr>
 												<th>Direcci&oacute;n</th>
@@ -114,8 +110,8 @@
 							</div>
 
 						</div>
-						@include('partials.edit-dir')
-						@include('partials.add-dir')
+						@include(Theme::current()->viewsPath.'.partials.edit-dir')
+						@include(Theme::current()->viewsPath.'.partials.add-dir')
 					<!--Modal para editar Datos-->
 					<div id="modalEditar" class="modal fade" tabindex="-1" role="dialog">
 						<div class="modal-dialog" role="document">
@@ -126,19 +122,19 @@
 									<h4 class="modal-title">Editar datos del Perfil</h4>
 								</div>
 								<div class="modal-body">
-									{!! Form::open(['url' =>[ "myProfile",Auth::user()->get()->id ],'method' => 'PUT','files' => true, 'data-toggle'=>'validator', 'role'=>'form']) !!}
+									{!! Form::open(['url' =>[ "myProfile" ],'method' => 'PUT','files' => true, 'data-toggle'=>'validator', 'role'=>'form']) !!}
 									<div class="row">
 										<div class="col-xs-6">
 											<label>Nombres</label>
-											<input type="text" class="form-control" name="name" value="{{Auth::user()->get()->name}}">
+											<input type="text" class="form-control" name="name" value="">
 										</div>
 										<div class="col-xs-6">
 											<label>Apellidos</label>
-											<input type="text" class="form-control"  name="last_name" value="{{Auth::user()->get()->last_name}}">
+											<input type="text" class="form-control"  name="last_name" value="">
 										</div>
 										<div class="col-xs-6">
 											<label>Telefono</label>
-											<input type="text" class="form-control" name="phone" value="{{Auth::user()->get()->phone}}">
+											<input type="text" class="form-control" name="phone" value="">
 										</div>
 										<div class="col-xs-6">
 											<style type="text/css">

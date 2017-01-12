@@ -39,7 +39,7 @@ class Shop extends Model
      */
     protected $fillable = [
         'uuid', 'name', 'logo', 'active', 'user_id', 'theme_id', 'country_base_operation_id' ,
-        'original' , 'slug' , 'slider1' , 'slider2' , 'slider3'
+        'original' , 'slug' , 'slider1' , 'slider2' , 'slider3' , 'slider4'
     ];
 
     /**
