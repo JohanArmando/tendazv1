@@ -17,7 +17,7 @@ class Domain extends Model
     public static $SHOP_ID;
 
     protected   $fillable = [
-        'uuid' ,  'name','domain'  , 'ssl' , 'main' , 'active' , 'state' , 'domain_id'
+        'uuid' ,  'name','domain'  , 'ssl' , 'main' , 'active' , 'state' , 'domain_id','shop_id'
     ];
 
     protected $subdomain;

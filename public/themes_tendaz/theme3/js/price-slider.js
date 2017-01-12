@@ -38,7 +38,7 @@ jQuery( function( $ ) {
 		$( document.body ).trigger( 'price_slider_updated', [ min, max ] );
 	});
 
-	$( '.price_slider' ).slider({
+	/*$( '.price_slider' ).slider({
 		range: true,
 		animate: true,
 		min: min_price,
@@ -62,6 +62,6 @@ jQuery( function( $ ) {
 
 			$( document.body ).trigger( 'price_slider_change', [ ui.values[0], ui.values[1] ] );
 		}
-	});
+	});*/
 
 });

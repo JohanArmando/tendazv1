@@ -44,9 +44,13 @@
     </div>
 </div>
 
-<!--Script-->
 <a href="#" class="go-to-top hidden-print"><i class="fa fa-angle-up"></i></a>
-{!! Theme::js('themes_tendaz/theme3/js/jquery.min.js') !!}
+
+<!--Script-->
+<script src="{{ asset('bower_components/angular/angular.js') }}"></script>
+<script src="{{ asset('themes_tendaz/theme3/js/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{asset('components/js/toastr.min.js') }}"></script>
+
 {!! Theme::js('themes_tendaz/theme3/js/bootstrap.min.js') !!}
 {!! Theme::js('themes_tendaz/theme3/js/jquery-migrate.min.js') !!}
 {!! Theme::js('themes_tendaz/theme3/js/modernizr-2.7.1.min.js') !!}
@@ -73,7 +77,6 @@
 <script type="text/javascript" src="{{asset('themes_tendaz/default/js/validator.js')}}"></script>
 
 <!-- Angular scripts -->
-<script type="text/javascript" src="{{ asset('components/js/toastr.min.js') }}"></script>
 <script src="{{ asset('components/js/angular.min.js') }}"></script>
 <script src="{{asset('components/js/underscore-min.js') }}"></script>
 <script src="{{asset('components/js/slick.js') }}"></script>
@@ -87,11 +90,13 @@
 <script src="{{asset('Angular/tienda/controller/productController.js') }}"></script>
 <script src="{{asset('Angular/tienda/controller/customerController.js') }}"></script>
 <script src="{{asset('Angular/tienda/controller/detailProductController.js') }}"></script>
+<script src="{{ asset('Angular/tienda/service/customerService.js') }}"></script>
+<script src="{{ asset('Angular/tienda/controller/customerController.js') }}"></script>
 <script src="{{ asset('Angular/tienda/service/service.js') }}"></script>
 <script src="{{ asset('Angular/tienda/service/categoryService.js') }}"></script>
 <script src="{{ asset('Angular/tienda/service/cartService.js') }}"></script>
 <script src="{{ asset('Angular/tienda/service/productService.js') }}"></script>
-<script src="{{asset('Angular/tienda/service/customerService.js') }}"></script>
+
 <script src="{{ asset('Angular/tienda/directives/directive.js') }}"></script>
 <script src="{{ asset('components/js/ui-bootstrap-tpls-1.1.1.min.js') }}"></script>
 <script src="{{ asset('components/js/dirPagination.js') }}"></script>

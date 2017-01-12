@@ -229,7 +229,6 @@ input.active { outline: 0 }
     position: relative;
     margin-top: 15px
 }
-.search-input { width: calc(100% - 175px) }
 .search-input input {
     width: 100% !important;
     height: 35px;

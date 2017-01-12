@@ -12,25 +12,31 @@
                                 <p>{!! Session::get('message')['message'] !!}</p>
                             </div>
                         @endif
-                        <form class="form" action="{{url('/store/contact')}}" role="form" method="POST" data-toggle="validator" >
+                        <form class="form" action="{{url('contact/email')}}" role="form" method="POST" data-toggle="validator" >
                             {!! csrf_field() !!}
                            <h3>Contactenos</h3>
                            <p align="justify">
                                Es importante que nos mantengas en informados de tus solucitudes, para brindarte el mejor servicio. O si teienes algun problemas informanos te brindaremosla mejor solucion lo pronto posible.
                            </p>
                            <div class="row">
-                               <div class="col-md-6 col-sm-12">
+                               <div class="col-md-4 col-sm-12">
                                    <div class="form-control-wrap your-name form-group">
                                        <input type="text" name="name" value="" size="40" class="form-control" placeholder="Nombres" required/>
                                        <div class="help-block with-errors"></div>
                                    </div>
                                </div>
-                               <div class="col-md-6 col-sm-12">
+                               <div class="col-md-4 col-sm-12">
                                     <div class="form-control-wrap your-website form-group">
-                                        <input type="text" name="your-website" value="" size="40" class="form-control" placeholder="Apellido" required/>
+                                        <input type="text" name="last_name" value="" size="40" class="form-control" placeholder="Apellido" required/>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
+                               <div class="col-md-4 col-sm-12">
+                                   <div class="form-control-wrap your-website form-group">
+                                       <input type="number" name="phone" value="" size="40" class="form-control" placeholder="Telefono" required/>
+                                       <div class="help-block with-errors"></div>
+                                   </div>
+                               </div>
                                 <div class="col-md-6 col-sm-12">
                                         <div class="form-control-wrap your-email form-group">
                                             <input type="email" name="email" value="" size="40" class="form-control" placeholder="Email" required/>
@@ -60,7 +66,8 @@
                         <div class="google-map">
                         <iframe width="600" height="450" frameborder="0"  allowfullscreen class="hidden-xs"></iframe>
                                     <div class="noo-address-info-wrap">
-                                            <div class="address-info {{ ($shop->phone_number && $shop->phone_country) || $shop->email_contact || $shop->address_contact ? '' : 'hidden' }}">
+                                            <div class="address-info {{ $shop->store->number_phone  || $shop->store->address_2 ||
+                                                    $shop->store->address_1 ? '' : 'hidden' }}">
                                                 <br><br>
                                                 <h3>Informacion</h3>
                                                 <p align="justify">
@@ -68,17 +75,17 @@
                                                 </p>
 
                                                 <ul>
-                                                    <li class="{{ !$shop->address_contact ? 'hidden' : '' }}">
+                                                    <li class="{{ !$shop->store->address_2 ? 'hidden' : '' }}">
                                                         <i class="fa fa-map-marker"></i>
-                                                        <span>{{$shop->address_contact}}</span>
+                                                        <span>{{$shop->store->address_2}}</span>
                                                     </li>
-                                                    <li class="{{ !$shop->phone_number || !$shop->phone_country ? 'hidden' : '' }}">
+                                                    <li class="{{ !$shop->store->number_phone ? 'hidden' : '' }}">
                                                         <i class="fa fa-phone"></i>
-                                                        <span>(+{{$shop->phone_country}}) {{$shop->phone_number}}</span>
+                                                        <span>({{$shop->store->number_phone}})</span>
                                                     </li>
-                                                    <li class="{{ !$shop->email_contact || !$shop->phone_country ? 'hidden' : '' }}">
+                                                    <li class="{{ !$shop->store->address_1 ? 'hidden' : '' }}">
                                                         <i class="fa fa-envelope"> </i>
-                                                        <span> {{$shop->email_contact}}</span></li>
+                                                        <span> {{$shop->store->address_1}}</span></li>
                                                 </ul>
                                         </div>
                                     </div>
@@ -90,5 +97,4 @@
                 </div>
     @endsection
     @section('script')
-        <script type='text/javascript' src='js/google-map-custom.js'></script>
         @stop

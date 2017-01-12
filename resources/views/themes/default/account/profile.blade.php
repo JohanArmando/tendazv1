@@ -22,9 +22,9 @@
                   <div style="margin-top: 10px;"></div>
                   <img src="http://placehold.it/150x150" alt="" class="img-circle" />
                     <br>
-                <h5><strong> {{Auth::user()->get()->full_name}}</strong></h5>
-                <h5>Email: <a href="mailto: info@tendaz.com">{{Auth::user()->get()->email}}</a></h5>
-                <h5>Telefono: <a class="active">{{Auth::user()->get()->phone ? Auth::user()->get()->phone : "Sin numero de telefono" }}</a></h5>
+                <h5><strong> NAME CLIENT</strong></h5>
+                <h5>Email: <a href="mailto: info@tendaz.com">EMAIL</a></h5>
+                <h5>Telefono: <a class="active">PHONE</a></h5>
                     <div style="margin-bottom: 20px;"></div>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalActualizar"
                             style="color: white;">
@@ -54,31 +54,26 @@
                               <th class="text-center">Principal</th>
                               <th class="text-center">Acciones</th>
                             </tr>
-                            @foreach($addresses as $address)
                                 <tr>
                                     <td>
-                                      <a href="">#{{ $address->id }}</a>
+                                      <a href="">#1</a>
                                     </td>
                                   <td>
                                       <p align="justify">
-                                          {{ $address->name }} {{ $address->last_name }}
+                                          NAME
                                       </p>
                                   </td>
                                     <td>
-                                        ({{ $address->country_name }}\{{ $address->city }}\{{ $address->locality }})<br>
-                                        " {{ $address->address }} "
+                                        DIRECTION
                                     </td>
-                                    <td> {{ $address->phone }}</td>
+                                    <td> PHONE</td>
                                   <td class="text-center">
-                                      @if($address->principal == 1)
                                         <a class="btn btn-xs btn-primary" id="si">
                                             <i class="fa fa-eye" id="siFa"></i>
                                         </a>
-                                      @else
                                         <a class="btn btn-xs btn-default" href="#" id="no">
                                             <i class="fa fa-eye-slash" id="noFa"></i>
                                         </a>
-                                      @endif
                                   </td>
                                   <td class="text-center">
                                     <button type="button" class="btn btn-xs btn-warning" data-toggle="modal"
@@ -87,7 +82,6 @@
                                     </button>
                                   </td>
                                 </tr>
-                            @endforeach
                     </tbody>
                     </table>
                     <div class="col-md-12">
@@ -111,7 +105,7 @@
 
         <!-- orders -->
         <div style="margin-bottom: 10px;"></div>
-           <div class="row panel panel-default panel-content hidden">
+           <div class="row panel panel-default panel-content">
                <div class="col-md-12">
                    <h2>Mis Ordenes</h2>
                    <div class="row">
@@ -184,8 +178,8 @@
        </div>
        <div class="clearfix"></div>
        <div style="margin-bottom: 100px;"></div>
-        @include('partials.createAddress')
-        @include('partials.edit-dir')
+        @include('themes.default.partials.createAddress')
+        @include('themes.default.partials.edit-dir')
        <!--MODAL ACTUALIZAR DATOS CLIENTES-->
         <div id="modalActualizar" class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
@@ -196,19 +190,19 @@
                         <h4 class="modal-title"><strong>Actualizacion de Datos</strong></h4>
                     </div>
                     <div class="modal-body">
-                        {!! Form::open(['url' =>[ "myProfile",Auth::user()->get()->id ],'method' => 'PUT','files' => true, 'data-toggle'=>'validator', 'role'=>'form']) !!}
+                        {!! Form::open(['url' =>[ "myProfile" ],'method' => 'PUT','files' => true, 'data-toggle'=>'validator', 'role'=>'form']) !!}
                         <div class="row">
                             <div class="col-xs-6 form-group">
                                 <label>Nombres</label>
-                                <input type="text" class="form-control" name="name" value="{{Auth::user()->get()->name}}">
+                                <input type="text" class="form-control" name="name" value="">
                             </div>
                             <div class="col-xs-6 form-group">
                                 <label>Apellidos</label>
-                                <input type="text" class="form-control"  name="last_name" value="{{Auth::user()->get()->last_name}}">
+                                <input type="text" class="form-control"  name="last_name" value="">
                             </div>
                             <div class="col-xs-6 form-group">
                                 <label>Telefono</label>
-                                <input type="text" class="form-control" name="phone" value="{{Auth::user()->get()->phone}}">
+                                <input type="text" class="form-control" name="phone" value="">
                             </div>
                             <div class="col-xs-6 form-group">
                                 <style type="text/css">

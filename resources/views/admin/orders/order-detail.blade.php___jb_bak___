@@ -35,7 +35,7 @@
                                     <br>
                                     <div class="text-left">
                                         <p style="float: left !important;">
-                                            <?php  setlocale(LC_TIME, 'ES'); $dt = \Carbon\Carbon::parse($order->created_at) ?>
+                                            <?php  setlocale(LC_TIME, 'ES'); $dt = \Carbon::parse($order->created_at) ?>
                                             <strong>Fecha de solicitud&nbsp;</strong><input class="form-control" type="text"
                                                                                             value="{{ $dt->formatLocalized('%A %d %B %Y') }}" width="150px;" disabled>
                                         </p>

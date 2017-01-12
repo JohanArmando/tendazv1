@@ -65,8 +65,8 @@
 									<span class="figure">
 										@foreach($sliders as $slider)
 											@if($slider->id == $shop->id)
-												@if(!$slider->slider1 == '')
-													<img class="responsive_slide" src="{{ asset("sliders/".$slider->id.'/'.$slider->slider1) }}" alt="Slider"
+												@if(!$slider->slider2 == '')
+													<img class="responsive_slide" src="{{ asset("sliders/".$slider->id.'/'.$slider->slider2) }}" alt="Slider"
 														 style="min-height: 286px;max-height: 286px">
 												@else
 													<img src="themes_tendaz/tema4/images/custom/banner-07.jpg" alt=""/>
@@ -88,8 +88,8 @@
 									<span class="figure">
 										@foreach($sliders as $slider)
 											@if($slider->id == $shop->id)
-												@if(!$slider->slider2 == '')
-													<img src="{{ asset("sliders/".$slider->id.'/'.$slider->slider2) }}" alt="Slider"
+												@if(!$slider->slider3 == '')
+													<img src="{{ asset("sliders/".$slider->id.'/'.$slider->slider3) }}" alt="Slider"
 														 style="min-height: 286px;max-height: 286px">
 												@else
 													<img src="themes_tendaz/tema4/images/custom/banner-08.jpg" alt=""/>
@@ -113,8 +113,8 @@
 									<span class="figure">
 										@foreach($sliders as $slider)
 											@if($slider->id == $shop->id)
-												@if(!$slider->slider3 == '')
-													<img src="{{ asset("sliders/".$slider->id.'/'.$slider->slider3) }}" alt="Slider"
+												@if(!$slider->slider4 == '')
+													<img src="{{ asset("sliders/".$slider->id.'/'.$slider->slider4) }}" alt="Slider"
 														 style="min-height: 286px;max-height: 286px">
 												@else
 													<img src="themes_tendaz/tema4/images/custom/banner-09.jpg" alt=""/>

@@ -72,14 +72,17 @@ Elige tu logo
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <input type="file" name="slider1" class="dropify" data-default-file="{{ asset("sliders/".$logo->id."/".$logo->slider1) }}" />
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <input type="file" name="slider2" class="dropify" data-default-file="{{ asset("sliders/".$logo->id."/".$logo->slider2) }}" />
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <input type="file" name="slider3" class="dropify" data-default-file="{{ asset("sliders/".$logo->id."/".$logo->slider3) }}" />
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="file" name="slider4" class="dropify" data-default-file="{{ asset("sliders/".$logo->id."/".$logo->slider4) }}" />
                                 </div>
                             </div>
 

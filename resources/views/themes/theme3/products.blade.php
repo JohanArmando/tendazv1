@@ -86,7 +86,7 @@
                                                      <img ng-src="<% product.images.data[0].url %>">
                                                  </a>
                                              </div>
-                                             <div class="noo-product-title">
+                                             <div style="padding: 0 0 0 10px" class="noo-product-title">
                                                  <h3><a href="<% BASEURL + '/detail/' + product.slug %>"><% product.name %></a></h3>
                                                  <span class="price" ng-if="product.special_price">
                                                      <span class="amount" style="font-size: 15px; color: rgba(204, 198, 187, 0.89)">Antes $<% product.price | number:0 %></span><br>
@@ -124,5 +124,5 @@
             </div>
         @endsection
     @section('script')
-        <script type='text/javascript' src='{{asset('js/price-slider.js')}}'></script>
+        <script type='text/javascript' src='{{asset('themes_tendaz/theme3/js/price-slider.js')}}'></script>
         @endsection

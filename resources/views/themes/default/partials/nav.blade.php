@@ -19,9 +19,7 @@
                     <li class="{{ Request::is('products') ? 'active' : '' }}"><a href="{{url('/products')}}">Productos</a></li>
                     <li class="{{ Request::is('cart/buy') ? 'active' : '' }}"><a href="{{url('/cart/buy')}}">Carrito de compras</a></li>
                     <li class="{{ Request::is('contact') ? 'active' : '' }}"><a href="{{url('/contact')}}">Contactenos</a></li>
-                    @if(!auth('web')->check())
-                    <li class="{{ Request::is('auth/login') ? 'active' : '' }}"><a href="{{url('/auth/login')}}">Inicio de sesion</a></li>
-                @endif
+                    <li  ng-if="!usuario" class="{{ Request::is('auth/login') ? 'active' : '' }}"><a href="{{url('/auth/login')}}">Inicio de sesion</a></li>
                 </ul>
             </div>
         </div>

@@ -46,6 +46,13 @@
                         <div>
                             <p style="margin-top: 5px">Mostrando <% filtered.length %>  de <% products.length %> Item(s)</p>
                         </div>
+                        <div>
+                            <form>
+                                <div class="search-input">
+                                    <input type="text" class="form-control" placeholder="Buscar productos...">
+                                </div>
+                            </form>
+                        </div>
                     </div>
                     <div class="col-md-3"  dir-paginate="product in filtered = (products  | itemsPerPage: itemsPerPage | orderBy:propertyName:reverse)">
                         <div class="box-product-outer">

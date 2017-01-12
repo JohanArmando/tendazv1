@@ -53,10 +53,11 @@ class StaticsController extends Controller
                 ' - '.Carbon::parse($request->get('dateEnd'))->format('d/m/Y');
             $hits = Trend::where('trend_type','product')->selectRaw('*, sum(hits) as sum')->groupBy('trend_id')
                 ->whereBetween('created_at',[Carbon::parse($request->get('dateStart')),Carbon::parse($request->get('dateEnd'))])->get();
-            $totalOrders = Order::where('orders.shop_id' , $request->shop->id)
+            $totalOrders = Order::where('orders.shop_id' , $request->shop->id)->NotInitOrders()
                 ->whereBetween('created_at',[Carbon::parse($request->get('dateStart')),Carbon::parse($request->get('dateEnd'))])->count();
-            $money = Order::where('orders.shop_id' , $request->shop->id)
-                ->whereBetween('created_at',[Carbon::parse($request->get('dateStart')),Carbon::parse($request->get('dateEnd'))])->NotInitOrders()->sum('total');
+            $money = Order::where('orders.shop_id' , $request->shop->id)->NotInitOrders()
+                ->whereBetween('created_at',[Carbon::parse($request->get('dateStart')),Carbon::parse($request->get('dateEnd'))])
+                ->NotInitOrders()->sum('total');
             if(!$totalOrders == 0) $avg = $money/$totalOrders; else $avg = 0;
             return view('admin.stats.advanced',compact('products','totalOrders','money','avg','date','hits'));
         }
@@ -65,9 +66,10 @@ class StaticsController extends Controller
             $date = 'Ultimos 7 Dias';
             $hits = Trend::where('trend_type','product')->selectRaw('*, sum(hits) as sum')->groupBy('trend_id')
                 ->whereBetween('created_at',[Carbon::today()->subDays(8),Carbon::now()])->get();
-            $totalOrders = Order::where('orders.shop_id' , $request->shop->id)
+            $totalOrders = Order::where('orders.shop_id' , $request->shop->id)->NotInitOrders()
                 ->whereBetween('created_at',[Carbon::today()->subDays(8),Carbon::now()])->count();
-            $money = Order::whereBetween('created_at',[Carbon::today()->subDays(8),Carbon::now()])->NotInitOrders()->sum('total');
+            $money = Order::whereBetween('created_at',[Carbon::today()->subDays(8),Carbon::now()])
+                ->NotInitOrders()->sum('total');
             if(!$totalOrders == 0) $avg = $money/$totalOrders; else $avg = 0;
             return view('admin.stats.advanced',compact('products','totalOrders','money','avg','date','hits'));
         }else{
@@ -76,7 +78,7 @@ class StaticsController extends Controller
                 $date = 'Ultimas 2 Semanas';
                 $hits = Trend::where('trend_type','product')->selectRaw('*, sum(hits) as sum')->groupBy('trend_id')
                     ->whereBetween('created_at',[Carbon::today()->subDays(16),Carbon::now()])->get();
-                $totalOrders = Order::where('orders.shop_id' , $request->shop->id)
+                $totalOrders = Order::where('orders.shop_id' , $request->shop->id)->NotInitOrders()
                     ->whereBetween('created_at',[Carbon::today()->subDays(16),Carbon::now()])->count();
                 $money = Order::where('orders.shop_id' , $request->shop->id)
                     ->whereBetween('created_at',[Carbon::today()->subDays(16),Carbon::now()])->NotInitOrders()->sum('total');
@@ -88,7 +90,7 @@ class StaticsController extends Controller
                     $date = 'Ultimo Mes';
                     $hits = Trend::where('trend_type','product')->selectRaw('*, sum(hits) as sum')->groupBy('trend_id')
                         ->whereBetween('created_at',[Carbon::today()->subMonth(1),Carbon::now()])->get();
-                    $totalOrders = Order::where('orders.shop_id' , $request->shop->id)
+                    $totalOrders = Order::where('orders.shop_id' , $request->shop->id)->NotInitOrders()
                         ->whereBetween('created_at',[Carbon::today()->subMonth(1),Carbon::now()])->count();
                     $money = Order::where('orders.shop_id' , $request->shop->id)
                         ->whereBetween('created_at',[Carbon::today()->subMonth(1),Carbon::now()])->NotInitOrders()->sum('total');
@@ -98,4 +100,5 @@ class StaticsController extends Controller
             }
         }
     }
+
 }

@@ -98,7 +98,7 @@
             <a href="<% BASEURL + '/detail/' + product.slug %>" class="link-p">
                 <img ng-src="<% product.images.data[0].url %>" alt="" ng-show="product.images.data"
                      style="min-height: 200px; max-height: 200px !important" class="img-responsive">
-                <img ng-src="<% BASEURL + '/uploads-products/default.jpg' %>" alt=""  style="max-height: 200px; min-height: 200px"
+                <img ng-src="<% BASEURL + '/administrator/image/noImage.png' %>" alt=""  style="max-height: 200px; min-height: 200px"
                      ng-hide="product.images.data">
             </a>
             <div class="caption prod-caption">

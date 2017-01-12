@@ -19,14 +19,13 @@
                             <div id="customer_login">
                                 <div class="col-md-6">
                                     <h2>Inicio de sesion</h2>
-                                    <form class="login" method="post" action="{{url('auth/login')}}" role="form" data-toggle="validator">
-                                        {!! csrf_field() !!}
+                                    <form class="login" name="loginForm" ng-submit="doLogin(loginForm)" role="form" data-toggle="validator">
                                         <div class="form-row form-row-wide form-group">
                                             <label for="username">
                                                 correo electronico
                                                 <span class="required">*</span>
                                             </label>
-                                            <input type="email" class="input-text" name="email" id="username" value="" required>
+                                            <input type="email" class="input-text" ng-model="formLog.loginMail" name="email" id="username" value="" required>
                                             <div class="help-block with-errors"></div>
                                         </div>
                                         <div class="form-row form-row-wide form-group">
@@ -34,7 +33,7 @@
                                                 Constrase&ntilde;a
                                                 <span class="required">*</span>
                                             </label>
-                                            <input class="input-text" type="password" name="password" id="password" required>
+                                            <input class="input-text" type="password" ng-model="formLog.loginPassword" name="password" id="password" required>
                                             <div class="help-block with-errors"></div>
                                         </div>
                                          
@@ -71,14 +70,14 @@
                                 </div>
                                 <div class="col-md-6">
                                     <h2>Registro</h2>
-                                    <form class="register" action="{{ url('auth/register') }}" method="post" role="form" data-toggle="validator">
+                                    <form class="register" ng-submit="doRegister(registerForm)" name="registerForm" role="form" data-toggle="validator">
                                         {!! csrf_field() !!}
                                         <div class="form-row form-row-wide form-group">
                                             <label for="reg_email">
                                                 Nombres
                                                 <span class="required">*</span>
                                             </label>
-                                            <input type="text" class="input-text" name="name" value="" required>
+                                            <input type="text" class="input-text" ng-model="registerFormR.RegisterName" name="name" value="" required>
                                             <div class="help-block with-errors"></div>
                                         </div>
                                         <div class="form-row form-row-wide form-group">
@@ -86,7 +85,7 @@
                                                 Apellidos
                                                 <span class="required">*</span>
                                             </label>
-                                            <input type="text" class="input-text" name="last_name" value="" required>
+                                            <input type="text" class="input-text" ng-model="registerFormR.RegisterLastName" name="last_name" value="" required>
                                             <div class="help-block with-errors"></div>
                                         </div>
                                         <div class="form-row form-row-wide form-group">
@@ -94,7 +93,7 @@
                                                 Correo
                                                 <span class="required">*</span>
                                             </label>
-                                            <input type="email" class="input-text" name="email" id="reg_email" value="" required>
+                                            <input type="email" class="input-text" ng-model="registerFormR.RegisterMail" name="email" id="reg_email" value="" required>
                                             <div class="help-block with-errors"></div>
                                         </div>
                                         <div class="form-row form-row-wide form-group">
@@ -102,7 +101,7 @@
                                                 Constrase&ntilde;a
                                                 <span class="required">*</span>
                                             </label>
-                                            <input type="password" class="input-text" id="inputPassword" name="password" required>
+                                            <input type="password" ng-model="registerFormR.RegisterPassword" class="input-text" id="inputPassword" name="password" required>
                                             <div class="help-block with-errors"></div>
                                         </div>
                                         <div class="form-row form-row-wide form-group">
@@ -111,7 +110,7 @@
                                                 <span class="required">*</span>
                                             </label>
                                             <input type="password" name="password_confirmation" data-match-error="Upz, Contrase&ntilde;as no son iguales"
-                                                   id="inputPasswordConfirm" data-match="#inputPassword"  class="input-text"  required>
+                                                   ng-model="registerFormR.RegisterPasswordConfirm" id="inputPasswordConfirm" data-match="#inputPassword"  class="input-text"  required>
                                             <div class="help-block with-errors"></div>
                                         </div>
                                         
