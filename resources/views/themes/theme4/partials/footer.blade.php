@@ -22,7 +22,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-4 col-md-4 col-lg-3 col-xl-2">
+			<div class="col-md-2">
 				<div class="mobile-collapse">
 					<h4 class="text-left  title-under  mobile-collapse__title">INFORMACION</h4>
 					<div class="v-links-list mobile-collapse__content">
@@ -35,7 +35,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-4 col-md-4 col-lg-3 col-xl-2">
+			<div class="col-md-3">
 				<div class="mobile-collapse">
 					<h4 class="text-left  title-under  mobile-collapse__title">MAS INFORMACI&Oacute;N</h4>
 					<div class="v-links-list mobile-collapse__content" >
@@ -56,7 +56,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-4 col-md-4 col-lg-2  col-xl-2">
+			<div class="col-md-2">
 				<div class="mobile-collapse">
 					<h4 class="text-left  title-under  mobile-collapse__title">MI CUENTA</h4>
 					<div class="v-links-list mobile-collapse__content">
@@ -68,14 +68,14 @@
 				</div>
 			</div>
 			<div class="divider divider--lg visible-md visible-sm"></div>
-			<div class="col-sm-9 col-md-7 col-lg-4  col-xl-3" ng-controller="customerStoreController">
+			<div class="col-md-5" ng-controller="customerStoreController">
 				<div class="subscribe-box">
 					<div class="mobile-collapse">
 						<h4 class="text-left  title-under  mobile-collapse__title">NOTICIAS</h4>
 						<div class="mobile-collapse__content">
 							<form class="form-inline" name="userForm" ng-submit="sendSubscriber(userForm.$valid)" ng-show="!letter.news" novalidate>
 								<input class="subscribe-form__input" type="email"  name="subscribe" ng-model="letter.email" required>
-								<button type="submit" class="btn btn--ys btn--xl">SUSCRIBIR</button>
+								<button type="submit" class="btn btn--ys btn--xl">SUSCRIBIRSE</button>
 							</form>
 							<div class="contact-ok alert alert-success text-center-xs" ng-show="letter.news">
 								<i class="fa fa-check-circle fa-2x d-inline pull-left m-half-right m-none-xs m-quarter-bottom-xs"></i>
@@ -111,7 +111,7 @@
 	<div class="container footer-copyright">
 		<div class="row">
 			<div class="col-lg-12">
-				<img src="{{asset('administrator/image/servientrega-footer.jpg')}}" alt="">
+				<img src="{{asset('administrator/image/servientrega-footer.gif')}}" alt="" height="20px">
 				&copy; 2017 .Todos lo derechos reservados.
 			</div>
 		</div>

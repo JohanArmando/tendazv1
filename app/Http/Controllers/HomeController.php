@@ -4,6 +4,7 @@ namespace Tendaz\Http\Controllers;
 
 
 use igaster\laravelTheme\Facades\Theme;
+use Illuminate\Support\Facades\Session;
 use Tendaz\Models\Customer;
 use Tendaz\Models\Order\Consult;
 use Tendaz\Models\Store\Shop;

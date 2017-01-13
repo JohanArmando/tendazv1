@@ -43,9 +43,8 @@
                             <div class="col-xs-6 text-center"><strong>Disponible</strong></div>
                             <div class="col-xs-6 text-center">
                                 <span class="green">
-                                    <% product.stock == none || product.stock > 0 || product.stock == unlimited
-                                                    ? 'En Stock ' + '(' + product.stock + ')' : 'Sin Stock' %>
-                                                    ? 'En Stock ' + '(' + product.stock + ')' : 'Sin Stock' %>
+                                    <% product.stock == none || product.stock > 0 || product.stock == unlimite ? 'En Stock ' + '(' + product.stock + ')' : 'Sin Stock' %>
+
                                 </span><hr>
                             </div>
                             <div class="col-xs-6 text-center"><strong>Medios de Pago</strong></div>
@@ -102,7 +101,9 @@
 
                         <p class="text-center buttons" ng-controller="productIndexController" ng-cloak="">
 
-                            <a href="#" ng-click="add(cartId , product)" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Agregar al carrito</a>
+                            <a href="#" ng-hide="product.stock == 0" ng-click="add(cartId , product)" class="btn btn-primary">
+                                <i class="fa fa-shopping-cart"></i> Agregar al carrito</a>
+                            <a href="#" ng-if="product.stock == 0" class="btn btn-primary">Producto Agotado</a>
                         </p>
                     </div>
 

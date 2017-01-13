@@ -7,7 +7,8 @@
 	            	<div>
 						<a href="{{url('/')}}" style="text-decoration: none">
 							@if($shop->logo)
-								<img class="logo replace-2x img-responsive" src="{{ asset("logos/$shop->id/$shop->logo") }}"  alt="Logo de la tienda {{ $shop->name_store }}" />
+								<img class="logo replace-2x img-responsive" src="{{ asset("logos/$shop->id/$shop->logo") }}"
+									 alt="Logo de la tienda {{ $shop->name_store }}" style="max-height: 100px; padding-bottom: 10px"/>
 							@else
 								<h1>{{ $shop->name }}</h1>
 							@endif
@@ -48,11 +49,11 @@
                                 <li ng-repeat="cart in carts.products.data" ng-cloak="">
 									<a href="{{url('/products')}}">
 										<b><% cart.name %></b>
-                                        <span>$<% cart.price %> x <% cart.quantity %></span>
+                                        <span>$<% cart.price | number:2 %> x <% cart.quantity %></span>
 									</a>
                                 </li>
                                 <li class="divider"></li>
-                                <li><a href="{{url('/cart/buy')}}">Total: $ <% carts.original_total %></a></li>
+                                <li><a href="{{url('/cart/buy')}}">Total: $ <% carts.original_total | number:2 %></a></li>
                             </ul>
 	                    </div>
 	                </div>

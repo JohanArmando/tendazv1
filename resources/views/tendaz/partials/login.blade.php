@@ -38,7 +38,7 @@
 <input type="hidden" value="1" name="remember">
     <div class="form-group">
         <div class="col-md-12 text-left">
-            <em>&iquest;No tiene cuenta todavia? </em> <a href="{{url('crea-tu-tienda')}}"><strong>Registrate</strong></a>
+            <em>&iquest;No tiene cuenta todavia? </em> <a href="{{url('/')}}"><strong>Registrate</strong></a>
             <br>
             <a type="button" href="#" data-toggle="modal" data-target="#mymodal"><em>&iquest;Olvidaste tu contrase&ntilde;a?</em>
             </a>

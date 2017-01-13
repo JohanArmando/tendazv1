@@ -40,7 +40,7 @@ class CustomerController extends Controller
     {
         $customer = Customer::create($request->all());
         $address = Address::create($request->shipping[0]);
-        $customer->shipping()->attach($address->id , ['isPrimary' => 1 , 'uuid' => Uuid::generate(4)->string]);
+        $customer->shipping()->attach($address->id , ['isPrimary' => 1]);
         return redirect()->to('admin/customers')->with('message',array('type' => 'success' , 'message' => 'Usuario creado de forma correcta'));
     }
 

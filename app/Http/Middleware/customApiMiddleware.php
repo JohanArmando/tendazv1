@@ -3,6 +3,8 @@
 namespace Tendaz\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Tendaz\Models\Domain\Domain;
 use Tendaz\Models\Store\Shop;
 use Illuminate\Auth\AuthenticationException;
@@ -18,6 +20,7 @@ class customApiMiddleware
      */
     public function handle($request, Closure $next)
     {
+
         if($request->wantsJson())
         {
             if($request->header('Accept') != 'application/json'){

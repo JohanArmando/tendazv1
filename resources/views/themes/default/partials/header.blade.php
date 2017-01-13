@@ -6,21 +6,15 @@
                 <div class="col-md-3">
                     <a href="{{url('/')}}" style="text-decoration: none">
                         @if($shop->logo)
-                            <img style="max-height: 100px" class="logo replace-2x img-responsive" src="{{ asset("logos/$shop->id/$shop->logo") }}"  alt="Logo de la tienda {{ $shop->name_store }}" />
+                            <img style="max-height: 100px" class="logo replace-2x img-responsive" src="{{ asset("logos/$shop->id/$shop->logo") }}"
+                                 alt="Logo de la tienda {{ $shop->name_store }}" />
                         @else
                             <h1>{{ $shop->name }}</h1>
                         @endif
                     </a>
                 </div>
-                <div class="col-sm-8 col-md-6 search-box">
-                    <form class="form-inline">
-                        <div class="form-group search-input">
-                            <input type="text" class="form-control" placeholder="Buscar productos...">
-                        </div><!--
-                            --><div class="form-group search-category hidden-xs">
-                        </div>
-                        <button type="submit" class="search-btn"> </button>
-                    </form>
+                <div class="col-sm-8 col-md-6">
+                    <img class="pull-right hidden-xs hidden-sm" src="{{asset('administrator/image/servientrega-banner.png')}}" style="margin: 10px 20px" alt="">
                 </div>
                 @if(!Request::is('cart/buy'))
                 <div class="col-sm-4 col-md-3 cart-btn hidden-xs"  ng-controller="cartGlobalController" ng-cloak="">
@@ -35,12 +29,12 @@
                             </div>
                             <div class="media-body">
                                 <a href="#"><% cart.name %></a>
-                                <div>$<% cart.price %> x <% cart.quantity %></div>
+                                <div>$<% cart.price | number:2 %> x <% cart.quantity %></div>
                             </div>
                             <div class="media-right"><a href="#" ng-click="destroy(cartId , cart )"><i class="fa fa-trash-o"></i></a></div>
                         </div>
 
-                        <div class="subtotal-cart">Subtotal: <span>$ <% carts.original_total %></span></div>
+                        <div class="subtotal-cart">Subtotal: <span>$ <% carts.original_total | number:2 %></span></div>
                         <div class="text-center chart-checkout-btn">
                             <div class="btn-group" role="group" aria-label="View Cart and Checkout Button">
                                 <a href="{{url('cart/buy')}}">

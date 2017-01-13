@@ -17,7 +17,7 @@
                         <div class="col-sm-8 login-register-form">
                             <div class="title"><span>Crea tu cuenta</span></div>
                             <div class="row">
-                                <form ng-submit="doRegister(registerForm)" method="post" role="form" data-toggle="validator">
+                                <form ng-submit="doRegister(registerForm)" name="registerForm" role="form" data-toggle="validator">
                                     <div class="form-group col-sm-3"  ng-class="{'has-error has-feedback' : registerFormR.RegisterName.$invalid && formSubmited }">
                                         <label for="nameInput">Nombre</label>
                                         <input type="text" ng-model="registerFormR.RegisterName" class="form-control" id="nameInput" placeholder="Nombre" value="{{ old('name') }}" name="name" required>
@@ -53,16 +53,15 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="title"><span>Ya te encuentras registrado ?</span></div>
-                            <form method="post" action="{{url('auth/login')}}" role="form" data-toggle="validator">
-                                {!! csrf_field() !!}
+                            <form name="loginForm" ng-submit="doLogin(loginForm)" role="form" data-toggle="validator">
                                 <div class="form-group">
                                     <label for="emailInputLogin">Email</label>
-                                    <input type="email" class="form-control" value="{{ old('email') }}" name="email" id="email" placeholder="Email" required>
+                                    <input type="email" class="form-control" name="email" value="{{ old('email') }}" ng-model="formLog.loginMail" id="email" placeholder="Email" required>
                                     <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group">
                                     <label for="passwordInputLogin">Contrase&ntilde;a</label>
-                                    <input type="password" class="form-control" name="password" id="password" placeholder="Contrase&ntilde;a" required>
+                                    <input type="password" class="form-control" name="password" ng-model="formLog.loginPassword" id="password" placeholder="Contrase&ntilde;a" required>
                                     <div class="help-block with-errors"></div>
                                 </div>
                                  

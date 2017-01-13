@@ -32,7 +32,7 @@
 					<div class="row">
 						<!-- imagen a la izquierda-->
 						<div class="">
-							<img src="{{asset('logos/'.$shop->id.'/'.$shop->logo)}}" class="img-responsive" align="right"
+							<img src="{{asset('logos/'.$shop->id.'/'.$shop->logo)}}" align="right"
 								 alt="Logo de la tienda" style="border: 1px solid; color: red; width: 300px; height: 100px;
 								 margin-right: 10%;">
 						</div>

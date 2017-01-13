@@ -28,6 +28,7 @@ class ThemeMiddleware
      */
     public function handle($request, Closure $next)
     {
+        
         $domain = $request->getHost();
         $theme = Cache::get("$domain._theme_current");
         if(!$theme){

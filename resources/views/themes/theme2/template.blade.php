@@ -70,6 +70,7 @@
 <script src="{{ asset('Angular/tienda/controller/cartGlobalController.js') }}"></script>
 <script src="{{ asset('Angular/tienda/controller/productIndexController.js') }}"></script>
 <script src="{{ asset('Angular/tienda/controller/productController.js') }}"></script>
+<script src="{{asset('Angular/tienda/controller/customerController.js') }}"></script>
 <script src="{{ asset('Angular/tienda/controller/detailProductController.js') }}"></script>
 <script src="{{ asset('Angular/tienda/service/customerService.js') }}"></script>
 <script src="{{ asset('Angular/tienda/controller/customerController.js') }}"></script>
@@ -105,7 +106,7 @@
         </div>
         <a href="<% BASEURL + '/detail/' + product.slug %>" class="invisible">
             <img class="img-responsive" style="min-height:250px ;max-height: 250px" ng-src="
-                <% BASEURL + '/uploads-products/' + store + '/' + product.attributes.image %>" alt="">
+                <% BASEURL + '/administrator/image/noImage.png' %>" alt="">
         </a>
         <div class="text" ng-if="product.special_price">
             <h3><a href="<% BASEURL + '/detail/' + product.slug %>"><% product.name %></a></h3>
@@ -121,14 +122,12 @@
             <p class="buttons">
                 <a ng-hide="product.stock == 0" ng-click="add(cartId , product)" class="btn btn-primary">
                     <i class="fa fa-shopping-cart"></i>Agregar al carrito</a>
+                <a ng-if="product.stock == 0" class="btn btn-primary">
+                    <i class="fa fa-shopping-cart"></i>Agotado</a>
             </p>
         </div>
 
-        <div class="{{ !Request::is('/') ? : 'hidden'}} ribbon new" ng-if="product.new">
-            <div class="theribbon">Nuevo</div>
-            <div class="ribbon-background"></div>
-        </div>
-        <div class="{{ !Request::is('/') ? : 'hidden'}} ribbon gift" ng-if="product.promotion">
+        <div class="ribbon gift" ng-if="product.special_price">
             <div class="theribbon">
                 Sale
                 <% product.promotion_price_percent | number:0 %>%

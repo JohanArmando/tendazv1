@@ -1,4 +1,4 @@
-@extends('tema1.template')
+@extends(Theme::current()->viewsPath.'.template')
 	@section('css')
 		@stop
 	@section('content')

@@ -2,6 +2,7 @@
 
 namespace Tendaz\Http\Controllers\Tendaz;
 
+use Illuminate\Support\Facades\Session;
 use Tendaz\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use Tendaz\Models\Store\Shop;

@@ -1,4 +1,4 @@
-	@extends('tema2.template')
+	@extends(Theme::current()->viewsPath.'.template')
 	@section('css')
 		@stop
 	@section('content')	
@@ -23,16 +23,16 @@
                     <tbody>
 					  <tr>
 						<th>Nombre de Cliente</th>
-						<td>{{Auth::user()->get()->full_name}}</td>
+						<td>NAME CLIENT</td>
 					  </tr>
 					  <tr>
 						  <th>Email</th>
-						  <td><a href="#">{{Auth::user()->get()->email}}</a></td>
+						  <td><a href="#">EMAIL CLIENT</a></td>
 					  </tr>
 					  <tr>
 						  <th>Telefono</th>
 						  <td>
-							  {{Auth::user()->get()->phone ? Auth::user()->get()->phone : 'Sin numero de telefono'}}
+							 PHONE CLIENT
 						  </td>
 					  </tr>
 					  <tr>
@@ -114,8 +114,8 @@
 				</div>
 			</div>
 			<div style="margin-bottom: 125px;"></div>
-			@include('partials.add-dir')
-			@include('partials.edit-dir')
+			@include(Theme::current()->viewsPath.'.partials.add-dir')
+			@include(Theme::current()->viewsPath.'.partials.edit-dir')
 
 			<!--Modal para modificar datos del perfil-->
 				<div id="modaEditar" class="modal fade" tabindex="-1" role="dialog">
@@ -128,19 +128,19 @@
 							<div class="modal-body">
 								<!--Fomulario-->
 
-								{!! Form::open(['url' =>[ "myProfile",Auth::user()->get()->id ],'method' => 'PUT','files' => true, 'data-toggle'=>'validator', 'role'=>'form']) !!}
+								{!! Form::open(['url' =>[ "myProfile" ],'method' => 'PUT','files' => true, 'data-toggle'=>'validator', 'role'=>'form']) !!}
 										<div class="form-group">
 											<label>Nombres</label>
-											<input type="text" name="name" value="{{Auth::user()->get()->name}}" class="form-control" required autocomplete="on">
+											<input type="text" name="name" value="" class="form-control" required autocomplete="on">
 										</div>
 										<div class="form-group">
 											<label>Apellidos</label>
-											<input type="text" name="last_name" value="{{Auth::user()->get()->last_name}}" class="form-control" required autocomplete="on">
+											<input type="text" name="last_name" value="" class="form-control" required autocomplete="on">
 										</div>
 
 										<div class="form-group">
 											<label>Telefono</label>
-											<input type="text" name="phone" value="{{Auth::user()->get()->phone}}" class="form-control" required>
+											<input type="text" name="phone" value="" class="form-control" required>
 										</div>
 										<hr>
 										<div clas="modal-footer">
