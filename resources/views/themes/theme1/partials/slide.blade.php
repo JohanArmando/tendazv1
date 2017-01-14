@@ -48,6 +48,21 @@
                                         </a>
                                     </li>
                                 @endif
+
+                                @if(!$slider->slider4 == '')
+                                    <li>
+                                        <a href="{{url('/')}}">
+                                            <img src="{{ asset("sliders/".auth('admins')->user()->shop->id.'/'.$slider->slider4) }}" alt=""
+                                                 style="max-width: 850px;max-height: 350px"/>
+                                        </a>
+                                    </li>
+                                @else
+                                    <li>
+                                        <a href="{{url('/')}}">
+                                            <img src="{{asset('themes_tendaz/theme1/images/banner_slider-2.jpg')}}" alt=""/>
+                                        </a>
+                                    </li>
+                                @endif
                             @endif
                         @endforeach
                     </ul>
