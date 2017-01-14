@@ -65,11 +65,17 @@ Mis ventas
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-xs-6" style="margin-left: 71% !important;">
-                                    <form action="{{url('admin/orders/search')}}" method="POST">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <form action="{{url('admin/orders/search')}}" method="GET">
                                         <label for="buscar"><strong>Buscar:</strong></label>
                                         <div role="form">
-                                            <input type="text" class="form-control" style="width:55%;" name="search" onchange="this.form.submit()">
+                                            <div class="col-md-5" style="padding-right: 0; padding-left: 0">
+                                                <input type="text" class="form-control" style="width:100%;border-radius: 5px 0 0 5px" name="search">
+                                            </div>
+                                            <div class="col-md-2" style="padding-left: 0">
+                                                <button type="submit" style="height: 34px; border-radius: 0 5px 5px 0 !important;" class="btn btn-primary">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
@@ -79,8 +85,7 @@ Mis ventas
                             <table class="table table-bordered table-hover table-responsive">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
-                                            <th>order</th>
+                                            <th>Orden</th>
                                             <th>Fecha</th>
                                             <th>Total</th>
                                             <th>Comprador</th>
@@ -91,13 +96,7 @@ Mis ventas
                                     <tbody>
                                     @foreach($orders as $order)
                                         <tr style="font-size: 14px">
-                                            <td>
-                                                <div class="checkbox custom-checkbox text-center">
-                                                    <input id="{{ $order->id }}" value="1" data-toggle="selectrow" data-target="tr" data-contextual="success"  type="checkbox">
-                                                    <label for="{{ $order->id }}"></label>
-                                                </div>
-                                            </td>
-                                            <td><a class="text-tendaz"  href="{{ url('admin/orders')."/".$order->id }}">
+                                            <td class="text-center"><a href="{{ url('admin/orders')."/".$order->id }}">
                                                     #{{  $order->id }}</a></td>
                                             <td>
                                                 <div class="text-center">
