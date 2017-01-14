@@ -9,6 +9,7 @@ use Tendaz\Models\Customer;
 use Tendaz\Models\Payment_method\PaymentValue;
 use Tendaz\Models\Products\Variant;
 use Tendaz\Models\Shipping\ShippingMethod;
+use Tendaz\Models\Store\Shop;
 use Tendaz\Traits\CacheTagsTrait;
 use Tendaz\Traits\UuidAndShopTrait;
 use Tendaz\Traits\WhereShopTrait;
@@ -50,6 +51,11 @@ class Order extends Model
     public function products()
     {
         return $this->belongsToMany(Variant::class, 'order_item')->withPivot('quantity');
+    }
+
+    public function shop()
+    {
+        return $this->belongsTo(Shop::class);
     }
 
     public function status(){
@@ -228,5 +234,11 @@ class Order extends Model
     public  function getCreatedAtAttribute(){
         return  Carbon::parse($this->attributes['created_at'])->format('m/d/Y');
     }
-    
+
+    public function updateStatus($status)
+    {
+        $this->order_status = trans("payments.status.$status");
+        $this->save();
+    }
+
 }

@@ -51,6 +51,7 @@ $appRoute = function (){
     Route::get('checkout/success' , 'checkout\\CheckoutController@successMercadopago');
     Route::get('checkout/failure' , 'checkout\\CheckoutController@failureMercadopago');
     Route::get('checkout/pending' , 'checkout\\CheckoutController@pendingMercadopago');
+    
 
     //Route page build
     Route::get('build' ,'HomeController@build');

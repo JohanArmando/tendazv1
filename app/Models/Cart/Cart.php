@@ -140,4 +140,10 @@ class Cart extends Model
     {
         return $this->belongsTo(Coupon::class);
     }
+
+    public function closed()
+    {
+        $this->status = 'closed';
+        $this->save();
+    }
 }
