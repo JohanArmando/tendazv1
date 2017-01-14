@@ -5,6 +5,7 @@ namespace Tendaz\Http\Controllers\Api\Checkout;
 use Illuminate\Http\Request;
 use Tendaz\Api\Mercadopago;
 use Tendaz\Http\Controllers\Controller;
+use Tendaz\Models\Api\Payment\MePa;
 use Tendaz\Models\Cart\Cart;
 use Tendaz\Models\Payment_method\PaymentValue;
 use Tendaz\Transformers\CartTransformer;
@@ -24,8 +25,8 @@ class PaymentMethodController extends Controller
     {
         $mp = new Mercadopago($payment->api_id , $payment->api_key);
         $access_token = $mp->get_access_token();
-        $cart->order->payment_method = $payment->id;
 
+        $cart->order->payment_method = $payment->id;
         $cart->order->save();
 
         return fractal()
@@ -35,42 +36,48 @@ class PaymentMethodController extends Controller
 
     public function custom(PaymentValue $payment , Cart $cart)
     {
-        //aqui retornamos el carrito cambiando las payment_preferences describiendo el metodo el descuento si hay y la description
+        $cart->order->payment_method = $payment->id;
+        $cart->order->save();
+        return fractal()
+            ->item($cart, new CartTransformer())
+            ->toJson();
     }
 
     public function doPayment(Cart $cart , PaymentValue $payment , Request $request)
     {
-        $mp = new Mercadopago($request->token);
-        //Crear un token para la tarjeta
-        //crear url para responser el metodo de pago
-        //entonces debe de venir el equest
-        $response = $mp->post('/v1/card_tokens' ,[
-            "expiration_month" => 12,
-            "expiration_year"  =>  2017,
-            "security_code"    => "123",
-            'cardholder' => [
-                'identification' => [
-                    'number' => "1013646891",
-                    'type'   => 'CC'
-                ],
-                'name' => "APRO"
-            ],
-            "card_number" => "4013540682746260"
-        ]);
-        
-        $card_token =  (string) $response['response']['id'];
-        //luego realizar el pago
-        $payment = $mp->post('/v1/payments' ,
-            array(
-                "transaction_amount" => 100,
-                "token" => $card_token,
-                "description" => "Title of what you are paying for",
-                "installments" => 1,
-                "payment_method_id" => "visa",
-                "payer" => array (
-                    "email" => "info@tendaz.com"
-                )
-            ));
-        return $payment;
+        //queda una posible solucion un archivo de traduccione por metodo entonces traduce a que clase es la dueña asi evitamos el if y solo enviar los metodoos
+        //unificar todas las pasarelas de apgos en paquetes
+        //queda pendiente si un trans para un metodo de pago es lo mejor
+        //optimizar las tablas
+        //optimizar el metodo para el transformerts que muestra algunos datos segun el metodo de apgo
+        //revisar como optimizar cuando hay muchas insercciones
+        //revisar como optimizar cuando se hace un join largo
+        //revisar como optimar muchos datos de estadisiticas
+        //2537364453
+        //tablas raras = supcriciones , orders , order_status ,address , metodos de pago
+        if ($payment->payment_method_id == 1){
+            $mp = new MePa($cart , $request->token, $request);
+            $payment = $mp->generate();
+
+            $cart->order->updateStatus($payment['response']['status']);
+            
+            $cart->order->api_id =  $payment['response']['id'];
+            $cart->order->save();
+            //actualizar order items puede ser un evento
+            $cart->closed();
+            
+            return response([
+                'status' => $payment['response']['status'],
+                'description' => $payment['response']['status_detail'],
+            ] ,$payment['status']);
+
+        }else{
+            $cart->order->updateStatus("approved");
+            $cart->closed();
+            return response([
+                'status' => 'approved',
+                'description' => 'payment_success',
+            ] ,201);
+        }
     }
 }

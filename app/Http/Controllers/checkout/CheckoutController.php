@@ -83,4 +83,5 @@ class CheckoutController extends Controller
         }
         return redirect(url('/checkout?status=pending'));
     }
+
 }

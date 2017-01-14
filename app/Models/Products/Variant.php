@@ -22,9 +22,21 @@ class Variant extends Model
         return 'uuid';
     }
 
+    public function mepaItem()
+    {
+        return [
+            "title" => $this->product->name,
+            "description" => $this->product->description,
+            "quantity"  => $this->pivot->quantity,
+            "unit_price" => $this->originalPrice,
+            "picture_url" => $this->product->mainImage()
+        ];
+    }
+
     /**
      * RELATHIONSHIP
      */
+
     public function cart()
     {
         return $this->belongsToMany(Cart::class , 'cart_products');
@@ -141,6 +153,11 @@ class Variant extends Model
     public function getStockAttribute()
     {
         return $this->attributes['stock'] < 0 ? 'unlimited' : $this->attributes['stock'];
+    }
+
+    public function getOriginalPriceAttribute()
+    {
+        return (int)  $this->product->collection->promotion ? $this->attributes['promotional_price'] : $this->attributes['price'];
     }
 
     public function getPriceAttribute()

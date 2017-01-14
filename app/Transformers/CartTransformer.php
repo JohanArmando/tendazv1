@@ -25,7 +25,7 @@ class CartTransformer extends  TransformerAbstract
     }
 
     protected $defaultIncludes = [
-        'products' , 'customer' , 'shippingAddress' , 'order' , 'shippingMethod' , 'coupon' , 'shop' , 'paymentPreferences'
+        'products' , 'customer' , 'shippingAddress' , 'order' , 'shippingMethod' , 'coupon' , 'shop' , 'paymentPreferences' ,'paymentsMethods'
     ];
     
     public function transform(Cart $cart)
@@ -51,6 +51,12 @@ class CartTransformer extends  TransformerAbstract
     public function includeProducts(Cart $cart){
         $products = $cart->products;
         return $this->collection($products, new  ProductTransformer());
+    }
+
+    public function includePaymentsMethods(Cart $cart){;
+        return $cart->shop->payments_methods ?
+            $this->collection($cart->shop->payments_methods, new  PaymentValueTransformer())
+            : $this->null();
     }
 
     public function includeCustomer(Cart $cart){

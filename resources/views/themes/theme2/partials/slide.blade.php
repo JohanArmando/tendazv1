@@ -31,7 +31,18 @@
                             <a href="{{url('/')}}"><img src="themes_tendaz/theme2/img/main-slider3.jpg" alt="Slider"></a>
                         </div>
                     @endif
+
+                    @if(!$slider->slider4 == '')
+                        <div class="item">
+                            <a href="{{url('/')}}"><img src="{{ asset("sliders/".$slider->id.'/'.$slider->slider4) }}" alt="Slider"
+                                                        style="max-width: 100%;max-height: 510px;min-height: 510px"></a>
+                        </div>
+                    @else
+                        <div class="item">
+                            <a href="{{url('/')}}"><img src="themes_tendaz/theme2/img/main-slider2.jpg" alt="Slider"></a>
+                        </div>
                     @endif
+                @endif
             @endforeach
         </div>
         <!-- /#main-slider -->

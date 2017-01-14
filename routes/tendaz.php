@@ -25,6 +25,8 @@ $appRoute = function (){
         Route::post('/password/email' ,'ForgotPasswordController@sendResetLinkEmail');
         Route::get('/password/reset/{token} ' ,'ResetPasswordController@showResetForm');
         Route::post('/password/reset' ,'ResetPasswordController@reset');
+        Route::get('mepa/payments/notification' , 'Checkout\\NotificationController@notification');
+
     });
 };
 Route::group(['domain' => $domain->getDomain()], $appRoute);

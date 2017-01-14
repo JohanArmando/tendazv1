@@ -23,7 +23,7 @@ class PaymentValueTransformer extends TransformerAbstract
 
     public function transform(PaymentValue $paymentValue)
     {
-        switch ($paymentValue->paymentMethod->id){
+        switch ($paymentValue->payment_method_id){
             case 1:
                 return [
                     '_id' => $paymentValue->uuid,
@@ -32,8 +32,9 @@ class PaymentValueTransformer extends TransformerAbstract
                     'name'          => $paymentValue->paymentMethod->name
                 ];
             break;
-            case 4:
+            case 3:
                 return [
+                    '_id' => $paymentValue->uuid,
                     'discount' => $paymentValue->discount,
                     'instructions' => $paymentValue->instructions,
                     'custom_name' => $paymentValue->custom_name,

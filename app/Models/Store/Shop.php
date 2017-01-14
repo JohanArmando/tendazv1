@@ -5,6 +5,7 @@ namespace Tendaz\Models\Store;
 use Tendaz\Models\Country;
 use Tendaz\Models\Domain\Domain;
 use Tendaz\Models\Payment_method\PaymentMethod;
+use Tendaz\Models\Payment_method\PaymentValue;
 use Tendaz\Models\Products\Product;
 use Tendaz\Models\Subscription\Plan;
 use Tendaz\Models\Subscription\Subscription;
@@ -139,8 +140,12 @@ class Shop extends Model
     public function mercadopago(){
         return $this->belongsToMany(PaymentMethod::class, 'payment_values')->where('payment_methods.id' , 1)->withPivot('api_id' , 'api_key');
     }
-      public function payments_values(){
-        return $this->belongsToMany(PaymentMethod::class, 'payment_values');
+    public function payments_values(){
+        return $this->belongsToMany(PaymentMethod::class, 'payment_values')->where('avaliable' ,1);
+    } 
+    
+    public function payments_methods(){
+        return $this->hasMany(PaymentValue::class);
     }
 
     public function originalSubscription(){
