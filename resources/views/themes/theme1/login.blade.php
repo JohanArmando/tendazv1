@@ -1,5 +1,9 @@
 @extends(Theme::current()->viewsPath.'.template')
     @section('css')
+        <style type="text/css">
+            .btn span.fa {  opacity: 0;  }
+            .btn.active span.fa {  opacity: 1;  }
+        </style>
         @stop
     @section('content')
         <div class="container">
@@ -47,6 +51,23 @@
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
+                        <div class="form-group col-sm-6">
+                            <div class=""  data-toggle="buttons">
+                                <label class="btn btn-default btn-xs">
+                                    <input type="checkbox"   style="zoom: 2.0;" required>
+                                    <span class="fa fa-check" style="color: darkblue;"></span>
+                                </label> &nbsp; <a data-toggle="modal" data-target="#modalConditions" >Acepto Terminos y Condiciones.</a>
+                            </div>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <div class=""  data-toggle="buttons">
+                                <label class="btn btn-default btn-xs active">
+                                    <input type="checkbox"   style="zoom: 2.0;">
+                                    <span class="fa fa-check" style="color: darkblue;"></span>
+                                </label> &nbsp; Acepto Envios de Correos.
+                            </div>
+                        </div>
                         <div class="clearfixs"></div>
                         <button class="btn btn-default" type="submit">Registrar <i class="fa fa-check"></i> </button>
                         <div class="clearfix"></div>
@@ -77,10 +98,11 @@
                                 </div>
                                 <div class="help-block with-errors"></div>
                             </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox"> Recordarme
-                                </label>
+                            <div class=""  data-toggle="buttons">
+                                <label class="btn btn-default btn-xs">
+                                    <input type="checkbox"  autocomplete="off" style="zoom: 2.0;" required>
+                                    <span class="fa fa-check" style="color: darkblue;"></span>
+                                </label> &nbsp; Recordar
                             </div>
                             <div class="form-group">
                             <button type="submit" class="btn btn-sm btn-primary pull-right"><i class="fa fa-long-arrow-right"></i> Iniciar sesion</button>

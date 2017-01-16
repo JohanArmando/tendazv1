@@ -54,7 +54,7 @@ Mis provedores
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Telefono:</label>
-                                    <input type="text" name="phone" value="{{$provider->phone}}" class="form-control" data-mask="999-9999-999" required>
+                                    <input type="number" name="phone" value="{{$provider->phone}}" class="form-control" required>
                                 </div>
                             </div>
                             <div class="col-md-6">

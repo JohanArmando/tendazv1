@@ -138,6 +138,7 @@
     </div>
 </script>
 @yield('script')
+@include('themes.default.partials.conditions')
 @include('globalPartials.iframeAdmin')
 @include('admin.partials.message')
 </body>

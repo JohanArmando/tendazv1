@@ -17,12 +17,21 @@
                         </div>
                         <div class="col-sm-4 col-md-4 col-lg-3 col-xl-2">
                             <div class="mobile-collapse">
-                                <h4 class="text-left  title-under  mobile-collapse__title">CATEGORIAS</h4>
-                                <div class="column"  ng-controller="categoryTemplateController">
+                                <h4 class="text-left  title-under  mobile-collapse__title">MAS INFORMACI&Oacute;N</h4>
+                                <div class="column">
                                     <ul>
-                                        <li ng-repeat="category in categories | limitTo:4">
-                                            <a href="<% BASEURL + '/products/' + category.slug %>"><% category.name %></a>
-                                        </li>
+                                        @if(!$shop->store->address_1 == '')
+                                            <li><strong>Email: </strong><span> {{$shop->store->address_1}}</span></li>
+                                        @endif
+                                        @if(!$shop->store->number_phone == '')
+                                            <li><strong>Telefono: </strong><span> {{$shop->store->number_phone}}</span></li>
+                                        @endif
+                                        @if(!$shop->store->number_phone == '')
+                                            <li><strong>Direcci&oacute;n: </strong><span> {{$shop->store->address_2}}</span></li>
+                                        @endif
+                                        @if(!$shop->store->conditions == '')
+                                            <li><a href="#" data-toggle="modal" data-target="#modalConditions">Terminos  y condiciones</a></li>
+                                        @endif
                                     </ul>
                                 </div>
                             </div>

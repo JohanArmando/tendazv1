@@ -1,8 +1,10 @@
 .stats{  background-color: white;  margin-bottom: 70px;  padding: 20px 20px 20px 20px;  }
 .inputAdvanced {  background-color: #F2F2F2;  border: 0;  text-align: center;  height: 30px;  }
+input[type="date"], input[type="time"], input[type="datetime-local"], input[type="month"] {  line-height: 25px !important;}
 #link_tab{  background-color: #f26522;  color: white !important;  }
 #link_tab .active{  background-color: #f26522;  color: white !important;  }
 #link_tab a {  color: white;  }
+#link_tab a span{  color: white; font-size: 15px;font-family: 'Lato', sans-serif}
 #link_tab a:hover {  color: white;  }
 select {  height: 30px;  }
 .triangle {  width: 0;  height: 0;  border-left: 20px solid #f26522;  border-top: 40px solid transparent; }
