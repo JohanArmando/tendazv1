@@ -85,7 +85,7 @@ Mis provedores
                                 <td class="text-center">
                                     <form action="{{url('admin/providers/'.$provider->uuid)}}" method="GET">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <button type="submit" class="btn btn-warning"><i class="fa fa-edit"></i></button>
+                                        <button type="submit" class="btn btn-primary"><i class="fa fa-edit"></i></button>
                                     </form>
                                 </td>
                                 <td class="text-center">
@@ -140,7 +140,7 @@ Mis provedores
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Telefono:</label>
-                                    <input type="text" name="phone" class="form-control" required>
+                                    <input type="number" name="phone" class="form-control" required>
                                 </div>
                             </div>
                             <div class="col-md-6">

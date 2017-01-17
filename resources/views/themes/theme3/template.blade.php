@@ -103,6 +103,7 @@
 <script src="{{ asset('components/js/rzslider.min.js') }}"></script>
 <script src="{{ asset('components/js/angularSanitize.min.js') }}"></script>
 @yield('script')
+@include('themes.default.partials.conditions')
 @include('globalPartials.iframeAdmin')
 @include('admin.partials.message')
         <!--Fin-->

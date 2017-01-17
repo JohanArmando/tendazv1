@@ -126,6 +126,7 @@
         </script>
     @yield('script')
     <!--Fin-->
+        @include('themes.default.partials.conditions')
         @include('globalPartials.iframeAdmin')
         @include('admin.partials.message')
 </body>

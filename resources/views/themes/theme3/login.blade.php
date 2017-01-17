@@ -113,6 +113,23 @@
                                                    ng-model="registerFormR.RegisterPasswordConfirm" id="inputPasswordConfirm" data-match="#inputPassword"  class="input-text"  required>
                                             <div class="help-block with-errors"></div>
                                         </div>
+                                        <div class="form-row form-row-wide  form-group">
+                                            <div class=""  data-toggle="buttons">
+                                                <label class="btn btn-default btn-xs">
+                                                    <input type="checkbox"  autocomplete="off" style="zoom: 2.0;" required>
+                                                    <span class="fa fa-check" style="color: darkblue;"></span>
+                                                </label> &nbsp; <a data-toggle="modal" data-target="#modalConditions" >Acepto Terminos y Condiciones.</a>
+                                            </div>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                        <div class="form-row form-row-wide  form-group">
+                                            <div class=""  data-toggle="buttons">
+                                                <label class="btn btn-default btn-xs active">
+                                                    <input type="checkbox"  autocomplete="off" style="zoom: 2.0;">
+                                                    <span class="fa fa-check" style="color: darkblue;"></span>
+                                                </label> &nbsp; Acepto Envios de Correos.
+                                            </div>
+                                        </div>
                                         
                                         <div class="form-row text-center">
                                             <input type="submit" class="button" name="register" value="Registrar">
