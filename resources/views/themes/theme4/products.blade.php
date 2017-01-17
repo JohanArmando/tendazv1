@@ -1,5 +1,7 @@
 @extends(Theme::current()->viewsPath.'.template')
-
+<script>
+	var search = "{{ Request::input('search') }}"
+</script>
 	@section('css')
 		<style>
 			.active{
@@ -78,20 +80,6 @@
 									<a href="#" class="sort-direction fa fa-arrow-down active" ng-show="reverse"></a>
 								</div>
 							</div>
-								<div class="col-md-4">
-									<div class="search link-inline pull-right mobile-menu-off">
-										<a href="#" class="search__open"><span class="icon icon-search"></span></a>
-										<div class="search-dropdown">
-											<form  action="#" method="get">
-												<div class="input-outer">
-													<input type="search" name="search" value="" ng-model="search.name" maxlength="128" placeholder="BUSCAR:">
-													<button type="submit" title="" class="icon icon-search"></button>
-												</div>
-												<a href="#" class="search__close"><span class="icon icon-close"></span></a>
-											</form>
-										</div>
-									</div>
-								</div>
 							<div class="pull-right">
 								<div class="filters-row__items hidden-sm hidden-xs">Mostrando <% filtered.length %>  de <% products.length %> Item(s)</div>
 								<div class="filters-row__select hidden-sm hidden-xs">
@@ -115,6 +103,7 @@
 						</div>
 
 						<div class="product-listing row" >
+							<h4 class="text-center" ng-if="filtered.length == 0"><strong>No se encontraron productos</strong></h4>
 							<div class="col-xs-6 col-sm-4 col-md-3 col-lg- col-xl-one-fifth" dir-paginate="product in filtered = (products  | itemsPerPage: 15 | filter:search | orderBy:propertyName:reverse)">
 								<div ng-include="'tpl.html'"></div>
 							</div>

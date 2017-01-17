@@ -23,8 +23,10 @@ $appRoute = function (){
     });
 
     //products
-    Route::get('products/{all?}','HomeController@product')
-        ->where('all', '.*');
+    Route::get('products/{all?}',[
+        'uses' => 'HomeController@product',
+        'as'   => 'products.all'
+    ])->where('all', '.*');
 
     //cart
     Route::get('cart/buy','HomeController@cart');
