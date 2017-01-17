@@ -2,6 +2,7 @@
 (function(){
 
     var myApp = angular.module('app',[
+        'account',
         'ngSanitize',
         'app.Controller',
         'app.categoryTemplateController',

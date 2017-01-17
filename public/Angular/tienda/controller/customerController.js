@@ -39,12 +39,11 @@
         }
 
         $http(toLog).then(function(response) {
-             $cookies.put('auth' , JSON.stringify(response.data));
+            $cookies.put('auth' , JSON.stringify(response.data) , {path: '/'});
              localStorage.setItem('cart_id',response.data.cart_id);
                location.reload();
         }, function(error) {
             $scope.erroreslogin = error.data;
-            console.log($scope.errores);
             $scope.errormail = $scope.errores.email;
             $scope.errorpassword = $scope.errores.password;
             $scope.errores = true;
@@ -74,7 +73,7 @@
         }
 
         $http(toLog).then(function(response) {
-             $cookies.put('auth' , JSON.stringify(response.data));
+            $cookies.put('auth' , JSON.stringify(response.data) , {path: '/'});
              localStorage.setItem('cart_id',response.data.cart_id);
                location.reload();
         }, function(error) {

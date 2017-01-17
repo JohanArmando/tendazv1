@@ -21,9 +21,8 @@
                 password: data.password
             }
         }).then(function(response) {
-        	console.log("Ingreso a la tienda");
             $location.path('/cart');
-            $cookies.put('auth' , JSON.stringify(response.data));
+            $cookies.put('auth' , JSON.stringify(response.data) , {path: '/', secure: true});
             localStorage.setItem('cart_id',response.data.cart_id);
             // $('#sign-up').modal('toggle');
             location.reload();

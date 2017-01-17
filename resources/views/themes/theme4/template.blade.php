@@ -28,6 +28,9 @@
 		var slug = "{{ isset($slug) ? $slug : ''}}";
 	</script>
 	<style>
+		.modal-content{
+			min-height: 450px;
+		}
 		a:hover{
 			cursor: pointer;
 		}
@@ -48,6 +51,10 @@
 		[ng\:cloak], [ng-cloak], .ng-cloak {
 			display: none !important;
 		}
+		.alert > ul {
+			margin-bottom: 0;
+			margin-left: -20px;
+		}
 	</style>
 		@yield('css')
 	<!--Fin-->
@@ -60,6 +67,7 @@
 			@yield('content')
 		</div>
 		@include(Theme::current()->viewsPath.'.partials.modal_login')
+		@include(Theme::current()->viewsPath.'.partials.restore_password')
 		@include(Theme::current()->viewsPath.'.partials.modal_register')
 		@include(Theme::current()->viewsPath.'.partials.footer')
 
@@ -103,6 +111,11 @@
 	<script src="{{asset('components/js/dirPagination.js') }}"></script>
 	<script src="{{asset('components/js/rzslider.min.js') }}"></script>
 	<script src="{{asset('components/js/angularSanitize.min.js') }}"></script>
+
+	<!-- SCRIPTS ANGULAR ACCOUNT -->
+	<script src="{{ asset('store/js/app.js') }}"></script>
+	<script src="{{ asset('store/js/controllers.js') }}"></script>
+	<script src="{{ asset('store/js/models.js') }}"></script>
 
 	<script type="text/ng-template" id="tpl.html" >
 		<div id="megaMenuCarousel1" class="product"  ng-class="{ ' sold-out' : product.stock == 0 , ' product--zoom' : !product.promotion && !product.feature} ">
@@ -169,6 +182,7 @@
 				$j('#form-login').submit();
 			});
 		});
+
 	</script>
 	<script>
 		$j(document).ready(function() {

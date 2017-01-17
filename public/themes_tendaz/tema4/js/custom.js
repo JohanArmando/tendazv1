@@ -1,7 +1,9 @@
 "use strict";
 	
 	var $j = jQuery.noConflict();
-
+	$j('.modalRestore').click(function() {
+		$j('#modalLoginForm').modal('toggle');
+	});
 	
 // 	Uncommenting these lines if prototype.js is used
 

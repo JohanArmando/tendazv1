@@ -25029,6 +25029,10 @@ body .fill-bg .radio {
   -ms-justify-content: center;
   justify-content: center;
 }
+.modal-content{
+  vertical-align: middle;
+  display: table-cell;
+}
 .tabs nav ul li {
   position: relative;
   z-index: 1;
@@ -25039,6 +25043,17 @@ body .fill-bg .radio {
   -moz-flex: 1;
   -ms-flex: 1;
   flex: 1;
+}
+.control_from_inp{
+  border: 1px solid rgba(31, 192, 160, 0.32)!important;
+  transition.4s;
+}
+.control_from_inp:focus{
+  border: 1px solid rgb(31, 192, 160)!important;
+  transition.4s!important;
+}
+.modal-dialog.white-modal.modal-sm {
+  border: 3px solid black;
 }
 .tabs nav a {
   position: relative;

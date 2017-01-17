@@ -42,6 +42,10 @@ Route::group(['domain' => env('APP_API_URL') , 'namespace' => 'Api'] , function 
     
     Route::post('password/email' , [
         'uses' => 'Auth\\ForgotPasswordController@sendResetLinkEmail'
+    ]);  
+    
+    Route::post('password/reset' , [
+        'uses' => 'Auth\\ResetPasswordController@reset'
     ]);
     
     Route::get('customers/{customer}/addresses/{address}/main' , [
