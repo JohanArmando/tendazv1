@@ -30,7 +30,10 @@ $appRoute = function (){
     Route::get('cart/buy','HomeController@cart');
 
     //cart
-    Route::get('detail/{id}','HomeController@detail');
+    Route::get('detail/{slug}',[
+        'uses' => 'HomeController@detail',
+        'as'  => 'product.store.show'
+    ]);
 
     //contact
     Route::get('contact', 'HomeController@contact');

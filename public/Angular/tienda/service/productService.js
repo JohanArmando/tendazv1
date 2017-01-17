@@ -26,6 +26,9 @@
                 },
                 getAncestorCategory : function (category) {
                     return $http.get( BASEURL + '/categories' + category + '?client_secret=' + client_secret + '&client_id=' +client_id , config);
+                },
+                getRelationsProducts: function (slug) {
+                    return $http.get(BASEURL  + '/product-relations/' + slug + '?client_secret=' + client_secret + '&client_id=' +client_id , config)
                 }
             }
         });

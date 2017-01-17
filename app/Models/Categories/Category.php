@@ -38,7 +38,12 @@ class Category extends Node
     public function products(){
         return $this->belongsToMany(Product::class , 'category_product');
     }
-
+    
+    public function scopeWhereInCategoryId($q , Model $product)
+    {
+        return $q->whereIn('categories.id' ,    $product->categories->pluck('id')->toArray());
+    }
+    
     public function setNameAttribute($name)
     {
         $this->attributes['name'] = $name;

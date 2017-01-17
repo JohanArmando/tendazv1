@@ -33,8 +33,9 @@ class ProductTransformer extends TransformerAbstract
             'stock'              => $variant->stock,
             'sku'                => $variant->sku,
             'visible'            => $variant->product->publish,
-            'quantity'           => $variant->pivot  ? $variant->pivot->quantity : null,
-            'description'        => $variant->product->description
+            'quantity'           => $variant->pivot  ? $variant->pivot->quantity : 1,
+            'description'        => $variant->product->description,
+            'url'                => $variant->product->url
         ];
     }
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 use League\Fractal\Serializer\ArraySerializer;
 use Tendaz\Http\Controllers\Controller;
+use Tendaz\Models\Categories\Category;
 use Tendaz\Models\Products\Product;
 use Tendaz\Models\Products\Variant;
 use Tendaz\Transformers\ProductTransformer;
@@ -49,5 +50,11 @@ class ProductsController extends Controller
             ->withResourceName('products')
             //->paginateWith(new IlluminatePaginatorAdapter($paginator))
             ->toArray();
+    }
+
+    public function relations(Product $product)
+    {
+        $products = Variant::RelationProduct($product);
+        return  fractal()->collection($products, new ProductTransformer());
     }
 }

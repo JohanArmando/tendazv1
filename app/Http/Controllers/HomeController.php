@@ -33,7 +33,7 @@ class HomeController extends Controller
         return view(Theme::current()->viewsPath.'.cart');
     }
 
-    public function detail ($subdomain,$slug){
+    public function detail ($subdomain , $slug){
         return view(Theme::current()->viewsPath.'.detail',compact('slug'));
     }
 
