@@ -10,8 +10,8 @@
             $scope.showCart = {'loading' : false};
             cartService.getAllProductsForCart($rootScope.cartId)
                 .then(function (response) {
-                    $scope.carts = response.data.data;
-                    angular.forEach($scope.carts.products.data , function (v , i) {
+                    $rootScope.carts = response.data.data;
+                    angular.forEach($rootScope.carts.products.data , function (v , i) {
                         angular.forEach(v.values.data , function (value, index) {
                             
                         })
@@ -25,10 +25,10 @@
                 };
                 cartService.updateItemQuantity(cartId , data)
                     .then(function (response) {
-                        $scope.carts = response.data.data;
+                        $rootScope.carts = response.data.data;
                     })
                     .catch(function (response) {
-                        $scope.carts = response.data.data;
+                        $rootScope.carts = response.data.data;
                         toastr["warning"]("No hay suficiente stock para el producto " + item.name);
                     });
                 $timeout(function () {
@@ -38,7 +38,7 @@
             $scope.emptyCart = function (cartId) {
                 cartService.emptyCart(cartId)
                     .then(function () {
-                        $scope.carts = {};
+                        $rootScope.carts = {};
                         toastr["info"]("El carrito ahora esta vacio");
                     });
             };
@@ -48,8 +48,8 @@
                 cartService.deleteItem(cartId , item._id)
                     .then(function (response) {
                         var index= $scope.carts.products.data.indexOf(item);
-                        $scope.carts.products.data.splice(index,1);
-                        $scope.quantity =  response.quantity;
+                        $rootScope.carts.products.data.splice(index,1);
+                        $rootScope.carts = response.data.data;
                         $timeout(function () {
                             $scope.toggleLoading(false);
                         } , 1000)

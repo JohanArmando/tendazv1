@@ -13,6 +13,7 @@
 						@endif
 					</a>
 				</div>
+
 				@if(!Request::is('cart/buy'))
 					<div class="col-sm-6 col-md-8 col-lg-8 col-xl-8 pull-right text-right" ng-controller="cartGlobalController" ng-cloak="">
 						<div class="row-functional-link">

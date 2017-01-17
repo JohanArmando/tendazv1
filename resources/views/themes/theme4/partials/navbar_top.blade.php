@@ -4,6 +4,18 @@
 
         </div>
         <div class="col-sm-9 col-md-9 col-lg-9 col-xl-9 text-right">
+            <div class="search link-inline pull-right mobile-menu-off">
+                <a href="#" class="search__open"><span class="icon icon-search"></span></a>
+                <div class="search-dropdown">
+                    <form action="{{ url('/products') }}" method="get">
+                        <div class="input-outer">
+                            <input type="search" name="search" value="" maxlength="128" placeholder="BURCAR PRODUCTO" class="placeholder">
+                            <button type="submit" title="" class="icon icon-search"></button>
+                        </div>
+                        <a href="#" class="search__close"><span class="icon icon-close"></span></a>
+                    </form>
+                </div>
+            </div>
             <div class="account link-inline  hidden mobile-menu-on"  ng-if="!usuario">
                 <div class="dropdown text-right">
                     <a class="dropdown-toggle" data-toggle="dropdown">

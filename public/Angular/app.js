@@ -68,6 +68,7 @@
             };
             cartService.updateItemQuantity(cartId , data)
                 .then(function (response) {
+                    $rootScope.carts = response.data.data;
                     toastr["info"]("Item agregado al carrito");
                 }).catch(function (response) {
                 toastr["warning"]("No hay suficiente cantidad del producto");
