@@ -35,7 +35,7 @@
 				<section class="content offset-top-1">
 					<div class="container">
 						<div class="row product-info-outer">
-							<div class="col-sm-12 col-md-12 col-lg-12 col-xl-8">
+							<div class="col-sm-12 col-md-9 col-lg-9 col-xl-9">
 								<div class="row">
 									<div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
 									<div class="container-fluid">
@@ -154,7 +154,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="content">
+								<div class="content" style="margin-left: 20px">
 									<ul class="nav nav-tabs nav-tabs--ys1" role="tablist">
 										<li class="active"><a href="#Tab1"  role="tab" data-toggle="tab" class="text-uppercase">Descripci&oacute;n</a></li>
 										<li class="hidden"><a href="#Tab2" role="tab" data-toggle="tab" class="text-uppercase">Comentarios</a></li>

@@ -3,7 +3,7 @@
 	        <div class="row hidden-xs">
 
 	        	<!-- Logo -->
-	            <div class="col-lg-4 col-md-3">
+	            <div class="col-lg-2 col-md-2">
 	            	<div>
 						<a href="{{url('/')}}" style="text-decoration: none">
 							@if($shop->logo)
@@ -18,11 +18,11 @@
 	            <!-- End Logo -->
 
 				<!-- Search Form -->
-	            <div class="col-lg-5 col-md-5 col-sm-7 col-xs-12">
+	            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
 	            	<div class="well">
-	                    <form action="#">
+	                    <form action="{{ url('/products') }}" method="get">
 	                        <div class="input-group">
-	                            <input style="height: 33px" type="text" class="form-control input-search" placeholder="Buscar producto..."/>
+	                            <input style="height: 33px" type="text" name="search" class="form-control input-search" placeholder="Buscar producto..."/>
 	                            <span class="input-group-btn">
 	                                <button class="btn btn-default no-border-left" type="submit" style="background-color: #384248">
 										<i class="fa fa-search" style="color: white"></i></button>
@@ -35,7 +35,7 @@
 
 				@if(!Request::is('cart/buy'))
 	            <!-- Shopping Cart List -->
-	            <div class="col-lg-3 col-md-4 col-sm-5 hidden-xs"  ng-controller="cartGlobalController" ng-cloak="">
+	            <div class="col-lg-3 col-md-5 col-sm-5 hidden-xs"  ng-controller="cartGlobalController" ng-cloak="">
 	                <div class="well">
 	                    <div class="btn-group btn-group-cart">
 	                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -60,6 +60,10 @@
 	            </div>
 	            <!-- End Shopping Cart List -->
 				@endif
+
+				<div class="col-sm-12 col-md-2">
+					<img class="pull-right hidden-xs hidden-sm" src="{{asset('administrator/image/servientrega-banner.png')}}" style="margin: 10px 20px" alt="">
+				</div>
 
 	        </div>
 	    </div>

@@ -86,6 +86,7 @@
 		</div>
 	</div>
         <div class="navbar-inverse text-center copyright">
-        	Tendaz.com | By Maxcorp 2016.
+			<img src="{{asset('administrator/image/servientrega-footer.gif')}}" alt="" height="20px">
+			Copyright @ 2017 By Maxcorp Inc.
         </div>
     </footer>

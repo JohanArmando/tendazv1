@@ -100,7 +100,7 @@
                             </div>
                             <div class=""  data-toggle="buttons">
                                 <label class="btn btn-default btn-xs">
-                                    <input type="checkbox"  autocomplete="off" style="zoom: 2.0;" required>
+                                    <input type="checkbox"  autocomplete="off" style="zoom: 2.0;">
                                     <span class="fa fa-check" style="color: darkblue;"></span>
                                 </label> &nbsp; Recordar
                             </div>

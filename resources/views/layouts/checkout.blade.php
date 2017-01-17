@@ -6,7 +6,7 @@
    <title>Checkout</title>
    <link href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
    <link rel="stylesheet" type="text/css" href="{{ asset('new-checkout/css/modal-checkout.css') }}">
-   <link href="{{ asset('/checkout-comp/assets/css/main.css') }}" rel="stylesheet">
+   <link href="{{ asset('new-checkout/css/main.css') }}" rel="stylesheet">
    <link href="{{ asset('bower_components/sweetalert/dist/sweetalert.css')}}" rel="stylesheet">
    <script>
       var client_secret = "{{ $shop->uuid }}";
@@ -159,7 +159,6 @@
 </div>
 <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
 <script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('checkout-comp/assets/js/main.js') }}"></script>
 <script src="{{ asset('bower_components/angular/angular.min.js') }}"></script>
 <script src="{{ asset('bower_components/angular-route/angular-route.min.js') }}"></script>
 <script src="{{ asset('bower_components/angular-cookies/angular-cookies.min.js') }}"></script>

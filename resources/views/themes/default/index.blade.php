@@ -9,7 +9,7 @@
             @include('themes.default.partials.slider')
         </div>
         <!-- End Slider -->
-        <div class="col-md-3 visible-lg" ng-repeat="product in features | limitTo:2" ng-cloak="">
+        <div class="col-md-3 visible-lg" ng-cloak="">
             @include('themes.default.partials.slide-small')
         </div>
     </div>

@@ -78,7 +78,7 @@
                                         <div class="quantity hidden">
                                             <input type="number" step="1" min="1" name="quantity" value="1" title="Qty" class="input-text qty text" size="4"/>
                                         </div>
-                                        <button ng-click="add(cartId , product)" type="submit" class="single_add_to_cart_button button" >
+                                        <button ng-if="!product.stock == 0" ng-click="add(cartId , product)" type="submit" class="single_add_to_cart_button button" >
                                             <i class="fa fa-shopping-cart"></i> Agregar al carro</button>
                                     </form>
 

@@ -72,7 +72,7 @@ class HomeController extends Controller
             'El mensaje ha sido enviado con exito, muchas gracias.' , 'type' => 'info'));
     }
 
-    public function login (){
+    public function login (Request $request){
         $user = new Customer();
 
         return view(Theme::current()->viewsPath.'.login' , ['users' => $user]);
