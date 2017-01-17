@@ -99,8 +99,7 @@
 									@include(Theme::current()->viewsPath.'.partials.categories_tree')
 									<li class="{{ Request::is('contact') ? 'active' : '' }}">
 										<a href="{{url('/contact')}}"><span class="act-underline">Cont&aacute;ctenos</span></a></li>
-									<li class="{{ Request::is('cart/buy') ? 'active' : '' }}"><a href="{{url('/cart/buy')}}">
-											<i class="fa fa-shopping-cart">&nbsp;</i><span class="act-underline">  Carrito de compras</span></a></li>
+									<li class="{{ Request::is('cart/buy') ? 'active' : '' }}"><a href="{{url('/cart/buy')}}"><span class="act-underline">  Carrito de compras</span></a></li>
 								</ul>
 							</div>
 						</nav>

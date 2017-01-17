@@ -18,6 +18,9 @@
                         <div class="title-box">
                             <h2 class="text-center text-uppercase title-under"><% cate ? cate : 'Todos los productos' %></h2>
                         </div>
+                        <h4 class="text-center text-uppercase">
+                            <small>{{ !Request::input('search') ?'': "Buscando '". Request::input('search') ."' en $shop->name" }}</small>
+                        </h4>
 
                         <div class="offset-top-20">
                             <p class="light-font text-center" ng-if="products.length <= 0">No hay productos en esta categoria</p>
@@ -61,7 +64,7 @@
                             <hr>
                         </div>
 
-                        <div class="col-sm-12 col-md-4"  dir-paginate="product in filtered = (products  | itemsPerPage: itemsPerPage | orderBy:propertyName:reverse)">
+                        <div class="col-sm-12 col-md-4"  dir-paginate="product in filtered = (products  | itemsPerPage: itemsPerPage | filter:search | orderBy:propertyName:reverse)">
                             <div class="hero-feature text-center">
                             <div ng-include="'tpl.html'"></div>
                             </div>
@@ -116,4 +119,7 @@
             </div>
         @endsection
     @section('scripts')
+        <script>
+            var search = "{{ Request::input('search') }}"
+        </script>
         @stop

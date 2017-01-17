@@ -73,17 +73,7 @@
                                             </div>
                                             <div class="col-md-3 col-sm-6 item-footer-four">
                                                 <div class="widget widget_noo_openhours">
-                                                    <h4 class="widget-title">Horarios</h4> 
-                                                    <ul class="noo-openhours">
-                                                        <li>
-                                                            <span>Lunes a Viernes:</span>
-                                                            <span>08:00am - 08:00pm </span>
-                                                        </li>
-                                                        <li>
-                                                            <span>Sabados &amp; Domingos: </span>
-                                                            <span>10:00am - 06:00pm </span>
-                                                        </li>
-                                                    </ul>
+                                                    <h4 class="widget-title">Siguenos en</h4>
                                                 </div>
                                                 <div class="widget widget_noo_social">
                                                     <div class="noo_social">
@@ -113,7 +103,8 @@
                 </div>
                 <div class="noo-bottom-bar-content">
                     <div class="container">
-                        2016 tendaz.<br class="br"/> Tienda Creada por <a href="https://tendaz.com">Tendaz</a>. </div>
+                        <img src="{{asset('administrator/image/servientrega-footer.gif')}}" alt="">
+                        <br class="br"/>2017 By Maxcorp.Inc. </div>
                 </div>
 
             </footer>

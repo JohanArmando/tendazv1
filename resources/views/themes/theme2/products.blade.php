@@ -15,6 +15,9 @@
                                     <% ancestor.name %></a>
                             </span>
                             </span>
+                            <h4 class="text-center text-uppercase">
+                                <small>{{ !Request::input('search') ?'': "Buscando '". Request::input('search') ."' en $shop->name" }}</small>
+                            </h4>
                         </div>
                     </div>
                     <div class="box info-bar">
@@ -55,7 +58,7 @@
                         </div>
                     </div>
                     <div class="row products">
-                        <div class="col-md-4 col-sm-6" dir-paginate="product in filtered = (products  | itemsPerPage: itemsPerPage | orderBy:propertyName:reverse)">
+                        <div class="col-md-4 col-sm-6" dir-paginate="product in filtered = (products  | itemsPerPage: itemsPerPage | filter:search | orderBy:propertyName:reverse)">
                             <div ng-include="'tpl.html'"></div>
                             <!-- /.product -->
                         </div>
@@ -69,4 +72,7 @@
             </div>
            @endsection
     @section('script')
-           @stop
+        <script>
+            var search = "{{ Request::input('search') }}"
+        </script>
+    @stop
