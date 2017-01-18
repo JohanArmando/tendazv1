@@ -38,6 +38,8 @@ class PaymentsController extends Controller
                     $quantity = 1;
                     $price +=  ($product->product->collection->promotion ? $product->promotional_price : $product->price) * $product->pivot->quantity;
                 }
+
+	
                 $preference_data = array(
                     "items" => [
                         array(
@@ -96,8 +98,10 @@ class PaymentsController extends Controller
                     "expiration_date_from" => null,
                     "expiration_date_to" => null
                 );
+
                 $preference = $mp->create_preference($preference_data);
-                return ['url' => $preference['response']['init_point']];
+		
+		return ['url' => $preference['response']['init_point']];
                 break;
         }
     }
