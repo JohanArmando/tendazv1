@@ -45,8 +45,8 @@
 </div>
 
 <a href="#" class="go-to-top hidden-print"><i class="fa fa-angle-up"></i></a>
-
 <!--Script-->
+<script src="{{ asset('bower_components/angular/angular.js') }}"></script>
 <script src="{{ asset('themes_tendaz/theme3/js/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{asset('components/js/toastr.min.js') }}"></script>
 
@@ -75,51 +75,38 @@
 {!! Theme::js('themes_tendaz/theme3/js/jquery.themepunch.revolution.min.js') !!}
 <script type="text/javascript" src="{{asset('themes_tendaz/default/js/validator.js')}}"></script>
 
-<!--Script-->
-<script src="{{asset('bower_components/angular/angular.js') }}"></script>
-<script src="{{asset('components/js/jquery-2.1.1.min.js')}}"></script>
-<script src="{{asset('themes_tendaz/default/js/validator.js')}}"></script>
-<script src="{{asset('components/js/toastr.min.js')}}"></script>
-<script src="{{asset('themes_tendaz/tema4/external/bootstrap/bootstrap.min.js') }}"></script>
-<script src="{{asset('themes_tendaz/tema4/external/countdown/jquery.plugin.min.js') }}"></script>
-<script src="{{asset('themes_tendaz/tema4/external/countdown/jquery.countdown.min.js') }}"></script>
-<script src="{{asset('themes_tendaz/tema4/external/instafeed/instafeed.min.js') }}"></script>
-<script src="{{asset('themes_tendaz/tema4/external/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
-<script src="{{asset('themes_tendaz/tema4/external/imagesloaded/imagesloaded.pkgd.min.js') }}"></script>
-<script src="{{asset('themes_tendaz/tema4/external/colorbox/jquery.colorbox-min.js') }}"></script>
-<script src="{{asset('themes_tendaz/tema4/external/nouislider/nouislider.min.js') }}"></script>
-<script src="{{ asset('themes_tendaz/tema4/external/elevatezoom/jquery.elevatezoom.js') }}"></script>
-<script src="{{asset('themes_tendaz/tema4/js/custom.js') }}"></script>
-<script src="{{asset('bower_components/angular-route/angular-route.min.js') }}"></script>
-<script src="{{asset('bower_components/angular-cookies/angular-cookies.min.js') }}"></script>
+<!-- Angular scripts -->
+<script src="{{ asset('components/js/angular.min.js') }}"></script>
 <script src="{{asset('components/js/underscore-min.js') }}"></script>
-<script src="{{asset('Angular/app.js') }}"></script>
-<script src="{{asset('themes_tendaz/tema4/external/slick/slick.min.js') }}"></script>
 <script src="{{asset('components/js/slick.js') }}"></script>
-
-<script src="{{asset('Angular/tienda/controller/controller.js') }}"></script>
-<script src="{{asset('Angular/tienda/controller/categoryTemplateController.js') }}"></script>
-<script src="{{asset('Angular/tienda/controller/cartGlobalController.js') }}"></script>
-<script src="{{asset('Angular/tienda/controller/productIndexController.js') }}"></script>
+<script src="{{ asset('bower_components/angular-route/angular-route.min.js') }}"></script>
+<script src="{{ asset('bower_components/angular-cookies/angular-cookies.min.js') }}"></script>
+<script src="{{ asset('Angular/app.js') }}"></script>
+<script src="{{ asset('Angular/tienda/controller/controller.js') }}"></script>
+<script src="{{ asset('Angular/tienda/controller/categoryTemplateController.js') }}"></script>
+<script src="{{ asset('Angular/tienda/controller/cartGlobalController.js') }}"></script>
+<script src="{{ asset('Angular/tienda/controller/productIndexController.js') }}"></script>
 <script src="{{asset('Angular/tienda/controller/productController.js') }}"></script>
-<script src="{{asset('Angular/tienda/service/customerService.js') }}"></script>
 <script src="{{asset('Angular/tienda/controller/customerController.js') }}"></script>
 <script src="{{asset('Angular/tienda/controller/detailProductController.js') }}"></script>
-<script src="{{asset('Angular/tienda/service/service.js') }}"></script>
-<script src="{{asset('Angular/tienda/service/categoryService.js') }}"></script>
-<script src="{{asset('Angular/tienda/service/cartService.js') }}"></script>
-<script src="{{asset('Angular/tienda/service/productService.js') }}"></script>
+<script src="{{ asset('Angular/tienda/service/customerService.js') }}"></script>
+<script src="{{ asset('Angular/tienda/controller/customerController.js') }}"></script>
+<script src="{{ asset('Angular/tienda/service/service.js') }}"></script>
+<script src="{{ asset('Angular/tienda/service/categoryService.js') }}"></script>
+<script src="{{ asset('Angular/tienda/service/cartService.js') }}"></script>
+<script src="{{ asset('Angular/tienda/service/productService.js') }}"></script>
 
-<script src="{{asset('Angular/tienda/directives/directive.js') }}"></script>
-<script src="{{asset('components/js/ui-bootstrap-tpls-1.1.1.min.js') }}"></script>
-<script src="{{asset('components/js/dirPagination.js') }}"></script>
-<script src="{{asset('components/js/rzslider.min.js') }}"></script>
-<script src="{{asset('components/js/angularSanitize.min.js') }}"></script>
+<script src="{{ asset('Angular/tienda/directives/directive.js') }}"></script>
+<script src="{{ asset('components/js/ui-bootstrap-tpls-1.1.1.min.js') }}"></script>
+<script src="{{ asset('components/js/dirPagination.js') }}"></script>
+<script src="{{ asset('components/js/rzslider.min.js') }}"></script>
+<script src="{{ asset('components/js/angularSanitize.min.js') }}"></script>
 
 <!-- SCRIPTS ANGULAR ACCOUNT -->
 <script src="{{ asset('store/js/app.js') }}"></script>
 <script src="{{ asset('store/js/controllers.js') }}"></script>
 <script src="{{ asset('store/js/models.js') }}"></script>
+
 @yield('script')
 @include('themes.default.partials.conditions')
 @include('globalPartials.iframeAdmin')

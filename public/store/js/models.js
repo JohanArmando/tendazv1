@@ -22,7 +22,7 @@ myApp.factory('Account' , ["$http" , "$cookies", function ($http ,$cookies) {
             },
             url: BASEURL + '/password/email' + '?client_secret='  + client_secret + '&client_id=' + client_id,
             data : _data,
-            method: "POST",
+            method: "POST"
         });
     };
     
@@ -37,8 +37,20 @@ myApp.factory('Account' , ["$http" , "$cookies", function ($http ,$cookies) {
             method: "POST",
         });
     };
-    
-    
+
+    UserModel.postChangePassword = function (_data , _authId) {
+        return $http({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            url: BASEURL + '/auth/'  + _authId + '/password' + '?client_secret='  + client_secret + '&client_id=' + client_id,
+            data : _data,
+            method: "PUT"
+        });
+    };
+
+
     return UserModel;
 }]);
 //# sourceMappingURL=models.js.map

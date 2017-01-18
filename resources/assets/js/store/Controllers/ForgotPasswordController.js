@@ -16,7 +16,6 @@ myApp.controller('ForgotPasswordController' , ["$scope" , "Account" , function (
                 Account.postSendResetLinkEmail(resetObj)
                     .then(function(response) {
                         $scope.errors = null;
-                        $j('#modalRestorePassword').modal('toggle');
                         toastr["info"](response.data.status);
                         $scope.changeElement('sentResetEmail' , false , "Enviar correo");
                 }).catch(function(response) {

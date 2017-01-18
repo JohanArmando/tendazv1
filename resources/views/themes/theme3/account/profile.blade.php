@@ -1,9 +1,10 @@
-@extends('tema3.template')	
+@extends(Theme::current()->viewsPath.'.template')
 	@section('css')
 		@stop
 	@section('content')
 		<div class="container">
 				<div class="row">
+					<div class="col-md-12" style="height: 100px"></div>
 					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 toppad col-md-offset-3" >
 					<div class="noo-about-right">
 						<div class="noo-line">
@@ -35,11 +36,11 @@
 									</div>
 									<div class="col-md-12 col-lg-12 text-center">
 										<div class="col-md-6"><strong>Nombre Completo</strong></div>
-										<div class="col-md-6">{{Auth::user()->get()->full_name}}<hr></div>
+										<div class="col-md-6">NAME<hr></div>
 										<div class="col-md-6"><strong>Email</strong></div>
-										<div class="col-md-6"><a href="#">{{Auth::user()->get()->email}}</a><hr></div>
+										<div class="col-md-6"><a href="#">EMAIL</a><hr></div>
 										<div class="col-md-6"><strong>Telefono</strong></div>
-										<div class="col-md-6">{{Auth::user()->get()->phone ? Auth::user()->get()->phone : 'Sin numero de telefono'}}<hr></div>
+										<div class="col-md-6">PHONE<hr></div>
 										<div class="col-md-12">
 											<a href="#" class="btn btn-primary" style="border-radius: 0" data-toggle="modal" data-target="#modaEditar">
 												<i class="fa fa-edit"></i> Actualizar Datos</a>
@@ -121,17 +122,16 @@
 						</div>
 						</div>
 					</div>
-				</div>
-				</div>
-			</div>
+		</div>
+
 			<div style="margin-bottom: 125px;"></div>
 			
-			@include('partials.add-dir')
-			@include('partials.edit-dir')
+			@include(Theme::current()->viewsPath.'.partials.add-dir')
+			@include(Theme::current()->viewsPath.'.partials.edit-dir')
 
 
 			<!--Modal para modificar datos del perfil-->
-				<div id="modaEditar" class="modal fade" tabindex="-1" role="dialog">
+				<div id="modaEditar" class="modal fade" tabindex="-1" role="dialog" style="margin-top: 100px">
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
@@ -140,18 +140,18 @@
 							</div>
 							<div class="modal-body">
 								<!--Fomulario-->
-								{!! Form::open(['url' =>[ "myProfile",Auth::user()->get()->id ],'method' => 'PUT','files' => true, 'data-toggle'=>'validator', 'role'=>'form']) !!}
+								{!! Form::open(['url' =>[ "myProfile"],'method' => 'PUT','files' => true, 'data-toggle'=>'validator', 'role'=>'form']) !!}
 									<div class="form-group">
 										<label>Nombres</label>
-										<input type="text" name="name" value="{{Auth::user()->get()->name}}" class="form-control">
+										<input type="text" name="name" value="" class="form-control">
 									</div>
 									<div class="form-group">
 										<label>Apellidos</label>
-										<input type="text" name="last_name" value="{{Auth::user()->get()->last_name}}" class="form-control">
+										<input type="text" name="last_name" value="" class="form-control">
 									</div>
 									<div class="form-group">
 										<label>Telefono</label>
-										<input type="number" name="phone" value="{{Auth::user()->get()->phone}}" class="form-control">
+										<input type="number" name="phone" value="" class="form-control">
 									</div>
 									<hr>
 									<div clas="modal-footer">

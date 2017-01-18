@@ -1,6 +1,7 @@
 <?php
 return [
   'mercadopago' => [
+        'invalid_token' => 'El token de pago no es valido',
         '4035'  => 'Debes escoger un metodo de pago',
         '4029'  => 'Tipo de usuario invalido',
         '4003'  => 'El monto de la transaccion deberia ser numerico',
