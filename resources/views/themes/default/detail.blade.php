@@ -133,29 +133,31 @@
 
 
             <!-- products relations-->
-            <div class="hidden row row-related" ng-controller="detailProductController" ng-cloak="">
+            <div class="row row-related" ng-show="size(relations) >= 1" ng-controller="detailProductController" ng-cloak="">
                 <div class="col-xs-12">
                     <div class="title">Productos Relacionados</div>
                     <div class="col-sm-3 col-md-2 box-product-outer" ng-repeat="relation in relations ">
                         <div class="box-product" style="min-height: 270px !important;">
                             <div class="img-wrapper">
-                                <a href="<% BASEURL + '/detail/' + product.slug %>">
-                                <img src=""
-                                     style="max-height: 200px; min-height: 200px" alt="">
+                                <a href="{{ url('/') }}<% '/detail/' + relation.slug %>">
+                                <img src="<% relation.images.data[0].url %>" style="max-height: 200px; min-height: 200px" alt="">
                                 </a>
-                                <div class="option">
-                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Agregar al carrito"><i class="ace-icon fa fa-shopping-cart"></i></a>
+                                <div ng-if="!relation.stock == 0" class="option" ng-click="add(cartId , relation)">
+                                    <a href="#" data-toggle="tooltip" data-placement="bottom"
+                                       title="Agregar al carrito">
+                                        <i class="ace-icon fa fa-shopping-cart"></i>
+                                    </a>
                                 </div>
                             </div>
                             <h6 class="text-center">
-                                <a href="<% BASEURL + '/detail/' + product.slug %>"><% product.name %>
+                                <a href="{{ url('/') }}<% '/detail/' + relation.slug %>"><% relation.name %>
                                 </a>
                             </h6>
-                            <div class="price text-center"  ng-if="relation.promotion">
-                                <span>$<% relation.promotion_price | number:2 %></span>
+                            <div class="price text-center"  ng-if="relation.special_price">
+                                <span>$<% relation.special_price | number:2 %></span>
                                 <span class="price-old">$<% relation.price | number:2 %></span>
                             </div>
-                            <div class="price text-center" ng-if="!relation.promotion">
+                            <div class="price text-center" ng-if="!relation.special_price">
                                 $<% relation.price | number:2 %>
                             </div>
 

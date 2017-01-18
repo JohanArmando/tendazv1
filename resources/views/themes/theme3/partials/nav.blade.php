@@ -20,7 +20,6 @@
                             </div>
                         </div>
                         <a href="{{url('/')}}" style="text-decoration: none">
-                            <%usuario.personal_info.first_name%>
                             @if($shop->logo)
                                 <img style="margin-top: 4px;margin-bottom: 4px; max-height: 60px" class="logo replace-2x img-responsive" src="{{ asset("logos/$shop->id/$shop->logo") }}"
                                      alt="Logo de la tienda {{ $shop->name_store }}" />
@@ -29,7 +28,8 @@
                             @endif
                         </a>
                     </div>
-                    <nav class="pull-right noo-main-menu">
+
+                    <nav style="margin-left: 100px" class="pull-left noo-main-menu">
                         <ul class="nav-collapse navbar-nav">
                             <li><a class="{{ Request::is('/') ? 'active' : '' }}" href="{{url('/')}}">Inicio</a></li>
                             <li><a class="{{ Request::is('products') ? 'active' : '' }}" href="{{url('/products')}}">Productos</a></li>
@@ -70,6 +70,16 @@
 
                         </ul>
                     </nav>
+                    <nav class="pull-right noo-menu-option">
+                        <a href="#" class="button-expand-option"><i class="fa fa-ellipsis-v"></i></a>
+                        <ul>
+                            <li class="menu-item fly-right">
+                                <a id="noo-search" class="search-button noo-search" href="#">
+                                    <i class="fa fa-search"></i> Buscar
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
@@ -77,9 +87,9 @@
     <div class="search-header5">
         <div class="remove-form"></div>
         <div class="container">
-            <form class="form-horizontal">
-                <label class="note-search">Type and Press Enter to Search</label>
-                <input type="search" name="s" class="form-control" value="" placeholder="Search...">
+            <form action="{{ url('/products') }}" method="get" class="form-horizontal">
+                <label class="note-search">Presiona Enter para realizar la busqueda</label>
+                <input type="search" name="search" class="form-control" value="" placeholder="Buscar Producto...">
                 <input type="submit" value="Search">
             </form>
         </div>

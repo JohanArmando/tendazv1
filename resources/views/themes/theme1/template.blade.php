@@ -93,6 +93,11 @@
     <script src="{{ asset('components/js/rzslider.min.js') }}"></script>
     <script src="{{ asset('components/js/angularSanitize.min.js') }}"></script>
 
+    <!-- SCRIPTS ANGULAR ACCOUNT -->
+    <script src="{{ asset('store/js/app.js') }}"></script>
+    <script src="{{ asset('store/js/controllers.js') }}"></script>
+    <script src="{{ asset('store/js/models.js') }}"></script>
+
     <script  type="text/ng-template" id="tpl.html">
         <div class="thumbnail" ng-class="{ ' sold-out' : product.stock == 0 , ' product--zoom' : !product.promotion && !product.feature}">
             <a href="<% BASEURL + '/detail/' + product.slug %>" class="link-p">
@@ -124,6 +129,7 @@
         </div>
     </script>
     @yield('scripts')
+    @include('themes.default.partials.conditions')
     @include('globalPartials.iframeAdmin')
     @include('admin.partials.message')
 <!--Fin-->

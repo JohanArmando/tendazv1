@@ -84,9 +84,9 @@
 
         <div class="collapse clearfix" id="search">
 
-            <form class="navbar-form" role="search">
+            <form action="{{ url('/products') }}" method="get" class="navbar-form" role="search">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Buscar...">
+                    <input type="text" name="search" class="form-control" placeholder="Buscar Producto...">
                         <span class="input-group-btn">
 
 			<button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>

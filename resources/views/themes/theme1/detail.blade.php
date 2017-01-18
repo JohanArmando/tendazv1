@@ -13,32 +13,6 @@
                             </ol>
                         </div>
                     </div>
-                    <div class="hidden col-lg-3 col-md-3 col-sm-12">
-                        <div class="no-padding">
-                            <span class="title"><strong>Productos Relacionados</strong></span>
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 visible-lg visible-md">
-                            
-                            <div class="thumbnail col-lg-12 col-md-12 col-sm-6 text-center" ng-repeat="relation in relations | limitTo:2">
-                                <a href="<% BASEURL + '/detail/' + relation.slug %>">
-                                    <img src="<<% product.images.data[0].url %>"
-                                         style="max-height: 200px; min-height: 200px" alt="">
-                                </a>
-                                <div class="caption prod-caption">
-                                    <h4>
-                                        <a href="<% BASEURL + '/detail/' + relation.slug %>"><% relation.name %>
-                                        </a>
-                                    </h4>
-                                    <div class="price text-center"  ng-if="relation.promotion">
-                                        <p>$<% relation.promotion_price | number:2 %></p>
-                                    </div>
-                                    <div class="price text-center" ng-if="!relation.promotion">
-                                        $<% relation.price | number:2 %>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="col-lg-9 col-md-9 col-sm-12">
                         <div class="col-lg-12 col-sm-12">
                             <span class="title"><strong><% detail.product.name%></strong></span>
@@ -77,12 +51,12 @@
                                                         <hr>
                                                     </div>
                                                     <!-- <span class="price-old">$169</span> -->
-                                                    <div class="text-center" ng-if="detail.product.price_promotion > 0">
-                                                        <strong>$ <% product.price_promotion_amount | number:0%></strong>&nbsp;&nbsp;&nbsp;
+                                                    <div class="text-center" ng-if="product.special_price > 0">
+                                                        <strong>$ <% product.special_price | number:0%></strong>&nbsp;&nbsp;&nbsp;
                                                         <strong style="text-decoration: line-through; color: red;">$ <% product.price | number:0 %></strong>
                                                         <hr>
                                                     </div>
-                                                    <div class="text-center" ng-if="!detail.product.price_promotion">
+                                                    <div class="text-center" ng-if="!product.special_price">
                                                         <strong>$ <% product.price | number:0%></strong>&nbsp;&nbsp;&nbsp;
                                                         <hr>
                                                     </div>
@@ -135,9 +109,9 @@
                                             <div class="col-xs-4 text-center">
                                                 <!-- <input type="text" class="hidden input-qty-detail form-control input-qty text-center " value="1"> -->
                                             </div>
-                                            <div class="col-xs-8" ng-controller="productIndexController" ng-cloak="">
+                                            <div ng-if="!product.stock == 0" class="col-xs-8" ng-controller="productIndexController" ng-cloak="">
                                                 <span class="green">
-                                                    <button class="btn btn-default pull-left" style="background-color: #2196F3; color: white" ng-click="add(rand)">
+                                                    <button class="btn btn-default pull-left" style="background-color: #2196F3; color: white"  ng-click="add(cartId , product)">
                                                         <i class="fa fa-shopping-cart"></i> Agregar al Carrito
                                                     </button>
                                                 </span>
@@ -220,6 +194,38 @@
                             </div>
                         </div>
                         <div class="clearfix"></div>
+                    </div>
+                    <div ng-show="size(relations) >= 1" class="col-lg-3 col-md-3 col-sm-12">
+                        <div class="no-padding">
+                            <span class="title"><strong>Productos Relacionados</strong></span>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 visible-lg visible-md">
+
+                            <div class="thumbnail col-lg-12 col-md-12 col-sm-6 text-center" ng-repeat="relation in relations | limitTo:2">
+                                <a href="{{ url('/') }}<% '/detail/' + relation.slug %>">
+                                    <img src="<% relation.images.data[0].url %>"
+                                         style="max-height: 200px; min-height: 200px" alt="">
+                                </a>
+                                <div class="caption prod-caption">
+                                    <h4><a href="{{ url('/') }}<% '/detail/' + relation.slug %>"><% relation.name %></a></h4>
+                                    <div class="btn-group"  ng-if="relation.special_price">
+                                        <a href="#" class="btn btn-default btn-xs">
+                                            <strong style="color: red; text-decoration: line-through;">$<% relation.price | number:0 %></strong>
+                                            <a  class="btn btn-default btn-xs"><strong>$<% relation.special_price | number:0 %></strong></a>
+                                        </a>
+                                        <a class="btn btn-primary btn-xs" ng-hide="relation.stock == 0" ng-click="add(cartId , relation)">
+                                            <i class="fa fa-shopping-cart"> Agregar</i>
+                                        </a>
+                                    </div>
+                                    <div class="btn-group"  ng-if="!relation.special_price">
+                                        <a  class="btn btn-default btn-xs"><strong>$<% product.price | number:0 %></strong></a>
+                                        <a class="btn btn-primary btn-xs" ng-hide="relation.stock == 0" ng-click="add(cartId , relation)">
+                                            <i class="fa fa-shopping-cart"></i> Agregar
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

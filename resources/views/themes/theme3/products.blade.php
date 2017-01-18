@@ -45,6 +45,9 @@
                                  <p class="light-font text-center" ng-if="products.length <= 0">No hay productos en esta categoria</p>
                                  <p class="light-font text-center" ng-if="products.length > 0 && cate != ''"><% notAvaliable %></p>
                              </div>
+                             <h4 class="text-center text-uppercase">
+                                 <small>{{ !Request::input('search') ?'': "Buscando '". Request::input('search') ."' en $shop->name" }}</small>
+                             </h4>
                              <br><br>
 
 
@@ -78,7 +81,7 @@
 
                                     <div class="products row product-list">
                                      <div class="masonry-item noo-product-column col-md-4 col-sm-6 product"
-                                          dir-paginate="product in filtered = (products  | itemsPerPage: itemsPerPage | orderBy:propertyName:reverse)">
+                                          dir-paginate="product in filtered = (products  | itemsPerPage: itemsPerPage | filter:search | orderBy:propertyName:reverse)">
                                          <div class="noo-product-inner">
                                              <div class="noo-product-thumbnail">
                                                  <a href="<% BASEURL + '/detail/' + product.slug %>">
@@ -125,4 +128,7 @@
         @endsection
     @section('script')
         <script type='text/javascript' src='{{asset('themes_tendaz/theme3/js/price-slider.js')}}'></script>
-        @endsection
+        <script>
+            var search = "{{ Request::input('search') }}"
+        </script>
+    @endsection

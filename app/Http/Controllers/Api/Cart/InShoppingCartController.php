@@ -49,7 +49,8 @@ class InShoppingCartController extends Controller
         else
             $cart->products()->attach( $item->id, ['quantity' => $quantity]);
             event(new updateOrderTotalByProductEvent($cart->order , $cart));
-            return response()->json(['Item add'] , 201);
+            return response()->json(fractal()
+                ->item($cart, new CartTransformer()) , 201);
     }
 
     public function destroy(Cart $cart , Variant $item , Request $request)

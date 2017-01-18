@@ -1,12 +1,8 @@
 @extends('themes.default.template')
     @section('css')
     <style type="text/css">
-        .btn span.fa {               
-    opacity: 0;             
-}
-.btn.active span.fa {                
-    opacity: 1;             
-}
+        .btn span.fa {  opacity: 0;  }
+        .btn.active span.fa {  opacity: 1;  }
     </style>
 
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
@@ -43,6 +39,23 @@
                                         <input type="password" ng-model="registerFormR.RegisterPasswordConfirm" class="form-control"  name="password_confirmation" data-match-error="Upz, Contrase&ntilde;as no son iguales"
                                                id="inputPasswordConfirm" data-match="#inputPassword" placeholder="Repetir Contrase&ntilde;a" required>
                                         <div class="help-block with-errors"></div>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <div class=""  data-toggle="buttons">
+                                            <label class="btn btn-default btn-xs">
+                                                <input type="checkbox"  autocomplete="off" style="zoom: 2.0;" required>
+                                                <span class="fa fa-check" style="color: darkblue;"></span>
+                                            </label> &nbsp; <a data-toggle="modal" data-target="#modalConditions" >Acepto Terminos y Condiciones.</a>
+                                        </div>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <div class=""  data-toggle="buttons">
+                                            <label class="btn btn-default btn-xs active">
+                                                <input type="checkbox"  autocomplete="off" style="zoom: 2.0;">
+                                                <span class="fa fa-check" style="color: darkblue;"></span>
+                                            </label> &nbsp; Acepto Envios de Correos.
+                                        </div>
                                     </div>
                                         
                                     <div class="col-xs-12">

@@ -6,7 +6,7 @@
                 "preventDuplicates": true,
                 "closeButton": true
             };
-        
+            $scope.search = search;
             if (!category){
                 productService.getAllProducts()
                 .then(function(response) {

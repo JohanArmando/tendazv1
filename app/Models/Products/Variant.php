@@ -33,6 +33,15 @@ class Variant extends Model
         ];
     }
 
+    public  static  function RelationProduct(Product $product)
+    {
+        return static::whereHas('product'  , function($query) use ($product){
+            return $query->whereHas('categories' , function($q) use ($product){
+                    $q->whereInCategoryId($product);
+            })->whereNotIn('id' , [$product->id]);
+        })->get();
+    }
+
     /**
      * RELATHIONSHIP
      */

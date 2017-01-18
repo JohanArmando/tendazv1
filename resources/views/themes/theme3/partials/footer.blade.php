@@ -39,11 +39,23 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-3 col-sm-6 item-footer-four">
-                                                <div class="widget widget_tag_cloud" ng-controller="categoryTemplateController">
-                                                    <h4 class="widget-title">Categorias</h4>
-                                                    <div class="tagcloud" >
-                                                        <a ng-repeat="category in categories | limitTo:8"
-                                                           href="<% BASEURL + '/products/' + category.slug %>"><% category.name %></a>
+                                                <div class="widget widget_tag_cloud">
+                                                    <h4 class="widget-title">MAS INFORMACI&Oacute;N</h4>
+                                                    <div>
+                                                        <ul>
+                                                            @if(!$shop->store->address_1 == '')
+                                                                <li><strong>Email: </strong><span> {{$shop->store->address_1}}</span></li>
+                                                            @endif
+                                                            @if(!$shop->store->number_phone == '')
+                                                                <li><strong>Telefono: </strong><span> {{$shop->store->number_phone}}</span></li>
+                                                            @endif
+                                                            @if(!$shop->store->number_phone == '')
+                                                                <li><strong>Direcci&oacute;n: </strong><span> {{$shop->store->address_2}}</span></li>
+                                                            @endif
+                                                            @if(!$shop->store->conditions == '')
+                                                                <li><a href="" data-toggle="modal" data-target="#modalConditions">Terminos  y condiciones</a></li>
+                                                            @endif
+                                                        </ul>
                                                     </div>
                                                 </div>
                                             </div>
@@ -61,17 +73,25 @@
                                             </div>
                                             <div class="col-md-3 col-sm-6 item-footer-four">
                                                 <div class="widget widget_noo_openhours">
-                                                    <h4 class="widget-title">Horarios</h4> 
-                                                    <ul class="noo-openhours">
-                                                        <li>
-                                                            <span>Lunes a Viernes:</span>
-                                                            <span>08:00am - 08:00pm </span>
-                                                        </li>
-                                                        <li>
-                                                            <span>Sabados &amp; Domingos: </span>
-                                                            <span>10:00am - 06:00pm </span>
-                                                        </li>
-                                                    </ul>
+                                                    <h4 class="widget-title">Siguenos en</h4>
+                                                </div>
+                                                <div class="widget widget_noo_social">
+                                                    <div class="noo_social">
+                                                        <div class="social-all">
+                                                            @if(!$shop->store->facebook == '')
+                                                                <a class="fa fa-facebook" href="{{url('https://'.$shop->store->facebook)}}"></a>
+                                                            @endif
+                                                            @if(!$shop->store->twitter == '')
+                                                                <a class="fa fa-twitter" href="{{url('https://'.$shop->store->twitter)}}"></a>
+                                                            @endif
+                                                            @if(!$shop->store->google_plus == '')
+                                                                <a class="fa fa-google-plus" href="{{url('https://'.$shop->store->google_plus)}}"></a>
+                                                            @endif
+                                                            @if(!$shop->store->instagram == '')
+                                                                <a class="fa fa-instagram" href="{{url('https://'.$shop->store->instagram)}}"></a>
+                                                            @endif
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -83,7 +103,8 @@
                 </div>
                 <div class="noo-bottom-bar-content">
                     <div class="container">
-                        2016 tendaz.<br class="br"/> Tienda Creada por <a href="https://tendaz.com">Tendaz</a>. </div>
+                        <img src="{{asset('administrator/image/servientrega-footer.gif')}}" alt="">
+                        <br class="br"/>2017 By Maxcorp.Inc. </div>
                 </div>
 
             </footer>

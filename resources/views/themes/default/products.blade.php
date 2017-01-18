@@ -11,8 +11,8 @@
                     <div class="title">
                         <span><a href="{{ url('/products') }}">Todos los Productos</a></span>
                         <span ng-repeat="ancestor in ancestors" > |
-                            <a  ng-class="{active : cate == ancestor.slug }"
-                                href="<% BASEURL + '/products/' + ancestor.slugable %>"><% ancest  .name %></a></span>
+                            <a  ng-class="{active : cate == ancestor.slug }" href="<% BASEURL + '/products/' + ancestor.slugable %>"><% ancestor.name %></a>
+                        </span>
                     </div>
                     <div class="title-box">
                         <h2 class="text-center text-uppercase title-under"><% cate ? cate : 'Todos los productos' %></h2>
@@ -22,6 +22,9 @@
                         <p class="light-font text-center" ng-if="products.length <= 0">No hay productos en esta categoria</p>
                         <p class="light-font text-center" ng-if="products.length > 0 && cate != ''"><% notAvaliable %></p>
                     </div>
+                    <h4 class="text-center text-uppercase">
+                        <small>{{ !Request::input('search') ?'': "Buscando '". Request::input('search') ."' en $shop->name" }}</small>
+                    </h4>
                     <div class="product-sorting-bar">
                         <div>
                             Ordenar por:
@@ -54,7 +57,7 @@
                             </form>
                         </div>
                     </div>
-                    <div class="col-md-3"  dir-paginate="product in filtered = (products  | itemsPerPage: itemsPerPage | orderBy:propertyName:reverse)">
+                    <div class="col-md-3"  dir-paginate="product in filtered = (products  | itemsPerPage: itemsPerPage | filter:search | orderBy:propertyName:reverse)">
                         <div class="box-product-outer">
                             <div ng-include="'tpl.html'"></div>
                             </div>
@@ -68,4 +71,7 @@
             </div>
         @endsection
     @section('script')
+        <script>
+            var search = "{{ Request::input('search') }}"
+        </script>
         @stop

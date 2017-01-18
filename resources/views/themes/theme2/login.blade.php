@@ -12,7 +12,7 @@
         @stop
     @section('content')
             <div class="container">
-                <div class="col-md-6">
+                <div class="col-md-7">
                     <div class="box" style="display: inline-block">
                         <h2>Registrate</h2>
                         <hr>
@@ -46,14 +46,26 @@
                                        id="inputPasswordConfirm" data-match="#inputPassword" placeholder="Repetir Contrase&ntilde;a" required>
                                 <div class="help-block with-errors"></div>
                             </div>
-                            <div class="text-center col-md-12">
+                            <div class="btn-group col-md-6" data-toggle="buttons">
+                                <label class="btn btn-default btn-xs">
+                                    <input type="checkbox" autocomplete="off" required>
+                                    <span class="fa fa-check fa2x" style="color: green;"></span>
+                                </label> &nbsp; <a data-toggle="modal" data-target="#modalConditions" >Acepto Terminos y Condiciones.</a>
+                            </div>
+                            <div class="btn-group col-md-6" data-toggle="buttons">
+                                <label class="btn btn-default btn-xs active">
+                                    <input type="checkbox" autocomplete="off">
+                                    <span class="fa fa-check fa2x" style="color: green;"></span>
+                                </label> &nbsp; Acepto Envios de Correos.
+                            </div>
+                            <div class="text-center form-group col-md-12" style="margin-top: 10px">
                                 <button type="submit" class="btn btn-primary">Registrarme</button>
                             </div>
                         </form>
                     </div>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-5">
                    <div class="box">
                        <h2>Inicio de sesion</h2>
                        <hr>

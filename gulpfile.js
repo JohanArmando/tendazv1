@@ -12,8 +12,22 @@ require('laravel-elixir-clear');
  */
 
 elixir(mix => {
+    //Account pipes
 
-    //new-checkout pipes
+        mix.scripts([
+        'store/app.js'
+    ] , 'public/store/js/app.js');
+
+    mix.scripts([
+        'store/Controllers/ForgotPasswordController.js',
+        'store/Controllers/ResetPasswordController.js',
+    ] , 'public/store/js/controllers.js');
+    
+    mix.scripts([
+        'store/Models/User.js',
+    ] , 'public/store/js/models.js');
+
+//new-checkout pipes
     mix.scripts([
         'checkout/app.js'
     ] , 'public/new-checkout/js/app.js');

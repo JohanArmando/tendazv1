@@ -245,7 +245,7 @@ input.active { outline: 0 }
 }
 .cart-btn {
     position: relative;
-    margin-top: 15px
+    margin-top: 18px
 }
 .cart-btn > button {
     font-size: 12px;

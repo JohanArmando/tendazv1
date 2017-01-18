@@ -19,14 +19,18 @@
             };
             productService.getIndexProducts()
                   .then(function(response) {
-                      console.log(response);
-                    angular.forEach(response.data.products , function(value , index){
-                      if(value.special_price > 0){
-                            response.data.products[index]['promotion_price_percent'] =  ((((value.special_price * 100) / value.price)-100)  * - 1);
-                        }
-                        
-                     });
-                    $scope.news = response.data.products;
+                      $scope.random = {};
+                      angular.forEach(response.data.products , function(value , index){
+                          if(value.special_price > 0){
+                              response.data.products[index]['promotion_price_percent'] =  ((((value.special_price * 100) / value.price)-100)  * - 1);
+                          }
+                      });
+                      Array.prototype.randomElement = function () {
+                          return this[Math.floor(Math.random() * this.length)]
+                      };
+                      $scope.news = response.data.products;
+                      $scope.randomProduct = $scope.news.randomElement();
+
             }).catch(function(response) {
                 console.log(response);
             });

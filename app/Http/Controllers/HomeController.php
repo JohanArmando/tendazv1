@@ -22,8 +22,11 @@ class HomeController extends Controller
         $sliders = Shop::all();
         return view(Theme::current()->viewsPath.'.index',compact('sliders'));
     }
-    public function product ($subdomain , $slug = '')
+    public function product (Request $request ,$subdomain , $slug = '')
     {
+        if (!$request->has('search') && !is_null($request->search))
+            return redirect()->to('/products');
+
         $slugArray = explode('/' , $slug);
         $category = $slugArray[count($slugArray) - 1];
         return view(Theme::current()->viewsPath.'.products' , compact('category'));
@@ -33,7 +36,7 @@ class HomeController extends Controller
         return view(Theme::current()->viewsPath.'.cart');
     }
 
-    public function detail ($subdomain,$slug){
+    public function detail ($subdomain , $slug){
         return view(Theme::current()->viewsPath.'.detail',compact('slug'));
     }
 
@@ -69,7 +72,7 @@ class HomeController extends Controller
             'El mensaje ha sido enviado con exito, muchas gracias.' , 'type' => 'info'));
     }
 
-    public function login (){
+    public function login (Request $request){
         $user = new Customer();
 
         return view(Theme::current()->viewsPath.'.login' , ['users' => $user]);

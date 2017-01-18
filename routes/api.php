@@ -42,6 +42,10 @@ Route::group(['domain' => env('APP_API_URL') , 'namespace' => 'Api'] , function 
     
     Route::post('password/email' , [
         'uses' => 'Auth\\ForgotPasswordController@sendResetLinkEmail'
+    ]);  
+    
+    Route::post('password/reset' , [
+        'uses' => 'Auth\\ResetPasswordController@reset'
     ]);
     
     Route::get('customers/{customer}/addresses/{address}/main' , [
@@ -96,6 +100,7 @@ Route::group(['domain' => env('APP_API_URL') , 'namespace' => 'Api'] , function 
 
     //Routes cart And store
     Route::group(['prefix' => '' , 'namespace' => 'Product'] , function (){
+        Route::get('product-relations/{product}' , 'ProductsController@relations');
         Route::get('products/all' , 'ProductsController@all');
         Route::resource('products' , 'ProductsController', [
             'only' => ['index' , 'show' , 'update' , 'delete']

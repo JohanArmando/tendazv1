@@ -69,30 +69,34 @@
                 </div>
             </div>
          <div ng-controller="productIndexController" ng-cloak="">
-            <div class="col-lg-3 visible-lg" ng-if="rand.name">
+            <div class="col-lg-3 visible-lg" ng-if="randomProduct.name">
                 <div class="row text-center">
                     <div class="col-lg-12 col-md-12 hero-feature">
-                        <div class="thumbnail">
-                            <a href="<% BASEURL + '/detail/' + rand.slug %>">
-                                <img ng-src="<% rand.attributes.image %>"
-                                     style="max-height: 220px; min-height: 220px" alt="">
+                        <div class="thumbnail" style="max-height: 360px; min-height: 360px">
+                            <a href="{{url('/')}}<% BASEURL + '/detail/' + randomProduct.slug %>">
+                                <img ng-src="<% randomProduct.images.data[0].url %>"
+                                     style="max-height: 250px; min-height: 250px" alt="">
                             </a>
                             <div class="caption prod-caption">
                                 <h4>
-                                    <a href="<% BASEURL + '/detail/' + rand.slug %>">
-                                        <% rand.name %></a>
+                                    <a href="{{url('/')}}<% BASEURL + '/detail/' + randomProduct.slug %>">
+                                        <% randomProduct.name %></a>
                                 </h4>
-                                    <div class="btn-group">
-                                    <div class="price text-center" ng-if="rand.promotion">
-                                        <strong>$<% rand.promotion_price | number:0 %></strong>
-                                        <span class="price-old">$<% rand.price | number:0 %></span>
-                                    </div>
-                                    <div class="price text-center" ng-if="!rand.promotion">
-                                        <strong>$<% rand.price | number:0 %></strong>
-                                    </div>
-                                        <a href="#" ng-hide="rand.stock == 0" ng-click="add(rand)" class="btn btn-primary">
-                                            <i class="fa fa-shopping-cart"></i> Comprar</a>
-                                    </div>
+                                <div class="btn-group"  ng-if="randomProduct.special_price">
+                                    <a href="#" class="btn btn-default btn-xs">
+                                        <strong style="color: red; text-decoration: line-through;">$<% randomProduct.price | number:0 %></strong>
+                                        <a  class="btn btn-default btn-xs"><strong>$<% randomProduct.special_price | number:0 %></strong></a>
+                                    </a>
+                                    <a class="btn btn-primary btn-xs" ng-hide="randomProduct.stock == 0" ng-click="add(cartId , randomProduct)">
+                                        <i class="fa fa-shopping-cart"> Agregar</i>
+                                    </a>
+                                </div>
+                                <div class="btn-group"  ng-if="!randomProduct.special_price">
+                                    <a  class="btn btn-default btn-xs"><strong>$<% randomProduct.price | number:0 %></strong></a>
+                                    <a class="btn btn-primary btn-xs" ng-hide="randomProduct.stock == 0" ng-click="add(cartId , randomProduct)">
+                                        <i class="fa fa-shopping-cart"></i> Agregar
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>

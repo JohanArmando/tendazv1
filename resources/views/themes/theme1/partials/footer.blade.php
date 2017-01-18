@@ -21,13 +21,16 @@
 						<div class="column">
 							<ul>
 								@if(!$shop->store->address_1 == '')
-									<li><a href="">Email: </a><span> {{$shop->store->address_1}}</span></li>
+									<li><strong>Email: </strong><span> {{$shop->store->address_1}}</span></li>
 								@endif
 								@if(!$shop->store->number_phone == '')
-									<li><a href="">Telefono: </a><span> {{$shop->store->number_phone}}</span></li>
+									<li><strong>Telefono: </strong><span> {{$shop->store->number_phone}}</span></li>
 								@endif
 								@if(!$shop->store->number_phone == '')
-									<li><a href="">Direcci&oacute;n: </a><span> {{$shop->store->address_2}}</span></li>
+									<li><strong>Direcci&oacute;n: </strong><span> {{$shop->store->address_2}}</span></li>
+								@endif
+								@if(!$shop->store->conditions == '')
+									<li><a href="#" data-toggle="modal" data-target="#modalConditions">Terminos  y condiciones</a></li>
 								@endif
 							</ul>
 						</div>
@@ -83,6 +86,7 @@
 		</div>
 	</div>
         <div class="navbar-inverse text-center copyright">
-        	Tendaz.com | By Maxcorp 2016.
+			<img src="{{asset('administrator/image/servientrega-footer.gif')}}" alt="" height="20px">
+			Copyright @ 2017 By Maxcorp Inc.
         </div>
     </footer>
