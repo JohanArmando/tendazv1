@@ -32,12 +32,14 @@ class PaymentsController extends Controller
                 $description = '';
                 $quantity = 0;
                 $price = 0;
+
                 foreach ($cart->products as $product){
                     $title .=  $product->pivot->quantity.' '.$product->product->name.' - ';
                     $description .=  ' '.$product->product->description;
                     $quantity = 1;
-                    $price +=  ($product->product->collection->promotion ? $product->promotional_price : $product->price) * $product->pivot->quantity;
+                    $price +=  ( $product->product->collection->promotion && $product->promotional_price > 0 ? $product->promotional_price : $product->price ) * $product->pivot->quantity;
                 }
+
                 $preference_data = array(
                     "items" => [
                         array(
