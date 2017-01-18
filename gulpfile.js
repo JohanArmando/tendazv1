@@ -21,7 +21,8 @@ elixir(mix => {
     mix.scripts([
         'store/Controllers/ForgotPasswordController.js',
         'store/Controllers/ResetPasswordController.js',
-        'store/Controllers/UpdatePasswordController.js'
+        'store/Controllers/UpdatePasswordController.js',
+        'store/Controllers/UserController.js'
     ] , 'public/store/js/controllers.js');
     
     mix.scripts([

@@ -21,7 +21,7 @@ myApp.controller('UpdatePasswordController' , ["$scope" , "Account", "$timeout" 
                         toastr["info"](response.data.status);
                         $scope.changeElement('changePasswordButton' , false , "Actualizar Contraseña");
                         $scope.changePasswordForm = {};
-                        $scope.errors = {};
+                        $scope.errors
                     }).catch(function (response) {
                         $scope.errors = response.data;
                         $scope.changeElement('changePasswordButton' , false , "Actualizar Contraseña");
