@@ -12,7 +12,7 @@
                                 <p>{!! Session::get('message')['message'] !!}</p>
                             </div>
                         @endif
-                        <form class="form" action="{{url('contact/email')}}" role="form" method="POST" data-toggle="validator" >
+                        <form class="form" action="{{url('contact/email')}}" role="form" method="POST" data-toggle="validator" novalidate>
                             {!! csrf_field() !!}
                            <h3>Contactenos</h3>
                            <p align="justify">

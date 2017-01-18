@@ -36,7 +36,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-4 col-md-4 col-lg-2  col-xl-2">
+                <div ng-if="!usuario" class="col-sm-4 col-md-4 col-lg-2  col-xl-2">
                     <div class="mobile-collapse">
                         <h4 class="text-left  title-under  mobile-collapse__title">MI CUENTA</h4>
                         <div class="v-links-list mobile-collapse__content">

@@ -14,7 +14,7 @@
                     </div>
                     <div class="box col-xs-12" style="display: inline-block">
                         <div class="col-xs-4" ng-repeat="image in product.images.data | limitTo:3"
-                             nng-if="image" style="margin-top: 10px">
+                             ng-if="image" style="margin-top: 10px">
                             <a href="#" class="image-click thumb active">
                                 <img ng-src="<% image.url %>" alt="" class="img-responsive">
                             </a>

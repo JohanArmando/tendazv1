@@ -127,6 +127,7 @@ input{
     border-style: dashed;
 }
 .btn_checkout{
+    margin-top: 20px;
 	background: #F26522 !important;
 	border: 0px!important;
 	color:#fff!important;

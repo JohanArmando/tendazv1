@@ -21,7 +21,7 @@
                                          <li style="font-size: 0.8em" ng-repeat="error in errors"><% error %></li>
                                      </ul>
                                  </div>
-                            <form name="resetPasswordForm" ng-submit="resetPassword(resetPasswordForm)"  accept-charset="utf-8" autocomplete="off" role="form" class="form-horizontal"  novalidate>
+                            <form class="form-horizontal" name="resetPasswordForm" ng-submit="resetPassword(resetPasswordForm)"  accept-charset="utf-8" autocomplete="off" role="form"  novalidate>
                             <div class="form-group">
                                 <label for="email" class="col-md-4 control-label">Correo:</label>
 
@@ -46,9 +46,9 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
-                                    <button type="submit" class="btn btn--ys btn--xl btn-top resetPassword">
+                                    <button type="submit" class="btn btn-primary btn--ys btn--xl btn-top resetPassword">
                                         <i class="fa fa-refresh">  </i>
-                                         Restablecer Contrase&ntilde;a
+                                          Restablecer Contrase&ntilde;a
                                     </button>
                                 </div>
                             </div>

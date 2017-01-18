@@ -1,12 +1,8 @@
 @extends(Theme::current()->viewsPath.'.template')
     @section('css')
       <style type="text/css">
-        .btn span.fa {         
-        opacity: 0;       
-      }
-      .btn.active span.fa {        
-        opacity: 1;       
-      }
+          .btn span.fa {  opacity: 0;  }
+          .btn.active span.fa {  opacity: 1;  }
       </style>
       <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
         @stop
@@ -89,6 +85,7 @@
 
                            <div class="text-center">
                                <button type="submit" class="btn btn-primary">Iniciar Sesion</button>
+                               <p><a data-toggle="modal" data-target="#modalRestorePassword">Olvidaste la Contase&ntilde;a?</a></p>
                            </div>
                            @if(!empty($socialData->client_id_facebook) || !empty($socialData->client_id_google))
                                <div class="text-center col-md-12">
@@ -115,6 +112,7 @@
                    </div>
                 </div>
             </div>
+            @include(Theme::current()->viewsPath.'.password.email')
           @endsection
     @section('script')
         @stop

@@ -1,12 +1,8 @@
 @extends(Theme::current()->viewsPath.'.template')
     @section('css')
     <style type="text/css">
-                .btn span.fa {               
-            opacity: 0;
-        }
-        .btn.active span.fa {                
-            opacity: 1;             
-        }
+        .btn span.fa {  opacity: 0;  }
+        .btn.active span.fa {  opacity: 1;  }
     </style>
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
     @stop
@@ -19,13 +15,13 @@
                             <div id="customer_login">
                                 <div class="col-md-6">
                                     <h2>Inicio de sesion</h2>
-                                    <form class="login" name="loginForm" ng-submit="doLogin(loginForm)" role="form" data-toggle="validator">
+                                    <form class="login" name="loginForm" ng-submit="doLogin(loginForm)" role="form" data-toggle="validator" novalidate>
                                         <div class="form-row form-row-wide form-group">
                                             <label for="username">
                                                 correo electronico
                                                 <span class="required">*</span>
                                             </label>
-                                            <input type="email" class="input-text" ng-model="formLog.loginMail" name="email" id="username" value="" required>
+                                            <input type="email" class="input-text" ng-model="formLog.loginMail" name="email" required>
                                             <div class="help-block with-errors"></div>
                                         </div>
                                         <div class="form-row form-row-wide form-group">
@@ -33,16 +29,23 @@
                                                 Constrase&ntilde;a
                                                 <span class="required">*</span>
                                             </label>
-                                            <input class="input-text" type="password" ng-model="formLog.loginPassword" name="password" id="password" required>
+                                            <input class="input-text" type="password" ng-model="formLog.loginPassword" name="password" required>
                                             <div class="help-block with-errors"></div>
                                         </div>
                                          
                                          <div class="form-group">
-                                           <input type="checkbox" autocomplete="off" style="zoom: 1.5;">Recordarme    
+                                             <div class=""  data-toggle="buttons">
+                                                 <label class="btn btn-default btn-xs" style="width:4%;">
+                                                     <input type="checkbox"  autocomplete="off" style="zoom: 2.0;">
+                                                     <span class="fa fa-check" style="color: #45B284;"></span>
+                                                 </label>
+                                                 <span>&nbsp; Recordarme.</span>
+                                             </div>
                                          </div>
                                         <div class="form-row text-center">
-                                            <input type="submit" class="button" name="login" value="Iniciar sesion"><br><div class="lost_password">
-                                                <a href="#" style="font-size: 10px;">Olvistaste tu contraseña?</a>
+                                            <input type="submit" class="button" value="Iniciar sesion"><br>
+                                            <div class="lost_password">
+                                                <a data-toggle="modal" data-target="#modalRestorePassword" style="font-size: 10px;">Olvistaste tu contraseña?</a>
                                             </div>
                                         </div>
                                         @if(!empty($socialData->client_id_facebook) || !empty($socialData->client_id_google))
@@ -113,21 +116,23 @@
                                                    ng-model="registerFormR.RegisterPasswordConfirm" id="inputPasswordConfirm" data-match="#inputPassword"  class="input-text"  required>
                                             <div class="help-block with-errors"></div>
                                         </div>
-                                        <div class="form-row form-row-wide  form-group">
-                                            <div class=""  data-toggle="buttons">
-                                                <label class="btn btn-default btn-xs">
-                                                    <input type="checkbox"  autocomplete="off" style="zoom: 2.0;" required>
-                                                    <span class="fa fa-check" style="color: darkblue;"></span>
-                                                </label> &nbsp; <a data-toggle="modal" data-target="#modalConditions" >Acepto Terminos y Condiciones.</a>
+                                        <div class="col-md-12 form-group">
+                                            <div class=""  data-toggle="buttons"  >
+                                                    <label class="btn btn-default btn-xs" style="width:4%;">
+                                                        <input type="checkbox"  autocomplete="off" style="zoom: 2.0;" required>
+                                                        <span class="fa fa-check" style="color: #45B284;"></span>
+                                                    </label>
+                                                    <span>&nbsp; <a data-toggle="modal" data-target="#modalConditions" >Acepto Terminos y Condiciones.</a></span>
                                             </div>
                                             <div class="help-block with-errors"></div>
                                         </div>
-                                        <div class="form-row form-row-wide  form-group">
+                                        <div class="col-md-12 form-group">
                                             <div class=""  data-toggle="buttons">
-                                                <label class="btn btn-default btn-xs active">
+                                                <label class="btn btn-default btn-xs active" style="width:4%;">
                                                     <input type="checkbox"  autocomplete="off" style="zoom: 2.0;">
-                                                    <span class="fa fa-check" style="color: darkblue;"></span>
-                                                </label> &nbsp; Acepto Envios de Correos.
+                                                    <span class="fa fa-check" style="color: #45B284;"></span>
+                                                </label>
+                                                <span>&nbsp; Acepto Envios de Correos.</span>
                                             </div>
                                         </div>
                                         
@@ -142,6 +147,7 @@
                 </div>
             </div>
         </div>
+        @include(Theme::current()->viewsPath.'.password.email')
     @endsection
     @section('script')
     @stop

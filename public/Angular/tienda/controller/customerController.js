@@ -2,7 +2,7 @@
 (function () {
     angular.module('app.customerStoreController',[])
         .controller('customerStoreController' , ["$http", "$location", "$cookies" ,"User", "$rootScope" , function ($http , $location , $cookies , $rootScope ,$scope,User) {
-          /*Variables*/
+         /*Variables*/
             $scope.errores = false;
             $scope.hideErrors = function(){
                 $scope.errores = false;

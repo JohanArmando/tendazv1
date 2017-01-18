@@ -59,7 +59,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3 col-sm-6 item-footer-four">
+                                            <div ng-if="!usuario" class="col-md-3 col-sm-6 item-footer-four">
                                                 <div class="widget noo-nav-menu-widget">
 
                                                     <h4 class="widget-title">Mi Cuenta</h4>
