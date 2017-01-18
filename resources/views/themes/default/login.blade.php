@@ -83,9 +83,10 @@
                                         <input type="checkbox"  autocomplete="off" style="zoom: 2.0;">
                                         <span class="fa fa-check" style="color: darkblue;"></span>
                                     </label> &nbsp; Recordarme
-                                </div>  
-                                 <br><br>   
+                                </div>
+                                <br>
                                 <button type="submit" class="btn btn-sm"><i class="fa fa-long-arrow-right"></i> Iniciar</button>
+                                <p><a data-toggle="modal" data-target="#modalRestorePassword">Olvidaste la Contase&ntilde;a?</a></p>
                             </form>
                             <div style="margin-bottom: 30px;"></div>
                             <div style="margin-bottom: 30px;"></div>
@@ -111,6 +112,7 @@
                         </div>
                     </div>
                 </div>
+                @include('themes.default.password.email')
            @endsection
     @section('script')
            @stop

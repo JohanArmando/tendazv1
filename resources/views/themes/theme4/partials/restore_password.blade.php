@@ -18,7 +18,7 @@
                     <label>Email:</label>
                     <input id="login_username"  name="email" ng-model="reset.email" class="form-control control_from_inp" type="text" placeholder="@" required>
                 </div>
-                <button  type="submit" class="btn btn--ys btn--full btn--lg sentResetEmail">Enviar Correo</button>
+                <input  type="submit" class="btn btn--ys btn--full btn--lg sentResetEmail">Enviar Correo</input>
                 <div class="divider divider--xs"></div>
             </form>
 
