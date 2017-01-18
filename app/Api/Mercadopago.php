@@ -544,10 +544,12 @@ class MPRestClient {
         if (!$response)
             return;
 
+        $trans = !empty($response['response']['cause']) ? $response['response']['cause'][0]['code'] :  $response['response']['message'];
+
         return response([
             'cause' => [
-                "code"          => $response['response']['cause'][0]['code'],
-                "description"   => trans(self::trans.$response['response']['cause'][0]['code'])
+                "code"          => !empty($response['response']['cause']) ? $response['response']['cause'][0]['code'] :  $response['response']['status'],
+                "description"   => trans(self::trans.$trans)
             ]
         ], $response['status']);
     }

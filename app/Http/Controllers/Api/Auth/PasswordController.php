@@ -21,6 +21,6 @@ class PasswordController extends Controller
         $customer->password = $request->get('password');
         $customer->save();
 
-        return response([trans('api.change.password')], 200);
+        return response(['status' => trans('api.change.password')], 200);
     }
 }
