@@ -8,15 +8,17 @@
             $scope.store = store;
             $scope.BASEURL = BASEURL;
             $scope.showCart = {'loading' : false};
-            cartService.getAllProductsForCart($rootScope.cartId)
-                .then(function (response) {
-                    $rootScope.carts = response.data.data;
-                    angular.forEach($rootScope.carts.products.data , function (v , i) {
-                        angular.forEach(v.values.data , function (value, index) {
-                            
+            if ($rootScope.cartId){
+                cartService.getAllProductsForCart($rootScope.cartId)
+                    .then(function (response) {
+                        $rootScope.carts = response.data.data;
+                        angular.forEach($rootScope.carts.products.data , function (v , i) {
+                            angular.forEach(v.values.data , function (value, index) {
+
+                            })
                         })
-                    })
-                });
+                    });
+            }
             $scope.updateQuantityCart = function (cartId , item) {
                 $scope.toggleLoading(true);
                 var data = {

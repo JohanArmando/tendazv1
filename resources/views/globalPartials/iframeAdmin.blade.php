@@ -21,13 +21,17 @@
             html.appendChild(iframe);
             if(getCookie('_bar') == '1'){
                 var element = document.getElementById("store_bar_iframe");
-                var body = $(".content");
-                var bodyID = $("#content");
+                var body = document.getElementsByClassName(".content");
+                var bodyID =  document.getElementById("#content");
                 element.style.width = '100%';
                 element.style.right = 'auto';
                 element.style.left = 0;
-                body.css('margin-top','33px');
-                bodyID.css('margin-top','33px');
+                if (body && body.length > 0){
+                    body.style.marginTop =  '33px';
+                }
+                if (bodyID && bodyID.length > 0){
+                    bodyID.style.marginTop = '33px';
+                }
                 doShift(true);
             }
             if(getCookie('_bar') == '0'){
@@ -93,7 +97,7 @@
         if(getCookie('_bar') == '1'){
             var element = document.getElementById("store_bar_iframe");
         }
-        //esta funcion recibe el mensaje y si el dato es 1 agrande el iframe y bajo todos los datos de lo contaro pone pequeño el iframe
+        //esta funcion recibe el mensaje y si el dato es 1 agrande el iframe y bajo todos los datos de lo contaro pone pequeï¿½o el iframe
         function receiveBarMessage(event){
             if(event.origin != "{{ url('/') }}") {
                 return;

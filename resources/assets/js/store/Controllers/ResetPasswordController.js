@@ -12,6 +12,11 @@ myApp.controller('ResetPasswordController' , ["$scope" , "Account" , "$location"
             if (!results[2]) return '';
             return decodeURIComponent(results[2].replace(/\+/g, " "));
         },
+        changeElement : function (clase , disabled , text) {
+            var button = document.getElementsByClassName(clase)[0];
+            button.disabled = disabled;
+            button.innerHTML = text;
+        },
         resetPassword : function (resetPasswordForm) {
             if (resetPasswordForm.$valid){
                 var resetObj = {
@@ -21,16 +26,15 @@ myApp.controller('ResetPasswordController' , ["$scope" , "Account" , "$location"
                     token : token
                 };
                 $scope.formSubmited = false;
-                $j('.resetPassword').attr('disabled' , true).html("<i class='fa fa-refresh fa-spin  fa-fw'></i> Restableciendo Contraseña.");
+                $scope.changeElement('resetPassword' , true , "<i class='fa fa-refresh fa-spin  fa-fw'></i> Restableciendo Contraseña.");
                Account.postResetPassword(resetObj)
                     .then(function(response) {
                         $scope.errors = null;
                         toastr["info"](response.data.status);
-                        
-                        $j('.resetPassword').attr('disabled' , false).html("<i class='fa fa-refresh'> </i> Reestablecer Contraseña");
+                        $scope.changeElement('resetPassword' , false , "<i class='fa fa-refresh'></i>Reestablecer Contraseña");
                     }).catch(function(response) {
                     $scope.errors = response.data;
-                    $j('.resetPassword').attr('disabled' , false).html("<i class='fa fa-refresh'> </i> Reestablecer Contraseña");
+                    $scope.changeElement('resetPassword' , false , "<i class='fa fa-refresh'></i>Reestablecer Contraseña");
                 }).finally(function() {});
             }else{
                 $scope.formSubmited = true;

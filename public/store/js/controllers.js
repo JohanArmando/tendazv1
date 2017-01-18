@@ -1,21 +1,27 @@
 myApp.controller('ForgotPasswordController' , ["$scope" , "Account" , function ($scope , Account) {
     angular.extend($scope ,{
+        changeElement : function (clase , disabled , text) {
+            var button = document.getElementsByClassName(clase)[0];
+            button.disabled = disabled;
+            button.innerHTML = text;
+        },
         resetEmail : function (restorePassword) {
+
             if (restorePassword.$valid){
                 var resetObj = {
                     email : $scope.reset.email
                 };
+                $scope.changeElement('sentResetEmail' , true , "Enviando Correo.");
                 $scope.formSubmited = false;
-                $j('.sentResetEmail').attr('disabled' , true).text("Enviando Correo.");
                 Account.postSendResetLinkEmail(resetObj)
                     .then(function(response) {
                         $scope.errors = null;
                         $j('#modalRestorePassword').modal('toggle');
                         toastr["info"](response.data.status);
-                        $j('.sentResetEmail').attr('disabled' , false).text("Enviar correo");
+                        $scope.changeElement('sentResetEmail' , false , "Enviar correo");
                 }).catch(function(response) {
                     $scope.errors = response.data;
-                    $j('.sentResetEmail').attr('disabled' , false).text("Enviar correo");
+                    $scope.changeElement('sentResetEmail' , false , "Enviar correo");
                 }).finally(function() {});;
             }else{
                 $scope.formSubmited = true;
@@ -38,6 +44,11 @@ myApp.controller('ResetPasswordController' , ["$scope" , "Account" , "$location"
             if (!results[2]) return '';
             return decodeURIComponent(results[2].replace(/\+/g, " "));
         },
+        changeElement : function (clase , disabled , text) {
+            var button = document.getElementsByClassName(clase)[0];
+            button.disabled = disabled;
+            button.innerHTML = text;
+        },
         resetPassword : function (resetPasswordForm) {
             if (resetPasswordForm.$valid){
                 var resetObj = {
@@ -47,16 +58,15 @@ myApp.controller('ResetPasswordController' , ["$scope" , "Account" , "$location"
                     token : token
                 };
                 $scope.formSubmited = false;
-                $j('.resetPassword').attr('disabled' , true).html("<i class='fa fa-refresh fa-spin  fa-fw'></i> Restableciendo Contraseña.");
+                $scope.changeElement('resetPassword' , true , "<i class='fa fa-refresh fa-spin  fa-fw'></i> Restableciendo Contraseña.");
                Account.postResetPassword(resetObj)
                     .then(function(response) {
                         $scope.errors = null;
                         toastr["info"](response.data.status);
-                        
-                        $j('.resetPassword').attr('disabled' , false).html("<i class='fa fa-refresh'> </i> Reestablecer Contraseña");
+                        $scope.changeElement('resetPassword' , false , "<i class='fa fa-refresh'></i>Reestablecer Contraseña");
                     }).catch(function(response) {
                     $scope.errors = response.data;
-                    $j('.resetPassword').attr('disabled' , false).html("<i class='fa fa-refresh'> </i> Reestablecer Contraseña");
+                    $scope.changeElement('resetPassword' , false , "<i class='fa fa-refresh'></i>Reestablecer Contraseña");
                 }).finally(function() {});
             }else{
                 $scope.formSubmited = true;
@@ -65,5 +75,18 @@ myApp.controller('ResetPasswordController' , ["$scope" , "Account" , "$location"
     });
     
     
+}]);
+myApp.controller('UpdatePasswordController' , ["$scope" , "Account" , function ($scope , Account) {
+
+    angular.extend($scope , {
+        'doChangePassword' : function (changePasswordForm) {
+            if (changePasswordForm.$valid){
+            
+            }else{
+                $scope.formSubmited = true;
+            }
+        }
+    });
+
 }]);
 //# sourceMappingURL=controllers.js.map

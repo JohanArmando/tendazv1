@@ -1,21 +1,27 @@
 myApp.controller('ForgotPasswordController' , ["$scope" , "Account" , function ($scope , Account) {
     angular.extend($scope ,{
+        changeElement : function (clase , disabled , text) {
+            var button = document.getElementsByClassName(clase)[0];
+            button.disabled = disabled;
+            button.innerHTML = text;
+        },
         resetEmail : function (restorePassword) {
+
             if (restorePassword.$valid){
                 var resetObj = {
                     email : $scope.reset.email
                 };
+                $scope.changeElement('sentResetEmail' , true , "Enviando Correo.");
                 $scope.formSubmited = false;
-                $j('.sentResetEmail').attr('disabled' , true).text("Enviando Correo.");
                 Account.postSendResetLinkEmail(resetObj)
                     .then(function(response) {
                         $scope.errors = null;
                         $j('#modalRestorePassword').modal('toggle');
                         toastr["info"](response.data.status);
-                        $j('.sentResetEmail').attr('disabled' , false).text("Enviar correo");
+                        $scope.changeElement('sentResetEmail' , false , "Enviar correo");
                 }).catch(function(response) {
                     $scope.errors = response.data;
-                    $j('.sentResetEmail').attr('disabled' , false).text("Enviar correo");
+                    $scope.changeElement('sentResetEmail' , false , "Enviar correo");
                 }).finally(function() {});;
             }else{
                 $scope.formSubmited = true;

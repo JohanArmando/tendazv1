@@ -102,6 +102,12 @@
 <script src="{{ asset('components/js/dirPagination.js') }}"></script>
 <script src="{{ asset('components/js/rzslider.min.js') }}"></script>
 <script src="{{ asset('components/js/angularSanitize.min.js') }}"></script>
+
+<!-- SCRIPTS ANGULAR ACCOUNT -->
+<script src="{{ asset('store/js/app.js') }}"></script>
+<script src="{{ asset('store/js/controllers.js') }}"></script>
+<script src="{{ asset('store/js/models.js') }}"></script>
+
 @yield('script')
 @include('themes.default.partials.conditions')
 @include('globalPartials.iframeAdmin')
