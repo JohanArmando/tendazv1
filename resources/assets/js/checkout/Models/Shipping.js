@@ -72,7 +72,6 @@ myApp.factory("Shipping" , ["$http" , "User", "$rootScope" , "Cart", "$location"
             url: baseUrl + '/carts/' + Cart.getCartId() +'/shipping?client_secret='  + client_secret + '&client_id=' + client_id,
             method: "GET"
         }).then(function(response) {
-            console.log(response);
             $rootScope.carts = response.data.cart.data;
         }).catch(function(response) {
             swal({
