@@ -24,6 +24,9 @@ class CartController extends Controller
     public function destroy(Cart $cart)
     {
         $cart->products()->detach();
+        $cart->order->update([
+            'total' => 0
+        ]);
         return [compact('cart')];
     }
     

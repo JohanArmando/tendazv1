@@ -1,5 +1,5 @@
 myApp.controller('UserController' , ['$scope' , 'Account' , '$cookies' , function ($scope , Account , $cookies) {
-    
+
     /** METHODS **/
     angular.extend($scope , {
         'getUser' : function () {
@@ -7,13 +7,13 @@ myApp.controller('UserController' , ['$scope' , 'Account' , '$cookies' , functio
         },
         changeElement : function (clase , disabled , text) {
             var button = document.getElementsByClassName(clase)[0];
-            button.disabled = true;
+            button.disabled = disabled;
             button.innerHTML = text;
         },
         'doUpdateProfile' : function (profileForm) {
             if (profileForm.$valid){
                 var usrObject = {
-                    'first_name' : $scope.user.personal_info.first_name,
+                    'name' : $scope.user.personal_info.first_name,
                     'last_name' : $scope.user.personal_info.last_name,
                     'phone' : $scope.user.personal_info.phone,
                     'identification' : $scope.user.personal_info.identification
@@ -35,5 +35,5 @@ myApp.controller('UserController' , ['$scope' , 'Account' , '$cookies' , functio
             }
         }
     });
-    
+
 }]);
