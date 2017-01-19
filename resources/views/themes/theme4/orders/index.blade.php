@@ -22,8 +22,8 @@
 													<select class="form-control" style="width: 250px;" ng-model="sortBy" >
 														<option>Seleccione...</option>
 														<option value="-_id">Por Orden</option>
-														<option value="-date">Por Fecha</option>
-														<option value="total">Por Precio</option>
+														<option value="date">Por Fecha</option>
+														<option value="-total">Por Precio</option>
 													</select>
 												</div>
 											</div>
@@ -50,7 +50,7 @@
                                    				</thead>
 												<tbody>
 													<tr dir-paginate="order in orders   | itemsPerPage: pageSize | filter:q | orderBy:sortBy"  current-page="currentPage">
-														<td ><a style="color: #0a8fb2" href="/orders/<% order._id %>">#<% order.id |  limitTo:8 %></a></td>
+														<td ><a style="color: #0a8fb2" href="/orders/<% order._id %>">#<% order._id |  limitTo:8 %></a></td>
 														<td><% order.date %></td>
 														<td><% order.status.code %></td>
 														<td><% order.status_payment %></td>

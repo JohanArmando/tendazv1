@@ -4,7 +4,7 @@
 
         </div>
         <div class="col-sm-9 col-md-9 col-lg-9 col-xl-9 text-right">
-            <div class="search link-inline pull-right mobile-menu-off">
+            <div class="search link-inline pull-right">
                 <a href="#" class="search__open"><span class="icon icon-search"></span></a>
                 <div class="search-dropdown">
                     <form action="{{ url('/products') }}" method="get">

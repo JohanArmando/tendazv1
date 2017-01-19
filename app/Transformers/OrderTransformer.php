@@ -53,6 +53,8 @@ class OrderTransformer extends TransformerAbstract
     }
 
     public function includeShippingAddress(Order $order){
+        //hay que revisar cuando la direccion se actualizo y traer la direccion de history_address donde la orden es menor al el created_at de la historia
+        //el eliminar orden toca usar soft_deletes y no mostrar las ordenes eliminadas al index del usuario, aqui si
         return $order->shippingAddress ?
             $this->item($order->shippingAddress->address , new  AddressTransformer())
             : $this->null();

@@ -10,7 +10,7 @@
 							<ol class="breadcrumb breadcrumb--ys pull-left">
 								<li class="home-link"><a href="{{ url('/') }}" class="fa fa-home"></a></li>
 								<li><a href="{{ url('/orders') }}">Ordenes</a></li>
-								<li class="active">#<% order.id %></li>
+								<li class="active">#<% order._id | limitTo:8 %></li>
 							</ol>
 						</div>
 					</div>
@@ -22,7 +22,7 @@
 									<div class="panel-content">
 										<div class="row">
 											<div class="col-md-12">
-												<h3>Orden #<% order.id %></h3><br>
+												<h3>Orden #<% order._id | limitTo:8 %></h3><br>
 											</div>
 											<div class="col-md-4" style="margin-bottom: 20px">
 												<!-- panel details -->

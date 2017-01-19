@@ -147,49 +147,49 @@
 	@include('globalPartials.iframeAdmin')
 	@include('themes.theme4.partials.conditions')
 	<script>
-		$j(document).on('ready' , function () {
-			$j('.register').click(function () {
-				$j(this).attr('disabled' , true);
-				$j(this).find('span').hide();
-				$j(this).find('i').removeClass('hidden');
-				$j('#form-register').submit();
+		$(document).on('ready' , function () {
+			$('.register').click(function () {
+				$(this).attr('disabled' , true);
+				$(this).find('span').hide();
+				$(this).find('i').removeClass('hidden');
+				$('#form-register').submit();
 			});
-			$j('.login').click(function () {
-				$j(this).attr('disabled' , true);
-				$j(this).find('.fa-arrow-right').hide();
-				$j(this).find('.fa-spinner').removeClass('hidden');
-				$j('#form-login').submit();
+			$('.login').click(function () {
+				$(this).attr('disabled' , true);
+				$(this).find('.fa-arrow-right').hide();
+				$(this).find('.fa-spinner').removeClass('hidden');
+				$('#form-login').submit();
 			});
 		});
 
 	</script>
 	<script>
-		$j(document).ready(function() {
+		$(document).ready(function() {
 			listingModeToggle();
 
-				productCarousel($j('.banner-slider'),1,1,1,1,1);
-				productCarousel($j('#carouselNew'),3,2,2,2,1);
-				productCarousel($j('#carouselSale'),3,2,2,2,1);
-				productCarousel($j('#carouselFeatured'),6,4,3,2,1);
-				productCarousel($j('#megaMenuCarousel1'),1,1,1,1,1);
+				productCarousel($('.banner-slider'),1,1,1,1,1);
+				productCarousel($('#carouselNew'),3,2,2,2,1);
+				productCarousel($('#carouselSale'),3,2,2,2,1);
+				productCarousel($('#carouselFeatured'),6,4,3,2,1);
+				productCarousel($('#megaMenuCarousel1'),1,1,1,1,1);
 				mobileOnlyCarousel();
-			$j('li').on('mouseover','.deleteHover', function () {
-				$j(this).parent().removeClass('hover');
+			$('li').on('mouseover','.deleteHover', function () {
+				$(this).parent().removeClass('hover');
 			});
-			$j(document).scroll(function() {
-				var y = $j(this).scrollTop();
+			$(document).scroll(function() {
+				var y = $(this).scrollTop();
 				if (y > 200) {
-					$j('.name-text').hide();
+					$('.name-text').hide();
 				} else {
-					$j('.name-text').fadeIn();
+					$('.name-text').fadeIn();
 				}
 			});
-			$j(document).on('ready' , function () {
-				var y = $j(this).scrollTop();
+			$(document).on('ready' , function () {
+				var y = $(this).scrollTop();
 				if (y > 200) {
-					$j('.name-text').hide();
+					$('.name-text').hide();
 				} else {
-					$j('.name-text').fadeIn();
+					$('.name-text').fadeIn();
 				}
 			});
 			 });

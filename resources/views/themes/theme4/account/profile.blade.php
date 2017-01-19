@@ -32,7 +32,8 @@
                          		</div>
                     		</div>
           				</div>
-						<div class="col-md-12 col-lg-12  col-xs-12 hidden">
+						<div class="col-md-12 col-lg-12  col-xs-12" ng-controller="AddressController">
+							@include(Theme::current()->viewsPath.'.partials.edit-dir')
 							<div class="panel">
 								 <div class="text-center">
 				 					<h4 class="text-center text-uppercase title-under">Direcciones</h4>			
@@ -42,28 +43,29 @@
 								 		<table class="table" cellspacing="100">
 								 			<tbody>
 								 				<tr>
-												<th>Id</th>
 												<th>Direccion</th>
-												<th>Telefono</th>
+												<th>Complemento</th>
+												<th>Estado</th>
 												<th class="text-center">Principal</th>
 												<th class="text-center">Acciones</th>
 											</tr>
-											<tr>
+											<tr ng-repeat="address in addresses">
+												<td><% address.street %></td>
 												<td>
-													<a href="">#001</a>
+													<% address.street %>
 												</td>
 												<td>
 													<p align="justify">
-														calle sdfs 78-45,
+														<% address.state.name %> - <% address.city.name %>
 													</p>
 												</td>
-												<td> (+57) 123456</td>
 												<td class="text-center">
-													<a class="btn btn-xs btn-primary" href=""><i class="fa fa-eye"></i></a>
-													<a class="btn btn-xs btn-default" href=""><i class="fa fa-eye-slash"></i></a>
+													<a class="btn btn-xs" ng-class=" address.isPrimary ? 'btn-primary' : 'btn-default'" href="">
+														<i class="fa" ng-class=" address.isPrimary ? 'fa-eye' : 'fa-eye-slash'"></i>
+													</a>
 												</td>
 												<td class="text-center">
-													<button type="button" data-target="#modalEditarDireccion" data-toggle="modal" class="btn btn-warning btn-xs"><i class="fa fa-edit
+													<button type="button" data-target="#modalAddress" data-toggle="modal" class="btn btn-warning btn-xs" ng-click="edit( $index)"><i class="fa fa-edit
 													"></i></button>
 												</td>
 											</tr>
@@ -77,7 +79,7 @@
 								 		</div>
 								 		<div class="col-md-12">
 								 			 <div class="pull-right">
-	 											<button type="submit" data-toggle="modal" data-target="#modalAgregardireccion" class="btn btn--ys"><i class="fa fa-plus"></i> Agregar nueva direccion</button>
+	 											<button type="submit" data-toggle="modal" data-target="#modalAddress" class="btn btn--ys" ng-click="created()"><i class="fa fa-plus"></i> Agregar nueva direccion</button>
 	 										</div>
 								 		</div>
 								 	</div>
@@ -86,8 +88,7 @@
 						</div>
 					</div>
 				</div>
-				@include(Theme::current()->viewsPath.'.partials.add-dir')
-				@include(Theme::current()->viewsPath.'.partials.edit-dir')
+
 
 				<!--MODAL PARA EL CAMBIO DE NOMBRE-->
 					<div id="modalActualizar" class="fade modal modalActualizar" tabindex="-1" role="dialog">
