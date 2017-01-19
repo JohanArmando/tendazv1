@@ -13,6 +13,7 @@
     });
        $scope.getUserObject = function () {
         $scope.usuario =  angular.fromJson($cookies.get('auth'));
+        $scope.user =  angular.fromJson($cookies.get('auth'));
         
     };
      $scope.getUserObject();
@@ -91,7 +92,7 @@
         },
         doLogout : function () {
             User.doUserLogout();
-            $location.path('/cart');
+            window.location.href = '/';
         },
         showFormRegister : function () {
             $rootScope.modalAnimate($rootScope.formLogin, $rootScope.formRegister);

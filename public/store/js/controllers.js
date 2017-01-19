@@ -126,7 +126,7 @@ myApp.controller('UserController' , ['$scope' , 'Account' , '$cookies' , functio
             if (profileForm.$valid){
                 var usrObject = {
                     'first_name' : $scope.user.personal_info.first_name,
-                    'last_name' : $scope.user.personal_info.first_name,
+                    'last_name' : $scope.user.personal_info.last_name,
                     'phone' : $scope.user.personal_info.phone,
                     'identification' : $scope.user.personal_info.identification
                 };
@@ -148,9 +148,21 @@ myApp.controller('UserController' , ['$scope' , 'Account' , '$cookies' , functio
         }
     });
     
-    /** VARIABLES **/
+}]);
+myApp.controller("OrderController" ,[ "$scope" , "Account" , "Order" , function ($scope , Account , Order) {
+    /*  METHODS */
     angular.extend($scope , {
-       'user' : $scope.getUser() 
+       'getOrders' : function () {
+           Order.getOrder(Account.getUserObject()._id).then(function (response) {
+               $scope.orders = response.data.data;
+           }).catch(function (response) {
+               console.log(response);
+           });
+       },
     });
+
+    $scope.pageSize = 10;
+    $scope.currentPage = 1;
+    $scope.getOrders();
 }]);
 //# sourceMappingURL=controllers.js.map

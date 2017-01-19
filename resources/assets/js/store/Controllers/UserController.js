@@ -14,7 +14,7 @@ myApp.controller('UserController' , ['$scope' , 'Account' , '$cookies' , functio
             if (profileForm.$valid){
                 var usrObject = {
                     'first_name' : $scope.user.personal_info.first_name,
-                    'last_name' : $scope.user.personal_info.first_name,
+                    'last_name' : $scope.user.personal_info.last_name,
                     'phone' : $scope.user.personal_info.phone,
                     'identification' : $scope.user.personal_info.identification
                 };
@@ -36,8 +36,4 @@ myApp.controller('UserController' , ['$scope' , 'Account' , '$cookies' , functio
         }
     });
     
-    /** VARIABLES **/
-    angular.extend($scope , {
-       'user' : $scope.getUser() 
-    });
 }]);

@@ -62,7 +62,7 @@
                                 <i class="icon icon-lock"></i>&nbsp;Cambiar Contraseña</a>
                         </li>
                         <li>
-                            <a  class="hidden" href="{{url('orders')}}">
+                            <a   href="{{ url('orders') }}">
                                 <i class="icon icon-list"></i>&nbsp;Mis Ordenes
                             </a>
                         </li>
@@ -102,7 +102,7 @@
                                              &nbsp; &nbsp; &nbsp;Cambiar Contraseña</a>
                                         </li>
                                         <li>
-                                            <a  class="hidden" href="{{url('orders')}}">
+                                            <a  href="{{url('orders')}}">
                                                <i class="fa fa-list"></i> &nbsp; &nbsp; &nbsp;Mis Ordenes
                                             </a>
                                         </li>

@@ -11,11 +11,8 @@ class OrdersController extends Controller
 {
     public function index(Customer $customer)
     {
-        $orders = $customer->orders()->NotInitOrders()->get();
-        //enviar order _id fecha estado pago envio total total de productos
-        //en el detalle de la orden resumen de productos
-        //resumen de cupon
-        //resumen de envio y costo id medio de apgo pago estado fecha
-        return  [$orders];
+        $orders = $customer->orders()->orderBy('id' , 'DESC')->NotInitOrders()->get();
+
+        return  fractal()->collection($orders , new OrderTransformer());
     }
 }

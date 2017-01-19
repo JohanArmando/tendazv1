@@ -19,7 +19,7 @@ class CustomerTransformer extends TransformerAbstract
             return [
                 '_id'           => $customer->uuid ,
                 'email'         => $customer->email,
-                'cart_id'       => $customer->cartsOpen->last()->secure_key,
+                'cart_id'       => $customer->cartsOpen ?? $customer->cartsOpen->last()->secure_key,
                 'personal_info' => [
                     'first_name'    => $customer->name,
                     'last_name'     => $customer->last_name,

@@ -95,4 +95,9 @@ class HomeController extends Controller
         return view(Theme::current()->viewsPath.'.account.change_password');
     }
 
+    public function getOrders()
+    {
+        return view(Theme::current()->viewsPath.'.orders.index');
+    }
+
 }
