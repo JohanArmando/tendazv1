@@ -7,7 +7,7 @@
 <div class="row nomarserv">
 <div class="col-md-12 nopad">
 	@include('servientrega.partials.top')
-				@include('servientrega.partials.nav')
+				@include('servientrega.partials.navlogin')
 </div>
 	
 </div>
@@ -57,7 +57,7 @@
 							<input type="hidden" value="1" name="remember">
 							<div class="form-group">
 								<div class="col-md-12 text-left">
-									<p>&iquest;No tiene cuenta todavia?<a href="#"> <strong>Registrate</strong></a> </p>
+									<p>&iquest;No tienes cuenta todavía?<a href="#"> <strong>Regístrate</strong></a> </p>
 									<div class="clearfix"></div>
 									<div ></div>
 									<button type="button" class="btn btn-primary make_tendaz" href="#" data-toggle="modal" data-target="#mymodal"><em>&iquest;Olvidaste tu contrase&ntilde;a?</em>
@@ -78,7 +78,7 @@
 						<div class="login-copytext">
 							<div class="col-md-12">
 
-								<p align="justify">Comparte con tus amigos de Servientrega Store y enseñales que tan facil es comenzár a vender por internet.</p>
+								<p align="justify">Comparte con tus amigos de Servientrega Store y enseñales que tan fácil es comenzár a vender por internet.</p>
 							</div>
 							<div class="col-md-3">
 								<iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FTendaz-1007603429285331&width=93&layout=box_count&action=like&size=large&show_faces=true&share=true&height=65&appId=1111594842195185" width="93" height="100" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>

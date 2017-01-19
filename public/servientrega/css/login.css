@@ -1,11 +1,7 @@
 
 
-:hov
 
-.cls
 
-element.style {
-}
 .serv_back {
     background: url(../img/fondoservi.png);
     background-repeat: repeat;
@@ -21,4 +17,10 @@ body {
     line-height: 1.42857143;
     color: #333;
     background-color: #c4e9d2;
+}
+
+@media (max-width: 1900px){
+    .serv_back {
+    height: auto!important;
+}
 }

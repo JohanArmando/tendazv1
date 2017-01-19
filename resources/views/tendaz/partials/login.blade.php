@@ -28,6 +28,7 @@
             @endif
         </div>
     </div>
+
     <div class="form-group">
         <div class="col-xs-7">
             <button type="submit" class="btn btn-primary" >
@@ -35,6 +36,7 @@
             </button>
         </div>
     </div>
+
 <input type="hidden" value="1" name="remember">
     <div class="form-group">
         <div class="col-md-12 text-left">

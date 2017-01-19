@@ -33,7 +33,9 @@
     </div>
     <div class="form-group">
         {!! Form::checkbox('term' , null , false , ['required' => 'required']) !!}
-        <strong>Acepto los terminos y condiciones</strong>
+        <strong>
+            <a href="{{asset('tendaz/TERMINOSYCONDICIONES.pdf')}}" target="_black"> Acepto Termino y Condiciones</a>
+        </strong>
         <div class="help-block with-errors"></div>
     </div>
     <div class="form-group">
