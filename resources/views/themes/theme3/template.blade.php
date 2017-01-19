@@ -33,7 +33,7 @@
     @yield('css')
             <!--Fin-->
 </head>
-<body ng-app="app">
+<body ng-app="app"  ng-controller="customerStoreController">
 <div class="site">
     @include(Theme::current()->viewsPath.'.partials.nav')
     <div class="main">
@@ -45,7 +45,6 @@
 </div>
 
 <a href="#" class="go-to-top hidden-print"><i class="fa fa-angle-up"></i></a>
-
 <!--Script-->
 <script src="{{ asset('bower_components/angular/angular.js') }}"></script>
 <script src="{{ asset('themes_tendaz/theme3/js/jquery.min.js') }}"></script>

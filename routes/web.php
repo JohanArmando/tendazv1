@@ -40,7 +40,10 @@ $appRoute = function (){
     //contact
     Route::get('contact', 'HomeController@contact');
     Route::post('contact/email', 'HomeController@email');
-
+    
+    //Orders
+    Route::get('orders', 'HomeController@getOrders');
+    
     //login
     Route::get('auth/login', 'HomeController@login');
 
@@ -49,7 +52,6 @@ $appRoute = function (){
     Route::get('change_password', 'HomeController@change_password');
 
     //Route checkout
-    Route::get('checkout2' , 'HomeController@checkout');
     Route::get('checkout' , 'HomeController@checkout');
 
     //Route Checkout Mercadopago

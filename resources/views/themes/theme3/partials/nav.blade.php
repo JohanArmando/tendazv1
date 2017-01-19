@@ -21,7 +21,7 @@
                         </div>
                         <a href="{{url('/')}}" style="text-decoration: none">
                             @if($shop->logo)
-                                <img style="margin-top: 4px;margin-bottom: 4px; max-height: 60px" class="logo replace-2x img-responsive" src="{{ asset("logos/$shop->id/$shop->logo") }}"
+                                <img style="margin-top: 8px;margin-bottom: 7px; max-height: 70px; min-height: 70px" src="{{ asset("logos/$shop->id/$shop->logo") }}"
                                      alt="Logo de la tienda {{ $shop->name_store }}" />
                             @else
                                 <h1>{{ $shop->name }}</h1>
@@ -52,7 +52,7 @@
                                                 Cambiar Contraseña
                                             </a>
                                         </li>
-                                        <li class="hidden">
+                                        <li>
                                             <a href="{{url('orders')}}">
                                                 <i class="fa fa-list"></i>
                                                 Mis Ordenes

@@ -42,7 +42,7 @@
                     <div class="col-md-3 hidden-xs hidden-sm" style="margin-top:5%">
                         <div class="text-center">
                             <div class="contenedor">
-                                <a href="{{url('crea-tu-tienda')}}">
+                                <a href="{{url('login')}}">
                                     <img  class="img-responsive" src="{{elixir('tendaz/images/icons/money.svg')}}" ><br>
                                     <h5>Incrementa tus ingresos</h5>
                                 </a>
@@ -50,7 +50,7 @@
                         </div>
                         <div class="text-center">
                             <div class="contenedor">
-                                <a href="{{url('crea-tu-tienda')}}">
+                                <a href="{{url('/login')}}">
                                     <img  class="img-responsive" src="{{elixir('tendaz/images/icons/welcome.svg')}}" ><br>
                                     <h5>Registrate</h5>
                                 </a>
@@ -60,7 +60,7 @@
                     <div class="col-md-3 col-lg-offset-0 hidden-xs hidden-sm" style="margin-top:5%">
                         <div class="text-center">
                             <div class="contenedor">
-                                <a href="{{url('crea-tu-tienda')}}">
+                                <a href="{{url('login')}}">
                                     <img  class="img-responsive" src="{{elixir('tendaz/images/icons/building.svg')}}" ><br>
                                     <h5>Quienes somos?</h5>
                                 </a>
@@ -68,7 +68,7 @@
                         </div>
                         <div class="text-center">
                             <div class="contenedor">
-                                <a href="{{url('crea-tu-tienda')}}">
+                                <a href="{{url('login')}}">
                                     <img  class="img-responsive" src="{{elixir('tendaz/images/icons/success.svg')}}" ><br>
                                     <h5>Casos de exito</h5>
                                 </a>

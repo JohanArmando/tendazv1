@@ -1,8 +1,8 @@
-@extends('template')
+@extends(Theme::current()->viewsPath.'.template')
 	@section('css')
-		@stop
+	@stop
 	@section('content')
-			<div class="container">
+			<div class="container" ng-controller="OrderController">
 				<div class="content">
 					<div class="row">
 						<div class="col-md-5">
@@ -19,11 +19,11 @@
 												<div class="pull-left">
 												<div class="form-group">
 													<label><i class="fa fa-filter"></i> Ordenar Por:</label>
-													<select class="form-control" style="width: 250px;">
+													<select class="form-control" style="width: 250px;" ng-model="sortBy" >
 														<option>Seleccione...</option>
-														<option>Por Orden</option>
-														<option>Por Fecha</option>
-														<option>Por Precio</option>
+														<option value="-_id">Por Orden</option>
+														<option value="-date">Por Fecha</option>
+														<option value="total">Por Precio</option>
 													</select>
 												</div>
 											</div>
@@ -32,7 +32,7 @@
 											<div class="pull-right">
 												<div class="form-group">
 													<label><i class="fa fa-search"></i> Buscar</label>
-													<input type="text" name="" class="form-control">
+													<input type="text" name="" class="form-control" ng-model="q">
 												</div>
 											</div>
 										</div>
@@ -46,35 +46,23 @@
 				                                           <th>Pago</th>
 				                                           <th>Envio</th>
 				                                           <th>Total</th>
-				                                           <th>&nbsp;</th>
 				                                       </tr>
                                    				</thead>
 												<tbody>
-													@foreach ($orders as $order)
-														
-														<tr>
-															<td><a href="{{url('order/id')}}">{{$order->idOrder}}</a></td>
-															<td>{{$order->date}}</td>
-															<td>{{$order->payment_id}}</td>
-															<td>{{$order->order_status_payment}}</td>
-															<td>{{$order->send_id}}</td>
-															<td>$ {{ number_format($order->total) }}</td>
-														</tr>
-
-													@endforeach
+													<tr dir-paginate="order in orders   | itemsPerPage: pageSize | filter:q | orderBy:sortBy"  current-page="currentPage">
+														<td ><a style="color: #0a8fb2" href="/orders/<% order._id %>">#<% order._id |  limitTo:8 %></a></td>
+														<td><% order.date %></td>
+														<td><% order.status.code %></td>
+														<td><% order.status_payment %></td>
+														<td><% order.status_shipping %></td>
+														<td><% order.total | number:0 %></td>
+													</tr>
 												</tbody>
 											</table>
 											  <div class="text-center">
-					                            <div class="page-nation">
-					                                <ul class="pagination pagination-large">
-					                                    <li class="disabled"> <span> Previo </span> </li>
-					                                    <li class="active"> <span>1</span> </li>
-					                                    <li> <span>2</span> </li>
-					                                    <li> <span>3</span> </li>
-					                                    <li> <span>4</span> </li>
-					                                    <li> <span>Siguiente</span> </li>
-					                                </ul>
-					                            </div>
+												  <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" >
+
+												  </dir-pagination-controls>
                         					</div>
 										</div>
 									</div>

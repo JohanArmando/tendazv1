@@ -101,7 +101,7 @@
                                                  <p ng-bind-html="product.description | limitTo:150"></p>
                                                  <div class="noo-product-action">
                                                      <div class="noo-action">
-                                                         <a ng-hide="product.stock == 0" ng-click="add(product)" class="button product_type_simple add_to_cart_button">
+                                                         <a ng-hide="product.stock == 0" ng-click="add(cartId , product)" class="button product_type_simple add_to_cart_button">
                                                              <span><i class="fa fa-shopping-cart"></i> Agregar <span class="hidden-xs">Al Carrito</span></span>
                                                          </a>
                                                          <div class="yith-wcwl-add-to-wishlist">

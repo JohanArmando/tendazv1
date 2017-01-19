@@ -11,14 +11,47 @@ Version: 0.1
     font-size: 19px;
     list-style: none;
 }
+
+.log_top_padd{
+    padding-top: 25px;
+    text-align: center;
+}
+.log_top_padd>img{
+        max-width: 300px;
+}
+button.btn.btn-primary.make_tendaz.col-md-4{
+    transition: .4s;
+    border-color: transparent; 
+    opacity: .5;
+    border-left: 0px; 
+}
+
+button.btn.btn-primary.make_tendaz.col-md-4:hover{
+    color: #fff;
+    opacity: 1;
+    background-color: #008834;
+    border-color: #fff;
+}
+input.full.text-center.col-md-8:focus {
+    box-shadow:none!important;
+        outline: none!important;
+        border: 1px solid #fff;
+        transition: .4s;
+}
 .nomarserv{
     margin-right: 0px;
     margin-left: 0px;
+}
+.net_sooc{
+    margin-top: 20px;
 }
 .icon_timeline_servi {
     position: relative;
     width: 50px;
     transition: .4s;
+}
+.color_W>div>ul>li{
+    color: #fff;
 }
 #icons_menu{
     min-height: 70px;

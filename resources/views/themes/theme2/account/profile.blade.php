@@ -1,11 +1,10 @@
-	@extends(Theme::current()->viewsPath.'.template')
+@extends(Theme::current()->viewsPath.'.template')
 	@section('css')
-		@stop
-	@section('content')	
-		
-			<div class="container">
-				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-md-offset-3" >
+	@stop
+@section('content')
+<div class="container" ng-controller="UserController">
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-md-offset-3" >
    <div style="margin-top: 30px;"></div>
           <div class="panel panel-primary">
             <div class="panel-heading">
@@ -23,26 +22,21 @@
                     <tbody>
 					  <tr>
 						<th>Nombre de Cliente</th>
-						<td>NAME CLIENT</td>
+						<td><% user.personal_info.first_name %> <% user.personal_info.last_name %></td>
 					  </tr>
 					  <tr>
 						  <th>Email</th>
-						  <td><a href="#">EMAIL CLIENT</a></td>
+						  <td><% user.email %></td>
 					  </tr>
 					  <tr>
 						  <th>Telefono</th>
 						  <td>
-							 PHONE CLIENT
+							  <% user.personal_info.phone %>
 						  </td>
 					  </tr>
 					  <tr>
 					  	<th>Direccion</th>
-					  	<td>
-					  		 
-					  			Cra. 55a #188-43 Barrio Mirandela, Conjutno Quintas de San Pedro III.
-					  		
-					  		
-					  	</td>
+					  	<td><% user.personal_info.identification %></td>
 					  </tr>
                     </tbody>
                   </table>
@@ -110,9 +104,7 @@
 							</div>
 						</div>
 
-     				</div>
-				</div>
-			</div>
+
 			<div style="margin-bottom: 125px;"></div>
 			@include(Theme::current()->viewsPath.'.partials.add-dir')
 			@include(Theme::current()->viewsPath.'.partials.edit-dir')
@@ -125,37 +117,48 @@
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aira-hidden="		true">&times;</span></button>
 								<h4 class="modal-title">Editar Perfil</h4>
 							</div>
-							<div class="modal-body">
+							<div class="modal-body container-fluid">
+								<div class="row">
+								<div class="col-md-12" style="padding: 5%">
 								<!--Fomulario-->
-
-								{!! Form::open(['url' =>[ "myProfile" ],'method' => 'PUT','files' => true, 'data-toggle'=>'validator', 'role'=>'form']) !!}
+								<form name="profileForm" accept-charset="utf-8" autocomplete="off" role="form" class="form-horizontal"
+									  ng-submit="doUpdateProfile(profileForm)" novalidate>
+									<div class="alert alert-danger" ng-repeat="error in errors" ng-show="errors" class="error"><% error %></div>
 										<div class="form-group">
 											<label>Nombres</label>
-											<input type="text" name="name" value="" class="form-control" required autocomplete="on">
+											<input type="text" name="name" value="" class="form-control"  ng-model="user.personal_info.first_name">
 										</div>
 										<div class="form-group">
 											<label>Apellidos</label>
-											<input type="text" name="last_name" value="" class="form-control" required autocomplete="on">
+											<input type="text" name="last_name" value="" class="form-control" ng-model="user.personal_info.last_name">
 										</div>
 
 										<div class="form-group">
 											<label>Telefono</label>
-											<input type="text" name="phone" value="" class="form-control" required>
+											<input type="text" name="phone" ng-model="user.personal_info.phone" class="form-control">
+										</div>
+										<div class="form-group">
+											<label>Identificaci&oacute;n</label>
+											<input type="text" name="phone" ng-model="user.personal_info.identification" class="form-control">
 										</div>
 										<hr>
 										<div clas="modal-footer">
 											<div class="text-center">
-												<button class="btn btn-primary"><i class="fa fa-edit"></i> Actualizar Datos</button>
+												<button class="btn btn-primary updateProfile"><i class="fa fa-edit"></i> Actualizar Datos</button>
 											</div>
 										</div>
-								{!! Form::close() !!}
+								</form>
 								<!--Fin-->
+								</div>
+								</div>
 							</div>
 						</div>
 					</div>
 
 				</div>
 			<!--Fin-->
-		@endsection
+	</div>
+</div>
+@endsection
 	@section('script')
-		@stop
+	@stop

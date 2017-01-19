@@ -54,6 +54,7 @@ class MePa
 
     public function createTokenCard()
     {
+
         $card = $this->mp->post('/v1/card_tokens' , [
             "expiration_month" => $this->request->expiration_month,
             "expiration_year"  =>  $this->request->expiration_year,
@@ -68,8 +69,9 @@ class MePa
             "card_number" => $this->request->card_number
         ]);
 
-	return $card;
-
+        if (isset($card->original['cause']['code']))
+            return $card;
+        
         $this->token_card = (string) $card['response']['id'];
     }
 

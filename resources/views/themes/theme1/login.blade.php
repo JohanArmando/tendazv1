@@ -106,6 +106,7 @@
                             </div>
                             <div class="form-group">
                             <button type="submit" class="btn btn-sm btn-primary pull-right"><i class="fa fa-long-arrow-right"></i> Iniciar sesion</button>
+                                <p><a data-toggle="modal" data-target="#modalRestorePassword">Olvidaste la Contase&ntilde;a?</a></p>
                             </div>
                     </form>
                 </div>
@@ -132,6 +133,7 @@
             </div>
 
         </div>
+        @include(Theme::current()->viewsPath.'.password.email')
           @endsection
     @section('scripts')
            @stop

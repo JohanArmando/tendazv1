@@ -38,11 +38,13 @@
         <div class="help-block">{{ $errors->default->first('password') }}</div>
         <div class="help-block with-errors"></div>
     </div>
-    <div class="form-group">
-        {!! Form::checkbox('term' , null , false , ['required' => 'required']) !!}
-        <strong>Acepto los terminos y condiciones</strong>
-        <div class="help-block with-errors"></div>
-    </div>
+            <div class="form-group">
+                {!! Form::checkbox('term' , null , false , ['required' => 'required']) !!}
+                <strong>
+                    <a href="{{asset('tendaz/TERMINOSYCONDICIONES.pdf')}}" target="_black"> Acepto Termino y Condiciones</a>
+                </strong>
+                <div class="help-block with-errors"></div>
+            </div>
     <div class="form-group">
         <button type="submit" class="btn btn-primary make_store_btn"  >
             <i class="fa fa-shopping-cart"></i> Crear tienda

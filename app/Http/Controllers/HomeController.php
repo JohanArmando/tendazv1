@@ -5,10 +5,13 @@ namespace Tendaz\Http\Controllers;
 
 use igaster\laravelTheme\Facades\Theme;
 use Illuminate\Support\Facades\Session;
+use Tendaz\Models\Cart\Cart;
 use Tendaz\Models\Customer;
 use Tendaz\Models\Order\Consult;
+use Tendaz\Models\Order\Order;
 use Tendaz\Models\Store\Shop;
 use Illuminate\Http\Request;
+use Webpatser\Uuid\Uuid;
 
 class HomeController extends Controller
 {
@@ -93,6 +96,11 @@ class HomeController extends Controller
     }
     public function change_password(){
         return view(Theme::current()->viewsPath.'.account.change_password');
+    }
+
+    public function getOrders()
+    {
+        return view(Theme::current()->viewsPath.'.orders.index');
     }
 
 }
