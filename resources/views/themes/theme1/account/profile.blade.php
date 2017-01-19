@@ -2,7 +2,7 @@
 	@section('css')
 		@stop
 	@section('content')
-			<div class="content">
+			<div class="content"  ng-controller="UserController">
 				<div class="container">
 					<div class="row">
 					<div style="margin-top: 50px;"></div>
@@ -27,19 +27,19 @@
 											<tbody>
 											<tr>
 												<th>Nombre</th>
-												<td>NAME CLIENT</td>
+												<td><% user.personal_info.first_name %> <% user.personal_info.last_name %></td>
 											</tr>
 											<tr>
 												<th>Telefono</th>
-												<td>PHONE CLIENT</td>
+												<td><% user.personal_info.phone %></td>
 											</tr>
 											<tr>
 												<th>Email</th>
-												<td><a href="#" class="active">EMAIL CLIENT</a></td>
+												<td><% user.email %></td>
 											</tr>
 											<tr>
 												<th>Direcci&oacute;n</th>
-												<td>direccion principal</td>
+												<td><% user.personal_info.identification %></td>
 											</tr>
 											</tbody>
 											</table>
@@ -122,21 +122,28 @@
 									<h4 class="modal-title">Editar datos del Perfil</h4>
 								</div>
 								<div class="modal-body">
-									{!! Form::open(['url' =>[ "myProfile" ],'method' => 'PUT','files' => true, 'data-toggle'=>'validator', 'role'=>'form']) !!}
+									<form name="profileForm" accept-charset="utf-8" autocomplete="off" role="form" class="form-horizontal"
+										  ng-submit="doUpdateProfile(profileForm)" novalidate>
+										<div class="alert alert-danger" ng-repeat="error in errors" ng-show="errors" class="error"><% error %></div>
 									<div class="row">
-										<div class="col-xs-6">
-											<label>Nombres</label>
-											<input type="text" class="form-control" name="name" value="">
-										</div>
-										<div class="col-xs-6">
-											<label>Apellidos</label>
-											<input type="text" class="form-control"  name="last_name" value="">
-										</div>
-										<div class="col-xs-6">
-											<label>Telefono</label>
-											<input type="text" class="form-control" name="phone" value="">
-										</div>
-										<div class="col-xs-6">
+										<div class="col-md-12">
+											<div class="col-xs-6">
+												<label>Nombres</label>
+												<input type="text" class="form-control" name="name"  ng-model="user.personal_info.first_name">
+											</div>
+											<div class="col-xs-6">
+												<label>Apellidos</label>
+												<input type="text" class="form-control"  name="last_name" ng-model="user.personal_info.last_name">
+											</div>
+											<div class="col-xs-6">
+												<label>Telefono</label>
+												<input type="text" class="form-control" name="phone"  ng-model="user.personal_info.phone">
+											</div>
+											<div class="col-xs-6">
+												<label>Idnetificaci&oacute;n</label>
+												<input type="text" class="form-control" name="phone"  ng-model="user.personal_info.identification">
+											</div>
+											<div class="col-xs-6 hidden">
 											<style type="text/css">
 												input[type="file"]{
 													display: none;
@@ -158,15 +165,18 @@
 												<input id="file-upload" type="file"/>
 											</div>
 										</div>
+										</div>
+										<div class="col-md-12">
+											<div class="modal-footer" style="margin-top: 30px">
+												<div class="text-center">
+													<button type="submit" class="btn btn-primary updateProfile"> <i class="fa fa-edit"></i> Guardar Cambios</button>
+													<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancelar</button>
+												</div>
+											</div>
+										</div>
 									</div>
+									</form>
 								</div>
-								<div class="modal-footer">
-									<div class="text-center">
-										<button type="submit" class="btn btn-primary"> <i class="fa fa-edit"></i> Guardar Cambios</button>
-										<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancelar</button>
-									</div>
-								</div>
-								{!!Form::close()!!}
 							</div>
 						</div>
 					</div>

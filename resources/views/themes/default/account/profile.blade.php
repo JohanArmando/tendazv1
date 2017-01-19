@@ -102,77 +102,6 @@
         <div class="clearfix"></div>
        </div>
 
-        <!-- orders -->
-        <div style="margin-bottom: 10px;"></div>
-           <div class="row panel panel-default panel-content">
-               <div class="col-md-12">
-                   <h2>Mis Ordenes</h2>
-                   <div class="row">
-                       <div class="col-md-3">
-                         <div class="pull-left">
-                                <p><strong><i class="fa fa-filter" aria-hidden="true"></i> Filtrar por:</strong></p>
-                                <select class="form-control" style="width: 300px;">
-                                    <option>Seleccione...</option>
-                                    <option>Por Orden</option>
-                                    <option>Por Estado</option>
-                                    <option>Por Precio</option>
-                                </select>
-                            </div>
-                       </div>
-                       <div class="col-md-4 col-md-offset-5 pull-rigth">
-                           <p align="rigth"><strong><i class="fa fa-search" aria-hidden="true"></i> Buscar:</strong></p> <input type="text" class="form-control" autofocus>
-                       </div>
-                   </div>
-                   <div style="margin-bottom: 15px;"></div>
-                 <table class="table table-responsive table-striped table-hover table-bordered" cellpadding="0" width="100%">
-                    <thead>
-                           <tr>
-                               <th>Orden</th>
-                               <th>Fecha</th>
-                               <th>Estado</th>
-                               <th>Pago</th>
-                               <th>Envio</th>
-                               <th>Total</th>                               
-                           </tr>
-                       </thead>
-                       <tbody>
-                           <tr>
-                               <td><a href="{{url('order/id')}}" style="color: blue;">#001</a></td>
-                               <td>12/10/2016</td>
-                               <td><p class="text-success">Entregado</p></td>
-                               <td>
-                                 <div class="text-center">
-                                   efectivo, tarjeta, contraentrega
-                                 </div>
-                               </td>
-                               <td>
-                                 <div class="tags text-center">
-                                   <a class="success">Entregrado</a>
-                                   <a class="warning">En Esperas</a>
-                                   <a class="danger">Cancelado</a>
-                                 </div>
-
-                               </td>
-                               <td>COP $ 123.456</td>
-                           </tr>
-                           
-                       </tbody>   
-                   </table>
-               </div>
-
-               <div class="text-center">
-                    <div class="page-nation">
-                        <ul class="pagination pagination-large">
-                            <li class="disabled"> <span> Previo </span> </li>
-                            <li class="active"> <span>1</span> </li>
-                            <li> <span>2</span> </li>
-                            <li> <span>3</span> </li>
-                            <li> <span>4</span> </li>
-                            <li> <span>Siguiente</span> </li>
-                        </ul>
-                    </div>
-                </div>
-           </div>
        <div class="clearfix"></div>
        <div style="margin-bottom: 100px;"></div>
         @include('themes.default.partials.createAddress')
@@ -247,25 +176,5 @@
         @endsection
     @section('script')
         <script>
-           /* if($('#si')) {
-                $('#si').on('click', function () {
-                    $('#si').removeClass('btn-primary');
-                    $('#si').addClass('btn-default');
-                    $('#siFa').removeClass('fa-eye');
-                    $('#siFa').addClass('fa-eye-slash');
-                    $('#si').attr('id', 'no');
-                    $('#siFa').attr('id', 'noFa');
-
-                });
-            }
-            if($('#no')) {
-            $('#no').on('click',function(){
-                $('#no').removeClass('btn-default');
-                $('#no').addClass('btn-primary');
-                $('#noFa').removeClass('fa-eye-slash');
-                $('#noFa').addClass('fa-eye');
-                $('#no').attr('id','si');
-                $('#noFa').attr('id','siFa');
-            });}*/
         </script>
         @stop

@@ -52,7 +52,7 @@
                                                 Cambiar Contraseña
                                             </a>
                                         </li>
-                                        <li class="hidden">
+                                        <li>
                                             <a href="{{url('orders')}}">
                                                 <i class="fa fa-list"></i>
                                                 Mis Ordenes

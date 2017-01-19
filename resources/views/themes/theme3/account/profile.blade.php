@@ -2,7 +2,7 @@
 	@section('css')
 		@stop
 	@section('content')
-		<div class="container">
+		<div class="container" ng-controller="UserController">
 				<div class="row">
 					<div class="col-md-12" style="height: 100px"></div>
 					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 toppad col-md-offset-3" >
@@ -35,12 +35,14 @@
 										<button type="button" class="btn btn-default btn-xs"><i class="fa fa-camera"></i>Cambiar imagen</button>
 									</div>
 									<div class="col-md-12 col-lg-12 text-center">
-										<div class="col-md-6"><strong>Nombre Completo</strong></div>
-										<div class="col-md-6">NAME<hr></div>
+										<div class="col-md-6"><strong>Nombre</strong></div>
+										<div class="col-md-6"><% user.personal_info.first_name %> <% user.personal_info.last_name %><hr></div>
 										<div class="col-md-6"><strong>Email</strong></div>
-										<div class="col-md-6"><a href="#">EMAIL</a><hr></div>
+										<div class="col-md-6"><% user.email %><hr></div>
 										<div class="col-md-6"><strong>Telefono</strong></div>
-										<div class="col-md-6">PHONE<hr></div>
+										<div class="col-md-6"><% user.personal_info.phone %><hr></div>
+										<div class="col-md-6"><strong>Identificaci&oacute;n</strong></div>
+										<div class="col-md-6"><% user.personal_info.identification %><hr></div>
 										<div class="col-md-12">
 											<a href="#" class="btn btn-primary" style="border-radius: 0" data-toggle="modal" data-target="#modaEditar">
 												<i class="fa fa-edit"></i> Actualizar Datos</a>
@@ -121,8 +123,6 @@
 							</div>
 						</div>
 						</div>
-					</div>
-		</div>
 
 			<div style="margin-bottom: 125px;"></div>
 			
@@ -140,32 +140,47 @@
 							</div>
 							<div class="modal-body">
 								<!--Fomulario-->
-								{!! Form::open(['url' =>[ "myProfile"],'method' => 'PUT','files' => true, 'data-toggle'=>'validator', 'role'=>'form']) !!}
-									<div class="form-group">
-										<label>Nombres</label>
-										<input type="text" name="name" value="" class="form-control">
-									</div>
-									<div class="form-group">
-										<label>Apellidos</label>
-										<input type="text" name="last_name" value="" class="form-control">
-									</div>
-									<div class="form-group">
-										<label>Telefono</label>
-										<input type="number" name="phone" value="" class="form-control">
-									</div>
-									<hr>
-									<div clas="modal-footer">
-										<div class="text-center">
-											<button type="submit" class="btn btn-primary">Actualizar datos</button>
+								<form name="profileForm" accept-charset="utf-8" autocomplete="off" role="form" class="form-horizontal"
+									  ng-submit="doUpdateProfile(profileForm)" novalidate>
+									<div class="alert alert-danger" ng-repeat="error in errors" ng-show="errors" class="error"><% error %></div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="col-md-12">
+											<div class="form-group">
+												<label>Nombres</label>
+												<input type="text" name="name" class="form-control" ng-model="user.personal_info.first_name">
+											</div>
+											<div class="form-group">
+												<label>Apellidos</label>
+												<input type="text" name="last_name" class="form-control" ng-model="user.personal_info.last_name">
+											</div>
+											<div class="form-group">
+												<label>Telefono</label>
+												<input type="text" name="phone" class="form-control" ng-model="user.personal_info.phone">
+											</div>
+											<div class="form-group">
+												<label>Idnetificaci&oacute;n</label>
+												<input type="text" name="phone" class="form-control" ng-model="user.personal_info.identification">
+											</div>
+											<hr>
+											<div clas="modal-footer">
+												<div class="text-center">
+													<button type="submit" class="btn btn-primary updateProfile">Actualizar datos</button>
+												</div>
+											</div>
+											</div>
 										</div>
 									</div>
-								{!! Form::close() !!}
+								</form>
 								<!--Fin-->
 							</div>
 						</div>
 					</div>
 				</div>
 			<!--Fin-->
+
+			</div>
+	</div>
 		@endsection
 	@section('script')
 		@stop

@@ -1,4 +1,4 @@
-@extends('tema1.template')
+@extends(Theme::current()->viewsPath.'.template')
 	@section('css')
 	<style type="text/css">
       .tags a{border:1px solid #DDD;display:inline-block;color:#717171;background:#FFF;-webkit-box-shadow:0 1px 1px 0 rgba(180,180,180,0.1);box-shadow:0 1px 1px 0 rgba(180,180,180,0.1);-webkit-transition:all .1s ease-in-out;-moz-transition:all .1s ease-in-out;-o-transition:all .1s ease-in-out;-ms-transition:all .1s ease-in-out;transition:all .1s ease-in-out;border-radius:2px;margin:0 3px 6px 0;padding:5px 10px}
@@ -11,77 +11,76 @@
     </style>
 		@stop
 	@section('content')
-			<div class="container">
-      <div class="clearfix"></div>
-      <div style="margin-bottom: 100px;"></div>
-				<div class="row">
-               <div class="col-md-12">
-                   <div class="panel panel-default">
-                       <div class="panel-body">
-                   <h2>Mis Ordenes</h2>
-                       <div class="row">
-                           <div class="col-md-3">
-                             <div class="pull-left">
-                                    <p><strong><i class="fa fa-filter" aria-hidden="true"></i> Filtrar por:</strong></p>
-                                    <select class="form-control" style="width: 300px;">
+<div class="container" ng-controller="OrderController">
+  <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-5">
+                <h2>Mis Ordenes</h2>
+                <div style="margin-bottom: 30px;"></div>
+            </div>
+        </div>
+   <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="panel-content">
+                        <div class="col-xs-6">
+                            <div class="pull-left">
+                                <div class="form-group">
+                                    <label><i class="fa fa-filter"></i> Ordenar Por:</label>
+                                    <select class="form-control" style="width: 250px;" ng-model="sortBy" >
                                         <option>Seleccione...</option>
-                                        <option>Por Orden</option>
-                                        <option>Por Estado</option>
-                                        <option>Por Precio</option>
+                                        <option value="-_id">Por Orden</option>
+                                        <option value="-date">Por Fecha</option>
+                                        <option value="total">Por Precio</option>
                                     </select>
                                 </div>
-                           </div>
-                           <div class="col-md-4 col-md-offset-5 pull-rigth">
-                               <p align="rigth"><strong><i class="fa fa-search" aria-hidden="true"></i> Buscar:</strong></p> <input type="text" class="form-control" autofocus>
-                           </div>
-                       </div>
-                        <div style="margin-bottom: 15px;"></div>
-                             <table class="table table-responsive table-striped table-hover table-bordered" cellpadding="0" width="100%">
-                                <thead>
-                                       <tr>
-                                           <th>Orden</th>
-                                           <th>Fecha</th>
-                                           <th>Estado</th>
-                                           <th>Pago</th>
-                                           <th>Envio</th>
-                                           <th>Total</th>
-                                           <th>&nbsp;</th>
-                                       </tr>
-                                   </thead>
-                                   <tbody>
-                                       @foreach($orders as $order)
-                                           <tr>
-                                               <td><a href="{{url('order/id')}}">{{ $order->idOrder }}</a></td>
-                                               <td>{{ $order->date }}</td>
-                                               <td>{{ $order->payment_id }}</td>
-                                               <td>{{ $order->order_status_id }}</td>
-                                               <td>{{ $order->send_id }}</td>
-                                               <td>$ {{ number_format($order->total) }}</td>
-                                               <td></td>
-                                           </tr>
-                                       @endforeach
-                                   </tbody> 
-                               </table>
-                             </div>
-
-                       <div class="text-center">
-                            <div class="page-nation">
-                                <ul class="pagination pagination-large">
-                                    <li class="disabled"> <span> Previo </span> </li>
-                                    <li class="active"> <span>1</span> </li>
-                                    <li> <span>2</span> </li>
-                                    <li> <span>3</span> </li>
-                                    <li> <span>4</span> </li>
-                                    <li> <span>Siguiente</span> </li>
-                                </ul>
                             </div>
                         </div>
-                   </div>
-               </div>
-           </div>
-           <div class="clearfix"></div>
-           <div style="margin-bottom: 150px;"></div>
-			</div>
+                        <div class="col-xs-6">
+                            <div class="pull-right">
+                                <div class="form-group">
+                                    <label><i class="fa fa-search"></i> Buscar</label>
+                                    <input type="text" name="" class="form-control" ng-model="q">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <table class="table table-responsive" cellpadding="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th>Orden</th>
+                                    <th>Fecha</th>
+                                    <th>Estado</th>
+                                    <th>Pago</th>
+                                    <th>Envio</th>
+                                    <th>Total</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr dir-paginate="order in orders   | itemsPerPage: pageSize | filter:q | orderBy:sortBy"  current-page="currentPage">
+                                    <td ><a style="color: #0a8fb2" href="/orders/<% order._id %>">#<% ($index + 1) + (currentPage - 1) * pageSize %></a></td>
+                                    <td><% order.date %></td>
+                                    <td><% order.status.code %></td>
+                                    <td><% order.status_payment %></td>
+                                    <td><% order.status_shipping %></td>
+                                    <td><% order.total | number:0 %></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="text-center">
+                                <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" >
+
+                                </dir-pagination-controls>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </div>
+   <div style="margin-bottom: 80px;"></div>
+</div>
 		@endsection
 	@section('scripts')
 		@stop
