@@ -19,8 +19,8 @@
                             <span class="price"><span class="amount">$<% product.price | number:0 %></span></span>
                             <div class="noo-product-action">
                                 <div class="noo-action">
-                                    <button ng-click="add(cartId , product)" class="button product_type_simple add_to_cart_button">
-                                        <span ng-if="product.stock > 0">Agregar al carrito</span>
+                                    <button ng-if="product.stock > 0" ng-click="add(cartId , product)" class="button product_type_simple add_to_cart_button">
+                                        <span>Agregar al carrito</span>
                                     </button>
                                 </div>
                             </div>

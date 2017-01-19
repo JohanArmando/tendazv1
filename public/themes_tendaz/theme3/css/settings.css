@@ -14,20 +14,19 @@ website:   	http://www.themepunch.com
 
 @font-face {
   font-family: 'revicons';
-  src: url('../fonts/revicons90c6.eot?5510888');
-  src: url('../fonts/revicons90c6.eot?5510888#iefix') format('embedded-opentype'),
-       url('../fonts/revicons90c6.woff?5510888') format('woff'),
-       url('../fonts/revicons90c6.ttf?5510888') format('truetype'),
-       url('../fonts/revicons90c6.svg?5510888#revicons') format('svg');
-  font-weight: normal;
-  font-style: normal;
+	src: url('../fonts/revicons90c6.svg?5510888');
+	src: url('../fonts/revicons90c6.woff?5510888#iefix') format('embedded-opentype'),
+	url('../fonts/revicons90c6.woff?5510888') format('woff'),
+	url('../fonts/revicons90c6.woff?5510888') format('truetype'),
+	url('../fonts/revicons90c6.svg?5510888#revicons') format('svg');
+	  font-weight: normal;
+	  font-style: normal;
 }
 
  [class^="revicon-"]:before, [class*=" revicon-"]:before {
   font-family: "revicons";
   font-style: normal;
   font-weight: normal;
-  speak: none;
   display: inline-block;
   text-decoration: inherit;
   width: 1em;
@@ -118,10 +117,6 @@ website:   	http://www.themepunch.com
 .tp-simpleresponsive img,
 .rev_slider img{
 	max-width:none !important;
-	-moz-transition: none 0;
-	-webkit-transition: none 0;
-	-o-transition: none 0;
-	transition: none 0;
 	margin:0px;
 	padding:0px;
 	border-width:0px;
@@ -453,10 +448,7 @@ img.tp-slider-alternative-image	{
 	-	DOTTED OVERLAYS	-
 *********************************/
 .tp-dottedoverlay						{	background-repeat:repeat;width:100%;height:100%;position:absolute;top:0px;left:0px;z-index:3}
-.tp-dottedoverlay.twoxtwo				{	background:url(../assets/gridtile.html)}
-.tp-dottedoverlay.twoxtwowhite			{	background:url(../assets/gridtile_white.html)}
-.tp-dottedoverlay.threexthree			{	background:url(../assets/gridtile_3x3.html)}
-.tp-dottedoverlay.threexthreewhite		{	background:url(../assets/gridtile_3x3_white.html)}
+
 
 
 /******************************
@@ -539,11 +531,10 @@ img.tp-slider-alternative-image	{
 	height:30px;
 	cursor:pointer;
 	color:#fff !important; text-shadow:0px 1px 1px rgba(0, 0, 0, 0.6) !important; font-size:15px; line-height:45px !important;
-	background:url(../images/gradient/g30.html) repeat-x top; font-family: arial, sans-serif; font-weight: bold; letter-spacing: -1px;
 	text-decoration:none;
 }
 
-.tp-button.big	{	color:#fff; text-shadow:0px 1px 1px rgba(0, 0, 0, 0.6); font-weight:bold; padding:9px 20px; font-size:19px;  line-height:57px !important; background:url(../images/gradient/g40.html) repeat-x top}
+.tp-button.big	{	color:#fff; text-shadow:0px 1px 1px rgba(0, 0, 0, 0.6); font-weight:bold; padding:9px 20px; font-size:19px;  line-height:57px !important;}
 
 
 .purchase:hover,
@@ -582,7 +573,7 @@ img.tp-slider-alternative-image	{
 .rev-btn.rev-uppercase,
 .rev-btn.rev-uppercase:visited			{ 	text-transform: uppercase; letter-spacing: 1px; font-size: 15px; font-weight: 900; }
 
-.rev-btn.rev-withicon i					{ 	font-size: 15px; font-weight: normal; position: relative; top: 0px; -webkit-transition: all 0.2s ease-out !important; -moz-transition: all 0.2s ease-out !important; -o-transition: all 0.2s ease-out !important; -ms-transition: all 0.2s ease-out !important; margin-left:10px !importan;}
+.rev-btn.rev-withicon i					{ 	font-size: 15px; font-weight: normal; position: relative; top: 0px; -webkit-transition: all 0.2s ease-out !important; -moz-transition: all 0.2s ease-out !important; -o-transition: all 0.2s ease-out !important; -ms-transition: all 0.2s ease-out !important; margin-left:10px}
 
 .rev-btn.rev-hiddenicon i				{ 	font-size: 15px; font-weight: normal; position: relative; top: 0px; -webkit-transition: all 0.2s ease-out !important; -moz-transition: all 0.2s ease-out !important; -o-transition: all 0.2s ease-out !important; -ms-transition: all 0.2s ease-out !important; opacity: 0; margin-left:0px !important; width:0px !important;  }
 .rev-btn.rev-hiddenicon:hover i			{   opacity: 1 !important; margin-left:10px !important; width:auto !important;}
@@ -822,7 +813,7 @@ img.tp-slider-alternative-image	{
 
 .rev-cbutton-light-sr	{		
 	color: #333;  	
-	border-radius: 3;		
+	border-radius: 3%;
 	background-color: rgba(255,255,255, 0.75);
 }
 
@@ -875,8 +866,6 @@ img.tp-slider-alternative-image	{
 
 /*  CAPTION SLIDELINK   **/
 .caption.slidelink a div,
-.tp-caption.slidelink a div {	width:3000px; height:1500px;  background:url(../assets/coloredbg.html) repeat}
-.tp-caption.slidelink a span{	background:url(../assets/coloredbg.html) repeat}
 .tp-shape {	width:100%;height:100%;}
 
 
@@ -926,8 +915,7 @@ img.tp-slider-alternative-image	{
 
 
 
-.tp-loader.spinner5 	{	
-	background:url(../assets/loader.html) no-repeat 10px 10px;
+.tp-loader.spinner5 	{
 	background-color:#fff;
 	margin:-22px -22px;
 	width:44px;height:44px;

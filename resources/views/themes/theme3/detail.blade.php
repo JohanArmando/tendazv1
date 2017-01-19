@@ -11,7 +11,7 @@
                             <div class="single-inner">
                                 <div class="images">
                                     <div class="product-simple-image">
-                                        <img ng-src="<% product.images.data[0].url %>"
+                                        <img ng-src="<% product.images.data[0].url %>" style="max-height: 500px; min-height: 500px"
                                              id="matrix" alt="" height="400" width="350px" class="image-responsive" />
                                     </div>
                                 </div>
@@ -95,14 +95,15 @@
                                             <i class="fa fa-pinterest"></i>
                                         </a>
                                     </div>
-
-                                    <div ng-if="detail.images.length > 0"><br><br>
-                                        <a class="image-click" ng-repeat="image in detail.images | limitTo:4" href="#">
-                                            <img src="<% BASEURL + '/uploads-products/'  + store + '/' + image.path %>" alt="" class="image-click img-thumbnail"
-                                                 style="max-height: 100px; min-height: 100px;width: 80px"></a>
-                                    </div>
-
                                 </div>
+
+                                <div class="col-md-12"><br><br>
+                                    <a class="image-click"ng-repeat="image in product.images.data | limitTo:3"
+                                       ng-if="image" href="#">
+                                        <img src="<% image.url %>" alt="" class="image-click img-thumbnail"
+                                             style="max-height: 100px; min-height: 100px;width: 80px"></a>
+                                </div>
+
                                 <div class="commerce-tabs" ng-if="product.description">
                                     <ul class="nav nav-tabs tabs">
                                         <li class="active">

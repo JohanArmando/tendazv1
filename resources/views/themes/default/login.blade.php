@@ -85,7 +85,7 @@
                                     </label> &nbsp; Recordarme
                                 </div>
                                 <br>
-                                <button type="submit" class="btn btn-sm"><i class="fa fa-long-arrow-right"></i> Iniciar</button>
+                                <button type="submit" class="btn btn-sm"><i class="fa fa-long-arrow-right"></i> Iniciar Sesion</button>
                                 <p><a data-toggle="modal" data-target="#modalRestorePassword">Olvidaste la Contase&ntilde;a?</a></p>
                             </form>
                             <div style="margin-bottom: 30px;"></div>

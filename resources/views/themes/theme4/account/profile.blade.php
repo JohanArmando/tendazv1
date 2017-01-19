@@ -1,30 +1,34 @@
 @extends(Theme::current()->viewsPath.'.template')
 	@section('css')
+		<style>
+			.item{
+				color: dimgrey;
+			}
+		</style>
 		@stop
 	@section('content')
 			<div class="content" ng-controller="UserController">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-5 col-sm-12 col-xs-12 col-md-offset-4">
-              				<div class=" col-xs-10 text-center" ng-if="usuario">
+              				<div class=" col-xs-10 text-center">
 							 	<div class="panel panel-default panel-content">
-								 	<div class="panel panel-default panel-content">
-										  <div style="margin-top: 10px;"></div>
-										  <img src="http://placehold.it/150x150" alt="" class="img-circle" />
-											<br>
-										<h3><strong style="color: #1FC0A0"> <% user.personal_info.first_name %></strong></h3>
-										<h5>Email: <span><% user.email %></span></h5>
-										<h5>Telefono: <span><% user.personal_info.phone %></span></h5>
-										<div class="hidden">
-										<hr style="color: grey;" />
-											<p align="center" style="color: black;"> CR 55a numweo 123 # 122a-33, Mirandela, Bogota D.C, Colombia.</p>
-										   <div class="clearfix"></div>
-										</div>
+								  <div style="margin-top: 10px;"></div>
+								  <img src="http://placehold.it/150x150" alt="" class="hidden img-circle" />
+									<br>
+									<h3><strong style="color: #1FC0A0"> <% user.personal_info.first_name %> <% user.personal_info.last_name %></strong></h3>
+									<h5><strong class="item">Email:</strong> <span><% user.email %></span></h5>
+									<h5><strong class="item">Telefono:</strong> <span><% user.personal_info.phone %></span></h5>
+									<h5><strong class="item">Identificaci&oacute;n:</strong> <span><% user.personal_info.identification %></span></h5>
+									<div class="hidden">
+									<hr style="color: grey;" />
+										<p align="center" style="color: black;"> CR 55a numweo 123 # 122a-33, Mirandela, Bogota D.C, Colombia.</p>
+									   <div class="clearfix"></div>
 									</div>
 									<button type="button" class="btn btn--ys" data-toggle="modal" data-target="#modalActualizar">
-									<i class="fa fa-edit"></i> Cambiar Datos Personales
+										<i class="fa fa-edit"></i> Cambiar Datos Personales
 									</button>
-							 		<div style="margin-bottom: 10px;"></div>
+									<div style="margin-bottom: 10px;"></div>
                          		</div>
                     		</div>
           				</div>
@@ -96,28 +100,33 @@
 								<div class="modal-body">
 									<form name="profileForm" accept-charset="utf-8" autocomplete="off" role="form" class="form-horizontal" ng-submit="doUpdateProfile(profileForm)" novalidate>
 										<div class="alert alert-danger" ng-repeat="error in errors" ng-show="errors" class="error"><% error %></div>
-										<div class="form-group">
-											<label>Nombre</label>
-											<input type="text" name="name" class="form-control" value="name" ng-model="user.personal_info.first_name">
+										<div class="row" style="padding: 5%">
+											<div class="col-md-12">
+												<div class="form-group">
+													<label>Nombre</label>
+													<input type="text" name="name" class="form-control" value="name" ng-model="user.personal_info.first_name">
+												</div>
+											</div>
+											<div class="col-md-12">
+												<div class="form-group">
+													<label>Apellido</label>
+													<input type="text" name="last_name" class="form-control" value="last_name" ng-model="user.personal_info.last_name">
+												</div>
+												<div class="form-group">
+													<label>Telefono</label>
+													<input type="text" name="phone" class="form-control" value="phone" ng-model="user.personal_info.phone">
+												</div>
+												<div class="form-group">
+													<label>Identificacion</label>
+													<input type="text" name="phone" class="form-control" value="phone" ng-model="user.personal_info.identification">
+												</div>
+												<div class="modal-footer">
+													<div class="pull-right">
+														<button type="submit" class="btn--ys updateProfile">Actualizar Datos</button>
+													</div>
+												</div>
+											</div>
 										</div>
-										<div class="form-group">
-											<label>Apellido</label>
-											<input type="text" name="last_name" class="form-control" value="last_name" ng-model="user.personal_info.last_name">
-										</div>
-										<div class="form-group">
-											<label>Telefono</label>
-											<input type="text" name="phone" class="form-control" value="phone" ng-model="user.personal_info.phone">
-										</div>
-										<div class="form-group">
-											<label>Identificacion</label>
-											<input type="text" name="phone" class="form-control" value="phone" ng-model="user.personal_info.identification">
-										</div>
-									<div class="modal-footer">
-										<div class="pull-right">
-											<button type="reset" class="btn btn-default"><i class="fa fa-times"></i> Cancelar</button>
-											<button type="submit" class="btn--ys updateProfile">Acutalizar Datos</button>
-										</div>
-									</div>
 									</form>
 									<!-- </form> -->
 								</div>

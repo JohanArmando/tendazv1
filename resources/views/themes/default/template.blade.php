@@ -67,12 +67,12 @@
     <script src="{{asset('components/js/slick.js') }}"></script>
 
     <script src="{{ asset('Angular/tienda/controller/controller.js') }}"></script>
+    <script src="{{asset('Angular/tienda/controller/customerController.js') }}"></script>
     <script src="{{ asset('Angular/tienda/controller/categoryTemplateController.js') }}"></script>
     <script src="{{ asset('Angular/tienda/controller/cartGlobalController.js') }}"></script>
     <script src="{{ asset('Angular/tienda/controller/productIndexController.js') }}"></script>
     <script src="{{asset('Angular/tienda/controller/productController.js') }}"></script>
     <script src="{{asset('Angular/tienda/service/customerService.js') }}"></script>
-    <script src="{{asset('Angular/tienda/controller/customerController.js') }}"></script>
     <script src="{{asset('Angular/tienda/controller/detailProductController.js') }}"></script>
     <script src="{{ asset('Angular/tienda/service/service.js') }}"></script>
     <script src="{{ asset('Angular/tienda/service/categoryService.js') }}"></script>

@@ -8,7 +8,7 @@
 						<a href="{{url('/')}}" style="text-decoration: none">
 							@if($shop->logo)
 								<img class="logo replace-2x img-responsive" src="{{ asset("logos/$shop->id/$shop->logo") }}"
-									 alt="Logo de la tienda {{ $shop->name_store }}" style="max-height: 100px; padding-bottom: 10px"/>
+									 alt="Logo de la tienda {{ $shop->name_store }}" style="max-height: 80px;min-height: 80px; padding-bottom: 10px"/>
 							@else
 								<h1>{{ $shop->name }}</h1>
 							@endif
