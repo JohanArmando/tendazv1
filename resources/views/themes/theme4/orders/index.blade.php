@@ -22,8 +22,8 @@
 													<select class="form-control" style="width: 250px;" ng-model="sortBy" >
 														<option>Seleccione...</option>
 														<option value="-_id">Por Orden</option>
-														<option value="-date">Por Fecha</option>
-														<option value="total">Por Precio</option>
+														<option value="date">Por Fecha</option>
+														<option value="-total">Por Precio</option>
 													</select>
 												</div>
 											</div>
@@ -74,4 +74,7 @@
 			</div>
 		@endsection
 	@section('script')
+		<script>
+			var order_id = "{{ isset($uuid) ? $uuid : '' }}";
+		</script>
 		@stop

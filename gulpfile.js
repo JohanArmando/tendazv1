@@ -23,12 +23,14 @@ elixir(mix => {
         'store/Controllers/ResetPasswordController.js',
         'store/Controllers/UpdatePasswordController.js',
         'store/Controllers/UserController.js',
-        'store/Controllers/OrderController.js'
+        'store/Controllers/OrderController.js',
+        'store/Controllers/AddressController.js'
     ] , 'public/store/js/controllers.js');
     
     mix.scripts([
         'store/Models/User.js',
-        'store/Models/Order.js'
+        'store/Models/Order.js',
+        'store/Models/Address.js'
     ] , 'public/store/js/models.js');
 
 //new-checkout pipes

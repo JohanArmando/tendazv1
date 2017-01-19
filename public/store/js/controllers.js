@@ -138,6 +138,7 @@ myApp.controller('UserController' , ['$scope' , 'Account' , '$cookies' , functio
                         toastr["info"]("Perfil Actualizado");
                         $scope.changeElement('updateProfile' , false , "Actualizar Datos");
                         $scope.errors = {};
+                        $('#modalActualizar').modal('toggle');
                     }).catch(function (response) {
                     $scope.errors = response.data;
                     $scope.changeElement('updateProfile' , false , "Actualizar Datos");
@@ -151,6 +152,7 @@ myApp.controller('UserController' , ['$scope' , 'Account' , '$cookies' , functio
 }]);
 myApp.controller("OrderController" ,[ "$scope" , "Account" , "Order" , function ($scope , Account , Order) {
     /*  METHODS */
+    
     angular.extend($scope , {
        'getOrders' : function () {
            Order.getOrder(Account.getUserObject()._id).then(function (response) {
@@ -159,10 +161,114 @@ myApp.controller("OrderController" ,[ "$scope" , "Account" , "Order" , function 
                console.log(response);
            });
        },
+        'showOrder' : function () {
+            Order.show(order_id).then(function (response) {
+                console.log(response);
+                $scope.order = response.data.data;
+            }).catch(function (response) {
+                console.log(response);
+            });
+        }
     });
 
     $scope.pageSize = 10;
     $scope.currentPage = 1;
     $scope.getOrders();
+
+    if (order_id){
+        $scope.showOrder();
+    }
+}]);
+myApp.controller('AddressController' , ['$scope' , 'Address' , 'Account' , function ($scope , Address , Account) {
+
+    /** VARIABLES **/
+    angular.extend($scope , {
+        'addresses' : '',
+        'address' :'',
+        'state': '',
+        'city': '',
+        'create' : ''
+    });
+
+    /** METHODS **/
+    angular.extend($scope , {
+        'index' : function () {
+            Address.get(Account.getUserObject()._id)
+                .then(function (response) {
+                    $scope.addresses = response.data.data;
+                    console.log(response);
+                }).catch(function (response) {
+                    console.log(response);
+            });
+        },
+        'created' : function () {
+            $scope.create = true;
+            $scope.address = {};
+        },
+        'edit' : function (i) {
+            $scope.create = false;
+            $scope.index = i;
+            $scope.address = $scope.addresses[i];
+            $scope.address.state['id'] = $scope.address.state._id;
+            $scope.state = $scope.address.state;
+            $scope.changeState($scope.state.id);
+            $scope.address.city['id'] = $scope.address.city._id;
+            $scope.city = $scope.address.city;
+        },
+        
+        'getStates' : function () {
+            Address.getStates()
+                .then(function(response) {
+                    $scope.states = response.data.states;
+                    $scope.state = response.data.states[0];
+                    $scope.changeState($scope.state.id);
+            }).catch(function(response) {
+                console.log(response);
+            }).finally(function() {});
+        },
+        
+        'changeState' : function () {
+            Address.getCities($scope.state.id)
+                .then(function(response) {
+                    $scope.cities = response.data.cities;
+                    $scope.city = response.data.cities[0];
+                }).catch(function(response) {
+                console.log(response);
+            }).finally(function() {});
+        },
+
+        createOrUpdate : function () {
+            var addressObject = {
+                street : $scope.address.street,
+                complement : $scope.address.complement,
+                neighborhood	 : $scope.address.neighborhood	,
+                city_id	 : $scope.city.id,
+                state_id	 : $scope.state.id,
+                country_id : 50
+            };
+            if ($scope.create) {
+                Address.create(Account.getUserObject()._id  , addressObject )
+                    .then(function (response) {
+                        $scope.addresses.push(response.data.data[0]);
+                        toastr["info"]("Direccion Creada");
+                        $('#modalAddress').modal('toggle');
+                    }).catch(function () {
+                    console.log(response);
+                });
+            } else {
+                Address.update(Account.getUserObject()._id , $scope.address._id ,addressObject )
+                    .then(function (response) {
+                        $scope.addresses[$scope.index]  = response.data.data[0];
+                        toastr["info"]("Direccion actualizada");
+                        $('#modalAddress').modal('toggle');
+                    }).catch(function () {
+                        console.log(response);
+                });
+            }
+        }
+    });
+
+    $scope.index();
+    $scope.getStates();
 }]);
 //# sourceMappingURL=controllers.js.map

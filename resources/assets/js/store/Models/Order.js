@@ -12,5 +12,15 @@ myApp.factory("Order" , ["$http" , function ($http) {
         });  
     };
     
+    orderModel.show = function (_orderId) {
+        return $http({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            url: BASEURL + '/orders/' +  _orderId  + '?client_secret='  + client_secret + '&client_id=' + client_id,
+            method: "GET"
+        });
+    };
     return orderModel;
 }]);

@@ -11,6 +11,7 @@ use Tendaz\Models\Order\Consult;
 use Tendaz\Models\Order\Order;
 use Tendaz\Models\Store\Shop;
 use Illuminate\Http\Request;
+use Tendaz\Transformers\OrderTransformer;
 use Webpatser\Uuid\Uuid;
 
 class HomeController extends Controller
@@ -101,6 +102,14 @@ class HomeController extends Controller
     public function getOrders()
     {
         return view(Theme::current()->viewsPath.'.orders.index');
+    }
+
+    /**
+     * @return string
+     */
+    public function showOrder($subdomain , $uuid , Request $request)
+    {
+        return view(Theme::current()->viewsPath.'.orders.show' , ['uuid' => $uuid]);
     }
 
 }
