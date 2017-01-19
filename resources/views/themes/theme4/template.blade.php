@@ -93,29 +93,8 @@
 	<script src="{{asset('themes_tendaz/tema4/external/slick/slick.min.js') }}"></script>
 	<script src="{{asset('components/js/slick.js') }}"></script>
 
-	<script src="{{asset('Angular/tienda/controller/controller.js') }}"></script>
-	<script src="{{asset('Angular/tienda/controller/categoryTemplateController.js') }}"></script>
-	<script src="{{asset('Angular/tienda/controller/cartGlobalController.js') }}"></script>
-	<script src="{{asset('Angular/tienda/controller/productIndexController.js') }}"></script>
-	<script src="{{asset('Angular/tienda/controller/productController.js') }}"></script>
-	<script src="{{asset('Angular/tienda/service/customerService.js') }}"></script>
-	<script src="{{asset('Angular/tienda/controller/customerController.js') }}"></script>
-	<script src="{{asset('Angular/tienda/controller/detailProductController.js') }}"></script>
-	<script src="{{asset('Angular/tienda/service/service.js') }}"></script>
-	<script src="{{asset('Angular/tienda/service/categoryService.js') }}"></script>
-	<script src="{{asset('Angular/tienda/service/cartService.js') }}"></script>
-	<script src="{{asset('Angular/tienda/service/productService.js') }}"></script>
-	
-	<script src="{{asset('Angular/tienda/directives/directive.js') }}"></script>
-	<script src="{{asset('components/js/ui-bootstrap-tpls-1.1.1.min.js') }}"></script>
-	<script src="{{asset('components/js/dirPagination.js') }}"></script>
-	<script src="{{asset('components/js/rzslider.min.js') }}"></script>
-	<script src="{{asset('components/js/angularSanitize.min.js') }}"></script>
-
-	<!-- SCRIPTS ANGULAR ACCOUNT -->
-	<script src="{{ asset('store/js/app.js') }}"></script>
-	<script src="{{ asset('store/js/controllers.js') }}"></script>
-	<script src="{{ asset('store/js/models.js') }}"></script>
+	<!-- AngularScripts -->
+	@include('themes.angularScripts')
 
 	<script type="text/ng-template" id="tpl.html" >
 		<div id="megaMenuCarousel1" class="product"  ng-class="{ ' sold-out' : product.stock == 0 , ' product--zoom' : !product.promotion && !product.feature} ">

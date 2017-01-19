@@ -728,6 +728,7 @@ input.active { outline: 0 }
 }
 .input-rating i { width: 20px }
 .row-related { margin-top: 20px }
+tr .notLine {  border-bottom: 1px solid white !important;  }
 /* -------------------------------------------------------------- End of Product Detail -------------------------------------------------------------- */
 
 

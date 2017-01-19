@@ -475,9 +475,6 @@ h1 {
 }
 #content .product .flip-container {
   cursor: pointer;
-  -webkit-perspective: 1000;
-  -moz-perspective: 1000;
-  perspective: 1000;
   -webkit-transform-style: preserve-3d;
   -moz-transform-style: preserve-3d;
   -ms-transform-style: preserve-3d;
@@ -1669,3 +1666,4 @@ address {
   color: #fff;
   text-decoration: none;
 }
+tr .notLine {  border-bottom: 1px solid white !important;  }

@@ -153,30 +153,30 @@ select{border:1px solid #ddd;padding:3px}
 .red{ color: red }
 @font-face {
     font-family: 'open_sanscondensed_light';
-    src: url('../fonts/OpenSans-CondLight-webfont.eot');
-    src: url('../fonts/OpenSans-CondLight-webfontd41d.eot?#iefix') format('embedded-opentype'),
+    src: url('../fonts/OpenSans-CondLight-webfont.svg');
+    src: url('../fonts/OpenSans-CondLight-webfont.svg?#iefix') format('embedded-opentype'),
          url('../fonts/OpenSans-CondLight-webfont.woff') format('woff'),
-         url('../fonts/OpenSans-CondLight-webfont.ttf') format('truetype'),
+         url('../fonts/OpenSans-CondLight-webfont.woff') format('truetype'),
          url('../fonts/OpenSans-CondLight-webfont.svg#open_sanscondensed_light') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'source_sans_proregular';
-    src: url('../fonts/sourcesanspro-regular-webfont.eot');
-    src: url('../fonts/sourcesanspro-regular-webfontd41d.eot?#iefix') format('embedded-opentype'),
+    src: url('../fonts/sourcesanspro-regular-webfont.svg');
+    src: url('../fonts/sourcesanspro-regular-webfont.svg?#iefix') format('embedded-opentype'),
          url('../fonts/sourcesanspro-regular-webfont.woff') format('woff'),
-         url('../fonts/sourcesanspro-regular-webfont.ttf') format('truetype'),
+         url('../fonts/sourcesanspro-regular-webfont.woff') format('truetype'),
          url('../fonts/sourcesanspro-regular-webfont.svg#source_sans_proregular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'DroidSansRegular';
-    src: url('../fonts/DroidSans-webfont.eot');
-    src: url('../fonts/DroidSans-webfontd41d.eot?#iefix') format('embedded-opentype'),
+    src: url('../fonts/DroidSans-webfont.svg');
+    src: url('../fonts/DroidSans-webfont.svg?#iefix') format('embedded-opentype'),
          url('../fonts/DroidSans-webfont.woff') format('woff'),
-         url('../fonts/DroidSans-webfont.ttf') format('truetype'),
+         url('../fonts/DroidSans-webfont.woff') format('truetype'),
          url('../fonts/DroidSans-webfont.svg#DroidSansRegular') format('svg');
     font-weight: normal;
     font-style: normal;
@@ -539,3 +539,4 @@ footer .copyright{
 }
 .blog-list-group-item a{ color: inherit }
 .blog-detail .thumbnail img{ width: 100% }
+tr .notLine {  border-bottom: 1px solid white !important;  }

@@ -1292,7 +1292,6 @@ header .navbar,
 }
 .interact-banner {
   padding-top:95px;
-  background-image:url(../images/banner/banner-9.jpg);
   background-position:center;
   background-repeat:no-repeat;
   background-size:cover;
@@ -1304,7 +1303,6 @@ header .navbar,
 .feature-product-2 {
   padding-top:95px;
   padding-bottom:97px;
-  background-image:url(../images/bg.jpg);
   background-position:center;
   background-repeat:no-repeat;
   background-size:cover;
@@ -1312,7 +1310,6 @@ header .navbar,
 .call-to-action-1 {
   padding-top:85px;
   padding-bottom:95px;
-  background-image:url(../images/bg_product.jpg);
   background-position:center;
   background-repeat:no-repeat;
   background-size:cover;
@@ -1320,7 +1317,6 @@ header .navbar,
 .testimonial {
   padding-top:0px;
   padding-bottom:0px;
-  background-image:url(../images/testimonial_bg.jpg);
   background-position:center;
   background-repeat:no-repeat;
   background-size:cover;
@@ -1328,7 +1324,6 @@ header .navbar,
 .testimonial-2 {
   padding-top:130px;
   padding-bottom:260px;
-  background-image:url(../images/testimonials.jpg);
   background-position:center;
   background-repeat:no-repeat;
   background-size:cover;
@@ -1336,7 +1331,6 @@ header .navbar,
 .testimonial-3 {
   padding-top:100px;
   padding-bottom:100px;
-  background-image:url(../images/testimonial_bg_2.jpg);
   background-position:center;
   background-repeat:no-repeat;
   background-size:cover;
@@ -1345,31 +1339,18 @@ header .navbar,
   padding-top:0px;
   padding-right:0px;
   padding-left:0px;
-  background-image:url(../images/testimonial_bg_3.jpg);
   background-position:center;
   background-repeat:no-repeat;
   background-size:cover;
 }
-.noo-testimonial-sync1 .background_image,
-.testimonial-header .background_image {
-  background-image: url(../images/vector.png);
-}
-.noo-testimonial-sync1.style-2 .background_image {
-  background-image: url(../images/vector_green.png);
-}
-.newsletter {
-  background-image:url(../images/newsletter.jpg);
-}
+
 .about-us-1 {
   padding-top:100px;
   padding-bottom:100px;
-  background-image:url(../images/bg_white.jpg);
 }
 .our-product {
   padding-top:80px;
   padding-bottom:80px;
-  background-image:url(../images/bg_our_product.jpg);
-  background-position:center;
   background-repeat:no-repeat;
   background-size:cover;
   clear: both;
@@ -1377,7 +1358,6 @@ header .navbar,
 .ads {
   padding-top:100px;
   padding-bottom:100px;
-  background-image:url(../images/image-background.jpg);
   background-position:center;
   background-repeat:no-repeat;
   background-size:cover;
@@ -1387,82 +1367,12 @@ header .navbar,
   font-size: 34px; 
   color: #fff;
 }
-.noo-simple-product-bk {
-  background-image: url('../images/bg_creative.jpg');
-}
-.noo-simple-product-bk-2 {
-  background-image: url('../images/simple-product.jpg');
-}
-.story-bk {
-  background-image: url('../images/rectangle.png');
-}
-.noo-about-left {
-  background-image: url('../images/image_lefft.jpg');
-}
-.noo-image {
-  background-image: url('../images/photo.jpg');
-}
-.our-menu {
-  padding-top:100px;
-  padding-bottom:120px;
-  background-image:url(../images/today_menu.jpg);
-  background-position:center;
-  background-repeat:no-repeat;
-  background-size:cover;
-}
-.noo-product-menu-content {
-  background-image: url('../images/bread.jpg');
-}
-.our-service {
-  padding-top: 120px;
-  padding-bottom: 120px;
-  background-image: url(../images/bg12.jpg);
-}
-.footer-4 {
-  background-image: url(../images/footer_bg.jpg);
-}
+
 .img-background-color {
   background-color: #f4eede;
 }
-.img-background-sign {
-  background-image: url(../images/image.jpg);
-}
-.img-background-sign.style-2 {
-  background-image: url(../images/store.jpg);
-}
-.noo-page-heading {
-  background-image: url('../images/banner/header-box.jpg');
-}
-.noo-page-heading.heading-2 {
-  background-image: url('../images/banner/header-business.jpg');
-}
-.noo-page-heading.heading-3 {
-  background-image: url('../images/banner/header-agency.jpg');
-}
-.noo-page-heading.heading-4 {
-  background-image: url('../images/banner/banner-4.jpg');
-}
-.noo-page-heading.heading-5 {
-  background-image: url('../images/banner/header-business.jpg');
-}
-.noo-page-heading.heading-6 {
-  background-image: url('../images/banner/header-center.jpg');
-}
-.noo-page-heading.heading-blog {
-  background-image: url('../images/banner/header-blog.jpg');
-}
-.image-elastickstack.bg-1 {
-  background-image: url(../images/stack/stack-1.jpg);
-}
-.image-elastickstack.bg-2 {
-  background-image: url(../images/stack/stack-2.jpg);
-}
-.image-elastickstack.bg-3 {
-  background-image: url(../images/stack/stack-3.jpg);
-}
-.image-elastickstack.bg-4 {
-  background-image: url(../images/stack/stack-4.jpg);
-}
+
+
 .content-featured img {
   width: 100%;
   height: auto;
@@ -1487,18 +1397,7 @@ header .navbar,
 #googleMap {
   height: 440px;
 }
-.noo-images-grid .grid-1 {
-  background-image: url('../images/grid_1.jpg');
-}
-.noo-images-grid .grid-2 {
-  background-image: url('../images/grid_2.jpg');
-}
-.noo-images-grid .grid-3 {
-  background-image: url('../images/grid_3.jpg');
-}
-.noo-images-grid .grid-4 {
-  background-image: url('../images/grid_4.jpg');
-}
+
 .flickr_badge_image {
   margin: 0 10px 10px 0;
   width: 72px;
@@ -1547,3 +1446,4 @@ header .navbar,
     	clear: left;
 	}
 }
+tr .notLine {  border-bottom: 1px solid white !important;  }
