@@ -111,7 +111,7 @@ myApp.controller('UpdatePasswordController' , ["$scope" , "Account", "$timeout" 
 
 }]);
 myApp.controller('UserController' , ['$scope' , 'Account' , '$cookies' , function ($scope , Account , $cookies) {
-    
+
     /** METHODS **/
     angular.extend($scope , {
         'getUser' : function () {
@@ -119,13 +119,13 @@ myApp.controller('UserController' , ['$scope' , 'Account' , '$cookies' , functio
         },
         changeElement : function (clase , disabled , text) {
             var button = document.getElementsByClassName(clase)[0];
-            button.disabled = true;
+            button.disabled = disabled;
             button.innerHTML = text;
         },
         'doUpdateProfile' : function (profileForm) {
             if (profileForm.$valid){
                 var usrObject = {
-                    'first_name' : $scope.user.personal_info.first_name,
+                    'name' : $scope.user.personal_info.first_name,
                     'last_name' : $scope.user.personal_info.last_name,
                     'phone' : $scope.user.personal_info.phone,
                     'identification' : $scope.user.personal_info.identification
@@ -147,10 +147,11 @@ myApp.controller('UserController' , ['$scope' , 'Account' , '$cookies' , functio
             }
         }
     });
-    
+
 }]);
 myApp.controller("OrderController" ,[ "$scope" , "Account" , "Order" , function ($scope , Account , Order) {
     /*  METHODS */
+    
     angular.extend($scope , {
        'getOrders' : function () {
            Order.getOrder(Account.getUserObject()._id).then(function (response) {
@@ -159,10 +160,22 @@ myApp.controller("OrderController" ,[ "$scope" , "Account" , "Order" , function 
                console.log(response);
            });
        },
+        'showOrder' : function () {
+            Order.show(order_id).then(function (response) {
+                console.log(response);
+                $scope.order = response.data.data;
+            }).catch(function (response) {
+                console.log(response);
+            });
+        }
     });
 
     $scope.pageSize = 10;
     $scope.currentPage = 1;
     $scope.getOrders();
+
+    if (order_id){
+        $scope.showOrder();
+    }
 }]);
 //# sourceMappingURL=controllers.js.map

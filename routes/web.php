@@ -43,7 +43,8 @@ $appRoute = function (){
     
     //Orders
     Route::get('orders', 'HomeController@getOrders');
-    
+    Route::get('orders/{order}', 'HomeController@showOrder');
+
     //login
     Route::get('auth/login', 'HomeController@login');
 

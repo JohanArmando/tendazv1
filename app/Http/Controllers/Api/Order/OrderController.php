@@ -48,4 +48,10 @@ class OrderController extends Controller
         return response()->json( fractal()->item($order->cart, new CartTransformer()), 201);
 
     }
+
+    public function show(Order $order)
+    {
+        return  fractal()
+            ->item($order, new OrderTransformer());
+    }
 }
