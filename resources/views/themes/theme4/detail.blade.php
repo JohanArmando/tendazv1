@@ -179,8 +179,8 @@
 	@endsection
 	@section('script')
 		<script>
-			$j(document).ready(function() {
-				$j('.video-link').magnificPopup({
+			$(document).ready(function() {
+				$('.video-link').magnificPopup({
 					disableOn: 767,
 					type: 'iframe',
 					removalDelay: 160,
@@ -192,11 +192,11 @@
 			})
 		</script>
 		<script type="text/javascript">
-			$j(document).ready( function(){
-				$j('div').on('click','.image-click', function(e){
+			$(document).ready( function(){
+				$('div').on('click','.image-click', function(e){
 					e.preventDefault();
-					var image = $j(this).find('img').attr('src');
-					$j('#matrix').attr('src', image);
+					var image = $(this).find('img').attr('src');
+					$('#matrix').attr('src', image);
 				});
 			})
 		</script>
