@@ -61,7 +61,7 @@
                                             </thead>
                                             <tbody>
                                             <tr dir-paginate="order in orders   | itemsPerPage: pageSize | filter:q | orderBy:sortBy"  current-page="currentPage">
-                                                <td ><a style="color: #0a8fb2" href="/orders/<% order._id %>">#<% ($index + 1) + (currentPage - 1) * pageSize %></a></td>
+                                                <td ><a href="/orders/<% order._id %>">#<% ($index + 1) + (currentPage - 1) * pageSize %></a></td>
                                                 <td><% order.date %></td>
                                                 <td><% order.status.code %></td>
                                                 <td><% order.status_payment %></td>
@@ -88,4 +88,7 @@
 <div style="margin-bottom: 59px;"></div>
     @endsection
 @section('script')
+    <script>
+        var order_id = "{{ isset($uuid) ? $uuid : '' }}";
+    </script>
 @stop

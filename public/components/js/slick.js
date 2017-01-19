@@ -65,7 +65,7 @@ angular.module('slick', []).directive('slick', [
         initializeSlick = function () {
           return $timeout(function () {
             var currentIndex, customPaging, slider;
-            slider = $j(element);
+            slider = $(element);
             if (scope.currentIndex != null) {
               currentIndex = scope.currentIndex;
             }
@@ -80,8 +80,8 @@ angular.module('slick', []).directive('slick', [
               adaptiveHeight: scope.adaptiveHeight === 'true',
               arrows: scope.arrows !== 'false',
               asNavFor: scope.asNavFor ? scope.asNavFor : void 0,
-              appendArrows: scope.appendArrows ? $(scope.appendArrows) : $j(element),
-              appendDots: scope.appendDots ? $(scope.appendDots) : $j(element),
+              appendArrows: scope.appendArrows ? $(scope.appendArrows) : $(element),
+              appendDots: scope.appendDots ? $(scope.appendDots) : $(element),
               autoplay: scope.autoplay === 'true',
               autoplaySpeed: scope.autoplaySpeed != null ? parseInt(scope.autoplaySpeed, 10) : 3000,
               centerMode: scope.centerMode === 'true',
@@ -113,8 +113,8 @@ angular.module('slick', []).directive('slick', [
               useCSS: scope.useCSS !== 'false',
               variableWidth: scope.variableWidth === 'true',
               vertical: scope.vertical === 'true',
-              prevArrow: scope.prevArrow ? $j(scope.prevArrow) : void 0,
-              nextArrow: scope.nextArrow ? $j(scope.nextArrow) : void 0
+              prevArrow: scope.prevArrow ? $(scope.prevArrow) : void 0,
+              nextArrow: scope.nextArrow ? $(scope.nextArrow) : void 0
             });
             slider.on('init', function (sl) {
               if (attrs.onInit) {
