@@ -47,7 +47,7 @@
                             <li>
                                 <a href="{{url('change_password')}}"><i class="fa fa-lock"></i> Cambiar contraseña</a>
                             </li>
-                            <li class="hidden">
+                            <li>
                                 <a href="{{url('orders')}}"><i class="fa fa-list"></i>Mis Ordenes</a>
                             </li>
                             <div class="divider"></div>

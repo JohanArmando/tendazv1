@@ -20,6 +20,7 @@
                         </a>
                         <ul ng-if="usuario" class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownAccount">
                             <li><a href="{{url('myProfile')}}"><i class="fa fa-user"></i> Perfil</a></li>
+                            <li><a href="{{url('orders')}}"><i class="fa fa-lock"></i> Mis Ordenes</a></li>
                             <li><a href="{{url('change_password')}}"><i class="fa fa-lock"></i> Cambiar Contraseña</a></li>
                             <li ng-click="cerrarSesion()">
                                 <a href="">

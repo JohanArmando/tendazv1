@@ -41,7 +41,7 @@
                             <li>
                                 <a href="{{url('change_password')}}"><i class="fa fa-lock"></i> Cambiar Contraseña</a>
                             </li>
-                            <li class="hidden">
+                            <li>
                                 <a href="{{url('orders')}}"><i class="fa fa-list"></i> Mis ordenes</a>
                             </li>
                             <li ng-click="cerrarSesion()">
