@@ -68,6 +68,8 @@ class MePa
             "card_number" => $this->request->card_number
         ]);
 
+	return $card;
+
         $this->token_card = (string) $card['response']['id'];
     }
 

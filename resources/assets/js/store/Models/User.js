@@ -20,7 +20,7 @@ myApp.factory('Account' , ["$http" , "$cookies", function ($http ,$cookies) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            url: BASEURL + '/password/email/' + '?client_secret='  + client_secret + '&client_id=' + client_id,
+            url: BASEURL + '/password/email' + '?client_secret='  + client_secret + '&client_id=' + client_id,
             data : _data,
             method: "POST",
         });

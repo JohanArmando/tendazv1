@@ -58,7 +58,7 @@ class PaymentMethodController extends Controller
         if ($payment->payment_method_id == 1){
             $mp = new MePa($cart , $request->token, $request);
             $payment = $mp->generate();
-
+		return $payment;
             $cart->order->updateStatus($payment['response']['status']);
             
             $cart->order->api_id =  $payment['response']['id'];
