@@ -11,8 +11,8 @@ class OrdersController extends Controller
 {
     public function index(Customer $customer)
     {
-        $orders = $customer->orders()->orderBy('id' , 'DESC')->NotInitOrders()->get();
+        $orders = $customer->orders()->orderBy('id' , 'ASC')->NotInitOrders()->get();
 
-        return  fractal()->collection($orders , new OrderTransformer());
+        return  fractal()->collection($orders , new OrderTransformer(0));
     }
 }

@@ -26,6 +26,7 @@ myApp.controller('UserController' , ['$scope' , 'Account' , '$cookies' , functio
                         toastr["info"]("Perfil Actualizado");
                         $scope.changeElement('updateProfile' , false , "Actualizar Datos");
                         $scope.errors = {};
+                        $('#modalActualizar').modal('toggle');
                     }).catch(function (response) {
                     $scope.errors = response.data;
                     $scope.changeElement('updateProfile' , false , "Actualizar Datos");

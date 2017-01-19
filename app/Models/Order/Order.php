@@ -19,10 +19,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    use WhereShopTrait , CacheTagsTrait , UuidAndShopTrait;
+    use WhereShopTrait, CacheTagsTrait, UuidAndShopTrait;
 
     protected $table = 'orders';
-    
+    protected $unique_id = 0;
+
     protected $fillable = [
         'uuid' , 'total' , 'name' , 'shipping_address_id', 'last_name' , 'phone', 'identification' , 'email' ,'total_discount' , 'total_tax' , 'total_inc_tax' , 'shipping_method_id' , 'total_exec_tax' , 'total_products' , 'total_shipping' , 'total_shipping_exec_tax' , 'total_shipping_inc_tax' , 'note' , 'shipping' , 'cart_id' , 'order_status' , 'shop_id'
     ];
@@ -243,6 +244,6 @@ class Order extends Model
 
     public function getUniqueIdByShopAttribute()
     {
-           return  (static::count() ? static::count() + 100 : 100) - 1;
+               return  (static::count() ? static::count() + 100 : 100) - 1;
     }
 }
