@@ -37,9 +37,16 @@ class PaymentValueTransformer extends TransformerAbstract
                     '_id' => $paymentValue->uuid,
                     'discount' => $paymentValue->discount,
                     'instructions' => $paymentValue->instructions,
-                    'custom_name' => $paymentValue->custom_name,
+                    'name' => $paymentValue->custom_name,
                 ];
                 break;
+            default:
+                return [
+                    '_id' => $paymentValue->uuid,
+                    'discount' => $paymentValue->discount,
+                    'instructions' => $paymentValue->instructions,
+                    'name' => $paymentValue->custom_name,
+                ];
         }
     }
 }
