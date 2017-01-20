@@ -9,7 +9,7 @@
            
                 <form name="loginForm" accept-charset="utf-8" autocomplete="off" role="form" class="form-horizontal" ng-submit="doLogin(loginForm)" novalidate>
                     <div class="form-group" ng-class="{'has-error has-feedback' : loginForm.email.$invalid && formSubmited }">
-                        <p ng-repeat="error in erroreslogin" ng-show="errores" class="error">Correo o contrase&ntilde;a incorrecta!</p>
+                        <p ng-repeat="error in erroreslogin" ng-show="errores" class="error-login">Correo o contrase&ntilde;a incorrecta!</p>
                         <label>Email</label>
                         <input id="login_username" name="email" ng-model="formLog.loginMail" class="form-control control_from_inp"
                                   type="text" placeholder="" required>

@@ -102,7 +102,7 @@
                        <ul id="components" class="submenu collapse ">
                            <li >
                                <a href="{{ url('admin/customers')}}">
-                                   <span class="text">Cliente</span>
+                                   <span class="text">Mis Cliente</span>
                                </a>
                            </li>
                            <li>

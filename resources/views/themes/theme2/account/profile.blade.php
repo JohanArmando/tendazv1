@@ -43,7 +43,7 @@
 
                 </div>
                 <div class="text-center">
-                  	<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modaEditar"> <i class="fa fa-edit"></i> Actualizar Datos</a>
+                  	<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalActualizar"> <i class="fa fa-edit"></i> Actualizar Datos</a>
                   </div>
               </div>
             </div>
@@ -109,7 +109,7 @@
 			<div style="margin-bottom: 125px;"></div>
 
 			<!--Modal para modificar datos del perfil-->
-				<div id="modaEditar" class="modal fade" tabindex="-1" role="dialog">
+				<div id="modalActualizar" class="modal fade" tabindex="-1" role="dialog">
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
