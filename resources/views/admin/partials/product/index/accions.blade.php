@@ -24,9 +24,10 @@
                 <p class="m-quarter-bottom"><strong>Categoria</strong></p>
                 <select name="categories" id="myCategory" class="form-control"
                         ng-options="category.name for category in categories track by category.id"
-                        ng-model="category">
-                    <option value>Sin categoria</option>
+                        ng-model="category.data">
                 </select>
+                <input type="text" class="btn btn-default" ng-click="category.data = []" value="Sin Categoria">
+                <input type="text" class="btn btn-default" ng-click="category = []" value="Todos">
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <p class="m-quarter-bottom"><strong>Ordenar por:</strong></p>
@@ -35,8 +36,8 @@
                     <option value="-price">Precio: Mayor a Menor</option>
                     <option value="name">A - Z</option>
                     <option value="-name">Z - A</option>
-                    <option value="created_at">M&aacute;s Nuevo al m&aacute;s Viejo</option>
-                    <option value="-created_at">M&aacute;s Viejo al m&aacute;s Nuevo</option>
+                    <option value="created_at">M&aacute;s Nuevo al m&aacute;s Antiguo</option>
+                    <option value="-created_at">M&aacute;s Antiguo al m&aacute;s Nuevo</option>
                     <option value="-best_seller">M&aacute;s vendidos</option>
                 </select>
             </div>

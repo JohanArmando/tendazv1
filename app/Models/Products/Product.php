@@ -67,6 +67,13 @@ class Product extends Model
      * @param string $name
      * @param mixed $extra
      */
+    /**
+     * @return array
+     */
+    public function getCreatedAtAttribute()
+    {
+        return \Carbon\Carbon::parse($this->attributes['created_at'])->timestamp;
+    }
     public function setUniqueName($name, $extra)
     {
         $slug = str_slug($name . '-' . $extra);

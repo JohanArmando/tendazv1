@@ -216,11 +216,9 @@
                     serviceProduct.delete(value.product_id)
                         .success(function(response){
                             $scope.preload = false;
-                            toastr["success"]("Producto " + $scope.products[$index].name + " eliminado de forma correcta!")
-                            $scope.products.splice($index , 1 );
-                        })
-                    var pos = $scope.products.indexOf(index);
-                    $scope.products.splice(index);
+
+                        });
+                    $scope.products.splice(index , 1 );
                 });
                 toastr['success']("Productos eliminados correctamente");
             }else{
@@ -239,14 +237,17 @@
             .success(function(response){
                 console.log(response);
                 var categories = [];
-                angular.forEach(response.data, function(value, key) {
-                    angular.forEach(value.categories, function(v, k) {
-                        categories.push(v);
+                angular.forEach(response.products, function(value, key) {
+                    angular.forEach(value.categories.data, function(v, k) {
+                        if (categories.indexOf(v) == -1) {
+                            categories[k] = v;
+                        }
                     });
                 });
                 if(categories){
                     $scope.categories = categories;
                 }
+                console.log($scope.categories);
                 serviceProduct.setInfoBackup(response.data);
                 $scope.preload = false;
                 $scope.products = response.products;

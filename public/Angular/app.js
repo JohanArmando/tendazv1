@@ -72,8 +72,8 @@
                     $rootScope.carts = response.data.data;
                     toastr["info"]("Item agregado al carrito");
                 }).catch(function (response) {
-                toastr["warning"]("No hay suficiente cantidad del producto");
-                item.quantity = 1 ;
+                    toastr["warning"]("No hay suficiente cantidad del producto");
+                    item.quantity = 1 ;
                 });
         }
     });

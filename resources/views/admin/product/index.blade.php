@@ -241,17 +241,18 @@ Mis productos
                                     </tr>
                                 </thead>
                                 <tbody>
+
                                 <tr dir-paginate="product in products
                                         | filter:search
                                         | orderBy:order
-                                        | filter : {categories: category}
+                                        | filter : { categories : category }
                                         | itemsPerPage: pageSize
                                         | filter: { price_promotion : price_promotion}
                                         | filter: {visible : show}  " class="ng-cloak" ng-show="product.show">
                                     <td class="vm">
                                         <div class="checkbox custom-checkbox pull-left check" data-original-title="Seleccionar @{{ product.name }}" data-toggle="tooltip" data-placement="right">
                                             <input id="product_@{{ product.product_id }}"  ng-model="product.select" type="checkbox"  ng-checked="all">
-                                            <label for="product_@{{ product.id }}"></label>
+                                            <label for="product_@{{ product.product_id }}"></label>
                                         </div>
                                     </td>
                                     <td class="image vm c">
