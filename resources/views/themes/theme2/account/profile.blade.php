@@ -50,64 +50,63 @@
           </div>
         </div>
        	<div style="margin-bottom: 35px;"></div>
-        <div class="col-md-6 col-lg-6 hidden">
-							<div class="panel panel-primary">
-								<div class="panel-heading">
-									<div class="text-center">
-										<h3 class="panel-title">Direcciones</h3>
-									</div>
-								</div>
-								<div class="panel-content">
-									<div class="panel-body">
-										<table class="table table-responsive">
-										<tbody>
-										<tr>
-											<th>Id</th>
-											<th>Direccion</th>
-											<th>Telefono</th>
-											<th class="text-center">Principal</th>
-											<th class="text-center">Acciones</th>
-										</tr>
-										<tr>
-											<td>
-												<a href="">#001</a>
-											</td>
-											<td>
-												<p align="justify">
-													calle sdfs 78-45,
-												</p>
-											</td>
-											<td> (+57) 123456</td>
-											<td class="text-center">
-												<a class="btn btn-xs btn-primary" href=""><i class="fa fa-eye"></i></a>
-												<a class="btn btn-xs btn-default" href=""><i class="fa fa-eye-slash"></i></a>
-											</td>
-											<td class="text-center">
-												<button type="button" data-target="#modalEditarDireccion" data-toggle="modal" class="btn btn-warning btn-xs"><i class="fa fa-edit
-												"></i></button>
-											</td>
-										</tr>
-										</tbody>
-										</table>
-										<div class="col-md-12">
-											<hr>
-											Al seleccionar ( <i class="fa fa-eye"></i> ) dejaras esta direcci&oacute;n como direccion principal.
-										</div>
+        <div class="col-md-12 col-lg-12" ng-controller="AddressController">
+			@include(Theme::current()->viewsPath.'.partials.edit-dir')
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<div class="text-center">
+							<h3 class="panel-title">Direcciones</h3>
+						</div>
+					</div>
+					<div class="panel-content">
+						<div class="panel-body">
+							<table class="table table-responsive">
+							<tbody>
+							<tr>
+								<th>Direccion</th>
+								<th>Complemento</th>
+								<th>Estado</th>
+								<th class="text-center">Principal</th>
+								<th class="text-center">Acciones</th>
+							</tr>
+							<tr ng-repeat="address in addresses">
+								<td><% address.street %></td>
+								<td>
+									<% address.street %>
+								</td>
+								<td>
+									<p align="justify">
+										<% address.state.name %> - <% address.city.name %>
+									</p>
+								</td>
+								<td class="text-center">
+									<a class="btn btn-xs" ng-class=" address.isPrimary ? 'btn-primary' : 'btn-default'" href="">
+										<i class="fa" ng-class=" address.isPrimary ? 'fa-eye' : 'fa-eye-slash'"></i>
+									</a>
+								</td>
+								<td class="text-center">
+									<button type="button" data-target="#modalAddress" data-toggle="modal" class="btn btn-warning btn-xs" ng-click="edit( $index)"><i class="fa fa-edit
+										"></i></button>
+								</td>
+							</tr>
+							</tbody>
+							</table>
+							<div class="col-md-12">
+								<hr>
+								Al seleccionar ( <i class="fa fa-eye"></i> ) dejaras esta direcci&oacute;n como direccion principal.
+							</div>
 
-										<div class="col-md-12">
-											<div class="pull-right"><br>
-											<button type="button" data-toggle="modal" data-target="#modal_Add_dir"  class="btn btn-primary"><i class="fa fa-plus"></i> Agregar Direccion</button>
-											</div>
-										</div>
-									</div>
+							<div class="col-md-12">
+								<div class="pull-right"><br>
+								<button ng-click="created()" data-target="#modalAddress" type="button" data-toggle="modal" class="btn btn-primary"><i class="fa fa-plus"></i> Agregar Direccion</button>
 								</div>
 							</div>
 						</div>
-
+					</div>
+				</div>
+			</div>
 
 			<div style="margin-bottom: 125px;"></div>
-			@include(Theme::current()->viewsPath.'.partials.add-dir')
-			@include(Theme::current()->viewsPath.'.partials.edit-dir')
 
 			<!--Modal para modificar datos del perfil-->
 				<div id="modaEditar" class="modal fade" tabindex="-1" role="dialog">

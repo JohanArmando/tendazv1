@@ -73,7 +73,7 @@ class Variant extends Model
     
     public function orders()
     {
-        return $this->belongsToMany(Order::class , 'order_item');
+        return $this->belongsToMany(Order::class , 'order_item')->withPivot('quantity');
     }
     
     public function optionValueVariant()
@@ -178,5 +178,11 @@ class Variant extends Model
     {
         return (int) $this->attributes['promotional_price'];
     }
-
+    
+    public function best_seller()
+    {
+        return $this->orders->sum(function ($order){
+            return $order->pivot->quantity;
+        });
+    }
 }

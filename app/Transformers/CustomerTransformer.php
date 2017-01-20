@@ -8,6 +8,7 @@
 
 namespace Tendaz\Transformers;
 
+use Tendaz\Models\Cart\Cart;
 use Tendaz\Models\Customer;
 use League\Fractal\TransformerAbstract;
 
@@ -19,7 +20,7 @@ class CustomerTransformer extends TransformerAbstract
             return [
                 '_id'           => $customer->uuid ,
                 'email'         => $customer->email,
-                'cart_id'       => $customer->cartsOpen ?? $customer->cartsOpen->last()->secure_key,
+                'cart_id'       => $customer->cartsOpen ? $customer->cartsOpen->last()->secure_key : Cart::findOrCreateBySessionID(null , $customer->shop->id),
                 'personal_info' => [
                     'first_name'    => $customer->name,
                     'last_name'     => $customer->last_name,

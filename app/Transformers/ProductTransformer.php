@@ -14,7 +14,7 @@ use League\Fractal\TransformerAbstract;
 class ProductTransformer extends TransformerAbstract
 {
     protected $defaultIncludes = [
-        'images' , 'values' , 'variants'
+        'images' , 'values' , 'variants' , 'categories'
     ];
 
 
@@ -23,6 +23,7 @@ class ProductTransformer extends TransformerAbstract
 
         return [
             '_id'                => $variant->uuid,
+            'created_at'         => $variant->product->created_at,
             'product_id'         => $variant->product->uuid,
             'active'             => $variant->active,
             'categories'         => $variant->product ? $this->parse($variant->product->categories) : [],
@@ -35,7 +36,8 @@ class ProductTransformer extends TransformerAbstract
             'visible'            => $variant->product->publish,
             'quantity'           => $variant->pivot  ? $variant->pivot->quantity : 1,
             'description'        => $variant->product->description,
-            'url'                => $variant->product->url
+            'url'                => $variant->product->url,
+            'best_seller'        => $variant->best_seller()
         ];
     }
 
@@ -65,5 +67,12 @@ class ProductTransformer extends TransformerAbstract
     public function includeVariants(Variant $variant){
         $variants = $variant->product->variants;
         return $this->collection($variants, new  VariantTransformer());
+    }
+
+    public function includeCategories(Variant $variant)
+    {
+        return $variant->product->categories ?
+            $this->collection($variant->product->categories, new  CategoryTransformer()) :
+            $this->null();
     }
 }

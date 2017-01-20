@@ -39,6 +39,7 @@
                     }
 
                     $http(toLog).then(function(response) {
+                        console.log(response);
                         $cookies.put('auth' , JSON.stringify(response.data) , {path: '/'});
                         localStorage.setItem('cart_id',response.data.cart_id);
                         window.location.href = '/';
