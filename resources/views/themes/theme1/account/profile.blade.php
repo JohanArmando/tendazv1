@@ -44,7 +44,7 @@
 											</tbody>
 											</table>
 											<div class="text-center"  style="height: 52px">
-												<button  data-target="#modalEditar" data-toggle="modal" type="button"
+												<button  data-target="#modalActualizar" data-toggle="modal" type="button"
 														 class="btn btn-primary"><i class="fa fa-edit"></i> Editar Datos de perfil</button>
 											</div>
 										</div>
@@ -112,7 +112,7 @@
 
 						</div>
 					<!--Modal para editar Datos-->
-					<div id="modalEditar" class="modal fade" tabindex="-1" role="dialog">
+					<div id="modalActualizar" class="modal fade" tabindex="-1" role="dialog">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
 								<div class="modal-header">

@@ -15553,3 +15553,12 @@ hr {
 #LittleLogo{
   margin-left: -2%;
 }
+.btn-category{
+  width: 100%;
+  background-color: #f26522;
+  color: white;
+}
+.btn-category:hover {
+  background-color: #BFBFBA;
+  color: white;
+}

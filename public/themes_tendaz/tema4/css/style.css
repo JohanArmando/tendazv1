@@ -25618,6 +25618,5 @@ body.modal-open {
 }
 }
 
-tr .notLine {
-  border-bottom: 1px solid white !important;
-}
+tr .notLine {  border-bottom: 1px solid white !important;  }
+.error-login{ background-color: red}
