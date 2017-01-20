@@ -44,7 +44,7 @@
 										<div class="col-md-6"><strong>Identificaci&oacute;n</strong></div>
 										<div class="col-md-6"><% user.personal_info.identification %><hr></div>
 										<div class="col-md-12">
-											<a href="#" class="btn btn-primary" style="border-radius: 0" data-toggle="modal" data-target="#modaEditar">
+											<a href="#" class="btn btn-primary" style="border-radius: 0" data-toggle="modal" data-target="#modalActualizar">
 												<i class="fa fa-edit"></i> Actualizar Datos</a>
 											<hr>
 										</div>
@@ -55,7 +55,7 @@
 						</div>
 					</div>
 					</div>
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 toppad " ng-controller="AddressController">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 toppad" ng-controller="AddressController">
 						@include(Theme::current()->viewsPath.'.partials.edit-dir')
 						<div class="noo-about-right">
 								<div class="noo-line">
@@ -67,7 +67,7 @@
 										<span></span>
 										<span></span>
 									</span>
-								</div>	
+								</div>
 								<div class="noo-button-creative">
 									<a href="#">
 										<span class="first"></span>
@@ -79,7 +79,8 @@
 								</div>
 							<div>
 							<div class="panel-body">
-								<div class="">
+								<div class="row">
+								<div class="col-md-12">
 									<table class="table table-hover table-responsive">
 											<tbody>
 											<tr>
@@ -111,6 +112,7 @@
 											</tr>
 											</tbody>
 										</table>
+									</div>
 										<div class="col-md-12">
 											Al seleccionar ( <i class="fa fa-eye"></i> ) dejaras esta direcci&oacute;n como direccion principal.
 										</div>
@@ -122,7 +124,7 @@
 										</div>
 
 								</div>
-								
+
 							</div>
 							</div>
 						</div>
@@ -132,7 +134,7 @@
 
 
 			<!--Modal para modificar datos del perfil-->
-				<div id="modaEditar" class="modal fade" tabindex="-1" role="dialog" style="margin-top: 100px">
+				<div id="modalActualizar" class="modal fade" tabindex="-1" role="dialog" style="margin-top: 100px">
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
