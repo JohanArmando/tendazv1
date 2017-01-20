@@ -93,7 +93,7 @@ tr {
                                 <div class="text-center mt15 mb15">
                                     <h1 class="semibold">
                                         <i class="fa fa-money"></i>
-                                        <span class="">${{ $sold }}</span>
+                                        <span class="">${{ number_format($sold , 0) }}</span>
                                     </h1>
                                 </div>
                             </div>
@@ -109,7 +109,7 @@ tr {
                                 <div class="text-center mt15 mb15">
                                     <h1 class="semibold">
                                         <i class="fa fa-shopping-cart"></i>
-                                        <span class="">{{ $ordersTotal }}</span>
+                                        <span class="">{{ number_format($ordersTotal , 0) }}</span>
                                     </h1>
                                 </div>
                             </div>
@@ -124,7 +124,7 @@ tr {
                                 <div class="text-center mt15 mb15">
                                     <h1 class="semibold">
                                         <i class="fa fa-ticket"></i>
-                                            <span class="">${{ $average }}</span>
+                                            <span class="">${{ number_format($average , 0) }}</span>
                                     </h1>
                                 </div>
                             </div>
