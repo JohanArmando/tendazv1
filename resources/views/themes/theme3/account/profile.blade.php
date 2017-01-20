@@ -55,7 +55,8 @@
 						</div>
 					</div>
 					</div>
-					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 toppad hidden">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 toppad " ng-controller="AddressController">
+						@include(Theme::current()->viewsPath.'.partials.edit-dir')
 						<div class="noo-about-right">
 								<div class="noo-line">
 									<span class="line-one">
@@ -68,42 +69,44 @@
 									</span>
 								</div>	
 								<div class="noo-button-creative">
-								<a href="#">
-									<span class="first"></span>
-									<span class="second"></span>
-									Direcciones
-									<span class="three"></span>
-									<span class="four"></span>
-								</a>
-							</div>
-							
+									<a href="#">
+										<span class="first"></span>
+										<span class="second"></span>
+										Direcciones
+										<span class="three"></span>
+										<span class="four"></span>
+									</a>
+								</div>
+							<div>
 							<div class="panel-body">
 								<div class="">
 									<table class="table table-hover table-responsive">
 											<tbody>
 											<tr>
-												<th>Id</th>
 												<th>Direccion</th>
-												<th>Telefono</th>
+												<th>Complemento</th>
+												<th>Estado</th>
 												<th class="text-center">Principal</th>
 												<th class="text-center">Acciones</th>
 											</tr>
-											<tr>
+											<tr ng-repeat="address in addresses">
+												<td><% address.street %></td>
 												<td>
-													<a href="">#001</a>
+													<% address.street %>
 												</td>
 												<td>
 													<p align="justify">
-														calle sdfs 78-45,
+														<% address.state.name %> - <% address.city.name %>
 													</p>
 												</td>
-												<td> (+57) 123456</td>
 												<td class="text-center">
-													<a class="btn btn-xs btn-primary" href=""><i class="fa fa-eye"></i></a>
-													<a class="btn btn-xs btn-default" href=""><i class="fa fa-eye-slash"></i></a>
+													<a class="btn btn-xs" ng-class=" address.isPrimary ? 'btn-primary' : 'btn-default'" href="">
+														<i class="fa" ng-class=" address.isPrimary ? 'fa-eye' : 'fa-eye-slash'"></i>
+													</a>
 												</td>
 												<td class="text-center">
-													<button type="button" class="btn btn-warning btn-xs" data-target="#modalEditarDireccion" data-toggle="modal"><i class="fa fa-edit"></i></button>
+													<button type="button" data-target="#modalAddress" data-toggle="modal" class="btn btn-warning btn-xs" ng-click="edit( $index)">
+														<i class="fa fa-edit"></i></button>
 												</td>
 											</tr>
 											</tbody>
@@ -113,7 +116,7 @@
 										</div>
 											<div class="col-md-12">
 												<div class="text-center"><br>
-												<button type="button" data-toggle="modal" data-target="#modal_Add_dir"  class="btn btn-primary"><i class="fa fa-plus"></i> Agregar Direccion</button>
+												<button ng-click="created()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAddress"><i class="fa fa-plus"></i> Agregar Direccion</button>
 											</div>
 											<div style="margin-bottom: 30px;"></div>
 										</div>
@@ -121,13 +124,11 @@
 								</div>
 								
 							</div>
+							</div>
 						</div>
 						</div>
 
 			<div style="margin-bottom: 125px;"></div>
-			
-			@include(Theme::current()->viewsPath.'.partials.add-dir')
-			@include(Theme::current()->viewsPath.'.partials.edit-dir')
 
 
 			<!--Modal para modificar datos del perfil-->

@@ -36,7 +36,8 @@
           </div>
 
         <!-- adresss -->
-            <div class="col-md-7 col-sm-12 col-xs-12 hidden">
+            <div class="col-md-12 col-sm-12 col-xs-12" ng-controller="AddressController">
+                @include('themes.default.partials.edit-dir')
                 <div class="row panel panel-default panel-content">
                     <div style="margin: 15px 15px 15px 15px">
                     <div class="">
@@ -46,41 +47,32 @@
                     <table class="table table-responsive panel-body">
                         <tbody>
                             <tr>
-                              <th>Id</th>
-                              <th>Nombre</th>
-                                <th>Direcci&oacute;n</th>
-                              <th>Telefono</th>
-                              <th class="text-center">Principal</th>
-                              <th class="text-center">Acciones</th>
+                                <th>Direccion</th>
+                                <th>Complemento</th>
+                                <th>Estado</th>
+                                <th class="text-center">Principal</th>
+                                <th class="text-center">Acciones</th>
                             </tr>
-                                <tr>
-                                    <td>
-                                      <a href="">#1</a>
-                                    </td>
-                                  <td>
-                                      <p align="justify">
-                                          NAME
-                                      </p>
-                                  </td>
-                                    <td>
-                                        DIRECTION
-                                    </td>
-                                    <td> PHONE</td>
-                                  <td class="text-center">
-                                        <a class="btn btn-xs btn-primary" id="si">
-                                            <i class="fa fa-eye" id="siFa"></i>
-                                        </a>
-                                        <a class="btn btn-xs btn-default" href="#" id="no">
-                                            <i class="fa fa-eye-slash" id="noFa"></i>
-                                        </a>
-                                  </td>
-                                  <td class="text-center">
-                                    <button type="button" class="btn btn-xs btn-warning" data-toggle="modal"
-                                            data-target="#modalEditarDireccion">
-                                      <i class="fa fa-edit"></i>
-                                    </button>
-                                  </td>
-                                </tr>
+                            <tr ng-repeat="address in addresses">
+                                <td><% address.street %></td>
+                                <td>
+                                    <% address.street %>
+                                </td>
+                                <td>
+                                    <p align="justify">
+                                        <% address.state.name %> - <% address.city.name %>
+                                    </p>
+                                </td>
+                                <td class="text-center">
+                                    <a class="btn btn-xs" ng-class=" address.isPrimary ? 'btn-primary' : 'btn-default'" href="">
+                                        <i class="fa" ng-class=" address.isPrimary ? 'fa-eye' : 'fa-eye-slash'"></i>
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" data-target="#modalAddress" data-toggle="modal" class="btn btn-warning btn-xs" ng-click="edit( $index)">
+                                        <i class="fa fa-edit"></i></button>
+                                </td>
+                            </tr>
                     </tbody>
                     </table>
                     <div class="col-md-12">
@@ -90,7 +82,7 @@
                     </div>
                     <div class="col-md-12">
                       <div class="pull-right" style="margin-bottom: 20px"><br>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAgregardireccion">
+                      <button  ng-click="created()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAddress">
                         <i class="fa fa-plus"></i> Agregar Nueva Direccion
                       </button>
                       </div>
@@ -104,8 +96,6 @@
 
        <div class="clearfix"></div>
        <div style="margin-bottom: 100px;"></div>
-        @include('themes.default.partials.createAddress')
-        @include('themes.default.partials.edit-dir')
        <!--MODAL ACTUALIZAR DATOS CLIENTES-->
         <div id="modalActualizar" class="modal fade" tabindex="-1" role="dialog" ng-controller="UserController">
             <div class="modal-dialog" role="document">
