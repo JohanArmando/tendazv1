@@ -8,6 +8,7 @@ use Tendaz\Http\Controllers\Controller;
 use Tendaz\Models\Marketing\Trend;
 use Tendaz\Models\Order\Order;
 use Tendaz\Models\Products\Product;
+use Tendaz\Models\Products\Variant;
 
 class StaticsController extends Controller
 {
@@ -16,8 +17,9 @@ class StaticsController extends Controller
         $sold = Order::totalSold();
         $ordersTotal = Order::totalOrders();
         $average =  (int) $sold / ($ordersTotal ? $ordersTotal : 1);
-        $higherSell = Product::totalSell()->toArray();
-        $higherBilling = Product::totalBilling()->toArray();
+        //dd(Product::withCount('variants' , 'categories')->get());
+        $higherSell = Product::TotalSell();
+        $higherBilling = Product::totalBilling();
         return view('admin.stats.basic' , [
             'sold'          => $sold ,
             'ordersTotal'   => $ordersTotal,

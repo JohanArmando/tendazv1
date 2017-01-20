@@ -70,7 +70,7 @@ class Product extends Model
     /**
      * @return array
      */
-    public function getCreatedAtAttribute()
+    public function getCreatedAtUnixAttribute()
     {
         return \Carbon\Carbon::parse($this->attributes['created_at'])->timestamp;
     }
@@ -415,6 +415,7 @@ class Product extends Model
 
     public function scopeMainImage($query)
     {
+        dd($query->variant()->images());
         return $query->variant()->images->first() ? $query->variant()->images->first()->url : null;
     }
 

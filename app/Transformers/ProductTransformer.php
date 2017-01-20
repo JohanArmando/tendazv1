@@ -23,7 +23,7 @@ class ProductTransformer extends TransformerAbstract
 
         return [
             '_id'                => $variant->uuid,
-            'created_at'         => $variant->product->created_at,
+            'created_at'         => $variant->product->created_at_unix,
             'product_id'         => $variant->product->uuid,
             'active'             => $variant->active,
             'categories'         => $variant->product ? $this->parse($variant->product->categories) : [],
