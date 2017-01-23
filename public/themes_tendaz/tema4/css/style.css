@@ -25619,4 +25619,4 @@ body.modal-open {
 }
 
 tr .notLine {  border-bottom: 1px solid white !important;  }
-.error-login{ background-color: red}
+.error-login{ background-color: #1FC0A0;  padding: 2%;color: white}

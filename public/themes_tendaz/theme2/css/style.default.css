@@ -1667,3 +1667,4 @@ address {
   text-decoration: none;
 }
 tr .notLine {  border-bottom: 1px solid white !important;  }
+.error-login { padding: 2%; background-color: #4fbfa8; color: white}

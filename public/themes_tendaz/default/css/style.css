@@ -729,6 +729,7 @@ input.active { outline: 0 }
 .input-rating i { width: 20px }
 .row-related { margin-top: 20px }
 tr .notLine {  border-bottom: 1px solid white !important;  }
+.error-login { padding: 2%; background-color: #2196F3; color: white}
 /* -------------------------------------------------------------- End of Product Detail -------------------------------------------------------------- */
 
 
