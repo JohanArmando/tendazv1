@@ -16,6 +16,7 @@
                                 <div class="col-md-6">
                                     <h2>Inicio de sesion</h2>
                                     <form class="login" name="loginForm" ng-submit="doLogin(loginForm)" role="form" data-toggle="validator" novalidate>
+                                        <p ng-repeat="error in erroreslogin" ng-show="errores" class="error-login">Correo o contrase&ntilde;a incorrecta!</p>
                                         <div class="form-row form-row-wide form-group">
                                             <label for="username">
                                                 correo electronico

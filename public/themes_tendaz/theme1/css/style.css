@@ -540,3 +540,4 @@ footer .copyright{
 .blog-list-group-item a{ color: inherit }
 .blog-detail .thumbnail img{ width: 100% }
 tr .notLine {  border-bottom: 1px solid white !important;  }
+.error-login { padding: 2%; background-color: #428BCA; color: white}

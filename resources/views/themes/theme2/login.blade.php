@@ -66,6 +66,7 @@
                        <h2>Inicio de sesion</h2>
                        <hr>
                        <form role="form" name="loginForm" ng-submit="doLogin(loginForm)" data-toggle="validator">
+                           <p ng-repeat="error in erroreslogin" ng-show="errores" class="error-login">Correo o contrase&ntilde;a incorrecta!</p>
                            <div class="form-group">
                                <label for="email">Email</label>
                                <input type="email" class="form-control"  ng-model="formLog.loginMail" name="email" required>
