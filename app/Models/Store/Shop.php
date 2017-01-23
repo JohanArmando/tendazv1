@@ -107,11 +107,11 @@ class Shop extends Model
     }
 
     public function plan(){
-        return $this->belongsToMany(Plan::class , 'subscriptions')->withPivot('end_at' , 'start_at' , 'trial_at' , 'amount');
+        return $this->belongsToMany(Plan::class , 'plans')->withPivot('end_at' , 'start_at' , 'trial_at' , 'amount');
     }
 
     public function subscription(){
-        return $this->hasMany(Subscription::class);
+        return $this->belongsToMany(Plan::class , 'subscriptions')->wherePivot('state' , 'active')->first();
     }
     
     public function domains(){
@@ -150,5 +150,25 @@ class Shop extends Model
 
     public function originalSubscription(){
         return $this->hasMany(Subscription::class);
+    }
+
+    public function hasAnyPlan($plans)
+    {
+        if (is_array($plans)){
+            foreach ($plans as $plan){
+                if($this->hasPlan($plan)){
+                 return true;
+                }
+            }
+        }else{
+            if($this->hasPlan($plans)){
+                return true;
+            }
+        }
+    }
+
+    public function hasPlan($plan)
+    {
+        return $this->subscription()->id >= Plan::findName($plan)->id;
     }
 }

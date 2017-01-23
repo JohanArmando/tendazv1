@@ -2,7 +2,10 @@
 $domain = new \Tendaz\Models\Domain\Domain();
     Route::group(['domain' => '{subdomain}.'.$domain->getDomain() ,'middleware' => ['store' , 'auth:admins']], function () {
     //Route home
-    Route::get('/' , 'HomeController@home');
+    Route::get('/' ,[
+        'uses'  =>  'HomeController@home',
+        'other'  => 'name'
+    ])->middleware('plan:Basico');
 
     //Routes statics
     Route::get('/stats' , 'StaticsController@basic');
@@ -49,7 +52,7 @@ $domain = new \Tendaz\Models\Domain\Domain();
     });
 
     //Route design
-    Route::group(['prefix' => 'design', 'namespace' => 'Design'], function() {
+    Route::group(['prefix' => 'design', 'namespace' => 'Design' , 'middleware' => ['plan:premiun']], function() {
         Route::get('/theme', 'DesignController@index');
         Route::post('/theme/change', 'DesignController@change');
         Route::get('/logo', 'DesignController@logo');

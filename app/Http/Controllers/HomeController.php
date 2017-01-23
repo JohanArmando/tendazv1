@@ -9,6 +9,7 @@ use Tendaz\Models\Cart\Cart;
 use Tendaz\Models\Customer;
 use Tendaz\Models\Order\Consult;
 use Tendaz\Models\Order\Order;
+use Tendaz\Models\Products\Product;
 use Tendaz\Models\Store\Shop;
 use Illuminate\Http\Request;
 use Tendaz\Transformers\OrderTransformer;

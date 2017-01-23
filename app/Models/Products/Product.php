@@ -415,6 +415,7 @@ class Product extends Model
 
     public function scopeMainImage($query)
     {
+        
         return $query->variant()->images->first() ? $query->variant()->images->first()->url : null;
     }
 

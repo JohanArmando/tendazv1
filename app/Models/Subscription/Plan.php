@@ -13,4 +13,9 @@ class Plan extends Model
     public static  function whereUuid( $uuid){
         return Plan::where('uuid' , '=' ,  $uuid)->first();
     }
+    
+    public static function findName($plan)
+    {
+        return static::where('name', ucfirst($plan))->first();
+    }
 }
