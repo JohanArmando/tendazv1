@@ -5,11 +5,11 @@ $domain = new \Tendaz\Models\Domain\Domain();
     Route::get('/' ,[
         'uses'  =>  'HomeController@home',
         'other'  => 'name'
-    ])->middleware('plan:Basico');
+    ]);
 
     //Routes statics
     Route::get('/stats' , 'StaticsController@basic');
-    Route::get('/stats/advanced' , 'StaticsController@advanced');
+    Route::get('/stats/advanced' , 'StaticsController@advanced')->middleware('plan:estandar,premiun');
     Route::get('/stats/update' , 'StaticsController@update');
 
     //Route logout
@@ -52,7 +52,7 @@ $domain = new \Tendaz\Models\Domain\Domain();
     });
 
     //Route design
-    Route::group(['prefix' => 'design', 'namespace' => 'Design' , 'middleware' => ['plan:premiun']], function() {
+    Route::group(['prefix' => 'design', 'namespace' => 'Design'], function() {
         Route::get('/theme', 'DesignController@index');
         Route::post('/theme/change', 'DesignController@change');
         Route::get('/logo', 'DesignController@logo');
@@ -68,9 +68,9 @@ $domain = new \Tendaz\Models\Domain\Domain();
 
     //Route marketing
     Route::group(['prefix' => 'marketing', 'namespace' => 'Marketing'], function() {
-        Route::get('/app', 'MarketingController@index');
+        Route::get('/app', 'MarketingController@index')->middleware('plan:premiun');
         Route::get('/config-app', 'MarketingController@config');
-        Route::get('/robot', 'MarketingController@robot');
+        Route::get('/robot', 'MarketingController@robot')->middleware('plan:premiun');
         Route::post('/robot', 'MarketingController@postRobot');
         Route::get('/social', 'MarketingController@social');
         Route::put('/social/{socialLogin}', 'MarketingController@postSocial');
@@ -91,6 +91,8 @@ $domain = new \Tendaz\Models\Domain\Domain();
         
         Route::resource('shippings', 'ShippingController',
             ['only' => ['index', 'store', 'update', 'destroy']]);
+        //meli
+        Route::get('/mercadolibre',function(){return redirect()->back();})->middleware('plan:estandar,premiun');
         //setting domain
         Route::get('/domain', 'NameCheapController@getIndex');
         Route::get('/domain/create', 'NameCheapController@store');

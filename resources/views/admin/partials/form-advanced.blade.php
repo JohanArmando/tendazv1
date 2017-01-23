@@ -168,6 +168,7 @@
         </span>
     </div>
 </div>
+@if($shop->hasAnyPlan(['estandar','premiun']))
 <div class="media border-dotted">
     <div class="row">
         <span class="media-body box">
@@ -187,6 +188,7 @@
         </span>
     </div>
 </div>
+@endif
 <div class="media border-dotted">
     <div class="row">
         <span class="media-body box">   

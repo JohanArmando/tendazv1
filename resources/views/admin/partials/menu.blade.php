@@ -57,7 +57,7 @@
                     <li>
                         <a href="{{url('admin/account/preferences')}}"><span class="icon"><img  src="{{asset('administrator/image/icons/icons-derecha/account.png')}}"></span> Mi Cuenta</a>
                     </li>
-                    <li class="hidden">
+                    <li>
                         <a href="{{url('/admin/account/invoices/')}}">
                         <span class="icon"><img src="{{asset('administrator/image/icons/icons-derecha/receipt.png')}}"></span> Mis facturas
                         </a>

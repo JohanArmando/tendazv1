@@ -1,6 +1,6 @@
 @extends('layouts.administrator')
 @section('css')
-<link rel="stylesheet" type="text/css" href="{{asset('admin/css/new_css_invoice.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('administrator/css/new_css_invoice.css')}}">
 @stop
 @section('content')	
 <div class="page-header page-header-block">
@@ -20,46 +20,26 @@
 	<div style="margin-top: 40px;"></div>
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
-			<ul id="tab_invoice" class="nav nav-tabs">
-				<li id="new_li_tab" role="presentation" class="active">
-					<a style=" font-size: 18px; background-color: #F26522; color: white; height: 45px; width: 100%;" href="#">
-						<img src="{{asset('administrator/image/icons/icons-base/business-cards.png')}}" width="16"> Datos de Facturación
-					<div class="triangulo-equilatero-bottom-left "></div>
-				</a></li>
+			<ul id="tab_invoice" class="nav nav-tabs" style="background: transparent">
+				<li id="new_li_tab" class="nav-title"  role="presentation" class="active">
+					<a href="#">Datos de Facturación</a>
+					<div class="triangulo-equilatero-bottom-left"></div>
+				</li>
 			</ul>
 			<div id="new_panel" class="tab-content panel panel-body panel-content">
 				<div id="home" class="tab-pane fade in active">
 					<div class="row">
-						<!-- imagen a la izquierda-->
-						<div class="">
-							<img src="{{asset('logos/'.$shop->id.'/'.$shop->logo)}}" align="right"
-								 alt="Logo de la tienda" style="border: 1px solid; color: red; width: 300px; height: 100px;
-								 margin-right: 10%;">
+						<div class="col-md-12 text-center">
+							<img src="{{asset('logos/'.$shop->id.'/'.$shop->logo)}}"
+								 alt="Logo de la tienda" style="padding:3%; border: 1px solid; color: #f26522; max-height: 150px">
 						</div>
-						<!--Fin-->
+						<div class="col-md-12 text-center">
+							<h2>{{Auth('admins')->user()->full_name}}</h2>
+							<h3>{{Auth('admins')->user()->email}}</h3>
+						</div>
 						<div class="clearfix"></div>
-						<div style="margin-bottom: 50px;"></div>
-						<form method="get" action="{{url('admin/invoices')}}" role="form">
-							<div class="row">
-								<div class="col-sm-10 col-sm-offset-1">
-									<input id="new_input_text" class="form-control" type="text" name="" placeholder="NOMBRES">
-								</div>
-								<div class="clearfix"></div>
-								<br>
-								<div class="col-sm-10 col-sm-offset-1">
-									<input id="new_input_text" class="form-control" type="text" name="" placeholder="APELLIDOS">
-								</div>
-								<div style="margin-bottom: 50px;"></div>
-								<div class="col-sm-10 col-sm-offset-1">
-									<textarea id="new_text_area_invoice" class="form-control" placeholder="DIRECCION"></textarea>
-								</div>
-							</div>
-							<div class="clearfix"></div>
-							<div style="margin-bottom: 30px;"></div>
-							<div class="text-center">
-								<a id="btn-invoices" href="{{url('admin/account/invoices')}}" class="btn btn-primary"><i class="fa fa-check" aria-hidden="true"></i> Registrar Cambios</a>
-							</div>
-						</form>
+						<div style="margin-bottom: 30px;"></div>
+
 					</div>
 				</div>
 			</div>
@@ -77,37 +57,37 @@
 						<table class="table table-bordered table-hover">
 							<thead>
 								<tr>
-									<th class="text-center">ID de Factura</th>
 									<th class="text-center">Fecha</th>
+									<th class="text-center">Pago</th>
 									<th class="text-center">Monto</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr class="text-center">
 									<td>
-										<a href="#" data-toggle="modal" data-target="#modal_invoice">1293849</a>
+										<a href="#" data-toggle="modal" data-target="#modal_invoice">10/02/2017</a>
 									</td>
-									<td> hola/hola/hola</td>
+									<td>Mensual</td>
 									<td>$123.456</td>
 								</tr>
 								<tr class="text-center">
-									<td>hola hola hola</td>
-									<td> hola/hola/hola</td>
+									<td>10/02/2017</td>
+									<td>Anual</td>
 									<td>$123.456</td>
 								</tr>
 								<tr class="text-center">
-									<td>hola hola hola</td>
-									<td> hola/hola/hola</td>
+									<td>10/02/2017</td>
+									<td>Mensual</td>
 									<td>$123.456</td>
 								</tr>
 								<tr class="text-center">
-									<td>hola hola hola</td>
-									<td> hola/hola/hola</td>
+									<td>10/02/2017</td>
+									<td>Mensual</td>
 									<td>$123.456</td>
 								</tr>
 								<tr class="text-center">
-									<td>hola hola hola</td>
-									<td> hola/hola/hola</td>
+									<td>10/02/2017</td>
+									<td>Anual</td>
 									<td>$123.456</td>
 								</tr>
 							</tbody>
