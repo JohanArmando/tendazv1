@@ -31,6 +31,7 @@
         <div class="help-block">{{ $errors->default->first('password') }}</div>
         <div class="help-block with-errors"></div>
     </div>
+<input type="hidden" name="plan" value="1">
     <div class="form-group">
         {!! Form::checkbox('term' , null , false , ['required' => 'required']) !!}
         <strong>

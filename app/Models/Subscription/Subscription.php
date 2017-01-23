@@ -2,26 +2,32 @@
 
 namespace  Tendaz\Models\Subscription;
 
-use Illuminate\Database\Eloquent\Model;
 use Tendaz\Models\Store\Shop;
 use Tendaz\Traits\UuidAndShopTrait;
-use Tendaz\Traits\WhereShopTrait;
-use Webpatser\Uuid\Uuid;
+use Illuminate\Database\Eloquent\Model;
 
 class Subscription extends Model
 {
-    use UuidAndShopTrait, WhereShopTrait;
+    use UuidAndShopTrait;
+
+    public $timestamps = false;
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'uuid', 'amount', 'state', 'start_at', 'end_at', 'trial_at','shop_id'
+        'uuid', 'amount', 'state', 'start_at', 'end_at', 'trial_at','shop_id' ,'plan_id'
     ];
-
-    public function originalSubscription(){
-        return $this->hasMany(Shop::class);
+    
+    public function shop()
+    {
+        return $this->belongsTo(Shop::class);
     }
-
+    
+    public function makeSubscription()
+    {
+        $this->shop->subscription_id = $this->id;
+        $this->shop->save();
+    }
 }

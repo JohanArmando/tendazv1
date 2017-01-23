@@ -10,11 +10,12 @@ use Tendaz\Models\Products\Product;
 use Tendaz\Models\Subscription\Plan;
 use Tendaz\Models\Subscription\Subscription;
 use Illuminate\Database\Eloquent\Model;
+use Tendaz\Traits\SubscriptionTrait;
 use Tendaz\Traits\UuidAndShopTrait;
 
 class Shop extends Model
 {
-    use UuidAndShopTrait;
+    use UuidAndShopTrait , SubscriptionTrait;
     /**
      * @param array|null $attributes
      * @throws \Exception
@@ -40,7 +41,7 @@ class Shop extends Model
      */
     protected $fillable = [
         'uuid', 'name', 'logo', 'active', 'user_id', 'theme_id', 'country_base_operation_id' ,
-        'original' , 'slug' , 'slider1' , 'slider2' , 'slider3' , 'slider4'
+        'original' , 'slug' , 'slider1' , 'slider2' , 'slider3' , 'slider4' , 'subscription_id'
     ];
 
     /**
@@ -106,14 +107,14 @@ class Shop extends Model
         return $this->hasOne(Store::class);
     }
 
-    public function plan(){
-        return $this->belongsToMany(Plan::class , 'plans')->withPivot('end_at' , 'start_at' , 'trial_at' , 'amount');
+    public function subscriptions(){
+        return $this->hasMany(Subscription::class);
     }
 
     public function subscription(){
-        return $this->belongsToMany(Plan::class , 'subscriptions')->wherePivot('state' , 'active')->first();
+        return $this->hasMany(Subscription::class)->where('id' , $this->subscription_id)->first();
     }
-    
+
     public function domains(){
         return $this->hasMany(Domain::class , 'shop_id');
     }
@@ -148,10 +149,6 @@ class Shop extends Model
         return $this->hasMany(PaymentValue::class);
     }
 
-    public function originalSubscription(){
-        return $this->hasMany(Subscription::class);
-    }
-
     public function hasAnyPlan($plans)
     {
         if (is_array($plans)){
@@ -169,6 +166,36 @@ class Shop extends Model
 
     public function hasPlan($plan)
     {
-        return $this->subscription()->id >= Plan::findName($plan)->id;
+        return $this->subscription()->plan_id >= Plan::findName($plan)->id;
     }
+
+    public function isSubscribed()
+    {
+        //si la subscripcion seleccionada es grtatuira
+        //si la subscripcion que tiene el usuario esta activa
+        //si la subscripcion seleccionada el tiempo que le queda y que notifique
+        //si la subscripcion seleccionada esta vencida
+        //revisar reactivar la subscripcion
+    }
+
+    //Detalles a revisar al crear una nueva subscripcion se va a guardar con trials end, entonces revisar esa parte
+    //revisar estados de la subscripcion es decir activa cancelada suspendida
+    //revisar el cambio de supscripcion por una que aun esta activa el lisdato de subscripciones
+    //revisar el cambio de plan en una subscripcion gratuita
+    //revisar el cambio de plan ahcia arriba y hacia abajo de una subscripcion activa
+
+    public function subscribeTo(Plan $plan , $trials = null)
+    {
+        $subscription = $this->subscriptions()->save(
+            new Subscription([
+                'trial_at' => $trial ?? $this->datesForTest() ,
+                'amount' => $plan->price ,
+                'plan_id' => $plan->id
+            ])
+        );
+
+        return $subscription;
+    }
+
+
 }
