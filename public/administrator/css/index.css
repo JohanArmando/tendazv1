@@ -1,0 +1,215 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+.big_container-two{ padding: 2%; overflow: hidden;  position: relative;  min-height:  calc(100vh - 52px) ; }
+.big_container-two:before{  position: absolute;  content: " ";  top: 0;  left: 0;  width: 100%;  height: 100%;  display: block;  z-index: 0;  background: rgba(57, 59, 59, 0.75)  }
+h1.w3ls {  margin-top: 10px; font-size: 45px;  font-weight: normal;  color: #fff;  text-transform: uppercase;  padding: 40px 0;  text-align: center  }
+.errorForm{
+    color: white !important; font-weight: bold; font-size: 14px;
+}
+.has-error .input-group-addon {
+    color: #f26522;
+    border: 1px solid #f26522;
+    background-color: transparent;
+}
+.form-control {
+    color: white;
+    border: 1px solid white !important;
+}
+.input-group-addon {
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1;
+    color: white !important;
+    text-align: center;
+    background-color: transparent !important;
+    border: 1px solid white !important;
+    border-radius: 4px;
+}
+input {
+    color: white;
+    background-color: transparent !important;
+    -webkit-rtl-ordering: logical;
+    user-select: text;
+    cursor: auto;
+    padding: 1px;
+    border-width: 2px;
+    border-style: inset;
+    border-color: initial;
+    border-image: initial;
+}
+::-webkit-input-placeholder {
+    color: white !important;
+}
+.btn span.fa {  opacity: 0;  }
+.btn.active span.fa {  opacity: 1;  }
+.btn-conditions{
+    background-color: transparent;
+    border: 1px solid white;
+}
+.btn-default:hover{
+    background-color: #f26522 !important;
+}
+.btn-default:active, .btn-default.active, .open > .btn-default.dropdown-toggle {
+    background-color: transparent !important;
+    border-color: #f26522 !important;
+}
+.conditions{
+    color: white;
+}
+.conditions:hover{
+    color: #f26522;
+}
+.createShop{
+    color: white;
+    width: 100%;
+    background-color: #f26522;
+    border: 1px solid #f26522;
+}
+.createShop:hover{
+    background-color: white !important;
+    color: black !important;
+    border: 1px solid white !important;
+}
+
+ul.cust-agileits {
+    list-style: none;
+    padding: 30px 0;
+    text-align: center;
+}
+ol, ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+ul, menu, dir {
+    display: block;
+    list-style-type: disc;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 40px;
+}
+ul.cust-agileits li {
+    display: inline;
+    position: relative;
+}
+ul.cust-agileits li a {
+    font-size: 16px;
+    font-weight: normal;
+    color: #fff;
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    padding: 15px 10px;
+    outline: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 0 1px rgba(255,255,255,0.3);
+}
+ul.cust-agileits li:nth-child(1):after, ul.cust-agileits li:nth-child(2):after, ul.cust-agileits li:nth-child(3):after
+ {
+    content: '|';
+    color: white !important;
+    position: absolute;
+    top: -6px;
+    right: -4px;
+    font-size: 16px;
+}
+
+ul.cust-agileits li {
+    display:inline;
+    position:relative;
+}
+ul.cust-agileits li:nth-child(1):after,ul.cust-agileits li:nth-child(2):after,ul.cust-agileits li:nth-child(3):after {
+    content: '|';
+    position: absolute;
+    top: -8px;
+    color: #fff;
+    right: -4px;
+    font-size: 16px;
+}
+ul.cust-agileits li a {
+    font-size:16px;
+    font-weight:normal;
+    color:#fff;
+    text-decoration:none;
+    position: relative;
+    display: inline-block;
+    padding:15px 10px;
+    outline: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 0 1px rgba(255,255,255,0.3);
+}
+ul.cust-agileits li a:hover,
+ul.cust-agileits li a:focus {
+    outline: none;
+}
+.cl-effect-21 a {
+    padding: 10px;
+    color: #237546;
+    font-weight: 700;
+    text-shadow: none;
+    -webkit-transition: color 0.3s;
+    -moz-transition: color 0.3s;
+    transition: color 0.3s;
+}
+.cl-effect-21 a::before,
+.cl-effect-21 a::after {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #fff;
+    content: '';
+    opacity: 0;
+    -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+    -moz-transition: opacity 0.3s, -moz-transform 0.3s;
+    transition: opacity 0.3s, transform 0.3s;
+    -webkit-transform: translateY(-10px);
+    -moz-transform: translateY(-10px);
+    transform: translateY(-10px);
+}
+.cl-effect-21 a::before {
+     top: 0;
+    -moz-transform: translateY(-10px);
+}
+.cl-effect-21 a::after {
+    bottom: 0;
+    -webkit-transform: translateY(10px);
+    -moz-transform: translateY(10px);
+    transform: translateY(10px);
+}
+
+.cl-effect-21 a:hover,
+.cl-effect-21 a:focus {
+    color: #fff;
+}
+
+.cl-effect-21 a:hover::before,
+.cl-effect-21 a:focus::before,
+.cl-effect-21 a:hover::after,
+.cl-effect-21 a:focus::after {
+    opacity: 1;
+    -webkit-transform: translateY(0px);
+    -moz-transform: translateY(0px);
+    transform: translateY(0px);
+}
+
+
+span.cust-agileinfo1 {
+    display: block;
+    width: 70%;
+    background: #999;
+    height: 1px;
+    margin: 0 auto;
+}
+span.cust-agileinfo2 {
+    display: block;
+    width: 10%;
+    background: #fff;
+    height: 4px;
+    margin: -3px auto 50px;
+}
