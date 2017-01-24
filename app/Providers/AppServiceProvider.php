@@ -2,9 +2,9 @@
 
 namespace Tendaz\Providers;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Tendaz\Models\Customer;
 use Webpatser\Uuid\Uuid;
 use Tendaz\Models\Cart\Cart;
 use Illuminate\Support\ServiceProvider;
@@ -18,6 +18,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        
+        Carbon::setLocale(config('app.locale'));
+        
+
         Validator::extend('hash_check', function($attribute, $value, $parameters, $validator) {
             return Hash::check($value, $parameters[0]);
         });

@@ -171,11 +171,24 @@ class Shop extends Model
 
     public function isSubscribed()
     {
-        //si la subscripcion seleccionada es grtatuira
-        //si la subscripcion que tiene el usuario esta activa
-        //si la subscripcion seleccionada el tiempo que le queda y que notifique
-        //si la subscripcion seleccionada esta vencida
-        //revisar reactivar la subscripcion
+        //retornar algo si la subcricion esta cacelada o no activa.
+        //retornar si la supcricion ya se vencio o si falta poco para que quede vencida
+        //si la supscripcion esta en prueba gratis y caunto le queda return $this->sendTrialResponse('notFinish' , $this->subscription());
+        //si la subscripcion se vencio la prueba gratis hace cuanto , cuando se crea una nueva , cuando se crea un pago neuvo , cuando se deja cambiar de plan como si nada
+        //revisar el home como vamos a llamarlo , el mensaje y activarlo , como optimizar este pocos de if
+        if ($this->subscription()->isActive()){
+
+        }
+
+        if ($this->subscription()->notFinish()){
+
+        }
+
+        if ($this->subscription()->isTrial()){
+            return $this->sendTrialResponse('notFinish' , $this->subscription());
+        }else{
+            return $this->sendTrialResponse('finish' , $this->subscription());
+        }
     }
 
     //Detalles a revisar al crear una nueva subscripcion se va a guardar con trials end, entonces revisar esa parte
@@ -183,14 +196,15 @@ class Shop extends Model
     //revisar el cambio de supscripcion por una que aun esta activa el lisdato de subscripciones
     //revisar el cambio de plan en una subscripcion gratuita
     //revisar el cambio de plan ahcia arriba y hacia abajo de una subscripcion activa
-
-    public function subscribeTo(Plan $plan , $trials = null)
+    
+    
+    public function subscribeTo(Model $model , $trials = null)
     {
         $subscription = $this->subscriptions()->save(
             new Subscription([
                 'trial_at' => $trial ?? $this->datesForTest() ,
-                'amount' => $plan->price ,
-                'plan_id' => $plan->id
+                'amount' => $model->price ,
+                'plan_id' => $model->id
             ])
         );
 
