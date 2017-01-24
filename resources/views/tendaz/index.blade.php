@@ -2,16 +2,10 @@
 @section('css')
 @endsection
 @section('content')
+    <link rel="stylesheet" href="{{asset('administrator/css/index.css')}}">
     <style type="text/css">
-        .big_container{
-            overflow: hidden;
-            position: relative;
-            /*margin-top: 4%;*/
-            min-height:  calc(100vh - 52px) ;
-        }
-        .big_container:after{
-
-            background-image: url('{{elixir('tendaz/images/bground.png')}}');
+        .big_container-two:after{
+            background-image: url('{{asset('tendaz/images/bground.png')}}');
             background-size: cover;
             position: absolute;
             content: " ";
@@ -23,20 +17,83 @@
             z-index: -1;
             filter: blur(5px);
         }
-        .big_container:before{
-            position: absolute;
-            content: " ";
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: block;
-            z-index: 0;
-            background: rgba(0, 0, 0, 0.41);
-        }
     </style>
     <div class="row">
-        <div class="big_container">
+        <div class="big_container-two">
+            <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="row">
+                                <h1 class="w3ls">Crea Tu Tienda Virtual</h1>
+                                <div class="col-md-offset-4 col-md-4 col-xs-12 col-sm-12">
+                                    {!! Form::open(['url' => url('auth/register') , 'method' => 'POST' , 'name' => "form-register" , 'data-toggle'=> "validator" , 'role'=>"form"]) !!}
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                               <span class="input-group-addon">
+                                                    <i class="fa fa-envelope"></i>
+                                               </span>
+                                            <input class="form-control" placeholder="Correo electronico" autocomplete="off" required name="email"  value="{{ old('email') }}" type="email">
+                                        </div>
+                                        <div class="help-block">{{ $errors->default->first('email') }}</div>
+                                        <div class="help-block with-errors errorForm"></div>
+                                    </div>
+                                    <input type="hidden" name="plan" value="{{ isset($_GET['plan']) ? $_GET['plan'] : '' }}">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa  fa-bars"></i>
+                                                </span>
+                                            <input style="height: 38px" class="form-control" placeholder="Nombre de tu tienda" autocomplete="off" value="{{ old('storename') }}" required="required" name="storename" type="text">
+                                        </div>
+                                        <div class="help-block">{{ $errors->default->first('storename') }}</div>
+                                        <div class="help-block with-errors errorForm"></div>
+                                    </div>
+                                    <div class="name_store"></div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-key"></i>
+                                            </span>
+                                            <input class="form-control" placeholder="Password" autocomplete="off" required="required" name="password" type="password" value="">
+                                        </div>
+                                        <div class="help-block">{{ $errors->default->first('password') }}</div>
+                                        <div class="help-block with-errors errorForm"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <span data-toggle="buttons">
+                                                <label class="btn btn-xs btn-conditions">
+                                                    <input type="checkbox" name="term" autocomplete="off" required>
+                                                    <span class="fa fa-check" style="color: white;"></span>
+                                                </label>
+                                        </span>
+                                        <a class="conditions" href="{{asset('tendaz/TERMINOSYCONDICIONES.pdf')}}" target="_black"> &nbsp; Acepto Termino y Condiciones</a>
+
+                                        <div class="help-block with-errors errorForm"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary createShop"  >
+                                            <i class="fa fa-shopping-cart"></i> Crear tienda
+                                        </button>
+                                    </div>
+                                    <input type="hidden" value="1" name="remember">
+                                    {!! Form::close() !!}
+                                </div>
+                            </div>
+                </div>
+                <div class="col-md-12">
+                    <ul class="cust-agileits cl-effect-21">
+                        <li><a href="#">Incrementa Tus Ingresos</a></li>
+                        <li><a href="#">Quienes Somos?</a></li>
+                        <li><a href="#">Casos de Exito</a></li>
+                        <li><a href="#">Nuestros Asociados</a></li>
+                    </ul>
+                    <span class="cust-agileinfo1"></span>
+                    <span class="cust-agileinfo2"></span>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="big_container hidden">
             <div class="row">
                 <div class="col-md-10 col-md-offset-2" >
                     <div class="col-md-3 hidden-xs hidden-sm" style="margin-top:5%">
@@ -76,7 +133,7 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="panel panel-default" style="margin-top: 25%">
+                        <div class="panel panel-default">
                             <div class="text-center">
                                 <img src="{{elixir('tendaz/img/etiqueta-tendaz-home.gif')}}" class="img-responsive"
                                      style="max-height: 180px; margin-top: -9px;padding-left: 10%">
@@ -93,45 +150,6 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" align="center">
                                         @include('tendaz.partials.register')
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="hidden">
-            <div class="row">
-                <div class="col-md-7 col-md-offset-1">
-                    <div class="row">
-                        <div class="col-md-12" >
-                            <div class="row">
-                                <h1>Tendaz.com</h1>
-                                <h2>Tu creador de tiendas virtuales</h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="row">
-                        <div class="col-md-12" >
-                            <div class="panel panel-default" style="margin-top: 5%;margin-right: 5%">
-                                <div class="text-center">
-                                    <img src="{{asset('tendaz/img/etiqueta-tendaz-home.gif')}}" class="img-responsive"
-                                         style="max-height: 180px; margin-top: -9px;padding-left: 10%">
-                                    <br>
-                                </div>
-                                <div class="panel-body">
-                                    @if(count($errors) > 0)
-                                        <div class="alert alert-info">
-                                            <h5>Tienes {{ count($errors) }} error{{ count($errors) == 1 ? '' :'es' }}</h5>
-                                        </div>
-                                    @endif
-                                    <div class="row">
-                                        <div class="col-md-12" style="z-index: 1">
-                                            @include('tendaz.partials.register')
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -171,13 +189,13 @@
     </div>
 </div>
 
-    <div class="hidden container-home">
+    <div class="container-home">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <h1 class="text-center">
                     En tan solo 3 pasos...
                 </h1>
-                <p class="text-center" style="font-size: 18px; margin-bottom: 3%">Crear una tienda es tan facil que te sorprenderas.</p>
+                <p class="text-center" style="font-size: 18px; margin-bottom: 3%">Crear una tienda es tan facil que te sorprenderas!.</p>
             </div>
             <div class="col-md-10 col-md-offset-2">
                 <div class="col-md-3">
