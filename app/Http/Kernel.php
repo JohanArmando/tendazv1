@@ -8,6 +8,7 @@ use Tendaz\Http\Middleware\PlanUserMiddleware;
 use Tendaz\Http\Middleware\sharedSessionByUniqueDomain;
 use Tendaz\Http\Middleware\StoreWithDomainMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Tendaz\Http\Middleware\SubscriptionMiddleware;
 use Tendaz\Http\Middleware\ThemeMiddleware;
 
 class Kernel extends HttpKernel
@@ -63,6 +64,7 @@ class Kernel extends HttpKernel
         'custom_api'   => customApiMiddleware::class,
         'build' 		=>  BuildMiddleware::class,
         'unique'        => sharedSessionByUniqueDomain::class,
-        'plan'          => PlanUserMiddleware::class
+        'plan'          => PlanUserMiddleware::class,
+        'subscription' =>SubscriptionMiddleware::class
     ];
 }

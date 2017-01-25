@@ -168,29 +168,14 @@ class Shop extends Model
     {
         return $this->subscription()->plan_id >= Plan::findName($plan)->id;
     }
-
-    public function isSubscribed()
-    {
-        //retornar algo si la subcricion esta cacelada o no activa.
-        //retornar si la supcricion ya se vencio o si falta poco para que quede vencida
-        //si la supscripcion esta en prueba gratis y caunto le queda return $this->sendTrialResponse('notFinish' , $this->subscription());
-        //si la subscripcion se vencio la prueba gratis hace cuanto , cuando se crea una nueva , cuando se crea un pago neuvo , cuando se deja cambiar de plan como si nada
-        //revisar el home como vamos a llamarlo , el mensaje y activarlo , como optimizar este pocos de if
-        if ($this->subscription()->isActive()){
-
-        }
-
-        if ($this->subscription()->notFinish()){
-
-        }
-
-        if ($this->subscription()->isTrial()){
-            return $this->sendTrialResponse('notFinish' , $this->subscription());
-        }else{
-            return $this->sendTrialResponse('finish' , $this->subscription());
-        }
-    }
-
+    
+    //revisar buenos metodos para crear los datos de pago de la subscripcion metodo create si se puede
+    //revisar el weekhook y revisar tambien     $table->string('card_brand')->nullable();
+    //$table->string('card_last_four')->nullable() para guardar estos datos
+    //el create genera un nuevo pago con los datos de dicha tarjet ay el apgo de esa subsccricion
+    /**
+     *Pagar la misma subscripcion, las facturas , el metodo create que va con la pasarela de apgos, si pago una subscricopn previamente vencida
+     */
     //Detalles a revisar al crear una nueva subscripcion se va a guardar con trials end, entonces revisar esa parte
     //revisar estados de la subscripcion es decir activa cancelada suspendida
     //revisar el cambio de supscripcion por una que aun esta activa el lisdato de subscripciones
@@ -198,16 +183,16 @@ class Shop extends Model
     //revisar el cambio de plan ahcia arriba y hacia abajo de una subscripcion activa
     
     
-    public function subscribeTo(Model $model , $trials = null)
+    public function newSubscription(Model $model)
     {
         $subscription = $this->subscriptions()->save(
             new Subscription([
-                'trial_at' => $trial ?? $this->datesForTest() ,
+                'trial_at' =>  $this->datesForTest() ,
                 'amount' => $model->price ,
                 'plan_id' => $model->id
             ])
         );
-
+        $subscription->makeSubscription();
         return $subscription;
     }
 

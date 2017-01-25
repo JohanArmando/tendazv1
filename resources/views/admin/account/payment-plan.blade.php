@@ -1,4 +1,4 @@
-@extends('admin.template')
+@extends('layouts.administrator')
 @section('css')
     <link rel="stylesheet" href="{{ asset('administrator/css/custom_tendaz.css') }}">
 @stop

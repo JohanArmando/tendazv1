@@ -3,6 +3,7 @@ Inicio
 @stop
 @extends('layouts.administrator')
 @section('content')
+
 <div class="page-header page-header-block">
     <div class="page-header-section">
         <h4 class="title semibold"><img class="page-header-section-icon" src="{{asset('administrator/image/icons/icons-base/dashboard.png')}}">&nbsp; Inicio</h4>
@@ -41,7 +42,8 @@ Inicio
                 <div class="page-end-space"></div>
             </div>
             @include('admin.partials.home.right')
-       
+            @include('admin.partials.footerNotify')
+
         </div>
     </div>
 </div>

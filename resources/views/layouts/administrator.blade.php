@@ -87,6 +87,48 @@
         var client_secret = "{{ $shop->uuid }}";
         var client_id      = "{{ $shop->id }}";
     </script>
+    <style>
+        .p-fixed.bottom {
+            bottom: 0;
+            top: auto;
+            z-index: 999;
+        }
+        .fixed-panel {
+            max-height: 57px;
+            width: 100%;
+            background: #3c3c3c !important;
+            opacity: 0.8;
+            filter: alpha(opacity=80); /* For IE8 and earlier */
+        }
+        .p-fixed {
+            position: fixed;
+        }
+        .footer {
+            position: relative;
+            z-index: 10;
+            font-size: 12pt;
+            clear: left;
+            background: #333;
+            padding: 20px 0;
+        }
+        .affix {
+            position: fixed;
+        }
+        .small{
+            margin-left: -30%;
+            margin-top: -0.5%;
+        }
+        .small > a{
+            color: #F26522;
+            font-weight: bold;
+            margin-left: 0.5%;
+        }
+        .small > a:hover{
+            color: #FFFFFF;
+            text-decoration: underline;
+        }
+    </style>
+
 </head>
 <body>
 @include('admin.partials.menu')

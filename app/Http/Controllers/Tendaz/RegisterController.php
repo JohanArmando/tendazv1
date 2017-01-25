@@ -115,8 +115,8 @@ class RegisterController extends Controller
         
         $plan = Plan::find($data['plan']);
         
-        $shop->subscribeTo($plan , true)->makeSubscription();
-        
+        $shop->newSubscription($plan);
+
         return $user;
     }
 }

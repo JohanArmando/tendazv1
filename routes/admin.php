@@ -1,10 +1,9 @@
 <?php
 $domain = new \Tendaz\Models\Domain\Domain();
-    Route::group(['domain' => '{subdomain}.'.$domain->getDomain() ,'middleware' => ['store' , 'auth:admins']], function () {
+    Route::group(['domain' => '{subdomain}.'.$domain->getDomain() ,'middleware' => ['store' , 'auth:admins' , 'subscription']], function () {
     //Route home
     Route::get('/' ,[
         'uses'  =>  'HomeController@home',
-        'other'  => 'name'
     ]);
 
     //Routes statics
@@ -103,14 +102,31 @@ $domain = new \Tendaz\Models\Domain\Domain();
         Route::resource('/locals', 'LocalController',
             ['only' => ['index', 'store', 'update', 'destroy']]);
     });
-    
+    //Route for payment plan
+
+
     //Route account
     Route::group(['prefix' => 'account', 'namespace' => 'Account'], function() {
         Route::resource('preferences','AccountController');
         Route::resource('profile','ProfileController');
         Route::resource('invoices','InvoiceController');
-        Route::get('plans', 'PlanController@getPlan');
+        
+        Route::get('plans', [
+            'uses' => 'PlanController@index',
+            'notMiddleware' => 'subscription'
+        ]);
+        
+        Route::post('plans/swap/{plan}', [
+            'uses' => 'PlanController@swap',
+            'notMiddleware' => 'subscription'
+        ]);
+        
         Route::get('checkout/finish/',function(){return redirect()->to('admin');});
+        
+        Route::get('checkout/start/',[
+            'uses' => 'SubscriptionController@start',
+            'notMiddleware' => 'subscription'
+        ]);
     });
 });
 
