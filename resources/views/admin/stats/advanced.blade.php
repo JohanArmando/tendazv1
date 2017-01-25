@@ -96,8 +96,8 @@
 		</div>
 	</div>
 
-	<div class="container-fluid">
-		<div class="col-md-12 hidden">
+	<div class="container-fluid hidden">
+		<div class="col-md-12">
 			<ul class="nav nav-tabs" style="background-color: transparent;">
 				<li id="link_tab">
 					<a class="active" href="#tab" data-toggle="tab" aria-expanded="false">
@@ -110,7 +110,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="col-md-12">
-							<div id="container"></div>
+							<iframe src="{{url('admin/stats/advanced/map')}}" style="width: 100%;min-height: 450px">Mapa</iframe>
 						</div>
 						<div class="col-md-6 ">
 							<div class="visitAll hidden">

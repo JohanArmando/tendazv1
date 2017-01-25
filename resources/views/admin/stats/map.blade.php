@@ -157,11 +157,11 @@
         $('#container').highcharts('Map', {
 
             title : {
-                text : 'Highmaps basic demo'
+                text : 'Ubicacion de Clientes'
             },
 
             subtitle : {
-                text : 'Source map: <a href="https://code.highcharts.com/mapdata/countries/co/co-all.js">Colombia</a>'
+                text : 'Clientes de: <a href="https://code.highcharts.com/mapdata/countries/co/co-all.js">Colombia</a>'
             },
 
             mapNavigation: {
@@ -189,7 +189,10 @@
                     enabled: true,
                     format: '{point.name}'
                 }
-            }]
+            }],
+            exporting: {
+                enabled: false
+            }
         });
     });
 </script>

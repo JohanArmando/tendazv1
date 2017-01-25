@@ -9,6 +9,7 @@ $domain = new \Tendaz\Models\Domain\Domain();
     //Routes statics
     Route::get('/stats' , 'StaticsController@basic');
     Route::get('/stats/advanced' , 'StaticsController@advanced')->middleware('plan:estandar,premiun');
+    Route::get('/stats/advanced/map' , 'StaticsController@map');
     Route::get('/stats/update' , 'StaticsController@update');
 
     //Route logout
