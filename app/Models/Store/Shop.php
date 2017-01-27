@@ -10,11 +10,12 @@ use Tendaz\Models\Products\Product;
 use Tendaz\Models\Subscription\Plan;
 use Tendaz\Models\Subscription\Subscription;
 use Illuminate\Database\Eloquent\Model;
+use Tendaz\Traits\SubscriptionTrait;
 use Tendaz\Traits\UuidAndShopTrait;
 
 class Shop extends Model
 {
-    use UuidAndShopTrait;
+    use UuidAndShopTrait , SubscriptionTrait;
     /**
      * @param array|null $attributes
      * @throws \Exception
@@ -40,7 +41,7 @@ class Shop extends Model
      */
     protected $fillable = [
         'uuid', 'name', 'logo', 'active', 'user_id', 'theme_id', 'country_base_operation_id' ,
-        'original' , 'slug' , 'slider1' , 'slider2' , 'slider3' , 'slider4'
+        'original' , 'slug' , 'slider1' , 'slider2' , 'slider3' , 'slider4' , 'subscription_id'
     ];
 
     /**
@@ -106,14 +107,14 @@ class Shop extends Model
         return $this->hasOne(Store::class);
     }
 
-    public function plan(){
-        return $this->belongsToMany(Plan::class , 'subscriptions')->withPivot('end_at' , 'start_at' , 'trial_at' , 'amount');
+    public function subscriptions(){
+        return $this->hasMany(Subscription::class);
     }
 
     public function subscription(){
-        return $this->hasMany(Subscription::class);
+        return $this->hasMany(Subscription::class)->where('id' , $this->subscription_id)->first();
     }
-    
+
     public function domains(){
         return $this->hasMany(Domain::class , 'shop_id');
     }
@@ -148,7 +149,38 @@ class Shop extends Model
         return $this->hasMany(PaymentValue::class);
     }
 
-    public function originalSubscription(){
-        return $this->hasMany(Subscription::class);
+    public function hasAnyPlan($plans)
+    {
+        if (is_array($plans)){
+            foreach ($plans as $plan){
+                if($this->hasPlan($plan)){
+                 return true;
+                }
+            }
+        }else{
+            if($this->hasPlan($plans)){
+                return true;
+            }
+        }
     }
+
+    public function hasPlan($plan)
+    {
+        return Plan::find($this->subscription()->plan_id)->plan_id >= Plan::findName($plan)->id;
+    }
+
+    public function newSubscription(Plan $plan)
+    {
+        $subscription = $this->subscriptions()->save(
+            new Subscription([
+                'trial_at' =>  $this->datesForTest() ,
+                'amount' => $plan->price,
+                'plan_id' => $plan->periods->first()->id
+            ])
+        );
+        $subscription->makeSubscription();
+        return $subscription;
+    }
+
+
 }

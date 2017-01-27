@@ -21,7 +21,7 @@ class Coupon extends Model
      * @var array
      */
     protected $fillable = [
-        'uuid', 'code', 'type', 'value','limit_uses','limit_dates','max_uses','available','start_date','end_date','shop_id'
+        'uuid', 'code', 'type', 'value','limit_uses','limit_dates','max_uses','available','start_date','end_date','shop_id' , 'class'
     ];
 
     /**
@@ -154,5 +154,35 @@ class Coupon extends Model
     public function scopeByCode($query , $code){
         return $query->where('code' , $code);
     }
+
+    public function applyCoupon(Order $order)
+    {
+        $order->total_discount = $this->discount($order);
+        $order->total =  ($order->total_products + $order->total_shipping) - $order->total_discount;
+        $order->save();
+
+        $order->cart->coupon_id = $this->id;
+        $order->cart->save();
+    }
+
+    public function discount($order)
+    {
+        if ($this->categories->count()){
+            foreach ($order->cart->products as $product){
+                if ($product->product->categories->count()){
+                    //dd( $this->categories()->get(['categories.id'])->toArray());
+                    //dd($product->product->categories->whereIn('id' , [0 => '1'])->toArray());
+                }
+            }
+        }else{
+            if ($this->type == 'percentage')
+                return ($this->value * $order->total_products) / 100;
+            else if ($this->type == 'absolute')
+                return $this->value;
+            else
+                return $order->total_shipping;
+        }
+    }
+
 
 }

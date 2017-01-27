@@ -27,7 +27,6 @@ class MePa
     public function generate()
     {
         $this->createTokenCard();
-
         $payment = $this->mp->post(self::PAYMENT_URL, [
             "payment_method_id" => $this->payer(),
             "notification_url" => $this->notificationUrl(),
@@ -66,7 +65,7 @@ class MePa
                 ],
                 'name' => $this->request->card_name
             ],
-            "card_number" => $this->request->card_number
+            "card_number" => $this->request->card_number,
         ]);
 
         if (isset($card->original['cause']['code']))

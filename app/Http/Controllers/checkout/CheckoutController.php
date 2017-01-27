@@ -22,7 +22,7 @@ class CheckoutController extends Controller
                     $product->stock = $product->stock - $product->pivot->quantity;
                     $product->save();
                 }
-            }
+            }       
 
             $order->cart->update([
                 'status' => 'closed'
@@ -40,7 +40,9 @@ class CheckoutController extends Controller
         //$status = $searchResult["response"]["results"][count($searchResult["response"]["results"]) - 1 ]["collection"]["status"];
         $status = 'approved';
         if($status == $request->collection_status){
-            $order->order_status = 3;
+            $order->updateStatus($status);
+            if ($order->cart->coupon)
+                $order->coupons()->attach($order->cart->coupon_id , ['total_discount' => $order->total_discount]);
             $order->payment_type = $request->payment_type;
             $order->save();
         }
@@ -77,7 +79,9 @@ class CheckoutController extends Controller
         //$status = $searchResult["response"]["results"][count($searchResult["response"]["results"]) - 1 ]["collection"]["status"];
         $status = 'pending';
         if($status == $request->collection_status){
-            $order->order_status = 2;
+            $order->updateStatus($status);
+            if ($order->cart->coupon)
+                $order->coupons()->attach($order->cart->coupon_id , ['total_discount' => $order->total_discount]);
             $order->payment_type = $request->payment_type;
             $order->save();
         }

@@ -26,12 +26,6 @@ class applyCouponToCartListener
      */
     public function handle(applyCouponToCartEvent $event)
     {
-        switch ($event->coupon->type){
-            case "percentage":
-                $event->order->total_discount = ($event->coupon->value * $event->order->total_products) / 100;
-                $event->order->total =  ($event->order->total_products + $event->order->total_shipping) - $event->order->total_discount;
-                $event->order->save();
-                break;
-        }
+        $event->coupon->applyCoupon($event->order);
     }
 }

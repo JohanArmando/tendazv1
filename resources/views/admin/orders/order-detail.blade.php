@@ -1,3 +1,6 @@
+@section('title')
+    Orden #{{ ($order->id)}}
+@stop
 @extends('layouts.administrator')
     @section('css')
         <link rel="stylesheet" href="{{ asset('administrator/css/order-detail.css') }}">
@@ -74,32 +77,38 @@
                                                             @endif
                                                         </td>
                                                         @if($producto->product->collection->promotion)
-                                                            <td>$ {{ number_format($producto->promotional_price,2,',','.') }}</td>
+                                                            <td>${{ number_format($producto->promotional_price,0,',','.') }}</td>
                                                             <td style="text-align: center !important;">{{ $producto->pivot->quantity }}</td>
-                                                            <td>{{ $t = number_format(($producto->pivot->quantity * $producto->promotional_price),2,',','.')  }}</td>
+                                                            <td>${{ $t = number_format(($producto->pivot->quantity * $producto->promotional_price),0,',','.')  }}</td>
 
                                                         @else
-                                                            <td>{{ number_format($producto->price , 2 ,',' , '.') }}</td>
+                                                            <td>$ {{ number_format($producto->price , 0 ,',' , '.') }}</td>
                                                             <td style="text-align: center !important;">{{ $producto->pivot->quantity }}</td>
-                                                            <td>{{ $t = number_format(($producto->pivot->quantity * $producto->price),2,',','.')  }}</td>
+                                                            <td>${{ $t = number_format(($producto->pivot->quantity * $producto->price),0,',','.')  }}</td>
 
                                                         @endif
                                                     </tr>
                                             @endforeach
                                                     <tr>
-                                                        <td></td><td></td><td></td>
+                                                        <td colspan="3"></td>
                                                         <td><strong>Sub:</strong></td>
-                                                        <td><strong>$ {{ number_format($order->total_products,2,',','.') }}</strong></td>
-                                                    </tr><tr>
-                                                        <td></td><td></td><td></td>
-                                                        <td><strong>Envio:</strong></td>
-                                                        <td><strong>$ {{ number_format($order->total_shipping,2,',','.') }}</strong></td>
+                                                        <td>${{ number_format($order->total_products,0,',','.') }}</td>
                                                     </tr>
                                                     <tr>
-                                                    <td></td><td></td><td></td>
-                                                    <td><strong>Total:</strong></td>
-                                                    <td><strong>$ {{ number_format($order->total , 2 , ',' , '.') }}</strong></td>
-                                                </tr>
+                                                        <td colspan="3"></td>
+                                                        <td><strong>Envio:</strong></td>
+                                                        <td>${{ number_format($order->total_shipping,0,',','.') }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="3"></td>
+                                                        <td><strong>Descuento:</strong></td>
+                                                        <td>${{ number_format($order->total_shipping,0,',','.') }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="3"></td>
+                                                        <td><strong>Total:</strong></td>
+                                                        <td>${{ number_format($order->total , 0 , ',' , '.') }}</td>
+                                                    </tr>
                                         </tbody>
                                     </table>
                                     <br>
@@ -135,12 +144,13 @@
                                                 @endif
                                                 <br>
                                                 <strong>Identificaci&oacute;n:</strong>
-                                                @if(empty($customer->identification))N.N
+                                                @if(empty($customer->identification))Sin Identificaci&oacute;n
                                                 @else {{ $customer->identification }}
                                                 @endif
                                                 <br>
                                                 <strong>Telefono:</strong>
                                                 @if(empty($customer->phone))
+                                                    Sin Telefono
                                                     @else
                                                     {{$customer->phone}}
                                                 @endif
@@ -150,12 +160,47 @@
                                 </div>
                                 <br>
                             </div>
+                            <!--notes -->
+                                @include('admin.partials.orders.order-detail-note')
+                            <!-- end notes-->
                         </div>
                         <div class="col-md-6">
                             @include('admin.partials.orders.order-detail-history')
                         </div>
                         <div class="col-md-6">
-                            @include('admin.partials.orders.order-detail-note')
+                            <div class="order-history panel panel-default info-box">
+                                <div class="panel-heading">
+                                    Direcci&oacute;n de Envio
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                        <div class="table-responsive">
+                                            <table class="table table-responsive">
+                                                <thead>
+                                                    <tr>
+                                                        <td>Nombre</td>
+                                                        <td>Direcci&oacute;n</td>
+                                                        <td>Barrio</td>
+                                                        <td>Departamento</td>
+                                                        <td>Ciudad</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>{{$address->name}}</td>
+                                                        <td>{{$address->street}}</td>
+                                                        <td>{{$address->complement}}</td>
+                                                        <td>{{$address->state->name}}</td>
+                                                        <td>{{$address->city->name}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-12">
                             <hr>

@@ -14,27 +14,22 @@ use Webpatser\Uuid\Uuid;
 
 class PlanController extends Controller
 {
-    public function __construct(){
-
-        /*$this->subscription = Auth('admins')->users()->subscription->first();
-
-        /*$this->subscription = Auth('admins')->user()->subscription->first();
-
-        $this->plan =  $this->subscription->plan;*/
-    }
-    public function findPlan(Route $route){
-        $this->plan = Plan::where('uuid' , '=' ,$route->getParameter('account'))->first();
-    }
-    public function getPlan(){
-        $get_params = explode('=' , $_SERVER['QUERY_STRING'] );
-        if(isset($get_params[2])){
-            $hidden = true;
+    public function swap($subdomain , Plan $plan ,Request $request)
+    {
+        if ($request->shop->subscription()->onTrial())
+        {
+            $request->shop->subscription()->swap($plan);
+            return back()->with('message' , ['type' => 'info' , 'message' => 'El plan de tu subscripcion ha cambiado']);
         }
-        else{
-            $hidden = 'false';
-        }
-        $plans = Plan::orderBy('name','ASC')->get();
-        return view('admin.account.plans' , compact('plans' , 'hidden'));
+        return redirect()->to('admin/account/checkout/start?ref=from_payment_bottom_bar');
+    }
+
+    public function index(Request $request)
+    {
+      $period = $request->has('period') ? $request->get('period') : 'monthly';
+
+        $plans = Plan::with($period)->whereHas($period)->get();
+        return view('admin.account.plans' , compact('plans'));
     }
 
     public  function  postChangePlan(Request $request ){

@@ -51,23 +51,41 @@
             </div>
         </div>
         <div class="panel-body">
-            <label for="">Nombre</label>
-            {!! Form::text('shipping[0][name]',null,['class'=>'form-control']) !!}
-            <p class="help-block">(Opcional)</p>
-            <label for="">Direccion</label>
-            {!! Form::text('shipping[0][street]',null,['class'=>'form-control']) !!}
-            <p class="help-block">(Opcional)</p>
-            <label for="">Complemento</label>
-            {!! Form::text('shipping[0][complement]',null,['class'=>'form-control']) !!}
-            <label for="">Barrio</label>
-            {!! Form::text('shipping[0][neighborhood]',null,['class'=>'form-control']) !!}
-            <label for="">Pais</label>
-            {!! Form::select('shipping[0][country_id]',$countries, 50,['class'=>'form-control' , 'id' => 'country_id']) !!}
-            <label for="">Estado</label>
-            {!! Form::select('shipping[0][state_id]',$states, 50,['class'=>'form-control' , 'id' => 'state_id']) !!}
-            <label for="">Ciudad</label>
-            {!! Form::select('shipping[0][city_id]',[], null,['class'=>'form-control hidden' , 'id' => 'city_id']) !!}
-
+            @if(empty($address))
+                <label for="">Nombre</label>
+                {!! Form::text('shipping[0][name]',null,['class'=>'form-control']) !!}
+                <p class="help-block">(Opcional)</p>
+                <label for="">Direccion</label>
+                {!! Form::text('shipping[0][street]',null,['class'=>'form-control']) !!}
+                <p class="help-block">(Opcional)</p>
+                <label for="">Complemento</label>
+                {!! Form::text('shipping[0][complement]',null,['class'=>'form-control']) !!}
+                <label for="">Barrio</label>
+                {!! Form::text('shipping[0][neighborhood]',null,['class'=>'form-control']) !!}
+                <label for="">Pais</label>
+                {!! Form::select('shipping[0][country_id]',$countries, 50,['class'=>'form-control' , 'id' => 'country_id']) !!}
+                <label for="">Estado</label>
+                {!! Form::select('shipping[0][state_id]',$states, 50,['class'=>'form-control' , 'id' => 'state_id']) !!}
+                <label for="">Ciudad</label>
+                {!! Form::select('shipping[0][city_id]',[], null,['class'=>'form-control hidden' , 'id' => 'city_id']) !!}
+                @else
+                    <label for="">Nombre</label>
+                    {!! Form::text('shipping[0][name]',$address->name,['class'=>'form-control']) !!}
+                    <p class="help-block">(Opcional)</p>
+                    <label for="">Direccion</label>
+                    {!! Form::text('shipping[0][street]',$address->street,['class'=>'form-control']) !!}
+                    <p class="help-block">(Opcional)</p>
+                    <label for="">Complemento</label>
+                    {!! Form::text('shipping[0][complement]',$address->complement,['class'=>'form-control']) !!}
+                    <label for="">Barrio</label>
+                    {!! Form::text('shipping[0][neighborhood]',$address->neighborhood,['class'=>'form-control']) !!}
+                    <label for="">Pais</label>
+                    {!! Form::select('shipping[0][country_id]',$countries, 50,['class'=>'form-control' , 'id' => 'country_id']) !!}
+                    <label for="">Estado</label>
+                    {!! Form::select('shipping[0][state_id]',$states, $address->state_id,['class'=>'form-control' , 'id' => 'state_id']) !!}
+                    <label for="">Ciudad</label>
+                    {!! Form::select('shipping[0][city_id]',[],null ,['class'=>'form-control hidden' , 'id' => 'city_id']) !!}
+            @endif
         </div>
     </div>
 

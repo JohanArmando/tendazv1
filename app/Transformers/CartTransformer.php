@@ -33,14 +33,13 @@ class CartTransformer extends  TransformerAbstract
             return [
                 '_id'                   => $cart->secure_key,
             'created'               => $cart->created_at->format('Y-m-d H:m:s'),
-            'discount_applied'      => '' , //aqui iteramos el descuento mas especificamente como fue aplicado[detalle descuento copun, detalle descuento _pago] y  si es por productos'Pendiente para cuando creemos la tabla descuento carrito',
             'original_qty'          => $cart->productsSize(),
             'original_total'        => $cart->total(),
             'order_id'              => $cart->order->uuid,
             'totalizers'            => [
                 'items'  => [ 'id' => 'items' , 'name' => 'Total De Los Items' , 'value' => $cart->totalProducts()],
                 'shipping'  => [ 'id' => 'Shipping' , 'name' => 'Costo total del envío' , 'value' => $cart->totalShipping()],
-                //  'Discounts'  => [ 'id' => 'Shipping' , 'name' => 'Costo total del envío' , 'value' => $cart->totalDiscount()],
+                'discounts'  => [ 'id' => 'Discount' , 'name' => 'Total del descuento' , 'value' => $cart->totalDiscount()],
                 // tax => [ 'id' => 'taxing' , 'name' => 'Costo total del envío' , 'value' => $cart->totalDiscount()
                 //hay que agregar columna total descuento por payment total_discount_payment
                 //shipping_tax

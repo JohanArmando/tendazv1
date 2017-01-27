@@ -63,10 +63,15 @@ class PaymentMethodController extends Controller
                 return $payment;
 
             $cart->order->updateStatus($payment['response']['status']);
-            
+
+            $cart->order->updateOrderItems();
+
             $cart->order->api_id =  $payment['response']['id'];
             $cart->order->save();
-            //actualizar order items puede ser un evento
+
+            if ($cart->coupon)
+                $cart->order->coupons()->attach($cart->coupon_id , ['total_discount' => $cart->order->total_discount]);
+
             $cart->closed();
             
             return response([
@@ -76,6 +81,18 @@ class PaymentMethodController extends Controller
 
         }else{
             $cart->order->updateStatus("approved");
+
+            $cart->order->updateStatus($payment['response']['status']);
+
+
+            if ($cart->coupon)
+                $cart->order->coupons->attach($cart->coupon_id , ['total_discount' => $cart->order->total_discount]);
+
+            $cart->order->updateOrderItems();
+
+            $cart->order->coupon_id = $cart->coupon_id;
+            $cart->save();
+
             $cart->closed();
             return response([
                 'status' => 'approved',

@@ -84,6 +84,7 @@
                 <div class="white-container">
                     <span class="title"><strong>Ya te encuentras registrado ?</strong></span>
                     <form name="loginForm" ng-submit="doLogin(loginForm)" role="form" data-toggle="validator">
+                        <p ng-repeat="error in erroreslogin" ng-show="errores" class="error-login">Correo o contrase&ntilde;a incorrecta!</p>
                             <div class="form-group">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-user"></i></span>

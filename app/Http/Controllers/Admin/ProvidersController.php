@@ -10,6 +10,9 @@ use Tendaz\Models\Order\Provider;
 
 class ProvidersController extends Controller
 {
+    public function __construct(){
+        $this->middleware('plan:estandar,premiun');
+    }
     public function index()
     {
         $providers = Provider::all();

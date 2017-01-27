@@ -34,6 +34,19 @@ myApp.factory('Payment' ,['$http', '$location' , "$rootScope" , "Cart",  functio
                         $location.reload();
                     }
                 });
+            }else if(response.data.custom){
+                swal({
+                    title:response.data.payment.data.name,
+                    text: response.data.payment.data.instructions,
+                    type: "success",
+                    confirmButtonText: "OK"
+                },function(isConfirm){
+                    if (isConfirm) {
+                        localStorage.removeItem('orderData');
+                        localStorage.removeItem('cart_id');
+                        location.href = "/checkout?status=success";
+                    }
+                });
             }
         }).catch(function(response) {
             console.log(response);

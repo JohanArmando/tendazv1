@@ -2,7 +2,9 @@ myApp.controller("couponController" , [ "$scope"  , "Coupon" , function ($scope 
     $scope.coupon = {};
     angular.extend($scope , {
         'useCoupon' : function () {
-            Coupon.useCoupon($scope.coupon.code);
+            Coupon.useCoupon($scope.coupon.code).then(function () {
+                $scope.coupon = {};
+            });
         }
     });
 }]);

@@ -4,9 +4,11 @@ namespace Tendaz\Http;
 
 use Tendaz\Http\Middleware\BuildMiddleware;
 use Tendaz\Http\Middleware\customApiMiddleware;
+use Tendaz\Http\Middleware\PlanUserMiddleware;
 use Tendaz\Http\Middleware\sharedSessionByUniqueDomain;
 use Tendaz\Http\Middleware\StoreWithDomainMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Tendaz\Http\Middleware\SubscriptionMiddleware;
 use Tendaz\Http\Middleware\ThemeMiddleware;
 
 class Kernel extends HttpKernel
@@ -37,7 +39,6 @@ class Kernel extends HttpKernel
             \Tendaz\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
-
         'api' => [
             'throttle:60,1',
             'bindings',
@@ -62,6 +63,8 @@ class Kernel extends HttpKernel
         'theme'     => ThemeMiddleware::class,
         'custom_api'   => customApiMiddleware::class,
         'build' 		=>  BuildMiddleware::class,
-        'unique'        => sharedSessionByUniqueDomain::class
+        'unique'        => sharedSessionByUniqueDomain::class,
+        'plan'          => PlanUserMiddleware::class,
+        'subscription' =>SubscriptionMiddleware::class
     ];
 }

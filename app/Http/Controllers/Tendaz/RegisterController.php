@@ -77,7 +77,12 @@ class RegisterController extends Controller
             'storename' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6',
-        ]);
+            'plan' => 'required|in:1,2,3'
+        ],
+            [
+                'plan.required' => 'Por favor selecciona un plan'
+            ]
+        );
     }
 
     /**
@@ -89,11 +94,14 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $storename =  CleanString::cleanName($data['storename']);
+
         $user = User::create([
             'email' => $data['email'],
             'password' => $data['password'],
         ]);
+
         $shop = $user->shop()->save(new Shop(['name' => $storename ]));
+
         $shop->domains()->save(new Domain([
             'name'     => $shop->name,
             'domain'   => $shop->name,  
@@ -102,8 +110,13 @@ class RegisterController extends Controller
             'active'   =>  1,
             'state'    => 'OK'
         ]));
+
         $shop->store()->save(new Store(['category_shop_id' => '26']));
-        $shop->plan()->attach( (isset($data['plan']) && !empty($data['plan'])) ? Plan::whereUuid($data['plan'])->id  : 1 , ['trial_at' => Carbon::today()->addDays(15)]);
+        
+        $plan = Plan::find($data['plan']);
+        
+        $shop->newSubscription($plan);
+
         return $user;
     }
 }

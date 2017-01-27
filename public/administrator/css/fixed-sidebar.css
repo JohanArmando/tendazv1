@@ -20,8 +20,6 @@
     position: absolute !important;
   }
   :not(.sidebar-minimized) .sidebar.sidebar-menu .content {
-    /*position: absolute;*/
-    overflow-y: scroll;
     -ms-overflow-style: -ms-autohiding-scrollbar;
     -webkit-overflow-scrolling: touch;
   }

@@ -90,7 +90,7 @@
                         El costo del envio es : $ {{ carts.totalizers.shipping.value | currency:"":0 }}
                     </div>
                     <div class="col-md-12">
-                        <button  type="submit" class="btn btn_checkout pull-right" ng-click="goToPay()">IR AL PAGO</button>
+                        <button  type="submit" class="btn btn_checkout pull-right" ng-click="goToPay()" ng-if="shippingTrue">IR AL PAGO</button>
                     </div>
                 </div>
             </div>

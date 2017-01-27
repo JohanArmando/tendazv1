@@ -1,12 +1,15 @@
 <?php
 $domain = new \Tendaz\Models\Domain\Domain();
-    Route::group(['domain' => '{subdomain}.'.$domain->getDomain() ,'middleware' => ['store' , 'auth:admins']], function () {
+    Route::group(['domain' => '{subdomain}.'.$domain->getDomain() ,'middleware' => ['store' , 'auth:admins' , 'subscription']], function () {
     //Route home
-    Route::get('/' , 'HomeController@home');
+    Route::get('/' ,[
+        'uses'  =>  'HomeController@home',
+    ]);
 
     //Routes statics
     Route::get('/stats' , 'StaticsController@basic');
-    Route::get('/stats/advanced' , 'StaticsController@advanced');
+    Route::get('/stats/advanced' , 'StaticsController@advanced')->middleware('plan:estandar,premiun');
+    Route::get('/stats/advanced/map' , 'StaticsController@map');
     Route::get('/stats/update' , 'StaticsController@update');
 
     //Route logout
@@ -28,7 +31,6 @@ $domain = new \Tendaz\Models\Domain\Domain();
 
     //Route orders
     Route::get('orders/status' , 'OrdersController@status');
-    Route::get('orders/search' , 'OrdersController@search');
     Route::get('orders/export' , 'OrdersController@getExport');
     Route::get('orders/print/{id}' , 'OrdersController@printOrder');
     Route::post('orders/export/post' , 'OrdersController@postExport');
@@ -65,9 +67,9 @@ $domain = new \Tendaz\Models\Domain\Domain();
 
     //Route marketing
     Route::group(['prefix' => 'marketing', 'namespace' => 'Marketing'], function() {
-        Route::get('/app', 'MarketingController@index');
+        Route::get('/app', 'MarketingController@index')->middleware('plan:premiun');
         Route::get('/config-app', 'MarketingController@config');
-        Route::get('/robot', 'MarketingController@robot');
+        Route::get('/robot', 'MarketingController@robot')->middleware('plan:premiun');
         Route::post('/robot', 'MarketingController@postRobot');
         Route::get('/social', 'MarketingController@social');
         Route::put('/social/{socialLogin}', 'MarketingController@postSocial');
@@ -85,9 +87,11 @@ $domain = new \Tendaz\Models\Domain\Domain();
     //Route Setting
     Route::group(['prefix' => 'setting', 'namespace' => 'Setting'], function() {
         Route::resource('/payments','PaymentController');
-        
+
         Route::resource('shippings', 'ShippingController',
             ['only' => ['index', 'store', 'update', 'destroy']]);
+        //meli
+        Route::get('/mercadolibre',function(){return redirect()->back();})->middleware('plan:estandar,premiun');
         //setting domain
         Route::get('/domain', 'NameCheapController@getIndex');
         Route::get('/domain/create', 'NameCheapController@store');
@@ -98,14 +102,31 @@ $domain = new \Tendaz\Models\Domain\Domain();
         Route::resource('/locals', 'LocalController',
             ['only' => ['index', 'store', 'update', 'destroy']]);
     });
-    
+    //Route for payment plan
+
+
     //Route account
     Route::group(['prefix' => 'account', 'namespace' => 'Account'], function() {
         Route::resource('preferences','AccountController');
         Route::resource('profile','ProfileController');
         Route::resource('invoices','InvoiceController');
-        Route::get('plans', 'PlanController@getPlan');
+        
+        Route::get('plans', [
+            'uses' => 'PlanController@index',
+            'notMiddleware' => 'subscription'
+        ]);
+        
+        Route::post('plans/swap/{plan}', [
+            'uses' => 'PlanController@swap',
+            'notMiddleware' => 'subscription'
+        ]);
+        
         Route::get('checkout/finish/',function(){return redirect()->to('admin');});
+        
+        Route::get('checkout/start/',[
+            'uses' => 'SubscriptionController@start',
+            'notMiddleware' => 'subscription'
+        ]);
     });
 });
 

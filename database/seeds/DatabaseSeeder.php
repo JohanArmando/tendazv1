@@ -27,12 +27,9 @@ class DatabaseSeeder extends Seeder
         $this->call(CategoryTldSeeder::class);
         $this->call(TldSeeder::class);
         Model::unguard();
-        /*factory(\App\Models\User::class , 10)->create()->each(function ($users) use ($faker){
-            $shop = $users->shop()->save(factory(\App\Models\Store\Shop::class)->make());
-            $shop->plan()->attach(2 , ['uuid' => $faker->uuid ,'amount' => 10 , 'state' => 'active' , 'start_at'=> null , 'end_at' => null ,'trial_at' => \Carbon\Carbon::today()->addDays(15)]);
-            $shop->domains()->save(factory(\App\Models\Domain\Domain::class)->make());
-            $shop->products()->saveMany(factory(\App\Models\Products\Product::class)->make());
-        });*/
+
+        factory(\Tendaz\Models\Subscription\Feature::class, 50)->create();
+        
         Model::reguard();
     }
 }

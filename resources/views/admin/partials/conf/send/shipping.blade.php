@@ -17,7 +17,6 @@
                             <th class="text-center">Nombre de la opcion</th>
                             <th class="text-center">Rango de peso de la compra</th>
                             <th class="text-center">Rango de precio de la compra</th>
-                            <th class="text-center">Aplicar en </th>
                             <th class="text-center">Costo del envio</th>
                             <th>Eliminar</th>
                             <th>Editar</th>
@@ -37,9 +36,8 @@
                             <td>
                                 @{{ method.price  }}
                             </td>
-                            <td>Todas las provincias</td>
                             <td>
-                                 @{{ method.cost }}
+                                 $@{{ method.cost | number:0 }}
                             </td>
                             <td>
                                 <button type="submit" class="btn btn-danger" ng-click="delete(method)">

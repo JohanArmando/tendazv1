@@ -4,13 +4,12 @@ namespace Tendaz\Http\Controllers\Admin;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use League\Fractal\Serializer\ArraySerializer;
-use Maatwebsite\Excel\Facades\Excel;
 use Tendaz\Http\Controllers\Controller;
+use Tendaz\Models\Address\Address;
+use Tendaz\Models\Address\CustomerAddress;
 use Tendaz\Models\Customer;
 use Tendaz\Models\Order\Order;
 use Tendaz\Models\Order\OrderStatus;
-use Tendaz\Transformers\OrderTransformer;
 
 class OrdersController extends Controller
 {
@@ -29,10 +28,11 @@ class OrdersController extends Controller
     public function show($subdomain , $id){
         $order= Order::where('id',$id)->first();
         $customer = Customer::where('id',$order->customer_id)->first();
+        $address = $customer->addressesForShipping->first();
         $histories= $order->histories->groupBy(function($date) {
             return Carbon::parse($date->created_at)->format('Y-m-d');
         })->toArray();
-        return view('admin.orders.order-detail',compact('order','customer','histories'));
+        return view('admin.orders.order-detail',compact('order','customer','histories','address'));
     }
     
     public function update($subdomain ,$id , Request $request)
@@ -133,17 +133,5 @@ class OrdersController extends Controller
         $order= Order::where('id',$id)->first();
         $customer = Customer::where('id',$order->customer_id)->first();
         return view('admin.orders.printOrder',compact('order','customer'));
-    }
-
-    public function search($subdomain , Request $request){
-        $data = $request->get('search');
-        $orders = Order::where('orders.shop_id' , $request->shop->id)
-            ->join('customers', 'customers.id', '=', 'orders.customer_id')
-            ->where('orders.id','=',$data)
-            ->orWhere('customers.name','like','%'.$data.'%')
-            ->orWhere('orders.total','=', $data)
-            ->NotInitOrders()->get();
-        $status = OrderStatus::all();
-        return view('admin.orders.index',compact('orders','status'));
     }
 }

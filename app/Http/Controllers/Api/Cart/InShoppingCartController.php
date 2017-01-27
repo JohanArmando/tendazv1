@@ -10,6 +10,7 @@ use Tendaz\Models\Cart\Cart;
 use Tendaz\Models\Customer;
 use Tendaz\Models\Products\Product;
 use Tendaz\Models\Products\Variant;
+use Tendaz\Models\Shipping\ShippingMethod;
 use Tendaz\Transformers\CartTransformer;
 
 class InShoppingCartController extends Controller
@@ -24,11 +25,11 @@ class InShoppingCartController extends Controller
 
     public function store(Cart $cart , Request $request)
     {
-        if(!$cart->customer_id && $request->customer_id){
-            Cart::createOrAssignUser($cart , Customer::where('uuid' , $request->customer_id)->first());   
+        if(!$cart->customer_id && $request->has('customer_id')){
+            Cart::createOrAssignUser($cart , Customer::where('uuid' , $request->customer_id)->first());
         }
         $item = Variant::where('uuid' , $request->item_id)->first();
-        
+
         $inShoppingCart =  $cart->products()->where('item_id' , $item->id)->first();
         $quantity = $request->get('quantity' , !$inShoppingCart ? 1 : $inShoppingCart->pivot->quantity + 1 );
         $quantity = $quantity <= 0 ? 1 : $quantity;
@@ -38,6 +39,7 @@ class InShoppingCartController extends Controller
                 $inShoppingCart->pivot->update([
                    'quantity' => $quantity
                 ]);
+                
                 event(new updateOrderTotalByProductEvent($cart->order , $cart));
                 return  fractal()
                     ->item($cart, new CartTransformer())
@@ -56,6 +58,11 @@ class InShoppingCartController extends Controller
     public function destroy(Cart $cart , Variant $item , Request $request)
     {
         $cart->products()->detach($item->id);
+
+        if (!$cart->products->count())
+            $cart->coupon_id = null;
+            $cart->save();
+
         event(new updateOrderTotalByProductEvent($cart->order , $cart));
         return response()->json( fractal()->item($cart, new CartTransformer()), 201);
     }

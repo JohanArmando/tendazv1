@@ -27,7 +27,7 @@ padding-right: 0px !important;">
                                       Por mes
                                       <br>
                                       <br>
-                                      <a  class="btn btn-primary" href="{{ url("/crea-tu-tienda?plan=$plan->uuid") }}">
+                                      <a  class="btn btn-primary" href="{{ url("/crea-tu-tienda?plan=$plan->id") }}">
                                             Probar Plan
                                       </a>
                                  </div>

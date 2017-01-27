@@ -17,14 +17,16 @@ class updateShippingOrderEvent
     
     public $order;
     public $cost;
+    public $bool;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Order $order , $cost)
+    public function __construct(Order $order , $cost , $bool = false)
     {
         $this->order = $order;
         $this->cost = $cost;
+        $this->bool = $bool;
     }
 }

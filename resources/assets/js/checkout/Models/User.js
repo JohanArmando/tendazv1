@@ -15,6 +15,7 @@ myApp.factory('User' ,['$http', '$location', '$cookies' , "$rootScope" , "Cart",
                 password: data.password
             }
         }).then(function(response) {
+            console.log(response);
             $location.path('/cart');
             $cookies.put('auth' , JSON.stringify(response.data));
             Cart.setCartId(response.data.cart_id);

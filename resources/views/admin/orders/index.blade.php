@@ -1,5 +1,5 @@
 @section('title')
-Mis ventas
+    Mis ventas
 @stop
 @extends('layouts.administrator')
     @section('css')
@@ -9,6 +9,11 @@ Mis ventas
         <link rel="stylesheet" href="{{asset('administrator/plugins/xeditable/css/xeditable.css')}}">
         <link rel="stylesheet" href="{{asset('administrator/plugins/xeditable/inputs-ext/typeaheadjs/lib/typeahead.js-bootstrap.css')}}">
         <link rel="stylesheet" href="{{asset('administrator/css/xeditable.min.css')}}">
+        <link rel="stylesheet" href="{{asset('administrator/plugins/datatables/css/tabletools.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('administrator/plugins/datatables/css/datatables.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('administrator/css/custom_tendaz.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('administrator/css/stylePersonal.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('administrator/css/styleDatabase.css')}}">
     @section('content')
         <div class="page-header page-header-block">
             <div class="page-header-section">
@@ -63,26 +68,9 @@ Mis ventas
                             <h3 class="panel-title">Ventas</h3>
                         </div>
                         <div class="panel-body">
-                            <div class="row">
-                                <div class="col-xs-6" style="margin-left: 71% !important;">
-                                    <form action="{{url('admin/orders/search')}}" method="GET">
-                                        <label for="buscar"><strong>Buscar:</strong></label>
-                                        <div role="form">
-                                            <div class="col-md-5" style="padding-right: 0; padding-left: 0">
-                                                <input type="text" class="form-control" style="width:100%;border-radius: 5px 0 0 5px" name="search">
-                                            </div>
-                                            <div class="col-md-2" style="padding-left: 0">
-                                                <button type="submit" style="height: 34px; border-radius: 0 5px 5px 0 !important;" class="btn btn-primary">
-                                                    <i class="fa fa-search"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <br><br>
+                            <br>
                             <div class="table-responsive">
-                            <table class="table table-bordered table-hover table-responsive">
+                            <table id="table_orders" class="table table-bordered table-hover table-responsive list-table">
                                     <thead>
                                         <tr>
                                             <th>Orden</th>
@@ -104,7 +92,7 @@ Mis ventas
                                                 </div>
                                             </td>
                                             <td>
-                                                $ {{ number_format($order->total , 2        ) }}
+                                                ${{ number_format($order->total , 2        ) }}
                                             </td>
                                             <td>
                                                 @if(empty($order->user->name))
@@ -165,4 +153,25 @@ Mis ventas
             <script type="text/javascript" src="{{asset('administrator/js/xeditable.min.js')}}"></script>
             <script type="text/javascript" src="{{asset('administrator/js/backend/forms/xeditable.js')}}"></script>
             <script type="text/javascript" src="{{asset('administrator/js/xeditable.min.js')}}"></script>
+            <script src="{{asset('administrator/js/jquery.dataTables.js')}}"></script>
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $('#table_orders').dataTable({
+                        "pageLength": 5,
+                        "language": {
+                            "search": "Buscar: ",
+                            "searchPlaceholder": "Numero de Orden",
+                            "lengthMenu":     "Mostrar _MENU_ resultados",
+                            "info":           "Mostrando _START_ a _END_ de _TOTAL_ Ordenes",
+                            "infoEmpty":      "Mostrando 0 a 0 de 0 Resultados",
+                            "paginate": {
+                                "first":      "Primero",
+                                "last":       "Ultimo",
+                                "next":       "Siguiente",
+                                "previous":   "Anterior"
+                            }
+                        }
+                    });
+                });
+            </script>
         @stop

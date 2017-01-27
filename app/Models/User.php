@@ -128,5 +128,4 @@ class User extends Authenticatable
             \Storage::disk('profile')->put($name, \File::get($path));
         }
     }
-
 }

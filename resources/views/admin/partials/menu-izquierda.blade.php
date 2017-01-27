@@ -102,7 +102,7 @@
                        <ul id="components" class="submenu collapse ">
                            <li >
                                <a href="{{ url('admin/customers')}}">
-                                   <span class="text">Mis Cliente</span>
+                                   <span class="text">Mis Clientes</span>
                                </a>
                            </li>
                            <li>
@@ -120,12 +120,12 @@
                            <span class="arrow"></span>
                        </a>
                        <ul id="table" class="submenu collapse ">
-                           <li class="hidden">
+                           <li>
                                <a href="{{url('admin/marketing/app')}}">
                                    <span class="text"> App Mobile </span>
                                </a>
                            </li>
-                           <li class="hidden">
+                           <li>
                                <a href="{{url('admin/marketing/robot')}}">
                                    <span class="text"> Maxi bot </span>
                                </a>
@@ -206,8 +206,8 @@
                                    <span class="text">Env&iacute;o y locales</span>
                                </a>
                            </li>
-                           <li class="hidden">
-                              <a href="{{url('admin/mercadolibre/')}}">
+                           <li>
+                              <a href="{{url('admin/setting/mercadolibre')}}">
                                 <span class="text">Tu Mercadolibre</span>
                               </a>
                            </li>

@@ -95,3 +95,10 @@ $factory->define(\Tendaz\Models\Products\Product::class, function (Faker\Generat
         'publish' => 1,
     ];
 });
+
+$factory->define(\Tendaz\Models\Subscription\Feature::class , function (Faker\Generator $faker){
+    return [
+        'name' => $faker->name,
+        'description' => $faker->paragraph()
+    ];
+});

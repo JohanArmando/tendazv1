@@ -80,10 +80,10 @@
                                     </div>
                                 </div>
                                 <br>
-                                <div class="col-xs-12">
+                                <div class="col-xs-12 col-md-12 col-lg-12">
                                     <div class="form-group">
                                         <label>Personalizada</label>
-                                        {!! Form::file('image') !!}
+                                        <input type="file" name="image" class="dropify" data-default-file="{{ asset("profile/".Auth('admins')->user()->image) }}" />
                                     </div>
                                 </div>
                                 <div class="panel-footer">

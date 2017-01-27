@@ -43,7 +43,7 @@ Cliente {{ $customer->full_name }}
                                 <p>
                                     <button data-target="#modalEditar" data-toggle="modal" class="btn btn-primary">
                                         <i class="fa fa-pencil"></i>
-                                        Editar Datos</button>
+                                        Editar Perfil</button>
                                 </p>
                                 <p class="hidden">
                                     <button data-target="#modalCorreo" data-toggle="modal" class="btn btn-primary" style="background-color: #3C3C3C; border-color: #3C3C3C">
@@ -55,14 +55,14 @@ Cliente {{ $customer->full_name }}
                                 <li class="text-left mb15">
                                     <a href="{{ url("admin/customers/".$customer->uuid."/edit") }}"><i class="fa fa-pencil"></i> Editar cliente</a>
                                     <h5><b>Correo: {{ $customer->email }}</b></h5>
-                                    <h5>Direccion de envio:</h5>
-                                    @if($address)
+                                    <h5><b>Direccion de envio:</b></h5>
+                                    @if(empty($address))
+                                        <p class="text-muted">No tiene direccion</p>
+                                        @else
                                         <p class="text-muted">
-                                                {{ $address->name }}<br>
-                                                {{ $address->street }}<br>
-                                                {{ $address->complement }}<br>
-                                                {{ $address->state->name }}<br>
-                                                {{ $address->city->name }}<br>
+                                            - {{ $address->name }}<br>
+                                            - {{ $address->street }} - {{ $address->complement }}<br>
+                                            - ({{ $address->state->name }} - {{ $address->city->name }})<br>
                                         </p>
                                     @endif
                                 </li>
@@ -93,29 +93,38 @@ Cliente {{ $customer->full_name }}
              </div>
              <div class="col-md-8">
                  <div class="panel panel-default">
+                     <div class="panel-heading">
+                         <div class="panel-title">
+                             <h4>
+                                 <i class="fa fa-file"></i>
+                                 &nbsp;
+                                 Resumen
+                             </h4>
+                         </div>
+                     </div>
                      <div class="panel-body">
                          <table class="table table-responsive table-hover">
                             <thead>
-                                <tr>
-                                    <th style="font-size: 18px !important;">$ {{ number_format($customer->total() , 2 , ',' , '.')  }}</th>
-                                    <th style="font-size: 18px !important;">{{ $customer->totalOrder() }}</th>
-                                    <th style="font-size: 18px !important;">{{ $customer->totalConsult() }}</th>
-                                    <th style="font-size: 18px !important;">
-                                        @if($customer->minOrder())
-                                            {{ \Carbon\Carbon::parse($customer->minOrder())->format('d/m/Y') }}
-                                        @else
-                                            {{ \Carbon\Carbon::parse($customer->created_at)->format('d/m/Y') }}
-                                        @endif
-                                    </th>
-                                </tr>
+                            <tr>
+                                <td  style="font-size: 18px !important;">Total Gastado</td>
+                                <td  style="font-size: 18px !important;">Ventas</td>
+                                <td  style="font-size: 18px !important;">Consultas</td>
+                                <td  style="font-size: 18px !important;">Primera iteraci&oacute;n</td>
+                            </tr>
                             </thead>
                              <tbody>
-                                <tr>
-                                    <td  style="font-size: 18px !important;">Total Gastado</td>
-                                    <td  style="font-size: 18px !important;">Ventas</td>
-                                    <td  style="font-size: 18px !important;">Consultas</td>
-                                    <td  style="font-size: 18px !important;">Primera iteraci&oacute;n</td>
-                                </tr>
+                                 <tr>
+                                     <th style="font-size: 18px !important;">${{ number_format($customer->total() , 0 , ',' , '.')  }}</th>
+                                     <th style="font-size: 18px !important;">{{ $customer->totalOrder() }}</th>
+                                     <th style="font-size: 18px !important;">{{ $customer->totalConsult() }}</th>
+                                     <th style="font-size: 18px !important;">
+                                         @if($customer->minOrder())
+                                             {{ \Carbon\Carbon::parse($customer->minOrder())->format('d/m/Y') }}
+                                         @else
+                                             {{ \Carbon\Carbon::parse($customer->created_at)->format('d/m/Y') }}
+                                         @endif
+                                     </th>
+                                 </tr>
                              </tbody>
                          </table>
                      </div>
@@ -146,9 +155,9 @@ Cliente {{ $customer->full_name }}
                                  <tbody>
                                      @foreach($orders as $order)
                                         <tr>
-                                            <td><a href="{{ url("admin/orders/$order->uuid")}}">#{{ $order->id }}</a></td>
+                                            <td><a href="{{ url("admin/orders/$order->id")}}">#{{ $order->id }}</a></td>
                                             <td>{{ $order->created_at }}</td>
-                                            <td><strong>${{ $order->total }}</strong></td>
+                                            <td><strong>${{ number_format($order->total , 0 , ',' , '.')  }}</strong></td>
                                             <td>
                                                 <p class="text-muted">
                                                     {{ $order->status->description  }}
@@ -172,7 +181,7 @@ Cliente {{ $customer->full_name }}
                      <div class="panel-heading">
                          <div class="panel-title">
                              <h4>
-                                 <i class="fa fa-shopping-cart"></i>
+                                 <i class="fa fa-comment"></i>
                                  &nbsp;
                                  Consultas
                              </h4>
@@ -221,38 +230,15 @@ Cliente {{ $customer->full_name }}
                          <div class="row">
                              <div class="col-xs-6">
                                  <label>Nombres</label>
-                                 <input type="text" class="form-control" name="name" value="{{$customer->name}}">
-                             </div>
-                             <div class="col-xs-6">
+                                 <input type="text" class="form-control" name="name" value="{{$customer->name}}"><br>
                                  <label>Apellidos</label>
-                                 <input type="text" class="form-control"  name="last_name" value="{{$customer->last_name}}">
-                             </div>
-                             <div class="col-xs-6">
+                                 <input type="text" class="form-control"  name="last_name" value="{{$customer->last_name}}"><br>
                                  <label>Telefono</label>
                                  <input type="text" class="form-control" name="phone" value="{{$customer->phone}}">
                              </div>
                              <div class="col-xs-6">
-                                 <style type="text/css">
-                                     input[type="file"]{
-                                         display: none;
-                                     }
-                                     .custom-file-upload{
-                                         border: 1px solid #ccc;
-                                         display: inline-block;
-                                         padding: 6px  12px;
-                                         cursor: pointer;
-                                     }
-                                 </style>
-                                 <div class="clearfix"></div>
-                                 <div style="margin-top: 2px;"></div>
-                                 <label>Imagen de Perfil</label>
-                                 <div class="form-group">
-                                     <label for="file-upload" class="custom-file-upload">
-                                         <i class="fa fa-upload"></i> Selecciona foto de Perfil
-                                     </label>
-                                     <input id="file-upload" type="file" name="avatar" onchange="readURL(this);"/>
-                                 </div>
-                                 <img id="blah" src="#" alt="Image Select"/>
+                                 <br>
+                                 <input class="dropify" type="file" name="avatar" data-default-file="{{ asset("profile/".$customer->avatar) }}" style="max-height: 100px"/>
                              </div>
                          </div>
                      </div>
@@ -303,15 +289,4 @@ Cliente {{ $customer->full_name }}
          </div>
     @endsection
     @section('scripts')
-        <script>
-            function readURL(input) {
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        $('#blah').attr('src', e.target.result).width(50).height(50);
-                    };
-                    reader.readAsDataURL(input.files[0]);
-                }
-            }
-        </script>
     @stop

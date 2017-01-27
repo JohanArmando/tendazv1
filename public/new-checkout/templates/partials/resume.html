@@ -16,8 +16,6 @@
                     <div ng-if="!item.special_price">
                         $ {{ item.price | currency:"":0}}
                     </div>
-
-                           
                             <p><b>Cantidad : </b>{{ item.quantity }}</p>
                         </div>
                     </div>
@@ -28,9 +26,13 @@
                         <b>Subtotal :</b>
                         $ {{ carts.totalizers.items.value | currency:"":0}}
                     </p>
-                    <p class="shipping" ng-if="carts.totalizers.shipping">
+                    <p class="shipping" ng-if="carts.totalizers.shipping.value">
                         <b>Costo del envio :</b>
                         $ {{ carts.totalizers.shipping.value| currency:"":0 }}
+                    </p>
+                    <p class="discount" ng-if="carts.totalizers.discounts.value">
+                        <b>Descuento:</b>
+                        $ {{ carts.totalizers.discounts.value| currency:"":0 }}
                     </p>
                     <p class="total">
                         <b>Total :</b>

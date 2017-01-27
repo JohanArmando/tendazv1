@@ -67,6 +67,7 @@
                         <div class="col-sm-4">
                             <div class="title"><span>Ya te encuentras registrado ?</span></div>
                             <form name="loginForm" ng-submit="doLogin(loginForm)" role="form" data-toggle="validator">
+                                <p ng-repeat="error in erroreslogin" ng-show="errores" class="error-login">Correo o contrase&ntilde;a incorrecta!</p>
                                 <div class="form-group">
                                     <label for="emailInputLogin">Email</label>
                                     <input type="email" class="form-control" name="email" value="{{ old('email') }}" ng-model="formLog.loginMail" id="email" placeholder="Email" required>
@@ -90,24 +91,30 @@
                             </form>
                             <div style="margin-bottom: 30px;"></div>
                             <div style="margin-bottom: 30px;"></div>
-                            <div class="col-md-12">
-                                @if(!empty($socialData->client_id_facebook) || !empty($socialData->client_id_google))
-                                    <div class="title"><span>Iniciar con</span></div>
+                            <div class="col-md-12 hidden">
+                                @if(count($socials) == 2)
+                                <div class="title"><span>Iniciar con</span></div>
                                 @endif
-                                @if(!empty($socialData->client_id_facebook) && !empty($socialData->client_secret_facebook))
-                                    <div class="text-center col-md-6">
-                                        <a href="{{ url('auth/facebook') }}" class="btn btn-primary btn-md sb-facebook" style="cursor: pointer">
-                                            <i class="fa fa-facebook"></i> Facebook
-                                        </a>
-                                    </div>
-                                @endif
-                                @if(!empty($socialData->client_id_google) && !empty($socialData->client_secret_google))
-                                    <div class="text-center col-md-6">
-                                        <a href="{{ url('auth/google') }}" class="sb-twitter" style="cursor: pointer">
-                                            <button type="button" class="btn btn-danger btn-md"><i class="fa fa-google-plus"></i> Google Plus</button>
-                                        </a>
-                                    </div>
-                                @endif
+                                @foreach($socials as $social)
+                                    @if(!empty($social->provider == "facebook"))
+                                        @if(!empty($social->app_id) && !empty($social->app_secret))
+                                            <div class="text-center col-md-6">
+                                                <a href="{{ url('auth/facebook') }}" class="btn btn-primary btn-md sb-facebook" style="cursor: pointer">
+                                                    <i class="fa fa-facebook"></i> Facebook
+                                                </a>
+                                            </div>
+                                        @endif
+                                    @endif
+                                    @if(!empty($social->provider == "google"))
+                                        @if(!empty($social->app_id) && !empty($social->app_secret))
+                                        <div class="text-center col-md-6">
+                                            <a href="{{ url('auth/google') }}" class="sb-twitter" style="cursor: pointer">
+                                                <button type="button" class="btn btn-danger btn-md"><i class="fa fa-google-plus"></i> Google Plus</button>
+                                            </a>
+                                        </div>
+                                        @endif
+                                    @endif
+                                @endforeach
                             </div>
                         </div>
                     </div>

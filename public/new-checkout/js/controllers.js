@@ -120,7 +120,9 @@ myApp.controller("couponController" , [ "$scope"  , "Coupon" , function ($scope 
     $scope.coupon = {};
     angular.extend($scope , {
         'useCoupon' : function () {
-            Coupon.useCoupon($scope.coupon.code);
+            Coupon.useCoupon($scope.coupon.code).then(function () {
+                $scope.coupon = {};
+            });
         }
     });
 }]);
@@ -174,7 +176,7 @@ myApp.controller("shippingController" , ["$scope" , "Shipping" , "$location" , "
                 var ordObject = {
                     'shipping_address_id'  : $rootScope.carts.shippingAddress.data._id
                 };
-                Shipping.assignShipping(ordObject)
+                Shipping.assignShipping(ordObject);
                 $location.path('/payment');
             }else{
                 alert('Escoge una direccion');
@@ -225,7 +227,9 @@ myApp.controller("shippingController" , ["$scope" , "Shipping" , "$location" , "
 }]);
 myApp.controller("paymentController" , ["$scope" , "Payment" , "$location" , "$rootScope",   function ($scope , Payment  , $location , $rootScope) {
     Payment.getPaymentMethod();
-
+    if(!$rootScope.shippingTrue){
+        $location.path('/shipping');
+    }
     $scope.doPayment = function (method) {
         $('#'+method).attr('disabled' , 'disabled');
         $('#'+method).text("Pagando");
