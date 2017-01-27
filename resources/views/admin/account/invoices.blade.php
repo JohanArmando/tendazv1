@@ -30,8 +30,12 @@
 				<div id="home" class="tab-pane fade in active">
 					<div class="row">
 						<div class="col-md-12 text-center">
+							@if($shop->logo)
 							<img src="{{asset('logos/'.$shop->id.'/'.$shop->logo)}}"
 								 alt="Logo de la tienda" style="padding:3%; border: 1px solid; color: #f26522; max-height: 150px">
+								@else
+								<h2 style="color: #f26522">{{$shop->name}}</h2>
+							@endif
 						</div>
 						<div class="col-md-12 text-center">
 							<h2>{{Auth('admins')->user()->full_name}}</h2>

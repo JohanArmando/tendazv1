@@ -22,10 +22,10 @@
         <div class="big_container-two">
             <div class="container">
             <div class="row">
-                <div class="col-md-10 col-md-offset-1">
+                <div class="col-md-12">
                     <div class="row">
-                                <h1 class="w3ls">Crea Tu Tienda Virtual</h1>
-                                <div class="col-md-offset-4 col-md-4 col-xs-12 col-sm-12">
+                        <h1 class="w3ls">Crea Tu Tienda Virtual</h1>
+                        <div class="col-md-offset-4 col-md-4 col-xs-12 col-sm-12">
                                     {!! Form::open(['url' => url('auth/register') , 'method' => 'POST' , 'name' => "form-register" , 'data-toggle'=> "validator" , 'role'=>"form"]) !!}
                                     <div class="form-group">
                                         <div class="input-group">
@@ -37,7 +37,7 @@
                                         <div class="help-block">{{ $errors->default->first('email') }}</div>
                                         <div class="help-block with-errors errorForm"></div>
                                     </div>
-                                    <input type="hidden" name="plan" value="{{ isset($_GET['plan']) ? $_GET['plan'] : '' }}">
+                                    <input type="hidden" name="plan" value="{{ isset($_GET['plan']) ? $_GET['plan'] : '1' }}">
                                     <div class="form-group">
                                         <div class="input-group">
                                                 <span class="input-group-addon">
@@ -77,15 +77,15 @@
                                     </div>
                                     <input type="hidden" value="1" name="remember">
                                     {!! Form::close() !!}
-                                </div>
-                            </div>
+                        </div>
+                        </div>
                 </div>
                 <div class="col-md-12">
                     <ul class="cust-agileits cl-effect-21">
                         <li><a href="#">Incrementa Tus Ingresos</a></li>
-                        <li><a href="#">Quienes Somos?</a></li>
-                        <li><a href="#">Casos de Exito</a></li>
-                        <li><a href="#">Nuestros Asociados</a></li>
+                        <li><a href="{{url('/contacto')}}">Quienes Somos?</a></li>
+                        <li><a href="{{url('/login')}}">Inicia Sesion</a></li>
+                        <li><a href="{{url('/planes')}}">Conoce Nuestros Planes</a></li>
                     </ul>
                     <span class="cust-agileinfo1"></span>
                     <span class="cust-agileinfo2"></span>

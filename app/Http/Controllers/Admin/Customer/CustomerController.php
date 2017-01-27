@@ -5,6 +5,7 @@ namespace Tendaz\Http\Controllers\Admin\Customer;
 use Illuminate\Http\Request;
 use Tendaz\Http\Controllers\Controller;
 use Tendaz\Models\Address\Address;
+use Tendaz\Models\Address\CustomerAddress;
 use Tendaz\Models\Customer;
 use Tendaz\Models\Geo\City;
 use Tendaz\Models\Geo\Country;
@@ -51,18 +52,31 @@ class CustomerController extends Controller
 
     public function update($subdomain , Customer $customer , Request $request)
     {
+        $customer->update(['avatar'=> $request->file('avatar')]);
         $customer->update($request->all());
         if($request->has('shipping'))
-            $customer->shipping()->update($request->shipping[0]);
+            if(!$request->shipping[0]['country_id'] == '' && !$request->shipping[0]['state_id'] == ''){
+                $customerAddress = CustomerAddress::where('customer_id',$customer->id)->first();
+                if(empty($customerAddress)){
+                    $newAddress = Address::create($request->shipping[0]);
+                    CustomerAddress::create(['customer_id' => $customer->id , 'address_id' => $newAddress->id]);
+                }else {
+                    $address = Address::where('id', $customerAddress->address_id)->first();
+                    $address->update($request->shipping[0]);
+                }
+            }else{
+                return redirect()->back()->with('message' , ['type' => 'warning' , 'message' => 'La direccion debe tener Estado y Ciudad.']);
+            }
+
         return redirect()->back()->with('message' , ['type' => 'info' , 'message' => 'Enhorabuena!. Perfil actualizado.']);
     }
 
     public function edit($sudomain , Customer $customer)
     {
-
+        $address = $customer->addressesForShipping->first();
         $countries = Country::pluck('name' , 'id');
         $states = State::where('country_id' , 50)->pluck('name' , 'id');
-        return view('admin.customer.edit' , compact('customer' , 'states' , 'countries'));
+        return view('admin.customer.edit' , compact('customer' , 'states' , 'countries','address'));
     }
 
     public function contact()
@@ -72,11 +86,22 @@ class CustomerController extends Controller
     }
     public function postExport($subdomain , Request $request){
         $so = !empty($request->get('so')) && $request->get('so') == 'Mac' ? $so = 'csv' : $so = 'xls';
-        \Excel::create('clientes', function($excel)  {
+        $customers = Customer::all();
+        \Excel::create("$subdomain.clientes", function($excel) use($customers) {
             $excel->setTitle('Listado  de clientes : ');
-            $excel->sheet('Sheetname', function($sheet)  {
-                $clients = Customer::all();
-                $sheet->fromArray($clients);
+            $excel->sheet('Sheetname', function($sheet) use($customers) {
+                $rows = array();
+                foreach ($customers as $customer) {
+                    $rows[] = array(
+                        'Nombre'                    => $customer->name,
+                        'Apellido'                  => $customer->last_name,
+                        'Telefono'                  => $customer->phone,
+                        'Correo'                    => $customer->email,
+                        'Identificacion'            => $customer->identification,
+                        'Notas'                     => $customer->notes
+                    );
+                }
+                $sheet->fromArray($customers);
 
             });
         })->store($so,'exports');

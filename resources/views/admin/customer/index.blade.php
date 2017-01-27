@@ -4,15 +4,10 @@
     @endsection
     @section('css')
         <link rel="stylesheet" href="{{asset('administrator/plugins/datatables/css/tabletools.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('administrator/plugins/datatables/css/datatables.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('administrator/css/custom_tendaz.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('administrator/css/stylePersonal.css')}}">
-        <style>
-            [ng\:cloak], [ng-cloak], .ng-cloak {
-                display: none !important;
-            }
-            .space{
-                margin-bottom: 10px;
-            }
-        </style>
+        <link rel="stylesheet" type="text/css" href="{{asset('administrator/css/styleDatabase.css')}}">
     @stop
     @section('content')
         <div class="page-header page-header-block">
@@ -63,15 +58,7 @@
                             </div>
                         </div>
                         <div class="panel-body">
-                            <div class="row">
-                                <div class="col-md-4 space">
-                                    <div class="input-group">
-                                        <span class="input-group-addon" ><i class="fa fa-search"></i></span>
-                                        <input type="text" class="form-control" placeholder="Busca tus clientes" aria-describedby="basic-addon1" ng-model="search">
-                                    </div>
-                                </div>
-                            </div>
-                            <table id="tbl_cliente" class="table table-responsive table-hover" cellspacing="100%" width="100%">
+                            <table id="table_clients" class="table table-responsive table-hover list-table table-products"  cellspacing="100%" width="100%">
                                 <thead>
                                     <tr>
                                         <th><strong>Nombre</strong></th>
@@ -91,7 +78,7 @@
                                             {{ $customer->phone }}
                                         </td>
                                         <td>
-                                            $ {{ $customer->eagerTotal->first()== null ? '0' : number_format($customer->eagerTotal->first()->total , 2 , '.' , ',') }}
+                                            ${{ $customer->eagerTotal->first()== null ? '0' : number_format($customer->eagerTotal->first()->total , 0 , '.' , ',') }}
                                         </td>
                                         <td class="hidden-sm hidden-xs">
                                             {{ $customer->total_exc_tax}}
@@ -99,7 +86,7 @@
                                         <td class="hidden-sm hidden-xs">
                                             <strong>
                                                 @if(!$customer->latestOrder->first() == null)
-                                                <a href="{{url('admin/orders/'.$customer->id)}}">{{ $customer->latestOrder->first()->id }}</a>
+                                                <a href="{{url('admin/orders/'.$customer->latestOrder->first()->id)}}">{{ $customer->latestOrder->first()->id }}</a>
                                                     @else
                                                         <strong>Ninguna</strong>
                                                 @endif
@@ -124,4 +111,25 @@
         <script src="{{ asset('administrator/angular/pagination.js') }}"></script>
         <script src="{{ asset('administrator/angular/moduloClientes.js') }}"></script>
         <script src="{{ asset('administrator/js/angular-locale-es_es.js')}}"></script>
+        <script src="{{asset('administrator/js/jquery.dataTables.js')}}"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#table_clients').dataTable({
+                    "pageLength": 5,
+                    "language": {
+                        "search": "Buscar: ",
+                        "searchPlaceholder": "Nombre del Cliente",
+                        "lengthMenu":     "Mostrar _MENU_ resultados",
+                        "info":           "Mostrando _START_ a _END_ de _TOTAL_ Clientes",
+                        "infoEmpty":      "Mostrando 0 a 0 de 0 Resultados",
+                        "paginate": {
+                            "first":      "Primero",
+                            "last":       "Ultimo",
+                            "next":       "Siguiente",
+                            "previous":   "Anterior"
+                        }
+                    }
+                });
+            });
+        </script>
      @stop

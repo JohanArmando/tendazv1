@@ -151,7 +151,8 @@ class Product extends Model
     {
         return $this->join('variants', 'variants.product_id', '=', 'products.id')
             ->join('order_item', 'order_item.variant_id', 'variants.id')
-            ->select(DB::raw('sum(order_item.quantity) as total'), DB::raw("(GROUP_CONCAT(DISTINCT products.name SEPARATOR ',')) as `name`"))
+            ->select(DB::raw('sum(order_item.quantity) as total'), DB::raw("(GROUP_CONCAT(DISTINCT products.name SEPARATOR ',')) as `name`"),
+                DB::raw("(GROUP_CONCAT(DISTINCT variants.id SEPARATOR ',')) as `variant_id`"))
             ->groupBy('products.id')
             ->orderBy('total', 'DESC')
             ->take('10')
@@ -162,7 +163,8 @@ class Product extends Model
     {
         return $this->join('variants', 'variants.product_id', '=', 'products.id')
             ->join('order_item', 'order_item.variant_id', 'variants.id')
-            ->select(DB::raw('sum(price) as total , sum(order_item.quantity) AS count'), DB::raw("(GROUP_CONCAT(DISTINCT products.name SEPARATOR ',')) as `name`"))
+            ->select(DB::raw('sum(price) as total , sum(order_item.quantity) AS count'), DB::raw("(GROUP_CONCAT(DISTINCT products.name SEPARATOR ',')) as `name`"),
+                DB::raw("(GROUP_CONCAT(DISTINCT variants.id SEPARATOR ',')) as `variant_id`"))
             ->groupBy('products.id')
             ->orderBy('total', 'DESC')
             ->orderBy('count', 'DESC')

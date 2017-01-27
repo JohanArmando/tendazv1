@@ -3,11 +3,6 @@ Editar cliente
 @stop
 @extends('layouts.administrator')
 @section('css')
-    <link rel="stylesheet" href="{{asset('admin/plugins/jquery-ui/css/jquery-ui.css')}}">
-    <link rel="stylesheet" href="{{asset('admin/plugins/selectize/css/selectize.css')}}">
-    <link rel="stylesheet" href="{{asset('admin')}}">
-    <link rel="stylesheet" href="{{asset('admin/font-awesome/font-awesome.min.css')}}">
-    <link rel="stylesheet" href="{{asset('admin/plugins/summernote/css/summernote.css')}}">
 @stop
 @section('content')
     <div class="page-header page-header-block">
@@ -51,12 +46,6 @@ Editar cliente
 
 @endsection
 @section('scripts')
-    <script type="text/javascript" src="{{asset('admin/plugins/jquery-ui/js/jquery-ui.js')}}"></script>
-    <script type="text/javascript" src="{{asset('admin/plugins/selectize/js/selectize.js')}}"></script>
-    <script type="text/javascript" src="{{asset('admin/plugins/select2/js/select2.js')}}"></script>
-    <script type="text/javascript" src="{{asset('admin/js/backend/forms/element.js')}}"></script>
-    <script type="text/javascript" src="{{asset('admin/plugins/summernote/js/summernote.js')}}"></script>
-    <script type="text/javascript" src="{{asset('admin/js/backend/forms/wysiwyg.js')}}"></script>
     <script>
         $('#country_id').on('change' , function () {
             $.ajax({

@@ -7,54 +7,9 @@ Estadisticas basicas
 <link rel="stylesheet" type="text/css" href="{{asset('administrator/plugins/flot/css/flot.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('administrator/plugins/datatables/css/datatables.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('administrator/css/custom_tendaz.css')}}">
-<style type="text/css">
-
-thead {
-    display: none;
-}
-input, select {
-    max-height: 25px;
-}
-tr {
-    line-height: 5;
-}
-.paginate_button 
-{
-    padding-right: 2px;
-    padding-left: 2px;
-}
-.dataTables_wrapper .dataTables_paginate {
-    text-align: left;
-    padding: 10px 0px;
-    line-height: 32px;
-}
-.dataTables_wrapper .dataTables_length  > label {
-    margin: 0px;
-    color: #5e5e5e;
-    font-weight: normal;
-    line-height: 25px;
-}
-.dataTables_wrapper .dataTables_filter > label {
-    margin: 0px;
-    color: #5e5e5e;
-    font-weight: normal;
-    line-height: 25px;
-}
-.paginate_button {
-    cursor: pointer;
-    border: 1px solid #DBE3E5;
-    padding: 5px;
-    margin-right: 2%;
-    border-radius: 3px;
-}
-.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
-
-    background-color: #f2f2f2 !important;
-}
-.dataTables_wrapper .dataTables_length {
-    text-align: left;
-    padding: 10px 0px;
-}
+<link rel="stylesheet" type="text/css" href="{{asset('administrator/css/styleDatabase.css')}}">
+<style>
+    thead{display: none}
 </style>
 @stop
 
@@ -78,59 +33,66 @@ tr {
         <div class="col-md-12">
             <div class="widget panel text-center">
                 <blockquote>
-                  <p>Acá encontraras reportes relevantes para tener en cuenta y analizar el desempeño de tu tienda. Los datos se actualizan cada 24 horas aproximadamente. </p>
+                  <p style="margin-top: 10px">Estadisticas del Ultimo Mes</p>
                 </blockquote>
             </div>
         </div>
     </div>
 	<div class="row">
-                    <div class="col-lg-4">
-                         <div class="widget panel bgcolor-tendaz">
-                             <div class="panel-body" >
-                                <div class="clearfix">
-                                    <p class="text-center semibold" style="font-size: 20px;">Ventas</p>
-                                </div>
-                                <div class="text-center mt15 mb15">
-                                    <h1 class="semibold">
-                                        <i class="fa fa-money"></i>
-                                        <span class="">${{ number_format($sold , 0) }}</span>
-                                    </h1>
-                                </div>
-                            </div>
+            <div class="col-lg-4">
+                 <div class="widget panel" style="background-color: #85ab2a;color: white">
+                     <div class="panel-body">
+                         <div class="row">
+                             <div class="col-md-6">
+                                 <div class="text-center">
+                                     <p class="semibold" style="font-size: 20px;margin-top: 10px">Ventas</p>
+                                     <h1 class="semibold"><span class="">${{ number_format($sold , 0) }}</span></h1>
+                                 </div>
+                             </div>
+                             <div class="col-md-6">
+                                 <img src="{{asset('administrator/image/statsBasic/dinero.png')}}" class="img-responsive" style="margin-top: 15px; max-height:120px " alt="">
+                             </div>
                          </div>
-                     </div>
- 
-                    <div class="col-lg-4">
-                         <div class="widget panel bgcolor-tendaz">
-                             <div class="panel-body" >
-                                <div class="clearfix">
-                                    <p class="text-center semibold" style="font-size: 20px;">Ordenes</p>
+                    </div>
+                 </div>
+             </div>
+
+            <div class="col-lg-4">
+                 <div class="widget panel bgcolor-tendaz">
+                     <div class="panel-body" >
+                         <div class="row">
+                             <div class="col-md-6">
+                                <div class="text-center">
+                                    <p class="semibold" style="font-size: 20px;margin-top: 10px">Ordenes</p>
+                                    <h1 class="semibold"><span class="">{{ number_format($ordersTotal , 0) }}</span></h1>
                                 </div>
-                                <div class="text-center mt15 mb15">
-                                    <h1 class="semibold">
-                                        <i class="fa fa-shopping-cart"></i>
-                                        <span class="">{{ number_format($ordersTotal , 0) }}</span>
-                                    </h1>
-                                </div>
-                            </div>
+                             </div>
+                             <div class="col-md-6">
+                                 <img src="{{asset('administrator/image/statsBasic/ordenes.png')}}" class="img-responsive" style="margin-top: 2px; max-height:120px " alt="">
+                             </div>
                          </div>
-                     </div>
-                    <div class="col-lg-4">
-                         <div class="widget panel bgcolor-tendaz">
-                             <div class="panel-body" >
-                                <div class="clearfix">
-                                    <p class="text-center semibold" style="font-size: 20px;">Facturaci&oacute;n promedio</p>
+                    </div>
+                 </div>
+             </div>
+            <div class="col-lg-4">
+                 <div class="widget panel" style="background-color: #2a85ab;color: white">
+                     <div class="panel-body" >
+                         <div class="row">
+                             <div class="col-md-6">
+                                <div class="text-center">
+                                    <p class="semibold" style="font-size: 20px;margin-top: 10px">Facturaci&oacute;n</p>
+                                    <h1 class="semibold"><span class="">${{ number_format($average , 0) }}</span></h1>
                                 </div>
-                                <div class="text-center mt15 mb15">
-                                    <h1 class="semibold">
-                                        <i class="fa fa-ticket"></i>
-                                            <span class="">${{ number_format($average , 0) }}</span>
-                                    </h1>
-                                </div>
-                            </div>
-                         </div>
-                     </div>
+                             </div>
+                             <div class="col-md-6">
+                                 <img src="{{asset('administrator/image/statsBasic/factura.png')}}" class="img-responsive" style="margin-top: 8px; max-height:120px;margin-left: 15px" alt="">
+                             </div>
+                    </div>
+                 </div>
+             </div>
          </div>
+    </div>
+
          <div class="row">
          	        <div class="col-lg-6">
                         <div class="widget panel">
@@ -153,7 +115,13 @@ tr {
                                         <tr>
                                             <td><b>{{ ucfirst(strtolower($higher['name'])) }}</b></td>
                                             <td class="text-tendaz-green">$ {{ number_format(($higher['total'] * $higher['count'] ),2,',','.') }}</td>
-                                            <td align="center"><img class="img-circle" src="" width="50px" height="50px" alt=""></td>
+                                            <td align="center">
+                                                @foreach($images as $image)
+                                                    @if($image->variant_id == $higher->variant_id)
+                                                    <img class="img-circle" src="{{$image->url}}" width="50px" height="50px" alt="">
+                                                    @endif
+                                                @endforeach
+                                            </td>
                                         </tr>
                                     </hr>
                                     @endforeach
@@ -183,8 +151,13 @@ tr {
                                         <tr>
                                             <td><b>{{ ucfirst(strtolower($mas['name'])) }}</b></td>
                                             <td>{{ $mas['total'] }} Ventas</td>
-                                            <td align="center"><img class="img-circle" src="" width="50px" height="50px" alt=""></td>
-                        
+                                            <td align="center">
+                                                @foreach($images as $image)
+                                                    @if($image->variant_id == $mas->variant_id)
+                                                        <img class="img-circle" src="{{$image->url}}" width="50px" height="50px" alt="">
+                                                    @endif
+                                                @endforeach
+                                            </td>
                                         </tr>
                                     @endforeach
                                     </tbody>
@@ -208,8 +181,8 @@ tr {
                  "language": {
                             "search": "Buscar: ",
                             "lengthMenu":     "Mostrar _MENU_ resultados",
-                            "info":           "Mostrando _START_ a _END_ de _TOTAL_ productos",
-                            "infoEmpty":      "Mostrando 0 a 0 de 0 resultados",
+                            "info":           "Mostrando _START_ a _END_ de _TOTAL_ Productos",
+                            "infoEmpty":      "Mostrando 0 a 0 de 0 Resultados",
                             "paginate": {
                                 "first":      "Primero",
                                 "last":       "Ultimo",

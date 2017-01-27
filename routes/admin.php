@@ -9,6 +9,7 @@ $domain = new \Tendaz\Models\Domain\Domain();
     //Routes statics
     Route::get('/stats' , 'StaticsController@basic');
     Route::get('/stats/advanced' , 'StaticsController@advanced')->middleware('plan:estandar,premiun');
+    Route::get('/stats/advanced/map' , 'StaticsController@map');
     Route::get('/stats/update' , 'StaticsController@update');
 
     //Route logout
@@ -30,7 +31,6 @@ $domain = new \Tendaz\Models\Domain\Domain();
 
     //Route orders
     Route::get('orders/status' , 'OrdersController@status');
-    Route::get('orders/search' , 'OrdersController@search');
     Route::get('orders/export' , 'OrdersController@getExport');
     Route::get('orders/print/{id}' , 'OrdersController@printOrder');
     Route::post('orders/export/post' , 'OrdersController@postExport');

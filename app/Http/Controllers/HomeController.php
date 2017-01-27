@@ -4,16 +4,13 @@ namespace Tendaz\Http\Controllers;
 
 
 use igaster\laravelTheme\Facades\Theme;
-use Illuminate\Support\Facades\Session;
-use Tendaz\Models\Cart\Cart;
 use Tendaz\Models\Customer;
+use Tendaz\Models\Marketing\Trend;
 use Tendaz\Models\Order\Consult;
-use Tendaz\Models\Order\Order;
 use Tendaz\Models\Products\Product;
+use Tendaz\Models\Social\SocialLogin;
 use Tendaz\Models\Store\Shop;
 use Illuminate\Http\Request;
-use Tendaz\Transformers\OrderTransformer;
-use Webpatser\Uuid\Uuid;
 
 class HomeController extends Controller
 {
@@ -42,6 +39,13 @@ class HomeController extends Controller
     }
 
     public function detail ($subdomain , $slug){
+        $product = Product::where('slug',$slug)->first();
+        Trend::create([
+            'customer_id'       => Auth('web')->user(),
+            'trend_id'          => $product->id,
+            'hits'              => 1,
+            'trend_type'        => "product",
+        ]);
         return view(Theme::current()->viewsPath.'.detail',compact('slug'));
     }
 
@@ -77,10 +81,10 @@ class HomeController extends Controller
             'El mensaje ha sido enviado con exito, muchas gracias.' , 'type' => 'info'));
     }
 
-    public function login (Request $request){
+    public function login ($subdomain , Request $request){
         $user = new Customer();
-
-        return view(Theme::current()->viewsPath.'.login' , ['users' => $user]);
+        $socials = SocialLogin::where('shop_id',$request->shop->id)->get();
+        return view(Theme::current()->viewsPath.'.login' , ['users' => $user, 'socials' => $socials]);
     }
 
     public function checkout(Request $request)

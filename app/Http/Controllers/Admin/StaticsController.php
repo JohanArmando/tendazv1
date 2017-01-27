@@ -5,6 +5,7 @@ namespace Tendaz\Http\Controllers\Admin;
 use Carbon\Carbon;
 use Symfony\Component\HttpFoundation\Request;
 use Tendaz\Http\Controllers\Controller;
+use Tendaz\Models\Images\Image;
 use Tendaz\Models\Marketing\Trend;
 use Tendaz\Models\Order\Order;
 use Tendaz\Models\Products\Product;
@@ -20,12 +21,14 @@ class StaticsController extends Controller
         //dd(Product::withCount('variants' , 'categories')->get());
         $higherSell = Product::TotalSell();
         $higherBilling = Product::totalBilling();
+        $images = Image::all();
         return view('admin.stats.basic' , [
             'sold'          => $sold ,
             'ordersTotal'   => $ordersTotal,
             'average'       => $average,
             'higherBilling' => $higherBilling,
-            'higherSell' => $higherSell
+            'higherSell' => $higherSell,
+            'images' => $images
         ]);
     }
 
@@ -101,6 +104,10 @@ class StaticsController extends Controller
                 }
             }
         }
+    }
+
+    public function map(){
+        return view('admin.stats.map');
     }
 
 }

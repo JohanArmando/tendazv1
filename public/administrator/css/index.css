@@ -1,10 +1,10 @@
 @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 
-.big_container-two{ padding: 2%; overflow: hidden;  position: relative;  min-height:  calc(100vh - 52px) ; }
+.big_container-two{ padding: 1.2%; overflow: hidden;  position: relative;  min-height:  calc(100vh - 52px) ; }
 .big_container-two:before{  position: absolute;  content: " ";  top: 0;  left: 0;  width: 100%;  height: 100%;  display: block;  z-index: 0;  background: rgba(57, 59, 59, 0.75)  }
-h1.w3ls {  margin-top: 10px; font-size: 45px;  font-weight: normal;  color: #fff;  text-transform: uppercase;  padding: 40px 0;  text-align: center  }
+h1.w3ls { font-size: 45px;  font-weight: normal;  color: #fff;  text-transform: uppercase;  padding: 40px 0;  text-align: center  }
 .errorForm{
-    color: white !important; font-weight: bold; font-size: 14px;
+    color: white !important; font-size: 14px;
 }
 .has-error .input-group-addon {
     color: #f26522;

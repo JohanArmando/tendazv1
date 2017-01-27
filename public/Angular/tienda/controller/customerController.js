@@ -76,7 +76,7 @@
                         $http(toLog).then(function(response) {
                             $cookies.put('auth' , JSON.stringify(response.data) , {path: '/'});
                             localStorage.setItem('cart_id',response.data.cart_id);
-                            location.reload();
+                            window.location.href = '/';
                         }, function(error) {
                             $scope.errores = error.data;
                             $scope.errorname = $scope.errores.name;

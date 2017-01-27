@@ -124,20 +124,20 @@ class ProductsController extends Controller
                         $rows[] = array(
                             'url_key'                   => $product->slug,
                             'Nombre'                    => $product->name,
-                            'catetgorias'               => $product->StringCategories(),
+                            'Categorias'               => $product->StringCategories(),
+                            'Precio'                    => $variant->price,
+                            'Precio Promocional'        => $variant->promotional_price,
+                            'Stock'                     => $variant->stock,
+                            'Peso'                      => $variant->weight,
+                            'Sku'                       => $variant->sku,
+                            'Mostrar En Tienda'         => $product->showInStore,
+                            'Descripcion'               => $product->description,
                             'Nombre de propiedad 1'     => $variant->optionOne,
                             'Valor de la propiedad 1'   => $variant->valueOne,
                             'Nombre de propiedad 2'     => $variant->optionTwo,
                             'Valor de la propiedad 2'   => $variant->valueTwo,
                             'Nombre de propiedad 3'     => $variant->optionThree,
                             'Valor de la propiedad 3'   => $variant->valueThree,
-                            'Precio'                    => $variant->price,
-                            'Precio Promocional'        => $variant->promotional_price,
-                            'Stock'                     => $variant->stock,
-                            'Peso'                      => $variant->weight,
-                            'sku'                       => $variant->sku,
-                            'Mostrar En Tienda'         => $product->showInStore,
-                            'Descripcion'               => $product->description,
                         );
                     }
                 }
