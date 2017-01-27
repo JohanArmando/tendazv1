@@ -113,7 +113,7 @@ class RegisterController extends Controller
 
         $shop->store()->save(new Store(['category_shop_id' => '26']));
         
-        $plan = Plan::find($data['plan']);
+        $plan = Plan::find(isset($data['plan']) ? $data['plan'] : 1);
         
         $shop->newSubscription($plan);
 
