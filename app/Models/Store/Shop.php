@@ -175,7 +175,7 @@ class Shop extends Model
             new Subscription([
                 'trial_at' =>  $this->datesForTest() ,
                 'amount' => $plan->price,
-                'plan_id' => $plan->periods->first()->id
+                'plan_id' => $plan->id
             ])
         );
         $subscription->makeSubscription();
