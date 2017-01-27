@@ -166,30 +166,16 @@ class Shop extends Model
 
     public function hasPlan($plan)
     {
-        return $this->subscription()->plan_id >= Plan::findName($plan)->id;
+        return Plan::find($this->subscription()->plan_id)->plan_id >= Plan::findName($plan)->id;
     }
-    
-    //revisar buenos metodos para crear los datos de pago de la subscripcion metodo create si se puede
-    //revisar el weekhook y revisar tambien     $table->string('card_brand')->nullable();
-    //$table->string('card_last_four')->nullable() para guardar estos datos
-    //el create genera un nuevo pago con los datos de dicha tarjet ay el apgo de esa subsccricion
-    /**
-     *Pagar la misma subscripcion, las facturas , el metodo create que va con la pasarela de apgos, si pago una subscricopn previamente vencida
-     */
-    //Detalles a revisar al crear una nueva subscripcion se va a guardar con trials end, entonces revisar esa parte
-    //revisar estados de la subscripcion es decir activa cancelada suspendida
-    //revisar el cambio de supscripcion por una que aun esta activa el lisdato de subscripciones
-    //revisar el cambio de plan en una subscripcion gratuita
-    //revisar el cambio de plan ahcia arriba y hacia abajo de una subscripcion activa
-    
-    
-    public function newSubscription(Model $model)
+
+    public function newSubscription(Plan $plan)
     {
         $subscription = $this->subscriptions()->save(
             new Subscription([
                 'trial_at' =>  $this->datesForTest() ,
-                'amount' => $model->price ,
-                'plan_id' => $model->id
+                'amount' => $plan->price,
+                'plan_id' => $plan->periods->first()->id
             ])
         );
         $subscription->makeSubscription();

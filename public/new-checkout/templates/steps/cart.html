@@ -113,23 +113,31 @@
                         <div class="col-md-8">
                             <input type="text" class="disc_input" name="" ng-model="coupon.code">
                         </div>
-                        <div class="col-md-4 nopad">
-                            <button class="btn btn_checkout btn-default"  ng-click="useCoupon()">Agregar</button>
+                        <div class="col-md-4">
+                            <button class="btn btn_checkout btn-default"  ng-click="useCoupon()" style="margin-top: 0px;margin-left: 0px">Agregar</button>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <h3>Resumen de la compra</h3>
-                        <div class="col-md-12">
-                            <p><b>Sub total:</b></p>
-                        </div>
-                        <div class="col-md-8 text-right">
-                            <span>$ {{ carts.totalizers.items.value | currency:"":0}}</span>
-                        </div>
-                        <div class="col-md-8">
-                            <p><b>Total:</b></p>
-                        </div>
-                        <div class="col-md-8 text-right">
-                            <span>$ {{ carts.original_total| currency:"":0 }}</span>
+                        <div class="row">
+                            <h3>Resumen de la compra</h3>
+                            <div class="col-md-4"><p><b>Sub total:</b></p></div>
+                            <div class="col-md-8 text-right">
+                                <p>$ {{ carts.totalizers.items.value | currency:"":0}}</p>
+                            </div>
+                            <div class="col-md-4" ng-if="carts.totalizers.shipping.value"><p><b>Envio :</b></p></div>
+                            <div class="col-md-8 text-right" ng-if="carts.totalizers.shipping.value">
+                                <p>$ {{ carts.totalizers.shipping.value   | currency:"":0 }}</p>
+                            </div>
+                            <div class="col-md-4" ng-if="carts.totalizers.discounts.value"><p><b>Descuento:</b></p></div>
+                            <div class="col-md-8 text-right" ng-if="carts.totalizers.discounts.value">
+                                <p>$ {{ carts.totalizers.discounts.value   | currency:"":0 }}</p>
+                                <p>({{ carts.coupon.data.code }} : {{ carts.coupon.data.message }})</p>
+                            </div>
+                            <div class="col-md-12"><hr></div>
+                            <div class="col-md-4"><p><b>Total:</b></p></div>
+                            <div class="col-md-8 text-right">
+                                <p>$ {{ carts.original_total| currency:"":0 }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>

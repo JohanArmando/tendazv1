@@ -6,6 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Plan extends Model
 {
+    const MONTHLY = 'monthly';
+    
+    public function periods()
+    {
+        return $this->hasMany(Plan::class);
+    }
+    
+    public function monthly()
+    {
+        return $this->periods()->where('interval' , self::MONTHLY)->where('interval_count' , 1);
+    }
     /**
      * SCOPES
      */

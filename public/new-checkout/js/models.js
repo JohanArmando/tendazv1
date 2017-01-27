@@ -15,6 +15,7 @@ myApp.factory('User' ,['$http', '$location', '$cookies' , "$rootScope" , "Cart",
                 password: data.password
             }
         }).then(function(response) {
+            console.log(response);
             $location.path('/cart');
             $cookies.put('auth' , JSON.stringify(response.data));
             Cart.setCartId(response.data.cart_id);
@@ -117,6 +118,7 @@ myApp.factory("Cart" , [ "$http" , "$rootScope", function ($http , $rootScope) {
             url: baseUrl + '/carts/' + cartId + '/items?client_secret='  + client_secret + '&client_id=' + client_id,
             method: "GET",
         }).then(function(response) {
+            console.log(response.data.data);
            $rootScope.carts = response.data.data;
            $rootScope.shopData = $rootScope.carts.shop.data;
         }).catch(function(response) {
@@ -307,6 +309,7 @@ myApp.factory("Shipping" , ["$http" , "User", "$rootScope" , "Cart", "$location"
             method: "GET"
         }).then(function(response) {
             $rootScope.carts = response.data.cart.data;
+            $rootScope.shippingTrue = true;
         }).catch(function(response) {
             swal({
                 title: "Upps!",
@@ -315,6 +318,7 @@ myApp.factory("Shipping" , ["$http" , "User", "$rootScope" , "Cart", "$location"
                 confirmButtonText: "OK"
             });
             $rootScope.carts = response.data.cart.data;
+            $rootScope.shippingTrue = false;
         }).finally(function() {});
     };
 
@@ -387,6 +391,19 @@ myApp.factory('Payment' ,['$http', '$location' , "$rootScope" , "Cart",  functio
                     mode: "modal",
                     onreturn: function(data) {
                         $location.reload();
+                    }
+                });
+            }else if(response.data.custom){
+                swal({
+                    title:response.data.payment.data.name,
+                    text: response.data.payment.data.instructions,
+                    type: "success",
+                    confirmButtonText: "OK"
+                },function(isConfirm){
+                    if (isConfirm) {
+                        localStorage.removeItem('orderData');
+                        localStorage.removeItem('cart_id');
+                        location.href = "/checkout?status=success";
                     }
                 });
             }

@@ -3,6 +3,7 @@
 namespace Tendaz\Models\Shipping;
 
 use Illuminate\Database\Eloquent\Model;
+use Tendaz\Events\applyCouponToCartEvent;
 use Tendaz\Events\updateShippingOrderEvent;
 use Tendaz\Models\Cart\Cart;
 use Tendaz\Models\Order\Order;
@@ -29,7 +30,7 @@ class ShippingMethod extends Model
             $price = $product->product->collection->first()->promotion ? $product->promotional_price : $product->price;
             $method =  $this->filterByPrice($price)->filterByWeight($product->weight)->orderBy('id')->min('cost');
             if (!$method){
-                event(new updateShippingOrderEvent($cart->order , 0));
+                event(new updateShippingOrderEvent($cart->order , 0 , true));
                 return response()->json(['message' => 'El producto ' . $product->product->name .' no tiene envio disponible.' , 'cart' => fractal()->item($cart, new CartTransformer()) ] , 404);
             }
             $total += ($method * $product->pivot->quantity);

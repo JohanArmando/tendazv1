@@ -13,6 +13,5 @@ class ShippingMethodsController extends Controller
     public function index(Cart $cart)
     {
         return ShippingMethod::OptionsByCart($cart);
-       
     }
 }

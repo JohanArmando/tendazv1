@@ -1,1 +1,1 @@
-{"version":3,"sources":["app.js"],"names":[],"mappings":"AAAA","file":"app.js","sourcesContent":["var myApp = angular.module('account',['ngCookies']);"]}
+{"version":3,"sources":["/resources/assets/js/store/app.js"],"names":[],"mappings":"AAAA","file":"app.js","sourcesContent":["var myApp = angular.module('account',['ngCookies']);"]}

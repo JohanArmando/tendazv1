@@ -5,6 +5,7 @@ namespace Tendaz\Models\Order;
 use Carbon\Carbon;
 use Tendaz\Models\Address\CustomerAddress;
 use Tendaz\Models\Cart\Cart;
+use Tendaz\Models\Coupon\Coupon;
 use Tendaz\Models\Customer;
 use Tendaz\Models\Payment_method\PaymentValue;
 use Tendaz\Models\Products\Variant;
@@ -44,6 +45,12 @@ class Order extends Model
     /**
      * RELATIONSHIP 
      */
+
+    public function coupons()
+    {
+        return $this->belongsToMany(Coupon::class , 'coupon_redemption');
+    }
+
     public function histories()
     {
         return $this->hasMany(OrderHistory::class,'order_id');
@@ -85,6 +92,26 @@ class Order extends Model
     public function cart()
     {
         return $this->belongsTo(Cart::class);
+    }
+    
+    public function setTotalProductsAttribute($value)
+    {
+        if ($value < 0){
+            $this->attributes['total_products']  = 0;
+        }else{
+            $this->attributes['total_products'] = $value;
+        }
+    }
+
+
+    public function setTotalAttribute($value)
+    {
+
+        if ($value < 0){
+            $this->attributes['total']  = 0;
+        }else{
+            $this->attributes['total'] = $value;
+        }
     }
     /**
      ** Scopes
@@ -244,6 +271,17 @@ class Order extends Model
 
     public function getUniqueIdByShopAttribute()
     {
-               return  (static::count() ? static::count() + 100 : 100) - 1;
+        return  (static::count() ? static::count() + 100 : 100) - 1;
+    }
+
+    public function updateOrderItems()
+    {
+        foreach ($this->cart->products as $product){
+            $this->products()->attach($product->id , ['quantity' => $product->pivot->quantity]);
+            if($product->stock > 0){
+                $product->stock = $product->stock - $product->pivot->quantity;
+                $product->save();
+            }
+        }
     }
 }

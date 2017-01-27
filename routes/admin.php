@@ -87,7 +87,7 @@ $domain = new \Tendaz\Models\Domain\Domain();
     //Route Setting
     Route::group(['prefix' => 'setting', 'namespace' => 'Setting'], function() {
         Route::resource('/payments','PaymentController');
-        
+
         Route::resource('shippings', 'ShippingController',
             ['only' => ['index', 'store', 'update', 'destroy']]);
         //meli

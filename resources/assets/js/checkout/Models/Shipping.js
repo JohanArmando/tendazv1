@@ -73,6 +73,7 @@ myApp.factory("Shipping" , ["$http" , "User", "$rootScope" , "Cart", "$location"
             method: "GET"
         }).then(function(response) {
             $rootScope.carts = response.data.cart.data;
+            $rootScope.shippingTrue = true;
         }).catch(function(response) {
             swal({
                 title: "Upps!",
@@ -81,6 +82,7 @@ myApp.factory("Shipping" , ["$http" , "User", "$rootScope" , "Cart", "$location"
                 confirmButtonText: "OK"
             });
             $rootScope.carts = response.data.cart.data;
+            $rootScope.shippingTrue = false;
         }).finally(function() {});
     };
 

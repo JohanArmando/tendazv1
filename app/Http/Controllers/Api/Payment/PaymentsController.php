@@ -21,7 +21,7 @@ class PaymentsController extends Controller
                 ->toJson();
     }
 
-    public function show(PaymentValue $paymentValue  , Cart $cart, Request $request)
+    public function show(PaymentValue  $paymentValue , Cart $cart, Request $request)
     {
 
         $method = $paymentValue->paymentMethod;
@@ -49,7 +49,7 @@ class PaymentsController extends Controller
                                 'picture_url' => $cart->products[0]->product->MainImage(),
                                 'description' => $description,
                                 'quantity' => $quantity,
-                                'unit_price' => $price
+                                'unit_price' => $price - (float) $cart->order->total_discount
                         )
                     ],
                     "payer" => array(
@@ -100,6 +100,18 @@ class PaymentsController extends Controller
                 );
                 $preference = $mp->create_preference($preference_data);
                 return ['url' => $preference['response']['init_point']];
+                break;
+            case 3:
+                $cart->order->updateStatus('approved');
+                $cart->update([
+                    'status' => 'closed',
+                ]);
+                $cart->order->updateOrderItems();
+
+                if ($cart->coupon)
+                    $cart->order->coupons()->attach($cart->coupon_id , ['total_discount' => $cart->order->total_discount]);
+
+                return response(['custom' => true , 'payment' => fractal()->item($paymentValue , new PaymentValueTransformer()) ],200);
                 break;
         }
     }

@@ -1,0 +1,10 @@
+<?php
+
+namespace Tendaz\Models\Subscription;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Feature extends Model
+{
+ 
+}

@@ -13,7 +13,7 @@ myApp.controller("shippingController" , ["$scope" , "Shipping" , "$location" , "
                 var ordObject = {
                     'shipping_address_id'  : $rootScope.carts.shippingAddress.data._id
                 };
-                Shipping.assignShipping(ordObject)
+                Shipping.assignShipping(ordObject);
                 $location.path('/payment');
             }else{
                 alert('Escoge una direccion');

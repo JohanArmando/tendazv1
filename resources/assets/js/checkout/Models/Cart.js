@@ -20,6 +20,7 @@ myApp.factory("Cart" , [ "$http" , "$rootScope", function ($http , $rootScope) {
             url: baseUrl + '/carts/' + cartId + '/items?client_secret='  + client_secret + '&client_id=' + client_id,
             method: "GET",
         }).then(function(response) {
+            console.log(response.data.data);
            $rootScope.carts = response.data.data;
            $rootScope.shopData = $rootScope.carts.shop.data;
         }).catch(function(response) {

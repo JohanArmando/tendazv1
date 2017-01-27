@@ -24,9 +24,11 @@ class PlanController extends Controller
         return redirect()->to('admin/account/checkout/start?ref=from_payment_bottom_bar');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $plans = Plan::orderBy('name','ASC')->get();
+      $period = $request->has('period') ? $request->get('period') : 'monthly';
+
+        $plans = Plan::with($period)->whereHas($period)->get();
         return view('admin.account.plans' , compact('plans'));
     }
 

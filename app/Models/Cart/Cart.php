@@ -60,6 +60,11 @@ class Cart extends Model
         } );
     }
 
+    public function totalDiscount()
+    {
+        return $this->order->total_discount * -1;
+    }
+
     public function totalShipping(){
         return (int) $this->order->total_shipping;
     }
