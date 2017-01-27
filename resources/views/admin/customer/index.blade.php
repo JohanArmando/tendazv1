@@ -78,7 +78,7 @@
                                             {{ $customer->phone }}
                                         </td>
                                         <td>
-                                            $ {{ $customer->eagerTotal->first()== null ? '0' : number_format($customer->eagerTotal->first()->total , 0 , '.' , ',') }}
+                                            ${{ $customer->eagerTotal->first()== null ? '0' : number_format($customer->eagerTotal->first()->total , 0 , '.' , ',') }}
                                         </td>
                                         <td class="hidden-sm hidden-xs">
                                             {{ $customer->total_exc_tax}}
@@ -86,7 +86,7 @@
                                         <td class="hidden-sm hidden-xs">
                                             <strong>
                                                 @if(!$customer->latestOrder->first() == null)
-                                                <a href="{{url('admin/orders/'.$customer->id)}}">{{ $customer->latestOrder->first()->id }}</a>
+                                                <a href="{{url('admin/orders/'.$customer->latestOrder->first()->id)}}">{{ $customer->latestOrder->first()->id }}</a>
                                                     @else
                                                         <strong>Ninguna</strong>
                                                 @endif
@@ -131,7 +131,5 @@
                     }
                 });
             });
-
-
         </script>
      @stop

@@ -5,6 +5,7 @@ namespace Tendaz\Http\Controllers\Admin\Customer;
 use Illuminate\Http\Request;
 use Tendaz\Http\Controllers\Controller;
 use Tendaz\Models\Address\Address;
+use Tendaz\Models\Address\CustomerAddress;
 use Tendaz\Models\Customer;
 use Tendaz\Models\Geo\City;
 use Tendaz\Models\Geo\Country;
@@ -54,16 +55,28 @@ class CustomerController extends Controller
         $customer->update(['avatar'=> $request->file('avatar')]);
         $customer->update($request->all());
         if($request->has('shipping'))
-            $customer->shipping()->update($request->shipping[0]);
+            if(!$request->shipping[0]['country_id'] == '' && !$request->shipping[0]['state_id'] == ''){
+                $customerAddress = CustomerAddress::where('customer_id',$customer->id)->first();
+                if(empty($customerAddress)){
+                    $newAddress = Address::create($request->shipping[0]);
+                    CustomerAddress::create(['customer_id' => $customer->id , 'address_id' => $newAddress->id]);
+                }else {
+                    $address = Address::where('id', $customerAddress->address_id)->first();
+                    $address->update($request->shipping[0]);
+                }
+            }else{
+                return redirect()->back()->with('message' , ['type' => 'warning' , 'message' => 'La direccion debe tener Estado y Ciudad.']);
+            }
+
         return redirect()->back()->with('message' , ['type' => 'info' , 'message' => 'Enhorabuena!. Perfil actualizado.']);
     }
 
     public function edit($sudomain , Customer $customer)
     {
-
+        $address = $customer->addressesForShipping->first();
         $countries = Country::pluck('name' , 'id');
         $states = State::where('country_id' , 50)->pluck('name' , 'id');
-        return view('admin.customer.edit' , compact('customer' , 'states' , 'countries'));
+        return view('admin.customer.edit' , compact('customer' , 'states' , 'countries','address'));
     }
 
     public function contact()

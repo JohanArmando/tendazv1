@@ -31,7 +31,6 @@ $domain = new \Tendaz\Models\Domain\Domain();
 
     //Route orders
     Route::get('orders/status' , 'OrdersController@status');
-    Route::get('orders/search' , 'OrdersController@search');
     Route::get('orders/export' , 'OrdersController@getExport');
     Route::get('orders/print/{id}' , 'OrdersController@printOrder');
     Route::post('orders/export/post' , 'OrdersController@postExport');

@@ -55,14 +55,14 @@ Cliente {{ $customer->full_name }}
                                 <li class="text-left mb15">
                                     <a href="{{ url("admin/customers/".$customer->uuid."/edit") }}"><i class="fa fa-pencil"></i> Editar cliente</a>
                                     <h5><b>Correo: {{ $customer->email }}</b></h5>
-                                    <h5>Direccion de envio:</h5>
-                                    @if($address)
+                                    <h5><b>Direccion de envio:</b></h5>
+                                    @if(empty($address))
+                                        <p class="text-muted">No tiene direccion</p>
+                                        @else
                                         <p class="text-muted">
-                                                {{ $address->name }}<br>
-                                                {{ $address->street }}<br>
-                                                {{ $address->complement }}<br>
-                                                {{ $address->state->name }}<br>
-                                                {{ $address->city->name }}<br>
+                                            - {{ $address->name }}<br>
+                                            - {{ $address->street }} - {{ $address->complement }}<br>
+                                            - ({{ $address->state->name }} - {{ $address->city->name }})<br>
                                         </p>
                                     @endif
                                 </li>
@@ -96,7 +96,7 @@ Cliente {{ $customer->full_name }}
                      <div class="panel-heading">
                          <div class="panel-title">
                              <h4>
-                                 <i class="fa fa-shopping-cart"></i>
+                                 <i class="fa fa-file"></i>
                                  &nbsp;
                                  Resumen
                              </h4>
@@ -105,26 +105,26 @@ Cliente {{ $customer->full_name }}
                      <div class="panel-body">
                          <table class="table table-responsive table-hover">
                             <thead>
-                                <tr>
-                                    <th style="font-size: 18px !important;">$ {{ number_format($customer->total() , 2 , ',' , '.')  }}</th>
-                                    <th style="font-size: 18px !important;">{{ $customer->totalOrder() }}</th>
-                                    <th style="font-size: 18px !important;">{{ $customer->totalConsult() }}</th>
-                                    <th style="font-size: 18px !important;">
-                                        @if($customer->minOrder())
-                                            {{ \Carbon\Carbon::parse($customer->minOrder())->format('d/m/Y') }}
-                                        @else
-                                            {{ \Carbon\Carbon::parse($customer->created_at)->format('d/m/Y') }}
-                                        @endif
-                                    </th>
-                                </tr>
+                            <tr>
+                                <td  style="font-size: 18px !important;">Total Gastado</td>
+                                <td  style="font-size: 18px !important;">Ventas</td>
+                                <td  style="font-size: 18px !important;">Consultas</td>
+                                <td  style="font-size: 18px !important;">Primera iteraci&oacute;n</td>
+                            </tr>
                             </thead>
                              <tbody>
-                                <tr>
-                                    <td  style="font-size: 18px !important;">Total Gastado</td>
-                                    <td  style="font-size: 18px !important;">Ventas</td>
-                                    <td  style="font-size: 18px !important;">Consultas</td>
-                                    <td  style="font-size: 18px !important;">Primera iteraci&oacute;n</td>
-                                </tr>
+                                 <tr>
+                                     <th style="font-size: 18px !important;">${{ number_format($customer->total() , 0 , ',' , '.')  }}</th>
+                                     <th style="font-size: 18px !important;">{{ $customer->totalOrder() }}</th>
+                                     <th style="font-size: 18px !important;">{{ $customer->totalConsult() }}</th>
+                                     <th style="font-size: 18px !important;">
+                                         @if($customer->minOrder())
+                                             {{ \Carbon\Carbon::parse($customer->minOrder())->format('d/m/Y') }}
+                                         @else
+                                             {{ \Carbon\Carbon::parse($customer->created_at)->format('d/m/Y') }}
+                                         @endif
+                                     </th>
+                                 </tr>
                              </tbody>
                          </table>
                      </div>
@@ -155,9 +155,9 @@ Cliente {{ $customer->full_name }}
                                  <tbody>
                                      @foreach($orders as $order)
                                         <tr>
-                                            <td><a href="{{ url("admin/orders/$order->uuid")}}">#{{ $order->id }}</a></td>
+                                            <td><a href="{{ url("admin/orders/$order->id")}}">#{{ $order->id }}</a></td>
                                             <td>{{ $order->created_at }}</td>
-                                            <td><strong>${{ $order->total }}</strong></td>
+                                            <td><strong>${{ number_format($order->total , 0 , ',' , '.')  }}</strong></td>
                                             <td>
                                                 <p class="text-muted">
                                                     {{ $order->status->description  }}
@@ -181,7 +181,7 @@ Cliente {{ $customer->full_name }}
                      <div class="panel-heading">
                          <div class="panel-title">
                              <h4>
-                                 <i class="fa fa-shopping-cart"></i>
+                                 <i class="fa fa-comment"></i>
                                  &nbsp;
                                  Consultas
                              </h4>
