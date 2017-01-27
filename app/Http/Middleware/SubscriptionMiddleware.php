@@ -3,6 +3,7 @@
 namespace Tendaz\Http\Middleware;
 
 use Closure;
+use Tendaz\Models\Subscription\Plan;
 
 class SubscriptionMiddleware
 {
@@ -17,7 +18,9 @@ class SubscriptionMiddleware
     {
         if (isset($request->route()->getAction()['notMiddleware']) && $request->route()->getAction()['notMiddleware'] == 'subscription')
             return $next($request);
-        
+        if(!$request->shop->subscription()){
+            $request->shop->makeSubscription(Plan::first());
+        }
         if ($request->shop->subscription()->subscribed() || $request->shop->subscription()->onTrial() || $request->shop->subscription()->onGracePeriod())
             return $next($request);
 
