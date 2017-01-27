@@ -17,7 +17,7 @@ class SubscriptionMiddleware
     {
         if (isset($request->route()->getAction()['notMiddleware']) && $request->route()->getAction()['notMiddleware'] == 'subscription')
             return $next($request);
-        
+	dd($request->shop);        
         if ($request->shop->subscription()->subscribed() || $request->shop->subscription()->onTrial() || $request->shop->subscription()->onGracePeriod())
             return $next($request);
 
