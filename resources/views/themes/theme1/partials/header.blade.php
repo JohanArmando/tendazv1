@@ -1,6 +1,6 @@
 <header>
 	    <div class="container">
-	        <div class="row hidden-xs">
+	        <div class="row">
 
 	        	<!-- Logo -->
 	            <div class="col-lg-2 col-md-2">

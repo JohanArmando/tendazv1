@@ -74,14 +74,14 @@
                                                             @endif
                                                         </td>
                                                         @if($producto->product->collection->promotion)
-                                                            <td>$ {{ number_format($producto->promotional_price,2,',','.') }}</td>
+                                                            <td>$ {{ number_format($producto->promotional_price,0,',','.') }}</td>
                                                             <td style="text-align: center !important;">{{ $producto->pivot->quantity }}</td>
-                                                            <td>{{ $t = number_format(($producto->pivot->quantity * $producto->promotional_price),2,',','.')  }}</td>
+                                                            <td>$ {{ $t = number_format(($producto->pivot->quantity * $producto->promotional_price),0,',','.')  }}</td>
 
                                                         @else
-                                                            <td>{{ number_format($producto->price , 2 ,',' , '.') }}</td>
+                                                            <td>$ {{ number_format($producto->price , 0 ,',' , '.') }}</td>
                                                             <td style="text-align: center !important;">{{ $producto->pivot->quantity }}</td>
-                                                            <td>{{ $t = number_format(($producto->pivot->quantity * $producto->price),2,',','.')  }}</td>
+                                                            <td>$ {{ $t = number_format(($producto->pivot->quantity * $producto->price),0,',','.')  }}</td>
 
                                                         @endif
                                                     </tr>
@@ -89,16 +89,16 @@
                                                     <tr>
                                                         <td></td><td></td><td></td>
                                                         <td><strong>Sub:</strong></td>
-                                                        <td><strong>$ {{ number_format($order->total_products,2,',','.') }}</strong></td>
+                                                        <td><strong>$ {{ number_format($order->total_products,0,',','.') }}</strong></td>
                                                     </tr><tr>
                                                         <td></td><td></td><td></td>
                                                         <td><strong>Envio:</strong></td>
-                                                        <td><strong>$ {{ number_format($order->total_shipping,2,',','.') }}</strong></td>
+                                                        <td><strong>$ {{ number_format($order->total_shipping,0,',','.') }}</strong></td>
                                                     </tr>
                                                     <tr>
                                                     <td></td><td></td><td></td>
                                                     <td><strong>Total:</strong></td>
-                                                    <td><strong>$ {{ number_format($order->total , 2 , ',' , '.') }}</strong></td>
+                                                    <td><strong>$ {{ number_format($order->total , 0 , ',' , '.') }}</strong></td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -135,12 +135,13 @@
                                                 @endif
                                                 <br>
                                                 <strong>Identificaci&oacute;n:</strong>
-                                                @if(empty($customer->identification))N.N
+                                                @if(empty($customer->identification))Sin Identificaci&oacute;n
                                                 @else {{ $customer->identification }}
                                                 @endif
                                                 <br>
                                                 <strong>Telefono:</strong>
                                                 @if(empty($customer->phone))
+                                                    Sin Telefono
                                                     @else
                                                     {{$customer->phone}}
                                                 @endif

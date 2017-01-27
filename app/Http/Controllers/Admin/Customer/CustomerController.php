@@ -51,6 +51,7 @@ class CustomerController extends Controller
 
     public function update($subdomain , Customer $customer , Request $request)
     {
+        $customer->update(['avatar'=> $request->file('avatar')]);
         $customer->update($request->all());
         if($request->has('shipping'))
             $customer->shipping()->update($request->shipping[0]);
@@ -72,11 +73,22 @@ class CustomerController extends Controller
     }
     public function postExport($subdomain , Request $request){
         $so = !empty($request->get('so')) && $request->get('so') == 'Mac' ? $so = 'csv' : $so = 'xls';
-        \Excel::create('clientes', function($excel)  {
+        $customers = Customer::all();
+        \Excel::create("$subdomain.clientes", function($excel) use($customers) {
             $excel->setTitle('Listado  de clientes : ');
-            $excel->sheet('Sheetname', function($sheet)  {
-                $clients = Customer::all();
-                $sheet->fromArray($clients);
+            $excel->sheet('Sheetname', function($sheet) use($customers) {
+                $rows = array();
+                foreach ($customers as $customer) {
+                    $rows[] = array(
+                        'Nombre'                    => $customer->name,
+                        'Apellido'                  => $customer->last_name,
+                        'Telefono'                  => $customer->phone,
+                        'Correo'                    => $customer->email,
+                        'Identificacion'            => $customer->identification,
+                        'Notas'                     => $customer->notes
+                    );
+                }
+                $sheet->fromArray($customers);
 
             });
         })->store($so,'exports');

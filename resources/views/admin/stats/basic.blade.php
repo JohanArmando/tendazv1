@@ -7,54 +7,9 @@ Estadisticas basicas
 <link rel="stylesheet" type="text/css" href="{{asset('administrator/plugins/flot/css/flot.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('administrator/plugins/datatables/css/datatables.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('administrator/css/custom_tendaz.css')}}">
-<style type="text/css">
-
-thead {
-    display: none;
-}
-input, select {
-    max-height: 25px;
-}
-tr {
-    line-height: 5;
-}
-.paginate_button 
-{
-    padding-right: 2px;
-    padding-left: 2px;
-}
-.dataTables_wrapper .dataTables_paginate {
-    text-align: left;
-    padding: 10px 0px;
-    line-height: 32px;
-}
-.dataTables_wrapper .dataTables_length  > label {
-    margin: 0px;
-    color: #5e5e5e;
-    font-weight: normal;
-    line-height: 25px;
-}
-.dataTables_wrapper .dataTables_filter > label {
-    margin: 0px;
-    color: #5e5e5e;
-    font-weight: normal;
-    line-height: 25px;
-}
-.paginate_button {
-    cursor: pointer;
-    border: 1px solid #DBE3E5;
-    padding: 5px;
-    margin-right: 2%;
-    border-radius: 3px;
-}
-.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
-
-    background-color: #f2f2f2 !important;
-}
-.dataTables_wrapper .dataTables_length {
-    text-align: left;
-    padding: 10px 0px;
-}
+<link rel="stylesheet" type="text/css" href="{{asset('administrator/css/styleDatabase.css')}}">
+<style>
+    thead{display: none}
 </style>
 @stop
 
@@ -226,8 +181,8 @@ tr {
                  "language": {
                             "search": "Buscar: ",
                             "lengthMenu":     "Mostrar _MENU_ resultados",
-                            "info":           "Mostrando _START_ a _END_ de _TOTAL_ productos",
-                            "infoEmpty":      "Mostrando 0 a 0 de 0 resultados",
+                            "info":           "Mostrando _START_ a _END_ de _TOTAL_ Productos",
+                            "infoEmpty":      "Mostrando 0 a 0 de 0 Resultados",
                             "paginate": {
                                 "first":      "Primero",
                                 "last":       "Ultimo",

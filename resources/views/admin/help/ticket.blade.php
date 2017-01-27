@@ -1,3 +1,6 @@
+@section('title')
+	Tickets
+@stop
 @extends('layouts.administrator')
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{asset('administrator/css/new_ticket.css')}}">
