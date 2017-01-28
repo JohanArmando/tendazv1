@@ -213,3 +213,10 @@ span.cust-agileinfo2 {
     height: 4px;
     margin: -3px auto 50px;
 }
+.container-text{border-right: 1px solid white; padding-right: 7%}
+.firstTitle{color: white !important;font-size: 24px;text-align: right}
+.secondTitle{color: white !important;font-size: 15px;text-align: right}
+.threeTitle{color: white !important;font-size: 20px;text-align: right}
+.firstHr{opacity: 0.2;width: 60%;text-align: right;margin-right: 0px}
+.secondHr{opacity: 0.2;width: 100%;text-align: right;margin-right: 0px}
+.adaptable{margin-top: calc(10vh - 30px);}

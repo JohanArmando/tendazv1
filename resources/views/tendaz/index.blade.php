@@ -20,12 +20,21 @@
     </style>
     <div class="row">
         <div class="big_container-two">
-            <div class="container">
+            <div class="container adaptable">
             <div class="row">
                 <div class="col-md-12">
                     <div class="row">
                         <h1 class="w3ls">Crea Tu Tienda Virtual</h1>
-                        <div class="col-md-offset-4 col-md-4 col-xs-12 col-sm-12">
+                        <div class="col-md-offset-2 col-md-4 col-xs-12 col-sm-12">
+                            <div class="container-text">
+                                <p class="firstTitle">Nunca fue tan facil <br>crear una tienda!</p>
+                                <hr class="firstHr">
+                                <p class="secondTitle">"En tan solo tres pasos podras comenzar"</p>
+                                <hr class="secondHr">
+                                <p class="threeTitle">Gana dinero desde casa <br>con tu e-commerce</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-xs-12 col-sm-12">
                                     {!! Form::open(['url' => url('auth/register') , 'method' => 'POST' , 'name' => "form-register" , 'data-toggle'=> "validator" , 'role'=>"form"]) !!}
                                     <div class="form-group">
                                         <div class="input-group">
@@ -78,7 +87,7 @@
                                     <input type="hidden" value="1" name="remember">
                                     {!! Form::close() !!}
                         </div>
-                        </div>
+                    </div>
                 </div>
                 <div class="col-md-12">
                     <ul class="cust-agileits cl-effect-21">
