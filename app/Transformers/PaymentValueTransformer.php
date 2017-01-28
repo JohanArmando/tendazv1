@@ -46,6 +46,7 @@ class PaymentValueTransformer extends TransformerAbstract
                     '_id' => $paymentValue->uuid,
                     'discount' => $paymentValue->discount,
                     'instructions' => $paymentValue->instructions,
+                    'type' => 'custom',
                     'name' => $paymentValue->custom_name,
                 ];
         }
