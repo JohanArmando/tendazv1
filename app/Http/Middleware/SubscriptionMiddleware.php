@@ -3,6 +3,7 @@
 namespace Tendaz\Http\Middleware;
 
 use Closure;
+use Maatwebsite\Excel\Classes\Cache;
 use Tendaz\Models\Subscription\Plan;
 
 class SubscriptionMiddleware
