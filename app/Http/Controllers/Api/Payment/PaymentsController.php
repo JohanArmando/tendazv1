@@ -113,6 +113,18 @@ class PaymentsController extends Controller
 
                 return response(['custom' => true , 'payment' => fractal()->item($paymentValue , new PaymentValueTransformer()) ],200);
                 break;
+            default:
+                $cart->order->updateStatus('approved');
+                $cart->update([
+                    'status' => 'closed',
+                ]);
+                $cart->order->updateOrderItems();
+
+                if ($cart->coupon)
+                    $cart->order->coupons()->attach($cart->coupon_id , ['total_discount' => $cart->order->total_discount]);
+
+                return response(['custom' => true , 'payment' => fractal()->item($paymentValue , new PaymentValueTransformer()) ],200);
+                break;
         }
     }
     
