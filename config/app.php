@@ -178,7 +178,7 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Barryvdh\Cors\ServiceProvider::class,
         SantiGraviano\LaravelMercadoPago\Providers\MercadoPagoServiceProvider::class,
-
+        \Jenssegers\Date\DateServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -245,6 +245,7 @@ return [
         'Theme' => igaster\laravelTheme\Facades\Theme::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'MP' => SantiGraviano\LaravelMercadoPago\Facades\MP::class,
+        'Date' => Jenssegers\Date\Date::class
     ],
 
 ];

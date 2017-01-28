@@ -84,7 +84,7 @@
                                     <tbody>
                                     @foreach($orders as $order)
                                         <tr style="font-size: 14px">
-                                            <td class="text-center"><a href="{{ url('admin/orders')."/".$order->id }}">
+                                            <td class="text-center"><a href="{{ url('admin/orders' , $order->uuid)}}">
                                                     #{{  $order->id }}</a></td>
                                             <td>
                                                 <div class="text-center">
@@ -157,7 +157,8 @@
             <script type="text/javascript">
                 $(document).ready(function() {
                     $('#table_orders').dataTable({
-                        "pageLength": 5,
+                        "order": "",
+                        "pageLength": 10,
                         "language": {
                             "search": "Buscar: ",
                             "searchPlaceholder": "Numero de Orden",

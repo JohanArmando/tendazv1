@@ -185,4 +185,9 @@ class Variant extends Model
             return $order->pivot->quantity;
         });
     }
+
+    public function subtotal()
+    {
+        return ($this->product->collection->promotion ? $this->promotional_price   : $this->price) *  $this->pivot->quantity;
+    }
 }

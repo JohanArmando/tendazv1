@@ -3,6 +3,7 @@
 namespace Tendaz\Models\Order;
 
 use Carbon\Carbon;
+use Jenssegers\Date\Date;
 use Tendaz\Models\Address\CustomerAddress;
 use Tendaz\Models\Cart\Cart;
 use Tendaz\Models\Coupon\Coupon;
@@ -40,8 +41,8 @@ class Order extends Model
     {
         return 'uuid';
     }
-    
-    
+
+
     /**
      * RELATIONSHIP 
      */
@@ -260,7 +261,7 @@ class Order extends Model
     }  
     
     public  function getCreatedAtAttribute(){
-        return  Carbon::parse($this->attributes['created_at'])->format('m/d/Y');
+        return  (new Date($this->attributes['created_at']))->format('l j , F Y');
     }
 
     public function updateStatus($status)
