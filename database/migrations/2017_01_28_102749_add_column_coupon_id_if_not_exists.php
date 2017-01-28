@@ -16,7 +16,7 @@ class AddColumnCouponIdIfNotExists extends Migration
         if (!Schema::hasColumn('carts', 'coupon_id')){
             Schema::table('carts' , function (Blueprint $table){
                 $table->integer('coupon_id')->unsigned()->nullable();
-                $table->enum('status' , ['open' , 'closed'])->default('open');
+                $table->foreign('coupon_id')->references('id')->on('coupons');
             });
         }
     }
