@@ -21,6 +21,7 @@ class SubscriptionMiddleware
         if(!$request->shop->subscription_id){
             $request->shop->newSubscription(Plan::first());
         }
+        
         if ($request->shop->subscription()->subscribed() || $request->shop->subscription()->onTrial() || $request->shop->subscription()->onGracePeriod())
             return $next($request);
 
