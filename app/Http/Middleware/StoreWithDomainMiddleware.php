@@ -34,6 +34,8 @@ class StoreWithDomainMiddleware
         $request->subdomain = $subdomain;
         if(Cache::has($subdomain.'_store')){
             $request->shop =  Cache::get($subdomain.'_store');
+            if (!$request->shop->subscription_id)
+                Cache::forget($subdomain.'_store');
             return $next($request);
         }else{
             if (Domain::isDomainName($domain)){
