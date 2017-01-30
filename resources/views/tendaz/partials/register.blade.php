@@ -9,7 +9,7 @@
         <div class="help-block">{{ $errors->default->first('email') }}</div>
         <div class="help-block with-errors"></div>
     </div>
-<input type="hidden" name="plan" value="{{ isset($_GET['plan']) ? $_GET['plan'] : '' }}">
+<input type="hidden" name="plan" value="{{ isset($_GET['plan']) ? $_GET['plan'] : '1' }}">
     <div class="form-group">
         <div class="input-group">
             <span class="input-group-addon">

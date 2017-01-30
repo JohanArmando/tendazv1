@@ -13,6 +13,7 @@ class HomeController extends Controller
 {
 
     public function home(Request $request){
+        //dd(Order::OrderPendingDay());
         $orderPendingDay = Order::OrderPendingDay();
         $orderPendingYesterday = Order::OrderPendingYesterday();
         $orderPendingMore = Order::OrderPendingMore();

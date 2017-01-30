@@ -1,5 +1,3 @@
-
-
 <div class="widget">
     <div class="panel-body">
         <ul class="list-unstyled">
