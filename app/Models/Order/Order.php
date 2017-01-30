@@ -163,7 +163,7 @@ class Order extends Model
     }
 
     public function scopeCurrentState($query){
-        $query->whereIn('current_state', [3, 6, 7 , 11]);
+        $query->whereIn('order_status', [3, 6, 7 , 11]);
     }
     public function scopeGroup($query , $field){
         $query->groupBy($field);
@@ -174,7 +174,7 @@ class Order extends Model
     }
 
     public function scopePending($query ){
-        $query->where('current_state' , '<' , 6);
+        $query->where('order_status' , '<' , 6);
     }
 
     /**
@@ -215,9 +215,9 @@ class Order extends Model
 
     public  static function ByStatus(){
         return  Order::currentState()
-            ->select('current_state', DB::raw('count(*) as total'))
-            ->group('current_state')
-            ->order('current_state')
+            ->select('order_status', DB::raw('count(*) as total'))
+            ->group('order_status')
+            ->order('order_status')
             ->NotInitOrders()
             ->get()
             ->toArray();

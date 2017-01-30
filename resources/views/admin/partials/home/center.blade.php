@@ -35,7 +35,7 @@
                     <tbody>
                     <tr>
                         <td class="active"><span class="text-success">Pagada</span></td>
-                        <td align="center"><span class="text-success"><strong>{{ isset($orderByStatus[2]) ? $orderByStatus[2]['total'] : 0}}</strong></span></td>
+                        <td align="center"><span class="text-success"><strong>{{ isset($orderByStatus[0]) ? $orderByStatus[0]['total'] : 0}}</strong></span></td>
                     </tr>
                     <tr>
                         <td class="active"><span class="text-default">Enviada</span></td>
@@ -43,7 +43,7 @@
                     </tr>
                     <tr>
                         <td class="active"><span class="text-danger">Cancelada</span></td>
-                        <td align="center" class="text-tendaz"><strong>{{ isset($orderByStatus[1]) ? $orderByStatus[0]['total'] : 0}}</strong></td>
+                        <td align="center" class="text-tendaz"><strong>{{ isset($orderByStatus[2]) ? $orderByStatus[2]['total'] : 0}}</strong></td>
                     </tr>
 
                     </tbody>
