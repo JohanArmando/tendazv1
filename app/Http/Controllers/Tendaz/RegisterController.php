@@ -76,8 +76,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'storename' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6',
-            'plan' => 'required|in:1,2,3'
+            'password' => 'required|min:6'
         ],
             [
                 'plan.required' => 'Por favor selecciona un plan'
@@ -93,28 +92,31 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $storename =  CleanString::cleanName($data['storename']);
+        $storename = CleanString::cleanName($data['storename']);
 
         $user = User::create([
             'email' => $data['email'],
             'password' => $data['password'],
         ]);
 
-        $shop = $user->shop()->save(new Shop(['name' => $storename ]));
+        $shop = $user->shop()->save(new Shop(['name' => $storename]));
 
         $shop->domains()->save(new Domain([
-            'name'     => $shop->name,
-            'domain'   => $shop->name,  
-            'ssl'      => $shop->name,
-            'main'     =>  1,
-            'active'   =>  1,
-            'state'    => 'OK'
+            'name' => $shop->name,
+            'domain' => $shop->name,
+            'ssl' => $shop->name,
+            'main' => 1,
+            'active' => 1,
+            'state' => 'OK'
         ]));
 
         $shop->store()->save(new Store(['category_shop_id' => '26']));
-        
+
         $plan = Plan::find(isset($data['plan']) ? $data['plan'] : 1);
         
+        if (!$plan)
+            abort(404);
+
         $shop->newSubscription($plan);
 
         return $user;

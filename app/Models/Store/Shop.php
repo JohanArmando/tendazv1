@@ -89,10 +89,9 @@ class Shop extends Model
     public function setUniqueName($name, $extra)
     {
         $slug = str_slug($name . '-' . $extra);
-
         if (static::whereSlug($slug)->exists())
         {
-            $this->setUniqueName($name, $extra + 1);
+            $this->setUniqueName($name, ((int) $extra) + 1);
             return;
         }
 
