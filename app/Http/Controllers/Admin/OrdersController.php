@@ -25,14 +25,8 @@ class OrdersController extends Controller
         return [OrderStatus::where('id' , '<>' , 1)->get(['name' ,'id'])];
     }
 
-    public function show($subdomain , $id){
-        $order= Order::where('id',$id)->first();
-        $customer = Customer::where('id',$order->customer_id)->first();
-        $address = $customer->addressesForShipping->first();
-        $histories= $order->histories->groupBy(function($date) {
-            return Carbon::parse($date->created_at)->format('Y-m-d');
-        })->toArray();
-        return view('admin.orders.order-detail',compact('order','customer','histories','address'));
+    public function show($subdomain , Order $order){
+        return view('admin.orders.show',compact('order'));
     }
     
     public function update($subdomain ,$id , Request $request)

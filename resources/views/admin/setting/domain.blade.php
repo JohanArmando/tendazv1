@@ -45,12 +45,12 @@ Configura tu dominio
 			<div id="new_tab" class="col-md-12">
 				<div class="border-content">
 				<ul class="nav nav-tabs nav-justified">
-					<li class="hidden custom_tab active"><a class="link_tab tab1" href="#tabone" data-toggle="tab">Comprar Dominio</a></li>
-					<li class="custom_tab"><a class="link_tab" href="#tabtwo" data-toggle="tab">Agregar Dominio</a></li>
+					<li class="hidden custom_tab"><a class="link_tab tab1" href="#tabone" data-toggle="tab">Comprar Dominio</a></li>
+					<li class="custom_tab active"><a class="link_tab" href="#tabtwo" data-toggle="tab">Agregar Dominio</a></li>
 					<li class="custom_tab"><a class="link_tab tab3" href="#tabthree" data-toggle="tab">Mis Dominios</a></li>
 				</ul>
 				<div class="tab-content panel" style="margin-bottom: -8px !important;">
-					<div class="tab-pane active" id="tabone">
+					<div class="tab-pane" id="tabone">
 						<div class="row">
 							<div class="clearfix"></div>
 							<div class="col-sm-8 col-sm-offset-2">
@@ -58,7 +58,7 @@ Configura tu dominio
 							</div>
 						</div>
 					</div>
-						<div class="tab-pane" id="tabtwo">
+						<div class="tab-pane active" id="tabtwo">
 						<div class="row">
 							<div class="clearfix"></div>
 							<div class="col-sm-8 col-sm-offset-2">
