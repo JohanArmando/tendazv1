@@ -157,12 +157,16 @@ Cupones de descuento
                     $('input[name=percentage]').val("");
                     $('input[name=discount]').val("");
                     $('#absolute-2').hide();
+                    $('#shippingLabel').show();
+                    $('#shipping').show();
                 }
                 if($(this).val() == 'absolute'){
                     $('input[name=percentage]').val("");
                     $('input[name=discount]').val("");
                     $('#percentage-2').hide();
                     $('#absolute-2').show();
+                    $('#shippingLabel').show();
+                    $('#shipping').show();
                 }
 
                 if($(this).val() == 'shipping'){
@@ -170,6 +174,8 @@ Cupones de descuento
                     $('input[name=discount]').val("");
                     $('#percentage-2').hide();
                     $('#absolute-2').hide();
+                    $('#shippingLabel').hide();
+                    $('#shipping').hide();
                 }
             });
             var meses = new Array ("ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE");
