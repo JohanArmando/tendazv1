@@ -3,6 +3,7 @@
 namespace Tendaz\Models\Products;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Tendaz\Models\Cart\CartProductPivot;
 use Tendaz\Models\Order\Provider;
 use Webpatser\Uuid\Uuid;
@@ -16,11 +17,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    use WhereShopTrait, UuidAndShopTrait;
+    use WhereShopTrait, UuidAndShopTrait ,SoftDeletes;
 
     protected $shop;
     protected $appends = ['options'];
-
+    protected $dates = ['deleted_at'];
     protected $table = 'products';
 
     protected $fillable = [
@@ -70,6 +71,13 @@ class Product extends Model
     /**
      * @return array
      */
+
+
+    public function getShowInStoreAttribute()
+    {
+        return $this->publish ? 'Si' : 'No';
+    }
+
     public function getCreatedAtUnixAttribute()
     {
         return \Carbon\Carbon::parse($this->attributes['created_at'])->timestamp;
@@ -78,7 +86,7 @@ class Product extends Model
     {
         $slug = str_slug($name . '-' . $extra);
         if (static::whereSlug($slug)->exists()) {
-            $this->setUniqueName($name, $extra + 1);
+            $this->setUniqueName($name, ((int) $extra )+ 1);
             return;
         }
 

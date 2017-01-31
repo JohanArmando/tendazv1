@@ -43,10 +43,9 @@ class OrderController extends Controller
                 'shipping_address_id' => $address->customer->first()->pivot->id
             ]);
         }else{
-            $order->update($request->all());
+            $order->updateStatus($request->value);
         }
         return response()->json( fractal()->item($order->cart, new CartTransformer()), 201);
-
     }
 
     public function show(Order $order)

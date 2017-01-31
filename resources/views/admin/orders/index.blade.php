@@ -100,7 +100,15 @@
                                                 @endif
                                             </td>
                                             <td>
-                                               <span>{{ $order->status->description }}</span>
+                                                <a href="#"
+                                                   class="select-status"
+                                                   data-type="select"
+                                                   data-name="order_status_id"
+                                                   data-pk="{{ $order->uuid }}"
+                                                   data-url="{{ App::environment('local') ? 'http://'.env('APP_API_URL').env('APP_API_PORT') : 'https://'.env('APP_API_URL').env('APP_API_PORT') }}{{ "/orders/$order->uuid"."?client_secret=$shop->uuid&client_id=$shop->id" }}"
+                                                   data-title="Estado de la orden"
+                                                   data-value="{{ $order->status->id }}">
+                                                </a>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -172,6 +180,27 @@
                                 "previous":   "Anterior"
                             }
                         }
+                    });
+                });
+            </script>
+            <script>
+                $.fn.editable.defaults.mode = 'inline';
+                $.fn.editable.defaults.ajaxOptions = { contentType: 'application/json', dataType: 'json' , type: 'PUT' };
+                $(document).on('ready' , function () {
+                    $('.select-status').editable({
+                        params: function(params) {
+                            return JSON.stringify(params);
+                        },
+                        source: [
+                            {value : '2' , text: 'Iniciada'},
+                            {value : '3' , text: 'Pagada'},
+                            {value : '4' , text: 'Empaquetada'},
+                            {value : '6' , text: 'Enviada'},
+                            {value : '7' , text: 'Recogida'},
+                            {value : '8' , text: 'Archivada'},
+                            {value : '11' , text: 'Cancelada'},
+                            {value : '11' , text: 'Devuelta'}
+                        ]
                     });
                 });
             </script>

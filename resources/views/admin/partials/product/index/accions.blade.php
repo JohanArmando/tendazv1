@@ -87,6 +87,8 @@
                 <select name="categories" id="myCategory" class="form-control"
                         ng-options="category.name for category in categories track by category.id"
                         ng-model="category.data">
+
+                    <option value="">------------ Escoge Una Categoria ---------</option>
                 </select>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">

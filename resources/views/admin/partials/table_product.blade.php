@@ -12,13 +12,13 @@
     @foreach($products as $product)
         <tr>
             <td>
-                <img src="{{ $product->product->mainImage() }}" width="50px"  height="50px" class="thumbnail" alt="">
+                <img src="{{ $product->productWithTrashed->mainImage() }}" width="50px"  height="50px" class="thumbnail" alt="">
             </td>
             <td>
-                {{ $product->product->name }}
+                {{ $product->productWithTrashed->name }}
             </td>
             <td>
-                $ {!!  $product->product->collection->promotion ? ("{$product->price}". " - " ."{$product->promotional_price}")  : $product->price !!}
+                $ {!!  $product->productWithTrashed->collection->promotion ? ("{$product->price}". " - " ."{$product->promotional_price}")  : $product->price !!}
             </td>
             <td>
                 {{ $product->pivot->quantity }}

@@ -205,7 +205,7 @@ Mis productos
         <br>
         @include('admin.partials.message')
         <div class="row" ng-app="Product" ng-controller="controllerProducts">
-            @include('admin.partials.product.index.filter_advanced')
+            {{-- @include('admin.partials.product.index.filter_advanced') --}}
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -246,6 +246,7 @@ Mis productos
                                         | filter:search
                                         | orderBy:order
                                         | filter : { categories : category }
+                                        | filter : { stock : stock }
                                         | itemsPerPage: pageSize
                                         | filter: { price_promotion : price_promotion}
                                         | filter: {visible : show}  " class="ng-cloak" ng-show="product.show">
@@ -309,7 +310,7 @@ Mis productos
                                                                        name="price"
                                                                        ng-blur="update(variant , 'price')"
                                                                        my-enter="update(variant , 'price')"
-                                                                       value="@{{ variant.price | currency:"":0 }}" >
+                                                                       value="@{{ variant.price }}" >
                                                             </div>
                                                         </div>
                                                     </div>

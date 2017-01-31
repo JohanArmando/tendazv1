@@ -3,7 +3,9 @@
 namespace Tendaz\Models\Order;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Lang;
 use Jenssegers\Date\Date;
+use Tendaz\Events\OrderStatusChangeEvent;
 use Tendaz\Models\Address\CustomerAddress;
 use Tendaz\Models\Cart\Cart;
 use Tendaz\Models\Coupon\Coupon;
@@ -266,8 +268,13 @@ class Order extends Model
 
     public function updateStatus($status)
     {
-        $this->order_status = trans("payments.status.$status");
+        if (Lang::has("payments.status.$status")){
+            $status = trans("payments.status.$status");
+        }
+        $this->order_status = $status;
         $this->save();
+
+        event(new OrderStatusChangeEvent($this ,$this->status->name));
     }
 
     public function getUniqueIdByShopAttribute()

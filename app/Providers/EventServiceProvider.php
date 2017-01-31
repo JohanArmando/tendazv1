@@ -4,9 +4,11 @@ namespace Tendaz\Providers;
 
 use Illuminate\Auth\Events\Login;
 use Tendaz\Events\applyCouponToCartEvent;
+use Tendaz\Events\OrderStatusChangeEvent;
 use Tendaz\Events\updateOrderTotalByProductEvent;
 use Tendaz\Events\updateShippingOrderEvent;
 use Tendaz\Listeners\applyCouponToCartListener;
+use Tendaz\Listeners\OrderStatusChangeListener;
 use Tendaz\Listeners\UpdateCountOnlogin;
 use Tendaz\Listeners\UpdateLastIpOnlogin;
 use Tendaz\Listeners\UpdateLastLoginOnLogin;
@@ -36,6 +38,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         applyCouponToCartEvent::class => [
             applyCouponToCartListener::class
+        ],
+        OrderStatusChangeEvent::class => [
+            OrderStatusChangeListener::class
         ]
     ];
 
