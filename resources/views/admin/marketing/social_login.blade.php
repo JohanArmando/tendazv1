@@ -13,7 +13,7 @@ Login con redes sociales
     <div class="page-header page-header-block">
         <div class="page-header-section">
             <h4 class="title">
-                <img class="page-header-section-icon" src="{{asset('administrator/image/icons/icons-base/network.png')}}">&nbsp; Social Login
+                <img class="page-header-section-icon" src="{{asset('administrator/image/icons/icons-base/network.png')}}">&nbsp; Login con Redes Sociales
             </h4>
         </div>
         <div class="page-header-section">
@@ -54,7 +54,7 @@ Login con redes sociales
                             {!! Form::label('app_secret','App Secret') !!}
                             {!! Form::text('app_secret' , null ,array('class' => 'form-control')) !!}
                             <input type="hidden" name="provider" value="facebook">
-                            <a href="#"><i class="fa fa-exclamation-circle"></i>
+                            <a href="{{url('/admin/marketing/social/tutorial')}}"><i class="fa fa-exclamation-circle"></i>
                                 <strong>&iquest;Como activo el login via Facebook para mis clientes?</strong>
                             </a>
                         </div>

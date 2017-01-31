@@ -18,13 +18,13 @@
                 {{ $product->product->name }}
             </td>
             <td>
-                $ {!!  $product->product->collection->promotion ? ("{$product->price}". " - " ."{$product->promotional_price}")  : $product->price !!}
+                ${!!  $product->product->collection->promotion ? ("{$product->price}". " - " ."{$product->promotional_price}")  : $product->price !!}
             </td>
             <td>
                 {{ $product->pivot->quantity }}
             </td>
             <td>
-                $ {!!  $product->subtotal() !!}
+                ${!!  $product->subtotal() !!}
             </td>
         </tr>
     @endforeach
