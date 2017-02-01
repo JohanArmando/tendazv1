@@ -135,18 +135,12 @@ class Customer extends Authenticatable
         return (float) $this->orders()->sum('total');
     }
 
-    public function eagerTotal(){
-            return $this->hasMany(Order::class)
-                ->selectRaw('sum(total) as total, customer_id')
-                ->groupBy('customer_id');
-    }
-
     public function totalOrder(){
         return (int) $this->orders()->count();
     }
     public function latestOrder()
     {
-        return $this->hasMany(Order::class)->latest();
+        return $this->hasMany(Order::class)->latest()->take(1);
     }
     
     public function consults()

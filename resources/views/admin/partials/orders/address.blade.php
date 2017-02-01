@@ -1,6 +1,8 @@
-<div class="order-history panel panel-default info-box">
+<div class="panel panel-default">
     <div class="panel-heading">
-        Direcci&oacute;n de Envio
+        <div class="panel-title">
+            <h5><i class="fa fa-truck"></i>&nbsp;<strong>Direcci&oacute;n de Envio de la orden #{{ ($order->id)}}.</strong></h5>
+        </div>
     </div>
     <div class="panel-body">
         <div class="row">

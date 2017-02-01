@@ -18,13 +18,17 @@
                 {{ $product->productWithTrashed->name }}
             </td>
             <td>
+<<<<<<< HEAD
                 $ {!!  $product->productWithTrashed->collection->promotion ? ("{$product->price}". " - " ."{$product->promotional_price}")  : $product->price !!}
+=======
+                ${!!  $product->product->collection->promotion ? ("{$product->price}". " - " ."{$product->promotional_price}")  : $product->price !!}
+>>>>>>> 24b16a3ae1c17509cb5aa107603101690afd4b57
             </td>
             <td>
                 {{ $product->pivot->quantity }}
             </td>
             <td>
-                $ {!!  $product->subtotal() !!}
+                ${!!  $product->subtotal() !!}
             </td>
         </tr>
     @endforeach

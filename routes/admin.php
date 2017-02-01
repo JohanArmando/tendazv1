@@ -72,6 +72,7 @@ $domain = new \Tendaz\Models\Domain\Domain();
         Route::get('/robot', 'MarketingController@robot')->middleware('plan:premiun');
         Route::post('/robot', 'MarketingController@postRobot');
         Route::get('/social', 'MarketingController@social');
+        Route::get('/social/tutorial', 'MarketingController@tutorial');
         Route::put('/social/{socialLogin}', 'MarketingController@postSocial');
         Route::resource('/coupons', 'CouponController');
     });

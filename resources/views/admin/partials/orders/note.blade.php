@@ -1,8 +1,6 @@
-<div class="order-history panel panel-default info-box">
-    <div class="panel-heading">
-        Notas de la orden
-    </div>
+<div class="order-history info-box">
     <div class="panel-body">
+        <h3>Notas de la orden</h3>
     @if(empty($order->note))
         <div id="record"><h3>No tienes notas creadas para esta orden</h3></div>
     @else
@@ -33,10 +31,11 @@
             </div>
             <br>
             <p class="text-right">
-            <button type="submit" class="btn btn-primary"  id="guardar-nota">Guardar Nota</button>
-        </form>
-            <a class="btn btn-default" onclick="$('#addnota').collapse('toggle');$('#record').show();$('#add').show();
+                <a class="btn btn-default" onclick="$('#addnota').collapse('toggle');$('#record').show();$('#add').show();
         $('.other').show();">Cancelar</a>
+            <button type="submit" class="btn btn-primary"  id="guardar-nota">Guardar Nota</button>
+            </p>
+        </form>
     </div>
 </div>
 </div>

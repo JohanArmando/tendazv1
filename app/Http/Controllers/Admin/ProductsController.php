@@ -215,7 +215,7 @@ class ProductsController extends Controller
         $current_cats       =   $product->categories->pluck('id')->toArray();
         $variant = Variant::where('product_id',$product->id)->first();
         $section    =   Section::where('product_id',$product->id)->first();
-        if (!is_null($request->publish)) {   $publish    =   11;  }
+        if (!is_null($request->publish)) {   $publish    =   1;  }
         if (empty($request->provider_id)) {   $provider_id    =   null;  }
         $product->update([
             'name' => $request->name,
