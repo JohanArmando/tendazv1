@@ -12,7 +12,9 @@ use Tendaz\Traits\WhereShopTrait;
 class Variant extends Model
 {
     use  UuidAndShopTrait;
+    
     protected $table = 'variants';
+    
     protected $fillable = [
         'sku' , 'uuid' , 'price' , 'promotional_price' , 'weight' , 'stock' , 'show' , 'price_declared' , 'product_id'
     ];
@@ -54,6 +56,11 @@ class Variant extends Model
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+
+    public function productWithTrashed()
+    {
+        return $this->product()->withTrashed();
     }
     
     public function information()
@@ -144,7 +151,7 @@ class Variant extends Model
     }
 
     public function setStockAttribute($value){
-        if($value >= 0){
+        if($value >= 0  && is_numeric($value)){
             $this->attributes['stock'] = $value < 0 || !is_numeric($value) ? 0 : $value;
         }else{
             $this->attributes['stock'] = -1;
@@ -188,6 +195,6 @@ class Variant extends Model
 
     public function subtotal()
     {
-        return ($this->product->collection->promotion ? $this->promotional_price   : $this->price) *  $this->pivot->quantity;
+        return ($this->productWithTrashed->collection->promotion ? $this->promotional_price   : $this->price) *  $this->pivot->quantity;
     }
 }

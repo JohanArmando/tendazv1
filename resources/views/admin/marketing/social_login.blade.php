@@ -84,7 +84,7 @@ Login con redes sociales
                         {!! Form::label('app_secret','Consumer Secret') !!}
                         {!! Form::text('app_secret' , null ,array('class' => 'form-control')) !!}
                         <input type="hidden" name="provider" value="google">
-                        <a href="#" >
+                        <a href="{{url('/admin/marketing/social/tutorial')}}" >
                             <i class="fa fa-exclamation-circle" ></i>
                             <strong>&iquest;Como activo el login via Google+ para mis clientes?</strong>
                         </a>

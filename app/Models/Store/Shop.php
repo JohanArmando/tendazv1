@@ -165,7 +165,7 @@ class Shop extends Model
 
     public function hasPlan($plan)
     {
-        return Plan::find($this->subscription()->plan_id)->plan_id >= Plan::findName($plan)->id;
+        return $this->subscription()->plan_id >= Plan::findName($plan)->id;
     }
 
     public function newSubscription(Plan $plan)

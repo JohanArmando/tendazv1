@@ -111,12 +111,12 @@ $domain = new \Tendaz\Models\Domain\Domain();
         Route::resource('preferences','AccountController');
         Route::resource('profile','ProfileController');
         Route::resource('invoices','InvoiceController');
-        
+
         Route::get('plans', [
             'uses' => 'PlanController@index',
             'notMiddleware' => 'subscription'
         ]);
-        
+
         Route::post('plans/swap/{plan}', [
             'uses' => 'PlanController@swap',
             'notMiddleware' => 'subscription'

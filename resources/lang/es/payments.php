@@ -17,6 +17,10 @@ return [
   'status' => [
       "pending"  => "2",
       "approved" => "3",
+      "package" => "4",
+      "send" => "6",
+      "collect" => "7",
+      "file" => "8",
       "authorized" => "3",
       "in_process" => "2",
       "in_mediation" => "2",

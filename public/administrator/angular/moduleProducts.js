@@ -18,7 +18,7 @@
                 return $http.put( BASEURL + '/admin/products/'+id + '?client_secret='  + client_secret + '&client_id=' + client_id, data ,  config);
             },   
             updateVariant: function(id , data){
-                return $http.put( BASEURL + '/admin/products/'+id+'/variant ' + '?client_secret='  + client_secret + '&client_id=' + client_id, data ,  config);
+                return $http.put( BASEURL + '/admin/products/'+id+'/variant' + '?client_secret='  + client_secret + '&client_id=' + client_id, data ,  config);
             },
             getInfoBackup : function(){
                 var products =  localStorage.getItem('products');
@@ -88,7 +88,7 @@
             });
         };
     });
-    app.controller('controllerProducts',['$scope','serviceProduct', function ($scope , serviceProduct) {
+    app.controller('controllerProducts',['$scope','serviceProduct', '$filter', function ($scope , serviceProduct , $filter) {
         $scope.store = store;
         $scope.preload = true;
         $scope.urlBase = BASEURL;
@@ -96,18 +96,21 @@
             var share_url = angular.element(document).find('#share_facebook' + product.id).data('share-url');
             var url = "http://facebook.com/sharer/sharer.php?app_id=107147892676939&sdk=joey&u=" + share_url;
             window.open(url,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
-        }
+        };
         $scope.shareTwitter = function(product){
             var tweet= angular.element(document).find('#share_twitter' + product.id).data('description');
             var url =  "https://twitter.com/intent/tweet?url=" + angular.element(document).find('#share_twitter' + product.id).data('share-url') +"&text=" + tweet;
             window.open(url,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
-        }
+        };
         $scope.shareGoogle = function(product){
             var url = "https://plus.google.com/share?url=" + angular.element(document).find('#share_google' + product.id).data('share-url');
             window.open(url,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=200,width=600')
-        }
+        };
         $scope.update = function (variant , attr) {
             var input = angular.element(document).find('#variant_'+ attr +variant.id);
+            input.parent().parent().find('span').html('<i style="color: white" class="fa fa-circle-o-notch fa-spin fa-fw"></i>');
+            variant.span.price = false;
+            variant.span.stock = false;
             if(input.val() != parseInt(variant[attr]) && input.val() ){
                 if(attr == 'price_promotion'){
                     variant['promotion_price'] = input.val().replace('.','').replace(',','.');
@@ -117,11 +120,10 @@
                 toastr['success']("Precio modificado correctamente");
                 if(attr == 'stock'){
                     toastr['success']("Stock modificado correctamente");
-                }else{
-                    input.parent().parent().find('span').html('<i style="color: white" class="fa fa-circle-o-notch fa-spin  fa-fw"></i>');
                 }
                 serviceProduct.updateVariant(variant.id ,  variant)
                     .success(function (response) {
+                        input.parent().parent().find('span').html((attr == 'price' ? "$ " : '') + $filter('currency')(attr == 'price' ?  variant.price : variant.stock , "" ,0));
                     });
             }
         }
@@ -216,9 +218,9 @@
                     serviceProduct.delete(value.product_id)
                         .success(function(response){
                             $scope.preload = false;
-
+                            var index = $scope.products.indexOf(value);
+                            $scope.products.splice($scope.products.indexOf(value), 1);
                         });
-                    $scope.products.splice(index , 1 );
                 });
                 toastr['success']("Productos eliminados correctamente");
             }else{

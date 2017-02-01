@@ -80,8 +80,8 @@ class ProductsController extends Controller
     public function updateVariant($subdomain, Variant $variant , Request $request)
     {
         if ($request->wantsJson()){
-           $variant->information->update($request->all());
-            return http_response_code(202);
+           $variant->update($request->all());
+            return fractal()->item($variant , new ProductTransformer());
         }
     }
 
@@ -124,7 +124,7 @@ class ProductsController extends Controller
                         $rows[] = array(
                             'url_key'                   => $product->slug,
                             'Nombre'                    => $product->name,
-                            'Categorias'               => $product->StringCategories(),
+                            'Categorias'                => $product->StringCategories(),
                             'Precio'                    => $variant->price,
                             'Precio Promocional'        => $variant->promotional_price,
                             'Stock'                     => $variant->stock,
@@ -143,9 +143,9 @@ class ProductsController extends Controller
                 }
                 $sheet->fromArray($rows);
             });
-        })->store('xls','exports');
+        })->store('csv','exports');
 
-        return response()->json(['path' => url("exports/$subdomain.products_export.xls")]);
+        return response()->json(['path' => url("exports/$subdomain.products_export.csv")]);
     }
 
     public function postImport(ProductListImport $import){
@@ -162,53 +162,32 @@ class ProductsController extends Controller
                     if($equal != 'ignore')
                         return [ $equal => $value];
                 });
+                if (!$array->has('name'))
+                    return redirect()->to('admin/products/import');
+
                 $product = Product::firstOrCreate([
+                    'uuid' => Uuid::generate(4)->string,
                     'name' => $array->get('name'),
-                    'slug' => $array->get('slug'),
-                    'description' => $array->get('description'),
-                    'publish' => $array->get('publish'),
+                    'slug' => $array->has('slug') ? $array->get('slug') : '',
+                    'description' => $array->has('description') ? $array->get('description') : '',
+                    'publish' => $array->has('publish') ? $array->get('publish') : 1,
                 ]);
+
                 $product->collection()->create([
                     'uuid' => Uuid::generate(4)->string,
-                    'promotion' =>   $array->get('promotional_price')
+                    'promotion' =>   $array->has('promotional_price')
                     &&  $array->get('promotional_price') > 0 ? : 0,
                     'primary'   => 1
                 ]);
 
-                $variant = $product->variants()->create([
+                $product->variants()->create([
                     'Uuid' => Uuid::generate(4)->string ,
                     'price'   => $array->get('price'),
-                    'promotional_price'   => $array->get('promotional_price'),
+                    'promotional_price'   => $array->get('price_promotion_amount'),
                     'weight'   => $array->get('weight'),
                     'stock'   => $array->get('stock'),
                     'sku'   => $array->get('sku'),
                 ]);
-
-                for ($i = 1 ; $i > 4 ; $i++){
-                    if(!is_null($array->get("option_name_$i"))){
-                        if (Option::where('name', $array->get("option_name_$i"))->exists()) {
-                            $option = Option::where('name', $array->get("option_name_$i"))->first();
-                            if ($option->values()->where('name', $array->get("option_value_$i"))->exists()) {
-                                $value = $option->values()->where('name', $array->get("option_value_$i"))->first();
-                            } else {
-                                $value = $option->values()->create([
-                                    'uuid' => Uuid::generate(4)->string,
-                                    'name' => $array->get("option_value_$i")
-                                ]);
-                            }
-                        } else {
-                            $option = Option::create([
-                                'uuid' => Uuid::generate(4)->string,
-                                'name' => $array->get("option_name_$i"),
-                            ]);
-                            $value = $option->values()->create([
-                                'uuid' => Uuid::generate(4)->string,
-                                'name' => $array->get("option_value_$i")
-                            ]);
-                        }
-                        $variant->optionValue()->attach($value->id , ['uuid' => Uuid::generate(4)->string]);
-                    }
-                }
             });
             return redirect()->to('/admin/products/import')
                 ->with('message', array('type' => 'success' , 'message' => 'Estamos cargando tus productos, cuando finalicemos te notificaremos por correo'));
@@ -216,6 +195,7 @@ class ProductsController extends Controller
 
     public function import(){
         $categories = Category::orderBy('name','DESC')->pluck('name' , 'id');
+        
         return view('admin.product.import',compact('categories'));
     }
 
@@ -300,6 +280,7 @@ class ProductsController extends Controller
             'product' => $product
         ));
     }
+
     public function ajaxDelete($product_id){
         
     }

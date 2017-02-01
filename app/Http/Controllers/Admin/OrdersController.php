@@ -25,17 +25,11 @@ class OrdersController extends Controller
         return [OrderStatus::where('id' , '<>' , 1)->get(['name' ,'id'])];
     }
 
-    public function show($subdomain , Order $order){
+    public function show($subdomain , Order $order , Request $request)
+    {
         return view('admin.orders.show',compact('order'));
     }
     
-    public function update($subdomain ,$id , Request $request)
-    {
-        $order= Order::findOrFail($id);
-        $order->order_status = 11;
-        $order->save();
-        return redirect()->to('admin/orders');
-    }
 
     public function getExport()
     {
