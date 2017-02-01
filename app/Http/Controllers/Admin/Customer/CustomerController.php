@@ -13,22 +13,27 @@ use Tendaz\Models\Geo\State;
 use Tendaz\Models\Order\Order;
 use Tendaz\Models\User;
 use Tendaz\Models\Order\Consult;
+use Tendaz\Repositories\CustomerRepository;
 use Webpatser\Uuid\Uuid;
 
 
 class CustomerController extends Controller
 {
-    protected function selectCustomerList()
+
+    private $customerRepository;
+
+    /**
+     * CustomerController constructor.
+     * @param CustomerRepository $customerRepository
+     */
+    public function __construct(CustomerRepository $customerRepository)
     {
-        return Customer::selectRaw('customers.*,'
-            .'(SELECT COUNT(*) FROM orders WHERE orders.customer_id = customers.id ) as total_orders,'
-            .'(SELECT SUM(total) FROM orders WHERE orders.customer_id = customers.id ) as total_amount_orders'
-        );
+        $this->customerRepository = $customerRepository;
     }
 
     public function index()
     {
-        $customers = $this->selectCustomerList()->with('latestOrder')->orderBy('id' , 'DESC')->get();
+        $customers = $this->customerRepository->getLatestCustomers();
         return view('admin.customer.index',compact('customers'));
     }
 
