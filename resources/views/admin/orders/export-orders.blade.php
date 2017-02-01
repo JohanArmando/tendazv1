@@ -1,4 +1,7 @@
 @extends('layouts.administrator')
+    @section('title')
+        Exportar Ordenes
+    @endsection
     @section('css')
         <link rel="stylesheet" href="{{ asset('administrator/plugins/timepicker/css/bootstrap-datetimepicker.min.css') }}">
     @stop
@@ -50,7 +53,7 @@
                                         <label>Rango de fechas</label>
                                         <select class="form-control" name="range-date" id="range-date">
                                             <option disabled value="" selected>Rango de fechas</option>
-                                            <option value="all" selected>Todas las fechas</option>
+                                            <option value="" selected>Todas las fechas</option>
                                             <option value="last">Ultimo dia</option>
                                             <option value="eight">Ultimo 7 dias</option>
                                             <option value="month">Ultimo 30 dias</option>
@@ -80,11 +83,11 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="radio" name="so" id="so" value="windows" checked>
+                                    <input type="radio" name="so" id="so" value="xls" checked>
                                     <label for="">Descargar para Windows</label>
                                 </div>
                                 <div class="form-group">
-                                    <input type="radio" name="so" id="so" value="Mac">
+                                    <input type="radio" name="so" id="so" value="csv">
                                     <label for="">Descargar para Mac</label>
                                 </div>
                             </div>

@@ -57,6 +57,13 @@ class Order extends Model
     public function histories()
     {
         return $this->hasMany(OrderHistory::class,'order_id');
+    }  
+    
+    public function historiesByDate()
+    {
+        return $this->histories()->get()->groupBy(function($date) {
+            return Carbon::parse($date->created_at)->format('Y-m-d');
+        });
     }
 
     public function products()
@@ -266,6 +273,10 @@ class Order extends Model
         return  (new Date($this->attributes['created_at']))->format('l j , F Y');
     }
 
+    public  function getCreatedAtNumAttribute(){
+        return  Carbon::parse($this->attributes['created_at'])->format('d/m/Y');
+    }
+
     public function updateStatus($status)
     {
         if (Lang::has("payments.status.$status")){
@@ -292,4 +303,37 @@ class Order extends Model
             }
         }
     }
+
+    public function getIsSendAttribute()
+    {
+        if ($this->order_status >= 3 && $this->order_status <= 5) {
+            return 'Lista para enviar';
+        }elseif ($this->order_status > 5){
+            return "Enviada";
+        }else {
+            return "No Enviada";
+        }
+    }
+
+    public function scopeLast($query , $from = null , $to = null)
+    {
+        return static::whereBetween('created_at' , [Carbon::now()->subDays(1) , Carbon::now()]);
+    }
+
+    public function scopeEight($query , $from = null , $to = null)
+    {
+        return static::whereBetween('created_at' , [Carbon::now()->subDays(8) , Carbon::now()]);
+    }
+
+    public function scopeMonth($query , $from = null , $to = null)
+    {
+        return static::whereBetween('created_at' , [Carbon::now()->subMonth(1) , Carbon::now()]);
+    }
+
+    public function scopeCustom($query , $from = null , $to = null)
+    {
+        return static::whereBetween('created_at' , [Carbon::parse(str_replace('/' , '-' ,$from)) , Carbon::parse(str_replace('/' , '-' ,$to))]);
+    }
+
+    
 }

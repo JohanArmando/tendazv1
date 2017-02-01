@@ -78,8 +78,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-6">
                 @include('admin.partials.orders.address' , ['address' => $order->shippingAddress->address ])
+            </div>
+            <div class="col-md-6">
+                @include('admin.partials.orders.history' , ['histories' => $order->historiesByDate() ])
             </div>
         </div>
         <div class="page-end-space"></div>

@@ -18,11 +18,20 @@ use Webpatser\Uuid\Uuid;
 
 class CustomerController extends Controller
 {
+    protected function selectCustomerList()
+    {
+        return Customer::selectRaw('customers.*,'
+            .'(SELECT COUNT(*) FROM orders WHERE orders.customer_id = customers.id ) as total_orders,'
+            .'(SELECT SUM(total) FROM orders WHERE orders.customer_id = customers.id ) as total_amount_orders'
+        );
+    }
+
     public function index()
     {
-        $customers = Customer::orderBy('id' , 'DESC')->with('latestOrder' , 'eagerTotal')->get();
+        $customers = $this->selectCustomerList()->with('latestOrder')->orderBy('id' , 'DESC')->get();
         return view('admin.customer.index',compact('customers'));
     }
+
     public function show($subdomain , Customer $customer)
     {
         $address = $customer->addressesForShipping->first();
