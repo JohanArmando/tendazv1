@@ -29,7 +29,6 @@ class OrderStatusChangeListener
         $event->order->histories()->create([
             'uuid' => Uuid::generate(4)->string,
             'order_status' =>  $event->status,
-            'date' => new Date()
         ]);
     }
 }
