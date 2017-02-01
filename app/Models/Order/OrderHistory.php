@@ -12,9 +12,14 @@ class OrderHistory extends Model
 
     public function getCreatedAtAttribute()
     {
-        return Carbon::parse($this->attributes['created_at'])->format('H:m');
+        return Carbon::parse($this->attributes['created_at'])->format('Y-m-d');
     }
 
+    public function getCreatedAtHourAttribute()
+    {
+        return Carbon::parse($this->attributes['created_at'])->format('H:i');
+    }
+    
     public function getOrderStatusAttribute()
     {
         return "marcó la orden como ".'"' . strtolower($this->attributes['order_status']).'".';

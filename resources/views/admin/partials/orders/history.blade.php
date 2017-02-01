@@ -13,7 +13,7 @@
                         <ul>
                             @foreach($history as $event)
                                 <li>
-                                    {{ $event->created_at }} - {{ $event->order_status }}
+                                    {{ $event->created_at_hour }} - {{ $event->order_status }}
                                 </li>
                             @endforeach
                         </ul>
