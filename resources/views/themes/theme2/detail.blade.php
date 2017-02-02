@@ -61,14 +61,14 @@
                                     <span class="green">
                                     <div class="input-group">
                                             <span>
-                                                <button class="btn btn-default bootstrap-touchspin-down" type="button">-</button>
+                                                <button ng-click="product.quantity = product.quantity > 1 ? product.quantity - 1 : 1" class="btn btn-default bootstrap-touchspin-down" type="button">-</button>
                                             </span>
                                         <i class="centerFa fa fa-cog fa-spin fa-2x fa-fw ng-hide"></i>
-                                        <input style="max-width: 20% !important; height: 33px" type="text" name="quantity" value="1"
+                                        <input style="max-width: 20% !important; height: 33px" type="text" ng-model="product.quantity ? product.quantity : 1 " value="<% product.quantity ? product.quantity : 1 %>"
                                                class="text-center">
                                         <span></span>
                                             <span>
-                                                <button class="btn btn-default bootstrap-touchspin-up" type="button">+</button>
+                                                <button class="btn btn-default bootstrap-touchspin-up" type="button" ng-click="product.quantity = product.quantity + 1">+</button>
                                             </span>
                                     </div>
                                     </span><hr>
