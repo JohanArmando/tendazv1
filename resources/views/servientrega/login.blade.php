@@ -18,6 +18,7 @@
 		<div class="text-center" >
 			<!-- <img src="/tendaz/images/icons/login.png" alt="" style="width: 100px; height:auto; "> -->
 		</div>
+		@include('servientrega.partials.form-rigth')
 		<div class="col-sm-1 col-lg-1"></div>
 		<div class="col-sm-5 col-sm-offset-1 col-lg-4 col-lg-offset-1">
 			<div class="panel panel-default">
