@@ -11,3 +11,10 @@ function footerNotification($bottom , $event , $time)
         </div>
     </div>";
 }
+
+if (!function_exists('cache_subdomain')){
+    function cache_subdomain($subdomain) 
+    {
+        \Illuminate\Support\Facades\Cache::forget($subdomain ."_store");
+    }
+}

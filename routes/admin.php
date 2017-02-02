@@ -122,8 +122,17 @@ $domain = new \Tendaz\Models\Domain\Domain();
             'notMiddleware' => 'subscription'
         ]);
         
-        Route::get('checkout/finish/',function(){return redirect()->to('admin');});
-        
+        Route::post('checkout/finish/',[
+            'uses' => 'SubscriptionController@doSubscription',
+            'notMiddleware' => 'subscription'
+        ]);
+
+        Route::get('checkout/finish/',[
+            'uses' => 'SubscriptionController@finish',
+            'notMiddleware' => 'subscription'
+        ]);
+
+
         Route::get('checkout/start/',[
             'uses' => 'SubscriptionController@start',
             'notMiddleware' => 'subscription'

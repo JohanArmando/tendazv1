@@ -55,7 +55,7 @@
                                     <ul class="text-left">
                                         <br>
                                         <br>
-                                        @foreach($plan->features as $feature)
+                                        @foreach($plan->plan->features as $feature)
                                             <li class="">
                                                 <i class="fa fa-angle-right" style="font-size: 15px"></i>
                                                 {{ $feature->description }}

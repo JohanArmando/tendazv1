@@ -168,13 +168,15 @@ class Shop extends Model
         return Plan::find($this->subscription()->plan_id)->plan_id >= Plan::findName($plan)->id;
     }
 
-    public function newSubscription(Plan $plan)
+    public function newSubscription(Plan $plan , $start , $end)
     {
         $subscription = $this->subscriptions()->save(
             new Subscription([
                 'trial_at' =>  $this->datesForTest() ,
                 'amount' => $plan->price,
-                'plan_id' => $plan->id  
+                'plan_id' => $plan->id,
+                'start_at' => $start,
+                'end_at' => $end,
             ])
         );
         $subscription->makeSubscription();
@@ -182,4 +184,15 @@ class Shop extends Model
     }
 
 
+    /**
+     * @return boolean
+     */
+    public function updateSubscription($trial = null , $start , $end)
+    {
+        return $this->subscription()->update([
+            'trial_at' => $trial,
+            'start_at' => $start,
+            'end_at' => $end
+        ]);
+    }
 }

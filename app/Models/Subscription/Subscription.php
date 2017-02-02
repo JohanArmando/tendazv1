@@ -24,6 +24,7 @@ class Subscription extends Model
     protected $fillable = [
         'uuid', 'amount', 'state', 'start_at', 'end_at', 'trial_at','shop_id' ,'plan_id'
     ];
+
     
     public function shop()
     {
@@ -101,5 +102,10 @@ class Subscription extends Model
     public function subscribedToPlan($plan)
     {
         return $this->plan_id >= Plan::findName($plan)->id;
+    }
+    
+    public function isSamePlanSubscription($plan)
+    {
+        return Plan::find($this->plan_id)->plan_id == $plan->plan->id;
     }
 }
