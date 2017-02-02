@@ -18,15 +18,7 @@
                 {{ $product->productWithTrashed->name }}
             </td>
             <td>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                $ {!!  $product->productWithTrashed->collection->promotion ? ("{$product->price}". " - " ."{$product->promotional_price}")  : $product->price !!}
-=======
-                ${!!  $product->product->collection->promotion ? ("{$product->price}". " - " ."{$product->promotional_price}")  : $product->price !!}
->>>>>>> 24b16a3ae1c17509cb5aa107603101690afd4b57
-=======
                 ${!!  $product->productWithTrashed->collection->promotion ? "<span style='text-decoration: line-through'>".(number_format("{$product->price}",0,',','.'). "</span> - $" .(number_format("{$product->promotional_price}",0,',','.'))) : $product->price !!}
->>>>>>> e3ab77f1bcc91177ecaae5978438f5415ca7d94d
             </td>
             <td>
                 {{ $product->pivot->quantity }}

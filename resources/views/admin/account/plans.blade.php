@@ -27,21 +27,21 @@
                 <div class="col-md-12">
                     <!-- Plan 1 -->
                     @foreach($plans as $plan)
-                        <div class="col-md-4 {{ $plan->main ? 'active_plan':'' }} text-center " style="padding-left: 0px !important;padding-right: 0px !important;">
-                            <div id="plan-1" class="panel-pricing {{ $plan->main ? 'shadow_plan':'' }}"  >
+                        <div class="col-md-4 {{ $plan->plan->main ? 'active_plan':'' }} text-center " style="padding-left: 0px !important;padding-right: 0px !important;">
+                            <div id="plan-1" class="panel-pricing {{ $plan->plan->main ? 'shadow_plan':'' }}"  >
                                 <div class="panel-heading">
                                     <div class="panel-body text-center" style="font-size: 18px">
 
-                                        <h3><img src="{{asset('tendaz/img/icon-plans.png')}}" style="max-height: 32px; margin-top: -2%" > {{ $plan->name }}
+                                        <h3><img src="{{asset('tendaz/img/icon-plans.png')}}" style="max-height: 32px; margin-top: -2%" > {{ $plan->plan->name }}
                                         </h3>
-                                        <h1>$ {{ number_format($plan->price , 0) }} USD</h1> Por mes
+                                        <h1>$ {{ $plan->getPrice() }} USD</h1> Por mes
                                         <br>
                                         <br>
 
-                                        @if($plan->activate)
+                                        @if($plan->plan->active)
                                             {!! Form::open(['url' => ['admin/account/plans/swap' , $plan->id] , 'method' => 'POST']) !!}
-                                                <button type="submit" class="btn btn-{{ $shop->subscription()->plan_id ==  $plan->id ? 'success' : 'info' }}" >
-                                                    {{ $shop->subscription()->plan_id <  $plan->id ? 'Subir Plan' : ($shop->subscription()->plan_id ==  $plan->id ? 'Plan actual' :'Bajar Plan')     }}
+                                                <button type="submit" class="btn btn-{{ $shop->subscription()->plan->plan_id ==  $plan->plan->id ? 'success' : 'info' }}" >
+                                                    {{ $shop->subscription()->plan->plan_id <  $plan->plan->id ? 'Subir Plan' : ($shop->subscription()->plan->plan_id ==  $plan->plan->id ? 'Plan actual' :'Bajar Plan')     }}
                                                 </button>
                                             {!! Form::close() !!}
                                         @else
@@ -55,10 +55,10 @@
                                     <ul class="text-left">
                                         <br>
                                         <br>
-                                        @foreach(explode('...' , $plan->description) as $description)
+                                        @foreach($plan->features as $feature)
                                             <li class="">
                                                 <i class="fa fa-angle-right" style="font-size: 15px"></i>
-                                                {{ $description }}
+                                                {{ $feature->description }}
                                             </li>
                                         @endforeach
                                     </ul>

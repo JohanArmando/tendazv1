@@ -9,24 +9,21 @@
             <div class="col-md-12">
                 <div class="table-responsive">
                     <table class="table table-responsive">
-                        <thead>
                         <tr>
-                            <td>Nombre</td>
-                            <td>Direcci&oacute;n</td>
-                            <td>Barrio</td>
-                            <td>Departamento</td>
-                            <td>Ciudad</td>
+                            <td><strong>Nombre: </strong></td> <td>{{ $address->name }}</td>
                         </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>{{ $address->name }}</td>
-                                <td>{{ $address->street }}</td>
-                                <td>{{ $address->neighborhood }}</td>
-                                <td>{{ $address->state->name }}</td>
-                                <td>{{  $address->city->name}}</td>
-                            </tr>
-                        </tbody>
+                        <tr>
+                            <td><strong>Direcci&oacute;n: </strong></td><td>{{ $address->street }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Barrio: </strong></td><td>{{ $address->neighborhood }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Departamento: </strong></td><td>{{ $address->state->name }}</td>
+                        <tr>
+                        <tr>
+                            <td><strong>Ciudad: </strong></td><td>{{  $address->city->name}}</td>
+                        </tr>
                     </table>
                 </div>
             </div>

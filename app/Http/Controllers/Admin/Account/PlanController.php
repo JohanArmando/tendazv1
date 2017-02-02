@@ -26,11 +26,9 @@ class PlanController extends Controller
 
     public function index(Request $request)
     {
-      $period = $request->has('period') ? $request->get('period') : 'monthly';
-
-        $plans = Plan::with($period)->whereHas($period)->get();
+        $plans = Plan::where('interval' , $request->get('frequency' , 'monthly'))->where('interval_count' , 1)->get();
         return view('admin.account.plans' , compact('plans'));
-    }
+    }   
 
     public  function  postChangePlan(Request $request ){
         if($this->auth->onTrial()){

@@ -37,41 +37,38 @@ Exportar clientes
                             <h5><i class="glyphicon glyphicon-cloud-download"></i>&nbsp; <strong>Descargar lista de cliente.</strong></h5>
                         </div>
                     </div>
-                    <div class="panel-boy">
-                        <br>
-                        <form action="#">
+                    <div class="panel-body">
+                        {!! Form::open(['url' => '/admin/customers/export' , 'method' => 'POST']) !!}
                             <p class="help-block col-md-6" align="justify">
-                                Esta opcion te permite exportar la lista de los cliente que se hayan registrado desde tu tienda. Te recomendamos que tengas en cuenta el sistema operativo que normalmente utilizasa para que este sea legible en cualquier otro ordenador. <strong>El archivo que se descarga tiene extension XLS, este es compatible con cualquier version de Microsoft Excel o cualquier hoja de calculo que acepte esta extension.</strong>
+                                Esta opcion te permite exportar la lista de los cliente que se hayan registrado desde tu tienda.
+                                Te recomendamos que tengas en cuenta el sistema operativo que normalmente utilizasa para que este sea legible en cualquier otro ordenador.
+                                <strong>El archivo que se descarga tiene extension XLS, este es compatible con cualquier version de Microsoft Excel o cualquier hoja de calculo que acepte esta extension.</strong>
                             </p>
+
                             <div class="container">
                                 <div class="form-group ">
-                                    <input type="radio" name="so" id="so" value="windows" checked>
+                                    <input type="radio" name="so" id="so" value="xls" checked>
                                     <label for="">Descargar para Windows</label>
                                 </div>
                                 <div class="form-group">
-                                    <input type="radio" name="so" id="so" value="Mac">
+                                    <input type="radio" name="so" id="so" value="csv">
                                     <label for="">Descargar para Mac</label>
                                 </div>
-                                <button type="button" class="btn btn-primary text-center" id="download">
-                                    <i class="glyphicon glyphicon-cloud-download" id="icon"></i>
-                                    <i id="gif-download" class="fa fa-cog fa-spin"></i> &nbsp;
-                                    <div id="find" style="display: inline;">Descargar</div></button>
-                                <a  href="{{ url('admin/customers') }}" id="cancelar" class="btn btn-default">
-                                    <i class="fa fa-times"></i> Cancelar</a>
-                            <br>
-                            <br>
+                                <input type="submit" class="btn btn-primary text-center" value="Descargar">
+                                <a  href="{{ url('admin/customers') }}"
+                                     class="btn btn-default">
+                                    <i class="fa fa-times"></i> Cancelar
+                                </a>
                             </div>
-                        </form>
+                        {!! Form::close() !!}
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <input type="hidden" value="{{ url('admin/customers/export') }}" id="route-export-order">
-                    <input type="hidden" value="{{ csrf_token() }}" id="token-route">
+
                 </div>
             </div>
     </div>
     @endsection
 
     @section('scripts')
-        <script type="text/javascript" src="{{asset('administrator/js/alternative/gift-control.js')}}"></script>
     @stop

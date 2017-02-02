@@ -9,11 +9,12 @@
             <div class="col-md-12">
                 <div class="table-responsive">
                     @foreach($histories as $key => $history)
-                        <p>{{ $key}}</p>
+                        <p><i class="fa fa-circle" style="color: #00c600"> </i> {{ $key}}</p>
+                        <hr style="margin: 0;border:1px dotted lightgrey;">
                         <ul>
                             @foreach($history as $event)
-                                <li>
-                                    {{ $event->created_at_hour }} - {{ $event->order_status }}
+                                <li style="margin-top:5px">
+                                    <strong>{{ $event->created_at_hour }}: </strong>  {{ $event->order_status }}
                                 </li>
                             @endforeach
                         </ul>
