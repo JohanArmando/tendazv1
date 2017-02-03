@@ -55,7 +55,6 @@ Editar {{ucfirst($product->name)}}
     <script type="text/javascript" src="{{ asset('administrator/js/backend/forms/wysiwyg.js') }}"></script>
     <script type="text/javascript" src="{{ asset('components/admin/js/fileinput.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('components/admin/js/locales/es.js') }}"></script>
-    <!-- <script type="text/javascript" src="{{ asset('components/admin/js/load-dropzone-simple.js') }}"></script> -->
     <script type="text/javascript" src="{{ asset('components/admin/js/ajax-create-category.js') }}"></script>
     <script type="text/javascript" src="{{ asset('components/admin/js/jquery-ui.js') }}" ></script>
     <script type="text/javascript" src="{{ asset('components/admin/js/jquery-tmpl.js') }}" ></script>
@@ -111,44 +110,40 @@ Editar {{ucfirst($product->name)}}
 </script>
     <script>
     $('#providers').select2();
-    // .val({{$product->provider_id}}).trigger("change")
     $("#file-1").fileinput({
-
-        dataType : "json",
-        contentType: "application/json; charset=utf-8",
-
-        uploadUrl: '#',
-        language: 'es',
-        allowedFileExtensions : ['jpg', 'png','gif'],
+        uploadUrl: '/admin/products/edit/{{$product->uuid}}',
+        uploadAsync: false,
+        minFileCount: 2,
+        maxFileCount: 5,
         overwriteInitial: false,
-        maxFileSize: 1000,
-        maxFilesNum: 5,
-        
-        showUpload: true,
-        showRemove: true,
+        initialPreviewAsData: true,
         initialPreview: [
-        @foreach($product->images as $productI) 
-            "{{ $productI['url'] }}",
-        @endforeach
+            @foreach($product->images as $productI)
+                "{{ $productI['url'] }}",
+            @endforeach
         ],
-        accepts: 'appliSSSSScation/json',
-        dataType : "json",
-            contentType: "application/json; charset=utf-8",
-        initialPreviewAsData: true, // identify if you are sending preview data only and not the raw markup
-        initialPreviewFileType: 'image', // image is the default and can be overridden in config below
         initialPreviewConfig: [
             @foreach($product->images as $productI)
-            {caption: "{{$productI['name']}}", size: false, width: "120px", url: "/products/file-delete/{{$productI['id']}}?client_secret={{$shop->uuid}}&client_id={{$shop->id}}", key: 1,
-            extra: {contentType: "application/json; charset=utf-8"} 
-            },
-
-            @endforeach 
-            ],
-        allowedFileTypes: ['image', 'video', 'flash'],
-        slugCallback: function(filename) {
-            return filename.replace('(', '_').replace(']', '_');
+                {
+                    caption: "{{$productI['name']}}",
+                    width: "120px",
+                    url: "/admin/products/delete/file/{{$productI['id']}}?client_secret=" + client_secret + "&client_id=" + client_id,
+                    key: "{{$productI['name']}}"
+                 }
+            @endforeach
+         ],
+        uploadExtraData: {
+            img_key: "1000",
+            img_keywords: "happy, places"
         }
     });
+    /*$("#file-1").on("filepredelete", function(jqXHR) {
+        var abort = true;
+        if (confirm("Seguro que deseas eliminar la imagen?")) {
+            abort = false;
+        }
+        return abort;
+    });*/
     </script>
     <script>
         function justNumbers(e)
@@ -175,6 +170,7 @@ Editar {{ucfirst($product->name)}}
         });
     </script>
     <script>
+        /*
         var default_values = {};
         var option_amount = 1;
         var editing_properties = true;
@@ -903,7 +899,7 @@ Editar {{ucfirst($product->name)}}
                 return false;
             });
 
-        });
+        });*/
 
 
     </script>
