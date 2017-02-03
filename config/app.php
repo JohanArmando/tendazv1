@@ -186,7 +186,6 @@ return [
 
         Tendaz\Providers\AppServiceProvider::class,
         Tendaz\Providers\AuthServiceProvider::class,
-        // Tendaz\Providers\BroadcastServiceProvider::class,
         Tendaz\Providers\EventServiceProvider::class,
         Tendaz\Providers\RouteServiceProvider::class,
 
