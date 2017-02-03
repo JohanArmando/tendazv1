@@ -30,7 +30,7 @@
             <div class="clearfix"></div>
             <div class="panel-footer text-center">
                 <div class="text-center">
-                    <button type="submit" class="btn btn-default-tendaz confirm_button m-half-bottom m-half-top">
+                    <button data-toggle="modal" data-target="#myModal" class="btn btn-default-tendaz confirm_button m-half-bottom m-half-top">
                         Contratar plan
                         <span class="one-time-in-button" style="display: none">y ahorrar
                             <strong class="savings"></strong>
@@ -40,5 +40,43 @@
                 </div>
             </div>
         {!! Form::close() !!}
+        <button data-toggle="modal" data-target="#myModal" class="btn btn-primary">
+            Contratar plan Modal
+        </button>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade bs-example-modal-sm buyModal" tabindex="-1" aria-labelledby="mySmallModalLabel" id="myModal" role="dialog" >
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content buyContent">
+            <div class="modal-header buyHeader">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="closeBuy" aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Pagar Suscripci&oacute;n</h4>
+            </div>
+            <div class="modal-body buyBody">
+                <form action="">
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label for="">Numero de Tarjeta *</label>
+                            <input type="text" id="card" placeholder="---- ---- ---- ----" class="form-control inputBuy"  required>
+                            <span>type: mastercard</span>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="">Expide el *</label>
+                            <input type="text" id="expiry" placeholder="MM / YYYY" class="form-control inputBuy" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="">CVC *</label>
+                            <input type="text" placeholder="---" class="form-control inputBuy" maxlength="3" pattern="[0-9]*" required>
+                        </div>
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-primary pull-right buyRight">Pagar $10,0</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end Modal -->

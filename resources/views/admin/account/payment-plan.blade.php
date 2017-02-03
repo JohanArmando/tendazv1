@@ -112,4 +112,14 @@
             return false;
         });
     </script>
+    <script src="{{asset('administrator/js/payform.js')}}"></script>
+    <script>
+        // Format input for card number entry
+        $('#card').payform('formatCardNumber');
+        $('#expiry').payform('formatCardExpiry');
+
+        // Validate
+        $.payform.validateCardNumber('4242 4242 4242 4242'); //=> true
+        $.payform.validateCardExpiry('01 / 2017'); //=> true
+    </script>
 @stop
