@@ -281,7 +281,7 @@ class ProductsController extends Controller
         ));
     }
 
-    public function ajaxDelete($product_id){
-        
+    public function postDelete($subdomain ,Request $request, $id){
+        dd($id);
     }
 }
