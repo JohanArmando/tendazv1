@@ -13,16 +13,30 @@ use Tendaz\Models\Geo\State;
 use Tendaz\Models\Order\Order;
 use Tendaz\Models\User;
 use Tendaz\Models\Order\Consult;
+use Tendaz\Repositories\CustomerRepository;
 use Webpatser\Uuid\Uuid;
 
 
 class CustomerController extends Controller
 {
+
+    private $customerRepository;
+
+    /**
+     * CustomerController constructor.
+     * @param CustomerRepository $customerRepository
+     */
+    public function __construct(CustomerRepository $customerRepository)
+    {
+        $this->customerRepository = $customerRepository;
+    }
+
     public function index()
     {
-        $customers = Customer::orderBy('id' , 'DESC')->with('latestOrder' , 'eagerTotal')->get();
+        $customers = $this->customerRepository->getLatestCustomers();
         return view('admin.customer.index',compact('customers'));
     }
+
     public function show($subdomain , Customer $customer)
     {
         $address = $customer->addressesForShipping->first();
@@ -85,27 +99,35 @@ class CustomerController extends Controller
         return view('admin.customer.contact',compact('contacts'));
     }
     public function postExport($subdomain , Request $request){
-        $so = !empty($request->get('so')) && $request->get('so') == 'Mac' ? $so = 'csv' : $so = 'xls';
-        $customers = Customer::all();
+        $this->validate($request , [
+           'so' => 'required|in:csv,xls'
+        ]);
+        $customers = $this->customerRepository->getLatestCustomers();
+
         \Excel::create("$subdomain.clientes", function($excel) use($customers) {
             $excel->setTitle('Listado  de clientes : ');
             $excel->sheet('Sheetname', function($sheet) use($customers) {
                 $rows = array();
                 foreach ($customers as $customer) {
                     $rows[] = array(
-                        'Nombre'                    => $customer->name,
-                        'Apellido'                  => $customer->last_name,
-                        'Telefono'                  => $customer->phone,
-                        'Correo'                    => $customer->email,
-                        'Identificacion'            => $customer->identification,
-                        'Notas'                     => $customer->notes
+                        'Nombre Y Apellido' => $customer->full_name,
+                        'Email' => $customer->email,
+                        'Telefono' => $customer->phone,
+                        'Direccion' => !$customer->addressesForShipping ?'': $customer->addressesForShipping->first()->street,
+                        'Numero' => !$customer->addressesForShipping ?'':  $customer->addressesForShipping->first()->complement,
+                        'Ciudad' =>!$customer->addressesForShipping ?'':  $customer->addressesForShipping->first()->city->name,
+                        'Localidad' => !$customer->addressesForShipping ?'':  $customer->addressesForShipping->first()->neighborhood,
+                        'Provincia o Estado' => !$customer->addressesForShipping ?'':  $customer->addressesForShipping->first()->state->name ,
+                        'Pais' =>  !$customer->addressesForShipping ?'':  $customer->addressesForShipping->first()->country->name ,
+                        'Total Consumido' => $customer->total_amount_orders,
+                        'Cantidad de compras' => $customer->total_orders,
+                        'Ultima compra' => $customer->latestOrder[0]->created_at,
                     );
                 }
-                $sheet->fromArray($customers);
+                $sheet->fromArray($rows);
 
             });
-        })->store($so,'exports');
-        return response()->json(['path' => url('/').'/exports/clientes.'.$so]);
+        })->export($request->get('so'));
     }
 
 }

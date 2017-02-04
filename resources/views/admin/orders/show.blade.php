@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="panel-body">
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <div class="widget">
                                 <div class="panel-body">
                                     <br>
@@ -50,13 +50,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            @include('admin.partials.orders.customer' , ['customer' => $order->user])
-                            @include('admin.partials.orders.note')
-                        </div>
-                        <div class="col-md-6">
-                            @include('admin.partials.orders.address' , ['address' => $order->shippingAddress->address ])
-                        </div>
                         <div class="col-md-12">
                             <hr>
                             <a href="{{url('admin/orders/print/'.$order->id)}}" class="btn btn-success pull-right" >
@@ -67,6 +60,30 @@
                 </div>
             </div>
             <br>
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <h5><i class="fa fa-user"></i>&nbsp;
+                                <strong>Cliente y Notas de la orden  #{{ ($order->id)}}.</strong></h5>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-md-5">
+                            @include('admin.partials.orders.customer' , ['customer' => $order->user])
+                        </div>
+                        <div class="col-md-7">
+                            @include('admin.partials.orders.note')
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                @include('admin.partials.orders.address' , ['address' => $order->shippingAddress->address ])
+            </div>
+            <div class="col-md-6">
+                @include('admin.partials.orders.history' , ['histories' => $order->historiesByDate() ])
+            </div>
         </div>
         <div class="page-end-space"></div>
     @endsection

@@ -54,9 +54,9 @@
                 <div class="front">
                     <a href="<% BASEURL + '/detail/' + randomProduct.slug %>">
                         <img ng-src="<% randomProduct.images.data[0].url %>" alt="" ng-show="product.images.data" class="img-responsive"
-                             style="min-height:350px ;max-height: 350px" alt="">
+                             style="min-height:335px ;max-height: 335px" alt="">
                         <img ng-src="<% randomProduct.images.data[0].url %>" alt="" class="img-responsive"
-                             style="min-height:350px ;max-height: 350px" alt="">
+                             style="min-height:335px ;max-height: 335px" alt="">
                     </a>
                 </div>
                 <div class="back">

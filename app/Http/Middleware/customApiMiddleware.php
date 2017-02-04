@@ -23,10 +23,7 @@ class customApiMiddleware
 
         if($request->wantsJson())
         {
-            if($request->header('Accept') != 'application/json'){
-                throw new AuthenticationException('Not application');
-            }
-
+        
             if(!Shop::where('id' , $request->client_id)->where('uuid' , $request->client_secret)->exists()){
                 throw new AuthenticationException('Unauthenticated.');
             }

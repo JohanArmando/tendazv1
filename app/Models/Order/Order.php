@@ -3,7 +3,9 @@
 namespace Tendaz\Models\Order;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Lang;
 use Jenssegers\Date\Date;
+use Tendaz\Events\OrderStatusChangeEvent;
 use Tendaz\Models\Address\CustomerAddress;
 use Tendaz\Models\Cart\Cart;
 use Tendaz\Models\Coupon\Coupon;
@@ -55,6 +57,11 @@ class Order extends Model
     public function histories()
     {
         return $this->hasMany(OrderHistory::class,'order_id');
+    }  
+    
+    public function historiesByDate()
+    {
+        return $this->histories->groupBy('created_at');
     }
 
     public function products()
@@ -163,7 +170,7 @@ class Order extends Model
     }
 
     public function scopeCurrentState($query){
-        $query->whereIn('current_state', [3, 6, 7 , 11]);
+        $query->whereIn('order_status', [3, 6, 7 , 11]);
     }
     public function scopeGroup($query , $field){
         $query->groupBy($field);
@@ -174,7 +181,7 @@ class Order extends Model
     }
 
     public function scopePending($query ){
-        $query->where('current_state' , '<' , 6);
+        $query->where('order_status' , '<' , 6);
     }
 
     /**
@@ -215,9 +222,9 @@ class Order extends Model
 
     public  static function ByStatus(){
         return  Order::currentState()
-            ->select('current_state', DB::raw('count(*) as total'))
-            ->group('current_state')
-            ->order('current_state')
+            ->select('order_status', DB::raw('count(*) as total'))
+            ->group('order_status')
+            ->order('order_status')
             ->NotInitOrders()
             ->get()
             ->toArray();
@@ -264,10 +271,19 @@ class Order extends Model
         return  (new Date($this->attributes['created_at']))->format('l j , F Y');
     }
 
+    public  function getCreatedAtNumAttribute(){
+        return  Carbon::parse($this->attributes['created_at'])->format('d/m/Y');
+    }
+
     public function updateStatus($status)
     {
-        $this->order_status = trans("payments.status.$status");
+        if (Lang::has("payments.status.$status")){
+            $status = trans("payments.status.$status");
+        }
+        $this->order_status = $status;
         $this->save();
+
+        event(new OrderStatusChangeEvent($this ,$this->status->name));
     }
 
     public function getUniqueIdByShopAttribute()
@@ -285,4 +301,37 @@ class Order extends Model
             }
         }
     }
+
+    public function getIsSendAttribute()
+    {
+        if ($this->order_status >= 3 && $this->order_status <= 5) {
+            return 'Lista para enviar';
+        }elseif ($this->order_status > 5){
+            return "Enviada";
+        }else {
+            return "No Enviada";
+        }
+    }
+
+    public function scopeLast($query , $from = null , $to = null)
+    {
+        return static::whereBetween('created_at' , [Carbon::now()->subDays(1) , Carbon::now()]);
+    }
+
+    public function scopeEight($query , $from = null , $to = null)
+    {
+        return static::whereBetween('created_at' , [Carbon::now()->subDays(8) , Carbon::now()]);
+    }
+
+    public function scopeMonth($query , $from = null , $to = null)
+    {
+        return static::whereBetween('created_at' , [Carbon::now()->subMonth(1) , Carbon::now()]);
+    }
+
+    public function scopeCustom($query , $from = null , $to = null)
+    {
+        return static::whereBetween('created_at' , [Carbon::parse(str_replace('/' , '-' ,$from)) , Carbon::parse(str_replace('/' , '-' ,$to))]);
+    }
+
+    
 }

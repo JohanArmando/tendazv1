@@ -43,10 +43,15 @@ class OrderController extends Controller
                 'shipping_address_id' => $address->customer->first()->pivot->id
             ]);
         }else{
-            $order->update($request->all());
+            if ($request->has('value')){
+                $order->updateStatus($request->value);
+            }else{
+                $order->update($request->all());
+            }
         }
-        return response()->json( fractal()->item($order->cart, new CartTransformer()), 201);
-
+        if (!$request->has('value')){
+            return response()->json( fractal()->item($order->cart, new CartTransformer()), 201);
+        }
     }
 
     public function show(Order $order)

@@ -4,6 +4,9 @@
 </script>
 	@section('css')
 		<style>
+			#off-canvas-menu .expander-list .name {
+				height: 10%;
+			}
 			.active{
 				color: #1fc0a0;
 			}

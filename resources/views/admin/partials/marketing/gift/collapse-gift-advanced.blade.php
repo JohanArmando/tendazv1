@@ -26,10 +26,10 @@
                             <hr>
                         </div>
                         <div class="form-group" >
-                            <label for="porcentaje_descuento">Porcentaje de Descuento</label>
+                            <label for="porcentaje_descuento" id="shippingLabel">Porcentaje de Descuento</label>
                             <div class="input-group">
                                 <span  class="input-group-addon" id="absolute-2">$</span>
-                                <input type="number" class="form-control" name="discount[value]" onkeypress="return justNumbers(event);"/>
+                                <input type="number" id="shipping" class="form-control" name="discount[value]" onkeypress="return justNumbers(event);"/>
                                 <span class="input-group-addon" id="percentage-2">%</span>
                             </div>
                             <p class="help-block" style="height: 68px !important;">Es el monto de descuento que recibir&aacute;n tus clientes sobre el total de la compra (no se aplica sobre los costos de env&iacute;o).</p>

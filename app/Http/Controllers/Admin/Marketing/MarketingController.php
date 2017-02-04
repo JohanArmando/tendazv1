@@ -122,6 +122,9 @@ class MarketingController extends Controller
             : $message = array('type' => 'warning' , 'message' => 'Hubo un error al activar el login');
         return redirect()->back()->with('message' , $message);
     }
+    public function tutorial(){
+        return view('admin.marketing.tutorial_social_login');
+    }
 
 
 

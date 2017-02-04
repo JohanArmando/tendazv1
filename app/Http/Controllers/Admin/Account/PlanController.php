@@ -19,16 +19,20 @@ class PlanController extends Controller
         if ($request->shop->subscription()->onTrial())
         {
             $request->shop->subscription()->swap($plan);
-            return back()->with('message' , ['type' => 'info' , 'message' => 'El plan de tu subscripcion ha cambiado']);
+            return redirect()->to('admin/account/checkout/finish?ref=from_payment_bottom_bar')
+                ->with('message' , ['type' => 'info' , 'message' => 'El plan de tu subscripcion ha cambiado']);
         }
-        return redirect()->to('admin/account/checkout/start?ref=from_payment_bottom_bar');
+
+        if ($request->shop->subscription()->isSamePlanSubscription($plan)){
+            return redirect()->to('admin/account/checkout/finish?ref=from_payment_bottom_bar');
+        }
+
+        return redirect()->to("admin/account/checkout/start?ref=from_payment_bottom_bar&plan=$plan->uuid");
     }
 
     public function index(Request $request)
     {
-      $period = $request->has('period') ? $request->get('period') : 'monthly';
-
-        $plans = Plan::with($period)->whereHas($period)->get();
+        $plans = Plan::where('interval' , $request->get('frequency' , 'monthly'))->where('interval_count' , 1)->get();
         return view('admin.account.plans' , compact('plans'));
     }
 

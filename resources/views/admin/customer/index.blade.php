@@ -77,21 +77,9 @@
                                         <td>
                                             {{ $customer->phone }}
                                         </td>
-                                        <td>
-                                            ${{ $customer->eagerTotal->first()== null ? '0' : number_format($customer->eagerTotal->first()->total , 0 , '.' , ',') }}
-                                        </td>
-                                        <td class="hidden-sm hidden-xs">
-                                            {{ $customer->total_exc_tax}}
-                                        </td>
-                                        <td class="hidden-sm hidden-xs">
-                                            <strong>
-                                                @if(!$customer->latestOrder->first() == null)
-                                                <a href="{{url('admin/orders/'.$customer->latestOrder->first()->id)}}">{{ $customer->latestOrder->first()->id }}</a>
-                                                    @else
-                                                        <strong>Ninguna</strong>
-                                                @endif
-                                            </strong>
-                                        </td>
+                                        <td>{{ $customer->total_amount_orders }}</td>
+                                        <td>{{ $customer->total_orders }}</td>
+                                        <td><a href="{{ url("admin/orders" , $customer->latestOrder[0]->uuid ) }}"># {{ $customer->latestOrder[0]->id + 100  }}</a> {{ $customer->latestOrder[0]->created_at_num }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

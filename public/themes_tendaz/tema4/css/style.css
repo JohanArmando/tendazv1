@@ -10461,9 +10461,9 @@ footer.layout-7 .footer-copyright .row {
 }
 .product__inside__image {
   position: relative;
-  max-height: 265px;
+  max-height: 250px;
   height: 100%;
-  min-height: 265px;
+  min-height: 250px;
   overflow: hidden;
 }
 .product__inside__image img {

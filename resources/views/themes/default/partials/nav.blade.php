@@ -16,6 +16,16 @@
                 <ul class="nav navbar-nav">
                     <div style="margin-right: 150px !important;"></div>
                     <li class="{{ Request::is('/') ? 'active' : '' }}"><a href="{{url('/')}}">Inicio</a></li>
+                    <li class="dropdown" ng-controller="categoryTemplateController" ng-init="x = 1">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Categories <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li ng-repeat="category in categories" >
+                                <a href="{{ url('/') }}<% slug ? '/products' + slug + '/' + category.slug : '/products'  + '/' +category.slug %>"><% category.name %></a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="{{ Request::is('products') ? 'active' : '' }}"><a href="{{url('/products')}}">Productos</a></li>
                     <li class="{{ Request::is('cart/buy') ? 'active' : '' }}"><a href="{{url('/cart/buy')}}">Carrito de compras</a></li>
                     <li class="{{ Request::is('contact') ? 'active' : '' }}"><a href="{{url('/contact')}}">Contactenos</a></li>

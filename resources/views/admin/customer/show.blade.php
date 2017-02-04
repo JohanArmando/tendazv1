@@ -38,8 +38,8 @@ Cliente {{ $customer->full_name }}
                                         <img class="img-rounded img-bordered-inverse" src="{{ asset('administrator/image/avatar/avatar7.jpg') }}" alt width="100px" height="100px">
                                     @endif
                                 </p>
-                                <p>{{$customer->email}}</p>
-                                <p>{{$customer->phone}}</p>
+                                <p><strong>Correo:</strong> {{$customer->email}}</p>
+                                <p><strong>Telefono:</strong> {{$customer->phone}}</p>
                                 <p>
                                     <button data-target="#modalEditar" data-toggle="modal" class="btn btn-primary">
                                         <i class="fa fa-pencil"></i>
@@ -50,14 +50,13 @@ Cliente {{ $customer->full_name }}
                                         <i class="fa fa-envelope"></i>
                                         Enviar Correo</button>
                                 </p>
+                                <hr>
                             </div>
-                            <div class="col-md-12 col-md-offset-1">
-                                <li class="text-left mb15">
-                                    <a href="{{ url("admin/customers/".$customer->uuid."/edit") }}"><i class="fa fa-pencil"></i> Editar cliente</a>
-                                    <h5><b>Correo: {{ $customer->email }}</b></h5>
+                            <div class="col-md-12">
+                                <li class="text-center mb15">
                                     <h5><b>Direccion de envio:</b></h5>
                                     @if(empty($address))
-                                        <p class="text-muted">No tiene direccion</p>
+                                        <p class="text-muted">No tiene direcci&oacute;n</p>
                                         @else
                                         <p class="text-muted">
                                             - {{ $address->name }}<br>
@@ -65,7 +64,10 @@ Cliente {{ $customer->full_name }}
                                             - ({{ $address->state->name }} - {{ $address->city->name }})<br>
                                         </p>
                                     @endif
+                                    <a class="btn btn-primary" href="{{ url("admin/customers/".$customer->uuid."/edit") }}">
+                                        <i class="fa fa-pencil"></i> Editar Direcci&oacute;n</a>
                                 </li>
+                                <hr>
                             </div>
                              
                         </ul>
@@ -155,7 +157,7 @@ Cliente {{ $customer->full_name }}
                                  <tbody>
                                      @foreach($orders as $order)
                                         <tr>
-                                            <td><a href="{{ url("admin/orders/$order->id")}}">#{{ $order->id }}</a></td>
+                                            <td><a href="{{ url("admin/orders/$order->uuid")}}">#{{ $order->id }}</a></td>
                                             <td>{{ $order->created_at }}</td>
                                             <td><strong>${{ number_format($order->total , 0 , ',' , '.')  }}</strong></td>
                                             <td>

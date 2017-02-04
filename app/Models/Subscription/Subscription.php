@@ -15,6 +15,7 @@ class Subscription extends Model
     const cancel = 'cancelled';
 
     public $timestamps = false;
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -23,6 +24,7 @@ class Subscription extends Model
     protected $fillable = [
         'uuid', 'amount', 'state', 'start_at', 'end_at', 'trial_at','shop_id' ,'plan_id'
     ];
+
     
     public function shop()
     {
@@ -56,7 +58,7 @@ class Subscription extends Model
         $this->plan_id = $plan->id;
         $this->save();
     }
-
+    
     public function onTrial()
     {
         return !is_null($this->trial_at) && Carbon::parse($this->trial_at)->isFuture() &&  !$this->cancelled();
@@ -100,5 +102,10 @@ class Subscription extends Model
     public function subscribedToPlan($plan)
     {
         return $this->plan_id >= Plan::findName($plan)->id;
+    }
+    
+    public function isSamePlanSubscription($plan)
+    {
+        return Plan::find($this->plan_id)->plan_id == $plan->plan->id;
     }
 }

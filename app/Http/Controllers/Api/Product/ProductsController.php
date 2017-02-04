@@ -37,7 +37,7 @@ class ProductsController extends Controller
     public function all(Request $request)
     {
         $resources =  Variant::whereHas('product' , function ($q) use ($request) {
-            $q->where('shop_id' , $request->shop->id);
+            $q->where('shop_id' , $request->shop->id)->where('publish',1);
         })->groupBy('product_id')->orderBy('id' ,'DESC')->get();
 
         //$paginator = $resource->paginate($request->get('per_page' , 10));

@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "hash": "decd7d42b26d0045d29b584f8251e6b3",
+=======
+    "hash": "9e2cce2353ee67b7bede95465a4f72b1",
+>>>>>>> b4b0cd8a7985e4d45eb0e75d31df405717135909
     "content-hash": "22864f1367579a384683ccfe248f875a",
     "packages": [
         {
@@ -1229,6 +1233,7 @@
         },
         {
             "name": "league/flysystem",
+<<<<<<< HEAD
             "version": "1.0.33",
             "source": {
                 "type": "git",
@@ -1239,6 +1244,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/5c7f98498b12d47f9de90ec9186a90000125777c",
                 "reference": "5c7f98498b12d47f9de90ec9186a90000125777c",
+=======
+            "version": "1.0.34",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/flysystem.git",
+                "reference": "469ad53c13ea19a0e54e3e5d70f61227ddcc0299"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/469ad53c13ea19a0e54e3e5d70f61227ddcc0299",
+                "reference": "469ad53c13ea19a0e54e3e5d70f61227ddcc0299",
+>>>>>>> b4b0cd8a7985e4d45eb0e75d31df405717135909
                 "shasum": ""
             },
             "require": {
@@ -1308,7 +1325,11 @@
                 "sftp",
                 "storage"
             ],
+<<<<<<< HEAD
             "time": "2017-01-23 10:32:09"
+=======
+            "time": "2017-01-30 17:41:17"
+>>>>>>> b4b0cd8a7985e4d45eb0e75d31df405717135909
         },
         {
             "name": "league/fractal",
@@ -4162,16 +4183,16 @@
         },
         {
             "name": "sebastian/comparator",
-            "version": "1.2.2",
+            "version": "1.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/comparator.git",
-                "reference": "6a1ed12e8b2409076ab22e3897126211ff8b1f7f"
+                "reference": "2b7424b55f5047b47ac6e5ccb20b2aea4011d9be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/6a1ed12e8b2409076ab22e3897126211ff8b1f7f",
-                "reference": "6a1ed12e8b2409076ab22e3897126211ff8b1f7f",
+                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/2b7424b55f5047b47ac6e5ccb20b2aea4011d9be",
+                "reference": "2b7424b55f5047b47ac6e5ccb20b2aea4011d9be",
                 "shasum": ""
             },
             "require": {
@@ -4222,7 +4243,11 @@
                 "compare",
                 "equality"
             ],
+<<<<<<< HEAD
             "time": "2016-11-19 09:18:40"
+=======
+            "time": "2017-01-29 09:50:25"
+>>>>>>> b4b0cd8a7985e4d45eb0e75d31df405717135909
         },
         {
             "name": "sebastian/diff",
