@@ -84,32 +84,135 @@
 
 @endsection
 @section('scripts')
+
+    <script src="{{asset('administrator/js/payform.js')}}"></script>
+    <script type="text/javascript" src="https://www.2checkout.com/checkout/api/2co.min.js"></script>
+
     <script>
-        $(".choose-period").find(".selection").click(function(){
-            var $this = $(this);
-            //escoge el parent de dicho div
-            var $panel = $this.closest('.panel-method');
-            var uuid = $this.data('uuid');
-            var installments = $this.data('installments');
+        $(document).on('ready' , function () {
+            $(".choose-period").find(".selection").click(function () {
+                var $this = $(this);
 
-            $panel.find(".selection").removeClass('selected');
-            $this.addClass('selected');
+                var $panel = $this.closest('.panel-method');
+                var uuid = $this.data('uuid');
+                var installments = $this.data('installments');
+                var value = $this.data('price');
 
-            $panel.find("input.input_uuid").val(uuid);
-            $panel.find("input.input_installments").val(installments);
+                $panel.find(".selection").removeClass('selected');
+                $this.addClass('selected');
 
-            //This give feedback of the method selected
-            $panel.addClass('method-selected');
+                $panel.find("input.input_uuid").val(uuid);
+                $panel.find("input.input_installments").val(installments);
+
+                $panel.addClass('method-selected');
+
+                $('#buttonCardPayment').html('Pagar ' + value + ' USD');
+
+                $apps_monthly = $('#apps').find('.monthly');
+                if ($panel.find(':selected').hasClass('selected')) {
+                    $apps_monthly.hide();
+                } else {
+                    $apps_monthly.show();
+                }
+
+                return false;
+            });
 
 
-            //This change button color and text for discounts
-            $apps_monthly = $('#apps').find('.monthly');
-            if ($panel.find(':selected').hasClass('selected')){
-                $apps_monthly.hide();
-            } else {
-                $apps_monthly.show();
+            $('#card').payform('formatCardNumber');
+            $('#expiry').payform('formatCardExpiry');
+
+            $('#card').keyup(function () {
+                var val =  $(this).val();
+
+                if ($.payform.validateCardNumber(val)){
+                    $(this).parent().addClass('has-success').removeClass('has-error');
+                    $(this).parent().find('span.glyphicon-remove').addClass('hidden');
+                    $(this).parent().find('span.glyphicon-ok').removeClass('hidden');
+                }else{
+                    $(this).parent().addClass('has-error');
+                    $(this).parent().find('span.glyphicon-remove').removeClass('hidden');
+                    $(this).parent().find('span.glyphicon-ok').addClass('hidden');
+                }
+
+                if ($.payform.parseCardType( val ) != null) {
+                    $('#type-card').html("<strong>" + $.payform.parseCardType( val ) + "</strong>")
+                }
+                disabledButton();
+            });
+
+            $('#expiry').keyup(function () {
+                var val =  $(this).val().split('/');
+                var month = val[0];
+                var year = val[1];
+                if ($.payform.validateCardExpiry(month , year)){
+                    $(this).parent().addClass('has-success').removeClass('has-error');
+                    $(this).parent().find('span.glyphicon-remove').addClass('hidden');
+                    $(this).parent().find('span.glyphicon-ok').removeClass('hidden');
+                }else{
+                    $(this).parent().addClass('has-error');
+                    $(this).parent().find('span.glyphicon-remove').removeClass('hidden');
+                    $(this).parent().find('span.glyphicon-ok').addClass('hidden');
+                }
+                disabledButton();
+            });
+
+            $('#cvc').keyup(function () {
+                var val =  $(this).val();
+                if ($.payform.validateCardCVC(val)){
+                    $(this).parent().addClass('has-success').removeClass('has-error');
+                    $(this).parent().find('span.glyphicon-remove').addClass('hidden');
+                    $(this).parent().find('span.glyphicon-ok').removeClass('hidden');
+                }else{
+                    $(this).parent().addClass('has-error');
+                    $(this).parent().find('span.glyphicon-remove').removeClass('hidden');
+                    $(this).parent().find('span.glyphicon-ok').addClass('hidden');
+                }
+                disabledButton();
+            });
+
+            function disabledButton() {
+                if ($.payform.validateCardCVC($('#cvc').val()) && $.payform.validateCardExpiry(  $('#expiry').val().split('/')[0] , $('#expiry').val().split('/')[1]) && $.payform.validateCardNumber(  $('#card').val() )){
+                    $('#buttonCardPayment').attr('disabled' , false);
+                }else{
+                    $('#buttonCardPayment').attr('disabled' , true);
+                }
             }
-            return false;
         });
+
+        var successCallback = function(data) {
+            var myForm = document.getElementById('formCardPayment');
+            myForm.token.value = data.response.token.token;
+            myForm.submit();
+        };
+
+        var errorCallback = function(data) {
+            if (data.errorCode === 200) {
+            } else {
+                alert(data.errorMsg);
+            }
+        };
+
+        var tokenRequest = function() {
+            var args = {
+                sellerId: "{{ env('SELLER_ID_TWO') }}",
+                publishableKey: "{{ env('PUBLIC_KEY_TWO') }}",
+                ccNo: $("#card").val(),
+                cvv: $("#cvc").val(),
+                expMonth: $("#expiry").val().split('/')[0].trim(),
+                expYear: $("#expiry").val().split('/')[1].trim()
+            };
+            console.log(args);
+            TCO.requestToken(successCallback, errorCallback, args);
+        };
+
+        $(function() {
+            TCO.loadPubKey('sandbox');
+            $("#formCardPayment").submit(function(e) {
+                tokenRequest();
+                return false;
+            });
+        });
+
     </script>
 @stop

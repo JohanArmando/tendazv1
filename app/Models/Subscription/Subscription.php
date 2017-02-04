@@ -3,6 +3,8 @@
 namespace  Tendaz\Models\Subscription;
 
 use Carbon\Carbon;
+use phpDocumentor\Reflection\Types\Object_;
+use Tendaz\Api\Twocheckout;
 use Tendaz\Models\Store\Shop;
 use Tendaz\Traits\UuidAndShopTrait;
 use Illuminate\Database\Eloquent\Model;
@@ -10,22 +12,27 @@ use Illuminate\Database\Eloquent\Model;
 class Subscription extends Model
 {
     use UuidAndShopTrait;
-    
+
     const active = 'active';
     const cancel = 'cancelled';
 
     public $timestamps = false;
-    
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'uuid', 'amount', 'state', 'start_at', 'end_at', 'trial_at','shop_id' ,'plan_id'
+        'uuid', 'amount', 'state', 'start_at', 'end_at', 'trial_at', 'shop_id', 'plan_id'
     ];
 
-    
+
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
+    }
+
     public function shop()
     {
         return $this->belongsTo(Shop::class);
@@ -107,5 +114,61 @@ class Subscription extends Model
     public function isSamePlanSubscription($plan)
     {
         return Plan::find($this->plan_id)->plan_id == $plan->plan->id;
+    }
+
+    public function createPayment($cardToken , $position )
+    {
+        $position = (object) $position;
+
+        Twocheckout::privateKey(env('PRIVATE_KEY_TWO'));
+        Twocheckout::sellerId(env('SELLER_ID_TWO'));
+        Twocheckout::sandbox(true);
+  
+        $charge = Twocheckout\Twocheckout_Charge::auth(array(
+            "sellerId" => env('SELLER_ID_TWO'),
+            "merchantOrderId" => "123",
+            "token" => $cardToken,
+            "currency" => 'USD',
+            "lineItems" => array(
+                array(
+                    "type" => 'product',
+                    "price" => $this->plan->getTotalPriceWithDiscount(),
+                    "productId" => $this->plan->uuid,
+                    "name" => $this->plan->name. " plan ". $this->plan->plan->name,
+                    "quantity" => "1",
+                    "tangible" => "N",
+                    "recurrence" => $this->plan->getIntervalInMonthly(). " Month",
+                    "duration" => 'Forever',
+                    "description" => $this->plan->description
+                )
+            ),
+            "billingAddr" => array(
+                "name" => !$this->shop->user->full_name == ' ' ?  $this->shop->user->full_name : $this->shop->name,
+                "addrLine1" => 'Colina Campestre',
+                "city" => empty($position->cityName) ? 'Bogota': $position->cityName,
+                "state" =>  empty($position->regionCode) ? 'BOG': $position->regionCode,
+                "zipCode" => empty($position->zipCode) ? '111461': $position->zipCode,
+                "country" =>  empty($position->countryCode) ? 'CO': $position->countryCode,
+                "email" => $this->shop->user->email,
+                "phoneNumber" =>  $this->shop->user->phone
+            ),
+        ));
+
+        $this->assertEquals('APPROVED', $charge['response']['responseCode']);
+
+        //Aqui va el codigo para crear una nueva factura de cobro
+        //falta la url de notificacion genera una nueva factura
+        //en facturafalta el boleano de cancelada
+        //asi como hay crear pago debe estar la opcion de para subscripcion
+        //y debe esta la opcion de cancelar subscripcion
+
+        return $this;
+    }
+    
+    public function assertEquals($status , $response)
+    {
+        if ($status != $response){
+            $this->shop->updateSubscription();
+        }
     }
 }

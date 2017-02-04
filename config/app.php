@@ -179,6 +179,7 @@ return [
         Barryvdh\Cors\ServiceProvider::class,
         SantiGraviano\LaravelMercadoPago\Providers\MercadoPagoServiceProvider::class,
         \Jenssegers\Date\DateServiceProvider::class,
+        Stevebauman\Location\LocationServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -244,7 +245,8 @@ return [
         'Theme' => igaster\laravelTheme\Facades\Theme::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'MP' => SantiGraviano\LaravelMercadoPago\Facades\MP::class,
-        'Date' => Jenssegers\Date\Date::class
+        'Date' => Jenssegers\Date\Date::class,
+        'Location' => 'Stevebauman\Location\Facades\Location',
     ],
 
 ];

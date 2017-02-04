@@ -215,7 +215,7 @@ label {
     text-decoration: none;
     font-size: 18px;
 
-    background-color: #3e52a1; */
+    background-color: #3e52a1;
     background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#4055a5),color-stop(100%,#283077));
      background-image: -webkit-linear-gradient(#3e52a1,#2d3277); 
     background-image: -moz-linear-gradient(#3e52a1,#2d3277);
@@ -237,3 +237,12 @@ background-color: #4355d2;
     -webkit-box-shadow: inset 0 1px #7a89e8;
     box-shadow: inset 0 1px #7a89e8;
     }
+
+.buyContent {  border-radius: 7px !important; margin-top: 150px }
+.buyHeader{background-color: #3c3c3c !important;color: white;border-radius: 5px 5px 0 0}
+.closeBuy{color: white !important;}
+.buyBody{border-radius: 0 0 5px 5px !important;}
+.inputBuy{font-size: 17px !important;border: 1px solid #f26522}
+.iconBuy{margin-right: 12px !important;}
+.buyRight{margin-left: 0; border-radius: 10px 0 0 0 !important;color: white;font-size: 16px;}
+.buyRight:hover{border: 1px solid #3c3c3c;color: white}

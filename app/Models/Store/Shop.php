@@ -10,6 +10,7 @@ use Tendaz\Models\Products\Product;
 use Tendaz\Models\Subscription\Plan;
 use Tendaz\Models\Subscription\Subscription;
 use Illuminate\Database\Eloquent\Model;
+use Tendaz\Models\User;
 use Tendaz\Traits\SubscriptionTrait;
 use Tendaz\Traits\UuidAndShopTrait;
 
@@ -104,6 +105,10 @@ class Shop extends Model
     
     public function store(){
         return $this->hasOne(Store::class);
+    }  
+    
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 
     public function subscriptions(){
@@ -180,6 +185,7 @@ class Shop extends Model
             ])
         );
         $subscription->makeSubscription();
+
         return $subscription;
     }
 
@@ -187,12 +193,13 @@ class Shop extends Model
     /**
      * @return boolean
      */
-    public function updateSubscription($trial = null , $start , $end)
+    public function updateSubscription( $start = null, $end = null)
     {
-        return $this->subscription()->update([
-            'trial_at' => $trial,
+         $this->subscription()->update([
             'start_at' => $start,
             'end_at' => $end
         ]);
+        
+        return $this->subscription();
     }
 }
