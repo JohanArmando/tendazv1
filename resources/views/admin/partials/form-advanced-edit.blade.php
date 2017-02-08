@@ -15,10 +15,12 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-sm-9 col-simple">
-                    <label class="control-label" style="font-size: 1.2em; color: black;">Imagenes
-                    <small style="color: #a9a9a9">(Opcional)</small>
-                    </label>
-                    <input id='file-1' name="product[images][]" type="file" multiple class="file-loading">
+                    <label class="control-label" style="font-size: 1.2em; color: black;">Imagenes</label>
+                        <div id="dropzone-edit" class="dropzone">
+                        </div>
+                        <p>Este modulo solo sirve para eliminar imagenes, si desea agregar otra imagen de clic en el boton "Agregar Mas Imagenes"</p>
+                        <br>
+                    <a href="{{url('admin/products/images/add/'.$product->uuid)}}" class="btn btn-tendaz">Agregar Mas Imagenes</a>
                 </div>
             </div>
         </div>
@@ -307,12 +309,14 @@
         </div>
     </span>
 </div>
-<div class="row" style="padding: 2.5%">
-    <div class="col-md-4 " style="margin-left: 13%">
-        <button type="submit" id="submit-edit" class="pull-left btn btn-primary">Actualizar Producto</button>
-    </div>
-    <div class="col-md-5" style="margin-left: -1.5%">
-        <a href="{{ url('admin/products') }}"  class="pull-right btn btn-default">Cancelar</a>
-    </div>
+<div class="media border-dotted">
+    <span class="media-body box">
+        <div class="row" style="padding: 2.5%">
+            <div class="col-md-12">
+                <button type="submit" id="submit-edit" class="pull-right btn btn-primary" style="margin-left: 1%">Actualizar Producto</button>
+                <a href="{{ url('admin/products') }}"  class="pull-right btn btn-default">Cancelar</a>
+            </div>
+        </div>
+    </span>
 </div>
 @include('admin.partials.modal-category')

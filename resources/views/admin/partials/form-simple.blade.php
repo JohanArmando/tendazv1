@@ -1,5 +1,5 @@
 {!! Form::open(['url' => "admin/products?client_secret=$shop->uuid&client_id=$shop->id" ,
-'method' => 'POST' , 'class' => 'dropzone hidden-xs hidden-sm' ,'id' => 'my-dropzone' , 'files' => true]) !!}
+'method' => 'POST' , 'class' => 'dropzone' ,'id' => 'my-dropzone' , 'files' => true]) !!}
 <div class="media border-dotted">
   <div class="row">
     <span class="media-body box">

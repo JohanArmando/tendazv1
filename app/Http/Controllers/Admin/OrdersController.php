@@ -46,9 +46,9 @@ class OrdersController extends Controller
         $filter = $request->get('filter');
 
         if (!empty($request->get('range-date'))){
-            $orders = Order::$field($request->get('to') , $request->get('from'))->get();
+            $orders = Order::$field($request->get('to') , $request->get('from'))->notInitOrders()->get();
         }else {
-            $orders = Order::all();
+            $orders = Order::notInitOrders()->get();
         }
 
         Excel::create("$subdomain.orders_export", function($excel) use($orders) {
