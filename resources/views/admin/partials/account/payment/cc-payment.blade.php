@@ -25,12 +25,10 @@
     <div class="checkout-confirm container">
         <div style="display: none; margin-left: 4.5%"><strong>Medio de pago:</strong> <span class="confirm-method">Tarjeta de cr&eacute;dito</span></div>
         <div style="display: none ;width: 59%; margin-left: 4.5%"><strong>Per&eacute;odo a contratar:</strong> <span class="confirm-period"></span></div>
-        {!! Form::open(['url' => '/admin/account/checkout/finish' , 'method' => 'POST' , 'class' => 'no-padding submit_form']) !!}
-            <input type="hidden" name="uuid" class="input_uuid" value="{{ $plan->plan->periods[0]->uuid }}">
-            <div class="clearfix"></div>
+
             <div class="panel-footer text-center">
                 <div class="text-center">
-                    <button type="submit" class="btn btn-default-tendaz confirm_button m-half-bottom m-half-top">
+                    <button  data-toggle="modal" data-target="#modalCreditCard"  class="btn btn-default-tendaz confirm_button m-half-bottom m-half-top">
                         Contratar plan
                         <span class="one-time-in-button" style="display: none">y ahorrar
                             <strong class="savings"></strong>
@@ -39,6 +37,50 @@
                     </button>
                 </div>
             </div>
-        {!! Form::close() !!}
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade bs-example-modal-sm buyModal" tabindex="-1" aria-labelledby="mySmallModalLabel" id="modalCreditCard" role="dialog" >
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content buyContent">
+            <div class="modal-header buyHeader">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="closeBuy" aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Pagar Suscripci&oacute;n</h4>
+            </div>
+            <div class="modal-body buyBody">
+                {!! Form::open(['url' => '/admin/account/checkout/finish' , 'method' => 'POST' , 'class' => 'no-padding submit_form' , 'id' =>'formCardPayment']) !!}
+
+                    <input type="hidden" name="uuid" class="input_uuid" value="{{ $plan->plan->periods[0]->uuid }}">
+                    <input name="token" type="hidden" value="" />
+                    <div class="row">
+                        <div class="form-group col-md-12 has-feedback">
+                            <label for="">Numero de Tarjeta *</label>
+                            <input type="text" id="card" placeholder="---- ---- ---- ----" class="form-control "  required>
+                            <span class="glyphicon glyphicon-remove form-control-feedback hidden iconBuy" aria-hidden="true" ></span>
+                            <span class="glyphicon glyphicon-ok form-control-feedback hidden iconBuy" aria-hidden="true" ></span>
+                            <span id="type-card"></span>
+                        </div>
+                        <div class="form-group col-md-7 has-feedback">
+                            <label for="">Expide el *</label>
+                            <input type="text" id="expiry" placeholder="MM / YYYY" class="form-control" required>
+                            <span class="glyphicon glyphicon-remove form-control-feedback hidden iconBuy" aria-hidden="true" ></span>
+                            <span class="glyphicon glyphicon-ok form-control-feedback hidden iconBuy" aria-hidden="true" ></span>
+                        </div>
+                        <div class="form-group col-md-5 has-feedback">
+                            <label for="">CVC *</label>
+                            <input type="text" id="cvc" placeholder="---" class="form-control" maxlength="3" pattern="[0-9]*" required>
+                            <span class="glyphicon glyphicon-remove form-control-feedback hidden iconBuy" aria-hidden="true" ></span>
+                            <span class="glyphicon glyphicon-ok form-control-feedback hidden iconBuy" aria-hidden="true" ></span>
+                        </div>
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary pull-right buyRight" disabled="disabled" id="buttonCardPayment">Pagar {{ $plan->plan->periods[0]->getTotalPriceWithDiscount() }} USD</button>
+                        </div>
+                    </div>
+
+                {!! Form::close() !!}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end Modal -->

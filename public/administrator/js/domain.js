@@ -115,7 +115,7 @@
                                         'tco_use_inline' : 1
                                     }
                                     var form = $('<form></form>');
-                                    form.attr("action", "https://www.2checkout.com/checkout/purchase");
+                                    form.attr("action", "https://www.johinsdev.com/checkout/purchase");
                                     form.attr("method", "POST");
                                     form.attr("target", "tco_lightbox_iframe");
                                     form.attr("style", "display:none;");
@@ -123,7 +123,7 @@
                                     $("body").append(form);
 
                                     $('.tco_lightbox').remove();
-                                    $.getScript( "https://www.2checkout.com/static/checkout/javascript/direct.min.js", function( data, textStatus, jqxhr ) {
+                                    $.getScript( "https://www.johinsdev.com/static/checkout/javascript/direct.min.js", function( data, textStatus, jqxhr ) {
                                         setTimeout(function() {
                                             form.submit();
                                             form.remove();

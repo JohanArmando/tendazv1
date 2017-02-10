@@ -179,7 +179,7 @@
                         <select name="provider_id" id="providers">
                             <option selected></option>
                             @foreach($providers as $provi)
-                                <option id="{{$provi->id}}">{{$provi->name}}</option>
+                                <option value="{{$provi->id}}">{{$provi->name}}</option>
                             @endforeach
                         </select>
                     </div>

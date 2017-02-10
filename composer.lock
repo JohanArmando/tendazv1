@@ -4,12 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-    "hash": "decd7d42b26d0045d29b584f8251e6b3",
-=======
-    "hash": "9e2cce2353ee67b7bede95465a4f72b1",
->>>>>>> b4b0cd8a7985e4d45eb0e75d31df405717135909
-    "content-hash": "22864f1367579a384683ccfe248f875a",
+    "hash": "b10dcf7dc6f54811f3cbcfa3cc25f428",
+    "content-hash": "204eaacc2c664c5163af40174a57ce17",
     "packages": [
         {
             "name": "barryvdh/laravel-cors",
@@ -792,6 +788,56 @@
             "time": "2014-09-09 13:34:57"
         },
         {
+            "name": "geoip2/geoip2",
+            "version": "v2.3.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maxmind/GeoIP2-php.git",
+                "reference": "ee15b2e466dd09fd2246cf64efa1aa9eca988b86"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maxmind/GeoIP2-php/zipball/ee15b2e466dd09fd2246cf64efa1aa9eca988b86",
+                "reference": "ee15b2e466dd09fd2246cf64efa1aa9eca988b86",
+                "shasum": ""
+            },
+            "require": {
+                "maxmind-db/reader": "~1.0",
+                "maxmind/web-service-common": "~0.0.3",
+                "php": ">=5.3.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.2.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "GeoIp2\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Gregory J. Oschwald",
+                    "email": "goschwald@maxmind.com",
+                    "homepage": "http://www.maxmind.com/"
+                }
+            ],
+            "description": "MaxMind GeoIP2 PHP API",
+            "homepage": "https://github.com/maxmind/GeoIP2-php",
+            "keywords": [
+                "IP",
+                "geoip",
+                "geoip2",
+                "geolocation",
+                "maxmind"
+            ],
+            "time": "2015-09-24 17:29:28"
+        },
+        {
             "name": "igaster/laravel-theme",
             "version": "v1.1.3",
             "source": {
@@ -1233,18 +1279,6 @@
         },
         {
             "name": "league/flysystem",
-<<<<<<< HEAD
-            "version": "1.0.33",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "5c7f98498b12d47f9de90ec9186a90000125777c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/5c7f98498b12d47f9de90ec9186a90000125777c",
-                "reference": "5c7f98498b12d47f9de90ec9186a90000125777c",
-=======
             "version": "1.0.34",
             "source": {
                 "type": "git",
@@ -1255,7 +1289,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/469ad53c13ea19a0e54e3e5d70f61227ddcc0299",
                 "reference": "469ad53c13ea19a0e54e3e5d70f61227ddcc0299",
->>>>>>> b4b0cd8a7985e4d45eb0e75d31df405717135909
                 "shasum": ""
             },
             "require": {
@@ -1325,11 +1358,7 @@
                 "sftp",
                 "storage"
             ],
-<<<<<<< HEAD
-            "time": "2017-01-23 10:32:09"
-=======
             "time": "2017-01-30 17:41:17"
->>>>>>> b4b0cd8a7985e4d45eb0e75d31df405717135909
         },
         {
             "name": "league/fractal",
@@ -1460,6 +1489,103 @@
                 "laravel"
             ],
             "time": "2017-01-20 16:16:51"
+        },
+        {
+            "name": "maxmind-db/reader",
+            "version": "v1.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maxmind/MaxMind-DB-Reader-php.git",
+                "reference": "7eeccf61b078bb23bb07b1a151a7e5db52871e65"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maxmind/MaxMind-DB-Reader-php/zipball/7eeccf61b078bb23bb07b1a151a7e5db52871e65",
+                "reference": "7eeccf61b078bb23bb07b1a151a7e5db52871e65",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.2.*",
+                "satooshi/php-coveralls": "1.0.*",
+                "squizlabs/php_codesniffer": "2.*"
+            },
+            "suggest": {
+                "ext-bcmath": "bcmath or gmp is requred for decoding larger integers with the pure PHP decoder",
+                "ext-gmp": "bcmath or gmp is requred for decoding larger integers with the pure PHP decoder",
+                "ext-maxminddb": "A C-based database decoder that provides significantly faster lookups"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MaxMind\\Db\\": "src/MaxMind/Db"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Gregory J. Oschwald",
+                    "email": "goschwald@maxmind.com",
+                    "homepage": "http://www.maxmind.com/"
+                }
+            ],
+            "description": "MaxMind DB Reader API",
+            "homepage": "https://github.com/maxmind/MaxMind-DB-Reader-php",
+            "keywords": [
+                "database",
+                "geoip",
+                "geoip2",
+                "geolocation",
+                "maxmind"
+            ],
+            "time": "2017-01-19 23:49:38"
+        },
+        {
+            "name": "maxmind/web-service-common",
+            "version": "v0.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maxmind/web-service-common-php.git",
+                "reference": "f26fce5281290973beeeca3e33847887177dd138"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maxmind/web-service-common-php/zipball/f26fce5281290973beeeca3e33847887177dd138",
+                "reference": "f26fce5281290973beeeca3e33847887177dd138",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.6.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MaxMind\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Gregory Oschwald",
+                    "email": "goschwald@maxmind.com"
+                }
+            ],
+            "description": "Internal MaxMind Web Service API",
+            "homepage": "https://github.com/maxmind/mm-web-service-api-php",
+            "time": "2015-07-21 20:07:31"
         },
         {
             "name": "monolog/monolog",
@@ -1638,16 +1764,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v3.0.2",
+            "version": "v3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "adf44419c0fc014a0f191db6f89d3e55d4211744"
+                "reference": "5b8182cc0abb4b0ff290ba9df6c0e1323286013a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/adf44419c0fc014a0f191db6f89d3e55d4211744",
-                "reference": "adf44419c0fc014a0f191db6f89d3e55d4211744",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/5b8182cc0abb4b0ff290ba9df6c0e1323286013a",
+                "reference": "5b8182cc0abb4b0ff290ba9df6c0e1323286013a",
                 "shasum": ""
             },
             "require": {
@@ -1685,7 +1811,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2016-12-06 11:30:35"
+            "time": "2017-02-03 21:57:31"
         },
         {
             "name": "nwidart/db-exporter",
@@ -2189,6 +2315,57 @@
                 "transform"
             ],
             "time": "2016-12-02 08:27:53"
+        },
+        {
+            "name": "stevebauman/location",
+            "version": "v2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stevebauman/location.git",
+                "reference": "3b350cc75cdf577d78084d70cd8b75363383db81"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stevebauman/location/zipball/3b350cc75cdf577d78084d70cd8b75363383db81",
+                "reference": "3b350cc75cdf577d78084d70cd8b75363383db81",
+                "shasum": ""
+            },
+            "require": {
+                "geoip2/geoip2": "2.3.*",
+                "illuminate/support": "5.*",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9",
+                "orchestra/testbench": "~3.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Stevebauman\\Location\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Steve Bauman",
+                    "email": "steven_bauman@outlook.com"
+                }
+            ],
+            "description": "Retrieve a users location by their IP Address using Laravel 5",
+            "keywords": [
+                "IP",
+                "geo",
+                "geo-location",
+                "geoip",
+                "laravel",
+                "location",
+                "php"
+            ],
+            "time": "2017-01-26 14:46:46"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -4243,11 +4420,7 @@
                 "compare",
                 "equality"
             ],
-<<<<<<< HEAD
-            "time": "2016-11-19 09:18:40"
-=======
             "time": "2017-01-29 09:50:25"
->>>>>>> b4b0cd8a7985e4d45eb0e75d31df405717135909
         },
         {
             "name": "sebastian/diff",

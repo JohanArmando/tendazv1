@@ -25,7 +25,7 @@ $domain = new \Tendaz\Models\Domain\Domain();
     Route::resource('products' , 'ProductsController');
     Route::get('products/edit/{id}' , 'ProductsController@editProduct');
     Route::put('products/edit/{id}' , 'ProductsController@putProduct');
-    Route::post('products/file-delete/{id}' , 'ProductsController@ajaxDelete');
+    Route::post('products/delete/file/{id}' , 'ProductsController@postDelete');
     //Route Categories
     Route::resource('categories' , 'CategoriesController');
 

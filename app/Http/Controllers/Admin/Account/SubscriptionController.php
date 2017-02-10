@@ -4,8 +4,10 @@ namespace Tendaz\Http\Controllers\Admin\Account;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Tendaz\Http\Controllers\Controller;
+use Stevebauman\Location\Facades\Location;
+use Tendaz\Api\Twocheckout;
 use Tendaz\Models\Subscription\Plan;
+use Tendaz\Http\Controllers\Controller;
 
 class SubscriptionController extends Controller
 {
@@ -30,15 +32,24 @@ class SubscriptionController extends Controller
 
     public function doSubscription($subdomain , Request $request)
     {
+        $position = Location::get($request->ip());
+
         $plan = Plan::whereUuid($request->get('uuid'));
 
         if (!$plan)
             abort(404);
+        
 
         if ($request->shop->subscription()->onTrial()) {
-            $request->shop->updateSubscription(null, Carbon::today(), Carbon::today()->addMonths($plan->getIntervalInMonthly()));
+            $request->shop
+                ->updateSubscription(Carbon::today(), Carbon::today()->addMonths($plan->getIntervalInMonthly()))
+                ->createPayment($request->token , $position)
+                ->skipTrial();
         }else {
-            $request->shop->newSubscription( $plan, Carbon::today(), Carbon::today()->addMonths( $plan->getIntervalInMonthly() ) )->skipTrial();
+            $request->shop
+                ->newSubscription( $plan, Carbon::today(), Carbon::today()->addMonths( $plan->getIntervalInMonthly() ) )
+                ->createPayment($request->token , $position)
+                ->skipTrial();
         }
 
         cache_subdomain($subdomain);
