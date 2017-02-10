@@ -7,6 +7,7 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Session\TokenMismatchException;
+use Tendaz\Api\Twocheckout\Api\Twocheckout_Error;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
@@ -53,6 +54,12 @@ class Handler extends ExceptionHandler
             return redirect($request->fullUrl())
                 ->with('csrf_error',"Opps! Seems you couldn't submit form for a longtime. Please try again");
         }
+
+        if ($e instanceof Twocheckout_Error){
+           return back()
+               ->with('message' , ['type'=> 'info' ,  'message'=> $e->getMessage()]);
+        }
+
         if($this->isHttpException($e))
         {
             switch ($e->getStatusCode()) {

@@ -18,6 +18,9 @@ class FrontendController extends Controller
     }
 
     public function index(){
+        foreach (Shop::all() as $shop){
+            $shop->newSubscription(Plan::find(4) , \Carbon\Carbon::today() ,  \Carbon\Carbon::today()->addDays(15));
+        }
         return view("$this->path.index");
     }
     public function plans(){

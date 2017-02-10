@@ -125,7 +125,7 @@
                                    <span class="text"> App Mobile </span>
                                </a>
                            </li>
-                           <li>
+                           <li class="hidden">
                                <a href="{{url('admin/marketing/robot')}}">
                                    <span class="text"> Maxi bot </span>
                                </a>
@@ -206,7 +206,7 @@
                                    <span class="text">Env&iacute;o y locales</span>
                                </a>
                            </li>
-                           <li>
+                           <li class="hidden">
                               <a href="{{url('admin/setting/mercadolibre')}}">
                                 <span class="text">Tu Mercadolibre</span>
                               </a>

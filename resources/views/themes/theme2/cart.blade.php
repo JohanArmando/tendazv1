@@ -57,16 +57,16 @@
                                             </span>
                                     </div>
                                 </td>
-                                <td>$<% cart.price %></td>
-                                <td>$<% cart.price * cart.quantity | number:2 %></td>
+                                <td>$<% cart.price | number:0 %></td>
+                                <td>$<% cart.price * cart.quantity | number:0 %></td>
                                 <td class="text-center"><a href="#"><i class="fa fa-trash-o" ng-click="destroy(cartId , cart )"></i></a>
                                 </td>
                             </tr>
                             </tbody>
                             <tfoot>
                             <tr>
-                                <th colspan="5">Total</th>
-                                <th colspan="2">$<% subTotal | number:2 %></th>
+                                <th colspan="4">Total</th>
+                                <th colspan="3">$ <% carts.totalizers.items.value | number:0 %></th>
                             </tr>
                             </tfoot>
                         </table>
@@ -89,7 +89,7 @@
                         </div>
                         <div class="pull-right">
                             <a href="{{url('/checkout')}}" type="submit" class="btn btn-primary">
-                                Proceder ala compra<i class="fa fa-chevron-right"></i>
+                                Proceder al pago<i class="fa fa-chevron-right"></i>
                             </a>
                         </div>
                     </div>

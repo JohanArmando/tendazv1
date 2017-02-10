@@ -79,7 +79,7 @@
                                         </td>
                                         <td>{{ $customer->total_amount_orders }}</td>
                                         <td>{{ $customer->total_orders }}</td>
-                                        <td><a href="{{ url("admin/orders" , $customer->latestOrder[0]->uuid ) }}"># {{ $customer->latestOrder[0]->id + 100  }}</a> {{ $customer->latestOrder[0]->created_at_num }}</td>
+                                        <td><a href="{{ url("admin/orders" , !$customer->latestOrder ?: $customer->latestOrder[0]->uuid ) }}"># {{ !$customer->latestOrder ?:$customer->latestOrder[0]->id + 100  }}</a> {{ $customer->latestOrder[0]->created_at_num }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

@@ -10,9 +10,6 @@
         </div>
     </span>
 </div>
-<div class="indicator hide" id="loading">
-    <img style="position: absolute;z-index: 999;left: 37%;top: 35%;opacity: 0.5" src="{{ asset('administrator/image/loading/cloud_loading.gif') }}" alt="">
-</div>
 <div class="media border-dotted">
     <span class="media-body box">
         <div class="form-group">
@@ -21,7 +18,7 @@
                     <label class="control-label" style="font-size: 1.2em; color: black;">Imagenes
                     <small style="color: #a9a9a9">(Opcional)</small>
                     </label>
-                    <input id='file-1' class='file' type='file' name="product[images][]" multiple="multiple" data-overwrite-initial="false" data-min-file-count="2">
+                    <input id='file-1' name="product[images][]" type="file" multiple class="file-loading">
                 </div>
             </div>
         </div>
