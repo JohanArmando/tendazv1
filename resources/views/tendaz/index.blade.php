@@ -43,7 +43,7 @@
                                                </span>
                                             <input class="form-control" placeholder="Correo electronico" autocomplete="off" required name="email"  value="{{ old('email') }}" type="email">
                                         </div>
-                                        <div class="help-block">{{ $errors->default->first('email') }}</div>
+                                        <div class="help-block text-white" >{{ $errors->default->first('email') }}</div>
                                         <div class="help-block with-errors errorForm"></div>
                                     </div>
                                     <input type="hidden" name="plan" value="{{ isset($_GET['plan']) ? $_GET['plan'] : '1' }}">

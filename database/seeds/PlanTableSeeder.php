@@ -21,7 +21,7 @@ class PlanTableSeeder extends Seeder
                 'image'  => $faker->imageUrl,
                 'description'  => $faker->text,
                 'main'  => 0,
-                'price'  => 10
+                'price'  => 14
             ],
             [
                 'id'    => 2 ,
@@ -30,7 +30,7 @@ class PlanTableSeeder extends Seeder
                 'image'  => $faker->imageUrl,
                 'description'  => $faker->text,
                 'main'  => 1,
-                'price'  => 20
+                'price'  => 29
             ],
             [
                 'id'    => 3 ,
@@ -39,7 +39,7 @@ class PlanTableSeeder extends Seeder
                 'image'  => $faker->imageUrl,
                 'description'  => $faker->text,
                 'main'  => 0,
-                'price'  => 30
+                'price'  => 45
             ],
         ));
         DB::table('plans')->insert([

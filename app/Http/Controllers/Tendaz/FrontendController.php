@@ -24,7 +24,7 @@ class FrontendController extends Controller
         return view("$this->path.index");
     }
     public function plans(){
-        $plans = Plan::all();
+        $plans = Plan::where('interval' , NULL)->get();
         return view("$this->path.plans" , ['plans' => $plans]);
     }
     
