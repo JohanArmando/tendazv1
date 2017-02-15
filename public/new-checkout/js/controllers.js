@@ -216,16 +216,6 @@ myApp.controller("shippingController" , ["$scope" , "Shipping" , "$location" , "
               'shipping_method_id'  : $rootScope.carts.shippingMethod.data._id
             };
             Shipping.doShippingMethod(ordObject);
-            /*console.log(ordObject);
-             return $http({
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                url: baseUrl + '/shipping/address/change'+ '?client_secret='  + client_secret + '&client_id=' + client_id,
-                method: "POST",
-                data: ordObject
-            });*/
         }
     });
     /*GET TOTAL SHIPPING*/

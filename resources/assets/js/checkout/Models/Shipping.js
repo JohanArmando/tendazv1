@@ -116,7 +116,18 @@ myApp.factory("Shipping" , ["$http" , "User", "$rootScope" , "Cart", "$location"
             $rootScope.carts = response.data.data;
         }).catch(function(response) {
             console.log(response);
-        }).finally(function() {});
+        }).finally(function() {
+            console.log(data);
+            return $http({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                url: baseUrl + '/shipping/address/change'+ '?client_secret='  + client_secret + '&client_id=' + client_id,
+                method: "POST",
+                data: data
+            });
+        });
     };
 
     return address;
