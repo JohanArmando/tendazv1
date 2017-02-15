@@ -2,7 +2,7 @@
 /public/storage
 /public/images-products
 /public/sliders
-/public/logos
+/public/logos/*
 /public/tendaz/css
 /public/tendaz/js
 /public/tendaz/fonts

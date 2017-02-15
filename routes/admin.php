@@ -8,7 +8,7 @@ $domain = new \Tendaz\Models\Domain\Domain();
 
     //Routes statics
     Route::get('/stats' , 'StaticsController@basic');
-    Route::get('/stats/advanced' , 'StaticsController@advanced')->middleware('plan:estandar,premiun');
+    Route::get('/stats/advanced' , 'StaticsController@advanced')->middleware('plan:estandar,avanzado');
     Route::get('/stats/advanced/map' , 'StaticsController@map');
     Route::get('/stats/update' , 'StaticsController@update');
 
@@ -68,9 +68,9 @@ $domain = new \Tendaz\Models\Domain\Domain();
 
     //Route marketing
     Route::group(['prefix' => 'marketing', 'namespace' => 'Marketing'], function() {
-        Route::get('/app', 'MarketingController@index')->middleware('plan:premiun');
+        Route::get('/app', 'MarketingController@index')->middleware('plan:avanzado');
         Route::get('/config-app', 'MarketingController@config');
-        Route::get('/robot', 'MarketingController@robot')->middleware('plan:premiun');
+        Route::get('/robot', 'MarketingController@robot')->middleware('plan:avanzado');
         Route::post('/robot', 'MarketingController@postRobot');
         Route::get('/social', 'MarketingController@social');
         Route::get('/social/tutorial', 'MarketingController@tutorial');
@@ -93,7 +93,7 @@ $domain = new \Tendaz\Models\Domain\Domain();
         Route::resource('shippings', 'ShippingController',
             ['only' => ['index', 'store', 'update', 'destroy']]);
         //meli
-        Route::get('/mercadolibre',function(){return redirect()->back();})->middleware('plan:estandar,premiun');
+        Route::get('/mercadolibre',function(){return redirect()->back();})->middleware('plan:estandar,avanzado');
         //setting domain
         Route::get('/domain', 'NameCheapController@getIndex');
         Route::get('/domain/create', 'NameCheapController@store');

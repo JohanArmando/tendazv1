@@ -210,6 +210,12 @@ class ProductsController extends Controller
         return view('admin.product.edit',compact('product','variant','categories','providers'));
     }
 
+    /**
+     * @param $subdomain
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function putProduct($subdomain,Request $request , $id){
         $product = Product::where('uuid',$id)->first();
         $publish            =   $request->publish;
@@ -267,12 +273,13 @@ class ProductsController extends Controller
                 $product->categories()->detach($current_cat);
             }
         }
-        //dd($request->all());
-        $images = $request->get('image-delete');
-        if(!empty($images)){
-            $image = Image::where('name', $images)->first();
+
+        if(!empty($request->get('image-delete'))) {
+            $image = explode(',',$request->get('image-delete'));
+            $image = Image::where('name', $image)->first();
             $image->delete();
         }
+
         return redirect()->to('admin/products')->with('message', array('type' => 'success' , 'message' => 'Editado correctamente'));
 
     }

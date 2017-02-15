@@ -55,4 +55,8 @@ class AddressesController extends Controller
         $cities = $state->cities()->get(['id' , 'name']);
         return response()->json(['cities' => $cities] , 200);
     }
+    public function addressForServi(Request $request){
+        dd($request->all());
+
+    }
 }
