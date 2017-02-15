@@ -9,6 +9,7 @@ use Tendaz\Models\Address\CustomerAddress;
 use Tendaz\Models\Cart\Cart;
 use Tendaz\Models\Customer;
 use Tendaz\Models\Geo\State;
+use Tendaz\Models\Order\Order;
 use Tendaz\Transformers\AddressTransformer;
 use Tendaz\Transformers\CartTransformer;
 use Webpatser\Uuid\Uuid;
@@ -54,5 +55,8 @@ class AddressesController extends Controller
     {
         $cities = $state->cities()->get(['id' , 'name']);
         return response()->json(['cities' => $cities] , 200);
+    }
+    public function addressForServi(Request $request){
+        return response()->json( $request->all(), 201);
     }
 }

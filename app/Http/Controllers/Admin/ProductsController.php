@@ -3,6 +3,9 @@
 namespace Tendaz\Http\Controllers\Admin;
 
 use Excel;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Validation\Validator;
+use Tendaz\Models\Images\Image;
 use Tendaz\Models\Store\Shop;
 use Webpatser\Uuid\Uuid;
 use Illuminate\Http\Request;
@@ -199,7 +202,7 @@ class ProductsController extends Controller
         return view('admin.product.import',compact('categories'));
     }
 
-    public function editProduct($subdomain , $id, Request $request){
+    public function editProduct($subdomain , Request $request ,$id){
         $product        =   Product::where('uuid',$id)->first();
         $variant        =   Variant::where('product_id',$product->id)->first();
         $providers      =   Provider::where('shop_id',$product->shop_id)->get();
@@ -207,7 +210,13 @@ class ProductsController extends Controller
         return view('admin.product.edit',compact('product','variant','categories','providers'));
     }
 
-    public function putProduct($subdomain,$id, Request $request){
+    /**
+     * @param $subdomain
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function putProduct($subdomain,Request $request , $id){
         $product = Product::where('uuid',$id)->first();
         $publish            =   $request->publish;
         $provider_id        =   $request->provider_id;
@@ -264,7 +273,13 @@ class ProductsController extends Controller
                 $product->categories()->detach($current_cat);
             }
         }
-       
+
+        if(!empty($request->get('image-delete'))) {
+            $image = explode(',',$request->get('image-delete'));
+            $image = Image::where('name', $image)->first();
+            $image->delete();
+        }
+
         return redirect()->to('admin/products')->with('message', array('type' => 'success' , 'message' => 'Editado correctamente'));
 
     }
@@ -280,8 +295,20 @@ class ProductsController extends Controller
             'product' => $product
         ));
     }
-
-    public function postDelete($subdomain ,Request $request, $id){
-        dd($id);
+    public function getImage($subdomain ,$id , Request $request){
+        $product = Product::where('uuid',$id)->first();
+        return view('admin.product.image',compact('product'));
     }
+    public function refreshProduct($subdomain , Request $request , $id){
+        $product = Product::where('uuid',$id)->first();
+        $variant = Variant::where('product_id',$product->id)->first();
+        foreach ($request->file as $file) {
+            $variant->images()->create([
+                'name' => $file
+            ]);
+        }
+        return redirect('admin/products/edit/'.$id.'?client_secret='.$request->shop->uuid.'&client_id='.$request->shop->id);
+    }
+
+
 }

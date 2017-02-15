@@ -4891,7 +4891,7 @@ class StateTableSeeder extends Seeder
 
             array(
                 'id' => '697',
-                'name' => 'ANTOIOQUIA',
+                'name' => 'ANTIOQUIA',
                 'abbr' => 'ANT',
                 'uuid' => $faker->uuid,
                 'country_id' => 50,
