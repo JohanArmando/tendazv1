@@ -186,7 +186,7 @@
         </div>
     </span>
 </div>
-@if($shop->hasAnyPlan(['estandar','premiun']))
+@if($shop->hasAnyPlan(['estandar','avanzado']))
 <div class="media border-dotted">
     <span class="media-body box">
         <div class="form-group">
