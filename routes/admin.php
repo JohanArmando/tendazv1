@@ -30,6 +30,12 @@ $domain = new \Tendaz\Models\Domain\Domain();
     //Route Categories
     Route::resource('categories' , 'CategoriesController');
 
+    //Route options variants
+    Route::get('options/{id}/values' , 'OptionsController@values');
+    Route::post('options/{id}/values' , 'OptionsController@storeValues');
+    Route::resource('options' , 'OptionsController');
+
+
     //Route orders
     Route::get('orders/status' , 'OrdersController@status');
     Route::get('orders/export' , 'OrdersController@getExport');

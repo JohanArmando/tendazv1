@@ -59,9 +59,33 @@ class ProductsController extends Controller
         $this->validate($request , [
            'name' => 'required'
         ]);
-        $response = Product::createWithVariant($request->all());
-
-        return response()->json($response , 200);
+        $product = Product::create([
+            'name' => $request->name,
+            'slug'=> $request->slug,
+            'seo_title'=> $request->seo_title,
+            'seo_description'=> $request->seo_description,
+            'description'=> $request->description,
+            'publish'=> 1,
+            'provider_id'=> $request->provider_id,
+            'large'=> $request->large,
+            'height'=> $request->height,
+            'width' => $request->width,
+            'dimension'=> 1
+        ]);
+        $variant = $product->variants()->create([
+            'sku' => $request->sku, 
+            'price' => $request->price, 
+            'promotional_price' => $request->promotional_price,
+            'weight'=> $request->weight,
+            'stock'=> $request->stock,
+            'price_declared'=> $request->price_declared
+        ]);
+        $values = json_decode($request->values);
+        foreach ($values as $value) {
+            $variant->optionValue()->attach($value);
+        }
+        
+        return response()->json($product->with('variants.values')->get(), 200);
     }
 
 

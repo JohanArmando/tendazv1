@@ -9,7 +9,7 @@
                     <td>
                         <div class="input-group">
                         <span class="input-group-addon">$</span>
-                            {!! Form::text('product[variants][0][price]',isset($product)? $product->price : null ,['class'=>'form-control','id'=>'price','style'=>'height: 30px;']) !!}
+                            {!! Form::text('price',isset($product)? $product->price : null ,['class'=>'form-control','id'=>'price','style'=>'height: 30px;']) !!}
                         </div>
                     </td>
                     
@@ -19,7 +19,7 @@
                     <td>
                         <div class="input-group">
                         <span class="input-group-addon">$</span>
-                            {!! Form::text('product[variants][0][promotional_price]',isset($product)? $product->promotional_price : null ,['class'=>'form-control','id'=>'price','style'=>"height: 30px; text-align: center" ]) !!}
+                            {!! Form::text('promotional_price',isset($product)? $product->promotional_price : null ,['class'=>'form-control','id'=>'price','style'=>"height: 30px; text-align: center" ]) !!}
                         </div>
                     </td>
                 </tr>
@@ -28,7 +28,7 @@
                     <td>
                     <div class="input-group ">
                         <span class="input-group-addon">Kg.</span>
-                        {!! Form::text('product[variants][0][weight]',isset($product)? $product->weight : null ,['class'=>'form-control','id'=>'kilo']) !!}
+                        {!! Form::text('weight',isset($product)? $product->weight : null ,['class'=>'form-control','id'=>'kilo']) !!}
                         
                     </div>
                     </td>
@@ -39,7 +39,7 @@
                     </td>
                     <td>
                         <div class="input-group">
-                            {!! Form::text('product[variants][0][stock]',isset($product)? $product->stock : null ,['class'=>'form-control','id'=>'stock']) !!}
+                            {!! Form::text('stock',isset($product)? $product->stock : null ,['class'=>'form-control','id'=>'stock']) !!}
                         </div>
                     </td>
                 </tr>
@@ -49,7 +49,7 @@
                     </td>
                     <td>
                         <div class="input-group">
-                            {!! Form::text('product[variants][0][sku]',isset($product)? $product->sku : null ,['class'=>'form-control','id'=>'price','style'=>"height: 30px; text-align: center" ]) !!}
+                            {!! Form::text('sku',isset($product)? $product->sku : null ,['class'=>'form-control','id'=>'price','style'=>"height: 30px; text-align: center" ]) !!}
                         </div>
                     </td>
                 </tr>

@@ -25,6 +25,7 @@ class customApiMiddleware
         {
         
             if(!Shop::where('id' , $request->client_id)->where('uuid' , $request->client_secret)->exists()){
+                
                 throw new AuthenticationException('Unauthenticated.');
             }
 

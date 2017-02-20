@@ -139,6 +139,10 @@
     <script type="text/javascript" src="{{ asset('components/admin/js/flat-ui.js') }}" ></script>
     <script type="text/javascript" src="{{ asset('components/admin/js/smoke.min.js') }}" ></script>
     <script src="{{ asset('components/admin/js/trumbowyg.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.2.0/vue-resource.js"></script>
+
+
     <script>
         $('#providers').select2();
         $('#categories').select2();
@@ -171,4 +175,162 @@
             lang: 'es'
         });
     </script>
+    <script>
+        var Base_Url = "{{ url('') }}"; 
+        Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf_token"]').attr('content');
+        //alert($('meta[name="csrf_token"]').attr('content'));
+    var app = new Vue({
+        el: '#app-vue',
+        data: {
+            values_selected: [],
+            options: [],
+            values: [],
+            option_selected: '',
+            option_selected_name: '',
+            option_new: '',
+            value_new: {
+                name: '',
+                attribute: ''
+            }
+        },
+        mounted() {
+            console.log('Component mounted.');
+            this.freshOptions();
+        },
+        methods: {
+            freshOptions: function () {
+                this.$http.get(Base_Url+'/admin/options/?client_secret='+client_secret+'&client_id='+client_id).
+                then((response) => {
+                    var data = response.body;
+                    this.options = data;
+                    this.option_selected = option_selected;
+                    console.log(data);
+                }, (response) => {
+                // error callback
+                })
+            },
+            freshValues: function () {
+                if (this.option_selected == -1){
+                    this.values = [];
+                }else{
+                    this.$http.get(Base_Url+'/admin/options/'+this.option_selected+'/values?client_secret='+client_secret+'&client_id='+client_id).
+                    then((response) => {
+                        var data = response.body;
+                        this.values = data;
+                        console.log(data);
+                    }, (response) => {
+                    // error callback
+                    })
+                }
+                
+            },
+            storeOptions: function () {
+                $('#btn-store-options').button('loading');
+
+                if (this.option_new == '') {
+                    $('#btn-store-options').button('reset');
+
+                    return "";
+
+                }else{
+                    this.$http.post(Base_Url+'/admin/options?client_secret='+client_secret+'&client_id='+client_id,{name:this.option_new}).
+                    then((response) => {
+                        this.freshOptions();
+                        var data = response.body;
+                        this.option_selected = data.id;
+                        this.option_new = '';
+                        $('#btn-store-options').button('reset');
+
+                        console.log(data);
+                    }, (response) => {
+                    // error callback
+                        $('#btn-store-options').button('reset');
+
+                    })
+                }
+            },
+            storeValues: function () {
+                $('#btn-store-values').button('loading');
+                if (this.value_new.name == '') {
+                    $('#btn-store-values').button('reset');
+
+                    return "";
+
+
+                }else{
+                    this.$http.post(Base_Url+'/admin/options/'+this.option_selected+'/values?client_secret='+client_secret+'&client_id='+client_id,this.value_new).
+                    then((response) => {
+                        this.freshValues();
+                        this.value_new = { name: '', attribute: '' };
+                        $('#btn-store-values').button('reset');
+
+                    }, (response) => {
+                    // error callback
+                        $('#btn-store-values').button('reset');
+
+                    })
+                }
+            },
+            addValue: function (value) {
+                   this.values_selected.push(value);
+            },
+            removeValue: function (value) {
+
+                   this.values_selected = this.values_selected.filter(function(el){
+                     return el.id !== value.id;
+                   });
+            },
+            selectedValue: function (value) {
+                for (var i = this.values_selected.length - 1; i >= 0; i--) {
+                    if(this.values_selected[i].id == value.id)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            } 
+        },
+        computed:{
+            nueva_propiedad: function () {
+                if (this.option_selected == -1){
+                    return true;
+                }else{
+                    return false;
+                }
+            },
+            nuevo_valor: function () {
+                if (this.option_selected == '' || this.option_selected == -1){
+                    return true;
+                }else{
+                    return false;
+                }
+            },
+            text_selected_value: function () {
+                var text = '';
+                if (this.values_selected.length == 0) {
+                    return "Ninguna carasteristica seleccionada";
+                }
+                for (var i = 0 ; i < this.values_selected.length; i++) {
+                    if (i == this.values_selected.length - 1 ){
+                        text += this.values_selected[i].name+'.';
+                    }else{
+                        text += this.values_selected[i].name+', ';
+                    }
+                    
+                }
+                return text;
+            },
+            ids_selected: function () {
+                var ids = [];
+
+                for (var i = 0 ; i < this.values_selected.length; i++) {
+                    ids.push(this.values_selected[i].id);
+                }
+                return ids;
+            }
+        }
+    })
+    </script>
+
+
 @stop
