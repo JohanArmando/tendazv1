@@ -58,8 +58,10 @@
                                     </div>
                                     <div class="tab-pane np " id="comments">
                                         <div class="media-list">
-                                            {!! Form::open(['url' => url ("admin/products?client_secret=".$shop->uuid."&client_id=".$shop->id)  , 'method' => 'POST' , 'class' => 'dropzone' ,'id' => 'my-dropzone-avanzado' , 'files' => true]) !!}
+                                            {{-- {!! Form::open(['url' => url ("admin/products?client_secret=".$shop->uuid."&client_id=".$shop->id)  , 'method' => 'POST' , 'class' => 'dropzone' ,'id' => 'my-dropzone-avanzado' , 'files' => true]) !!}
                                             @include('admin.partials.form-advanced')
+                                            --}}
+                                            @include('admin.partials.form-simple-2')
                                         </div>
                                     </div>
                                 </div>
@@ -179,157 +181,214 @@
         var Base_Url = "{{ url('') }}"; 
         Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf_token"]').attr('content');
         //alert($('meta[name="csrf_token"]').attr('content'));
-    var app = new Vue({
-        el: '#app-vue',
-        data: {
-            values_selected: [],
-            options: [],
-            values: [],
-            option_selected: '',
-            option_selected_name: '',
-            option_new: '',
-            value_new: {
-                name: '',
-                attribute: ''
-            }
-        },
-        mounted() {
-            console.log('Component mounted.');
-            this.freshOptions();
-        },
-        methods: {
-            freshOptions: function () {
-                this.$http.get(Base_Url+'/admin/options/?client_secret='+client_secret+'&client_id='+client_id).
-                then((response) => {
-                    var data = response.body;
-                    this.options = data;
-                    this.option_selected = option_selected;
-                    console.log(data);
-                }, (response) => {
-                // error callback
-                })
+        var app = new Vue({
+            el: '#app-vue',
+            data: {
+                values_selected: [],
+                options: [],
+                values: [],
+                option_selected: '',
+                option_selected_name: '',
+                aux: '',
+                option_new: '',
+                value_new: {
+                    name: '',
+                    attribute: ''
+                }
             },
-            freshValues: function () {
-                if (this.option_selected == -1){
-                    this.values = [];
-                }else{
-                    this.$http.get(Base_Url+'/admin/options/'+this.option_selected+'/values?client_secret='+client_secret+'&client_id='+client_id).
+            mounted() {
+                console.log('Component mounted.');
+                this.freshOptions();
+            },
+            methods: {
+                freshOptions: function () {
+                    this.$http.get(Base_Url+'/admin/options/?client_secret='+client_secret+'&client_id='+client_id).
                     then((response) => {
                         var data = response.body;
-                        this.values = data;
+                        this.options = data;
+                        this.option_selected = this.aux;
                         console.log(data);
                     }, (response) => {
                     // error callback
                     })
-                }
-                
-            },
-            storeOptions: function () {
-                $('#btn-store-options').button('loading');
-
-                if (this.option_new == '') {
-                    $('#btn-store-options').button('reset');
-
-                    return "";
-
-                }else{
-                    this.$http.post(Base_Url+'/admin/options?client_secret='+client_secret+'&client_id='+client_id,{name:this.option_new}).
-                    then((response) => {
-                        this.freshOptions();
-                        var data = response.body;
-                        this.option_selected = data.id;
-                        this.option_new = '';
-                        $('#btn-store-options').button('reset');
-
-                        console.log(data);
-                    }, (response) => {
-                    // error callback
-                        $('#btn-store-options').button('reset');
-
-                    })
-                }
-            },
-            storeValues: function () {
-                $('#btn-store-values').button('loading');
-                if (this.value_new.name == '') {
-                    $('#btn-store-values').button('reset');
-
-                    return "";
-
-
-                }else{
-                    this.$http.post(Base_Url+'/admin/options/'+this.option_selected+'/values?client_secret='+client_secret+'&client_id='+client_id,this.value_new).
-                    then((response) => {
-                        this.freshValues();
-                        this.value_new = { name: '', attribute: '' };
-                        $('#btn-store-values').button('reset');
-
-                    }, (response) => {
-                    // error callback
-                        $('#btn-store-values').button('reset');
-
-                    })
-                }
-            },
-            addValue: function (value) {
-                   this.values_selected.push(value);
-            },
-            removeValue: function (value) {
-
-                   this.values_selected = this.values_selected.filter(function(el){
-                     return el.id !== value.id;
-                   });
-            },
-            selectedValue: function (value) {
-                for (var i = this.values_selected.length - 1; i >= 0; i--) {
-                    if(this.values_selected[i].id == value.id)
-                    {
-                        return true;
-                    }
-                }
-                return false;
-            } 
-        },
-        computed:{
-            nueva_propiedad: function () {
-                if (this.option_selected == -1){
-                    return true;
-                }else{
-                    return false;
-                }
-            },
-            nuevo_valor: function () {
-                if (this.option_selected == '' || this.option_selected == -1){
-                    return true;
-                }else{
-                    return false;
-                }
-            },
-            text_selected_value: function () {
-                var text = '';
-                if (this.values_selected.length == 0) {
-                    return "Ninguna carasteristica seleccionada";
-                }
-                for (var i = 0 ; i < this.values_selected.length; i++) {
-                    if (i == this.values_selected.length - 1 ){
-                        text += this.values_selected[i].name+'.';
+                },
+                freshValues: function () {
+                    if (this.option_selected == -1){
+                        this.values = [];
                     }else{
-                        text += this.values_selected[i].name+', ';
+                        this.$http.get(Base_Url+'/admin/options/'+this.option_selected+'/values?client_secret='+client_secret+'&client_id='+client_id).
+                        then((response) => {
+                            var data = response.body;
+                            this.values = data;
+                            console.log(data);
+                        }, (response) => {
+                        // error callback
+                        })
                     }
                     
-                }
-                return text;
-            },
-            ids_selected: function () {
-                var ids = [];
+                },
+                storeOptions: function () {
+                    $('#btn-store-options').button('loading');
 
-                for (var i = 0 ; i < this.values_selected.length; i++) {
-                    ids.push(this.values_selected[i].id);
+                    if (this.option_new == '') {
+                        $('#btn-store-options').button('reset');
+
+                        return "";
+
+                    }else{
+                        this.$http.post(Base_Url+'/admin/options?client_secret='+client_secret+'&client_id='+client_id,{name:this.option_new}).
+                        then((response) => {
+                            this.freshOptions();
+                            var data = response.body;
+                            this.aux = data.id;
+
+                            this.option_new = '';
+                            $('#btn-store-options').button('reset');
+
+                            console.log(data);
+                        }, (response) => {
+                        // error callback
+                            $('#btn-store-options').button('reset');
+
+                        })
+                    }
+                },
+                storeValues: function () {
+                    $('#btn-store-values').button('loading');
+                    if (this.value_new.name == '') {
+                        $('#btn-store-values').button('reset');
+
+                        return "";
+
+
+                    }else{
+                        this.$http.post(Base_Url+'/admin/options/'+this.option_selected+'/values?client_secret='+client_secret+'&client_id='+client_id,this.value_new).
+                        then((response) => {
+                            this.freshValues();
+                            this.value_new = { name: '', attribute: '' };
+                            $('#btn-store-values').button('reset');
+
+                        }, (response) => {
+                        // error callback
+                            $('#btn-store-values').button('reset');
+
+                        })
+                    }
+                },
+                addValue: function (value) {
+                       this.values_selected.push(value);
+                },
+                removeValue: function (value) {
+
+                       this.values_selected = this.values_selected.filter(function(el){
+                         return el.id !== value.id;
+                       });
+                },
+                selectedValue: function (value) {
+                    for (var i = this.values_selected.length - 1; i >= 0; i--) {
+                        if(this.values_selected[i].id == value.id)
+                        {
+                            return true;
+                        }
+                    }
+                    return false;
+                } 
+            },
+            computed:{
+                nueva_propiedad: function () {
+                    if (this.option_selected == -1){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                },
+                nuevo_valor: function () {
+                    if (this.option_selected == '' || this.option_selected == -1){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                },
+                text_selected_value: function () {
+                    var text = '';
+                    if (this.values_selected.length == 0) {
+                        return "Ninguna carasteristica seleccionada";
+                    }
+                    for (var i = 0 ; i < this.values_selected.length; i++) {
+                        if (i == this.values_selected.length - 1 ){
+                            text += this.values_selected[i].name+'.';
+                        }else{
+                            text += this.values_selected[i].name+', ';
+                        }
+                        
+                    }
+                    return text;
+                },
+                ids_selected: function () {
+                    var ids = [];
+
+                    for (var i = 0 ; i < this.values_selected.length; i++) {
+                        ids.push(this.values_selected[i].id);
+                    }
+                    return ids;
                 }
-                return ids;
             }
-        }
-    })
+        });
+
+        var app2 = new Vue({
+            el: '#app-vue-simple',
+            data: {
+                save: false,
+                product_new: {
+                    name: '',
+                    height: '',
+                    width: '',
+                    large: '',
+                    description: '',
+                    variant: {
+                        price: '',
+                        stock: '',
+                        weight: ''
+                    }
+                },
+                product:{
+
+                }
+            },
+            mounted() {
+                console.log('Component mounted 2.');
+            },
+            methods: {
+                storeProduct: function () {
+                    $('#btn-store-product').button('loading');
+
+                    if (this.option_new == '') {
+                        $('#btn-store-product').button('reset');
+
+                        return "";
+
+                    }else{
+                        this.$http.post(Base_Url+'/admin/products/advanced?client_secret='+client_secret+'&client_id='+client_id,this.product_new).
+                        then((response) => {
+                            var data = response.body;
+                            this.product = data;
+                            this.save = true;
+                            $('#btn-store-product').button('reset');
+
+                            console.log(data);
+                        }, (response) => {
+                        // error callback
+                            $('#btn-store-product').button('reset');
+
+                        })
+                    }
+                },
+
+            },
+            computed: {
+
+            }
+        });
     </script>
 
 

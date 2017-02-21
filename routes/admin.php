@@ -17,6 +17,7 @@ $domain = new \Tendaz\Models\Domain\Domain();
 
     //Route Products
     Route::put('products/{variant}/variant' , 'ProductsController@updateVariant');
+    Route::post('products/advanced' , 'ProductsController@storeAdvanced');
     Route::get('products/import' , 'ProductsController@import');
     Route::post('products/export' , 'ProductsController@export');
     Route::post('products/import/upload' , 'ProductsController@postImport');

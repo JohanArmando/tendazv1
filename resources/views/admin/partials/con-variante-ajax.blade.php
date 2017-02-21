@@ -63,7 +63,6 @@
                                     
                                 </div> <!-- /col -->
                                 <input type="hidden" v-model="ids_selected" name="values">
-                                @{{ ids_selected }}
                         </div> <!-- /row -->
                         <hr>
                         <h4 class="variant-title" style="color:grey !important;">Propiedades que tiene el producto</h4>

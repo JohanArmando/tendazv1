@@ -51,7 +51,7 @@ Dropzone.options.myDropzone = {
             file.previewElement.appendChild(removeButton);
         });
         this.on("complete", function(file) {
-            myDropzoneAvanzado.removeFile(file);
+            myDropzone.removeFile(file);
         });
         var toas = '';
         this.on("sendingmultiple",function(totalBytesSent){

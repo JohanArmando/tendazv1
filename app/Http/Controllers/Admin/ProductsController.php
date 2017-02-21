@@ -72,6 +72,17 @@ class ProductsController extends Controller
             'width' => $request->width,
             'dimension'=> 1
         ]);
+        $product->collection()->create([
+            'uuid' => Uuid::generate(4)->string,
+            'shipping_free' => isset($request->shipping_free),
+            'promotion' => isset($request->promotion),
+            'primary' => isset($request->primary)
+        ]);
+        if (isset($request->category_id) && count($request->category_id) > 0) {
+            foreach ($request->category_id as $category) {
+                $product->categories()->attach($category);
+            }
+        }
         $variant = $product->variants()->create([
             'sku' => $request->sku, 
             'price' => $request->price, 
@@ -80,14 +91,76 @@ class ProductsController extends Controller
             'stock'=> $request->stock,
             'price_declared'=> $request->price_declared
         ]);
-        $values = json_decode($request->values);
-        foreach ($values as $value) {
-            $variant->optionValue()->attach($value);
+        if (isset($request->file) && count($request->file) > 0) {
+            foreach ($request->file as $file) {
+                $variant->images()->create([
+                    'name' => $file
+                ]);
+            }
+        }
+        if (isset($request->values)) {
+            $values = json_decode($request->values);
+            foreach ($values as $value) {
+                $variant->optionValue()->attach($value);
+            }
         }
         
-        return response()->json($product->with('variants.values')->get(), 200);
+        $product = $product->fresh();
+        return response()->json($product, 200);
     }
 
+    public function storeAdvanced(Request $request)
+    {
+        //return $request->variant['price'];
+        $this->validate($request , [
+           'name' => 'required'
+        ]);
+        $product = Product::create([
+            'name' => $request->name,
+            'slug'=> $request->slug,
+            'seo_title'=> $request->seo_title,
+            'seo_description'=> $request->seo_description,
+            'description'=> $request->description,
+            'publish'=> 1,
+            'provider_id'=> $request->provider_id,
+            'large'=> $request->large,
+            'height'=> $request->height,
+            'width' => $request->width,
+            'dimension'=> 1
+        ]);
+        $product->collection()->create([
+            'uuid' => Uuid::generate(4)->string,
+            'shipping_free' => isset($request->shipping_free),
+            'promotion' => isset($request->promotion),
+            'primary' => isset($request->primary)
+        ]);
+        if (isset($request->category_id) && count($request->category_id) > 0) {
+            foreach ($request->category_id as $category) {
+                $product->categories()->attach($category);
+            }
+        }
+        $variant = $product->variants()->create([
+            'price' => $request->variant['price'], 
+            'stock'=> $request->variant['stock'],
+            'weight'=> $request->variant['weight']
+        ]);
+        if (isset($request->file) && count($request->file) > 0) {
+            foreach ($request->file as $file) {
+                $variant->images()->create([
+                    'name' => $file
+                ]);
+            }
+        }
+        if (isset($request->values)) {
+            $values = json_decode($request->values);
+            foreach ($values as $value) {
+                $variant->optionValue()->attach($value);
+            }
+        }
+        
+        $product = $product->fresh();
+        return response()->json(Product::with(['collection','variants.values'])->find($product->id), 200);
+    }
 
     public function edit($subdomain ,Product $product)
     {

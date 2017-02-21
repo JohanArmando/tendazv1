@@ -21,7 +21,7 @@ $(document).on('ready', function () {
         var categoria = $('#sub').val();
         var data = { '_token' : token, 'name' : $('#nameCategory').val() , 'title' : $('#title_seo').val(), 'description' : $('#description_seo').val(), 'url' : $('#url_product').val() , 'sub' : $('#sub').val() };
         $.ajax({
-            url: url,
+            url: url+'?client_secret='+client_secret+'&client_id='+client_id,
             data :  data,
             type : 'POST',
             dataType : 'json',

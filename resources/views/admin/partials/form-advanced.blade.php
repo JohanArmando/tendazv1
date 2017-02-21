@@ -300,6 +300,17 @@
         </span>
     </div>
 </div>
+<div class="media border-dotted">
+    <div class="row">
+        <span class="media-body box">
+            <div class="form-group">
+                <div class="row">
+                    @include('admin.partials.con-variante')
+                </div>
+            </div>
+        </span>
+    </div>
+</div>
 <div class="row" style="padding: 2.5%">
     <div class="col-md-4 " style="margin-left: 13%">
         <button type="submit" id="submit-avanzado" class="pull-left btn  btn-primary" ><i class="fa fa-check"></i> Crear Producto
