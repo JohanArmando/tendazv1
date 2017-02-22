@@ -144,8 +144,18 @@ class ProductsController extends Controller
             'stock'=> $request->variant['stock'],
             'weight'=> $request->variant['weight']
         ]);
+
+
         if (isset($request->file) && count($request->file) > 0) {
             foreach ($request->file as $file) {
+                $variant->images()->create([
+                    'name' => $file
+                ]);
+            }
+        }
+        if (isset($request->variant['images']) && count($request->variant['images']) > 0) {
+            foreach ($request->variant['images'] as $file) {
+
                 $variant->images()->create([
                     'name' => $file
                 ]);
@@ -159,7 +169,24 @@ class ProductsController extends Controller
         }
         
         $product = $product->fresh();
-        return response()->json(Product::with(['collection','variants.values'])->find($product->id), 200);
+        return response()->json(Product::with(['collection','variants.images'])->find($product->id), 200);
+    }
+
+    public function storeVariant($subdomain, $id, Request $request)
+    {
+        $product = Product::where('uuid',$id)->first();
+        $variant = $product->variants()->create([
+            'price' => $request->price, 
+            'promotional_price' => $request->promotional_price, 
+            'stock'=> $request->stock,
+            'weight'=> $request->weight,
+            'sku' => $request->sku, 
+        ]);
+        foreach ($request->values as $value) {
+            $variant->values()->attach($value['id']);
+        }
+        $variant = Variant::with(['values','images'])->find($variant->id);
+        return response()->json($variant, 200);
     }
 
     public function edit($subdomain ,Product $product)

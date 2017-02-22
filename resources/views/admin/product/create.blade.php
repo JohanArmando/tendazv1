@@ -181,7 +181,7 @@
         var Base_Url = "{{ url('') }}"; 
         Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf_token"]').attr('content');
         //alert($('meta[name="csrf_token"]').attr('content'));
-        var app = new Vue({
+        /*var app = new Vue({
             el: '#app-vue',
             data: {
                 values_selected: [],
@@ -333,12 +333,22 @@
                     return ids;
                 }
             }
-        });
+        });*/
 
         var app2 = new Vue({
             el: '#app-vue-simple',
             data: {
                 save: false,
+                is_new_variant: false,
+                variant_new: {
+                    price: '',
+                    promotional_price: '',
+                    sku: '',
+                    stock: '',
+                    weight: '',
+                    values: [],
+                    images: []
+                },
                 product_new: {
                     name: '',
                     height: '',
@@ -348,11 +358,23 @@
                     variant: {
                         price: '',
                         stock: '',
-                        weight: ''
+                        weight: '',
+                        images: []
                     }
                 },
                 product:{
 
+                },
+                values_selected: [],
+                options: [],
+                values: [],
+                option_selected: '',
+                option_selected_name: '',
+                aux: '',
+                option_new: '',
+                value_new: {
+                    name: '',
+                    attribute: ''
                 }
             },
             mounted() {
@@ -362,7 +384,7 @@
                 storeProduct: function () {
                     $('#btn-store-product').button('loading');
 
-                    if (this.option_new == '') {
+                    if (this.product_new.name == '') {
                         $('#btn-store-product').button('reset');
 
                         return "";
@@ -373,6 +395,7 @@
                             var data = response.body;
                             this.product = data;
                             this.save = true;
+                            this.freshOptions();
                             $('#btn-store-product').button('reset');
 
                             console.log(data);
@@ -383,12 +406,216 @@
                         })
                     }
                 },
+                storeVariant: function () {
+                    $('#btn-store-variant').button('loading');
+                    this.variant_new.values = this.values_selected;
+                    if (this.variant_new.price == '') {
+                        $('#btn-store-variant').button('reset');
+
+                        return "";
+
+                    }else{
+                        this.$http.post(Base_Url+'/admin/products/'+this.product.uuid+'/variants?client_secret='+client_secret+'&client_id='+client_id,this.variant_new).
+                        then((response) => {
+                            var data = response.body;
+                            this.product.variants.push(data);
+                            this.is_new_variant = false;
+                            $('#btn-store-variant').button('reset');
+
+                            console.log(data);
+                        }, (response) => {
+                        // error callback
+                            $('#btn-store-variant').button('reset');
+
+                        })
+                    }
+                },
+                freshOptions: function () {
+                    this.$http.get(Base_Url+'/admin/options/?client_secret='+client_secret+'&client_id='+client_id).
+                    then((response) => {
+                        var data = response.body;
+                        this.options = data;
+                        this.option_selected = this.aux;
+                        console.log(data);
+                    }, (response) => {
+                    // error callback
+                    })
+                },
+                freshValues: function () {
+                    if (this.option_selected == -1){
+                        this.values = [];
+                    }else{
+                        this.$http.get(Base_Url+'/admin/options/'+this.option_selected+'/values?client_secret='+client_secret+'&client_id='+client_id).
+                        then((response) => {
+                            var data = response.body;
+                            this.values = data;
+                            console.log(data);
+                        }, (response) => {
+                        // error callback
+                        })
+                    }
+                    
+                },
+                storeOptions: function () {
+                    $('#btn-store-options').button('loading');
+
+                    if (this.option_new == '') {
+                        $('#btn-store-options').button('reset');
+
+                        return "";
+
+                    }else{
+                        this.$http.post(Base_Url+'/admin/options?client_secret='+client_secret+'&client_id='+client_id,{name:this.option_new}).
+                        then((response) => {
+                            this.freshOptions();
+                            var data = response.body;
+                            this.aux = data.id;
+
+                            this.option_new = '';
+                            $('#btn-store-options').button('reset');
+
+                            console.log(data);
+                        }, (response) => {
+                        // error callback
+                            $('#btn-store-options').button('reset');
+
+                        })
+                    }
+                },
+                storeValues: function () {
+                    $('#btn-store-values').button('loading');
+                    if (this.value_new.name == '') {
+                        $('#btn-store-values').button('reset');
+
+                        return "";
+
+
+                    }else{
+                        this.$http.post(Base_Url+'/admin/options/'+this.option_selected+'/values?client_secret='+client_secret+'&client_id='+client_id,this.value_new).
+                        then((response) => {
+                            this.freshValues();
+                            this.value_new = { name: '', attribute: '' };
+                            $('#btn-store-values').button('reset');
+
+                        }, (response) => {
+                        // error callback
+                            $('#btn-store-values').button('reset');
+
+                        })
+                    }
+                },
+                addValue: function (value) {
+                    this.values_selected.push(value);
+                },
+                removeValue: function (value) {
+
+                       this.values_selected = this.values_selected.filter(function(el){
+                         return el.id !== value.id;
+                       });
+                },
+                selectedValue: function (value) {
+                    for (var i = this.values_selected.length - 1; i >= 0; i--) {
+                        if(this.values_selected[i].id == value.id)
+                        {
+                            return true;
+                        }
+                    }
+                    return false;
+                },
+                onFileChange(e) {
+                    var files = e.target.files || e.dataTransfer.files;
+                    if (!files.length)
+                    return;
+                    this.createImage(files[0]);
+                },
+                createImage(file) {
+                    var image = new Image();
+                    var reader = new FileReader();
+                    var vm = this;
+
+                    reader.onload = (e) => {
+                        vm.product_new.variant.images.push(e.target.result);
+                    };
+                    reader.readAsDataURL(file);
+                },
+                removeImage: function (image) {
+                    this.product_new.variant.images = this.product_new.variant.images.filter(function(el){
+                    return el !== image;
+                    });
+                }
+
 
             },
             computed: {
+                nueva_propiedad: function () {
+                    if (this.option_selected == -1){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                },
+                nuevo_valor: function () {
+                    if (this.option_selected == '' || this.option_selected == -1){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                },
+                text_selected_value: function () {
+                    var text = '';
+                    if (this.values_selected.length == 0) {
+                        return "Ninguna carasteristica seleccionada";
+                    }
+                    for (var i = 0 ; i < this.values_selected.length; i++) {
+                        if (i == this.values_selected.length - 1 ){
+                            text += this.values_selected[i].name+'.';
+                        }else{
+                            text += this.values_selected[i].name+', ';
+                        }
+                        
+                    }
+                    return text;
+                },
+                ids_selected: function () {
+                    var ids = [];
 
+                    for (var i = 0 ; i < this.values_selected.length; i++) {
+                        ids.push(this.values_selected[i].id);
+                    }
+                    return ids;
+                }
             }
         });
+
+/*   new Vue({
+    el: '#app3',
+    data: {
+            images: []
+        },
+        methods: {
+            onFileChange(e) {
+                var files = e.target.files || e.dataTransfer.files;
+                if (!files.length)
+                return;
+                this.createImage(files[0]);
+            },
+            createImage(file) {
+                var image = new Image();
+                var reader = new FileReader();
+                var vm = this;
+
+                reader.onload = (e) => {
+                vm.images.push(e.target.result);
+                };
+                reader.readAsDataURL(file);
+            },
+            removeImage: function (image) {
+                this.images = this.images.filter(function(el){
+                return el !== image;
+                });
+            }
+        }
+    })*/
     </script>
 
 
