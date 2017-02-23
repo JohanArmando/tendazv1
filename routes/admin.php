@@ -35,6 +35,8 @@ $domain = new \Tendaz\Models\Domain\Domain();
     //Route options variants
     Route::get('options/{id}/values' , 'OptionsController@values');
     Route::post('options/{id}/values' , 'OptionsController@storeValues');
+    Route::post('variants/{id}/images' , 'ProductsController@storeImages');
+    Route::delete('variants/{variant_id}/images/{image_id}' , 'ProductsController@deleteImages');
     Route::resource('options' , 'OptionsController');
 
 

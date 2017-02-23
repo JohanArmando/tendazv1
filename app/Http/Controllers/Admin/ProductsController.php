@@ -198,10 +198,39 @@ class ProductsController extends Controller
 
     public function update($subdomain, Product $product , Request $request)
     {
-        if ($request->wantsJson()){
+        /*if ($request->wantsJson()){
             $product->update($request->all());
             return $this->response($request);
+        }*/
+        if ($request->type == 'visibility') {
+            $collection = $product->collection;
+            $collection->update($request->all());
+            return $collection->fresh();
         }
+        $product->update($request->all());
+        $product = $product->fresh();
+        return $product;
+        
+    }
+
+    public function storeImages($subdomain, $id, Request $request)
+    {
+        $variant = Variant::find($id);
+        $image = $variant->images()->create([
+            'name' => $request->image
+        ]);
+        return $image;
+
+    }
+    public function deleteImages($subdomain, $variant_id,$image_id)
+    {
+        $variant = Variant::find($variant_id);
+        $image = $variant->images()->find($image_id);
+        if ($image->delete()) {
+            return $image;
+        }
+        return "error";
+
     }
     
     public function updateVariant($subdomain, Variant $variant , Request $request)

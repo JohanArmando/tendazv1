@@ -340,6 +340,14 @@
             data: {
                 save: false,
                 is_new_variant: false,
+                messaje:{
+                    show: false,
+                    text: '',
+                    type: ''
+                },
+                mas: {
+                    images: []
+                },
                 variant_new: {
                     price: '',
                     promotional_price: '',
@@ -542,9 +550,145 @@
                     this.product_new.variant.images = this.product_new.variant.images.filter(function(el){
                     return el !== image;
                     });
+                },
+                updateGeneral: function () {
+                    
+                    $('#btn-udate-general').button('loading');
+                    var aux = {
+                        name: this.product.name,
+                        description: this.product.description,
+                        height: this.product.height,
+                        width: this.product.width,
+                        large: this.product.large,
+                        publish: this.product.publish,
+                        type: 'general'
+                    };
+                    this.$http.put(Base_Url+'/admin/products/'+this.product.uuid+'/?client_secret='+client_secret+'&client_id='+client_id,aux).
+                    then((response) => {
+                        var data = response.body;
+                        /*this.product = data;
+                        this.save = true;
+                        this.freshOptions();*/
+                        console.log(data);
+                        $('#btn-udate-general').button('reset');
+                        this.messajeSuccess();
+
+                        console.log(data);
+                    }, (response) => {
+                    // error callback
+                        $('#btn-udate-general').button('reset');
+
+                    })      
+                },
+                updateSeo:function () {
+                    $('#btn-udate-seo').button('loading');
+                    var aux = {
+                        seo_title: this.product.seo_title,
+                        seo_description: this.product.seo_description,
+                        type: 'seo'
+                    };
+                    this.$http.put(Base_Url+'/admin/products/'+this.product.uuid+'/?client_secret='+client_secret+'&client_id='+client_id,aux).
+                    then((response) => {
+                        var data = response.body;
+                        /*this.product = data;
+                        this.save = true;
+                        this.freshOptions();*/
+                        console.log(data);
+                        $('#btn-udate-seo').button('reset');
+                        this.messajeSuccess();
+                        console.log(data);
+                    }, (response) => {
+                    // error callback
+                        $('#btn-udate-seo').button('reset');
+
+                    })      
+                },
+                updateVisibility:function () {
+                    $('#btn-udate-visibility').button('loading');
+                    var aux = {
+                        primary: this.product.collection.primary,
+                        promotion: this.product.collection.promotion,
+                        shipping_free: this.product.collection.shipping_free,
+                        type: 'visibility'
+                    };
+                    this.$http.put(Base_Url+'/admin/products/'+this.product.uuid+'/?client_secret='+client_secret+'&client_id='+client_id,aux).
+                    then((response) => {
+                        var data = response.body;
+                        /*this.product = data;
+                        this.save = true;
+                        this.freshOptions();*/
+                         console.log(data);
+                        $('#btn-udate-visibility').button('reset');
+                        this.messajeSuccess();
+
+                        console.log(data);
+                    }, (response) => {
+                    // error callback
+                        $('#btn-udate-visibility').button('reset');
+
+                    }) 
+                },
+                addImageVariant: function (variant) {
+                    alert(variant.price);
+                },
+                messajeSuccess: function () {
+                    this.messaje.type = 'Genial! ';
+                    this.messaje.show = true;
+                    this.messaje.text = 'Los datos fueron actualizado correctamente';
+                    vm = this;
+                    setTimeout(function(){
+                        vm.messaje.show = false;
+                    }, 2000);
+                },
+                addImageVariant: function (variant, e) {
+                    var files = e.target.files || e.dataTransfer.files;
+                    if (!files.length)
+                    return;
+                    var image = new Image();
+                    var reader = new FileReader();
+                    var vm = this;
+
+                    reader.onload = (e) => {
+                        //vm.mas.images.push(e.target.result);
+                        vm.$http.post(Base_Url+'/admin/variants/'+variant.id+'/images?client_secret='+client_secret+'&client_id='+client_id,{image: e.target.result }).
+                        then((response) => {
+                            var data = response.body;
+                            variant.images.push(data);
+                            this.messajeSuccess();
+
+                            console.log(data);
+                        }, (response) => {
+                        // error callback
+                            $('#btn-udate-visibility').button('reset');
+
+                        }) 
+                    };
+                    reader.readAsDataURL(files[0]);
+                    //alert(files.length);
+                },
+                removeImageVariant: function (image ,variant) {
+                    
+                    this.$http.delete(Base_Url+'/admin/variants/'+variant.id+'/images/'+image.id+'?client_secret='+client_secret+'&client_id='+client_id).
+                    then((response) => {
+                        var data = response.body;
+                        variant.images = variant.images.filter(function(el){
+                            return el.id !== data.id;
+                        });
+                        /*this.product = data;
+                        this.save = true;
+                        this.freshOptions();*/
+                        /* console.log(data);
+                        $('#btn-udate-visibility').button('reset');
+                        this.messajeSuccess();
+                        */
+                        this.messajeSuccess();
+                        console.log(data);
+                    }, (response) => {
+                    // error callback
+                        //$('#btn-udate-visibility').button('reset');
+
+                    }) 
                 }
-
-
             },
             computed: {
                 nueva_propiedad: function () {

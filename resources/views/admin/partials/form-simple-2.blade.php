@@ -22,21 +22,33 @@
         </div>
 
         <div class="media border-dotted">
-            <div class="row">
-                <div v-for="image in product_new.variant.images" class="col-md-3 text-center" >
-                  <img :src="image" class="img-responsive img-thumbnail" style="height: 300px;"/>
-                  <br>
-                  <br>
-                  <button @click="removeImage(image)" class="btn-primary btn">Remove image</button>
+            <span class="media-body box">
+                <div class="row">
+                    <div class="col-md-9 col-simple">                    
+                        <label class="control-label" style="font-size: 1.2em; color: black;">Imagenes
+                            <small style="color: darkgray">(Opcional)</small>
+                        </label>
+                        <br>
+                        <div v-for="image in product_new.variant.images" class="col-md-3 text-center" >
+                          <img :src="image" class="img-responsive img-thumbnail" style="height: 220px;"/>
+
+                          <button @click="removeImage(image)" style="margin: 15px;" class="btn-primary btn">Remover imagen</button>
+
+                        </div>
+                        <div class="col-md-3">
+                          <div class="panel panel-default" style="height: 220px;">
+                              <div class="panel-body text-center" > 
+                                  <input type="file" id="file" class="hide" @change="onFileChange">
+                                    <label for="file" style="cursor: pointer;">
+                                        <h1 style="font-size: 80px !important; color: #F26522; margin: 20px;"><i class="ico-cloud-upload2"></i></h1>
+                                        <h4>Agregar imagen</h4>
+                                    </label>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-3">
-                  <div class="panel panel-default" style="height: 300px;">
-                      <div class="panel-body" > 
-                          <input type="file" @change="onFileChange">
-                      </div>
-                  </div>
-                </div>
-            </div>
+            </span>
         </div>
         <div class="media border-dotted">
             <div class="row">
@@ -179,258 +191,268 @@
              opacity: 0.5" src="{{ asset('administrator/image/loading/cloud_loading.gif') }}" alt="">
         </div>
     </form>
+    <!-- form store-->
     <div v-else>
         <div class="row">
-
-        <div class="col-md-3">
-            <div class="panel panel-default" style="margin-top: 15px;">
-                <div class="panel-heading-white" >
-                    <div class="panel-title">Navegacion</div>
+            <div class="col-md-3">
+                <div class="panel panel-default" style="margin-top: 15px;">
+                    <div class="panel-heading-white" >
+                        <div class="panel-title">Navegacion</div>
+                    </div>
+                    <div class="list-group">
+                        <a class="list-group-item" href="#general" aria-controls="general" role="tab" data-toggle="tab">Informacion General</a>
+                        <a class="list-group-item" href="#seo" aria-controls="seo" role="tab" data-toggle="tab">Configuraciones avanzadas para SEO</a>
+                        <a class="list-group-item" href="#visibity" aria-controls="visibity" role="tab" data-toggle="tab">Configuraciones para la visibilidad</a>
+                        <a class="list-group-item" href="#variants" aria-controls="variants" role="tab" data-toggle="tab">Configuracion sobre las variantes</a>
+                    </div>
                 </div>
-                <div class="list-group">
-                    <a class="list-group-item" href="#general" aria-controls="general" role="tab" data-toggle="tab">Informacion General</a>
-                    <a class="list-group-item" href="#seo" aria-controls="seo" role="tab" data-toggle="tab">Configuraciones avanzadas para SEO</a>
-                    <a class="list-group-item" href="#visibity" aria-controls="visibity" role="tab" data-toggle="tab">Configuraciones para la visibilidad</a>
-                    <a class="list-group-item" href="#variants" aria-controls="variants" role="tab" data-toggle="tab">Configuracion sobre las variantes</a>
+                <div class="alert alert-info" v-show="messaje.show">
+                    <button v-on:click="messaje.show = false" type="button" class="close">&times;</button>
+                    <strong>@{{ messaje.type }}</strong> @{{ messaje.text }}
                 </div>
             </div>
-        </div>
-        <div class="col-md-9">
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="general">
-                <div class="panel panel-default">
-                    <div class="panel-heading-white" >
-                        <div class="panel-title">Informacion General</div>
+            <div class="col-md-9">
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="general">
+                        <div class="panel panel-default">
+                            <div class="panel-heading-white" >
+                                <div class="panel-title">Informacion General</div>
+                            </div>
+                          <div class="panel-body">
+                              <div class="row">
+
+                                 <div class="col-md-12">
+                                   <div class="form-group">
+                                     <label for="">Nombre del producto</label>
+                                     <input type="text" v-model="product.name" class="form-control" id="" placeholder="">
+                                   </div>
+                                 </div>
+                                 <div class="col-md-3">
+                                   <div class="form-group">
+                                     <label for="">Largo</label>
+                                    <span class="input-group">
+                                        <span class="input-group-addon">cm</span>
+                                        <input type="text" v-model="product.large" class="form-control" id="" placeholder="">
+                                    </span>
+                                   </div>
+                                 </div>
+                                 <div class="col-md-3">
+                                   <div class="form-group">
+                                     <label for="">Alto</label>
+                                     <span class="input-group">
+                                         <span class="input-group-addon">cm</span>
+                                         <input type="text" v-model="product.height" class="form-control" id="" placeholder="">
+                                     </span>
+                                         
+                                   </div>
+                                 </div>
+                                 <div class="col-md-3">
+                                   <div class="form-group">
+                                     <label for="">Ancho</label>
+                                     <span class="input-group">
+                                         <span class="input-group-addon">cm</span>
+                                         <input type="text" v-model="product.width" class="form-control" id="" placeholder="">
+                                     </span>
+
+                                   </div>
+                                 </div>
+                                 <div class="col-md-3">
+                                     <label class="control-label" style=" color: darkslategray">Visibilidad del producto en tu tienda</label>
+                                     
+                                     <span class="checkbox custom-checkbox" style="margin-top: 8px;">
+                                         <input class="checkbox" v-model="product.publish" id="checkbox5" name="checkbox5" type="checkbox" value="1">
+                                         <label for="checkbox5" style="color: #7b7b7b">&nbsp;&nbsp;Quiero que este producto se muestre en mi tienda</label>
+                                     </span>
+                                     <br>
+                                 </div>
+                                 <div class="col-md-12">
+                                   <div class="form-group">
+                                     <label for="">Description</label>
+                                     <textarea name="" v-model="product.description" id="input" class="form-control" rows="3" required="required"></textarea>
+                                   </div>
+                                   <br>
+                                   <button v-on:click="updateGeneral()" data-loading-text="procesando..." id="btn-udate-general" type="button" class="btn btn-primary">Guardar cambios</button>
+                                 </div>
+                              </div>
+                          </div>
+                        </div>
                     </div>
-                  <div class="panel-body">
-                      <div class="row">
+                    <div role="tabpanel" class="tab-pane" id="seo">
+                        <div class="panel panel-default">
+                            <div class="panel-heading-white" >
+                                <div class="panel-title">Configuraciones avanzadas para SEO</div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="control-label" style=" color:darkslategray">Titulo para SEO</label>
+                                        <input type="text" v-model="product.seo_title" class="form-control" id="" placeholder="">
 
-                         <div class="col-md-12">
-                           <div class="form-group">
-                             <label for="">Nombre del producto</label>
-                             <input type="text" v-model="product.name" class="form-control" id="" placeholder="">
-                           </div>
-                         </div>
-                         <div class="col-md-4">
-                           <div class="form-group">
-                             <label for="">Largo</label>
-                            <span class="input-group">
-                                <span class="input-group-addon">cm</span>
-                                <input type="text" v-model="product.large" class="form-control" id="" placeholder="">
-                            </span>
-                           </div>
-                         </div>
-                         <div class="col-md-4">
-                           <div class="form-group">
-                             <label for="">Alto</label>
-                             <span class="input-group">
-                                 <span class="input-group-addon">cm</span>
-                                 <input type="text" v-model="product.height" class="form-control" id="" placeholder="">
-                             </span>
-                                 
-                           </div>
-                         </div>
-                         <div class="col-md-4">
-                           <div class="form-group">
-                             <label for="">Ancho</label>
-                             <span class="input-group">
-                                 <span class="input-group-addon">cm</span>
-                                 <input type="text" v-model="product.width" class="form-control" id="" placeholder="">
-                             </span>
+                                        <br>
+                                        <label class="control-label" style=" color: darkslategray">Descripcion SEO</label>
+                                        <input type="text" v-model="product.seo_description" class="form-control" id="" placeholder="">
 
-                           </div>
-                         </div>
-                         <div class="col-md-12">
-                           <div class="form-group">
-                             <label for="">Description</label>
-                             <textarea name="" v-model="product.description" id="input" class="form-control" rows="3" required="required"></textarea>
-                           </div>
-                           <br>
-                           <button type="button" class="btn btn-primary">Guardar cambios</button>
-                         </div>
-                      </div>
-                  </div>
-                </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="seo">
-                <div class="panel panel-default">
-                    <div class="panel-heading-white" >
-                        <div class="panel-title">Configuraciones avanzadas para SEO</div>
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label class="control-label" style=" color:darkslategray">Titulo para SEO</label>
-                                <input type="text" v-model="product.seo_title" class="form-control" id="" placeholder="">
+                                        <br>
+                                        <label class="control-label" style=" color: darkslategray">URL del producto</label>
 
-                                <br>
-                                <label class="control-label" style=" color: darkslategray">Descripcion SEO</label>
-                                <input type="text" v-model="product.seo_description" class="form-control" id="" placeholder="">
-
-                                <br>
-                                <label class="control-label" style=" color: darkslategray">URL del producto</label>
-
-                                <span class="input-group">
-                                    <span class="input-group-addon">{{ url('products/') }}</span>
-                                    <input type="text" v-model="product.slug" class="form-control" id="" placeholder="" readonly="">
-                                </span>
-                                <br>
-                                <button type="button" class="btn btn-primary">Guardar cambios</button>
+                                        <span class="input-group">
+                                            <span class="input-group-addon">{{ url('products/') }}</span>
+                                            <input type="text" v-model="product.slug" class="form-control" id="" placeholder="" readonly="">
+                                        </span>
+                                        <br>
+                                        <button data-loading-text="procesando..." v-on:click="updateSeo()" id="btn-udate-seo" type="button" class="btn btn-primary">Guardar cambios</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="visibity">
-                <div class="panel panel-default">
-                    <div class="panel-heading-white" >
-                        <div class="panel-title">Configuracion de publicacion</div>
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label class="control-label" style=" color: darkslategray">Envio</label>
-                                
-                                <span class="checkbox custom-checkbox">
-                                    <input class="checkbox" v-model="product.collection.shipping_free" id="checkbox1" name="checkbox1" type="checkbox" value="1">
-                                    <label for="checkbox1" style="color: #7b7b7b">&nbsp;&nbsp;Este producto no tiene costo de envio</label>
-                                </span>
-                                <br>
+                    <div role="tabpanel" class="tab-pane" id="visibity">
+                        <div class="panel panel-default">
+                            <div class="panel-heading-white" >
+                                <div class="panel-title">Configuracion de publicacion</div>
                             </div>
-                            <div class="col-md-6">
-                                <label class="control-label" style=" color: darkslategray">Producto destacado</label>
-                                
-                                <span class="checkbox custom-checkbox">
-                                    <input class="checkbox" v-model="product.collection.primary" id="checkbox2" name="checkbox2" type="checkbox" value="1">
-                                    <label for="checkbox2" style="color: #7b7b7b">&nbsp;&nbsp;Este producto es destacado</label>
-                                </span>
-                                <br>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="control-label" style=" color: darkslategray">Producto en oferta</label>
-                                
-                                <span class="checkbox custom-checkbox">
-                                    <input class="checkbox" v-model="product.collection.promotion" id="checkbox3" name="checkbox3" type="checkbox" value="1">
-                                    <label for="checkbox3" style="color: #7b7b7b">&nbsp;&nbsp;Este producto esta en oferta</label>
-                                </span>
-                                <br>
-                                <button type="button" class="btn btn-primary">Guardar cambios</button>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="variants">
-                <div class="panel panel-primary" v-for="variant in product.variants">
-                    <div class="panel-heading-white" >
-                        <div class="panel-title">Detalles del producto</div>
-                    </div>
-                  <div class="panel-body">
-                      <div class="row">
-                          <div class="col-md-4">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <label class="control-label" style="font-size: 1.2em; color: black;">Imagenes</label>
-                                    <div v-for="image in variant.images" class="col-md-12 text-center" >
-                                      <img :src="image.url" class="img-responsive img-thumbnail" style="height: 300px;"/>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="control-label" style=" color: darkslategray">Envio</label>
+                                        
+                                        <span class="checkbox custom-checkbox">
+                                            <input class="checkbox" v-model="product.collection.shipping_free" id="checkbox1" name="checkbox1" type="checkbox" value="1">
+                                            <label for="checkbox1" style="color: #7b7b7b">&nbsp;&nbsp;Este producto no tiene costo de envio</label>
+                                        </span>
+                                        <br>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="control-label" style=" color: darkslategray">Producto destacado</label>
+                                        
+                                        <span class="checkbox custom-checkbox">
+                                            <input class="checkbox" v-model="product.collection.primary" id="checkbox2" name="checkbox2" type="checkbox" value="1">
+                                            <label for="checkbox2" style="color: #7b7b7b">&nbsp;&nbsp;Este producto es destacado</label>
+                                        </span>
+                                        <br>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="control-label" style=" color: darkslategray">Producto en oferta</label>
+                                        
+                                        <span class="checkbox custom-checkbox">
+                                            <input class="checkbox" v-model="product.collection.promotion" id="checkbox3" name="checkbox3" type="checkbox" value="1">
+                                            <label for="checkbox3" style="color: #7b7b7b">&nbsp;&nbsp;Este producto esta en oferta</label>
+                                        </span>
+                                        <br>
+                                        <button data-loading-text="procesando..." type="button"  v-on:click="updateVisibility()" id="btn-udate-visibility" class="btn btn-primary">Guardar cambios</button>
 
                                     </div>
                                 </div>
                             </div>
-                          </div>
-                          <div class="col-md-4">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <label class="control-label" style="font-size: 1.2em; color: black;">Detalles</label>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label class="control-label" style=" color:darkslategray">Precio</label>
-                                            <input type="text" v-model="variant.price" class="form-control" id="" placeholder="">
-                                            <br>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="control-label" style=" color:darkslategray">Precio Promocional</label>
-                                            <input type="text" v-model="variant.promotional_price" class="form-control" id="" placeholder="">
-                                            <br>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="control-label" style=" color:darkslategray">Stock</label>
-                                            <input type="text" v-model="variant.stock" class="form-control" id="" placeholder="">
-                                            <br>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="control-label" style=" color:darkslategray">SKU</label>
-                                            <input type="text" v-model="variant.sku" class="form-control" id="" placeholder="">
-                                            <br>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <label class="control-label" style=" color:darkslategray">Peso</label>
-                                            <input type="text" v-model="variant.weight" class="form-control" id="" placeholder="">
-                                            <br>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                          </div>
-                          <div class="col-md-4">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <label class="control-label" style="font-size: 1.2em; color: black;">Variacion</label>
-
-
-                                </div>
-                            </div>
-                          </div>
-                      </div>
-                  </div>
-                </div>
-                <div  v-if="!is_new_variant">
-                    <div class="text-center">
-                        <button v-on:click="is_new_variant=true" type="button" class="btn btn-default"><h2><i class="fa fa-plus"></i></h2></button>
-                    </div>
-                </div>
-                <div class="panel panel-primary" v-else>
-                    <div class="panel-heading-white">
-                        <h3 class="panel-title">Nueva variacion del producto</h3>
-                        <!-- panel toolbar -->
-                        <div class="panel-toolbar text-right">
-                            <!-- option -->
-                            <div class="option">
-                                <button class="btn" v-on:click="is_new_variant=false" ><i class="remove"></i></button>
-                            </div>
-                            <!--/ option -->
                         </div>
-                        <!--/ panel toolbar -->
                     </div>
-                    {{-- <div class="panel-heading-white" >
-                        <div class="panel-title">Nueva variacion del producto <a v-on:click="is_new_variant=false" class="pull-right btn btn-sm btn-default"><i class="fa fa-remove"></i></a></div>
-                    </div> --}}
-                    <div class="panel-body">
-                      <label class="control-label" style="font-size: 1.2em; color: black;">Nueva variacion del producto</label>
-                      <div class="row">
-                          
-                            <div class="col-md-4">
-                                <div class="panel panel-default">
-                                    <div class="panel-body">
+                    <div role="tabpanel" class="tab-pane" id="variants">
+                        <div class="panel panel-primary" v-for="variant in product.variants">
+                            <div class="panel-heading-white" >
+                                <div class="panel-title">Detalles del producto</div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div>
+                                            <label class="control-label" style="font-size: 1.2em; color: black;">Imagenes</label>
+                                            <br>
+                                        </div>
+
+                                            <img v-for="image in variant.images" :src="image.url" v-on:click="removeImageVariant(image,variant)" class="img-responsive img-thumbnail" style="margin-right: 10px; margin-bottom: 10px; height: 75px; width: 75px;"/>
+                                                <input type="file"  @change="addImageVariant(variant,$event)"  class="hide" name="file2" v-bind:id="'file-' + variant.id">
+                                                <label v-bind:for="'file-' + variant.id" style="cursor: pointer;">
+                                                    <div class="img-thumbnail" style="padding: 18px 26px 15px 26px;">
+                                                        <h4><i class="fa fa-plus"></i></h4>
+                                                    </div>
+                                                </label>
+                                    </div>
+                                    <div class="col-md-12">
+
                                         <label class="control-label" style="font-size: 1.2em; color: black;">Detalles</label>
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-3">
+                                                <label class="control-label" style=" color:darkslategray">Precio</label>
+                                                <input type="text" v-model="variant.price" class="form-control" id="" placeholder="">
+                                                <br>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="control-label" style=" color:darkslategray">Precio Promocional</label>
+                                                <input type="text" v-model="variant.promotional_price" class="form-control" id="" placeholder="">
+                                                <br>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="control-label" style=" color:darkslategray">Stock</label>
+                                                <input type="text" v-model="variant.stock" class="form-control" id="" placeholder="">
+                                                <br>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="control-label" style=" color:darkslategray">SKU</label>
+                                                <input type="text" v-model="variant.sku" class="form-control" id="" placeholder="">
+                                                <br>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label class="control-label" style=" color:darkslategray">Peso</label>
+                                                <input type="text" v-model="variant.weight" class="form-control" id="" placeholder="">
+                                                <br>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label class="control-label" style="font-size: 1.2em; color: black;">Variacion</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div  v-if="!is_new_variant">
+                            <div class="text-center">
+                                <button v-on:click="is_new_variant=true" type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Agregar variacion del producto</button>
+                            </div>
+                        </div>
+                        <div class="panel panel-primary" v-else>
+                            <div class="panel-heading-white">
+                                <h3 class="panel-title">Nueva variacion del producto</h3>
+                                <!-- panel toolbar -->
+                                <div class="panel-toolbar text-right">
+                                    <!-- option -->
+                                    <div class="option">
+                                        <button class="btn" v-on:click="is_new_variant=false" ><i class="remove"></i></button>
+                                    </div>
+                                    <!--/ option -->
+                                </div>
+                                <!--/ panel toolbar -->
+                            </div>
+                            {{-- <div class="panel-heading-white" >
+                                <div class="panel-title">Nueva variacion del producto <a v-on:click="is_new_variant=false" class="pull-right btn btn-sm btn-default"><i class="fa fa-remove"></i></a></div>
+                            </div> --}}
+                            <div class="panel-body">
+                                <div class="row">
+                                    {{-- <div class="col-md-12">
+                                        <div>
+                                            <label class="control-label" style="font-size: 1.2em; color: black;">Imagenes</label>
+                                            <br>
+                                        </div>
+                                        <button type="button" class="btn btn-primary"><i class="fa fa-plus"></i> agregar imagen</button>
+                                    </div> --}}
+                                    <div class="col-md-12">
+                                        <label class="control-label" style="font-size: 1.2em; color: black;">Detalles</label>
+                                        <div class="row">
+                                            <div class="col-md-3">
                                                 <label class="control-label" style=" color:darkslategray">Precio</label>
                                                 <input type="text" v-model="variant_new.price" class="form-control" id="" placeholder="">
                                                 <br>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-3">
                                                 <label class="control-label" style=" color:darkslategray">Precio Promocional</label>
                                                 <input type="text" v-model="variant_new.promotional_price" class="form-control" id="" placeholder="">
                                                 <br>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-3">
                                                 <label class="control-label" style=" color:darkslategray">Stock</label>
                                                 <input type="text" v-model="variant_new.stock" class="form-control" id="" placeholder="">
                                                 <br>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-3">
                                                 <label class="control-label" style=" color:darkslategray">SKU</label>
                                                 <input type="text" v-model="variant_new.sku" class="form-control" id="" placeholder="">
                                                 <br>
@@ -443,18 +465,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="panel panel-default">
-                                    <div class="panel-body">
-                                        <label class="control-label" style="font-size: 1.2em; color: black;">Imagenes</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="panel panel-default">
-                                    <div class="panel-body">
+                                    {{-- 
+                                    <div class="col-md-12">
+
                                         <label class="control-label" style="font-size: 1.2em; color: black;">Variacion</label>
                                         <br>
                                         @{{ text_selected_value }}
@@ -514,15 +527,15 @@
                                                 </div> <!-- /col -->
                                                 <input type="hidden" v-model="ids_selected" name="values">
                                         </div> <!-- /row -->
+
                                     </div>
+                                    --}}
                                 </div>
                             </div>
-                      </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        </div>
         </div>
     </div>
 </div>
