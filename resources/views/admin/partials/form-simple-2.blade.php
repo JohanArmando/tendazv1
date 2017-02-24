@@ -4,6 +4,7 @@
 
 
 <div id="app-vue-simple">
+
     <form v-if="!save" action="{{ url('admin/products?client_secret=$shop->uuid&client_id=$shop->id') }}"  method="POST" role="form">
         <div class="media border-dotted">
           <div class="row">
@@ -11,6 +12,7 @@
               <div class="col-md-9 col-simple">
                 <div class="form-group">
                   <div class="row">
+
                     <label class="control-label" style="font-size: 1.2em; color: black">Nombre del producto
                     <small style="color: darkgray">(Obligatorio)</small></label>
                     <input type="text" v-model="product_new.name" name="name" class="form-control" placeholder="Ejemplo: Zapato de cuero">
@@ -349,57 +351,68 @@
                     <div role="tabpanel" class="tab-pane" id="variants">
                         <div class="panel panel-primary" v-for="variant in product.variants">
                             <div class="panel-heading-white" >
-                                <div class="panel-title">Detalles del producto</div>
+                                <h3 class="panel-title">Detalles del producto</h3>
+                                <div class="panel-toolbar text-right">
+                                    <!-- option -->
+                                    <div class="option">
+                                        <button class="btn up" data-toggle="panelcollapse"><i class="arrow"></i></button>
+                                    </div>
+                                    <!--/ option -->
+                                </div>
                             </div>
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div>
-                                            <label class="control-label" style="font-size: 1.2em; color: black;">Imagenes</label>
-                                            <br>
-                                        </div>
 
-                                            <img v-for="image in variant.images" :src="image.url" v-on:click="removeImageVariant(image,variant)" class="img-responsive img-thumbnail" style="margin-right: 10px; margin-bottom: 10px; height: 75px; width: 75px;"/>
-                                                <input type="file"  @change="addImageVariant(variant,$event)"  class="hide" name="file2" v-bind:id="'file-' + variant.id">
-                                                <label v-bind:for="'file-' + variant.id" style="cursor: pointer;">
-                                                    <div class="img-thumbnail" style="padding: 18px 26px 15px 26px;">
-                                                        <h4><i class="fa fa-plus"></i></h4>
-                                                    </div>
-                                                </label>
-                                    </div>
-                                    <div class="col-md-12">
+                            <div class="panel-collapse pull out">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div>
+                                                <label class="control-label" style="font-size: 1.2em; color: black;">Imagenes</label>
+                                                <br>
+                                            </div>
 
-                                        <label class="control-label" style="font-size: 1.2em; color: black;">Detalles</label>
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <label class="control-label" style=" color:darkslategray">Precio</label>
-                                                <input type="text" v-model="variant.price" class="form-control" id="" placeholder="">
-                                                <br>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label class="control-label" style=" color:darkslategray">Precio Promocional</label>
-                                                <input type="text" v-model="variant.promotional_price" class="form-control" id="" placeholder="">
-                                                <br>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label class="control-label" style=" color:darkslategray">Stock</label>
-                                                <input type="text" v-model="variant.stock" class="form-control" id="" placeholder="">
-                                                <br>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label class="control-label" style=" color:darkslategray">SKU</label>
-                                                <input type="text" v-model="variant.sku" class="form-control" id="" placeholder="">
-                                                <br>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <label class="control-label" style=" color:darkslategray">Peso</label>
-                                                <input type="text" v-model="variant.weight" class="form-control" id="" placeholder="">
-                                                <br>
+                                                <img v-for="image in variant.images" :src="image.url" v-on:click="removeImageVariant(image,variant)" class="img-responsive img-thumbnail" style="margin-right: 10px; margin-bottom: 10px; height: 75px; width: 75px;"/>
+                                                    <input type="file"  @change="addImageVariant(variant,$event)"  class="hide" name="file2" v-bind:id="'file-' + variant.id">
+                                                    <label v-bind:for="'file-' + variant.id" style="cursor: pointer;">
+                                                        <div class="img-thumbnail" style="padding: 18px 26px 15px 26px;">
+                                                            <h4><i class="fa fa-plus"></i></h4>
+                                                        </div>
+                                                    </label>
+                                        </div>
+                                        <div class="col-md-12">
+
+                                            <label class="control-label" style="font-size: 1.2em; color: black;">Detalles</label>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="control-label" style=" color:darkslategray">Precio</label>
+                                                    <input type="text" v-model="variant.price" class="form-control" id="" placeholder="">
+                                                    <br>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="control-label" style=" color:darkslategray">Precio Promocional</label>
+                                                    <input type="text" v-model="variant.promotional_price" class="form-control" id="" placeholder="">
+                                                    <br>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="control-label" style=" color:darkslategray">Stock</label>
+                                                    <input type="text" v-model="variant.stock" class="form-control" id="" placeholder="">
+                                                    <br>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="control-label" style=" color:darkslategray">SKU</label>
+                                                    <input type="text" v-model="variant.sku" class="form-control" id="" placeholder="">
+                                                    <br>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <label class="control-label" style=" color:darkslategray">Peso</label>
+                                                    <input type="text" v-model="variant.weight" class="form-control" id="" placeholder="">
+                                                    <br>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label class="control-label" style="font-size: 1.2em; color: black;">Variacion</label>
+                                        <div class="col-md-12">
+                                            <label class="control-label" style="font-size: 1.2em; color: black;">Variacion</label>
+                                            <variant-option v-bind:options="options" v-bind:variant="variant"></variant-option>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

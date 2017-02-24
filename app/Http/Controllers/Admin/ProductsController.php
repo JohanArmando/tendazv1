@@ -182,9 +182,6 @@ class ProductsController extends Controller
             'weight'=> $request->weight,
             'sku' => $request->sku, 
         ]);
-        foreach ($request->values as $value) {
-            $variant->values()->attach($value['id']);
-        }
         $variant = Variant::with(['values','images'])->find($variant->id);
         return response()->json($variant, 200);
     }
@@ -193,7 +190,7 @@ class ProductsController extends Controller
     {
         $categories =   Category::pluck('name' , 'id');
         $options    =   Option::get(['id' , 'name']);
-        return view('admin.product.edit',compact('product' , 'categories' , 'options','providers'));
+        return view('admin.product.edit2',compact('product' , 'categories' , 'options','providers'));
     }
 
     public function update($subdomain, Product $product , Request $request)
@@ -212,7 +209,20 @@ class ProductsController extends Controller
         return $product;
         
     }
+    public function addValue($subdomain, $variant_id, $value_id)
+    {
+        $variant = Variant::find($variant_id);
+        $variant->values()->attach($value_id);
+        return $variant->values;
 
+    }
+    public function removeValue($subdomain, $variant_id, $value_id)
+    {
+        $variant = Variant::find($variant_id);
+        $variant->values()->detach($value_id);
+        return $variant->values;
+
+    }
     public function storeImages($subdomain, $id, Request $request)
     {
         $variant = Variant::find($id);
@@ -239,6 +249,12 @@ class ProductsController extends Controller
            $variant->update($request->all());
             return fractal()->item($variant , new ProductTransformer());
         }
+    }
+    public function updateVariant2($subdomain, $id , Request $request)
+    {
+        $variant = Variant::find($id);
+        $variant->update($request->all());
+        return $variant->fresh();
     }
 
 
@@ -357,10 +373,10 @@ class ProductsController extends Controller
 
     public function editProduct($subdomain , Request $request ,$id){
         $product        =   Product::where('uuid',$id)->first();
-        $variant        =   Variant::where('product_id',$product->id)->first();
+        /*$variant        =   Variant::where('product_id',$product->id)->first();
         $providers      =   Provider::where('shop_id',$product->shop_id)->get();
-        $categories     =   Category::where('shop_id',$request->shop->id)->get();
-        return view('admin.product.edit',compact('product','variant','categories','providers'));
+        $categories     =   Category::where('shop_id',$request->shop->id)->get();*/
+        return view('admin.product.edit2',['product' => $product]);
     }
 
     /**
@@ -437,16 +453,20 @@ class ProductsController extends Controller
 
     }
 
-    public function show($subdomain , $slug)
+    public function show($subdomain , $id)
     {
-        $product = Product::all()
+        /*$product = Product::all()
             ->where('products.slug','=',$slug)
             ->select('products.*')
             ->get();
 
         return response()->json(array(
             'product' => $product
-        ));
+        ));*/
+        $product = Product::where('uuid',$id)->first();
+
+        return Product::with(['collection','variants.images','variants.values'])->find($product->id);
+        //return $id;
     }
     public function getImage($subdomain ,$id , Request $request){
         $product = Product::where('uuid',$id)->first();

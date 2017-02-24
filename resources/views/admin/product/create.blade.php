@@ -128,6 +128,71 @@
             </div>
         </div>
     </div>
+    
+    <template id="variant-options" >
+        <div>
+            <h4>Caracteristicas: </h4>
+            <button v-for="value in values_selected" type="button" v-bind:class="'btn-remove-value-'+variant.id+'-'+value.id" data-loading-text="eliminando..." v-on:click="removeValue(value)" class="btn btn-primary" style="margin-bottom: 5px; margin-right: 5px;">@{{ value.name }}</button>
+            <div class="panel panel-default">
+                <div class="panel-heading-white">
+                    <h3 class="panel-title">Agregar caracteristicas al producto</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                            <div class="col-md-4">
+                                <label>Propiedad</label>
+                                <select v-model="option_selected" class="form-control" v-on:change="freshValues()">
+                                  <option v-for="option in options" v-bind:value="option.id">
+                                    @{{ option.name }}
+                                  </option>
+                                  <option value="-1">
+                                    Nueva...
+                                  </option>
+                                </select>
+                                <div v-show="nueva_propiedad">
+                                    <h4 class="variant-title" style="color: grey;">Nueva propiedad</h4>
+                                    <div class="form-group">
+                                        <input type="text" v-model="option_new" class="form-control" id="" placeholder="nombre">
+                                    </div>
+                                    <button type="button" id="btn-store-options" v-on:click="storeOptions()" data-loading-text="procesando" class="btn btn-primary btn-block">Agregar propiedad</button>
+                                </div>
+                                
+
+                            </div>
+                            <div class="col-md-8">
+
+                                <label>Valores de la propiedad</label>
+                                
+                                <div class="row">
+                                    <div  v-for="value in values" class="col-md-3">
+                                        <button v-if="!selectedValue(value)" v-bind:id="'btn-add-value-'+variant.id+'-'+value.id" data-loading-text="procesando..." type="button" v-on:click="addValue(value)" class="btn btn-block btn-default" style="margin-bottom: 5px;">@{{ value.name }}</button>
+                                        <button v-else type="button" v-bind:class="'btn-remove-value-'+variant.id+'-'+value.id" data-loading-text="procesando..." v-on:click="removeValue(value)"  class="btn btn-block btn-primary" style="margin-bottom: 5px;">@{{ value.name }}</button>
+                                    </div>
+                                    <div  v-if="!nuevo_valor" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <h5 class="variant-title" style="color:grey !important;">Agregar propiedad</h5>
+
+                                        <div class="row">
+                                            <div class="col-md-4" >
+                                                <input type="text" v-model="value_new.name" class="form-control" id="" placeholder="Nombre">
+                                            </div>
+                                            <div class="col-md-4" >
+                                                <input type="text"  v-model="value_new.attribute" class="form-control" id="" placeholder="Atributo">
+                                            </div>
+                                            <div class="col-md-4" >
+                                                <button v-on:click="storeValues()" id="btn-store-values" data-loading-text="procesando" type="button" class="btn btn-primary btn-block">Agregar valor</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div> <!-- /col -->
+                            <input type="hidden" v-model="ids_selected" name="values">
+                    </div> <!-- /row -->
+                </div>
+                
+            </div>
+        </div>
+    </template>
 @endsection
 @section('scripts')
 
@@ -180,25 +245,26 @@
     <script>
         var Base_Url = "{{ url('') }}"; 
         Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf_token"]').attr('content');
-        //alert($('meta[name="csrf_token"]').attr('content'));
-        /*var app = new Vue({
-            el: '#app-vue',
-            data: {
-                values_selected: [],
-                options: [],
-                values: [],
-                option_selected: '',
-                option_selected_name: '',
-                aux: '',
-                option_new: '',
-                value_new: {
-                    name: '',
-                    attribute: ''
+
+        Vue.component('variant-option', {
+          template: '#variant-options',
+          props: ['options','variant'],
+          // data is technically a function, so Vue won't
+          // complain, but we return the same object
+          // reference for each component instance
+            data: function () {
+                return {
+                    values_selected: [],
+                    values: [],
+                    option_selected: '',
+                    option_selected_name: '',
+                    aux: '',
+                    option_new: '',
+                    value_new: {
+                        name: '',
+                        attribute: ''
+                    }
                 }
-            },
-            mounted() {
-                console.log('Component mounted.');
-                this.freshOptions();
             },
             methods: {
                 freshOptions: function () {
@@ -276,13 +342,38 @@
                     }
                 },
                 addValue: function (value) {
-                       this.values_selected.push(value);
+                        
+                        $('#btn-add-value-'+this.variant.id+'-'+value.id).button('loading');
+
+
+                        this.$http.post(Base_Url+'/admin/variants/'+this.variant.id+'/values/'+value.id+'?client_secret='+client_secret+'&client_id='+client_id,this.value_new).
+                        then((response) => {
+                           this.values_selected.push(value);
+                           $('#btn-add-value-'+this.variant.id+'-'+value.id).button('reset');
+
+                        }, (response) => {
+                        // error callback
+                           $('#btn-add-value-'+this.variant.id+'-'+value.id).button('reset');
+
+                        });
                 },
                 removeValue: function (value) {
+                        $('.btn-remove-value-'+this.variant.id+'-'+value.id).button('loading');
 
-                       this.values_selected = this.values_selected.filter(function(el){
-                         return el.id !== value.id;
-                       });
+
+                        this.$http.delete(Base_Url+'/admin/variants/'+this.variant.id+'/values/'+value.id+'?client_secret='+client_secret+'&client_id='+client_id,this.value_new).
+                        then((response) => {
+                            this.values_selected = this.values_selected.filter(function(el){
+                                return el.id !== value.id;
+                            });
+                           $('.btn-remove-value-'+this.variant.id+'-'+value.id).button('reset');
+
+                        }, (response) => {
+                        // error callback
+                           $('.btn-remove-value-'+this.variant.id+'-'+value.id).button('reset');
+
+                        });
+                       
                 },
                 selectedValue: function (value) {
                     for (var i = this.values_selected.length - 1; i >= 0; i--) {
@@ -333,7 +424,7 @@
                     return ids;
                 }
             }
-        });*/
+        })
 
         var app2 = new Vue({
             el: '#app-vue-simple',
@@ -373,17 +464,8 @@
                 product:{
 
                 },
-                values_selected: [],
                 options: [],
-                values: [],
-                option_selected: '',
-                option_selected_name: '',
                 aux: '',
-                option_new: '',
-                value_new: {
-                    name: '',
-                    attribute: ''
-                }
             },
             mounted() {
                 console.log('Component mounted 2.');
