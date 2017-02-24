@@ -1,0 +1,101 @@
+.ship-pay-risk-box {
+    background-color: #F7F7F7;
+    border-radius: 0 0 5px 5px;
+}
+.row {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+body, *, label, input, select, textarea {
+    font-family: "Open Sans", Arial, Arial, sans-serif;
+}
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+div {
+    display: block;
+}
+
+.panel-heading {
+    min-height: 43px;
+    font-size: 16px;
+}
+.panel-heading {
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+.p-none {
+    padding: 0!important;
+}
+.l-nostyle {
+    list-style: none;
+    margin: 0;
+}
+.pull-left {
+    float: left;
+}
+.pull-left {
+    float: left!important;
+}
+ul, ol {
+    margin-bottom: 15px;
+}
+
+ol, ul {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.m-bottom {
+    margin-bottom: 20px!important;
+}
+
+.pull-left {
+    float: left;
+}
+.pull-left {
+    float: left!important;
+}
+.order-history ul li:first-child i {
+    color: #00c6a3;
+    margin-top: -1px;
+}
+.order-history i {
+    margin-right: 5px;
+    color: #BEBEBE;
+    font-size: 14px;
+    float: left;
+}
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.history-date {
+    float: left;
+    border-bottom: 1px dashed rgb(226, 226, 226);
+    padding-bottom: 5px;
+    margin-left: 5px;
+    margin-top: -3px;
+}
+.order-history-entry .history-hour {
+    margin-right: 40px;
+    margin-left: 25px;
+    font-weight: bold;
+}
+.order-history-entry p, #main .order .order-history-entry p {
+    float: left;
+    color: #999;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+p {
+    margin: 0 0 10px;
+}

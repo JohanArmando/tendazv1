@@ -1,0 +1,24 @@
+<section class="section">
+    <br>
+    <div class="col col-md-7 col-sm-6 col-xs-12">
+        <div  class="contact card" style="min-height: 250px !important;">
+            <br><h6 class="text-uppercase text-center">Iniciar Sesion</h6>
+            <form id="contact-form"  name="loginForm" ng-submit="doLogin(loginForm)" novalidate>
+                <div class="input-field">
+                    <input id="email" name="email" ng-model="login.email"  type="email" class="validate" required autocomplete="off">
+                    <label for="email">Correo</label>
+                </div>
+                <div class="input-field">
+                    <input id="password" type="password" name="password" ng-model="login.password" class="validate" required>
+                    <label for="password">Password</label>
+                </div>
+                <div class="row">
+                    <div class="col col-md-12 col-sm-12 col-xs-12 text-center">
+                        <button type="submit" id="submit" name="submit-data" value="Submit" class="btn waves-effect waves-light btn-primary custom-btn">
+                            Ingresar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

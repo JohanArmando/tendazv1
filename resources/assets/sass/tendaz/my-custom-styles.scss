@@ -1,0 +1,83 @@
+/* your custom styles here */
+.label-tendaz {
+	padding: 10px;
+	background-color: #ffffff;
+	border: 1px solid #DDDDDD;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 30%;
+	border-bottom-left-radius: 10px;
+	min-height: 200px;
+	max-width: 200px;
+	box-shadow: 5px 5px 5px #888888;
+}
+.label-tendaz-header {
+	border-bottom: 1px solid #DDDDDD;
+	min-width: 10px;
+	min-height: 10px;
+	float: left;
+	width: 100%;
+	font-weight:  bold;
+	font-size: 30px;
+	color: #000000;
+	text-align: center;
+
+}
+.label-tendaz > img {
+	color: #9BC53D;
+	font-size: 40px;
+	display: inherit;
+    margin-top: 40%;
+    margin-bottom: 10%;
+    margin-left: 15%;
+
+}
+.label-tendaz > span {
+	font-weight: bold;
+	margin-left: 15%;
+	text-align: center;
+   
+}
+.container-home {
+	width: 100%; 
+	background-color: #f7f7f7;
+	padding: 50px;
+}
+.container-orange {
+	width: 100%; 
+	background-color: #F9A03F;
+	padding: 50px;
+}
+.label-point {
+	min-height: 10px;
+	min-width: 10px;
+	background-color: #F7F7F7;
+	border-radius: 50%;
+	float: left;
+	border: 1px solid #DDDDDD;
+}
+.social-description {
+	color: #808080;
+}
+.preloader_general {
+	position: fixed;
+	top: 0;
+ 	left: 0;
+	right: 0;
+  	bottom: 0;
+ 	background: #ffffff;
+  	z-index: 13000;
+  	height: 100%;
+}
+
+ .preloader_image_general {
+    width: 250px;
+    height: 100px;
+    position: absolute;
+    left: 47%;
+    top: 45%;
+ 	margin: -40px 0 0 -40px;
+}
+.first-container 
+{
+	margin-top: 100px;
+}

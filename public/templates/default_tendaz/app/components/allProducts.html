@@ -1,0 +1,51 @@
+<section class="section" ng-controller="storeProductController" ng-cloak="">
+    <br>
+<h4 class="text-uppercase text-center" style="margin-top: 30px">Todos los Productos</h4>
+<div class="container">
+
+    <div class="row">
+
+        <div class="filtr-container center-block">
+            <div class="col-md-12 col-xs-12">
+                <div class="title">
+                    <span>Todos los Productos</span>
+                    <span ng-repeat="ancestor in ancestors" > |
+                        <a  ng-class="{active : cate == ancestor.slug }">{{ ancestor.name }}</a></span>
+                </div>
+            </div>
+            <div class="col col-md-3 col-sm-6 col-xs-12" dir-paginate="product in filtered = (products  | itemsPerPage: itemsPerPage | orderBy:propertyName:reverse)">
+                <div class="portfolio card">
+                    <figure class="hover-effect">
+                        <!--Product Image -->
+                        <br>
+                        <a href="#/detailProduct">
+                            <img class="img-responsive"
+                                 ng-src="{{ product.attributes.image }}" alt="">
+                        </a>
+                    </figure>
+                    <!-- Product Price -->
+                    <h6 class="text-capitalize text-center" ng-if="product.promotion">
+                        <strong>${{ product.promotion_price | number:0 }}</strong>
+                        <span style="text-decoration: line-through">${{ product.price | number:0 }}</span>
+                    </h6>
+                    <h6 class="text-capitalize text-center" ng-if="!product.promotion">
+                        <strong>${{ product.price | number:0 }}</strong>
+                    </h6>
+                    <!-- Product Name -->
+                    <h6 class="text-capitalize text-center"><a href="#/detailProduct">{{ product.name }}</a></h6>
+                    <p class="text-center" ng-click="add(product)">
+                        <a ng-hide="product.stock == 0" ng-click="add(product)" target="_blank" class="btn modal-btn waves-effect waves-light btn-primary custom-btn">
+                            <i class="fa fa-shipping-cart"></i>Agregar
+                        </a>
+                    </p><br>
+                </div>
+            </div>
+            <div class="col-xs-12 text-center">
+                <div class="filters-row__pagination">
+                    <dir-pagination-controls></dir-pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>

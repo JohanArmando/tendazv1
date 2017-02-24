@@ -1,0 +1,9 @@
+.count {
+                float: left;
+                color: #333;
+                margin-top: 0px;
+                margin-left: 5px;
+            }
+            .note {
+                font-size: 12px;
+            }

@@ -1,0 +1,59 @@
+
+<a  href="/" class="btn btn-primary" style="margin-top: 20px">
+    <i class="glyphicon glyphicon-chevron-left"></i>
+    Volver a la tienda
+</a>
+<br>
+
+
+<footer class="container-fluid footer_checkout">
+    <div class="row">
+        <div class="col-md-12"><hr></div>
+        <div class="col-md-4">
+            <br>
+            <img ng-src="{{shopData.logo}}" class="logoFooter" ng-show="shopData.logo">
+            <span class="nameShop">{{ shopData.name }}</span>
+        </div>
+        <div class="col-md-4" ng-show="shopData.facebook || shopData.twitter || shopData.instagram">
+            <small class="title">Encuentranos en:</small>
+            <ul>
+                <li ng-show="shopData.facebook">
+                    <p>
+                    <a href="https://{{ shopData.facebook }}">
+                        <i class="fa fa-facebook fa-2x" aria-hidden="true"></i>
+                        <span>Facebook</span>
+                    </a>
+                    </p>
+                </li>
+                <li ng-show="shopData.twitter">
+                    <p>
+                    <a href="https://{{ shopData.twitter }}">
+                        <i class="fa fa-twitter fa-2x" aria-hidden="true"></i>
+                        <span>Twitter</span>
+                    </a>
+                    </p>
+                </li>
+                <li ng-show="shopData.instagram">
+                    <a href="https://{{ shopData.instagram }}">
+                        <i class="fa fa-instagram fa-2x" aria-hidden="true"></i>
+                        <span>Instagram</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-4" ng-show="shopData.phone || shopData.correo ">
+            <small class="title">Contacto:</small>
+            <ul>
+                <li style="background-color: transparent">
+                    <i ng-show="shopData.phone" class="fa fa-phone-square fa-2x" aria-hidden="true"></i>
+                    {{ shopData.phone }}
+                </li>
+                <li  style="background-color: transparent">
+                    <i ng-show="shopData.correo" class="fa fa-envelope-o fa-2x" aria-hidden="true"></i>
+                    {{ shopData.correo }}
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-12" style="height: 30px"><hr></div>
+    </div>
+</footer>

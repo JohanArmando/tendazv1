@@ -1,0 +1,347 @@
+/*
+Theme Name: Servientrega
+Template Theme URI:
+Author: Allensmilko  https://www.facebook.com/allensmilko
+Description: Plantilla desarrollada exclusivamente para  Servientrega.
+Version: 0.1
+*/
+*{
+    margin: 0 auto;
+    font-family: bariol_r;
+    font-size: 19px;
+    list-style: none;
+}
+
+.log_top_padd{
+    padding-top: 25px;
+    text-align: center;
+}
+.log_top_padd>img{
+        max-width: 300px;
+}
+button.btn.btn-primary.make_tendaz.col-md-4{
+    transition: .4s;
+    border-color: transparent; 
+    opacity: .5;
+    border-left: 0px; 
+}
+
+button.btn.btn-primary.make_tendaz.col-md-4:hover{
+    color: #fff;
+    opacity: 1;
+    background-color: #008834;
+    border-color: #fff;
+}
+input.full.text-center.col-md-8:focus {
+    box-shadow:none!important;
+        outline: none!important;
+        border: 1px solid #fff;
+        transition: .4s;
+}
+.nomarserv{
+    margin-right: 0px;
+    margin-left: 0px;
+}
+.net_sooc{
+    margin-top: 20px;
+}
+.icon_timeline_servi {
+    position: relative;
+    width: 50px;
+    transition: .4s;
+}
+.color_W>div>ul>li{
+    color: #fff;
+}
+#icons_menu{
+    min-height: 70px;
+}
+.icon_timeline_servi:hover {
+    position: relative;
+    width: 55px;
+    transition: .4s;
+}
+.container_steps{
+    height: 100vh
+}
+.navbar-default {
+    background-color: #008834;
+    border-color: #008834;
+    border-radius: 0px;
+}
+.brand_logo_image{
+    width: 75px;
+}
+.navbar-default .navbar-nav > li > a {
+    color: #fff;
+     transition: .4s;
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus ,.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    color: #008834;
+    background-color: #91dfa9;
+    outline: none;
+    transition: .4s;
+}
+.nopad_left{
+    padding-left: 0px;
+}
+
+.make_store_btn {
+    background: #008834;
+    border-radius: 0px;
+    width: 300px;
+    transition: .4s;
+}
+.make_store_btn:hover {
+    background: rgba(145, 223, 169, 0.36);
+    border-radius: 0px;
+    width: 300px;
+    transition: .4s;
+    color: #008834;
+    border-color: #008834;
+}
+.container_content {
+    width: 100vw;
+    height: calc(80vh - 175px);
+    display: table-cell;
+    vertical-align: middle;
+    margin: 0 auto;
+    float: none;
+    padding-left: 10vw;
+}
+.hei_serv{
+        height: 500px;
+    display: table-cell;
+    vertical-align: middle;
+}
+.social>li {
+    display: inline-block;
+    margin-right: 24px;
+}
+.icon_servi img.img-responsive {
+    width: 112px;
+}
+.icon_servi_central img.img-responsive{
+    width: 200px;
+}
+.border_servi{
+        /*border-bottom: 10px solid #008834;*/
+        background: url('../servientrega/img/iconos_fondo.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-color: #c4e9d2;
+
+}
+.conctent_truk{
+    background: url(../servientrega/img/camion.png);
+    background-repeat: no-repeat;
+            padding-top: 30px;
+            padding-bottom: 30px;
+             animation: camion 8s infinite;
+}
+
+/* Standard syntax */
+@keyframes camion {
+    0%   {background-position-x: -134px;
+    background-position-y: 85px;}
+    /*45%  {    background-position-x: 108%;
+    background-position-y: 85px;}
+    50%  {    background-position-x: 108%;
+    background-position-y: 85px;}*/
+    100% {background-position-x: 112%;
+    background-position-y: 85px;}
+}
+.make_tendaz{
+    background: #008834;
+    border-radius:0px; 
+}
+.pp-scrollable{
+    /*background: #ececec!important;*/
+    background: #f2f2f2!important;
+    padding-left: 0px;
+    overflow-x: hidden;
+    padding-right: 0px;
+}
+
+.icon_servi_central{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+        padding-top: 33vh;
+    vertical-align: middle;
+    text-align: center;
+}
+.cont{
+    display: inline-block;
+}
+.icon_servi{
+    position: absolute;
+}
+.container-menu{
+    height: 100%;
+    width: 100%;
+    transition: 1s;
+    position: absolute;
+}
+ul.row.container-menu.nopad.menu_part {
+    opacity: .4;
+    transition: .4s;
+}
+ul.row.container-menu.nopad.menu_part:hover {
+    opacity: 1;
+}
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    color: #fff;
+    background-color: #008f3d;
+    outline: none;
+    transition: .4s;
+}
+.container_steps:hover > .container-fluid > .container-menu{
+    opacity: 1;
+    transform-origin: center;
+    transition: 1s;
+
+}
+.icon_servi>img{
+    transition: .4s;    
+}
+.icon_servi:hover>img {
+    width: 133px;
+}
+.nopad{
+    padding: 0px!important;
+}
+.brand_anchor{
+    padding-top: 6px!important;
+    padding-bottom: 5px!important;
+    padding-left: 5px!important;
+    padding-right: 5px!important;
+}
+
+.panel-default_servi {
+    border-radius: 0px;
+    margin-top: 15vh;
+    background: #fff;
+    border-color: transparent;
+        box-shadow: #c1bfbf -15px 17px 12px -10px;
+
+}
+::-webkit-scrollbar {
+    width: 12px;
+}
+ 
+::-webkit-scrollbar-track {
+}
+ 
+::-webkit-scrollbar-thumb {
+    background:  #008834; 
+}
+::scrollbar {
+    width: 12px;
+}
+ 
+::scrollbar-track {
+}
+ 
+::scrollbar-thumb {
+    border-radius: 10px;
+    background:  #008834; 
+}
+.footer{
+    background: #008834;
+}
+.footer > div>.row>div >ul > li > a {
+    color: #fff;
+}
+.form-control{
+    border-color: rgba(0, 136, 52, 0.27);
+    transition: .5s;
+}
+.form-control:focus {
+    border-color: #008834;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+    box-shadow: inset 6px 6px 1px rgba(0,0,0,.075), 2px 1px 8px rgb(0, 136, 52);
+    transition: .5s;
+}
+span.input-group-addon {
+    background: rgba(0, 136, 52, 0.27);
+}
+.footer > div>.row>div > h3{
+    color: #fff;
+    font-weight: bold;
+}
+.footer > div>.row>div >ul > li > a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+    .icono_r{
+
+            font-size: 23px;
+                -webkit-animation: cloudtwo 1s  infinite; /* Safari 4.0 - 8.0 */
+    animation: cloudthree 1s  infinite;
+    z-index: 0;
+}
+@-webkit-keyframes cloudthree {
+    0%   {font-size: 23px;}
+    40% {font-size: 20px;}
+     100%   {font-size: 23px;}
+}
+@keyframes cloudthree {
+    0%   {font-size: 23px;}
+    40% {font-size: 20px;}
+     100%   {font-size: 23px;}
+}
+    
+
+
+
+
+    /*==========  Non-Mobile First Method  ==========*/
+@media only screen and(min-width: 992px){
+    .content_general{
+            margin: 0 auto;
+    float: none;
+    max-height: 312px;
+    margin-top: 239px;
+    }
+}
+    /* Large Devices, Wide Screens */
+    @media only screen and (max-width : 1200px) {
+
+    }
+
+    /* Medium Devices, Desktops */
+    @media only screen and (max-width : 992px) {
+        .aa_container-fluid{
+    overflow: scroll;
+}
+.cloud3{
+    display: none;
+}
+.cloud2{
+       display: none;
+}
+.cloud1{
+        display: none;
+}
+
+    }
+
+    /* Small Devices, Tablets */
+    @media only screen and (max-width : 768px) {
+
+    }
+
+    /* Extra Small Devices, Phones */ 
+    @media only screen and (max-width : 480px) {
+
+    }
+
+    /* Custom, iPhone Retina */ 
+    @media only screen and (max-width : 320px) {
+        
+    }

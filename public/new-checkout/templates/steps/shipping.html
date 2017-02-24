@@ -1,0 +1,117 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-5 form_separator">
+            <div class="container-fluid">
+                <div class="row">
+                <button class="btn_edit" ng-click="prev('/profile')"><i class="glyphicon glyphicon-pencil" ></i></button>
+                    <div class="col-md-12">
+                        <h3><i class="glyphicon glyphicon-user"></i> Identificaci&oacute;n</h3>
+                        <span class="col-md-12"><strong>Nombre: </strong> {{ carts.order.data.client.first_name}}</span>
+                        <span class="col-md-12"><strong>Apellidos: </strong> {{ carts.order.data.client.last_name }}</span>
+                        <span class="col-md-12"><strong>Telefono: </strong> {{ carts.order.data.client.phone }}</span>
+                        <span class="col-md-12"><strong>Correo: </strong> {{ carts.order.data.client.email }}</span>
+                        <span class="col-md-12"><strong>Identificaci&oacute;n: </strong> {{ carts.order.data.client.identification }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="container-fluid form_separator">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3><i class="glyphicon glyphicon-home"></i> Direcci&oacute;n de env&iacute;o</h3>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="exampleInputPassword1">Elige una de las direcciones</label>
+                    </div>
+                    <div class="container-fluid ">
+                        <div class="row">
+                            <div class="col-md-3 text-center" ng-if="addresses.length > 0" ng-repeat="address in addresses">
+
+                            <input type="radio" id="shippingAddress{{ address._id }}" name="shippingAddress"
+                            ng-model="carts.shippingAddress.data._id"  value="{{ address._id }}" checked/>
+                            <label for="shippingAddress{{ address._id }}">
+                                <span><i class="glyphicon glyphicon-ok"></i></span>
+                                    <div class="col-md-12">
+                                        {{ address.name }}
+                                    </div>
+                            </label>
+
+                            </div>
+                             <div class="col-md-3 text-center" ng-click="addressCreate()">
+                                <button data-tooltip="Agregar Direcci&oacute;n" class="btn_checkout btn_new_Dir">
+                                    <i class="glyphicon glyphicon-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <form ng-submit="doAddress(addressForm)" name="addressForm" novalidate ng-if="newAddress">
+
+                        <div class="form-group col-md-12">
+                            <label for="exampleInputPassword1">Nombre</label>
+                            <input type="text" class="form-control" name=""  ng-model="address.name" placeholder="(*)">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="exampleInputPassword1">Direcci&oacute;n</label>
+                            <input type="text" class="form-control" name="street"  ng-model="address.street" placeholder="(*)">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputPassword1">Piso o apartamento (ej: B201)</label>
+                            <input type="text" class="form-control" name="complement"  ng-model="address.complement" placeholder="Opcional">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputPassword1">Barrio</label>
+                            <input type="text" class="form-control"  ng-model="address.neighborhood" name="neighborhood" id="exampleInputPassword1" placeholder="Opcional">
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label>Departamento</label>
+                            <select ng-options="state.name for state in states track by state.id" class="form-control" ng-model="states.defaultState" ng-change="changeState()"></select>
+                        </div>
+                        <div class="col-md-12 form-group" ng-if="defaultCity">
+                            <label>Ciudad</label>
+                            <select ng-model="defaultCity" ng-options="city.name for city in cities track by city.id" class="form-control"></select>
+                        </div>
+                        <div class="form-group col-md-12 hidden">
+                            <label for="exampleInputPassword1">Nombre persona remitente</label>
+                            <input type="text" name="state" ng-model="  address.receiverName" class="form-control">
+                        </div>
+                        <div class="col-md-12">
+                            <button  type="submit" class="btn btn_checkout ">Guardar Direcci&oacute;n</button>
+                        </div>
+                    </form>
+                    <br><br>
+                    <div class="form-group col-md-12" ng-if="shipping_methods.length">
+                        <label for="exampleInputPassword1">Total del envio:</label>
+                        <label >
+                            <span><i class="glyphicon glyphicon-ok"></i></span>1000
+                        </label>
+                    </div>
+                    <div class="form-group col-md-12" >
+                        El costo del envio es : $ {{ carts.totalizers.shipping.value | currency:"":0 }}
+                    </div>
+                    <div class="col-md-12">
+                        <button  type="submit" class="btn btn_checkout pull-right" ng-click="goToPay()" ng-if="shippingTrue">IR AL PAGO</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid form_separator " >
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3><i class="glyphicon glyphicon-credit-card"></i> Pago</h3>
+                        <div ng-show="!tarjetaData">
+                            <p>A&uacute;n debes llenar estos datos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-include="global.resumeUrl"></div>
+    </div>
+</div>
+ <script type="text/javascript">
+      $( document ).ready(function() {
+  $(".pops").popover({ trigger: "hover" });
+});
+          
+      </script>

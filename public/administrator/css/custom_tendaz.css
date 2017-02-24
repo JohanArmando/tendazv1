@@ -1,0 +1,248 @@
+    /*Css para form de domain cuando ets adisponible*/
+.highlight {
+    background: #fcfcd1;
+    padding: 1px;
+}
+.pb {
+    padding-bottom: 10px !important;
+}
+.st {
+    margin-top: 10px !important;
+    margin-left: 20px !important;
+}
+.fw-normal {
+    font-weight: normal !important;
+}
+
+h2 {
+    font-size: 18px;
+}
+.divider-top {
+    margin-top: 15px !important;
+    padding: 15px  !important;
+    margin: 15px 20px 0px 20px !important;
+    border-top: 1px solid #e6e6e6 !important;
+
+}
+
+.next-label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1.07143rem;
+    line-height: 1.42857rem;
+    font-weight: 400;
+    text-transform: initial;
+    letter-spacing: initial;
+    cursor: pointer;
+}
+
+label {
+    display: block;
+    color: #31373d;
+    margin-bottom: 5px;
+}
+.modal .body{
+    padding: 20px;
+    max-height: calc(100vh - 374px);
+    overflow: auto;
+    transition: max-height 0.15s;
+}
+.has-error-background{
+    background-color: #fef6f5;
+}
+
+ .tendaz{
+    color: #f26522;
+}
+
+.nav-tabs {
+    background-color:  white;
+}
+  .nav-tabs > li > a {
+    background-color: #dde4e6;
+}
+  .nav-tabs > li > a:hover {
+    opacity: 0.6 !important;
+    background-color:#dde4e6 ;
+}
+ .nav-tabs > li >a:hover {
+    border-color: #eee #eee #ddd !important;
+}
+/*CSS para el checkout y pago de tendaz */
+.checkout  #choose-method .tab-pane .panel {
+    border-top: 0;
+    border-radius: 0 0 6px 6px;
+}
+.checkout  .panel-method {
+    overflow: hidden;
+}
+.checkout  .panel-default {
+    border-color: #ddd;
+}
+.checkout  .selections {
+    text-align: center;
+    margin-top: 10px;
+    overflow: hidden;
+}
+.checkout .list-unstyled, .checkout .list-unstyled>ul {
+    min-width: 120px;
+}
+.checkout .text-center {
+    text-align: center;
+}
+.checkout .p-top {
+    padding-top: 20px!important;
+}
+.checkout .list-unstyled {
+    padding-left: 0;
+    list-style: none;
+}
+.checkout .selection.selected, .checkout  .selection.selected:hover {
+    background: #fff;
+}
+.checkout .choose-period .selected {
+    border: 2px solid #f26522;
+    text-decoration: none;
+    border-radius: 4px;
+}
+.checkout .choose-period .selection {
+    background-color: #efefef;
+    border-radius: 4px;
+    display: block;
+    border: 2px solid transparent;
+}
+.checkout .selection {
+    cursor: pointer;
+}
+.checkout .m-bottom {
+    margin-bottom: 20px!important;
+}
+.checkout .text-black {
+    color: #000;
+}
+.checkout .p-bottom-half {
+    padding-bottom: 10px;
+}
+.checkout .p-top-half {
+    padding-top: 10px;
+}
+.checkout .choose-period .selected i.fa-circle-o {
+    display: none;
+}
+
+.checkout div.choose-period .selected div i {
+    color: #f26522;
+}
+.checkout .choose-period .selected i.fa-check-circle-o {
+    display: inline-block;
+}
+
+.checkout div.choose-period .selected div i {
+    color: #f26522;
+}
+.checkout .choose-period i.fa-check-circle-o {
+    display: none;
+}
+.checkout .text-greylight {
+    color: #888;
+}
+.checkout .choose-period .selected {
+    border: 2px solid #f26522;
+    text-decoration: none;
+    border-radius: 4px;
+}
+.checkout .selection.selected,.checkout   .selection.selected:hover {
+    background: #fff;
+}
+.checkout .a-tendaz{
+    text-decoration: underline;
+    color: #f26522;
+    border-color: transparent;
+    background-color: transparent;
+    box-shadow: none;
+}
+.checkout .text-tertiary {
+    color: #f26522 !important;
+}
+
+.checkout .panel-footer{
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
+.dataTables_length {
+    float: left;
+}
+.dataTables_paginate {
+    float: left;
+}
+.dataTables_info {
+    float: right;
+}
+.statics-products_length > label {
+    height: 5px;
+}
+.mercadolibre li
+{
+    list-style: circle !important;
+    padding-bottom: 3%;
+}
+.mercadolibre-btn {
+    color: #fff;
+    line-height: 1.12em;
+    padding: 5px 10px;
+    background-color: #3e52a1;
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#4055a5),color-stop(100%,#283077));
+    background-image: -webkit-linear-gradient(#3e52a1,#2d3277);
+    background-image: -moz-linear-gradient(#3e52a1,#2d3277);
+    background-image: -o-linear-gradient(#3e52a1,#2d3277);
+    background-image: linear-gradient(#3e52a1,#2d3277);
+    -webkit-box-shadow: inset 0 1px #8ea2df;
+    box-shadow: inset 0 1px #8ea2df;
+    border: 1px solid #2d3277;
+}
+[class*="mercadolibre-btn"], [class*="mercadolibre-btn"]:focus {
+    color: #fff !important;
+    font-family: Arial,Helvetica,"Nimbus Sans L",sans-serif;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Arial,Helvetica,sans-serif;
+    height: auto;
+    text-decoration: none;
+    font-size: 18px;
+
+    background-color: #3e52a1;
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#4055a5),color-stop(100%,#283077));
+     background-image: -webkit-linear-gradient(#3e52a1,#2d3277); 
+    background-image: -moz-linear-gradient(#3e52a1,#2d3277);
+    background-image: -o-linear-gradient(#3e52a1,#2d3277);
+    background-image: linear-gradient(#3e52a1,#2d3277);
+    -webkit-box-shadow: inset 0 1px #8ea2df;
+     box-shadow: inset 0 1px #8ea2df; 
+     border: 1px solid #2d3277; 
+     color: #fff; 
+}
+.mercadolibre-btn:hover {
+text-transform: none !important;
+text-decoration:    none;
+background-color: #4355d2;
+    background-image: -webkit-linear-gradient(#4355d2,#2f33ae);
+    background-image: -moz-linear-gradient(#4355d2,#2f33ae);
+    background-image: -o-linear-gradient(#4355d2,#2f33ae);
+    background-image: linear-gradient(#4355d2,#2f33ae);
+    -webkit-box-shadow: inset 0 1px #7a89e8;
+    box-shadow: inset 0 1px #7a89e8;
+    }
+
+.buyContent {  border-radius: 7px !important; margin-top: 150px }
+.buyHeader{background-color: #3c3c3c !important;color: white;border-radius: 5px 5px 0 0}
+.closeBuy{color: white !important;}
+.buyBody{border-radius: 0 0 5px 5px !important;}
+.inputBuy{font-size: 17px !important;border: 1px solid #f26522}
+.iconBuy{margin-right: 12px !important;}
+.buyRight{margin-left: 0; border-radius: 10px 0 0 0 !important;color: white;font-size: 16px;}
+.buyRight:hover{border: 1px solid #3c3c3c;color: white}

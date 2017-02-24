@@ -1,0 +1,38 @@
+a,
+a:link{
+    outline: none;
+}
+
+#container_lista{
+    width: 500px;
+    text-align: center;
+    margin: 20px auto;
+}
+ul{
+    margin: 15px auto 0;
+    padding: 0;
+    width: 545px;
+}
+ul li{
+    list-style-type: none;
+    font-size: 24px;
+    cursor: none;
+    background-color: #efefef;
+    margin-bottom: 5px;
+    padding: 10px;
+    text-align: left;
+}
+ul li span{
+    cursor: text;
+}
+ul li a,
+ul li a:link{
+    float: right;
+    display: none;
+    text-decoration: none;
+    color: #f03;
+
+}
+ul li a:hover{
+    text-decoration: underline;
+}

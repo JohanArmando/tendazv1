@@ -1,0 +1,50 @@
+<div class="container-fluid" >
+    <div class="row text-center">
+    <div class="col-md-12" ng-controller="cartController">
+            <img ng-src="{{shopData.logo}}" class="img-responsive marg_auto logo_check" ng-show="shopData.logo">
+            <h2 ng-hide="shopData.logo != ''"> {{ shopData.name }}</h2>
+    </div>
+                                   
+                               
+        <div class="col-md-12 header_he" ng-controller="navController">
+            <nav class="navbar navbar-default menu_checkout">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <div  class="container-fluid">
+                            <div class="row top_pad">
+                                <div class="col-md-12">
+                                    <a   ng-show="!user" data-target="#sign-up" data-toggle="modal" class="btn btn_checkout" >
+                                        <i class="glyphicon glyphicon-user"></i>
+                                        Iniciar sesi&oacute;n
+                                    </a>
+                                </div>
+                                
+                                <div class="col-md-12" ng-show="user">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <img src="../../../administrator/image/avatar/avatar.png"
+                                                     class="avatar img-responsive" alt="TendazAvatar"/>
+                                            </div>
+
+                                            <div class="col-md-4" style="text-align: left">
+                                                <p>{{user.personal_info.first_name}} {{user.personal_info.last_name}}</p>
+                                                <p><b>Productos en carrito:</b> {{ carts.original_qty }}</p>
+                                                <button class="btn btn_checkout" ng-click="doLogout()">
+                                                    Cerrar Sesion
+                                                </button>
+                                            </div>
+                                            <div class="col-md-1 pull-right text-right">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>

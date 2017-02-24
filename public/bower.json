@@ -1,0 +1,29 @@
+{
+  "name": "tendaz",
+  "homepage": "https://github.com/JohanArmando/tendaz",
+  "authors": [
+    "tendaz"
+  ],
+  "description": "Tendaz project bower",
+  "main": "index.php",
+  "keywords": [
+    "tendaz"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-cookies": "^1.6.0",
+    "angular-route": "^1.6.0",
+    "bootstrap": "^3.3.7",
+    "angular": "^1.6.0",
+    "ui-bootstrap": "angular-ui-bootstrap#^2.3.0",
+    "jquery": "2.2.4"
+  }
+}

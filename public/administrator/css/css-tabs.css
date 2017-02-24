@@ -1,0 +1,11 @@
+#algo li.active {
+	background: orange;
+	color: white; 
+}
+#algo_tabs.nav-tabs > li {
+	float: left;
+	margin-bottom: -1px;
+	transform: skewX(33deg);
+	overflow: hidden;
+	background: #dde4e6;
+}

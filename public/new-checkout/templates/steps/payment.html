@@ -1,0 +1,81 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-5 form_separator">
+            <div class="container-fluid">
+                <div class="row">
+                    <button class="btn_edit" ng-click="prev('/profile')"><i class="glyphicon glyphicon-pencil" ></i></button>
+                    <div class="col-md-12">
+                        <h3><i class="glyphicon glyphicon-user"></i> Identificaci&oacute;n</h3>
+                        <label>
+                            {{ carts.order.data.client.first_name}}
+                        </label>
+                        <span class="col-md-12">{{ carts.order.data.client.last_name }}</span>
+                        <span class="col-md-12">{{ carts.order.data.client.phone }}</span>
+                        <span class="col-md-12">{{ carts.order.data.client.email }}</span>
+                        <span class="col-md-12">{{ carts.order.data.client.identification }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="container-fluid form_separator">
+                <div class="row">
+                    <button class="btn_edit" ng-click="prev('/shipping')"><i class="glyphicon glyphicon-pencil" ></i></button>
+                    <div class="col-md-12">
+                        <h3><i class="glyphicon glyphicon-home"></i> Direcci&oacute;n de env&iacute;o</h3>
+                        <span class="col-md-12">{{ carts.shippingAddress.data.name }}</span>
+                        <span class="col-md-12">{{ carts.shippingAddress.data.neighborhood  }}</span>
+                        <span class="col-md-12">{{ carts.shippingAddress.data.street}}</span>
+                        <span class="col-md-12">{{ carts.shippingAddress.data.receiverName }}</span>
+                    </div>
+                    <div class="col-md-12">
+                        <h3><i class="glyphicon glyphicon-globe"></i> Costo de env&iacute;o</h3>
+                        <span class="col-md-12">{{ carts.shippingMethod.data.name }}</span>
+                        <span class="col-md-12">$ {{ carts.totalizers.shipping.value | currency:"":0 }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid form_separator">
+                <div class="row">
+                    <div class="col-md-12" ng>
+                        <h3><i class="glyphicon glyphicon-credit-card"></i> Pago</h3>
+                        <div ng-show="!payment_methods.length">
+                            <p>No hay pagos disponibles para este carrito</p>
+                        </div>
+                        <div class="container-fluid" ng-if="payment_methods.length">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label>Elige un metodo de pago</label>
+                                </div>
+                                <div class="col-md-12" ng-repeat="method in payment_methods">
+                                    <div class="radio container-fluid">
+                                        <label class="row" text-center data-tooltip="Pagar con {{ method.name }}">
+                                           <!-- <div class="col-md-12">
+                                                <input type="radio" name="optionsRadios"  value="option1" checked>
+                                            </div>-->
+                                            <button type="button" class="col-md-12 btn btn_checkout" id="{{method._id  }}" ng-click="doPayment(method._id)">
+                                               Pagar ahora
+                                            </button>
+                                            <div class="col-md-12 col-md-12">
+                                                <img class="img-responssive" src="../new-checkout/images/{{ method.type}}.png">
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-include="global.resumeUrl"></div>
+    </div>
+</div>
+<script type="text/javascript">
+    $( document ).ready(function() {
+        $(".pops").popover({ trigger: "hover" });
+    });
+
+</script>

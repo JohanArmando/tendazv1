@@ -1,0 +1,76 @@
+<section class="section" ng-controller="storeCartController">
+    <br>
+<h4 class="text-uppercase text-center">Carrito de Compras</h4>
+<div class="container">
+    <div class="row">
+        <div class="col col-md-6 col-sm-12 col-xs-12 text-center" ng-repeat="cart in carts" ng-cloak="">
+            <div class="publication card">
+                <!-- Product -->
+                <div>
+                    <br><h6 class="text-capitalize">{{ cart.name }}</h6>
+                    <hr>
+                    <div class="col-xs-12">
+                    <div class="col-xs-4">
+                    <img class="img-responsive" ng-src="{{ cart.attributes.image }}" alt="">
+                    </div>
+                    <div class="col-xs-8">
+                    <p><strong>Precio Unitario:</strong><br> $ {{ cart.price }}</p>
+                    <p class="hidden"><strong>Cantidad:</strong> 1
+                        <i class="fa fa-pencil"> </i></p>
+                    <p><strong>Subtotal:</strong>
+                        <br>$ {{ cart.price * cart.quantity | number:0 }}</p>
+                    </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <a ng-click="destroy(cart.id)" class="btn waves-effect waves-light btn-primary custom-btn">
+                        <i class="fa fa-trash-o"></i> Eliminar
+                    </a>
+                </div>
+                <br>
+            </div>
+        </div>
+        <div class="col col-md-6 col-sm-12 col-xs-12 text-center">
+            <div class="publication card">
+                <!-- Product -->
+                <div style="height: 250px">
+                    <br><h6 class="text-capitalize">Acciones</h6>
+                    <hr>
+                    <div class="col-xs-12">
+                        <a href="" class="btn waves-effect waves-light btn-primary custom-btn">
+                            <i class="fa fa-plus"></i> Agregar mas productos
+                        </a><br><br>
+                        <a href="" class="btn waves-effect waves-light btn-primary custom-btn">
+                            <i class="fa fa-trash-o"></i> Limpiar carrito
+                        </a><br><br>
+                        <a href="" class="btn waves-effect waves-light btn-primary custom-btn">
+                            Proceder al pago <i class="fa fa-angle-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <br>
+            </div>
+        </div>
+        <div class="col col-md-6 col-sm-12 col-xs-12 text-center">
+            <div class="publication card">
+                <!-- Product -->
+                <div style="height: 250px">
+                    <br><h6 class="text-capitalize">Resumen de Orden</h6>
+                    <hr>
+                    <div class="col-xs-12">
+                        <p><strong>Subtotal: $0.0</strong></p>
+                        <p><strong>Precio de Envio: $0.0</strong></p>
+                        <p><strong>Total: $0.0</strong></p>
+                        <a href="/checkout/address_and_login/1" class="btn waves-effect waves-light btn-primary custom-btn">
+                            Proceder al pago <i class="fa fa-angle-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
+</section>

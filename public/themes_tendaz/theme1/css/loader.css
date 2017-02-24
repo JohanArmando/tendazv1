@@ -1,0 +1,25 @@
+.tachar{
+    text-decoration: line-through;
+    color: #428BCA !important;
+}
+.orange{
+    border: 1px solid #428BCA !important;
+}
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #ffffff;
+    z-index: 13000;
+    height: 100%;
+    opacity: 0.9;
+}
+.preloader_p{
+    font-size: 1.9em;
+    width: 300px;
+    color: #428BCA;
+    margin-left: 310px;
+    margin-top: 420px
+}
