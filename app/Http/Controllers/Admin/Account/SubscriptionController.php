@@ -42,30 +42,30 @@ class SubscriptionController extends Controller
         if(Auth('admins')->user()->phone == null){$phone = 'Sin Numero';}else{$phone= Auth('admins')->user()->phone;}
         try {
             $charge = Twocheckout\Twocheckout_Charge::auth(array(
-                "sellerId" => env('SELLER_ID_TWO'),
+                "sellerId" => "901248204",
                 "merchantOrderId" => "123",
-                "token" => $request->get('_token'),
+                "token" => 'MjFiYzIzYjAtYjE4YS00ZmI0LTg4YzYtNDIzMTBlMjc0MDlk',
                 "currency" => 'USD',
-                "total" => $plan->price,
+                "total" => '10.00',
                 "billingAddr" => array(
-                    "name" => '',
-                    "addrLine1" => '',
-                    "city" => $request->shop->country->name,
-                    "state" => $request->shop->country->abbr,
-                    "zipCode" => '111011',
-                    "country" => $request->shop->country->name,
-                    "email" => Auth('admins')->user()->email,
-                    "phoneNumber" => $phone
+                    "name" => 'Testing Tester',
+                    "addrLine1" => '123 Test St',
+                    "city" => 'Columbus',
+                    "state" => 'OH',
+                    "zipCode" => '43123',
+                    "country" => 'USA',
+                    "email" => 'testingtester@2co.com',
+                    "phoneNumber" => '555-555-5555'
                 ),
                 "shippingAddr" => array(
-                    "name" => '',
-                    "addrLine1" => '',
-                    "city" => $request->shop->country->name,
-                    "state" => $request->shop->country->abbr,
-                    "zipCode" => '111011',
-                    "country" => $request->shop->country->name,
-                    "email" => Auth('admins')->user()->email,
-                    "phoneNumber" => $phone
+                    "name" => 'Testing Tester',
+                    "addrLine1" => '123 Test St',
+                    "city" => 'Columbus',
+                    "state" => 'OH',
+                    "zipCode" => '43123',
+                    "country" => 'USA',
+                    "email" => 'testingtester@2co.com',
+                    "phoneNumber" => '555-555-5555'
                 )
             ));
             $this->assertEquals('APPROVED', $charge['response']['responseCode']);
