@@ -42,30 +42,30 @@ class SubscriptionController extends Controller
         if(Auth('admins')->user()->phone == null){$phone = 'Sin Numero';}else{$phone= Auth('admins')->user()->phone;}
         try {
             $charge = Twocheckout\Twocheckout_Charge::auth(array(
-                "sellerId" => "901248204",
+                "sellerId" => env('SELLER_ID_TWO'),
                 "merchantOrderId" => "123",
-                "token" => 'MjFiYzIzYjAtYjE4YS00ZmI0LTg4YzYtNDIzMTBlMjc0MDlk',
+                "token" => $request->get('_token'),
                 "currency" => 'USD',
-                "total" => '10.00',
+                "total" => $plan->price,
                 "billingAddr" => array(
-                    "name" => 'Testing Tester',
-                    "addrLine1" => '123 Test St',
-                    "city" => 'Columbus',
-                    "state" => 'OH',
-                    "zipCode" => '43123',
-                    "country" => 'USA',
-                    "email" => 'testingtester@2co.com',
-                    "phoneNumber" => '555-555-5555'
+                    "name" => '',
+                    "addrLine1" => '',
+                    "city" => $request->shop->country->name,
+                    "state" => $request->shop->country->abbr,
+                    "zipCode" => '111011',
+                    "country" => $request->shop->country->name,
+                    "email" => Auth('admins')->user()->email,
+                    "phoneNumber" => $phone
                 ),
                 "shippingAddr" => array(
-                    "name" => 'Testing Tester',
-                    "addrLine1" => '123 Test St',
-                    "city" => 'Columbus',
-                    "state" => 'OH',
-                    "zipCode" => '43123',
-                    "country" => 'USA',
-                    "email" => 'testingtester@2co.com',
-                    "phoneNumber" => '555-555-5555'
+                    "name" => '',
+                    "addrLine1" => '',
+                    "city" => $request->shop->country->name,
+                    "state" => $request->shop->country->abbr,
+                    "zipCode" => '111011',
+                    "country" => $request->shop->country->name,
+                    "email" => Auth('admins')->user()->email,
+                    "phoneNumber" => $phone
                 )
             ));
             $this->assertEquals('APPROVED', $charge['response']['responseCode']);
