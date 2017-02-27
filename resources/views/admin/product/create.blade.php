@@ -58,8 +58,10 @@
                                     </div>
                                     <div class="tab-pane np " id="comments">
                                         <div class="media-list">
-                                            {!! Form::open(['url' => url ("admin/products?client_secret=".$shop->uuid."&client_id=".$shop->id)  , 'method' => 'POST' , 'class' => 'dropzone' ,'id' => 'my-dropzone-avanzado' , 'files' => true]) !!}
+                                            {{-- {!! Form::open(['url' => url ("admin/products?client_secret=".$shop->uuid."&client_id=".$shop->id)  , 'method' => 'POST' , 'class' => 'dropzone' ,'id' => 'my-dropzone-avanzado' , 'files' => true]) !!}
                                             @include('admin.partials.form-advanced')
+                                            --}}
+                                            @include('admin.partials.form-simple-2')
                                         </div>
                                     </div>
                                 </div>
@@ -126,6 +128,8 @@
             </div>
         </div>
     </div>
+    
+
 @endsection
 @section('scripts')
 
@@ -139,6 +143,10 @@
     <script type="text/javascript" src="{{ asset('components/admin/js/flat-ui.js') }}" ></script>
     <script type="text/javascript" src="{{ asset('components/admin/js/smoke.min.js') }}" ></script>
     <script src="{{ asset('components/admin/js/trumbowyg.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.2.0/vue-resource.js"></script>
+
+
     <script>
         $('#providers').select2();
         $('#categories').select2();
@@ -165,10 +173,148 @@
             }
         });
     </script>
-    <script type="text/javascript">
-        $('textarea').trumbowyg({
-            fullscreenable: true,
-            lang: 'es'
+    
+    <script>
+        var Base_Url = "{{ url('') }}"; 
+        Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf_token"]').attr('content');
+
+        
+        var app2 = new Vue({
+            el: '#app-vue-simple',
+            data: {
+                mas: {
+                    images: []
+                },
+                edit_url: '',
+                product_new: {
+                    name: '',
+                    height: '',
+                    width: '',
+                    large: '',
+                    description: '',
+                    variant: {
+                        price: '',
+                        stock: '',
+                        weight: '',
+                        images: []
+                    }
+                },
+                product:{
+
+                },
+                options: [],
+                aux: '',
+            },
+            mounted() {
+                console.log('Component mounted 2.');
+                $('textarea').trumbowyg({
+                    fullscreenable: true,
+                    lang: 'es'
+                });
+            },
+            methods: {
+                storeProduct: function () {
+                    $('#btn-store-product').button('loading');
+                    this.product_new.description = $('#simple-description2').trumbowyg('html');
+
+                    if (this.product_new.name == '') {
+                        $('#btn-store-product').button('reset');
+
+                        return "";
+
+                    }else{
+                        this.$http.post(Base_Url+'/admin/products/advanced?client_secret='+client_secret+'&client_id='+client_id,this.product_new).
+                        then((response) => {
+                            var data = response.body;
+                            //this.product = data;
+                            //this.save = true;
+                            //this.freshOptions();
+                            //$('#btn-store-product').button('reset');
+                            $('#modal-success-product').modal('show');
+                            this.product_new = {
+                                name: '',
+                                height: '',
+                                width: '',
+                                large: '',
+                                description: '',
+                                variant: {
+                                    price: '',
+                                    stock: '',
+                                    weight: '',
+                                    images: []
+                                }
+                            };
+                            this.product_new.description = $('#simple-description2').trumbowyg('empty');
+
+                            $('#btn-store-product').button('reset');
+
+                            this.edit_url = Base_Url+'/admin/products/edit/'+data.uuid;
+                            ///console.log(data);
+                        }, (response) => {
+                        // error callback
+                            $('#btn-store-product').button('reset');
+
+                        })
+                    }
+                },
+                onFileChange(e) {
+                    var files = e.target.files || e.dataTransfer.files;
+                    if (!files.length)
+                    return;
+                    this.createImage(files[0]);
+                },
+                createImage(file) {
+                    var image = new Image();
+                    var reader = new FileReader();
+                    var vm = this;
+
+                    reader.onload = (e) => {
+                        vm.product_new.variant.images.push(e.target.result);
+                    };
+                    reader.readAsDataURL(file);
+                },
+                removeImage: function (image) {
+                    this.product_new.variant.images = this.product_new.variant.images.filter(function(el){
+                    return el !== image;
+                    });
+                },
+                updateGeneral: function () {
+                    
+                    $('#btn-udate-general').button('loading');
+                    var aux = {
+                        name: this.product.name,
+                        description: this.product.description,
+                        height: this.product.height,
+                        width: this.product.width,
+                        large: this.product.large,
+                        publish: this.product.publish,
+                        type: 'general'
+                    };
+                    this.$http.put(Base_Url+'/admin/products/'+this.product.uuid+'/?client_secret='+client_secret+'&client_id='+client_id,aux).
+                    then((response) => {
+                        var data = response.body;
+                        /*this.product = data;
+                        this.save = true;
+                        this.freshOptions();*/
+                        console.log(data);
+                        $('#btn-udate-general').button('reset');
+                        this.messajeSuccess();
+
+                        console.log(data);
+                    }, (response) => {
+                    // error callback
+                        $('#btn-udate-general').button('reset');
+
+                    })      
+                },
+            }
         });
+
+
     </script>
+    <script type="text/javascript">
+        
+    </script>
+
+
 @stop

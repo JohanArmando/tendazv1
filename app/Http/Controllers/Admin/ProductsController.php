@@ -59,25 +59,196 @@ class ProductsController extends Controller
         $this->validate($request , [
            'name' => 'required'
         ]);
-        $response = Product::createWithVariant($request->all());
-
-        return response()->json($response , 200);
+        $product = Product::create([
+            'name' => $request->name,
+            'slug'=> $request->slug,
+            'seo_title'=> $request->seo_title,
+            'seo_description'=> $request->seo_description,
+            'description'=> $request->description,
+            'publish'=> 1,
+            'provider_id'=> $request->provider_id,
+            'large'=> $request->large,
+            'height'=> $request->height,
+            'width' => $request->width,
+            'dimension'=> 1
+        ]);
+        $product->collection()->create([
+            'uuid' => Uuid::generate(4)->string,
+            'shipping_free' => isset($request->shipping_free),
+            'promotion' => isset($request->promotion),
+            'primary' => isset($request->primary)
+        ]);
+        if (isset($request->category_id) && count($request->category_id) > 0) {
+            foreach ($request->category_id as $category) {
+                $product->categories()->attach($category);
+            }
+        }
+        $variant = $product->variants()->create([
+            'sku' => $request->sku, 
+            'price' => $request->price, 
+            'promotional_price' => $request->promotional_price,
+            'weight'=> $request->weight,
+            'stock'=> $request->stock,
+            'price_declared'=> $request->price_declared
+        ]);
+        if (isset($request->file) && count($request->file) > 0) {
+            foreach ($request->file as $file) {
+                $variant->images()->create([
+                    'name' => $file
+                ]);
+            }
+        }
+        if (isset($request->values)) {
+            $values = json_decode($request->values);
+            foreach ($values as $value) {
+                $variant->optionValue()->attach($value);
+            }
+        }
+        
+        $product = $product->fresh();
+        return response()->json($product, 200);
     }
 
+    public function storeAdvanced(Request $request)
+    {
+        //return $request->variant['price'];
+        $this->validate($request , [
+           'name' => 'required'
+        ]);
+        $product = Product::create([
+            'name' => $request->name,
+            'slug'=> $request->slug,
+            'seo_title'=> $request->seo_title,
+            'seo_description'=> $request->seo_description,
+            'description'=> $request->description,
+            'publish'=> 1,
+            'provider_id'=> $request->provider_id,
+            'large'=> $request->large,
+            'height'=> $request->height,
+            'width' => $request->width,
+            'dimension'=> 1
+        ]);
+        $product->collection()->create([
+            'uuid' => Uuid::generate(4)->string,
+            'shipping_free' => isset($request->shipping_free),
+            'promotion' => isset($request->promotion),
+            'primary' => isset($request->primary)
+        ]);
+        if (isset($request->category_id) && count($request->category_id) > 0) {
+            foreach ($request->category_id as $category) {
+                $product->categories()->attach($category);
+            }
+        }
+        $variant = $product->variants()->create([
+            'price' => $request->variant['price'], 
+            'stock'=> $request->variant['stock'],
+            'weight'=> $request->variant['weight']
+        ]);
+
+
+        if (isset($request->file) && count($request->file) > 0) {
+            foreach ($request->file as $file) {
+                $variant->images()->create([
+                    'name' => $file
+                ]);
+            }
+        }
+        if (isset($request->variant['images']) && count($request->variant['images']) > 0) {
+            foreach ($request->variant['images'] as $file) {
+
+                $variant->images()->create([
+                    'name' => $file
+                ]);
+            }
+        }
+        if (isset($request->values)) {
+            $values = json_decode($request->values);
+            foreach ($values as $value) {
+                $variant->optionValue()->attach($value);
+            }
+        }
+        
+        $product = $product->fresh();
+        return response()->json(Product::with(['collection','variants.images'])->find($product->id), 200);
+    }
+
+    public function storeVariant($subdomain, $id, Request $request)
+    {
+        $product = Product::where('uuid',$id)->first();
+        $variant = $product->variants()->create([
+            'price' => $request->price, 
+            'promotional_price' => $request->promotional_price, 
+            'stock'=> $request->stock,
+            'weight'=> $request->weight,
+            'sku' => $request->sku, 
+        ]);
+        $variant = Variant::with(['values','images'])->find($variant->id);
+        return response()->json($variant, 200);
+    }
+    public function removeVariant($subdomain, $id)
+    {
+        $variant = Variant::find($id);
+        if ($variant->delete()) {
+            return $variant;
+        }
+        return ['message'=>'No se pudo borrar la variante'];
+    }
 
     public function edit($subdomain ,Product $product)
     {
         $categories =   Category::pluck('name' , 'id');
         $options    =   Option::get(['id' , 'name']);
-        return view('admin.product.edit',compact('product' , 'categories' , 'options','providers'));
+        return view('admin.product.edit2',compact('product' , 'categories' , 'options','providers'));
     }
 
     public function update($subdomain, Product $product , Request $request)
     {
-        if ($request->wantsJson()){
+        /*if ($request->wantsJson()){
             $product->update($request->all());
             return $this->response($request);
+        }*/
+        if ($request->type == 'visibility') {
+            $collection = $product->collection;
+            $collection->update($request->all());
+            return $collection->fresh();
         }
+        $product->update($request->all());
+        $product = $product->fresh();
+        return $product;
+        
+    }
+    public function addValue($subdomain, $variant_id, $value_id)
+    {
+        $variant = Variant::find($variant_id);
+        $variant->values()->attach($value_id);
+        return $variant->values;
+
+    }
+    public function removeValue($subdomain, $variant_id, $value_id)
+    {
+        $variant = Variant::find($variant_id);
+        $variant->values()->detach($value_id);
+        return $variant->values;
+
+    }
+    public function storeImages($subdomain, $id, Request $request)
+    {
+        $variant = Variant::find($id);
+        $image = $variant->images()->create([
+            'name' => $request->image
+        ]);
+        return $image;
+
+    }
+    public function deleteImages($subdomain, $variant_id,$image_id)
+    {
+        $variant = Variant::find($variant_id);
+        $image = $variant->images()->find($image_id);
+        if ($image->delete()) {
+            return $image;
+        }
+        return "error";
+
     }
     
     public function updateVariant($subdomain, Variant $variant , Request $request)
@@ -86,6 +257,12 @@ class ProductsController extends Controller
            $variant->update($request->all());
             return fractal()->item($variant , new ProductTransformer());
         }
+    }
+    public function updateVariant2($subdomain, $id , Request $request)
+    {
+        $variant = Variant::find($id);
+        $variant->update($request->all());
+        return $variant->fresh();
     }
 
 
@@ -204,10 +381,10 @@ class ProductsController extends Controller
 
     public function editProduct($subdomain , Request $request ,$id){
         $product        =   Product::where('uuid',$id)->first();
-        $variant        =   Variant::where('product_id',$product->id)->first();
+        /*$variant        =   Variant::where('product_id',$product->id)->first();
         $providers      =   Provider::where('shop_id',$product->shop_id)->get();
-        $categories     =   Category::where('shop_id',$request->shop->id)->get();
-        return view('admin.product.edit',compact('product','variant','categories','providers'));
+        $categories     =   Category::where('shop_id',$request->shop->id)->get();*/
+        return view('admin.product.edit2',['product' => $product]);
     }
 
     /**
@@ -284,16 +461,20 @@ class ProductsController extends Controller
 
     }
 
-    public function show($subdomain , $slug)
+    public function show($subdomain , $id)
     {
-        $product = Product::all()
+        /*$product = Product::all()
             ->where('products.slug','=',$slug)
             ->select('products.*')
             ->get();
 
         return response()->json(array(
             'product' => $product
-        ));
+        ));*/
+        $product = Product::where('uuid',$id)->first();
+
+        return Product::with(['collection','variants.images','variants.values'])->find($product->id);
+        //return $id;
     }
     public function getImage($subdomain ,$id , Request $request){
         $product = Product::where('uuid',$id)->first();
