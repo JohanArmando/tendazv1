@@ -104,11 +104,11 @@ Cupones de descuento
                                         </td>
                                         <td>
                                             @if($coupon->available == 0)
-                                                <a data-toggle="tooltip" data-placement="top" title="Desactivar"  href="{{ url("admin/marketing/coupons/$coupon->uuid") }}" class="btn btn-tendaz" style="background-color: lightgrey;border:1px solid lightgrey">
-                                                    <i class="fa fa-eye-slash"></i></a>
-                                            @else
                                                 <a class="btn btn-success" href="{{ url("admin/marketing/coupons/$coupon->uuid") }}" data-toggle="tooltip" data-placement="top" title="Activar">
                                                     <i class="fa fa-eye"></i></a>
+                                            @else
+                                                <a data-toggle="tooltip" data-placement="top" title="Desactivar"  href="{{ url("admin/marketing/coupons/$coupon->uuid") }}" class="btn btn-tendaz" style="background-color: lightgrey;border:1px solid lightgrey">
+                                                    <i class="fa fa-eye-slash"></i></a>
                                             @endif
                                         </td>
                                     </tr>
