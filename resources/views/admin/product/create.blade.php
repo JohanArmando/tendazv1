@@ -231,7 +231,7 @@
                             //this.freshOptions();
                             //$('#btn-store-product').button('reset');
                             $('#modal-success-product').modal('show');
-                            /*this.product_new = {
+                            this.product_new = {
                                 name: '',
                                 height: '',
                                 width: '',
@@ -243,7 +243,9 @@
                                     weight: '',
                                     images: []
                                 }
-                            };*/
+                            };
+                            this.product_new.description = $('#simple-description2').trumbowyg('empty');
+
                             $('#btn-store-product').button('reset');
 
                             this.edit_url = Base_Url+'/admin/products/edit/'+data.uuid;
