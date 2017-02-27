@@ -56,7 +56,7 @@ Cupones de descuento
                                         <th>Limite de uso</th>
                                         <th>Limite de fecha</th>
                                         <th>Otros limites</th>
-                                        <th colspan="2">Acciones</th>
+                                        <th colspan="3">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -95,6 +95,11 @@ Cupones de descuento
                                             {!! Form::open(['url' => ['admin/marketing/coupons/'.$coupon->uuid] ,'method'=> 'DELETE' ]) !!}
                                             <button onclick="return confirm('Seguro que deseas eliminar este cupon?')"
                                                     class="eliminar btn btn-danger" data-id="{{ $coupon->uuid }}"><i class="fa fa-trash-o"></i></button>
+                                            {!! Form::close() !!}
+                                        </td>
+                                        <td>
+                                            {!! Form::open(['url' => ['admin/marketing/coupons/'.$coupon->uuid.'/edit'] ,'method'=> 'GET' ]) !!}
+                                            <button class="btn btn-primary"><i class="fa fa-edit"></i></button>
                                             {!! Form::close() !!}
                                         </td>
                                         <td>
