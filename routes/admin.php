@@ -17,6 +17,8 @@ $domain = new \Tendaz\Models\Domain\Domain();
 
     //Route Products
     Route::put('products/{variant}/variant' , 'ProductsController@updateVariant');
+    Route::post('products/advanced' , 'ProductsController@storeAdvanced');
+    Route::post('products/{id}/variants' , 'ProductsController@storeVariant');
     Route::get('products/import' , 'ProductsController@import');
     Route::post('products/export' , 'ProductsController@export');
     Route::post('products/import/upload' , 'ProductsController@postImport');
@@ -29,6 +31,18 @@ $domain = new \Tendaz\Models\Domain\Domain();
     Route::post('products/refresh/{id}' , 'ProductsController@refreshProduct');
     //Route Categories
     Route::resource('categories' , 'CategoriesController');
+
+    //Route options variants
+    Route::get('options/{id}/values' , 'OptionsController@values');
+    Route::post('options/{id}/values' , 'OptionsController@storeValues');
+    Route::post('variants/{id}/images' , 'ProductsController@storeImages');
+    Route::put('variants/{id}' , 'ProductsController@updateVariant2');
+    Route::delete('variants/{id}' , 'ProductsController@removeVariant');
+    Route::post('variants/{variant_id}/values/{value_id}' , 'ProductsController@addValue');
+    Route::delete('variants/{variant_id}/values/{value_id}' , 'ProductsController@removeValue');
+    Route::delete('variants/{variant_id}/images/{image_id}' , 'ProductsController@deleteImages');
+    Route::resource('options' , 'OptionsController');
+
 
     //Route orders
     Route::get('orders/status' , 'OrdersController@status');

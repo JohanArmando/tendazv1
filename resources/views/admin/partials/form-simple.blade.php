@@ -109,7 +109,7 @@
                     <span class="input-group-addon">
                       $
                     </span>
-                    <input type="number" id="price" name="product[variants][0][price]" class="form-control" placeholder="$12000">
+                    <input type="number" id="price" name="price" class="form-control" placeholder="$12000">
                 </div>
             </div>
             <div class="col-md-3">
@@ -120,7 +120,7 @@
                     <span class="input-group-addon">
                       Kg.
                     </span>
-                    <input type="number"  id="kilo"  name="product[variants][0][weight]" class="form-control" data-parsley-type="digits" placeholder="1.0 Kg">
+                    <input type="number"  id="kilo"  name="weight" class="form-control" data-parsley-type="digits" placeholder="1.0 Kg">
                 </div>
             </div>
             <div class="col-md-3">
@@ -131,7 +131,7 @@
                     <span class="input-group-addon">
                       #
                     </span>
-                    <input type="number" id="stock" name="product[variants][0][stock]" class="form-control" data-parsley-type="number" placeholder="12">
+                    <input type="number" id="stock" name="stock" class="form-control" data-parsley-type="number" placeholder="12">
                 </div>
             </div>
           </div>

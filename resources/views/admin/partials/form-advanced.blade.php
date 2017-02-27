@@ -43,17 +43,7 @@
         </span>
     </div>
 </div>
-<div class="media border-dotted">
-    <div class="row">
-        <span class="media-body box">
-            <div class="form-group">
-                <div class="row">
-                    @include('admin.partials.sin-variante')
-                </div>
-            </div>
-        </span>
-    </div>
-</div>
+
 <div class="media border-dotted">
     <div class="row">
       <span class="media-body box">
@@ -283,6 +273,39 @@
                             {!! Form::text('slug' , null , ['class' => 'form-control']) !!}
                         </span>
                     </div>
+                </div>
+            </div>
+        </span>
+    </div>
+</div>
+<div class="media border-dotted">
+    <div class="row">
+        <span class="media-body box">
+            <div class="form-group">
+                <div class="row">
+                    @include('admin.partials.sin-variante')
+                </div>
+            </div>
+        </span>
+    </div>
+</div>
+<div class="media border-dotted">
+    <div class="row">
+        <span class="media-body box">
+            <div class="form-group">
+                <div class="row">
+                    @include('admin.partials.con-variante-ajax')
+                </div>
+            </div>
+        </span>
+    </div>
+</div>
+<div class="media border-dotted">
+    <div class="row">
+        <span class="media-body box">
+            <div class="form-group">
+                <div class="row">
+                    @include('admin.partials.con-variante')
                 </div>
             </div>
         </span>
