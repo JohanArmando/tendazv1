@@ -42,7 +42,6 @@
                                     {!! Form::number('price',isset($product->variants)? $product->variants->first()->price : null ,['class'=>'form-control','id'=>'price','style'=>"height: 30px; text-align: center" ]) !!}
                                 </div>
                             </td>
-
                         </tr>
                         <tr>
                             <td>

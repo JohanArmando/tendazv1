@@ -51,7 +51,8 @@ Editar {{ucfirst($product->name)}}
                                       <div class="media-list">
                                         
                                         <div id="app-vue-simple">
-                                            <div v-if="save">
+                                            <div v-show="save"
+                                                style="display: none;">
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <div class="panel panel-default" style="margin-top: 15px;">
@@ -59,10 +60,11 @@ Editar {{ucfirst($product->name)}}
                                                                 <div class="panel-title">Navegacion</div>
                                                             </div>
                                                             <div class="list-group">
+                                                                <a class="list-group-item" href="#variants" aria-controls="variants" role="tab" data-toggle="tab">Configuracion sobre las variantes</a>
                                                                 <a class="list-group-item" href="#general" aria-controls="general" role="tab" data-toggle="tab">Informacion General</a>
                                                                 <a class="list-group-item" href="#seo" aria-controls="seo" role="tab" data-toggle="tab">Configuraciones avanzadas para SEO</a>
                                                                 <a class="list-group-item" href="#visibity" aria-controls="visibity" role="tab" data-toggle="tab">Configuraciones para la visibilidad</a>
-                                                                <a class="list-group-item" href="#variants" aria-controls="variants" role="tab" data-toggle="tab">Configuracion sobre las variantes</a>
+                                                                
                                                             </div>
                                                         </div>
                                                         <div class="alert alert-info" v-show="messaje.show">
@@ -72,7 +74,7 @@ Editar {{ucfirst($product->name)}}
                                                     </div>
                                                     <div class="col-md-9">
                                                         <div class="tab-content">
-                                                            <div role="tabpanel" class="tab-pane active" id="general">
+                                                            <div role="tabpanel" class="tab-pane" id="general">
                                                                 <div class="panel panel-default">
                                                                     <div class="panel-heading-white" >
                                                                         <div class="panel-title">Informacion General</div>
@@ -127,10 +129,10 @@ Editar {{ucfirst($product->name)}}
                                                                          <div class="col-md-12">
                                                                            <div class="form-group">
                                                                              <label for="">Description</label>
-                                                                             <textarea name="" v-model="product.description" id="input" class="form-control" rows="3" required="required"></textarea>
+                                                                             <textarea name="" id="description" class="form-control" rows="3" required="required"></textarea>
                                                                            </div>
                                                                            <br>
-                                                                           <button v-on:click="updateGeneral()" data-loading-text="procesando..." id="btn-udate-general" type="button" class="btn btn-primary">Guardar cambios</button>
+                                                                           <button v-on:click="updateGeneral()" data-loading-text="<i class='fa fa-spinner fa-spin'></i> procesando..." id="btn-udate-general" type="button" class="btn btn-primary">Guardar cambios</button>
                                                                          </div>
                                                                       </div>
                                                                   </div>
@@ -159,7 +161,7 @@ Editar {{ucfirst($product->name)}}
                                                                                     <input type="text" v-model="product.slug" class="form-control" id="" placeholder="" readonly="">
                                                                                 </span>
                                                                                 <br>
-                                                                                <button data-loading-text="procesando..." v-on:click="updateSeo()" id="btn-udate-seo" type="button" class="btn btn-primary">Guardar cambios</button>
+                                                                                <button data-loading-text="<i class='fa fa-spinner fa-spin'></i> procesando..." v-on:click="updateSeo()" id="btn-udate-seo" type="button" class="btn btn-primary">Guardar cambios</button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -198,14 +200,14 @@ Editar {{ucfirst($product->name)}}
                                                                                     <label for="checkbox3" style="color: #7b7b7b">&nbsp;&nbsp;Este producto esta en oferta</label>
                                                                                 </span>
                                                                                 <br>
-                                                                                <button data-loading-text="procesando..." type="button"  v-on:click="updateVisibility()" id="btn-udate-visibility" class="btn btn-primary">Guardar cambios</button>
+                                                                                <button data-loading-text="<i class='fa fa-spinner fa-spin'></i> procesando..." type="button"  v-on:click="updateVisibility()" id="btn-udate-visibility" class="btn btn-primary">Guardar cambios</button>
 
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div role="tabpanel" class="tab-pane" id="variants">
+                                                            <div role="tabpanel" class="tab-pane active" id="variants">
                                                                 <div class="panel panel-primary" v-for="variant in product.variants">
                                                                     <div class="panel-heading-white" >
                                                                         <h3 class="panel-title">Detalles del producto</h3>
@@ -241,7 +243,7 @@ Editar {{ucfirst($product->name)}}
 
                                                                                     <label class="control-label" style="font-size: 1.2em; color: black;">Detalles</label>
                                                                                     <div class="row">
-                                                                                        <div class="col-md-3">
+                                                                                        <div class="col-md-4">
                                                                                             <label class="control-label" style=" color:darkslategray">Precio</label>
                                                                                             <div class="input-group">
                                                                                                 <span class="input-group-addon">$</span>
@@ -249,7 +251,7 @@ Editar {{ucfirst($product->name)}}
                                                                                             </div>
                                                                                             <br>
                                                                                         </div>
-                                                                                        <div class="col-md-3">
+                                                                                        <div class="col-md-4">
                                                                                             <label class="control-label" style=" color:darkslategray">Precio Promocional</label>
                                                                                             <div class="input-group">
                                                                                                 <span class="input-group-addon">$</span>
@@ -257,31 +259,43 @@ Editar {{ucfirst($product->name)}}
                                                                                             </div>
                                                                                             <br>
                                                                                         </div>
-                                                                                        <div class="col-md-3">
+                                                                                        <div class="col-md-4">
                                                                                             <label class="control-label" style=" color:darkslategray">Stock</label>
                                                                                             <input type="text" v-model="variant.stock" class="form-control" id="" placeholder="">
                                                                                             <br>
                                                                                         </div>
-                                                                                        <div class="col-md-3">
+                                                                                        <div class="col-md-4">
                                                                                             <label class="control-label" style=" color:darkslategray">SKU</label>
                                                                                                 <input type="text" v-model="variant.sku" class="form-control" id="" placeholder="">
                                                                                             <br>
                                                                                         </div>
-                                                                                        <div class="col-md-12">
+                                                                                        <div class="col-md-4">
                                                                                             <label class="control-label" style=" color:darkslategray">Peso</label>
                                                                                             <div class="input-group">
                                                                                                 <span class="input-group-addon">kg</span>    
                                                                                                 <input type="text" v-model="variant.weight" class="form-control" id="" placeholder="">
                                                                                             </div>
                                                                                             <br>
-                                                                                            <button type="button" v-bind:id="'btn-save-details-'+variant.id" data-loading-text="Guardando..." v-on:click="saveDetails(variant)" class="btn btn-primary"><i class="fa fa-edit"></i> Guardar detalles</button>
-                                                                                            <hr>
+                                                                                        </div>
+                                                                                        <div class="col-md-4">
+                                                                                            <label class="control-label" style=" color:darkslategray">Guardar</label>
+                                                                                            
+                                                                                            <button type="button"
+                                                                                                v-bind:id="'btn-save-details-'+variant.id"
+                                                                                                data-loading-text="Guardando..."
+                                                                                                v-on:click="saveDetails(variant)"
+                                                                                                class="btn btn-primary btn-block">
+                                                                                                <i class="fa fa-edit"></i> Guardar detalles
+                                                                                            </button>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-md-12">
                                                                                     <label class="control-label" style="font-size: 1.2em; color: black;">Variacion</label>
                                                                                     <variant-option v-bind:options="options" v-bind:variant="variant"></variant-option>
+                                                                                </div>
+                                                                                <div class="col-md-12">
+                                                                                    <a class="btn btn-primary" v-on:click="variant_id = variant.id" data-toggle="modal" href='#modal-id'>Eliminar variacion del producto</a>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -343,10 +357,32 @@ Editar {{ucfirst($product->name)}}
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                                <div class="modal fade" id="modal-id">
+                                                                    <div class="modal-dialog">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                                                <h4 class="modal-title">Eliminar Variacion</h4>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <p>No se podra dehacer la accion.</p>
+                                                                                <p>¿Esta seguro de eliminar la variacion?</p>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                                                                <button type="button"  data-loading-text="eliminando..." id="btn-delete-variant" v-on:click="deleteVariant()" class="btn btn-primary">Eliminar</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div v-show="!save"
+                                                class="text-center">
+                                                <h3><i class="fa fa-spinner fa-spin"></i> Cargando...</h3>
                                             </div>
                                         </div>
                                       </div>
@@ -359,17 +395,19 @@ Editar {{ucfirst($product->name)}}
             </div>
         </div>
     </div>
+
+    
     <template id="variant-options" >
         <div>
             <h4>Caracteristicas: </h4>
-            <button v-for="value in values_selected" type="button" v-bind:class="'btn-remove-value-'+variant.id+'-'+value.id" data-loading-text="eliminando..." v-on:click="removeValue(value)" class="btn btn-primary" style="margin-bottom: 5px; margin-right: 5px;">@{{ value.name }}</button>
+            <button v-for="value in values_selected" type="button" v-bind:class="'btn-remove-value-'+variant.id+'-'+value.id" data-loading-text="<i class='fa fa-spinner fa-spin'></i> eliminando..." v-on:click="removeValue(value)" class="btn btn-primary" style="margin-bottom: 5px; margin-right: 5px;">@{{ value.name }}</button>
             <div class="panel panel-default">
                 <div class="panel-heading-white">
                     <h3 class="panel-title">Agregar caracteristicas al producto</h3>
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label>Propiedad</label>
                                 <select v-model="option_selected" class="form-control" v-on:change="freshValues()">
                                   <option v-for="option in options" v-bind:value="option.id">
@@ -384,21 +422,49 @@ Editar {{ucfirst($product->name)}}
                                     <div class="form-group">
                                         <input type="text" v-model="option_new" class="form-control" id="" placeholder="nombre">
                                     </div>
-                                    <button type="button" id="btn-store-options" v-on:click="storeOptions()" data-loading-text="procesando" class="btn btn-primary btn-block">Agregar propiedad</button>
+                                    <button type="button" id="btn-store-options" v-on:click="storeOptions()" data-loading-text="<i class='fa fa-spinner fa-spin'></i> procesando" class="btn btn-primary btn-block">Agregar propiedad</button>
                                 </div>
                                 
 
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-9">
 
                                 <label>Valores de la propiedad</label>
                                 
-                                <div class="row">
+                                <div class="row" v-if="!loadingValues">
                                     <div  v-for="value in values" class="col-md-3">
-                                        <button v-if="!selectedValue(value)" v-bind:id="'btn-add-value-'+variant.id+'-'+value.id" data-loading-text="procesando..." type="button" v-on:click="addValue(value)" class="btn btn-block btn-default" style="margin-bottom: 5px;">@{{ value.name }}</button>
-                                        <button v-else type="button" v-bind:class="'btn-remove-value-'+variant.id+'-'+value.id" data-loading-text="procesando..." v-on:click="removeValue(value)"  class="btn btn-block btn-primary" style="margin-bottom: 5px;">@{{ value.name }}</button>
+                                        <button v-if="!selectedValue(value)"
+                                            v-bind:id="'btn-add-value-'+variant.id+'-'+value.id"
+                                            data-loading-text="<i class='fa fa-spinner fa-spin'></i> procesando..."
+                                            type="button" v-on:click="addValue(value)" class="btn btn-block btn-default"
+                                            style="margin-bottom: 5px;">
+                                                @{{ value.name }}
+                                        </button>
+                                        <button v-else
+                                            type="button" 
+                                            v-bind:class="'btn-remove-value-'+variant.id+'-'+value.id"
+                                            data-loading-text="<i class='fa fa-spinner fa-spin'></i> procesando..."
+                                            v-on:click="removeValue(value)"
+                                            class="btn btn-block btn-primary"
+                                            style="margin-bottom: 5px;">
+                                                @{{ value.name }}
+                                        </button>
                                     </div>
-                                    <div  v-if="!nuevo_valor" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <div class="col-md-3" v-show="!nuevo_valor">
+                                        <button v-if="!valor_nuevo"
+                                            type="button"
+                                            v-on:click="valor_nuevo = true"
+                                            class="btn btn-block btn-default">
+                                                <i class="fa fa-plus"></i> Nuevo
+                                        </button>
+                                        <button v-else 
+                                            type="button"
+                                            v-on:click="valor_nuevo = false"
+                                            class="btn btn-block btn-default">
+                                                <i class="fa fa-minus"></i> Cancelar
+                                        </button>
+                                    </div>
+                                    <div  v-if="valor_nuevo" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                         <h5 class="variant-title" style="color:grey !important;">Agregar propiedad</h5>
 
                                         <div class="row">
@@ -409,8 +475,15 @@ Editar {{ucfirst($product->name)}}
                                                 <input type="text"  v-model="value_new.attribute" class="form-control" id="" placeholder="Atributo">
                                             </div>
                                             <div class="col-md-4" >
-                                                <button v-on:click="storeValues()" id="btn-store-values" data-loading-text="procesando" type="button" class="btn btn-primary btn-block">Agregar valor</button>
+                                                <button v-on:click="storeValues()" id="btn-store-values" data-loading-text="<i class='fa fa-spinner fa-spin'></i> procesando" type="button" class="btn btn-primary btn-block">Agregar valor</button>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" v-else>
+                                    <div class="col-md-12" >
+                                        <div class="text-center">
+                                            <h4><i class="fa fa-spinner fa-spin"></i> Cargando valores...</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -464,11 +537,7 @@ Editar {{ucfirst($product->name)}}
             }
         });
     </script>
-    <script type="text/javascript">
-            $('textarea').trumbowyg({
-                fullscreenable: false
-            });
-    </script>
+
     <script>
         var Base_Url = "{{ url('') }}"; 
         Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf_token"]').attr('content');
@@ -481,6 +550,8 @@ Editar {{ucfirst($product->name)}}
           // reference for each component instance
             data: function () {
                 return {
+                    valor_nuevo: false,
+                    loadingValues: false,
                     values_selected: this.variant.values,
                     values: [],
                     option_selected: '',
@@ -506,13 +577,20 @@ Editar {{ucfirst($product->name)}}
                     })
                 },
                 freshValues: function () {
+                    this.loadingValues = true;
+                    this.values = [];
                     if (this.option_selected == -1){
                         this.values = [];
+                        this.loadingValues = false;
+
                     }else{
                         this.$http.get(Base_Url+'/admin/options/'+this.option_selected+'/values?client_secret='+client_secret+'&client_id='+client_id).
                         then((response) => {
                             var data = response.body;
                             this.values = data;
+                            this.valor_nuevo = false;
+                            this.loadingValues = false;
+
                             console.log(data);
                         }, (response) => {
                         // error callback
@@ -557,10 +635,12 @@ Editar {{ucfirst($product->name)}}
                     }else{
                         this.$http.post(Base_Url+'/admin/options/'+this.option_selected+'/values?client_secret='+client_secret+'&client_id='+client_id,this.value_new).
                         then((response) => {
-                            this.freshValues();
                             this.value_new = { name: '', attribute: '' };
+                            var data = response.body;
                             $('#btn-store-values').button('reset');
+                            this.valor_nuevo = false;
 
+                            this.values.push(data);
                         }, (response) => {
                         // error callback
                             $('#btn-store-values').button('reset');
@@ -658,6 +738,7 @@ Editar {{ucfirst($product->name)}}
             data: {
                 save: false,
                 is_new_variant: false,
+                variant_id: '',
                 messaje:{
                     show: false,
                     text: '',
@@ -710,6 +791,10 @@ Editar {{ucfirst($product->name)}}
             },
             mounted() {
                 console.log('Component mounted 2.');
+                $('textarea').trumbowyg({
+                    fullscreenable: true,
+                    lang: 'es'
+                });
                 this.freshProduct();
             },
             methods: {
@@ -719,8 +804,9 @@ Editar {{ucfirst($product->name)}}
                     then((response) => {
                         var data = response.body;
                         this.product = data;
+                        $('#description').trumbowyg('html', this.product.description);
                         this.save = true;
-                          this.freshOptions();
+                        this.freshOptions();
                         $('#btn-store-product').button('reset');
                         console.log(data);
                     }, (response) => {
@@ -870,9 +956,10 @@ Editar {{ucfirst($product->name)}}
                 updateGeneral: function () {
                     
                     $('#btn-udate-general').button('loading');
+
                     var aux = {
                         name: this.product.name,
-                        description: this.product.description,
+                        description: $('#description').trumbowyg('html'),
                         height: this.product.height,
                         width: this.product.width,
                         large: this.product.large,
@@ -919,6 +1006,30 @@ Editar {{ucfirst($product->name)}}
 
                     })      
                 },
+                deleteVariant: function () {
+                    $('#btn-delete-variant').button('loading');
+
+                    this.$http.delete(Base_Url+'/admin/variants/'+this.variant_id+'?client_secret='+client_secret+'&client_id='+client_id).
+                    then((response) => {
+                        var data = response.body;
+                        /*this.product = data;
+                        this.save = true;
+                        this.freshOptions();*/
+
+                         console.log(data);
+                        $('#btn-delete-variant').button('reset');
+                        $('#modal-id').modal('hide');
+                        this.messajeSuccess();
+                        this.product.variants = this.product.variants.filter(function(el){
+                            return el.id !== data.id;
+                        });
+                        console.log(data);
+                    }, (response) => {
+                    // error callback
+                        $('#btn-delete-variant').button('reset');
+
+                    }) 
+                },
                 updateVisibility:function () {
                     $('#btn-udate-visibility').button('loading');
                     var aux = {
@@ -943,9 +1054,6 @@ Editar {{ucfirst($product->name)}}
                         $('#btn-udate-visibility').button('reset');
 
                     }) 
-                },
-                addImageVariant: function (variant) {
-                    alert(variant.price);
                 },
                 messajeSuccess: function () {
                     this.messaje.type = 'Genial! ';

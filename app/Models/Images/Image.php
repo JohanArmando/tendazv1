@@ -21,22 +21,28 @@ class Image extends Model
     protected $folder = 'products';
 
     public function setNameAttribute($file){
-        /*if(! empty($path)){
-            $name = $path->getClientOriginalName();
+        
+        if(!is_string($file)){
+            $name = $file->getClientOriginalName();
             $this->attributes['name'] = $name;
             $this->attributes['url'] = url("images-$this->folder/".auth('admins')->user()->shop->id.'/'.$name);
-            \Storage::disk($this->folder)->put(auth('admins')->user()->shop->id.'/'.$name, \File::get($path));
-        }*/
-        //get the base-64 from data
-        $base64_str = substr($file, strpos($file, ",")+1);
-        //decode base64 string
-        $image = base64_decode($base64_str);
-        $png_url = "image-".Uuid::generate(4)->string.".png";
-        $path = public_path()."/images-products/".auth('admins')->user()->shop->id."/";
-        \Storage::disk($this->folder)->makeDirectory(auth('admins')->user()->shop->id."/");
-        file_put_contents($path.$png_url, $image);
-        $this->attributes['name'] = $png_url;
-        $this->attributes['url'] = url("images-$this->folder/".auth('admins')->user()->shop->id.'/'.$png_url);;
+            \Storage::disk($this->folder)->put(auth('admins')->user()->shop->id.'/'.$name, \File::get($file));
+        }else
+        {
+            //get the base-64 from data
+            $base64_str = substr($file, strpos($file, ",")+1);
+            //decode base64 string
+            $image = base64_decode($base64_str);
+            $png_url = "image-".Uuid::generate(4)->string.".png";
+            $path = public_path()."/images-products/".auth('admins')->user()->shop->id."/";
+            \Storage::disk($this->folder)->makeDirectory(auth('admins')->user()->shop->id."/");
+            file_put_contents($path.$png_url, $image);
+            $this->attributes['name'] = $png_url;
+            $this->attributes['url'] = url("images-$this->folder/".auth('admins')->user()->shop->id.'/'.$png_url);
+        }
+        
+        
+
 
     }
     public function Product(){

@@ -185,6 +185,14 @@ class ProductsController extends Controller
         $variant = Variant::with(['values','images'])->find($variant->id);
         return response()->json($variant, 200);
     }
+    public function removeVariant($subdomain, $id)
+    {
+        $variant = Variant::find($id);
+        if ($variant->delete()) {
+            return $variant;
+        }
+        return ['message'=>'No se pudo borrar la variante'];
+    }
 
     public function edit($subdomain ,Product $product)
     {
