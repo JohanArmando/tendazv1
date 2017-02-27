@@ -36,6 +36,19 @@ class CouponController extends Controller
         !$coupon->available  ? $message = 'Cupos Desactivado de forma correcta' : $message = 'Cupon activado de forma correcta';
         return redirect()->back()->with('message',array('type' => 'success' , 'message' => $message));
     }
+
+    public function edit($subdomain , Coupon $coupon)
+    {
+        $categories = Category::orderBy('id','ASC')->pluck('name','id');
+        return view('admin.marketing.edit-coupons',compact('coupon', 'categories'));
+    }
+
+    public function update($subdomain , Coupon $coupon,Request $request){
+        $coupon->update($request->discount);
+        $coupon->save();
+        return redirect()->to('admin/marketing/coupons')->with('message',array('type' => 'success' , 'message' => 'Cupon Editado correctamente'));
+    }
+
     public function destroy($subdomain , Coupon $coupon){
         $coupon->delete();
         return redirect()->to('admin/marketing/coupons')->with('message',
