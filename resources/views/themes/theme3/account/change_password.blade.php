@@ -48,7 +48,7 @@
 											<div class="row">
 												<div class="text-center">
 													<button type="submit" class="btn btn--ys btn-primary btn-top btn--xl changePasswordButton" >
-														<span class="icon icon-check"></span>Actualizar</button>
+														<span class="icon icon-check"></span>Actualizar Contrase&ntilde;a</button>
 												</div>
 												<div class="divider divider--md visible-xs"></div>
 											</div>
