@@ -28,7 +28,6 @@ Cupones de descuento
         <div class="row">
             <div class="col-md-12">
                         <div class="panel-body">
-                            <br><br>
                                 <div class="row">
                                     <div class="col-md-12" id="modal1">
                                         <div class="panel panel-default">
@@ -139,10 +138,10 @@ Cupones de descuento
                                 <!-- button -->
                                 <div class="row">
                                     <div class="col-md-12 text-center">
-                                        <button class="btn btn-primary" type="submit"><i class="fa fa-plus"></i> Guardar Cambios</button>
+                                        <button class="btn btn-primary" type="submit"> Guardar Cambios</button>
                                         <a type="button" href="{{url('/admin/marketing/coupons')}}" class="btn btn-default">
                                             <i class="fa fa-times"></i> Cancelar </a>
-                                    </div>
+                                </div>
                                 </div>
                                 <!-- end button-->
                         </div>
