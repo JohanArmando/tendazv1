@@ -55,6 +55,18 @@ Editar {{ucfirst($product->name)}}
                                         <a class="list-group-item" href="#general" aria-controls="general" role="tab" data-toggle="tab">Informacion General</a>
                                         <a class="list-group-item" href="#seo" aria-controls="seo" role="tab" data-toggle="tab">Configuraciones avanzadas para SEO</a>
                                         <a class="list-group-item" href="#visibity" aria-controls="visibity" role="tab" data-toggle="tab">Configuraciones para la visibilidad</a>
+
+                                        
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading-white" >
+                                        <div class="panel-title">Otras Opciones</div>
+                                    </div>
+                                    <div class="list-group">
+                                        <a href="{{ url('/admin/products/create') }}" class="list-group-item">Agregar otro productos</a>
+                                        <a href="{{ url('/admin/products') }}" class="list-group-item"> Ir a Productos</a>
+
                                         
                                     </div>
                                 </div>
@@ -386,10 +398,6 @@ Editar {{ucfirst($product->name)}}
                         <h3><i class="fa fa-spinner fa-spin"></i> Cargando...</h3>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-12">
-                <a href="{{ url('/admin/products') }}" class="btn btn-primary pull-right">Ir a Productos</a>
-                <a href="{{ url('/admin/products/create') }}" class="btn btn-primary pull-right" style="margin-right: 10px;">Agregar otro productos</a>
             </div>
         </div>
     </div>
