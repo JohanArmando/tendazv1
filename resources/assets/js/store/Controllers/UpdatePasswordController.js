@@ -19,12 +19,12 @@ myApp.controller('UpdatePasswordController' , ["$scope" , "Account", "$timeout" 
                 Account.postChangePassword(usrObject, Account.getUserObject()._id)
                     .then(function (response) {
                         toastr["info"](response.data.status);
-                        $scope.changeElement('changePasswordButton' , false , "Actualizar Contraseña");
+                        $scope.changeElement('changePasswordButton' , false , "Actualizar Contrase&ntilde;a");
                         $scope.changePasswordForm = {};
                         $scope.errors
                     }).catch(function (response) {
                         $scope.errors = response.data;
-                        $scope.changeElement('changePasswordButton' , false , "Actualizar Contraseña");
+                        $scope.changeElement('changePasswordButton' , false , "Actualizar Contrase&ntilde;a");
                     });
             }else{
                 $scope.formSubmited = true;
