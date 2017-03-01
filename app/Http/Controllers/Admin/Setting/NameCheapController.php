@@ -1,17 +1,15 @@
 <?php
 
 namespace Tendaz\Http\Controllers\Admin\Setting;
-
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Cookie;
+use Tendaz\Api\NameCheapApi;
 use Tendaz\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Routing\Route;
 use Illuminate\Http\Request;
 use Tendaz\Models\Domain\Domain;
 use Tendaz\Models\Domain\Tld;
-use Tendaz\Models\Store\Shop;
 
 
 class NameCheapController extends Controller
@@ -21,12 +19,9 @@ class NameCheapController extends Controller
      *Get data
      */
     public function __construct(){
-        $this->user = Auth('admins')->user();
-        /*$this->beforeFilter('@findDomain', ['only' => ['postDelete', 'postVerify' , 'getVerify']]);
         $this->ip = env('IP');
-        $this->middleware('freeShop');
         $this->adapter = new NameCheapApi();
-        $this->adapter->setClientIp(env('IP_CLIENT'));*/
+        $this->adapter->setClientIp(env('IP_CLIENT'));
     }
 
     /**
@@ -52,15 +47,14 @@ class NameCheapController extends Controller
 
     public function store($subdomain, Request $request)
     {
-        Domain::create([
-            'domain' => 'http://'.$request->get('domain'),
-            'name' => $request->get('domain'),
-            'ssl' => 'http://'.$request->get('domain'),
-            'main' => 0,
-            'active' => 0,
-            'state' => 'OK',
+         $dom = ['edit',$request->get('domain')];
+         Domain::create([
+            'domain' => $dom,
+            'name' => $dom,
+            'ssl' => $dom,
             'shop_id' => $request->shop->id
-        ]);
+         ]);
+
         return redirect()->back()->with('message', array('type' => 'success', 'message' => 'El dominio ' . $request->get('domain') . '  fue agregado correctamente!'));
     }
 
@@ -114,15 +108,18 @@ class NameCheapController extends Controller
     /**
      * @return $this
      */
-    public function getVerify(){
-        if($this->domain) {
-            return view('admin.configuration.verify_domain')->with('domain' , $this->domain);
+    public function getVerify($subdomain , Request $request)
+    {
+        $domain = Domain::where('shop_id',$request->shop->id)->where('main',1)->first();
+        if($domain) {
+            return view('admin.setting.verify_domain',compact('domain'));
         }
     }
     /**
      * @return \Illuminate\Http\RedirectResponse
      */
     public function postVerify(){
+        dd('aca');
         if($this->domain){
             $url = $this->domain->name;
             if($url == NULL) return false;
