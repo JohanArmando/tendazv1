@@ -163,23 +163,23 @@ Crear categorias
                 v-show="!isRoot"
                 style="text-align: left; margin-bottom: 3px;" 
                 >
-                <li class="list-group-item">
-                  @{{ model.name }}
-                    
-                  <span v-if="open" class="badge" @click="toggle" title="Modificar categoria"><i class="fa fa-angle-down" aria-hidden="true"></i></span>
-                  <span v-else class="badge" @click="toggle" title="Modificar categoria"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
-                  <span class="badge" @click="changeType"><i class="fa fa-plus"></i></span>
+                <li class="list-group-item list-group-item-info">
+                  <span v-if="open" class="bold" @click="toggle" title="Modificar categoria"><i class="fa fa-angle-down" aria-hidden="true"></i> @{{ model.name }}</span>
+                  <span v-else class="bold" @click="toggle" title="Modificar categoria"><i class="fa fa-angle-right" aria-hidden="true"></i> @{{ model.name }}</span>
+                   
+                  <span class="badge" @click="changeType"><i class="fa fa-remove"></i></span>
                   <span class="badge"><i  class="fa fa-edit"></i></span>
+                  <span class="badge" @click="create = true"><i  class="fa fa-plus"></i></span>
                 </li>
             </ul>
 
-            <ul class="" v-show="open" v-if="isFolder">
+            <ul class="" v-show="open">
               <item
                 
                 v-for="model in model.children"
                 :model="model">
               </item>
-              <li 
+              <li v-if="create"
                   
                   style="text-align: left; margin-top: 3px; margin-bottom: 20px;">
                   <form action="" method="POST" class="form-inline" role="form">
@@ -192,6 +192,7 @@ Crear categorias
                     
                   
                     <a href="#" @click="addChild" class="btn btn-primary">Guardar</a>
+                    <a href="#" @click="create = false" class="btn btn-default">cancelar</a>
                   </form>
               </li>
 
@@ -211,8 +212,9 @@ Crear categorias
               },
               data: function () {
                 return {
-                  open: false,
-                  new_name: ''
+                  open: true,
+                  new_name: '',
+                  create: false
                 }
               },
               computed: {
@@ -242,9 +244,11 @@ Crear categorias
                 },
                 addChild: function () {
                   this.model.children.push({
-                    name: this.new_name
+                    name: this.new_name,
+                    children: []
                   });
                   this.new_name = '';
+                  this.create = false;
 
                 }
               }
