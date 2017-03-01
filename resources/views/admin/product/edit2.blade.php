@@ -986,7 +986,8 @@ Editar {{ucfirst($product->name)}}
                         this.freshOptions();*/
                         console.log(data);
                         $('#btn-udate-general').button('reset');
-                        this.messajeSuccess();
+                        toastr.success('La Informacion general del producto '+this.product.name+' fueron actulizadas correctamente');
+                        
 
                         console.log(data);
                     }, (response) => {
@@ -1010,7 +1011,7 @@ Editar {{ucfirst($product->name)}}
                         this.freshOptions();*/
                         console.log(data);
                         $('#btn-udate-seo').button('reset');
-                        this.messajeSuccess();
+                        toastr.success('Las opciones avanzadas para SEO fueron actulizadas correctamente');
                         console.log(data);
                     }, (response) => {
                     // error callback
@@ -1058,7 +1059,8 @@ Editar {{ucfirst($product->name)}}
                         this.freshOptions();*/
                          console.log(data);
                         $('#btn-udate-visibility').button('reset');
-                        this.messajeSuccess();
+                        toastr.success('Las opciones para la visilidad del producto en la tienda fueron actualizadas correctamente');
+                        
 
                         console.log(data);
                     }, (response) => {
