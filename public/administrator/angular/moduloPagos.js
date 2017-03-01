@@ -204,7 +204,7 @@
                     if (value != null) {
                         var form_group = $('<div></div>').addClass('form-group');
                         var label = $('<label></label>').text(value.label);
-                        var  a = $('<a href=""><i class="fa fa-exclamation-circle"></i></a>');
+                        var  a = $('<a href=""><i class="hidden fa fa-exclamation-circle"></i></a>');
                         if(value.label == 'country'){
                             var input = $('<select name="options" id="country"></select>').attr("ng-model", name).val(value.value).addClass('form-control');
                             var split = [ {'BRL' : 'Brasil'} , {'ARS' : 'Argentina'}, { 'CLP' : 'Chile'},{ 'COP' : 'Colombia'},{'MXN' : 'Mexico'}, {'VEF' : 'Venezuela'}];

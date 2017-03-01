@@ -7,16 +7,15 @@ Editar {{ucfirst($product->name)}}
     <link rel="stylesheet" href="{{ asset('components/admin/css/trumbowyg.min.css') }}">
     <link rel="stylesheet" href="{{ asset('components/admin/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('components/css/dropzone.css') }}">
+
     <style>
-        .dropzone{
-            background-color: transparent;
-            border: 2px dashed #f26522;
-            border-radius: 8px;
+        .img-product{
+            margin-right: 10px; margin-bottom: 10px; height: 75px; width: 75px;
         }
-        .dz-error-message{display: none}
-        .dz-success-mark{display: none}
-        .dz-remove{ display: none}
-        .dz-remove a:hover{ color: transparent}
+         .img-thumbnail:hover {
+            cursor: pointer;
+            /*background-color: rgba(81, 81, 81, 0.94) !important;*/
+        }
     </style>
     <script>
         var product = "{{$product->uuid}}";
@@ -233,7 +232,7 @@ Editar {{ucfirst($product->name)}}
                                                                 <br>
                                                             </div>
 
-                                                            <img v-for="image in variant.images" :src="image.url" v-on:click="removeImageVariant(image,variant)" class="img-responsive img-thumbnail" style="margin-right: 10px; margin-bottom: 10px; height: 75px; width: 75px;"/>
+                                                            <img v-for="image in variant.images" :src="image.url" v-on:click="removeImageVariant(image,variant)" class="img-responsive img-thumbnail img-product"/>
                                                             <input type="file"  @change="addImageVariant(variant,$event)"  class="hide" name="file2" v-bind:id="'file-' + variant.id">
                                                             <label v-bind:for="'file-' + variant.id" style="cursor: pointer;">
                                                                 <div class="img-thumbnail" style="padding: 18px 26px 15px 26px;">
@@ -986,7 +985,8 @@ Editar {{ucfirst($product->name)}}
                         this.freshOptions();*/
                         console.log(data);
                         $('#btn-udate-general').button('reset');
-                        this.messajeSuccess();
+                        toastr.success('La Informacion general del producto '+this.product.name+' fueron actulizadas correctamente');
+                        
 
                         console.log(data);
                     }, (response) => {
@@ -1010,7 +1010,7 @@ Editar {{ucfirst($product->name)}}
                         this.freshOptions();*/
                         console.log(data);
                         $('#btn-udate-seo').button('reset');
-                        this.messajeSuccess();
+                        toastr.success('Las opciones avanzadas para SEO fueron actulizadas correctamente');
                         console.log(data);
                     }, (response) => {
                     // error callback
@@ -1058,7 +1058,8 @@ Editar {{ucfirst($product->name)}}
                         this.freshOptions();*/
                          console.log(data);
                         $('#btn-udate-visibility').button('reset');
-                        this.messajeSuccess();
+                        toastr.success('Las opciones para la visilidad del producto en la tienda fueron actualizadas correctamente');
+                        
 
                         console.log(data);
                     }, (response) => {
