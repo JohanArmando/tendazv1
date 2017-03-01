@@ -161,13 +161,17 @@ Crear categorias
           <li>
             <ul class="list-group"
                 v-show="!isRoot"
-                :class="{bold: isFolder}"
-                style="text-align: left;" 
-                @click="toggle"
-                @dblclick="changeType">
-              <li class="list-group-item"><span v-if="isFolder">[@{{open ? '-' : '+'}}]</span> @{{model.name}}</li>
+                style="text-align: left; margin-bottom: 3px;" 
+                >
+                <li class="list-group-item">
+                  @{{ model.name }}
+                    
+                  <span v-if="open" class="badge" @click="toggle" title="Modificar categoria"><i class="fa fa-angle-down" aria-hidden="true"></i></span>
+                  <span v-else class="badge" @click="toggle" title="Modificar categoria"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                  <span class="badge" @click="changeType"><i class="fa fa-plus"></i></span>
+                  <span class="badge"><i  class="fa fa-edit"></i></span>
+                </li>
             </ul>
-            <br>
 
             <ul class="" v-show="open" v-if="isFolder">
               <item
