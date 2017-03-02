@@ -44,7 +44,8 @@ class SubscriptionController extends Controller
         Twocheckout::privateKey($privateKey);
         Twocheckout::sellerId($resellerId);
         Twocheckout::verifySSL(false);
-        Twocheckout::sandbox(true);
+
+        Twocheckout::sandbox(env('SANBOX_TWO',false));
         Twocheckout::username('davidfigueroar9');
         Twocheckout::password('D19979872f');
         Plan::whereUuid($request->get('uuid'));
@@ -72,13 +73,13 @@ class SubscriptionController extends Controller
                 ] 
             ],
             "billingAddr" => [ 
-                "name" => "testing tester",
-                "addrLine1" => "123 test blvd",
-                "city" => "columbus",
-                "state" => "Ohio",
-                "zipCode" => "43123",
-                "country" => "USA",
-                "email" => "example@2co.com",
+                "name" => $request->name,
+                "addrLine1" => $request->addrLine1,
+                "city" => $request->city,
+                "state" => $request->state ,
+                "zipCode" => $request->zipCode,
+                "country" => $request->country,
+                "email" => $request->email,
                 "phoneNumber" => "123456789"
             ],
             "shippingAddr" => array(
@@ -109,6 +110,8 @@ class SubscriptionController extends Controller
 
         if (!$plan)
             abort(404);
+        
+        $plan->price = $plan->getTotalPriceWithDiscount();
 
         //return ['inicio'=>Carbon::today()->addMonths(1), 'final'=> Carbon::today()->addMonths($plan->getIntervalInMonthly())];
         if ($request->shop->subscription()->onTrial()) {
