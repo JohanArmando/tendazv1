@@ -1,8 +1,8 @@
-@extends('admin.template')
+@extends('layouts.administrator')
 
 @section('css')
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/bootstrap-select/dist/css/bootstrap-select.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/css/payment-plan.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('administrator/bootstrap-select/dist/css/bootstrap-select.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('administrator/css/payment-plan.css')}}">
 @stop
     @section('content')
         <div class="page-header page-header-block">
@@ -14,7 +14,7 @@
                 <div class="toolbar">
                     <ol class="breadcrumb breadcrumb-transparent nm">
                         <li><a href="{{url('admin/home')}}" style="color: orange;">Inicio</a></li>
-                        <li class="active"><a href="{{url('admin/configuration/domain')}}" style="color: orange;">Dominios</a></li>
+                        <li class="active"><a href="{{url('admin/setting/domain')}}" style="color: orange;">Dominios</a></li>
                         <li class="">{{ $domain->name }}</li>
                     </ol>
                 </div>
@@ -41,7 +41,7 @@
                         </p>
                         <input type="hidden" id="uuid" value="{{ $domain->uuid }}">
                         <input type="hidden"  name="_token" value="{{ csrf_token() }}" id="token">
-                        <input type="hidden"  name="status_domain" value="{{ $domain->status->code }}">
+                        <input type="hidden"  name="status_domain" value="{{ $domain->state }}">
                         <p id="status_code"></p>
                         <br>
                     </div>
@@ -52,10 +52,12 @@
 @section('scripts')
     <script>
         $('#status_code').html('<h5>Verificando ...<h5>');
-        var status = $('input[name=status_domain]').val();
+        //var status = $('input[name=status_domain]').val();
+        var status = 401;
+        alert(status);
         var url = BASEURL + '/';
         if(status == '401'){
-            url = url + 'admin/configuration/domain/verify/';
+            url = url + 'admin/setting/domain/verify/';
         }else if(status == 402){
             //aqui la url para verificcar ssl
             //falta url para verificar si el dominio expiro o no y cambiar el estado a expeirado
