@@ -111,7 +111,7 @@ $domain = new \Tendaz\Models\Domain\Domain();
         Route::get('/domain', 'NameCheapController@getIndex');
         Route::get('/domain/create', 'NameCheapController@store');
         Route::get('/domain/verify', 'NameCheapController@getVerify');
-        Route::post('/domain/verify', 'NameCheapController@postVerify');
+        Route::get('/domain/verify/{id}', 'NameCheapController@postVerify');
         Route::delete('/domain/destroy/{account}', 'NameCheapController@postDelete');
         Route::get('/domain/settings/{account}', 'NameCheapController@getVerify');
         Route::get('/domain/verify/{account}', 'NameCheapController@postVerify');

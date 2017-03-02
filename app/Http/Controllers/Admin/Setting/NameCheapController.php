@@ -120,6 +120,7 @@ class NameCheapController extends Controller
      */
     public function postVerify(){
         dd('aca');
+
         if($this->domain){
             $url = $this->domain->name;
             if($url == NULL) return false;
