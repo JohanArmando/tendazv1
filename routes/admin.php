@@ -148,6 +148,11 @@ $domain = new \Tendaz\Models\Domain\Domain();
             'notMiddleware' => 'subscription'
         ]);
 
+        Route::get('checkout/plans',[
+            'uses' => 'SubscriptionController@plans',
+            'notMiddleware' => 'subscription'
+        ]);
+
 
         Route::get('checkout/start/',[
             'uses' => 'SubscriptionController@start',
