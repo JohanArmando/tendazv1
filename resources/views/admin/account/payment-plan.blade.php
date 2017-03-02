@@ -92,6 +92,9 @@
 
     <script>
         $(document).on('ready' , function () {
+            var price = $(".choose-period").find(".selection").data('price');
+            $('#enviar').html('Pagar ' + price + ' USD');
+
             $(".choose-period").find(".selection").click(function () {
                 var $this = $(this);
 
@@ -108,7 +111,7 @@
 
                 $panel.addClass('method-selected');
 
-                $('#buttonCardPayment').html('Pagar ' + value + ' USD');
+                $('#enviar').html('Pagar ' + value + ' USD');
 
                 $apps_monthly = $('#apps').find('.monthly');
                 if ($panel.find(':selected').hasClass('selected')) {
@@ -119,11 +122,19 @@
 
                 return false;
             });
+            disabledButton()
 
-
+            /*validateform('#name');
+            validateform('#email');
+            validateform('#city');
+            validateform('#country');
+            validateform('#state');
+            validateform('#zipCode');
+            validateform('#addrLine1');
+            */
             $('#card').payform('formatCardNumber');
             $('#expiry').payform('formatCardExpiry');
-
+            
             $('#card').keyup(function () {
                 var val =  $(this).val();
 
@@ -172,17 +183,75 @@
                 }
                 disabledButton();
             });
+            
+            $('#name').keyup(function () {
+                var val =  $(this).val();
+                validateform(this);
+                
+            });
+            $('#email').keyup(function () {
+                var val =  $(this).val();
+                validateform(this);
+                
+            });
 
-            function disabledButton() {
-                if ($.payform.validateCardCVC($('#cvc').val()) && $.payform.validateCardExpiry(  $('#expiry').val().split('/')[0] , $('#expiry').val().split('/')[1]) && $.payform.validateCardNumber(  $('#card').val() )){
-                    $('#buttonCardPayment').attr('disabled' , false);
-                }else{
-                    $('#buttonCardPayment').attr('disabled' , true);
-                }
-            }
+            $('#city').keyup(function () {
+                var val =  $(this).val();
+                validateform(this);
+                
+            });
+
+            $('#country').keyup(function () {
+                var val =  $(this).val();
+                validateform(this);
+                
+            });
+
+            $('#state').keyup(function () {
+                validateform(this);
+            });
+
+            $('#zipCode').keyup(function () {
+                validateform(this);
+            });
+
+            $('#addrLine1').keyup(function () {
+                validateform(this);
+            });
+
+
         });
 
-        
+        function validateform(val) {
+            var value =  $(val).val();
+
+            if (value != ''){
+                $(val).parent().addClass('has-success').removeClass('has-error');
+                $(val).parent().find('span.glyphicon-remove').addClass('hidden');
+                $(val).parent().find('span.glyphicon-ok').removeClass('hidden');
+            }else{
+                $(val).parent().addClass('has-error');
+                $(val).parent().find('span.glyphicon-remove').removeClass('hidden');
+                $(val).parent().find('span.glyphicon-ok').addClass('hidden');
+            }
+            disabledButton();
+        }
+
+        function disabledButton() {
+            if ($.payform.validateCardCVC($('#cvc').val()) 
+                && $.payform.validateCardExpiry( $('#expiry').val().split('/')[0] , $('#expiry').val().split('/')[1]) 
+                && $.payform.validateCardNumber(  $('#card').val() ) 
+                && ($('#state').val() != '')  
+                && ($('#name').val() != '')  
+                && ($('#country').val() != '')
+                && ($('#zipCode').val() != '')
+                && ($('#email').val() != ''))
+            {
+                $('#enviar').attr('disabled' , false);
+            }else{
+                $('#enviar').attr('disabled' , true);
+            }
+        }
 
         var successCallback = function(data) {
             var myForm = document.getElementById('formCardPayment');
@@ -217,81 +286,15 @@
         };
 
         $(function() {
-            TCO.loadPubKey('sandbox');
+
+            TCO.loadPubKey( @if (env('SANBOX_TWO',false)) 'sandbox' @else 'production' @endif );
             $("#enviar").click(function(e) {
+                $("#enviar").button('loading');
                 tokenRequest();
                 return false;
             });
         });
-        /*
-        curl -X POST https://sandbox.2checkout.com/checkout/api/1/901248156/rs/authService \
-            -d '{   
-                    "sellerId": "901341507",
-                    "privateKey": "7BD8EEAA-6BEA-42C5-B95F-2794862A250A",
-                    "merchantOrderId": "123",
-                    "token": "NmY2MDkxZjctM2FkMC00MDVlLTg4MzUtOWY3YTcxNmYyNTZi",
-                    "currency": "USD",
-                    "lineItems": 
-                    [
-                        {   
-                            "name": "Demo Item",
-                            "price": "4.99",
-                            "type": "product",
-                            "quantity": "1",
-                            "recurrence": "4 Year",
-                            "startupFee": "9.99"
-                        }
-                    ], 
-                    "billingAddr": 
-                    {   "name": "testing tester",
-                        "addrLine1": "123 test blvd",
-                        "city": "columbus",
-                        "state": "Ohio",
-                        "zipCode": "43123",
-                        "country": "USA",
-                        "email": "example@2co.com",
-                        "phoneNumber": "123456789"
-                    } 
-                }' \
-            -H 'Accept: application/json' -H 'Content-Type: application/json'
-    
-
-            """
-            {\n
-                "sellerId": "901341507",\n
-                "merchantOrderId": "123",\n
-                "token": "2e358e7d-8e18-33ee-8e7a-3cb9e5a36e69",\n
-                "currency": "USD",\n
-                "lineItems": {\n
-                    "name": "Demo Item",\n
-                    "price": "4.99",\n
-                    "type": "product",\n
-                    "quantity": "1",\n
-                    "recurrence": "4 Year",\n
-                    "startupFee": "9.99"\n
-                },\n
-                "billingAddr": {\n
-                    "name": "testing tester",\n
-                    "addrLine1": "123 test blvd",\n
-                    "city": "columbus",\n
-                    "state": "Ohio",\n
-                    "zipCode": "43123",\n
-                    "country": "USA",\n
-                    "email": "example@2co.com",\n
-                    "phoneNumber": "123456789"\n
-                },\n
-                "shippingAddr": {\n
-                    "name": "Joe Flagster",\n
-                    "addrLine1": "123 Main Street Townsville,   USA",\n
-                    "city": "Townsville",\n
-                    "state": "Ohio",\n
-                    "zipCode": "43206",\n
-                    "country": "USA"\n
-                },\n
-                "privateKey": "7BD8EEAA-6BEA-42C5-B95F-2794862A250A"\n
-            }
-            """
-            */
+     
     </script>
 
 @stop
