@@ -24,19 +24,9 @@ class NameCheapController extends Controller
         $this->adapter->setClientIp(env('IP_CLIENT'));
     }
 
-    /**
-     * @param Route $route
-     */
-    public function findDomain(Route $route){
-        $uuid = $route->getParameter('account');
-        $this->domain = Domain::where('uuid','=',$uuid)->first();
-    }
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
 
-
-    public function getIndex($subdomain , Request $request){
+    public function getIndex($subdomain , Request $request)
+    {
         $domains = Domain::where('shop_id',$request->shop->id)->get();
         $tlds = Cache::get('tlds');
         if(!$tlds)
@@ -52,10 +42,73 @@ class NameCheapController extends Controller
             'domain' => $dom,
             'name' => $dom,
             'ssl' => $dom,
+            'state' => 401,
             'shop_id' => $request->shop->id
          ]);
 
         return redirect()->back()->with('message', array('type' => 'success', 'message' => 'El dominio ' . $request->get('domain') . '  fue agregado correctamente!'));
+    }
+
+    public function main($subdomain , Request $request , $uuid)
+    {
+        $domains = Domain::where('main',1)->where('shop_id',$request->shop->id)->first();
+        $domains->fill(['main'=> 0]);
+        $domains->save();
+
+        $domain = Domain::where('uuid',$uuid)->where('shop_id',$request->shop->id)->first();
+        $domain->fill(['main'=> 1]);
+        $domain->save();
+
+        return redirect()->back()->with('message', array('type' => 'success', 'message' => 'El dominio ' . $domain->name . '  es el principal!'));
+    }
+
+    public function getVerify($subdomain , Request $request , $uuid)
+    {
+        $domain = Domain::where('uuid',$uuid)->first();
+        if($domain) {
+            return view('admin.setting.verify_domain',compact('domain'));
+        }
+    }
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postVerify($subdomain,  Request $request , $uuid){
+        $domain = Domain::where('uuid',$uuid)->first();
+        if($domain){
+            $url = $domain->name;
+            if($url == NULL) return false;
+            $exist = $this->curlDNS($url);
+            $exist ?  $ip = gethostbyname($url) : $ip = false;
+            $ip && $ip == $this->ip ? $goodDns =  true : $goodDns =  false ;
+            if($exist){
+                $domain->state = $exist;
+                //$domain->status_id = 3;
+            }else{
+                $domain->state = 401;
+                //$domain->status_id = 2;
+            }
+            $domain->save();
+        }
+        return response()->json($domain->state);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * @param Route $route
+     */
+    public function findDomain(Route $route){
+        $uuid = $route->getParameter('account');
+        $this->domain = Domain::where('uuid','=',$uuid)->first();
     }
 
     /**
@@ -108,34 +161,7 @@ class NameCheapController extends Controller
     /**
      * @return $this
      */
-    public function getVerify($subdomain , Request $request)
-    {
-        $domain = Domain::where('shop_id',$request->shop->id)->where('main',1)->first();
-        if($domain) {
-            return view('admin.setting.verify_domain',compact('domain'));
-        }
-    }
-    /**
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postVerify(){
-        dd('aca');
 
-        if($this->domain){
-            $url = $this->domain->name;
-            if($url == NULL) return false;
-            $exist = $this->curlDNS($url);
-            $exist ?  $ip = gethostbyname($url) : $ip = false;
-            $ip && $ip == $this->ip ? $goodDns =  true : $goodDns =  false ;
-            if($goodDns){
-                $this->domain->status_id = 3;
-            }else{
-                $this->domain->status_id = 2;
-            }
-            $this->domain->save();
-        }
-            return response()->json($this->domain->status->code);
-    }
 
     /**
      * Create domain exist not buy

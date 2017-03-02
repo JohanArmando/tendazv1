@@ -46,8 +46,8 @@ Configura tu dominio
 				<div class="border-content">
 				<ul class="nav nav-tabs nav-justified">
 					<li class="hidden custom_tab"><a class="link_tab tab1" href="#tabone" data-toggle="tab">Comprar Dominio</a></li>
-					<li class="custom_tab active"><a class="link_tab" href="#tabtwo" data-toggle="tab">Agregar Dominio</a></li>
-					<li class="custom_tab"><a class="link_tab tab3" href="#tabthree" data-toggle="tab">Mis Dominios</a></li>
+					<li class="custom_tab"><a class="link_tab" href="#tabtwo" data-toggle="tab">Agregar Dominio</a></li>
+					<li class="custom_tab active"><a class="link_tab tab3" href="#tabthree" data-toggle="tab">Mis Dominios</a></li>
 				</ul>
 				<div class="tab-content panel" style="margin-bottom: -8px !important;">
 					<div class="tab-pane" id="tabone">
@@ -58,7 +58,7 @@ Configura tu dominio
 							</div>
 						</div>
 					</div>
-						<div class="tab-pane active" id="tabtwo">
+						<div class="tab-pane" id="tabtwo">
 						<div class="row">
 							<div class="clearfix"></div>
 							<div class="col-sm-8 col-sm-offset-2">
@@ -66,7 +66,7 @@ Configura tu dominio
 							</div>
 							</div>
 							</div>
-							<div class="tab-pane" id="tabthree">
+							<div class="tab-pane active" id="tabthree">
 							<div class="row">
 							<div class="clearfix"></div>
 							<div class="col-md-10 col-md-offset-2 text-center">
@@ -82,35 +82,43 @@ Configura tu dominio
 									<table class="table table-bordered table-striped table-hover">
 										<thead>
 										<tr class="text-center">
-											<td style="background: #FF3D00; color: white;">Nombre Dominio</td>
-											<td style="background: #FF8C00; color: white;">Status</td>
+											<td style="background: #929292; color: white;">Nombre Dominio</td>
+											<td style="background: #929292; color: white;">Status</td>
+											<td style="background: #929292; color: white;">Principal</td>
 										</tr>
 										</thead>
 										<tbody>
 										@foreach($domains as $domain)
 											<tr class="text-center">
-												<td><a href="#">{{$domain->name}}</a></td>
-												@if($domain->state == 'OK')
+												<td><a href="{{url('admin/setting/domain/verify/'.$domain->uuid)}}">{{$domain->name}}</a></td>
+												@if($domain->state == 200)
 													<td>
 														<a href="#" data-tooltip="Dominio Activo">
 															<img src="{{asset('administrator/image/tick.png')}}">
 														</a>
 													</td>
 													@else
-														@if($domain->state == 'NOT')
+														@if($domain->state == 401)
 															<td>
-																<a href="#" data-tooltip="Dominio Activo">
+																<a href="#" data-tooltip="Dominio Inactivo , 'Completa la Instalaci&oacute;n'">
 																<img src="{{asset('administrator/image/forbidden.png')}}">
 																</a>
 															</td>
 															@else
 																<td>
-																	<a href="#" data-tooltip="Dominio Activo">
+																	<a href="#" data-tooltip="Ssl">
 																	<img src="{{asset('administrator/image/download.png')}}">
 																	</a>
 																</td>
 														@endif
 												@endif
+												<td>
+													@if($domain->main == 1 )
+														<a class="btn btn-primary" href="{{url('/admin/setting/domain/main/'.$domain->uuid)}}">Si</a>
+													@else
+														<a class="btn btn-default" href="{{url('/admin/setting/domain/main/'.$domain->uuid)}}">No</a>
+													@endif
+												</td>
 											</tr>
 										@endforeach
 										</tbody>

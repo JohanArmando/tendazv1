@@ -110,11 +110,10 @@ $domain = new \Tendaz\Models\Domain\Domain();
         //setting domain
         Route::get('/domain', 'NameCheapController@getIndex');
         Route::get('/domain/create', 'NameCheapController@store');
-        Route::get('/domain/verify', 'NameCheapController@getVerify');
-        Route::get('/domain/verify/{id}', 'NameCheapController@postVerify');
-        Route::delete('/domain/destroy/{account}', 'NameCheapController@postDelete');
-        Route::get('/domain/settings/{account}', 'NameCheapController@getVerify');
-        Route::get('/domain/verify/{account}', 'NameCheapController@postVerify');
+        Route::get('/domain/main/{uuid}', 'NameCheapController@main');
+        Route::get('/domain/verify/{uuid}', 'NameCheapController@getVerify');
+        Route::post('/domain/verify/{uuid}', 'NameCheapController@postVerify');
+        Route::delete('/domain/destroy/{uuid}', 'NameCheapController@postDelete');
         
         Route::resource('/locals', 'LocalController',
             ['only' => ['index', 'store', 'update', 'destroy']]);
