@@ -14,6 +14,10 @@ class SubscriptionController extends Controller
     public function finish(Request $request)
     {
         $plan = $request->shop->subscription()->plan;
+        if ($plan->plan == null) {
+            return redirect()->to('/admin/account/plans')
+                ->with('message' , ['type' => 'info' , 'message' => 'Debes seleccionar un plan antes de poder pagarlo']);
+        }
         return view('admin.account.payment-plan' , ['plan' => $plan]);
     }
 
@@ -31,45 +35,72 @@ class SubscriptionController extends Controller
     }
 
     public function doSubscription($subdomain , Request $request)
-    {
+    {   
+        //return $request->get('token');
+        //return $request->all();
         $position = Location::get($request->ip());
         $privateKey = env('PRIVATE_KEY_TWO');
         $resellerId = env('SELLER_ID_TWO');
         Twocheckout::privateKey($privateKey);
         Twocheckout::sellerId($resellerId);
+        Twocheckout::verifySSL(false);
+        Twocheckout::sandbox(true);
+        Twocheckout::username('davidfigueroar9');
+        Twocheckout::password('D19979872f');
         Plan::whereUuid($request->get('uuid'));
         $plan = Plan::whereUuid($request->get('uuid'));
+
+        if(Auth('admins')->user()->phone == null){$phone = '+68 523 523 63';}else{$phone= Auth('admins')->user()->phone;}
+
+
+        $data2 = [  
+            "sellerId" => env('SELLER_ID_TWO'),
+            "merchantOrderId" => "123",
+            "token" => $request->get('token'),
+            "currency" => "USD",
+            "lineItems" => [
+                [                       
+                    "type" => 'product',
+                    "price" => $plan->getTotalPriceWithDiscount(),
+                    "productId" => $plan->uuid,
+                    "name" => $plan->name. " plan ". $plan->plan->name,
+                    "quantity" => "1",
+                    "tangible" => "N",
+                    "recurrence" => $plan->getIntervalInMonthly(). " Month",
+                    "duration" => 'Forever',
+                    "description" => $plan->description   
+                ] 
+            ],
+            "billingAddr" => [ 
+                "name" => "testing tester",
+                "addrLine1" => "123 test blvd",
+                "city" => "columbus",
+                "state" => "Ohio",
+                "zipCode" => "43123",
+                "country" => "USA",
+                "email" => "example@2co.com",
+                "phoneNumber" => "123456789"
+            ],
+            "shippingAddr" => array(
+                "name" => 'Joe Flagster',
+                "addrLine1" => '123 Main Street Townsville,   USA',
+                "city" => 'Townsville',
+                "state" => 'Ohio',
+                "zipCode" => '43206',
+                "country" => 'USA'
+            )
+        ];
+        //return $data2;
+
+        
+        //return $data;
         if(Auth('admins')->user()->phone == null){$phone = 'Sin Numero';}else{$phone= Auth('admins')->user()->phone;}
         try {
-            $charge = Twocheckout\Twocheckout_Charge::auth(array(
-                "sellerId" => env('SELLER_ID_TWO'),
-                "merchantOrderId" => "123",
-                "token" => $request->get('_token'),
-                "currency" => 'USD',
-                "total" => $plan->price,
-                "billingAddr" => array(
-                    "name" => '',
-                    "addrLine1" => '',
-                    "city" => $request->shop->country->name,
-                    "state" => $request->shop->country->abbr,
-                    "zipCode" => '111011',
-                    "country" => $request->shop->country->name,
-                    "email" => Auth('admins')->user()->email,
-                    "phoneNumber" => $phone
-                ),
-                "shippingAddr" => array(
-                    "name" => '',
-                    "addrLine1" => '',
-                    "city" => $request->shop->country->name,
-                    "state" => $request->shop->country->abbr,
-                    "zipCode" => '111011',
-                    "country" => $request->shop->country->name,
-                    "email" => Auth('admins')->user()->email,
-                    "phoneNumber" => $phone
-                )
-            ));
-            $this->assertEquals('APPROVED', $charge['response']['responseCode']);
+            $charge = Twocheckout\Twocheckout_Charge::auth($data2);
+            //return $charge;
+           
         } catch (Twocheckout_Error $e) {
+
             $this->assertEquals('Unauthorized', $e->getMessage());
         }
 
@@ -79,22 +110,35 @@ class SubscriptionController extends Controller
         if (!$plan)
             abort(404);
 
-
+        //return ['inicio'=>Carbon::today()->addMonths(1), 'final'=> Carbon::today()->addMonths($plan->getIntervalInMonthly())];
         if ($request->shop->subscription()->onTrial()) {
             $request->shop
                 ->updateSubscription(Carbon::today(), Carbon::today()->addMonths($plan->getIntervalInMonthly()))
-                ->createPayment($request->token , $position)
                 ->skipTrial();
         }else {
             $request->shop
-                ->newSubscription( $plan, Carbon::today(), Carbon::today()->addMonths( $plan->getIntervalInMonthly() ) )
-                ->createPayment($request->token , $position)
+                ->newSubscription( $plan, Carbon::today(), Carbon::today()->addMonths( $plan->getIntervalInMonthly()))
                 ->skipTrial();
         }
+
 
         cache_subdomain($subdomain);
 
         return redirect()->to('/admin')
-            ->with('message' , ['type' => 'info' , 'message' => 'Tu subscripcion ha cambiado']);
+            ->with('message' , ['type' => 'info' , 'message' => 'Tu subscripcion ha cambiado a el plan '.$plan->name]);
+    }
+
+    public function plans(Request $request)
+    {
+        if ($request->has('plan')){
+            $plan = Plan::whereUuid($request->get('plan'));
+        }else{
+            $plan = Plan::find(4);
+        }
+        if (!$plan)
+            abort(404);
+        $plan = Plan::with('plan.periods')->find($plan->id);
+        return $plan;
+
     }
 }

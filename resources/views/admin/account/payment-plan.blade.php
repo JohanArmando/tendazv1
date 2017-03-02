@@ -87,6 +87,8 @@
 
     <script src="{{asset('administrator/js/payform.js')}}"></script>
     <script type="text/javascript" src="https://www.2checkout.com/checkout/api/2co.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.2.0/vue-resource.js"></script>
 
     <script>
         $(document).on('ready' , function () {
@@ -180,9 +182,13 @@
             }
         });
 
+        
+
         var successCallback = function(data) {
             var myForm = document.getElementById('formCardPayment');
+            //alert(data.response.token.token);
             myForm.token.value = data.response.token.token;
+            //console.log(myForm.token.value);
             myForm.submit();
         };
 
@@ -201,6 +207,10 @@
                 cvv: $("#cvc").val(),
                 expMonth: $("#expiry").val().split('/')[0].trim(),
                 expYear: $("#expiry").val().split('/')[1].trim()
+                /*ccNo: '4000000000000002',
+                cvv: '123',
+                expMonth: '02',
+                expYear:'20'*/
             };
             console.log(args);
             TCO.requestToken(successCallback, errorCallback, args);
@@ -208,11 +218,80 @@
 
         $(function() {
             TCO.loadPubKey('sandbox');
-            $("#formCardPayment").submit(function(e) {
+            $("#enviar").click(function(e) {
                 tokenRequest();
                 return false;
             });
         });
+        /*
+        curl -X POST https://sandbox.2checkout.com/checkout/api/1/901248156/rs/authService \
+            -d '{   
+                    "sellerId": "901341507",
+                    "privateKey": "7BD8EEAA-6BEA-42C5-B95F-2794862A250A",
+                    "merchantOrderId": "123",
+                    "token": "NmY2MDkxZjctM2FkMC00MDVlLTg4MzUtOWY3YTcxNmYyNTZi",
+                    "currency": "USD",
+                    "lineItems": 
+                    [
+                        {   
+                            "name": "Demo Item",
+                            "price": "4.99",
+                            "type": "product",
+                            "quantity": "1",
+                            "recurrence": "4 Year",
+                            "startupFee": "9.99"
+                        }
+                    ], 
+                    "billingAddr": 
+                    {   "name": "testing tester",
+                        "addrLine1": "123 test blvd",
+                        "city": "columbus",
+                        "state": "Ohio",
+                        "zipCode": "43123",
+                        "country": "USA",
+                        "email": "example@2co.com",
+                        "phoneNumber": "123456789"
+                    } 
+                }' \
+            -H 'Accept: application/json' -H 'Content-Type: application/json'
+    
 
+            """
+            {\n
+                "sellerId": "901341507",\n
+                "merchantOrderId": "123",\n
+                "token": "2e358e7d-8e18-33ee-8e7a-3cb9e5a36e69",\n
+                "currency": "USD",\n
+                "lineItems": {\n
+                    "name": "Demo Item",\n
+                    "price": "4.99",\n
+                    "type": "product",\n
+                    "quantity": "1",\n
+                    "recurrence": "4 Year",\n
+                    "startupFee": "9.99"\n
+                },\n
+                "billingAddr": {\n
+                    "name": "testing tester",\n
+                    "addrLine1": "123 test blvd",\n
+                    "city": "columbus",\n
+                    "state": "Ohio",\n
+                    "zipCode": "43123",\n
+                    "country": "USA",\n
+                    "email": "example@2co.com",\n
+                    "phoneNumber": "123456789"\n
+                },\n
+                "shippingAddr": {\n
+                    "name": "Joe Flagster",\n
+                    "addrLine1": "123 Main Street Townsville,   USA",\n
+                    "city": "Townsville",\n
+                    "state": "Ohio",\n
+                    "zipCode": "43206",\n
+                    "country": "USA"\n
+                },\n
+                "privateKey": "7BD8EEAA-6BEA-42C5-B95F-2794862A250A"\n
+            }
+            """
+            */
     </script>
+
 @stop
