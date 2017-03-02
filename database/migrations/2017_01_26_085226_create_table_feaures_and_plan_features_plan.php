@@ -41,6 +41,6 @@ class CreateTableFeauresAndPlanFeaturesPlan extends Migration
     public function down()
     {
         Schema::dropIfExists('features_plan');
-        Schema::dropIfExists('features      ');
+        Schema::dropIfExists('features');
     }
 }
