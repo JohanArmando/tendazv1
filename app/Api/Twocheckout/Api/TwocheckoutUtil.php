@@ -30,12 +30,9 @@ class Twocheckout_Util extends Twocheckout
     {
         $object = json_decode($object, true);
         $array=array();
-        if($object != null)
+        foreach($object as $member=>$data)
         {
-            foreach($object as $member=>$data)
-            {
-                $array[$member]=$data;
-            }
+            $array[$member]=$data;
         }
         return $array;
     }

@@ -80,16 +80,8 @@ class SubscriptionController extends Controller
                 "zipCode" => $request->zipCode,
                 "country" => $request->country,
                 "email" => $request->email,
-                "phoneNumber" => "123456789"
-            ],
-            "shippingAddr" => array(
-                "name" => 'Joe Flagster',
-                "addrLine1" => '123 Main Street Townsville,   USA',
-                "city" => 'Townsville',
-                "state" => 'Ohio',
-                "zipCode" => '43206',
-                "country" => 'USA'
-            )
+                "phoneNumber" => $phone
+            ]
         ];
         //return $data2;
 
