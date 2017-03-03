@@ -67,7 +67,7 @@ class SubscriptionController extends Controller
                     "name" => $plan->name. " plan ". $plan->plan->name,
                     "quantity" => "1",
                     "tangible" => "N",
-                    //"recurrence" => $plan->getIntervalInMonthly(). " Month",
+                    "recurrence" => $plan->getIntervalInMonthly(). " Month",
                     "duration" => 'Forever',
                     "description" => $plan->description   
                 ] 
