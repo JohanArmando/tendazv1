@@ -114,9 +114,9 @@ class SubscriptionController extends Controller
         $plan->price = $plan->getTotalPriceWithDiscount();
 
         //return ['inicio'=>Carbon::today()->addMonths(1), 'final'=> Carbon::today()->addMonths($plan->getIntervalInMonthly())];
-        if ($request->shop->subscription()->onTrial()) {
+        if (!$request->shop->subscription()->onTrial()) {
             $request->shop
-                ->updateSubscription(Carbon::today(), Carbon::today()->addMonths($plan->getIntervalInMonthly()))
+                ->newSubscription( $plan, Carbon::today(), Carbon::today()->addMonths( $plan->getIntervalInMonthly()))
                 ->skipTrial();
         }else {
             $request->shop

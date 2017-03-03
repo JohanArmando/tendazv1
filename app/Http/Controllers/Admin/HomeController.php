@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Tendaz\Http\Requests;
 use Tendaz\Models\Order\Order;
 use Tendaz\Http\Controllers\Controller;
+use Tendaz\Models\Subscription\Subscription;
 
 class HomeController extends Controller
 {
@@ -26,6 +27,8 @@ class HomeController extends Controller
         $countWeekly = Order::CountWeekly();
         $orderByStatus = Order::ByStatus();
         $orderByDate = Order::ByDate();
+
+        $subscription = Subscription::find(Auth('admins')->user()->shop->subscription_id);
         
         return view('admin.home' , compact(
             'orderPendingDay',
@@ -40,6 +43,7 @@ class HomeController extends Controller
             'totalDay' ,
             'orderByStatus' ,
             'totalCountDay',
-            'orderByDate'));
+            'orderByDate',
+            'subscription'));
     }
 }
