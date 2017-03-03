@@ -53,6 +53,9 @@ class SubscriptionController extends Controller
 
         if(Auth('admins')->user()->phone == null){$phone = '+68 523 523 63';}else{$phone= Auth('admins')->user()->phone;}
 
+        $shop = Auth('admins')->user()->shop;
+        $position = null;
+
 
         $data2 = [  
             "sellerId" => env('SELLER_ID_TWO'),
@@ -73,14 +76,14 @@ class SubscriptionController extends Controller
                 ] 
             ],
             "billingAddr" => [ 
-                "name" => $request->name,
-                "addrLine1" => $request->addrLine1,
-                "city" => $request->city,
-                "state" => $request->state ,
-                "zipCode" => $request->zipCode,
-                "country" => $request->country,
-                "email" => $request->email,
-                "phoneNumber" => $phone
+                "name" => !$shop->user->full_name == ' ' ?  $shop->user->full_name : $shop->name,
+                "addrLine1" => 'Colina Campestre',
+                "city" => empty($position->cityName) ? 'Bogota': $position->cityName,
+                "state" =>  empty($position->regionCode) ? 'BOG': $position->regionCode,
+                "zipCode" => empty($position->zipCode) ? '111461': $position->zipCode,
+                "country" =>  empty($position->countryCode) ? 'CO': $position->countryCode,
+                "email" => $shop->user->email,
+                "phoneNumber" =>  $shop->user->phone
             ]
         ];
         //return $data2;
