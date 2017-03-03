@@ -9,6 +9,7 @@ use Tendaz\Http\Requests;
 use Tendaz\Models\Order\Order;
 use Tendaz\Http\Controllers\Controller;
 use Tendaz\Models\Subscription\Subscription;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {

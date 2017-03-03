@@ -26,8 +26,13 @@
                     </div>
                     <div class="panel-collapse">
                         <div class="panel-body listing">
-                            <p> <button type="button" class="btn btn-primary">Cancelar Subcripcion</button></p>
-                            <p></p>
+                            @if ($subscription->recurrent)
+                                <p>Su proxima fecha de cobro es {{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $subscription->end_at )->diffForHumans() }}</p>
+                                <p> <button type="button" class="btn btn-primary">Cancelar Subcripcion</button></p>
+                            @else
+                                <p>Su tienda estara activa hasta el {{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $subscription->end_at )->diffForHumans()  }}</p>
+                            @endif
+
                         </div>
                     </div>
                 </div>
