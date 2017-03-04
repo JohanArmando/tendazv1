@@ -34,14 +34,29 @@ class ProductsController extends Controller
             'values' => $product->options->get()->toArray()];
     }
 
+    public function getVariant($slug, $uuid)
+    {
+        $product = Product::bySlug($slug);
+        $variant = $product->variants()->with('values')->where('uuid',$uuid)->first();
+        //return $variant;
+        return ['product' =>  fractal()
+            ->item($variant, new ProductTransformer())
+            ->serializeWith(new ArraySerializer()) ,
+            'values' => $product->options->get()->toArray()];
+    }
+
     public function all(Request $request)
     {
-        $resources =  Variant::whereHas('product' , function ($q) use ($request) {
+        /*$resources =  Variant::whereHas('product' , function ($q) use ($request) {
+            $q->where('shop_id' , $request->shop->id)->where('pu        $resources =  Variant::whereHas('product' , function ($q) use ($request) {
             $q->where('shop_id' , $request->shop->id)->where('publish',1);
+        })->groupBy('product_id')->orderBy('id' ,'DESC')->get();blish',1);
         })->groupBy('product_id')->orderBy('id' ,'DESC')->get();
-
+        */
         //$paginator = $resource->paginate($request->get('per_page' , 10));
-
+        $resources =  Variant::whereHas('product' , function ($q) use ($request) {
+                    $q->where('shop_id' , $request->shop->id)->where('publish',1);
+                })->orderBy('id' ,'DESC')->get();
         return fractal()
             ->collection($resources, new ProductTransformer($request->get('values')))
             ->serializeWith(new ArraySerializer())
