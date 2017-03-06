@@ -9,7 +9,7 @@
                             <ol class="breadcrumb breadcrumb--ys pull-left">
                                 <li class="home-link"><a href="{{ url('/') }}" class="fa fa-home"></a></li>
                                 <li><a href="{{ url('/products') }}">Todos</a></li>
-                                <li class="active"><% product.name %> <% product.variants.data[0].values.data[0].value %></li>
+                                <li class="active"><% product.name %></li>
                             </ol>
                         </div>
                     </div>
@@ -88,6 +88,22 @@
                                                             </select>
                                                         </span><hr>
                                                     </div>
+                                                </div>
+                                                <div>
+                                                    <div class="col-xs-4"><strong>Variantes:</strong></div>
+                                                    <div class="col-xs-8">
+                                                        <div ng-repeat="variant in product.variants.data" class="col-md-5 pull-right" style="width: 100px; margin-right: 5px;">
+                                                            <a href="{{ url('/') }}<% '/detail/' + product.slug + '/' +variant.id%>" >
+                                                                <img ng-mousemove="updateImage(this)"  ng-src="<% variant.images.data[0].url %>"  alt=""  class="img-thumbnail img-clickEa"
+                                                                     style="min-height: 120px;max-height: 120px;">
+                                                            </a>
+                                                        </div>
+                                                        <div class="col-md-12"><hr></div>
+                                                    </div>
+                                                </div>
+                                                <div ng-repeat="property in properties">
+                                                    <div class="col-xs-4"><strong><% property.name %>:</strong></div>
+                                                    <div class="col-xs-8"><span ng-repeat="value in property.values"><% value.name %>, </span><hr></div>
                                                 </div>
                                                 <div class="col-xs-4" ><strong>Compartir</strong></div>
                                                 <div class="col-xs-8">
