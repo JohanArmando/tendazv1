@@ -40,8 +40,8 @@
                $("input[name="+ filter +"]").attr('checked', false);
            }
            //funcion para ver el detalle del producto en el tema 4
-           $scope.viewDetail = function (slug){
-               Product.detailProduct(slug)
+           $scope.viewDetail = function (slug,uuid){
+               Product.detailProduct(slug,uuid)
                    .success(function(response){
                         detailProduct($scope , response , true);
                    });

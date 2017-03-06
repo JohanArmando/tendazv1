@@ -27,6 +27,7 @@
         var client_secret = "{{ $shop->uuid }}";
         var category = "{{ isset($category)	 ? $category : ''}}";
         var slug = "{{ isset($slug) ? $slug : ''}}";
+        var uuid = "{{ isset($uuid) ? $uuid : ''}}";
     </script>
     <style>
         [ng\:cloak], [ng-cloak], .ng-cloak {
@@ -73,7 +74,7 @@
                             <span class="label label-info">Sale <% product.promotion_price_percent | number:0 %>%</span>
                         </span>
                     </div>
-                    <a href="{{ url('/') }}<% '/detail/' + product.slug %>">
+                    <a href="{{ url('/') }}<% '/detail/' + product.slug + '/' +product._id%>">
                         <img ng-src="<% product.images.data[0].url %>" alt="" ng-show="product.images.data"  style="max-height: 200px; min-height: 200px">
                         <img ng-src="<% BASEURL + '/administrator/image/noImage.png' %>" alt=""  style="max-height: 200px; min-height: 200px"
                              ng-hide="product.images.data">

@@ -32,8 +32,15 @@ $appRoute = function (){
     Route::get('cart/buy','HomeController@cart');
 
     //cart
+
+    //cart
     Route::get('detail/{slug}',[
         'uses' => 'HomeController@detail',
+        'as'  => 'product.store.show'
+    ]);
+
+    Route::get('detail/{slug}/{uuid}',[
+        'uses' => 'HomeController@detail2',
         'as'  => 'product.store.show'
     ]);
 

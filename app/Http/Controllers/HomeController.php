@@ -49,6 +49,21 @@ class HomeController extends Controller
         return view(Theme::current()->viewsPath.'.detail',compact('slug'));
     }
 
+    public function detail2 ($subdomain , $slug, $uuid){
+        $product = Product::where('slug',$slug)->first();
+        if (Auth('web')->user()) {
+            Trend::create([
+                'customer_id'       => Auth('web')->user(),
+                'trend_id'          => $product->id,
+                'hits'              => 1,
+                'trend_type'        => "product",
+            ]);
+            return Auth('web')->user();
+        }
+        
+        return view(Theme::current()->viewsPath.'.detail',compact('slug','uuid'));
+    }
+
     public function contact (){
         return view(Theme::current()->viewsPath.'.contact');
     }

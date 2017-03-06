@@ -60,7 +60,7 @@ class ProductTransformer extends TransformerAbstract
     }
 
     public function includeImages(Variant $variant){
-        $images = $variant->product->images;
+        $images = $variant->images;
         return $this->collection($images, new  ImageTransformer());
     }
 

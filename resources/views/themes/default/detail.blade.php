@@ -19,8 +19,7 @@
                         <img id="matrix" ng-src="<% product.images.data[0].url %>"
                               alt="" style="min-height: 400px;max-height: 400px"></a>
                     </div>
-
-                    <!-- sliders image --->
+                    <!-- sliders image -->
                     <div  class="products-slider-detail owl-carousel owl-theme owl-loaded owl-text-select-on">
                         <div class="owl-stage-outer">
                             <div class="owl-stage" >
@@ -120,12 +119,33 @@
                                 </div>
                             </td>
                         </tr>
+                        <tr ng-repeat="property in properties">
+                            <td><% property.name %>:</td>
+                            <td><span ng-repeat="value in property.values"><% value.name %>, </span></td>
+                        </tr>
                         <tr>
-                            <td colspan="2"></td>
+                            <td>Variantes:</td>
+                            <td>
+                                <div  class="products-slider-detail owl-carousel owl-theme owl-loaded owl-text-select-on">
+                                    <div class="owl-stage-outer">
+                                        <div class="owl-stage" >
+                                            <div ng-repeat="variant in product.variants.data"
+                                                 class="owl-item active" style="width: 100px; margin-right: 5px;">
+                                                <a href="{{ url('/') }}<% '/detail/' + product.slug + '/' +variant.id%>">
+                                                    <img ng-mousemove="updateImage(this)"  ng-src="<% variant.images.data[0].url %>"  alt=""  class="img-thumbnail img-clickEa"
+                                                         style="min-height: 120px;max-height: 120px;">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </td>
                         </tr>
 
                         </tbody>
                     </table>
+                    
                     @include('themes.default.partials.detail-product-coment')
                 </div>
                 <div class="clearfix"></div>

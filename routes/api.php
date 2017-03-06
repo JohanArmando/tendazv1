@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 
 
 
-Route::group(['domain' => env('APP_API_URL') , 'namespace' => 'Api'] , function (){
+Route::group(['domain' => env('APP_API_URL') , 'namespace' => 'Api'], function (){
 
     /**
      * Routes Payments
@@ -102,6 +102,7 @@ Route::group(['domain' => env('APP_API_URL') , 'namespace' => 'Api'] , function 
     Route::group(['prefix' => '' , 'namespace' => 'Product'] , function (){
         Route::get('product-relations/{product}' , 'ProductsController@relations');
         Route::get('products/all' , 'ProductsController@all');
+        Route::get('products/{slug}/{uuid}', 'ProductsController@getVariant');
         Route::resource('products' , 'ProductsController', [
             'only' => ['index' , 'show' , 'update' , 'delete']
         ]);
