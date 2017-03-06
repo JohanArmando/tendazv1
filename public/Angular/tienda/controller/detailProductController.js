@@ -22,7 +22,6 @@
                             if (values[i].property == values[j].property)
                             {
                                 $scope.properties[values[i].property].values.push({'name':values[j].value});
-
                             }
                             
                         }
