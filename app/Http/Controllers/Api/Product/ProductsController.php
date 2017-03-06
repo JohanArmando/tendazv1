@@ -56,7 +56,7 @@ class ProductsController extends Controller
         //$paginator = $resource->paginate($request->get('per_page' , 10));
         $resources =  Variant::whereHas('product' , function ($q) use ($request) {
                     $q->where('shop_id' , $request->shop->id)->where('publish',1);
-                })->orderBy('id' ,'DESC')->get();
+                })->groupBy('product_id')->orderBy('id' ,'DESC')->get();
         return fractal()
             ->collection($resources, new ProductTransformer($request->get('values')))
             ->serializeWith(new ArraySerializer())

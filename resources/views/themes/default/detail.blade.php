@@ -132,7 +132,7 @@
                                             <div ng-repeat="variant in product.variants.data"
                                                  class="owl-item active" style="width: 100px; margin-right: 5px;">
                                                 <a href="{{ url('/') }}<% '/detail/' + product.slug + '/' +variant.id%>">
-                                                    <img   ng-src="<% variant.images.data[0].url %>"  alt=""  class="img-thumbnail img-clickEa"
+                                                    <img ng-mousemove="updateImage(this)"  ng-src="<% variant.images.data[0].url %>"  alt=""  class="img-thumbnail img-clickEa"
                                                          style="min-height: 120px;max-height: 120px;">
                                                 </a>
                                             </div>
