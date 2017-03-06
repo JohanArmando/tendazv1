@@ -1,6 +1,7 @@
 <?php
 
 namespace Tendaz\Http\Controllers\Admin\Setting;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Cookie;
 use Tendaz\Api\NameCheapApi;
@@ -92,6 +93,17 @@ class NameCheapController extends Controller
         return response()->json($domain->state);
     }
 
+    public function check(Request $request){
+        if($request->ajax()){
+            $this->adapter->checkDomain($request->get('domain'));
+            $this->adapter->getResponse();
+            $json = $this->adapter->toResponse();
+            $tlds = $request->get('tld');
+            $response = $this->adapter->suggestions($json , $tlds , $request->get('domain') );
+            //Cache::put($this->user->uuid.'_expire_domain' , 1 ,30);
+            return response()->json($response);
+        }
+    }
 
 
 

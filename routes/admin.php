@@ -113,6 +113,7 @@ $domain = new \Tendaz\Models\Domain\Domain();
         Route::get('/domain/main/{uuid}', 'NameCheapController@main');
         Route::get('/domain/verify/{uuid}', 'NameCheapController@getVerify');
         Route::post('/domain/verify/{uuid}', 'NameCheapController@postVerify');
+        Route::post('/domain/check', 'NameCheapController@check');
         Route::delete('/domain/destroy/{uuid}', 'NameCheapController@postDelete');
         
         Route::resource('/locals', 'LocalController',

@@ -13,7 +13,7 @@ use anlutro\cURL\cURL;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Mail;
-use Tendaz\Tld;
+use Tendaz\Models\Domain\Tld;
 
 /**
  * Class NameCheapApi
@@ -47,9 +47,8 @@ class NameCheapApi
      */
     public function __construct(){
         $this->curl = new cURL();
-        /*dd(Auth('admins')->user());
-        $this->shop = Auth::client()->get();
-        $this->user = Auth::client()->get();*/
+        $this->shop = 'algo';
+        $this->user = 'juan';
         $this->ssd = '';
         $this->tld = '';
         $this->domain = '';

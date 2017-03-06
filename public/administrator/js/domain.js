@@ -1,8 +1,7 @@
 (function(){
     $(document).on('ready' , function () {
-        //funcion que al dar click en check domain toma solo la ultima parte del dominio para evirtar errores aparte
-        //de si el valor de slect no lo tiene  lo agrega con punto
         $('#buyer-domain').on('click' , function () {
+            $('#buyer-domain').addClass('hidden');
             var input = $('#basic-url');
             var domain = input.val();
             var tld = $('#select-domain').val();
@@ -25,18 +24,18 @@
             }
             var data = {'domain' : stringToSend , 'tld' : $.unique(arrayTLD)};
             $.ajax({
-                url : url,
+                url : url + '?client_secret='  + client_secret + '&client_id=' + client_id,
                 headers : {'X-CSRF-TOKEN' : token },
                 type : 'POST',
                 dataType : 'json',
                 data : data,
                 beforeSend : function () {
-                    $('.preloader_general').removeClass('hidden');
+                    $('#search').removeClass('hidden');
                 },
                 success : function (response) {
                     var ul = $('.not-available').find('ul');
                     if(!response.available){
-                        $('.preloader_general').addClass('hidden');
+                        $('#search').addClass('hidden');
                         $('.not-available').removeClass('hidden');
                         $.each(response[0] , function (key , value) {
                             if(value['@attributes']['Status'] == "OK"){
@@ -46,7 +45,7 @@
                             ul.append(li);
                         });
                     }else{
-                        $('.preloader_general').removeClass('hidden');
+                        $('#search').removeClass('hidden');
                         $('.not-available').addClass('hidden');
                         $('#bs-modal').modal('toggle');
                         $('#basic-url').val('');
@@ -64,7 +63,6 @@
                                 });
                             }
                         };
-
                         $.getJSON("https://api.ipify.org?format=jsonp&callback=?",function(){
                         }).success(function(json){
                             $.getJSON( "https://freegeoip.net/json/"+json.ip, function(data) {
@@ -114,7 +112,7 @@
                                         'phone' : response.shop.phone_contact ? esponse.shop.phone_contact : '5555555',
                                         'tco_use_inline' : 1
                                     }
-                                    var form = $('<form></form>');
+                                    /*var form = $('<form></form>');
                                     form.attr("action", "https://www.johinsdev.com/checkout/purchase");
                                     form.attr("method", "POST");
                                     form.attr("target", "tco_lightbox_iframe");
@@ -128,7 +126,7 @@
                                             form.submit();
                                             form.remove();
                                         }, 1000);
-                                    });
+                                    });*/
                                     setTimeout(function() {
                                         $('.preloader_general').addClass('hidden');
                                     }, 5500);
@@ -146,12 +144,12 @@
                     }
                 },
                 error : function () {
-                    alert('Hay un error een els servidor');
-                    $('.preloader_general').addClass('hidden');
+                    alert('Hay un error en el servidor');
+                    $('#search').addClass('hidden');
                 }
             });
         });
-        //funcion que cambian el select despues que en uno de los dominios sse de select
+        //funcion que cambian el select despues que en uno de los dominios se de select
         $('#basic-url').keyup(function(){
             var value = $(this).val();
             var lastCharacter = value.lastIndexOf('.');
