@@ -37,6 +37,7 @@
                     var ul = $('.not-available').find('ul');
                     if(!response.available){
                         $('#search').addClass('hidden');
+                        $('#text').addClass('hidden');
                         $('.not-available').removeClass('hidden');
                         $.each(response[0] , function (key , value) {
                             if(value['@attributes']['Status'] == "OK"){
@@ -48,6 +49,7 @@
                         $('#buyer-domain').removeClass('hidden');
                     }else{
                         $('#search').removeClass('hidden');
+                        $('#text').removeClass('hidden');
                         $('.not-available').addClass('hidden');
                         $('#bs-modal').modal('toggle');
                         $('#basic-url').val('');
@@ -142,6 +144,7 @@
                                 })
                                 .always(function() {
                                     console.log( "complete" );
+                                    $('#buyer-domain').removeClass('hidden');
                                 });
                         });
                     }
