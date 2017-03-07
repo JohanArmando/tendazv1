@@ -33,10 +33,12 @@
                     $('#search').removeClass('hidden');
                 },
                 success : function (response) {
+
                     var ul = $('.not-available').find('ul');
                     if(!response.available){
                         $('#search').addClass('hidden');
                         $('.not-available').removeClass('hidden');
+                        console.log(response);
                         $.each(response[0] , function (key , value) {
                             if(value['@attributes']['Status'] == "OK"){
                                 if(value['CommandResponse']['DomainCheckResult']['@attributes']['Available'] == 'true')
@@ -109,7 +111,7 @@
                                         'ship_zip' : API.zip_code == '' ? '111461' : API.zip_code,
                                         'ship_country' : API.country_name,
                                         'email' : response.user.email,
-                                        'phone' : response.shop.phone_contact ? esponse.shop.phone_contact : '5555555',
+                                        'phone' : response.shop.phone_contact ? response.shop.phone_contact : '5555555',
                                         'tco_use_inline' : 1
                                     }
                                     /*var form = $('<form></form>');

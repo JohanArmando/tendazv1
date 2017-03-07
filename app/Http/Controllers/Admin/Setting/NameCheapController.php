@@ -11,6 +11,8 @@ use Illuminate\Routing\Route;
 use Illuminate\Http\Request;
 use Tendaz\Models\Domain\Domain;
 use Tendaz\Models\Domain\Tld;
+use Tendaz\Models\User;
+use anlutro\cURL;
 
 
 class NameCheapController extends Controller
@@ -20,6 +22,9 @@ class NameCheapController extends Controller
      *Get data
      */
     public function __construct(){
+        $this->user = User::find(1);
+        $this->shop = $this->user->shop;
+        $this->domains = $this->shop->domains;
         $this->ip = env('IP');
         $this->adapter = new NameCheapApi();
         $this->adapter->setClientIp(env('IP_CLIENT'));
@@ -100,7 +105,7 @@ class NameCheapController extends Controller
             $json = $this->adapter->toResponse();
             $tlds = $request->get('tld');
             $response = $this->adapter->suggestions($json , $tlds , $request->get('domain') );
-            //Cache::put($this->user->uuid.'_expire_domain' , 1 ,30);
+            Cache::put($this->user->uuid.'_expire_domain' , 1 ,30);
             return response()->json($response);
         }
     }
