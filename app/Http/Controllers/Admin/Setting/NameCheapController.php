@@ -135,7 +135,7 @@ class NameCheapController extends Controller
                 return redirect()->back()->with('message',array('type' => 'warning' , 'message' => 'No se pudo cargar la compra a tu tarjeta de credito'));
             }
         }else{
-            return redirect()->to('https://'.$this->user->shop->principalDomain->name.'/admin/configuration/domain')
+            return redirect()->to('https://'.$this->user->shop->principalDomain->name.'/admin/setting/domain')
                 ->with('message',array('type' => 'warning' , 'message' => 'El tiempo de session de compra de tu dominio ha expirado'));
         }
         //no olvidar crear el dominio en nginx

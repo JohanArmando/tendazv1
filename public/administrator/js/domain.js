@@ -22,15 +22,17 @@
                     arrayTLD.push(val);
                 }
             }
+            alert(url);
             var data = {'domain' : stringToSend , 'tld' : $.unique(arrayTLD)};
             $.ajax({
-                url : url + '?client_secret='  + client_secret + '&client_id=' + client_id,
+                url : url + '/check?client_secret='  + client_secret + '&client_id=' + client_id,
                 headers : {'X-CSRF-TOKEN' : token },
                 type : 'POST',
                 dataType : 'json',
                 data : data,
                 beforeSend : function () {
                     $('#search').removeClass('hidden');
+                    $('#text').removeClass('hidden');
                 },
                 success : function (response) {
 
@@ -45,6 +47,7 @@
                             }
                             ul.append(li);
                         });
+                        $('#buyer-domain').removeClass('hidden');
                     }else{
                         $('#search').removeClass('hidden');
                         $('.not-available').addClass('hidden');
@@ -72,7 +75,7 @@
                                     data  = {
                                         'sid' : response.sid ,
                                         'mode' : '2CO' ,
-                                        'x_receipt_link_url'  : 'http://tendaz.com/setting/domain/buy',
+                                        'x_receipt_link_url'  : url + '/buy?client_secret='  + client_secret + '&client_id=' + client_id,
                                         "x_receipt_user" : response.user.uuid,
                                         "x_domain_true" : 1 ,
                                         "_domain_name" : response.domain,

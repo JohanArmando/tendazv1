@@ -9,7 +9,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <form name="form-check-domain">
-                            <input type="hidden" name="url-check-domain" value="{{ url('admin/setting/domain/check') }}">
+                            <input type="hidden" name="url-check-domain" value="{{ url('admin/setting/domain') }}">
                             <input type="hidden" name="token-check-domain" value="{{ csrf_token() }}">
                             <div class="form-group">
                                 <div class="input-group">
@@ -44,7 +44,7 @@
                             <div class="text-right">
                                 <button type="button" class="btn btn-default" data-dismiss="modal" style="background:#3B3B3B; color: white; border-radius: 0 !important;"> <i class="fa fa-times"></i></button>
                                 <button type="button" id="buyer-domain" class="btn btn-primary" style="border-radius: 0 !important;"> <i class="fa fa-check"></i></button>
-                                <i id="search" class="hidden fa fa-spinner fa-spin fa-2x"></i>
+                                <i id="search" class="hidden fa fa-spinner fa-spin fa-2x"></i><span id="text" class="hidden"> Esto tardara unos minutos, porfavor espere...</span>
                             </div>
                         </form>
                         <div class="row not-available hidden">
