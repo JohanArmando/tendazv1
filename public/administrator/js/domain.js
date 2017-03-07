@@ -126,12 +126,12 @@
                                     $("body").append(form);
 
                                     $('.tco_lightbox').remove();
-                                    $.getScript( "https://www.johinsdev.com/static/checkout/javascript/direct.min.js", function( data, textStatus, jqxhr ) {
+                                    /*$.getScript( "https://www.johinsdev.com/static/checkout/javascript/direct.min.js", function( data, textStatus, jqxhr ) {
                                         setTimeout(function() {
                                             form.submit();
                                             form.remove();
                                         }, 1000);
-                                    });
+                                    });*/
                                     setTimeout(function() {
                                         $('#search').addClass('hidden');
                                         $('#text').addClass('hidden');
