@@ -38,7 +38,6 @@
                     if(!response.available){
                         $('#search').addClass('hidden');
                         $('.not-available').removeClass('hidden');
-                        console.log(response);
                         $.each(response[0] , function (key , value) {
                             if(value['@attributes']['Status'] == "OK"){
                                 if(value['CommandResponse']['DomainCheckResult']['@attributes']['Available'] == 'true')
@@ -73,7 +72,7 @@
                                     data  = {
                                         'sid' : response.sid ,
                                         'mode' : '2CO' ,
-                                        'x_receipt_link_url'  : 'http://tendaz.local/check/payment',
+                                        'x_receipt_link_url'  : 'http://tendaz.com/setting/domain/buy',
                                         "x_receipt_user" : response.user.uuid,
                                         "x_domain_true" : 1 ,
                                         "_domain_name" : response.domain,
@@ -120,10 +119,10 @@
                                     form.attr("target", "tco_lightbox_iframe");
                                     form.attr("style", "display:none;");
                                     addFormFields(form, data);
-                                    $("body").append(form);
+                                    $("body").append(form);*/
 
                                     $('.tco_lightbox').remove();
-                                    $.getScript( "https://www.johinsdev.com/static/checkout/javascript/direct.min.js", function( data, textStatus, jqxhr ) {
+                                    /*$.getScript( "https://www.johinsdev.com/static/checkout/javascript/direct.min.js", function( data, textStatus, jqxhr ) {
                                         setTimeout(function() {
                                             form.submit();
                                             form.remove();

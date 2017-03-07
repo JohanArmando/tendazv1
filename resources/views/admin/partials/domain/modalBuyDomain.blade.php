@@ -44,7 +44,7 @@
                             <div class="text-right">
                                 <button type="button" class="btn btn-default" data-dismiss="modal" style="background:#3B3B3B; color: white; border-radius: 0 !important;"> <i class="fa fa-times"></i></button>
                                 <button type="button" id="buyer-domain" class="btn btn-primary" style="border-radius: 0 !important;"> <i class="fa fa-check"></i></button>
-                                <i id="search" class="hidden fa fa-spinner fa-spin"></i>
+                                <i id="search" class="hidden fa fa-spinner fa-spin fa-2x"></i>
                             </div>
                         </form>
                         <div class="row not-available hidden">

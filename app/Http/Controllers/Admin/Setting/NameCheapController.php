@@ -110,6 +110,37 @@ class NameCheapController extends Controller
         }
     }
 
+    public function getDomainPayment(Request $request){
+        $expired = Cookie::get('_expire_domain');
+        if($expired){
+            $tld = Tld::where('uuid' , $request->get('_uuid_name'))->first();
+            $charge = $this->singleCharge($tld , $request->all());
+            if($charge){
+                $url = $this->adapter->createUrl($request->except(['_token' , 'token']));
+                $response = $this->adapter->create($url);
+                if(isset($response['error'])){
+                    return redirect()->back()->with('message',array('type' => 'warning' , 'message' => $response['error']));
+                }else{
+                    $response = $this->adapter->toResponse();
+                    if(isset($response['has-error'])){
+                        $domain = Domain::create(['name' => $request->get('_domain_name') , 'shop_id' => $this->shop->id , 'status_id' => 5 ]);
+                        Domain::create(['name' => 'www.'.$request->get('_domain_name') , 'shop_id' => $this->shop->id ,'status_id' => 5  ,  'domain_id' => $domain->id]);
+                        return redirect()->back()->with('meesage',array('type' => 'info' , 'message' => 'Se creo el dominio pero no el host error:'.$response['error-host']));
+                    }
+                    $domain = Domain::create(['name' => $request->get('_domain_name') , 'shop_id' => $this->shop->id , 'status_id' => 3]);
+                    Domain::create(['name' => 'www.'.$request->get('_domain_name') , 'shop_id' => $this->shop->id , 'domain_id' => $domain->id ,   'status_id' => 3]);
+                    return redirect()->to('admin/configuration/domain')->with('message',array('type' => 'info' , 'message' => 'Dominio creado y apuntado correctamente. Disfruta de tu tienda personalizada'));
+                }
+            }else{
+                return redirect()->back()->with('message',array('type' => 'warning' , 'message' => 'No se pudo cargar la compra a tu tarjeta de credito'));
+            }
+        }else{
+            return redirect()->to('https://'.$this->user->shop->principalDomain->name.'/admin/configuration/domain')
+                ->with('message',array('type' => 'warning' , 'message' => 'El tiempo de session de compra de tu dominio ha expirado'));
+        }
+        //no olvidar crear el dominio en nginx
+    }
+
 
 
 
