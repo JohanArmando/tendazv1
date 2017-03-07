@@ -22,6 +22,7 @@ class NameCheapController extends Controller
      *Get data
      */
     public function __construct(){
+        dd(env('IP_CLIENT'));
         $this->user = User::find(1);
         $this->shop = $this->user->shop;
         $this->domains = $this->shop->domains;
