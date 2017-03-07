@@ -22,7 +22,6 @@
                     arrayTLD.push(val);
                 }
             }
-            alert(url);
             var data = {'domain' : stringToSend , 'tld' : $.unique(arrayTLD)};
             $.ajax({
                 url : url + '/check?client_secret='  + client_secret + '&client_id=' + client_id,
@@ -35,7 +34,6 @@
                     $('#text').removeClass('hidden');
                 },
                 success : function (response) {
-
                     var ul = $('.not-available').find('ul');
                     if(!response.available){
                         $('#search').addClass('hidden');
@@ -132,7 +130,8 @@
                                         }, 1000);
                                     });*/
                                     setTimeout(function() {
-                                        $('.preloader_general').addClass('hidden');
+                                        $('#search').addClass('hidden');
+                                        $('#text').addClass('hidden');
                                     }, 5500);
                                     $('#tco_lightbox').on('click' , '#button-content' , function () {
                                         alert('hola');
@@ -150,6 +149,7 @@
                 error : function () {
                     alert('Hay un error en el servidor');
                     $('#search').addClass('hidden');
+                    $('#text').addClass('hidden');
                 }
             });
         });
