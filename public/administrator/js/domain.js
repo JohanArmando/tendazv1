@@ -56,7 +56,7 @@
                         var setup = $('.setup-billing');
                         setup.removeClass('hidden');
                         ul.html('');
-                        //$('.payment-form').append(response.view);
+                        $('.payment-form').append(response.view);
                         function addFormFields(form, data) {
                             if (data != null) {
                                 $.each(data, function (name, value) {
