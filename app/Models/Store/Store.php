@@ -4,6 +4,7 @@ namespace Tendaz\Models\Store;
 
 use Illuminate\Database\Eloquent\Model;
 use Tendaz\Traits\UuidAndShopTrait;
+use Tendaz\Models\Geo\City;
 
 class Store extends Model
 {
@@ -23,5 +24,14 @@ class Store extends Model
     public function getRouteKeyName()
     {
         return 'uuid';
+    }
+
+    /**
+     *
+     *
+     */
+    public function city()
+    {
+        return $this->belongsTo(City::class, 'code_country');
     }
 }

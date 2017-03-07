@@ -29,8 +29,8 @@
                             <div class="col-md-3 text-center" ng-if="addresses.length > 0" ng-repeat="address in addresses">
 
                             <input type="radio" id="shippingAddress{{ address._id }}" name="shippingAddress"
-                            ng-model="carts.shippingAddress.data._id"  value="{{ address._id }}" checked/>
-                            <label for="shippingAddress{{ address._id }}">
+                            ng-model="carts.shippingAddress.data._id"  value="{{ address._id }}"  checked/>
+                            <label for="shippingAddress{{ address._id }}" ng-click="changeAddress(address._id)">
                                 <span><i class="glyphicon glyphicon-ok"></i></span>
                                     <div class="col-md-12">
                                         {{ address.name }}

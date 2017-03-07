@@ -63,13 +63,13 @@ myApp.factory("Shipping" , ["$http" , "User", "$rootScope" , "Cart", "$location"
             console.log(response);
         }).finally(function() {});  
     };
-     address.getShippingValue = function () {
+     address.getShippingValue = function (id) {
         return $http({
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            url: baseUrl + '/carts/' + Cart.getCartId() +'/shipping?client_secret='  + client_secret + '&client_id=' + client_id,
+            url: baseUrl + '/carts/' + Cart.getCartId() +'/shippings/servientrega?client_secret='  + client_secret + '&client_id=' + client_id + '&address_id='+id,
             method: "GET"
         }).then(function(response) {
             $rootScope.carts = response.data.cart.data;

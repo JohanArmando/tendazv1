@@ -33,8 +33,9 @@ class ShippingMethod extends Model
                 event(new updateShippingOrderEvent($cart->order , 0 , true));
                 return response()->json(['message' => 'El producto ' . $product->product->name .' no tiene envio disponible.' , 'cart' => fractal()->item($cart, new CartTransformer()) ] , 404);
             }
-            $total += ($method * $product->pivot->quantity);
+            //$total += ($method * $product->pivot->quantity);
         }
+        //$total = 1000;
         event(new updateShippingOrderEvent($cart->order , $total));
         return response()->json(['message' => "Perfecto ya calculamos tu envio :$ ".number_format($total , 2) , 'cart' => fractal()->item($cart, new CartTransformer()) ] , 201);
     }

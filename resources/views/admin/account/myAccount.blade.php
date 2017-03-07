@@ -34,18 +34,22 @@
                                 <label class="control-label">Telefono</label>
                                 {!! Form::select('phone_type',['mobile' => 'Celular', 'home' => 'Casa', 'work' => 'Trabajo', 'fax' => 'Fax'],$shop->phone_type,['class' => 'form-control']) !!}
                             </div>
-                            <div class="col-md-1">
+                            <div class="col-md-4">
                                 <label class="control-label">Pais</label>
-                                {{--
-                                <input type="text" style="min-width: 40px !important;" class="form-control" @if($country[ 'country']=='CO' ) value="57" @endif @if($country[ 'country']=='PE' ) value="51" @endif @if($country[ 'country']=='ES' ) value="34" @endif @if(empty($country[ 'country'])) value="{{ Auth('admins')->user()->shop->phone_country }}" @endif name="phone_country" /> --}}
+                                <select name="country" id="inputCountry" class="form-control" required="required">
+                                    @foreach ($countries as $country)
+                                        <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                    @endforeach
+                                </select>
+                                {{-- <input type="text" style="min-width: 40px !important;" class="form-control" @if($country[ 'country']=='CO' ) value="57" @endif @if($country[ 'country']=='PE' ) value="51" @endif @if($country[ 'country']=='ES' ) value="34" @endif @if(empty($country[ 'country'])) value="{{ Auth('admins')->user()->shop->phone_country }}" @endif name="phone_country" /> --}} 
                             </div>
 
-                            <div class="col-sm-2">
+                            <div class="col-sm-3">
                                 <label class="control-label">COD</label>
                                 <input class="form-control" value="{{$store->code_country}}" type="text" name="code_country" />
                             </div>
 
-                            <div class="col-sm-5">
+                            <div class="col-sm-3">
                                 <label class="control-label">Telefono</label>
                                 {!! Form::text('number_phone',$shop->phone_nummber,['class' => 'form-control', 'placeholder' => 'Telefono ', 'data-mask' => '999-999-9999']) !!}
                             </div>

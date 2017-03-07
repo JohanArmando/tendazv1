@@ -37,7 +37,13 @@ class ProductTransformer extends TransformerAbstract
             'quantity'           => $variant->pivot  ? $variant->pivot->quantity : 1,
             'description'        => $variant->product->description,
             'url'                => $variant->product->url,
-            'best_seller'        => $variant->best_seller()
+            'best_seller'        => $variant->best_seller(),
+            'large'              => $variant->product->large,
+            'width'              => $variant->product->width,
+            'height'             => $variant->product->height,
+            'weight'             => $variant->weight,
+            'price_declared'     => $variant->price_declared
+
         ];
     }
 
