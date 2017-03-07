@@ -138,5 +138,6 @@ Configura tu dominio
 @include('admin.partials.domain.modalCompleteInstall')
 @endsection
 @section('scripts')
+	<script src="https://www.2checkout.com/static/checkout/javascript/direct.min.js"></script>
 	<script src="{{asset('administrator/js/domain.js')}}"></script>
 @stop

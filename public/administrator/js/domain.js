@@ -51,6 +51,7 @@
                         $('#search').removeClass('hidden');
                         $('#text').removeClass('hidden');
                         $('.not-available').addClass('hidden');
+
                         $('#bs-modal').modal('toggle');
                         $('#basic-url').val('');
                         var setup = $('.setup-billing');
@@ -116,21 +117,21 @@
                                         'phone' : response.shop.phone_contact ? response.shop.phone_contact : '5555555',
                                         'tco_use_inline' : 1
                                     }
-                                    /*var form = $('<form></form>');
+                                    var form = $('<form></form>');
                                     form.attr("action", "https://www.johinsdev.com/checkout/purchase");
                                     form.attr("method", "POST");
                                     form.attr("target", "tco_lightbox_iframe");
                                     form.attr("style", "display:none;");
                                     addFormFields(form, data);
-                                    $("body").append(form);*/
+                                    $("body").append(form);
 
                                     $('.tco_lightbox').remove();
-                                    /*$.getScript( "https://www.johinsdev.com/static/checkout/javascript/direct.min.js", function( data, textStatus, jqxhr ) {
+                                    $.getScript( "https://www.johinsdev.com/static/checkout/javascript/direct.min.js", function( data, textStatus, jqxhr ) {
                                         setTimeout(function() {
                                             form.submit();
                                             form.remove();
                                         }, 1000);
-                                    });*/
+                                    });
                                     setTimeout(function() {
                                         $('#search').addClass('hidden');
                                         $('#text').addClass('hidden');
