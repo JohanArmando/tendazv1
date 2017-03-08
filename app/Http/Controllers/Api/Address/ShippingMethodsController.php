@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 use Tendaz\Models\Cart\Cart;
 use Tendaz\Http\Controllers\Controller;
 use Tendaz\Models\Shipping\ShippingMethod;
+use Tendaz\Events\updateShippingOrderEvent;
 use Tendaz\Transformers\CartTransformer;
-
+use GuzzleHttp\Client;
 
 class ShippingMethodsController extends Controller
 {
@@ -34,6 +35,44 @@ class ShippingMethodsController extends Controller
    			
    		}
    		$address = $cart->customer->addresses()->where('uuid',$request->address_id)->first();
-   		return ['data' => ['products' => $Shipping, 'from' => $cart->customer->shop->store->city->name.'-'.$cart->customer->shop->store->city->state->name, 'to' => $address->city->name.'-'.$address->state->name ]];
+
+   		$client = new Client([
+   		    // Base URI is used with relative requests
+   		    'base_uri' => env('SERVIENTREGA_API'),
+   		    'headers' => [
+   		    	'User-Agent' => 'testing/1.0',
+   		    	'Accept' => 'application/json',
+   		    	'Content-Type' => 'application/json'
+   		    ]
+
+   		]);
+   		//dd($client);
+   		$response = $client->post('servientrega/index', [
+   			'json' => [
+   				'products' => $Shipping,
+   				'from' => $cart->customer->shop->store->city->name.'-'.$cart->customer->shop->store->city->state->name,
+   				'to' => $address->city->name.'-'.$address->state->name 
+   			]
+   		]);
+   		$total = 0;
+
+   		$prices = json_decode($response->getBody());
+   		foreach ($prices as $value) {
+   			$total = $total + $value;
+   		}
+   		//return $prices;
+   		$cart->address_shipping_id = $address->id;
+   		$cart->save();
+   		$cart = $cart->fresh();
+
+   		event(new updateShippingOrderEvent($cart->order , $total));
+
+
+   		return response()->json(['message' => "Perfecto ya calculamos tu envio :$ ".number_format($total , 2) , 'cart' => fractal()->item($cart, new CartTransformer()) ] , 201);
    	}
 }
+
+
+//$client = new Client([ 'base_uri' => env('SERVIENTREGA_API'), 'headers' => ['User-Agent' => 'testing/1.0', 'Accept' => 'application/json', 'Content-Type' => 'application/json']]);
+
+//$response = $client->post('servientrega/index', ['form_params' => ['products' => [{"weight" => "4.5","price" => "10000"}],'from' => 'BOGOTA-CUNDINAMARCA','to' => 'ABEJORRAL-ANTIOQUIA']]);
