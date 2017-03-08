@@ -280,7 +280,7 @@ class NameCheapApi
         $data['RegistrantStateProvince'] = $array['state'];
         $data['RegistrantPostalCode'] = $array['zipCode'] ? $array['zipCode'] : '111461' ;
         $data['RegistrantCountry'] = 'CO';
-        $data['RegistrantPhone'] = '3102556894';
+        $data['RegistrantPhone'] = '+57.'.env('PHONE_NAME');
         $data['RegistrantEmailAddress'] = env('EMAIL_NAMECHEAP');
         if($tld != 'CA') {
             $data['RegistrantOrganizationName'] = 'TENDAZ';
