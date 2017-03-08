@@ -46,6 +46,7 @@
                             ul.append(li);
                         });
                         $('#buyer-domain').removeClass('hidden');
+                        $("#buyer-domain").button('reset');
                     }else{
                         $('.not-available').addClass('hidden');
                         $('#bs-modal').modal('toggle');
