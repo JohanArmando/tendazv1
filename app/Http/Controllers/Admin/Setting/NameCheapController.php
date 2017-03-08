@@ -172,7 +172,7 @@ class NameCheapController extends Controller
                 $url = $this->adapter->createUrl($request->except(['_token' , 'token']));
                 $response = $this->adapter->create($url);
                 if(isset($response['error'])){
-                    return redirect()->back()->with('message',array('type' => 'warning' , 'message' => 'error'));
+                    return redirect()->back()->with('message',array('type' => 'warning' , 'message' => $response['error']));
                 }else{
                     $dom = ['edit',$request->get('domain')];
                      $this->adapter->toResponse();

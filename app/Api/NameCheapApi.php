@@ -307,8 +307,8 @@ class NameCheapApi
     public function senEmail($error , $domain){
         $user = $this->user;
         Mail::send('admin.emails.domainCreate', ['user' => $this->user , 'error' => $error , 'domain' => $domain], function ($m) use ($user) {
-            $m->from('hello@app.com', 'Your Application');
-            $m->to($user->email, $user->full_name)->subject('Dominio creado!');
+            $m->from('juanm.ruizr@ecci.edu.co', 'Your Application');
+            $m->to($user->email, $user->name)->subject('Dominio creado!');
         });
     }
 
