@@ -57,6 +57,7 @@
                     </div>
 
                     <div class="col-md-12">
+                        <div class="col-md-6">El dominio <span id="d"></span>  cuesta <span id="p"></span> USD</div>
                         <button id="enviar" type="button" data-loading-text="<i class='fa fa-spinner fa-spin'></i> procesando..." class="btn btn-primary pull-right buyRight" disabled="true">Enviar</button>
                     </div>
                 </div>

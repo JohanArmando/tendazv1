@@ -220,7 +220,7 @@ class NameCheapApi
     public function createUrl($array){
         $data = array();
         $data = $this->getDataBasicRequest();
-        list($ssd , $tld ) = explode('.' , $array['_domain_name']);
+        list($ssd , $tld ) = explode('.' , $array['domain']);
         $this->ssd = $ssd ;
         $this->tld = $tld ;
         if(in_array('.'.$tld , $this->tlds)){
@@ -231,15 +231,15 @@ class NameCheapApi
         };
         //DOMAIN DATA
         $data['command'] = 'namecheap.domains.create';
-        $data['DomainName'] = $array['_domain_name'];
-        $this->domain = $array['_domain_name'];
+        $data['DomainName'] = $array['domain'];
+        $this->domain = $array['domain'];
         $data['Years'] = 1;
         //AUX DATA
         $data['AuxBillingFirstName'] = $array['name'];
-        $data['AuxBillingLastName'] = $array['name_last'];
-        $data['AuxBillingAddress1'] = $array['address']  ? $array['address'] : 'carrera 58 numero 137a-28' ;
+        $data['AuxBillingLastName'] = $array['name'];
+        $data['AuxBillingAddress1'] = $array['addrLine1']  ? $array['addrLine1'] : 'carrera 58 numero 137a-28' ;
         $data['AuxBillingStateProvince'] = $array['state'];
-        $data['AuxBillingPostalCode'] = $array['zip']  ? $array['zip'] : '111461' ;
+        $data['AuxBillingPostalCode'] = $array['zipCode']  ? $array['zipCode'] : '111461' ;
         $data['AuxBillingCountry'] = 'CO';
         $data['AuxBillingPhone'] = $this->getPhone();
         $data['AuxBillingEmailAddress'] = env('EMAIL_NAMECHEAP');
@@ -275,10 +275,10 @@ class NameCheapApi
         $data['AdminCity'] = 'Bogota';
         //REGISTRAN DATA
         $data['RegistrantFirstName'] = $array['name'];
-        $data['RegistrantLastName'] = $array['name_last'];
-        $data['RegistrantAddress1'] = $array['address'] ? $array['address'] : 'carrera 58 numero 137a-28';
+        $data['RegistrantLastName'] = $array['name'];
+        $data['RegistrantAddress1'] = $array['addrLine1'] ? $array['addrLine1'] : 'carrera 58 numero 137a-28';
         $data['RegistrantStateProvince'] = $array['state'];
-        $data['RegistrantPostalCode'] = $array['zip'] ? $array['zip'] : '111461' ;
+        $data['RegistrantPostalCode'] = $array['zipCode'] ? $array['zipCode'] : '111461' ;
         $data['RegistrantCountry'] = 'CO';
         $data['RegistrantPhone'] = $this->getPhone();
         $data['RegistrantEmailAddress'] = env('EMAIL_NAMECHEAP');

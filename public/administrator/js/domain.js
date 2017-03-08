@@ -1,7 +1,7 @@
 (function(){
     $(document).on('ready' , function () {
         $('#buyer-domain').on('click' , function () {
-            $('#buyer-domain').addClass('hidden');
+            $("#buyer-domain").button('loading');
             var input = $('#basic-url');
             var domain = input.val();
             var tld = $('#select-domain').val();
@@ -30,8 +30,7 @@
                 dataType : 'json',
                 data : data,
                 beforeSend : function () {
-                    $('#search').removeClass('hidden');
-                    $('#text').removeClass('hidden');
+
                 },
                 success : function (response) {
                     var ul = $('.not-available').find('ul');
@@ -48,8 +47,6 @@
                         });
                         $('#buyer-domain').removeClass('hidden');
                     }else{
-                        $('#search').removeClass('hidden');
-                        $('#text').removeClass('hidden');
                         $('.not-available').addClass('hidden');
                         $('#bs-modal').modal('toggle');
                         $('#basic-url').val('');
@@ -57,12 +54,12 @@
                         $('#namecheapPayment').modal('show');
                         $('#domainAvailable').val(response.domain);
                         $('#domainTld').val(response.tld.uuid);
+                        $('#d').html(response.domain);
+                        $('#p').html(response.tld.price);
                     }
                 },
                 error : function () {
                     alert('Hay un error en el servidor');
-                    $('#search').addClass('hidden');
-                    $('#text').addClass('hidden');
                 }
             });
         });
