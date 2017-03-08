@@ -332,11 +332,11 @@ class NameCheapApi
         $domain = $this->domain;
         if($response['@attributes']['Status'] == 'OK'){
             $error  = 'NONE';
-            $this->senEmail($error , $domain);
+            //$this->senEmail($error , $domain);
             $this->createHost();
         }else{
             $error  = 'YES';
-            $this->senEmail($error , $domain);
+            //$this->senEmail($error , $domain);
             if(!isset($response['Errors']['Number'])){
                 return  ['error' => $response['Errors']['Error']];
             }else{
