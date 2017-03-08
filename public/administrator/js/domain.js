@@ -42,7 +42,7 @@
                         $.each(response[0] , function (key , value) {
                             if(value['@attributes']['Status'] == "OK"){
                                 if(value['CommandResponse']['DomainCheckResult']['@attributes']['Available'] == 'true')
-                                var li = '<li>' + value['CommandResponse']['DomainCheckResult']['@attributes']['Domain'] +'</li>'
+                                    var li = '<li>' + value['CommandResponse']['DomainCheckResult']['@attributes']['Domain'] +'</li>'
                             }
                             ul.append(li);
                         });
@@ -51,103 +51,12 @@
                         $('#search').removeClass('hidden');
                         $('#text').removeClass('hidden');
                         $('.not-available').addClass('hidden');
-
                         $('#bs-modal').modal('toggle');
                         $('#basic-url').val('');
-                        var setup = $('.setup-billing');
-                        setup.removeClass('hidden');
-                        ul.html('');
-                        $('.payment-form').append(response.view);
-                        function addFormFields(form, data) {
-                            if (data != null) {
-                                $.each(data, function (name, value) {
-                                    if (value != null) {
-                                        var input = $("<input />").attr("type", "hidden").attr("name", name).val(value);
-                                        form.append(input);
-                                    }
-                                });
-                            }
-                        };
-                        $.getJSON("https://api.ipify.org?format=jsonp&callback=?",function(){
-                        }).success(function(json){
-                            $.getJSON( "https://freegeoip.net/json/"+json.ip, function(data) {
-                            })
-                                .done(function(API) {
-                                    data  = {
-                                        'sid' : response.sid ,
-                                        'mode' : '2CO' ,
-                                        'x_receipt_link_url'  : url + '/buy?client_secret='  + client_secret + '&client_id=' + client_id,
-                                        "x_receipt_user" : response.user.uuid,
-                                        "x_domain_true" : 1 ,
-                                        "_domain_name" : response.domain,
-                                        "_uuid_name" :  response.tld.uuid,
-                                        'name' : response.user.name ,
-                                        'address' : response.shop.state,
-                                        'city' : API.city,
-                                        'zip' : API.zip_code ? API.zip_code : '111461',
-                                        'country' : API.country_name,
-                                        'state'  : response.shop.state,
-                                        'name_last' : response.user.last_name,
-                                        "currency_code" : "USD",
-                                        "lang" : "es_ib",
-                                        "demo" : "Y",
-                                        "card_holder_name" : "Domain Buy",
-                                        'li_0_type' :'product' ,
-                                        'li_0_name' : response.domain,
-                                        'li_0_price' : response.tld.price ,
-                                        'li_0_tangible' : 'Y' ,
-                                        'li_1_type' : 'shipping' ,
-                                        'li_1_name' : '' ,
-                                        'li_1_price' : '' ,
-                                        'card_holder_name' :'Domain' + response.domain ,
-                                        'street_address' : response.shop.address_contact == '' ? 'NONE' : response.shop.address_contact,
-                                        'street_address2' : '' ,
-                                        'city' : API.region_name ,
-                                        'state' :API.region_name     ,
-                                        'zip' : API.zip == '' ? '111461' : API.zip,
-                                        'country' : API.country_name ,
-                                        'ship_name' : response.shop.address_contact == '' ? 'NONE' : response.shop.address_contact,
-                                        'ship_street_address' : response.shop.address_contact == '' ? 'NONE' : response.shop.address_contact,
-                                        'ship_street_address2' : '' ,
-                                        'ship_city' : API.city ,
-                                        'ship_state' : API.region_name ,
-                                        'ship_zip' : API.zip_code == '' ? '111461' : API.zip_code,
-                                        'ship_country' : API.country_name,
-                                        'email' : response.user.email,
-                                        'phone' : response.shop.phone_contact ? response.shop.phone_contact : '5555555',
-                                        'tco_use_inline' : 1
-                                    }
-                                    var form = $('<form></form>');
-                                    form.attr("action", "https://www.johinsdev.com/checkout/purchase");
-                                    form.attr("method", "POST");
-                                    form.attr("target", "tco_lightbox_iframe");
-                                    form.attr("style", "display:none;");
-                                    addFormFields(form, data);
-                                    $("body").append(form);
-
-                                    $('.tco_lightbox').remove();
-                                    /*$.getScript( "https://www.johinsdev.com/static/checkout/javascript/direct.min.js", function( data, textStatus, jqxhr ) {
-                                        setTimeout(function() {
-                                            form.submit();
-                                            form.remove();
-                                        }, 1000);
-                                    });*/
-                                    setTimeout(function() {
-                                        $('#search').addClass('hidden');
-                                        $('#text').addClass('hidden');
-                                    }, 5500);
-                                    $('#tco_lightbox').on('click' , '#button-content' , function () {
-                                        alert('hola');
-                                    });
-                                })
-                                .fail(function() {
-                                    console.log( "error" );
-                                })
-                                .always(function() {
-                                    console.log( "complete" );
-                                    $('#buyer-domain').removeClass('hidden');
-                                });
-                        });
+                        //modal payment
+                        $('#namecheapPayment').modal('show');
+                        $('#domainAvailable').val(response.domain);
+                        $('#domainTld').val(response.tld.uuid);
                     }
                 },
                 error : function () {

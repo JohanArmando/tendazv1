@@ -80,7 +80,7 @@ class Domain extends Model
             $val = 'http://'.$value.'.'.self::getDomainSubTendaz();
             $this->attributes['domain'] = $val;
         }else{
-            $val = $value[1];
+            $val = 'http://'.$value[1];
             $this->attributes['domain'] = $val;
         }
     }
@@ -90,7 +90,7 @@ class Domain extends Model
             $val = 'https://'.$value.'.'.self::getDomainSubTendaz();
             $this->attributes['ssl'] = $val;
         }else{
-            $val = $value[1];
+            $val = 'https://'.$value[1];
             $this->attributes['ssl'] = $val;
         }
     }

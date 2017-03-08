@@ -134,10 +134,185 @@ Configura tu dominio
 <div class="payment-form"></div>
 @include('admin.partials.domain.modalAddDomain')
 @include('admin.partials.domain.modalBuyDomain')
+@include('admin.partials.domain.modalPayment')
 @include('admin.partials.domain.modalDeleteDomain')
 @include('admin.partials.domain.modalCompleteInstall')
 @endsection
 @section('scripts')
 	<script src="https://www.2checkout.com/static/checkout/javascript/direct.min.js"></script>
 	<script src="{{asset('administrator/js/domain.js')}}"></script>
+
+	<!--payment-->
+
+	<script src="{{asset('administrator/js/payform.js')}}"></script>
+	<script type="text/javascript" src="https://www.2checkout.com/checkout/api/2co.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.2.0/vue-resource.js"></script>
+
+	<script>
+		$(document).on('ready' , function () {
+			$('#card').payform('formatCardNumber');
+			$('#expiry').payform('formatCardExpiry');
+
+			$('#card').keyup(function () {
+				var val =  $(this).val();
+
+				if ($.payform.validateCardNumber(val)){
+					$(this).parent().addClass('has-success').removeClass('has-error');
+					$(this).parent().find('span.glyphicon-remove').addClass('hidden');
+					$(this).parent().find('span.glyphicon-ok').removeClass('hidden');
+				}else{
+					$(this).parent().addClass('has-error');
+					$(this).parent().find('span.glyphicon-remove').removeClass('hidden');
+					$(this).parent().find('span.glyphicon-ok').addClass('hidden');
+				}
+
+				if ($.payform.parseCardType( val ) != null) {
+					$('#type-card').html("<strong>" + $.payform.parseCardType( val ) + "</strong>")
+				}
+				disabledButton();
+			});
+
+			$('#expiry').keyup(function () {
+				var val =  $(this).val().split('/');
+				var month = val[0];
+				var year = val[1];
+				if ($.payform.validateCardExpiry(month , year)){
+					$(this).parent().addClass('has-success').removeClass('has-error');
+					$(this).parent().find('span.glyphicon-remove').addClass('hidden');
+					$(this).parent().find('span.glyphicon-ok').removeClass('hidden');
+				}else{
+					$(this).parent().addClass('has-error');
+					$(this).parent().find('span.glyphicon-remove').removeClass('hidden');
+					$(this).parent().find('span.glyphicon-ok').addClass('hidden');
+				}
+				disabledButton();
+			});
+
+			$('#cvc').keyup(function () {
+				var val =  $(this).val();
+				if ($.payform.validateCardCVC(val)){
+					$(this).parent().addClass('has-success').removeClass('has-error');
+					$(this).parent().find('span.glyphicon-remove').addClass('hidden');
+					$(this).parent().find('span.glyphicon-ok').removeClass('hidden');
+				}else{
+					$(this).parent().addClass('has-error');
+					$(this).parent().find('span.glyphicon-remove').removeClass('hidden');
+					$(this).parent().find('span.glyphicon-ok').addClass('hidden');
+				}
+				disabledButton();
+			});
+
+			$('#name').keyup(function () {
+				var val =  $(this).val();
+				validateform(this);
+
+			});
+			$('#email').keyup(function () {
+				var val =  $(this).val();
+				validateform(this);
+
+			});
+
+			$('#city').keyup(function () {
+				var val =  $(this).val();
+				validateform(this);
+
+			});
+
+			$('#country').keyup(function () {
+				var val =  $(this).val();
+				validateform(this);
+
+			});
+
+			$('#state').keyup(function () {
+				validateform(this);
+			});
+
+			$('#zipCode').keyup(function () {
+				validateform(this);
+			});
+
+			$('#addrLine1').keyup(function () {
+				validateform(this);
+			});
+
+
+		});
+
+		function validateform(val) {
+			var value =  $(val).val();
+
+			if (value != ''){
+				$(val).parent().addClass('has-success').removeClass('has-error');
+				$(val).parent().find('span.glyphicon-remove').addClass('hidden');
+				$(val).parent().find('span.glyphicon-ok').removeClass('hidden');
+			}else{
+				$(val).parent().addClass('has-error');
+				$(val).parent().find('span.glyphicon-remove').removeClass('hidden');
+				$(val).parent().find('span.glyphicon-ok').addClass('hidden');
+			}
+			disabledButton();
+		}
+
+		function disabledButton() {
+			if ($.payform.validateCardCVC($('#cvc').val())
+					&& $.payform.validateCardExpiry( $('#expiry').val().split('/')[0] , $('#expiry').val().split('/')[1])
+					&& $.payform.validateCardNumber(  $('#card').val() )
+					&& ($('#state').val() != '')
+					&& ($('#name').val() != '')
+					&& ($('#country').val() != '')
+					&& ($('#zipCode').val() != '')
+					&& ($('#email').val() != ''))
+			{
+				$('#enviar').attr('disabled' , false);
+			}else{
+				$('#enviar').attr('disabled' , true);
+			}
+		}
+
+		var successCallback = function(data) {
+			var myForm = document.getElementById('formCardPayment');
+			//alert(data.response.token.token);
+			myForm.token.value = data.response.token.token;
+			//console.log(myForm.token.value);
+			myForm.submit();
+		};
+
+		var errorCallback = function(data) {
+			if (data.errorCode === 200) {
+			} else {
+				alert(data.errorMsg);
+			}
+		};
+
+		var tokenRequest = function() {
+			var args = {
+				sellerId: "{{ env('SELLER_ID_TWO') }}",
+				publishableKey: "{{ env('PUBLIC_KEY_TWO') }}",
+				ccNo: $("#card").val(),
+				cvv: $("#cvc").val(),
+				expMonth: $("#expiry").val().split('/')[0].trim(),
+				expYear: $("#expiry").val().split('/')[1].trim()
+				/*ccNo: '4000000000000002',
+				 cvv: '123',
+				 expMonth: '02',
+				 expYear:'20'*/
+			};
+			console.log(args);
+			TCO.requestToken(successCallback, errorCallback, args);
+		};
+
+		$(function() {
+
+			TCO.loadPubKey( @if (env('SANBOX_TWO',false)) 'sandbox' @else 'production' @endif );
+			$("#enviar").click(function(e) {
+				$("#enviar").button('loading');
+				tokenRequest();
+				return false;
+			});
+		});
+
+	</script>
 @stop
