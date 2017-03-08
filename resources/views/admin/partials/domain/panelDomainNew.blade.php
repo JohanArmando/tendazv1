@@ -7,19 +7,10 @@
                 en los registros de inscripci&oacute;n de dominio p&uacute;blico.
             </p>
             <br>
-
             <div class="text-center">
                 <button type="button" id="btn-domain" class="btn btn-primary" data-toggle="modal" data-target="#bs-modal">
                     <i class="fa fa-credit-card"></i> Comprar Dominio</button>
             </div>
-           {{--
-            @if($shop->originalSubscription() == 'free' && $shop->domains->count() < 2)
-            <div class="text-center">
-                <button type="button" id="btn-domain" class="btn btn-primary"  data-toggle="modal" data-target="#bs-modal">
-                    <i class="fa fa-credit-card"></i> Comprar Dominio</button>
-            </div>
-            @endif
-            --}}
             <br>
         </div>
     </div>

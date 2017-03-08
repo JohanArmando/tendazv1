@@ -21,8 +21,8 @@
                 getProductsByCategory : function (category) {
                     return $http.get(BASEURL + '/categories/' + category + '/products?client_secret=' + client_secret + '&client_id=' +client_id , config);
                 },
-                getProductBySlug : function (slug) {
-                    return $http.get( BASEURL + '/products/' + slug + '?client_secret=' + client_secret + '&client_id=' +client_id , config);
+                getProductBySlug : function (slug,uuid) {
+                    return $http.get( BASEURL + '/products/' + slug + '/' + uuid + '?client_secret=' + client_secret + '&client_id=' +client_id , config);
                 },
                 getAncestorCategory : function (category) {
                     return $http.get( BASEURL + '/categories/' + category + '?client_secret=' + client_secret + '&client_id=' +client_id , config);

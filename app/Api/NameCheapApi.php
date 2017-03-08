@@ -13,7 +13,8 @@ use anlutro\cURL\cURL;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Mail;
-use Tendaz\Tld;
+use Tendaz\Models\Domain\Tld;
+use Tendaz\Models\User;
 
 /**
  * Class NameCheapApi
@@ -47,9 +48,8 @@ class NameCheapApi
      */
     public function __construct(){
         $this->curl = new cURL();
-        /*dd(Auth('admins')->user());
-        $this->shop = Auth::client()->get();
-        $this->user = Auth::client()->get();*/
+        $this->shop = User::find(1)->shop;
+        $this->user = User::find(1);
         $this->ssd = '';
         $this->tld = '';
         $this->domain = '';
@@ -59,7 +59,7 @@ class NameCheapApi
      * @return mixed
      */
     public function getNameCheapKey(){
-            return static::$nameCheapApiKey ?: Config::get('nameCheap.NAMECHEAP.api_key');
+        return static::$nameCheapApiKey ?: Config::get('nameCheap.NAMECHEAP.api_key');
     }
 
     /**
@@ -102,9 +102,9 @@ class NameCheapApi
      */
     public function getDataBasicRequest(){
         return $data = array('ApiUser' => $this->getNameCheapUser() ,
-                            'ApiKey' => $this->getNameCheapKey() ,
-                            'UserName' => $this->getNameCheapUser(),
-                            'ClientIp' => $this->getClientIp());
+            'ApiKey' => $this->getNameCheapKey() ,
+            'UserName' => $this->getNameCheapUser(),
+            'ClientIp' => $this->getClientIp());
     }
 
     /**
@@ -218,36 +218,36 @@ class NameCheapApi
      * @return string
      */
     public function createUrl($array){
-         $data = array();
+        $data = array();
         $data = $this->getDataBasicRequest();
         list($ssd , $tld ) = explode('.' , $array['_domain_name']);
         $this->ssd = $ssd ;
         $this->tld = $tld ;
-            if(in_array('.'.$tld , $this->tlds)){
-                $arr = $this->getExtendecAttribute('.'.$tld);
-                foreach($arr as $key => $value){
-                    $data[$key] = $value;
-                }
-            };
-            //DOMAIN DATA
-         $data['command'] = 'namecheap.domains.create';
-         $data['DomainName'] = $array['_domain_name'];
-         $this->domain = $array['_domain_name'];
-         $data['Years'] = 1;
-            //AUX DATA
-         $data['AuxBillingFirstName'] = $array['name'];
-         $data['AuxBillingLastName'] = $array['name_last'];
-         $data['AuxBillingAddress1'] = $array['address']  ? $array['address'] : 'carrera 58 numero 137a-28' ;
-         $data['AuxBillingStateProvince'] = $array['state'];
-         $data['AuxBillingPostalCode'] = $array['zip']  ? $array['zip'] : '111461' ;
-         $data['AuxBillingCountry'] = 'CO';
-         $data['AuxBillingPhone'] = $this->getPhone();
-         $data['AuxBillingEmailAddress'] = env('EMAIL_NAMECHEAP');
+        if(in_array('.'.$tld , $this->tlds)){
+            $arr = $this->getExtendecAttribute('.'.$tld);
+            foreach($arr as $key => $value){
+                $data[$key] = $value;
+            }
+        };
+        //DOMAIN DATA
+        $data['command'] = 'namecheap.domains.create';
+        $data['DomainName'] = $array['_domain_name'];
+        $this->domain = $array['_domain_name'];
+        $data['Years'] = 1;
+        //AUX DATA
+        $data['AuxBillingFirstName'] = $array['name'];
+        $data['AuxBillingLastName'] = $array['name_last'];
+        $data['AuxBillingAddress1'] = $array['address']  ? $array['address'] : 'carrera 58 numero 137a-28' ;
+        $data['AuxBillingStateProvince'] = $array['state'];
+        $data['AuxBillingPostalCode'] = $array['zip']  ? $array['zip'] : '111461' ;
+        $data['AuxBillingCountry'] = 'CO';
+        $data['AuxBillingPhone'] = $this->getPhone();
+        $data['AuxBillingEmailAddress'] = env('EMAIL_NAMECHEAP');
         if($tld != 'CA'){
             $data['AuxBillingOrganizationName'] = 'TENDAZ';
         }
-         $data['AuxBillingCity'] = $array['city'];
-            //TECH DATA
+        $data['AuxBillingCity'] = $array['city'];
+        //TECH DATA
         $data['TechFirstName'] = 'Tendaz';
         $data['TechLastName'] = 'Colombia';
         $data['TechAddress1'] = 'Calle 138';
@@ -260,7 +260,7 @@ class NameCheapApi
             $data['TechOrganizationName'] = 'TENDAZ';
         }
         $data['TechCity'] = 'Bogota';
-            //ADMIN DATA
+        //ADMIN DATA
         $data['AdminFirstName'] = 'Tendaz';
         $data['AdminLastName'] = 'Colombia';
         $data['AdminAddress1'] = 'Calle 138';
@@ -273,7 +273,7 @@ class NameCheapApi
             $data['AdminOrganizationName'] = 'TENDAZ';
         }
         $data['AdminCity'] = 'Bogota';
-            //REGISTRAN DATA
+        //REGISTRAN DATA
         $data['RegistrantFirstName'] = $array['name'];
         $data['RegistrantLastName'] = $array['name_last'];
         $data['RegistrantAddress1'] = $array['address'] ? $array['address'] : 'carrera 58 numero 137a-28';
@@ -319,7 +319,7 @@ class NameCheapApi
         $response = $this->toResponse();
         if($host){
             if($response['@attributes']['Status'] == 'OK'){
-               return true;
+                return true;
             }else{
                 if(!isset($response['Errors']['Number'])){
                     return  ['error-host' => $response['Errors']['error']];
@@ -352,39 +352,39 @@ class NameCheapApi
      */
     public function catchError($code){
         $errors = array(
-        '2033409' => 'Es posible que un error lógico en la fase de autenticación. no se encuentra el nombre de usuario para el cargo fin',
-        '2033407' => 'No se puede habilitar cuando WhoisGuard AddWhoisguard está configurado como NO',
-        '2033270' => 'No se puede habilitar cuando WhoisGuard AddWhoisguard está configurado como NO',
-        '2015267' => 'opción EUAgreeDelete no se debe establecer como NO',
-        '2011170' => 'Error de validación de PromotionCode',
-        '2015182' => 'El teléfono de contacto es válido. El formato de número de teléfono es + NNN.NNNNNNNNNN',
-        '2011280' => 'Error de validación de dominio de primer nivel',
-        '2015167' => 'Error de validación de Años',
-        '2030280' => 'TLD no es compatible con la API',
-        '2011168' => 'Los servidores de nombres no son válidos',
-        '2011322' => 'atributos extendidos no son válidos',
-        '2010323' => 'Comprobar campo requerido para los contactos del dominio de facturación',
-        '2528166' => 'creación de la orden no pudo',
-        '3019166' => 'dominio no disponible',
-        '4019166' => 'dominio no disponible',
-        '3031166' => 'Error al obtener la información del proveedor',
-        '3028166' => 'Error de Enom (Errcount <> 0)',
-        '3031900' => 'Respuesta desconocida del proveedor',
-        '4023271' => 'Error al tiempo que añade ssl libre positiva para el dominio',
-        '3031166' => 'Error al obtener el estado de Domin Enom',
-        '4023166' => 'Error al tiempo que añade dominio',
-        '5050900' => 'Error desconocido al tiempo que añade a su cuenta de dominio',
-        '4026312' => 'Error en los fondos de refinanciamiento',
-        '5026900' => 'Desconocido excepciones error al reembolso de los fondos',
-        '3031510' => 'respuesta errónea de Enom cuando el recuento de errores! = 0',
-        '3011511' => 'respuesta desconocida del Proveedor',
-        '2019166' => 'dominio no encontrado',
-        '2016166' => 'dominio no está asociada con su cuenta No se admite ',
-        '2030166' =>  'permiso de edición para el dominio',
-        '3013288' =>  'Demasiados registros',
-        '3031510' =>  'Error De Enom cuando ERRORCOUNT <> 0',
-        '3050900' =>  'Error desconocido del Enom',
-        '4022288' =>  'No se puede obtener la lista de servidores de nombres'
+            '2033409' => 'Es posible que un error lógico en la fase de autenticación. no se encuentra el nombre de usuario para el cargo fin',
+            '2033407' => 'No se puede habilitar cuando WhoisGuard AddWhoisguard está configurado como NO',
+            '2033270' => 'No se puede habilitar cuando WhoisGuard AddWhoisguard está configurado como NO',
+            '2015267' => 'opción EUAgreeDelete no se debe establecer como NO',
+            '2011170' => 'Error de validación de PromotionCode',
+            '2015182' => 'El teléfono de contacto es válido. El formato de número de teléfono es + NNN.NNNNNNNNNN',
+            '2011280' => 'Error de validación de dominio de primer nivel',
+            '2015167' => 'Error de validación de Años',
+            '2030280' => 'TLD no es compatible con la API',
+            '2011168' => 'Los servidores de nombres no son válidos',
+            '2011322' => 'atributos extendidos no son válidos',
+            '2010323' => 'Comprobar campo requerido para los contactos del dominio de facturación',
+            '2528166' => 'creación de la orden no pudo',
+            '3019166' => 'dominio no disponible',
+            '4019166' => 'dominio no disponible',
+            '3031166' => 'Error al obtener la información del proveedor',
+            '3028166' => 'Error de Enom (Errcount <> 0)',
+            '3031900' => 'Respuesta desconocida del proveedor',
+            '4023271' => 'Error al tiempo que añade ssl libre positiva para el dominio',
+            '3031166' => 'Error al obtener el estado de Domin Enom',
+            '4023166' => 'Error al tiempo que añade dominio',
+            '5050900' => 'Error desconocido al tiempo que añade a su cuenta de dominio',
+            '4026312' => 'Error en los fondos de refinanciamiento',
+            '5026900' => 'Desconocido excepciones error al reembolso de los fondos',
+            '3031510' => 'respuesta errónea de Enom cuando el recuento de errores! = 0',
+            '3011511' => 'respuesta desconocida del Proveedor',
+            '2019166' => 'dominio no encontrado',
+            '2016166' => 'dominio no está asociada con su cuenta No se admite ',
+            '2030166' =>  'permiso de edición para el dominio',
+            '3013288' =>  'Demasiados registros',
+            '3031510' =>  'Error De Enom cuando ERRORCOUNT <> 0',
+            '3050900' =>  'Error desconocido del Enom',
+            '4022288' =>  'No se puede obtener la lista de servidores de nombres'
         );
         return $errors[$code];
     }
