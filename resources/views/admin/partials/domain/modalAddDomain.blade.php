@@ -22,7 +22,7 @@
                 </div>
                 <form role="form" action="{{ url('admin/setting/domain/create') }}" data-token="{{ csrf_token() }}" name="add_domain" >
                     <div class="from-group">
-                        <!-- <label>Ingresa tu nombre de Donimio Existente</label> -->
+                        <label>Ingresa el nombre del Dominio Existente</label>
                         <div class="input-group">
                             <span class="input-group-addon" style="background: #3C3C3C; color: white;">http://</span>
                             <input type="text" class="form-control" name="domain" style="background-color:#D1D2D4; color: white; font-size: 16px;">

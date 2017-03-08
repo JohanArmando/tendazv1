@@ -1,8 +1,7 @@
 (function(){
     $(document).on('ready' , function () {
-        //funcion que al dar click en check domain toma solo la ultima parte del dominio para evirtar errores aparte
-        //de si el valor de slect no lo tiene  lo agrega con punto
         $('#buyer-domain').on('click' , function () {
+            $('#buyer-domain').addClass('hidden');
             var input = $('#basic-url');
             var domain = input.val();
             var tld = $('#select-domain').val();
@@ -25,18 +24,20 @@
             }
             var data = {'domain' : stringToSend , 'tld' : $.unique(arrayTLD)};
             $.ajax({
-                url : url,
+                url : url + '/check?client_secret='  + client_secret + '&client_id=' + client_id,
                 headers : {'X-CSRF-TOKEN' : token },
                 type : 'POST',
                 dataType : 'json',
                 data : data,
                 beforeSend : function () {
-                    $('.preloader_general').removeClass('hidden');
+                    $('#search').removeClass('hidden');
+                    $('#text').removeClass('hidden');
                 },
                 success : function (response) {
                     var ul = $('.not-available').find('ul');
                     if(!response.available){
-                        $('.preloader_general').addClass('hidden');
+                        $('#search').addClass('hidden');
+                        $('#text').addClass('hidden');
                         $('.not-available').removeClass('hidden');
                         $.each(response[0] , function (key , value) {
                             if(value['@attributes']['Status'] == "OK"){
@@ -45,15 +46,18 @@
                             }
                             ul.append(li);
                         });
+                        $('#buyer-domain').removeClass('hidden');
                     }else{
-                        $('.preloader_general').removeClass('hidden');
+                        $('#search').removeClass('hidden');
+                        $('#text').removeClass('hidden');
                         $('.not-available').addClass('hidden');
+
                         $('#bs-modal').modal('toggle');
                         $('#basic-url').val('');
                         var setup = $('.setup-billing');
                         setup.removeClass('hidden');
                         ul.html('');
-                        //$('.payment-form').append(response.view);
+                        $('.payment-form').append(response.view);
                         function addFormFields(form, data) {
                             if (data != null) {
                                 $.each(data, function (name, value) {
@@ -64,7 +68,6 @@
                                 });
                             }
                         };
-
                         $.getJSON("https://api.ipify.org?format=jsonp&callback=?",function(){
                         }).success(function(json){
                             $.getJSON( "https://freegeoip.net/json/"+json.ip, function(data) {
@@ -73,7 +76,7 @@
                                     data  = {
                                         'sid' : response.sid ,
                                         'mode' : '2CO' ,
-                                        'x_receipt_link_url'  : 'http://tendaz.local/check/payment',
+                                        'x_receipt_link_url'  : url + '/buy?client_secret='  + client_secret + '&client_id=' + client_id,
                                         "x_receipt_user" : response.user.uuid,
                                         "x_domain_true" : 1 ,
                                         "_domain_name" : response.domain,
@@ -111,7 +114,7 @@
                                         'ship_zip' : API.zip_code == '' ? '111461' : API.zip_code,
                                         'ship_country' : API.country_name,
                                         'email' : response.user.email,
-                                        'phone' : response.shop.phone_contact ? esponse.shop.phone_contact : '5555555',
+                                        'phone' : response.shop.phone_contact ? response.shop.phone_contact : '5555555',
                                         'tco_use_inline' : 1
                                     }
                                     var form = $('<form></form>');
@@ -123,14 +126,15 @@
                                     $("body").append(form);
 
                                     $('.tco_lightbox').remove();
-                                    $.getScript( "https://www.johinsdev.com/static/checkout/javascript/direct.min.js", function( data, textStatus, jqxhr ) {
+                                    /*$.getScript( "https://www.johinsdev.com/static/checkout/javascript/direct.min.js", function( data, textStatus, jqxhr ) {
                                         setTimeout(function() {
                                             form.submit();
                                             form.remove();
                                         }, 1000);
-                                    });
+                                    });*/
                                     setTimeout(function() {
-                                        $('.preloader_general').addClass('hidden');
+                                        $('#search').addClass('hidden');
+                                        $('#text').addClass('hidden');
                                     }, 5500);
                                     $('#tco_lightbox').on('click' , '#button-content' , function () {
                                         alert('hola');
@@ -141,17 +145,19 @@
                                 })
                                 .always(function() {
                                     console.log( "complete" );
+                                    $('#buyer-domain').removeClass('hidden');
                                 });
                         });
                     }
                 },
                 error : function () {
-                    alert('Hay un error een els servidor');
-                    $('.preloader_general').addClass('hidden');
+                    alert('Hay un error en el servidor');
+                    $('#search').addClass('hidden');
+                    $('#text').addClass('hidden');
                 }
             });
         });
-        //funcion que cambian el select despues que en uno de los dominios sse de select
+        //funcion que cambian el select despues que en uno de los dominios se de select
         $('#basic-url').keyup(function(){
             var value = $(this).val();
             var lastCharacter = value.lastIndexOf('.');

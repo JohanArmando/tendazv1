@@ -247,6 +247,7 @@ return [
         'MP' => SantiGraviano\LaravelMercadoPago\Facades\MP::class,
         'Date' => Jenssegers\Date\Date::class,
         'Location' => 'Stevebauman\Location\Facades\Location',
+        'cURL' => 'anlutro\cURL\Laravel\cURL'
     ],
 
 ];

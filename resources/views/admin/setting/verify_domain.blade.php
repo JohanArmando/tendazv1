@@ -1,5 +1,7 @@
 @extends('layouts.administrator')
-
+@section('title')
+    Verifica tu dominio
+@stop
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{asset('administrator/bootstrap-select/dist/css/bootstrap-select.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('administrator/css/payment-plan.css')}}">

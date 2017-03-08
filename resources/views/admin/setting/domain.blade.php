@@ -45,7 +45,7 @@ Configura tu dominio
 			<div id="new_tab" class="col-md-12">
 				<div class="border-content">
 				<ul class="nav nav-tabs nav-justified">
-					<li class="hidden custom_tab"><a class="link_tab tab1" href="#tabone" data-toggle="tab">Comprar Dominio</a></li>
+					<li class="custom_tab"><a class="link_tab tab1" href="#tabone" data-toggle="tab">Comprar Dominio</a></li>
 					<li class="custom_tab"><a class="link_tab" href="#tabtwo" data-toggle="tab">Agregar Dominio</a></li>
 					<li class="custom_tab active"><a class="link_tab tab3" href="#tabthree" data-toggle="tab">Mis Dominios</a></li>
 				</ul>
@@ -138,4 +138,6 @@ Configura tu dominio
 @include('admin.partials.domain.modalCompleteInstall')
 @endsection
 @section('scripts')
+	<script src="https://www.2checkout.com/static/checkout/javascript/direct.min.js"></script>
+	<script src="{{asset('administrator/js/domain.js')}}"></script>
 @stop
