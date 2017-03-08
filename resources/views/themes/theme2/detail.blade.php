@@ -56,6 +56,22 @@
                                                         <img src="{{asset('administrator/imagesMediosdePago/payment-4.png')}}" alt="">
                                                     </span><hr>
                             </div>
+                            <div>
+                                <div class="col-xs-6 text-center"><strong>Variantes:</strong></div>
+                                <div class="col-xs-6 text-center">
+                                        <div ng-repeat="variant in product.variants.data" class="col-md-5" style="width: 100px; margin-right: 5px;">
+                                            <a href="{{ url('/') }}<% '/detail/' + product.slug + '/' +variant.id%>" >
+                                                <img ng-mousemove="updateImage(this)"  ng-src="<% variant.images.data[0].url %>"  alt=""  class="img-thumbnail img-clickEa"
+                                                     style="min-height: 120px;max-height: 120px;">
+                                            </a>
+                                        </div>
+                                    <div class="col-md-12"><hr></div>
+                                </div>
+                            </div>
+                            <div ng-repeat="property in properties">
+                                <div class="col-xs-6 text-center"><strong><% property.name %>:</strong></div>
+                                <div class="col-xs-6 text-center"><span ng-repeat="value in property.values"><% value.name %>, </span><hr></div>
+                            </div>
                             <div class="col-xs-6 text-center"><strong>Cantidad</strong></div>
                             <div class="col-xs-6 text-center">
                                     <span class="green">

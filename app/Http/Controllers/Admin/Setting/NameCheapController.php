@@ -1,7 +1,6 @@
 <?php
 
 namespace Tendaz\Http\Controllers\Admin\Setting;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Cookie;
 use Tendaz\Api\NameCheapApi;
@@ -13,6 +12,7 @@ use Tendaz\Models\Domain\Domain;
 use Tendaz\Models\Domain\Tld;
 use Tendaz\Models\User;
 use anlutro\cURL;
+use Tendaz\Api\Twocheckout;
 
 
 class NameCheapController extends Controller
@@ -22,9 +22,6 @@ class NameCheapController extends Controller
      *Get data
      */
     public function __construct(){
-        $this->user = User::find(1);
-        $this->shop = $this->user->shop;
-        $this->domains = $this->shop->domains;
         $this->ip = env('IP');
         $this->adapter = new NameCheapApi();
         $this->adapter->setClientIp(env('IP_CLIENT'));
@@ -105,41 +102,124 @@ class NameCheapController extends Controller
             $json = $this->adapter->toResponse();
             $tlds = $request->get('tld');
             $response = $this->adapter->suggestions($json , $tlds , $request->get('domain') );
-            Cache::put($this->user->uuid.'_expire_domain' , 1 ,30);
             return response()->json($response);
         }
     }
 
-    public function getDomainPayment(Request $request){
-        $expired = Cookie::get('_expire_domain');
-        if($expired){
-            $tld = Tld::where('uuid' , $request->get('_uuid_name'))->first();
-            $charge = $this->singleCharge($tld , $request->all());
-            if($charge){
-                $url = $this->adapter->createUrl($request->except(['_token' , 'token']));
-                $response = $this->adapter->create($url);
+    public function getDomainPayment(Request $request)
+    {
+        $privateKey = env('PRIVATE_KEY_TWO');
+        $resellerId = env('SELLER_ID_TWO');
+        Twocheckout::privateKey($privateKey);
+        Twocheckout::sellerId($resellerId);
+        Twocheckout::verifySSL(false);
+
+        Twocheckout::sandbox(env('SANBOX_TWO',false));
+        Twocheckout::username('davidfigueroar9');
+        Twocheckout::password('D19979872f');
+
+        if(Auth('admins')->user()->phone == null){$phone = '+68 523 523 63';}else{$phone= Auth('admins')->user()->phone;}
+
+        $shop = Auth('admins')->user()->shop;
+        $tld = Tld::where('uuid' , $request->get('domainTld'))->first();
+        $position = null;
+
+
+        $data2 = [
+            "sellerId" => env('SELLER_ID_TWO'),
+            "merchantOrderId" => "123",
+            "token" => $request->get('token'),
+            "currency" => "USD",
+            "lineItems" => [
+                [
+                    "type" => 'product',
+                    "price" => $tld->price,
+                    "productId" => 1,
+                    "name" => $request->get('domain'),
+                    "quantity" => "1",
+                    "tangible" => "N",
+                    "recurrence" => "Anual",
+                    "duration" => 'Forever',
+                    "description" => $request->get('domain'),
+                ]
+            ],
+            "billingAddr" => [
+                "name" => !$shop->user->full_name == ' ' ?  $shop->user->full_name : $shop->name,
+                "addrLine1" => 'Bogota',
+                "city" => empty($position->cityName) ? 'Bogota': $position->cityName,
+                "state" =>  empty($position->regionCode) ? 'BOG': $position->regionCode,
+                "zipCode" => empty($position->zipCode) ? '111461': $position->zipCode,
+                "country" =>  empty($position->countryCode) ? 'CO': $position->countryCode,
+                "email" => $shop->user->email,
+                "phoneNumber" =>  $shop->user->phone
+            ]
+        ];
+        //return $data2;
+
+
+        //return $data;
+        if(Auth('admins')->user()->phone == null){$phone = 'Sin Numero';}else{$phone= Auth('admins')->user()->phone;}
+        try {
+            $charge = Twocheckout\Twocheckout_Charge::auth($data2);
+            //return $charge;
+
+        } catch (Twocheckout_Error $e) {
+
+            $this->assertEquals('Unauthorized', $e->getMessage());
+        }
+
+            if($data2){
                 if(isset($response['error'])){
                     return redirect()->back()->with('message',array('type' => 'warning' , 'message' => $response['error']));
                 }else{
-                    $response = $this->adapter->toResponse();
+                    $dom = ['edit',$request->get('domain')];
+                     $this->adapter->toResponse();
                     if(isset($response['has-error'])){
-                        $domain = Domain::create(['name' => $request->get('_domain_name') , 'shop_id' => $this->shop->id , 'status_id' => 5 ]);
-                        Domain::create(['name' => 'www.'.$request->get('_domain_name') , 'shop_id' => $this->shop->id ,'status_id' => 5  ,  'domain_id' => $domain->id]);
-                        return redirect()->back()->with('meesage',array('type' => 'info' , 'message' => 'Se creo el dominio pero no el host error:'.$response['error-host']));
+                        Domain::create([
+                            'domain' => 'http://'.$dom,
+                            'name' => $dom,
+                            'ssl' => 'https://'.$dom,
+                            'state' => 401,
+                            'shop_id' => $shop->id
+                        ]);
+                        return redirect()->back()->with('message',array('type' => 'info' , 'message' => 'Se creo el dominio pero no el host error:'.$response['error-host']));
                     }
-                    $domain = Domain::create(['name' => $request->get('_domain_name') , 'shop_id' => $this->shop->id , 'status_id' => 3]);
-                    Domain::create(['name' => 'www.'.$request->get('_domain_name') , 'shop_id' => $this->shop->id , 'domain_id' => $domain->id ,   'status_id' => 3]);
-                    return redirect()->to('admin/configuration/domain')->with('message',array('type' => 'info' , 'message' => 'Dominio creado y apuntado correctamente. Disfruta de tu tienda personalizada'));
+                    Domain::create([
+                        'domain' => $dom,
+                        'name' => $dom,
+                        'ssl' => $dom,
+                        'state' => 401,
+                        'shop_id' => $shop->id
+                    ]);
+                    return redirect()->to('admin/setting/domain')->with('message',array('type' => 'success' , 'message' => 'Dominio '. $request->get('domain') .' comprado correctamente. Activalo en tu tabla de Dominios'));
                 }
             }else{
                 return redirect()->back()->with('message',array('type' => 'warning' , 'message' => 'No se pudo cargar la compra a tu tarjeta de credito'));
             }
-        }else{
-            return redirect()->to('https://'.$this->user->shop->principalDomain->name.'/admin/setting/domain')
-                ->with('message',array('type' => 'warning' , 'message' => 'El tiempo de session de compra de tu dominio ha expirado'));
-        }
+
         //no olvidar crear el dominio en nginx
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

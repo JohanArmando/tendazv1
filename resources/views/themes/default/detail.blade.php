@@ -95,6 +95,29 @@
                                 </select>
                             </td>
                         </tr>
+                        <tr>
+                            <td>Variantes:</td>
+                            <td>
+                                <div  class="products-slider-detail owl-carousel owl-theme owl-loaded owl-text-select-on">
+                                    <div class="owl-stage-outer">
+                                        <div class="owl-stage" >
+                                            <div ng-repeat="variant in product.variants.data"
+                                                 class="owl-item active" style="width: 100px; margin-right: 5px;">
+                                                <a href="{{ url('/') }}<% '/detail/' + product.slug + '/' +variant.id%>">
+                                                    <img ng-mousemove="updateImage(this)"  ng-src="<% variant.images.data[0].url %>"  alt=""  class="img-thumbnail img-clickEa"
+                                                         style="min-height: 120px;max-height: 120px;">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </td>
+                        </tr>
+                        <tr ng-repeat="property in properties">
+                            <td><% property.name %>:</td>
+                            <td><span ng-repeat="value in property.values"><% value.name %>, </span></td>
+                        </tr>
                         <tr ng-if="!product.stock == 0" ng-controller="productIndexController" ng-cloak="">
                             <td class="btn-action"></td>
                             <td class="text-left">
@@ -119,30 +142,6 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr ng-repeat="property in properties">
-                            <td><% property.name %>:</td>
-                            <td><span ng-repeat="value in property.values"><% value.name %>, </span></td>
-                        </tr>
-                        <tr>
-                            <td>Variantes:</td>
-                            <td>
-                                <div  class="products-slider-detail owl-carousel owl-theme owl-loaded owl-text-select-on">
-                                    <div class="owl-stage-outer">
-                                        <div class="owl-stage" >
-                                            <div ng-repeat="variant in product.variants.data"
-                                                 class="owl-item active" style="width: 100px; margin-right: 5px;">
-                                                <a href="{{ url('/') }}<% '/detail/' + product.slug + '/' +variant.id%>">
-                                                    <img ng-mousemove="updateImage(this)"  ng-src="<% variant.images.data[0].url %>"  alt=""  class="img-thumbnail img-clickEa"
-                                                         style="min-height: 120px;max-height: 120px;">
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </td>
-                        </tr>
-
                         </tbody>
                     </table>
                     

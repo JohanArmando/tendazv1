@@ -136,6 +136,20 @@
 											</select>
 											<div class="pull-left required"></div>
 										</div>
+										<div class="col-xs-2"><strong>Variantes:</strong></div>
+										<div class="col-xs-10">
+											<div ng-repeat="variant in product.variants.data" class="col-md-5 pull-right" style="width: 100px; margin-right: 5px;">
+												<a href="{{ url('/') }}<% '/detail/' + product.slug + '/' +variant.id%>" >
+													<img ng-mousemove="updateImage(this)"  ng-src="<% variant.images.data[0].url %>"  alt=""  class="img-thumbnail img-clickEa"
+														 style="min-height: 120px;max-height: 120px;">
+												</a>
+											</div>
+											<div class="col-md-12"><hr></div>
+										</div>
+										<div ng-repeat="property in properties">
+											<div class="col-xs-2"><strong><% property.name %>:</strong></div>
+											<div class="col-xs-10"><span ng-repeat="value in property.values"><% value.name %>, </span><hr></div>
+										</div>
 										<br>
 										<div class="divider divider--sm"></div>
 										<div class="wrapper" ng-if="!product.stock == 0">
