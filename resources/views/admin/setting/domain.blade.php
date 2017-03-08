@@ -300,7 +300,7 @@ Configura tu dominio
 				 expMonth: '02',
 				 expYear:'20'*/
 			};
-			console.log(args);
+
 			TCO.requestToken(successCallback, errorCallback, args);
 		};
 

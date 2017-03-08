@@ -43,7 +43,7 @@
                             <a href="https://www.namecheap.com/support/knowledgebase/searchResult.aspx?q=Domain" target="_blank" id="read-more-domain">Leer mas sobre la compra de dominios.</a>
                             <div class="text-right">
                                 <button type="button" class="btn btn-default" data-dismiss="modal" style="background:#3B3B3B; color: white; border-radius: 0 !important;"> <i class="fa fa-times"></i></button>
-                                <button type="button" id="buyer-domain" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Esto tardar unos minutos, porfavor espere..." class="btn btn-primary" style="border-radius: 0 !important;"> <i class="fa fa-check"></i></button>
+                                <button type="button" id="buyer-domain" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Esto tardara unos minutos, porfavor espere..." class="btn btn-primary" style="border-radius: 0 !important;"> <i class="fa fa-check"></i></button>
                             </div>
                         </form>
                         <div class="row not-available hidden">
