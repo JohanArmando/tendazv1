@@ -39,7 +39,7 @@ class ShippingMethod extends Model
         event(new updateShippingOrderEvent($cart->order , $total));
         return response()->json(['message' => "Perfecto ya calculamos tu envio :$ ".number_format($total , 2) , 'cart' => fractal()->item($cart, new CartTransformer()) ] , 201);
     }
-    
+
     public function scopeFilterByPrice($query , $total){
         $query->FilterByPriceMin($total)->FilterByPriceMax($total);
     }
@@ -79,8 +79,8 @@ class ShippingMethod extends Model
         }else{
             $this->attributes['max_price'] = 0;
         }
-    }  
-    
+    }
+
     public function setMinPriceAttribute($value)
     {
         if (!empty($value)){
@@ -88,8 +88,8 @@ class ShippingMethod extends Model
         }else{
             $this->attributes['min_price'] = 0;
         }
-    }  
-    
+    }
+
     public function setMaxWeightAttribute($value)
     {
         if (!empty($value)){
@@ -98,7 +98,7 @@ class ShippingMethod extends Model
             $this->attributes['max_weight'] = 0;
         }
     }
-    
+
     public function setMinWeightAttribute($value)
     {
         if (!empty($value)){

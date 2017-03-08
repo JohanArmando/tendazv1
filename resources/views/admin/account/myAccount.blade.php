@@ -17,7 +17,7 @@
     <div class="clearfix"></div>
     <div style="margin-bottom: 20px;"></div>
     @include('admin.partials.message')
-    <div class="row">
+    <div class="row" id="app">
         <div class="col-md-1 col-md-offset-2"></div>
         <div class="col-md-7">
             <div class="panel panel-default">
@@ -34,6 +34,7 @@
                                 <label class="control-label">Telefono</label>
                                 {!! Form::select('phone_type',['mobile' => 'Celular', 'home' => 'Casa', 'work' => 'Trabajo', 'fax' => 'Fax'],$shop->phone_type,['class' => 'form-control']) !!}
                             </div>
+                            {{--
                             <div class="col-md-4">
                                 <label class="control-label">Pais</label>
                                 <select name="country" id="inputCountry" class="form-control" required="required">
@@ -41,20 +42,33 @@
                                         <option value="{{ $country->id }}">{{ $country->name }}</option>
                                     @endforeach
                                 </select>
-                                {{-- <input type="text" style="min-width: 40px !important;" class="form-control" @if($country[ 'country']=='CO' ) value="57" @endif @if($country[ 'country']=='PE' ) value="51" @endif @if($country[ 'country']=='ES' ) value="34" @endif @if(empty($country[ 'country'])) value="{{ Auth('admins')->user()->shop->phone_country }}" @endif name="phone_country" /> --}} 
+                                <!-- <input type="text" style="min-width: 40px !important;" class="form-control" @if($country[ 'country']=='CO' ) value="57" @endif @if($country[ 'country']=='PE' ) value="51" @endif @if($country[ 'country']=='ES' ) value="34" @endif @if(empty($country[ 'country'])) value="{{ Auth('admins')->user()->shop->phone_country }}" @endif name="phone_country" />
+                                -->
                             </div>
-
-                            <div class="col-sm-3">
+                            --}}
+                            <div class="col-sm-2">
                                 <label class="control-label">COD</label>
                                 <input class="form-control" value="{{$store->code_country}}" type="text" name="code_country" />
                             </div>
 
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
                                 <label class="control-label">Telefono</label>
                                 {!! Form::text('number_phone',$shop->phone_nummber,['class' => 'form-control', 'placeholder' => 'Telefono ', 'data-mask' => '999-999-9999']) !!}
                             </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">Estado</label>
+                                <select class="form-control" name="state" v-model="selected_state" v-on:change="getState()">
+                                  <option v-for="state in states" v-bind:value="state.id" >@{{ state.name }}</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">Ciudad</label>
+                                <select class="form-control" v-model="selected_city" name="city_id">
+                                  <option v-for="city in cities" v-bind:value="city.id" >@{{ city.name }}</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
+                    </div>451-634-5465
                     <hr/>
                     <div class="form-group">
                         <div class="row">
@@ -115,21 +129,13 @@
                             </div>
                         </div>
                     </div>
-                    <hr/>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <label class="control-label">Estado/Provincia</label>
-                                {!! Form::text('state',$shop->state,['class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="panel-footer text-center">
                     <a href="{{ url('admin') }}" type="reset" class="btn btn-default"><i class="fa fa-times"></i> Cancelar</a>
                     <button type="submit" class="btn btn-primary"> Guardar Cambios</button>
                 </div>
                 {!! Form::close() !!}
+
+              </div>
                 <div class="col-md-1"></div>
             </div>
             <div class="row">
@@ -151,13 +157,102 @@
         </div>
     </div>
     <div class="page-end-space"></div>
-@endsection 
+@endsection
     @section('scripts')
     <script type="text/javascript" src="{{asset('administrator/plugins/inputmask/js/inputmask.js')}}"></script>
     <script type="text/javascript" src="{{asset('administrator/js/trumbowyg.min.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.2.0/vue-resource.js"></script>
     <script type="text/javascript">
         $('#editor').trumbowyg({
             fullscreenable: false
         });
+        var Api_Url = "{{ env('APP_API_URL') }}";
+        var Base_Url = "{{ url('') }}";
+        Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf_token"]').attr('content');
+        Vue.http.headers.common['Accept'] = 'application/json';
+        Vue.http.headers.common['Content-Type'] = 'application/json';
+        var app = new Vue({
+        el: '#app',
+          data: {
+            states: [],
+            cities: [],
+            selected_state_aux: '',
+            selected_state: '',
+            selected_city: '',
+            selected_city_aux: ''
+
+          },
+          mounted: function () {
+            this.getMyCity();
+          },
+          methods: {
+            loadStates: function () {
+              this.$http.get('http://'+Api_Url+'/states?client_secret='+client_secret+'&client_id='+client_id,this.variant_new).
+              then((response) => {
+                  var data = response.body;
+                  //this.product.variants.push(data);
+                  //this.is_new_variant = false;
+                  //$('#btn-store-variant').button('reset');
+                  this.states = data.states;
+                  this.selected_state = this.selected_state_aux;
+                  this.loadCities(this.selected_state);
+
+                  console.log(data);
+              }, (response) => {
+              // error callback
+                  //$('#btn-store-variant').button('reset');
+                  alert('error to load states');
+
+              })
+            },
+            getState: function () {
+
+               this.loadCities(this.selected_state);
+
+            },
+            loadCities: function (id) {
+              this.$http.get('http://'+Api_Url+'/cities/'+id+'?client_secret='+client_secret+'&client_id='+client_id,this.variant_new).
+              then((response) => {
+                  var data = response.body;
+                  //this.product.variants.push(data);
+                  //this.is_new_variant = false;
+                  //$('#btn-store-variant').button('reset');
+                  this.cities = data.cities;
+                  this.selected_city = this.selected_city_aux;
+
+                  console.log(data);
+              }, (response) => {
+              // error callback
+                  //$('#btn-store-variant').button('reset');
+                  alert('error to load cities');
+
+              })
+            },
+            getMyCity: function () {
+              this.$http.get(Base_Url+'/admin/account/preferences/self?client_secret='+client_secret+'&client_id='+client_id).
+              then((response) => {
+                  var data = response.body;
+                  //this.product.variants.push(data);
+                  //this.is_new_variant = false;
+                  //$('#btn-store-variant').button('reset');
+                  this.selected_city_aux = data.city_id;
+                  this.selected_state_aux = data.state_id;
+                  this.loadStates();
+
+
+                  console.log(data);
+              }, (response) => {
+              // error callback
+                  //$('#btn-store-variant').button('reset');
+                  alert('error');
+
+              })
+
+            }
+
+
+          },
+        })
     </script>
 @stop

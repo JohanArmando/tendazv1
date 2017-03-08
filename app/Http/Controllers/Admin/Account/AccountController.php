@@ -51,9 +51,14 @@ class AccountController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($subdomian, $id)
     {
-        //
+        if ($id == 'self') {
+            $data = Auth('admins')->user()->shop->store;
+            $data->state_id = $data->city->state->id;
+            return $data;
+
+        }
     }
 
     /**

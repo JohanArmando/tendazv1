@@ -20,7 +20,7 @@ class ShippingMethodsController extends Controller
    	public function servientrega(Cart $cart, Request $request)
    	{
    		$Shipping = [];
-   		
+
    		foreach ($cart->products as $variant) {
    			$volumeInMeter = ($variant->product->large*0.01)*($variant->product->height*0.01)*($variant->product->width*0.01);
    			$weightVolumetric  = (222*$volumeInMeter);
@@ -32,7 +32,7 @@ class ShippingMethodsController extends Controller
    				array_push($Shipping,['weight' => $weightVolumetric, 'price' => $variant->price ]);
 
    			}
-   			
+
    		}
    		$address = $cart->customer->addresses()->where('uuid',$request->address_id)->first();
 
@@ -47,29 +47,37 @@ class ShippingMethodsController extends Controller
 
    		]);
    		//dd($client);
-   		$response = $client->post('servientrega/index', [
-   			'json' => [
-   				'products' => $Shipping,
-   				'from' => $cart->customer->shop->store->city->name.'-'.$cart->customer->shop->store->city->state->name,
-   				'to' => $address->city->name.'-'.$address->state->name 
-   			]
-   		]);
-   		$total = 0;
+      if (isset($cart->customer->shop->store->city->name)) {
+        $response = $client->post('servientrega/index', [
+          'json' => [
+            'products' => $Shipping,
+            'from' => $cart->customer->shop->store->city->name.'-'.$cart->customer->shop->store->city->state->name,
+            'to' => $address->city->name.'-'.$address->state->name
+          ]
+        ]);
+        $total = 0;
 
-   		$prices = json_decode($response->getBody());
-   		foreach ($prices as $value) {
-   			$total = $total + $value;
-   		}
-   		//return $prices;
-   		$cart->address_shipping_id = $address->id;
-   		$cart->save();
-   		$cart = $cart->fresh();
+        $prices = json_decode($response->getBody());
+        foreach ($prices as $value) {
+          $total = $total + $value;
+        }
+        //return $prices;
+        $cart->address_shipping_id = $address->id;
+        $cart->save();
+        $cart = $cart->fresh();
 
-   		event(new updateShippingOrderEvent($cart->order , $total));
+        event(new updateShippingOrderEvent($cart->order , $total));
 
 
-   		return response()->json(['message' => "Perfecto ya calculamos tu envio :$ ".number_format($total , 2) , 'cart' => fractal()->item($cart, new CartTransformer()) ] , 201);
-   	}
+        return response()->json([
+            'message' => "Perfecto ya calculamos tu envio :$ ".number_format($total , 2),
+            'cart' => fractal()->item($cart, new CartTransformer())
+            ], 201);
+      }else{
+        return response()->json(
+          ['message' => 'la tienda no tiene envio disponible.' , 'cart' => fractal()->item($cart, new CartTransformer()) ] , 404);
+      }
+    }
 }
 
 
