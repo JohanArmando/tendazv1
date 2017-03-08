@@ -61,7 +61,7 @@ myApp.factory("Shipping" , ["$http" , "User", "$rootScope" , "Cart", "$location"
             $rootScope.carts = response.data.cart.data;
         }).catch(function(response) {
             console.log(response);
-        }).finally(function() {});  
+        }).finally(function() {});
     };
      address.getShippingValue = function (id) {
         return $http({
@@ -100,8 +100,8 @@ myApp.factory("Shipping" , ["$http" , "User", "$rootScope" , "Cart", "$location"
         }).catch(function(response) {
             console.log(response);
         }).finally(function() {});
-    };  
-    
+    };
+
     address.assignShipping = function (data) {
         return $http({
             headers: {

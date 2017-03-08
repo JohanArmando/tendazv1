@@ -62,9 +62,9 @@ class ShippingMethodsController extends Controller
           $total = $total + $value;
         }
         //return $prices;
-        $cart->address_shipping_id = $address->id;
-        $cart->save();
-        $cart = $cart->fresh();
+        $order = $cart->order;
+        $order->shipping_address_id = $address->id;
+        $order->save();
 
         event(new updateShippingOrderEvent($cart->order , $total));
 

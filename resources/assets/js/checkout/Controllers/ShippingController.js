@@ -61,7 +61,7 @@ myApp.controller("shippingController" , ["$scope" , "Shipping" , "$location" , "
     });
     /*GET TOTAL SHIPPING*/
     //$scope.getShippingValue();
-    
+
     /*VARIABLES*/
     $scope.getStates();
     $scope.getAddresses();
