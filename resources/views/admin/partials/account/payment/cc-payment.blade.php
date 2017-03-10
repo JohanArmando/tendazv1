@@ -64,8 +64,10 @@
                        <div class="row">
                            <div class="form-group col-md-12">
                                <label for="">Numero de Tarjeta *</label>
-                               <input type="text" id="card" placeholder="---- ---- ---- ----" class="form-control inputBuy"  required>
-                               <span>type: mastercard</span>
+                               <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                   <div class="input-group-addon" id="type-card"></div>
+                                   <input type="text" id="card" placeholder="---- ---- ---- ----" class="form-control inputBuy"  required>
+                               </div>
                            </div>
                            <div class="form-group col-md-8">
                                <label for="">Expide el *</label>
