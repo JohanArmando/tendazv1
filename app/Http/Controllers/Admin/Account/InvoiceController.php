@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Tendaz\Http\Requests;
 use Tendaz\Http\Controllers\Controller;
 use Tendaz\Models\Subscription\Plan;
+use Tendaz\Api\Twocheckout;
 use Tendaz\Models\Subscription\Subscription;
 
 class InvoiceController extends Controller
@@ -23,7 +24,22 @@ class InvoiceController extends Controller
     public function show($subdomain , $id)
     {
         $invoice = Subscription::where('uuid',$id)->first();
-        return view('admin.account.my-invoice',compact('invoice'));
+        $Subscription = Subscription::find(Auth('admins')->user()->shop->subscription_id);
+        Twocheckout::verifySSL(false);
+        Twocheckout::sandbox(env('SANBOX_TWO',false));
+        Twocheckout::username(env('USER_TWO'));
+        Twocheckout::password(env('PASSWORD_TWO'));
+
+        $args = array(
+            'sale_id' => $Subscription->sale_id
+        );
+        try {
+            $result = Twocheckout\Api\Twocheckout_Sale::retrieve($args);
+        } catch (Twocheckout_Error $e) {
+            $e->getMessage();
+        }
+        //return $result;
+        return view('admin.account.my-invoice',compact('invoice','result'));
     }
 
     public function edit(){

@@ -20,15 +20,15 @@
                </div>
            </div>
        </div>
-   @endforeach 
-        
+   @endforeach
+
            <!-- Boton pago con tarjeta -->
    <div class="checkout-confirm-container confirm">
        <div class="checkout-confirm container">
             <div style="display: none; margin-left: 4.5%"><strong>Medio de pago:</strong> <span class="confirm-method">Tarjeta de cr&eacute;dito</span></div>
             <div style="display: none ;width: 59%; margin-left: 4.5%"><strong>Per&eacute;odo a contratar:</strong> <span class="confirm-period"></span></div>
-            
-            
+
+
 
            <div class="clearfix"></div>
            <div class="panel-footer text-center">
@@ -42,7 +42,7 @@
                    </a>
                </div>
            </div>
-           
+
            <button data-toggle="modal" data-target="#myModal" class="hidden btn btn-primary">
                Contratar plan Modal
            </button>
@@ -50,8 +50,8 @@
    </div>
 
    <!-- Modal -->
-   <div class="modal fade bs-example-modal-md buyModal" tabindex="-1" aria-labelledby="mySmallModalLabel" id="myModal" role="dialog" >
-       <div class="modal-dialog modal-md" role="document">
+   <div class="modal fade bs-example-modal-lg buyModal" tabindex="-1" aria-labelledby="mySmallModalLabel" id="myModal" role="dialog" >
+       <div class="modal-dialog modal-lg" role="document">
            <div class="modal-content buyContent">
                <div class="modal-header buyHeader">
                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="closeBuy" aria-hidden="true">&times;</span></button>
@@ -62,51 +62,99 @@
                         <input type="hidden" name="uuid" class="input_uuid" value="{{ $plan->plan->periods[0]->uuid }}">
                         <input type="hidden" name="token" class="input_uuid" value="">
                        <div class="row">
+                           <div class="col-md-6">
+                                <legend>Datos personales</legend>
+                                <div class="form-group">
+                                     <label for="">Nombres</label>
+                                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                       <span class="input-group-addon"><i aria-hidden="true" class="glyphicon glyphicon-user"></i></span>
+                                        <input id="name" type="text" name="name" value="{{ Auth('admins')->user()->name }} {{ Auth('admins')->user()->last_name }}" placeholder="John Doe" class="form-control" required>
+                                     </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Email</label>
+                                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                       <span class="input-group-addon"><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i></span>
+                                       <input id="email" type="text" value="{{ Auth('admins')->user()->email }}" name="email" placeholder="123 Main Street" class="form-control" required>
+                                    </div>
+                                </div>
+                           </div>
+                           <div class="col-md-6">
+                             <legend>Datos de la tarjeta</legend>
+
+                             <div class="form-group">
+                                 <label for="">Numero de Tarjeta *</label>
+                                 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                     <div class="input-group-addon" id="type-card"><i class="glyphicon glyphicon-credit-card"></i></div>
+                                     <input type="text" id="card" placeholder="---- ---- ---- ----" class="form-control"  required>
+                                 </div>
+                             </div>
+                             <div class="row">
+                               <div class="form-group col-md-8">
+                                   <label for="">Expide el *</label>
+                                   <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                     <input type="text" id="expiry" placeholder="MM / YYYY" class="form-control" required>
+                                   </div>
+                               </div>
+                               <div class="form-group col-md-4">
+                                   <label for="">CVC *</label>
+                                   <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                     <span class="input-group-addon"><i aria-hidden="true" class="glyphicon glyphicon-ok"></i></span>
+                                     <input id="cvc" type="text" placeholder="---" class="form-control" maxlength="3" pattern="[0-9]*" required>
+                                    </div>
+                               </div>
+                             </div>
+                           </div>
+
+                           <div class="col-md-12">
+                             <legend>Dirección de facturación</legend>
+
+                           </div>
                            <div class="form-group col-md-12">
-                               <label for="">Numero de Tarjeta *</label>
+                               <label for="">Direccion 1 *</label>
                                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                   <div class="input-group-addon" id="type-card"></div>
-                                   <input type="text" id="card" placeholder="---- ---- ---- ----" class="form-control inputBuy"  required>
+                                  <span class="input-group-addon"><i aria-hidden="true" class="glyphicon glyphicon-pencil"></i></span>
+                                  <input id="addrLine1" type="text" value="" name="addrLine1" placeholder="123 Main Street" class="form-control" required>
                                </div>
                            </div>
-                           <div class="form-group col-md-8">
-                               <label for="">Expide el *</label>
-                               <input type="text" id="expiry" placeholder="MM / YYYY" class="form-control inputBuy" required>
-                           </div>
-                           <div class="form-group col-md-4">
-                               <label for="">CVC *</label>
-                               <input id="cvc" type="text" placeholder="---" class="form-control inputBuy" maxlength="3" pattern="[0-9]*" required>
-                           </div>
                            <div class="form-group col-md-12">
-                               <label for="">Nombres</label>
-                               <input id="name" type="text" name="name" value="{{ Auth('admins')->user()->name }} {{ Auth('admins')->user()->last_name }}" placeholder="John Doe" class="form-control" required>
+                               <label for="">Direccion 2 (opcional)</label>
+                               <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                  <span class="input-group-addon"><i aria-hidden="true" class="glyphicon glyphicon-pencil"></i></span>
+                                  <input id="addrLine2" type="text" value="" name="addrLine2" placeholder="123 Main Street" class="form-control" required>
+                               </div>
                            </div>
-                           <div class="form-group col-md-12">
-                               <label for="">Email</label>
-                               <input id="email" type="text" value="{{ Auth('admins')->user()->email }}" name="email" placeholder="123 Main Street" class="form-control" required>
-                           </div>
-                           <div class="form-group col-md-12">
-                               <label for="">Direccion</label>
-                               <input id="addrLine1" type="text" value="" name="addrLine1" placeholder="123 Main Street" class="form-control" required>
-                           </div>
-                           
+
                            <div class="form-group col-md-6">
-                               <label for="">Ciudad</label>
-                               <input id="city" type="text" name="city" placeholder="Townsville" class="form-control" required>
+                               <label for="">Ciudad *</label>
+                               <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                  <span class="input-group-addon"><i aria-hidden="true" class="glyphicon glyphicon-pencil"></i></span>
+                                  <input id="city" type="text" name="city" placeholder="Townsville" class="form-control" required>
+                                </div>
                            </div>
                            <div class="form-group col-md-6">
-                               <label for="">Codigo Postal</label>
-                               <input id="zipCode" type="text" name="zipCode" placeholder="43206" class="form-control" required>
+                               <label for="">Codigo Postal *</label>
+                               <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                  <span class="input-group-addon"><i aria-hidden="true" class="glyphicon glyphicon-pencil"></i></span>
+                                  <input id="zipCode" type="text" name="zipCode" placeholder="43206" class="form-control" required>
+                               </div>
                            </div>
                            <div class="form-group col-md-6">
-                               <label for="">Estado</label>
-                               <input id="state" type="text" name="state" placeholder="Ohao" class="form-control" required>
+                               <label for="">Estado *</label>
+                               <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                  <span class="input-group-addon"><i aria-hidden="true" class="glyphicon glyphicon-pencil"></i></span>
+                                  <input id="state" type="text" name="state" placeholder="Ohao" class="form-control" required>
+                                </div>
                            </div>
                            <div class="form-group col-md-6">
-                               <label for="">Pais</label>
-                               <input id="country" type="text" name="country" placeholder="USA" class="form-control" required>
+                               <label for="">Pais *</label>
+                               <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                  <span class="input-group-addon"><i aria-hidden="true" class="glyphicon glyphicon-globe"></i></span>
+                                  <input id="country" type="text" name="country" placeholder="USA" class="form-control" required>
+                                </div>
                            </div>
-                           
+
                            <div class="col-md-12">
                                <button id="enviar" type="button" data-loading-text="<i class='fa fa-spinner fa-spin'></i> procesando..." class="btn btn-primary pull-right buyRight" disabled="true"></button>
                            </div>
@@ -116,5 +164,5 @@
            </div>
        </div>
    </div>
-   <!-- end Modal --> 
+   <!-- end Modal -->
 </div>

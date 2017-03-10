@@ -19,6 +19,11 @@ class SubscriptionController extends Controller
             return redirect()->to('/admin/account/plans')
                 ->with('message' , ['type' => 'info' , 'message' => 'Debes seleccionar un plan antes de poder pagarlo']);
         }
+        $subscription = Subscription::find(Auth('admins')->user()->shop->subscription_id);
+        if ($subscription->recurrent == 1) {
+          return redirect()->to('/admin/account/plans')
+              ->with('message' , ['type' => 'info' , 'message' => 'Ya estas suscripto a un plan, cancela la subscription para optar por otra']);
+        }
         return view('admin.account.payment-plan' , ['plan' => $plan]);
     }
 
@@ -75,13 +80,13 @@ class SubscriptionController extends Controller
                 ]
             ],
             "billingAddr" => [
-                "name" => !$shop->user->full_name == ' ' ?  $shop->user->full_name : $shop->name,
-                "addrLine1" => 'Colina Campestre',
-                "city" => empty($position->cityName) ? 'Bogota': $position->cityName,
-                "state" =>  empty($position->regionCode) ? 'BOG': $position->regionCode,
-                "zipCode" => empty($position->zipCode) ? '111461': $position->zipCode,
-                "country" =>  empty($position->countryCode) ? 'CO': $position->countryCode,
-                "email" => $shop->user->email,
+                "name" => $request->name,
+                "addrLine1" => $request->addrLine1,
+                "city" => $request->city,
+                "state" =>  $request->state,
+                "zipCode" => $request->zipCode,
+                "country" =>  $request->country,
+                "email" => $request->email,
                 "phoneNumber" =>  $shop->user->phone
             ]
         ];
