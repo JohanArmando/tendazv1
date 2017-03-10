@@ -1,9 +1,9 @@
-@extends('admin.template')
-	@section('css')
-	<link rel="stylesheet" type="text/css" href="{{asset('admin/css/custom_tendaz.css')}}">
+@extends('layouts.administrator')
+@section('css')
+<link rel="stylesheet" type="text/css" href="{{asset('admin/css/custom_tendaz.css')}}">
 <link rel="stylesheet" href="{{ asset('admin/css/mercadolibre.css') }}" media="screen"  charset="utf-8">
-		@stop
-	@section('content')
+@endsection
+@section('content')
    <div class="page-header page-header-block">
         <div class="page-header-section">
             <h4 class="title semibold"><img width="20" height="20" src="{{asset('admin/image/icons/icons-nav/mercadolibre.png')}}"> Mi Mercadolibre</h4>
@@ -29,34 +29,6 @@
                         </div>
                     </div>
 
-<<<<<<< HEAD
-@section('content')
-	<div class="page-header page-header-block">
-		<div class="page-header-section">
-			<h4 class="title semibold"><img width="20" height="20" src="{{asset('admin/image/icons/icons-nav/mercadolibre.png')}}"> Mi Mercadolibre</h4>
-		</div>
-		<div class="page-header-section">
-			<!--Toolbar-->
-			<div class="toolbar">
-				<ol class="breadcrumb breadcrumb-transparent nm">
-					<li><a href="{{url('admin/home')}}" style="color: darkgrey;"><i class="fa fa-home"></i> Inicio</a></li>
-				</ol>
-			</div>
-		</div>
-	</div>
-		<div class="content">
-            <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-10">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="panel-title">
-                            <div class="col-md-6">
-                                <h5><strong>Asocia tu Mercadolibre</strong></h5>
-                                </div>
-                            </div>
-                            
-=======
                 </div>
                 <div class="panel-body mercadolibre">
                     <div class="col-md-12 text-center">
@@ -64,7 +36,7 @@
                             <img src="{{asset('tendaz/img/mercadotendaz.png')}}" width="50%">
                             <h4 align="center"><strong>Hemos asociado tu tienda con tu cuenta en MercadoLibre</strong></h4>
                             <p>Ahora puedes importar los productos de dercadolibre o exportarlos directamente a tu tienda</p>
->>>>>>> 5af0b75e734e41f100d07d7fb77b0ef7df32ba39
+
                         </div>
                         <div class="row">
                             <div class="col-md-2">
@@ -207,12 +179,10 @@
           </div>
         </div>
     </div>
-		@endsection
-	@section('scripts')
-  <script src="http://a248.e.akamai.net/secure.mlstatic.com/org-img/sdk/mercadolibre-1.0.4.js">
-  </script>
+@endsection
+@section('scripts')
+<script src="http://a248.e.akamai.net/secure.mlstatic.com/org-img/sdk/mercadolibre-1.0.4.js"></script>
 <script type="text/javascript" src="{{ asset('admin/angular/latest1/angular.min.js') }}"></script>
-
 <script type="text/javascript" src="{{ asset('admin/angular/moduloMercadoLibre.js') }}"></script>
 <script type="text/javascript">
 // A $( document ).ready() block.
@@ -220,4 +190,4 @@ $( document ).ready(function() {
    $('[data-toggle="tooltip"]').tooltip();
 });
 </script>
-		@stop
+@endsection

@@ -134,6 +134,7 @@
             */
             $('#card').payform('formatCardNumber');
             $('#expiry').payform('formatCardExpiry');
+
             
             $('#card').keyup(function () {
                 var val =  $(this).val();

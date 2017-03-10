@@ -106,7 +106,7 @@ $domain = new \Tendaz\Models\Domain\Domain();
         Route::resource('shippings', 'ShippingController',
             ['only' => ['index', 'store', 'update', 'destroy']]);
         //meli
-        Route::get('/mercadolibre',function(){return redirect()->back();})->middleware('plan:estandar,avanzado');
+        Route::get('/mercadolibre',function(){return view('admin.setting.mercadolibre.index');})->middleware('plan:estandar,avanzado');
         //setting domain
         Route::get('/domain', 'NameCheapController@getIndex');
         Route::get('/domain/create', 'NameCheapController@store');
