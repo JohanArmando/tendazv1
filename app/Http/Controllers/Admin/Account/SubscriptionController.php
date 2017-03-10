@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Stevebauman\Location\Facades\Location;
 use Tendaz\Api\Twocheckout;
 use Tendaz\Models\Subscription\Plan;
+use Tendaz\Models\Subscription\Subscription;
 use Tendaz\Http\Controllers\Controller;
 
 class SubscriptionController extends Controller
@@ -35,10 +36,11 @@ class SubscriptionController extends Controller
     }
 
     public function doSubscription($subdomain , Request $request)
-    {   
+    {
         //return $request->get('token');
         //return $request->all();
         $position = Location::get($request->ip());
+        //dd($position);
         $privateKey = env('PRIVATE_KEY_TWO');
         $resellerId = env('SELLER_ID_TWO');
         Twocheckout::privateKey($privateKey);
@@ -46,24 +48,21 @@ class SubscriptionController extends Controller
         Twocheckout::verifySSL(false);
 
         Twocheckout::sandbox(env('SANBOX_TWO',false));
-        Twocheckout::username('davidfigueroar9');
-        Twocheckout::password('D19979872f');
         Plan::whereUuid($request->get('uuid'));
         $plan = Plan::whereUuid($request->get('uuid'));
 
         if(Auth('admins')->user()->phone == null){$phone = '+68 523 523 63';}else{$phone= Auth('admins')->user()->phone;}
 
         $shop = Auth('admins')->user()->shop;
-        $position = null;
 
 
-        $data2 = [  
+        $data2 = [
             "sellerId" => env('SELLER_ID_TWO'),
             "merchantOrderId" => "123",
             "token" => $request->get('token'),
             "currency" => "USD",
             "lineItems" => [
-                [                       
+                [
                     "type" => 'product',
                     "price" => $plan->getTotalPriceWithDiscount(),
                     "productId" => $plan->uuid,
@@ -72,10 +71,10 @@ class SubscriptionController extends Controller
                     "tangible" => "N",
                     "recurrence" => $plan->getIntervalInMonthly(). " Month",
                     "duration" => 'Forever',
-                    "description" => $plan->description   
-                ] 
+                    "description" => $plan->description
+                ]
             ],
-            "billingAddr" => [ 
+            "billingAddr" => [
                 "name" => !$shop->user->full_name == ' ' ?  $shop->user->full_name : $shop->name,
                 "addrLine1" => 'Colina Campestre',
                 "city" => empty($position->cityName) ? 'Bogota': $position->cityName,
@@ -88,13 +87,15 @@ class SubscriptionController extends Controller
         ];
         //return $data2;
 
-        
+
         //return $data;
+        $sale_id = null;
         if(Auth('admins')->user()->phone == null){$phone = 'Sin Numero';}else{$phone= Auth('admins')->user()->phone;}
         try {
             $charge = Twocheckout\Twocheckout_Charge::auth($data2);
-            //return $charge;
-           
+            $sale_id = $charge['response']['orderNumber'];
+            //return $sale_id;
+
         } catch (Twocheckout_Error $e) {
 
             $this->assertEquals('Unauthorized', $e->getMessage());
@@ -105,18 +106,18 @@ class SubscriptionController extends Controller
 
         if (!$plan)
             abort(404);
-        
+
         $plan->price = $plan->getTotalPriceWithDiscount();
 
         //return ['inicio'=>Carbon::today()->addMonths(1), 'final'=> Carbon::today()->addMonths($plan->getIntervalInMonthly())];
         if (!$request->shop->subscription()->onTrial()) {
             $request->shop
                 ->newSubscription( $plan, Carbon::today(), Carbon::today()->addMonths( $plan->getIntervalInMonthly()))
-                ->skipTrial();
+                ->skipTrial()->onRecurrent($sale_id);
         }else {
             $request->shop
                 ->newSubscription( $plan, Carbon::today(), Carbon::today()->addMonths( $plan->getIntervalInMonthly()))
-                ->skipTrial();
+                ->skipTrial()->onRecurrent($sale_id);
         }
 
 
@@ -124,6 +125,29 @@ class SubscriptionController extends Controller
 
         return redirect()->to('/admin')
             ->with('message' , ['type' => 'info' , 'message' => 'Tu subscripcion ha cambiado a el plan '.$plan->name]);
+    }
+
+    public function stopSubscription()
+    {
+       //9093734457789
+      $Subscription = Subscription::find(Auth('admins')->user()->shop->subscription_id);
+      Twocheckout::verifySSL(false);
+      Twocheckout::sandbox(env('SANBOX_TWO',false));
+      Twocheckout::username(env('USER_TWO'));
+      Twocheckout::password(env('PASSWORD_TWO'));
+
+      $args = array(
+          'sale_id' => $Subscription->sale_id
+      );
+      try {
+          $result = Twocheckout\Api\Twocheckout_Sale::stop($args);
+      } catch (Twocheckout_Error $e) {
+          $e->getMessage();
+      }
+      $Subscription->recurrent = 0;
+      $Subscription->save();
+      return redirect()->to('/admin')
+          ->with('message' , ['type' => 'info' , 'message' => 'La subscripcion ha sido cancelada ']);
     }
 
     public function plans(Request $request)

@@ -24,7 +24,7 @@ class Subscription extends Model
      * @var array
      */
     protected $fillable = [
-        'uuid', 'amount', 'state', 'start_at', 'end_at', 'trial_at', 'shop_id', 'plan_id','recurrent'
+        'uuid', 'amount', 'state', 'start_at', 'end_at', 'trial_at', 'shop_id', 'plan_id','recurrent', 'sale_id'
     ];
 
 
@@ -47,7 +47,7 @@ class Subscription extends Model
     {
         return property_exists($this , 'grace_period') ? $this->grace_period : 10;
     }
-    
+
     public function makeSubscription()
     {
         $this->shop->subscription_id = $this->id;
@@ -58,6 +58,14 @@ class Subscription extends Model
     {
         $this->trial_at =  null;
         $this->save();
+        return $this;
+    }
+
+    public function onRecurrent($sale_id = null)
+    {
+        $this->sale_id =  $sale_id;
+        $this->recurrent =  1;
+        $this->save();
     }
 
     public function swap(Plan $plan)
@@ -65,7 +73,7 @@ class Subscription extends Model
         $this->plan_id = $plan->id;
         $this->save();
     }
-    
+
     public function onTrial()
     {
         return !is_null($this->trial_at) && Carbon::parse($this->trial_at)->isFuture() &&  !$this->cancelled();
@@ -100,7 +108,7 @@ class Subscription extends Model
     {
         return $this->state == self::active;
     }
-    
+
     public function notFinish()
     {
         return !is_null($this->end_at) && Carbon::parse($this->end_at)->isFuture();
@@ -110,7 +118,7 @@ class Subscription extends Model
     {
         return $this->plan_id >= Plan::findName($plan)->id;
     }
-    
+
     public function isSamePlanSubscription($plan)
     {
         return Plan::find($this->plan_id)->plan_id == $plan->plan->id;
@@ -123,7 +131,7 @@ class Subscription extends Model
         Twocheckout::privateKey(env('PRIVATE_KEY_TWO'));
         Twocheckout::sellerId(env('SELLER_ID_TWO'));
         Twocheckout::sandbox(true);
-  
+
         $charge = Twocheckout\Twocheckout_Charge::auth(array(
             "sellerId" => env('SELLER_ID_TWO'),
             "merchantOrderId" => "123",
@@ -164,7 +172,7 @@ class Subscription extends Model
 
         return $this;
     }
-    
+
     public function assertEquals($status , $response)
     {
         if ($status != $response){
