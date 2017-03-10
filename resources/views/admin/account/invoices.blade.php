@@ -59,10 +59,10 @@
 											</tr>
 											</thead>
 											@foreach($invoices as $invoice)
-												<tr data-toggle="modal" data-target="#modal_invoic" class="text-center cu @if($invoice->id == $subscription) trSelect @endif">
+												<tr  class="text-center cu @if($invoice->id == $subscription) trSelect @endif">
 													<td>{{\Tendaz\components\DateGenerator::dateGenerate($invoice->start_at)}}</td>
 													<td>{{\Tendaz\components\DateGenerator::dateGenerate($invoice->end_at)}}</td>
-													<td>{{$invoice->amount}}</td>
+													<td><a href="{{url('/admin/account/invoices/'.$invoice->uuid)}}">{{$invoice->amount}}</a></td>
 													<td>
 														@foreach($plans as $plan)
 															@if($plan->id == $invoice->plan_id)

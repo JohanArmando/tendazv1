@@ -11,12 +11,23 @@ use Tendaz\Models\Subscription\Subscription;
 class InvoiceController extends Controller
 {
 
-    public function index($subdomain, Request $request){
+    public function index($subdomain, Request $request)
+    {
 
         $invoices = Subscription::where('shop_id',$request->shop->id)->get();
         $subscription = $request->shop->subscription_id;
         $plans = Plan::all();
         return view('admin.account.invoices' , compact('invoices','plans','subscription'));
+    }
+
+    public function show($subdomain , $id)
+    {
+        $invoice = Subscription::where('uuid',$id)->first();
+        return view('admin.account.my-invoice',compact('invoice'));
+    }
+
+    public function edit(){
+        return view('admin.account.invoice-print');
     }
 
     public function postInvoice(Request $request){
