@@ -10,7 +10,262 @@
             Sin obligaciones. Cambia de plan en cualquier momento. Incrementa tus ganancias!
         </p>
     </section>
-    <section id="plans">
+    <section>
+        <div class="row">
+            <div class="col-md-3 col-md-offset-3"></div>
+            <div class="col-md-4">
+                <div class="col-md-6 col-xs-6 space">
+                    <span class="name">Plan Estadar</span>
+                    <span class="price">USD $25</span>
+                </div>
+                <div class="col-md-6 col-xs-6 space">
+                    <span class="name">Plan Avanzado</span>
+                    <span class="price">USD $40</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-7 col-md-offset-3 item-principal">
+                <p>M&Oacute;DULO DE INICIO</p>
+            </div>
+            <div class="col-md-3 col-xs-6 col-md-offset-3 items">
+                <p>Resumen de ventas plan de ventas.</p>
+                <p>Plan de ordenes.</p>
+                <p>Ordenes pendientes.</p>
+                <p>Todas las ordenes.</p>
+            </div>
+            <div class="col-md-2 col-xs-3 text-center items">
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+            </div>
+            <div class="col-md-2 col-xs-3 text-center items">
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-7 col-md-offset-3 item-principal">
+                <p>M&Oacute;DULO DE PRODUCTOS</p>
+            </div>
+            <div class="col-md-3 col-xs-6 col-md-offset-3 items">
+                <p>Cargue de productos ilimitados.</p>
+                <p>Creacion de categorias ilimitadas.</p>
+                <p>Importaci&oacute;n y exportaci&oacute;n masiva de productos.</p>
+                <p>Variantes por articulo, talla, color entre otras.</p>
+                <p>Publicaci&oacute;n de cupones.</p>
+            </div>
+            <div class="col-md-2 col-xs-3 text-center items">
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+            </div>
+            <div class="col-md-2 col-xs-3 text-center items">
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-7 col-md-offset-3 item-principal">
+                <p>M&Oacute;DULO DE VENTAS</p>
+            </div>
+            <div class="col-md-3 col-xs-6 col-md-offset-3 items">
+                <p>Ordenes de pedido(fecha,total,comprador).</p>
+            </div>
+            <div class="col-md-2 col-xs-3 text-center items">
+                <p><i class="fa fa-check"></i></p>
+            </div>
+            <div class="col-md-2 col-xs-3 text-center items">
+                <p><i class="fa fa-check"></i></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-7 col-md-offset-3 item-principal">
+                <p>M&Oacute;DULO DE ClIENTES</p>
+            </div>
+            <div class="col-md-3 col-xs-6 col-md-offset-3 items">
+                <p>Administraci&oacute;n de clientes(total consumido).</p>
+            </div>
+            <div class="col-md-2 col-xs-3 text-center items">
+                <p><i class="fa fa-check"></i></p>
+            </div>
+            <div class="col-md-2 col-xs-3 text-center items">
+                <p><i class="fa fa-check"></i></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-7 col-md-offset-3 item-principal">
+                <p>M&Oacute;DULO DE MARKETING</p>
+            </div>
+            <div class="col-md-3 col-xs-6 col-md-offset-3 items">
+                <p>Inicio de sesion con redes sociales.</p>
+                <p>Cupones de descuento.</p>
+                <p>Email marketing.</p>
+            </div>
+            <div class="col-md-2 col-xs-3 text-center items">
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+            </div>
+            <div class="col-md-2 col-xs-3 text-center items">
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-7 col-md-offset-3 item-principal">
+                <p>M&Oacute;DULO DE DISE&Ntilde;O</p>
+            </div>
+            <div class="col-md-3 col-xs-6 col-md-offset-3 items">
+                <p>Selecci&oacute;n m&uacute;ltiples templates.</p>
+                <p>Cambiar logo.</p>
+                <p>P&aacute;gina en construcci&oacute;n.</p>
+                <p>Dise&ntilde;o responsivo.</p>
+            </div>
+            <div class="col-md-2 col-xs-3 text-center items">
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+            </div>
+            <div class="col-md-2 col-xs-3 text-center items">
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-7 col-md-offset-3 item-principal">
+                <p>M&Oacute;DULO DE CONFIGURACI&Oacute;N</p>
+            </div>
+            <div class="col-md-3 col-xs-6 col-md-offset-3 items">
+                <p>Pasarelas de pago(mercadopago o personalizada).</p>
+                <p>Envios a trav&eacute;s de servientrega.</p>
+                <p>Subdomio gratis de Tendaz.com.</p>
+                <p>Integraci&oacute;n con mercadolibre.</p>
+                <p>SEO avanzado (url personalizada).</p>
+                <p>Configuraci&oacute;n de redes sociales.</p>
+                <p>Cont&aacute;ctanos del cliente.</p>
+            </div>
+            <div class="col-md-2 col-xs-3 text-center items">
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+            </div>
+            <div class="col-md-2 col-xs-3 text-center items">
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-7 col-md-offset-3 item-principal">
+                <p>M&Oacute;DULO DE ESTAD&Iacute;STICAS</p>
+            </div>
+            <div class="col-md-3 col-xs-6 col-md-offset-3 items">
+                <p>Estadisticas avanzadas (graficos).</p>
+                <p>Producto con mayor facturaci&oacute;n.</p>
+                <p>Productos m&aacute;s vendidos.</p>
+            </div>
+            <div class="col-md-2 col-xs-3 text-center items">
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+            </div>
+            <div class="col-md-2 col-xs-3 text-center items">
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-7 col-md-offset-3 item-principal">
+                <p>BUSINESS INTELLIGENT</p>
+            </div>
+            <div class="col-md-3 col-xs-6 col-md-offset-3 items">
+                <p>An&aacute;lisis de tendencias, clientes y envio de emails con
+                    promociones dependiendo las busquedas que realice el cliente
+                    en el sitio.</p>
+            </div>
+            <div class="col-md-2 col-xs-3 text-center items">
+                <p><i class="fa fa-times" style="color: red"></i></p>
+            </div>
+            <div class="col-md-2 col-xs-3 text-center items">
+                <p><i class="fa fa-check"></i></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-7 col-md-offset-3 item-principal">
+                <p>APLICATIVO MOVIL PARA SU TIENDA</p>
+            </div>
+            <div class="col-md-3 col-xs-6 col-md-offset-3 items">
+                <p>App mobile de tienda.</p>
+            </div>
+            <div class="col-md-2 col-xs-3 text-center items">
+                <p><i class="fa fa-times" style="color: red"></i></p>
+            </div>
+            <div class="col-md-2 col-xs-3 text-center items">
+                <p><i class="fa fa-check"></i></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-7 col-md-offset-3 item-principal">
+                <p>M&Oacute;DULO DE HERRAMIENTAS Y AYUDA</p>
+            </div>
+            <div class="col-md-3 col-xs-6 col-md-offset-3 items">
+                <p>Temas generales.</p>
+                <p>Temas especificos con manuales.</p>
+                <p>Chat de soporte.</p>
+                <p>Vista de foros.</p>
+                <p>Contacto de soporte.</p>
+            </div>
+            <div class="col-md-2 col-xs-3 text-center items">
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+            </div>
+            <div class="col-md-2 col-xs-3 text-center items">
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+                <p><i class="fa fa-check"></i></p>
+            </div>
+        </div>
+
+    </section>
+    <section id="plans" class="hidden">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 ">
