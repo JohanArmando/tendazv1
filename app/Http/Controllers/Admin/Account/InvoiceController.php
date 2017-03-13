@@ -39,6 +39,7 @@ class InvoiceController extends Controller
             $e->getMessage();
         }
         //return $result;
+        //return $result['sale']['customer']['cardholder_name'];
         return view('admin.account.my-invoice',compact('invoice','result'));
     }
 
