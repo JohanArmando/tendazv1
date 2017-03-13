@@ -57,7 +57,7 @@ class HomeController extends Controller
                 return ['message' => 'fail', 'subscription' => $subscription ];
             }
         }
-        //return $request->all();
+        return $request->all();
     }
 
     public function product (Request $request ,$subdomain , $slug = '')
