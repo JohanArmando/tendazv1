@@ -56,4 +56,8 @@ class FrontendController extends Controller
             'message' => 'required|max:510',
         ]);
     }
+
+    public function payment(Request $request){
+        dd($request->all());
+    }
 }

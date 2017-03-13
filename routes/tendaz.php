@@ -9,6 +9,7 @@ $appRoute = function (){
         //Routes for frontend y global scope
         Route::get('/' ,'FrontendController@index');
         Route::get('/planes' ,'FrontendController@plans');
+        Route::post('/plans/payment' ,'FrontendController@payment');
         Route::get('/contacto' ,'FrontendController@contact');
         Route::get('/sobre-nosotros' ,'FrontendController@about');
         Route::post('/contact' ,'FrontendController@sendEmail');
