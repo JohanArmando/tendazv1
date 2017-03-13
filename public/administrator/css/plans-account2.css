@@ -108,7 +108,7 @@
 }
 .heading-description 
 {
-  padding-top: 110px;
+  padding-top: 40px;
   color: #1f2836;
   font-size: 15px;
   margin-bottom: -0%;
@@ -127,3 +127,11 @@
     -moz-box-shadow: 0px 0px 33px 0px rgba(0,0,0,0.75);
     box-shadow: 0px 0px 33px 0px rgba(0,0,0,0.75);
 }
+
+ .name {background-color: #f26522;border-radius:5px 0 0 5px ;border: 1px solid #f26522;color: white;padding: 9px 4px 8px 4px;}
+ .price {background-color: #3c3c3c; color: white;padding: 9px 5px 8px 5px;border-radius:0 5px 5px 0; margin-left: -3px}
+ .items p{background-color: white;padding: 3px 3px 3px 3px}
+ .ba {margin-top: 20px; margin-bottom: 20px}
+ .fa{color: green}
+ .item-principal p {padding: 1px 1px 1px 5px;background-color: rgba(17, 17, 17, 0.68);color: white;}
+ .space{margin-top: 15px; margin-bottom: 15px}
