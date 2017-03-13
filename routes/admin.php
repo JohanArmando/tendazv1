@@ -116,7 +116,7 @@ $domain = new \Tendaz\Models\Domain\Domain();
         Route::post('/domain/check', 'NameCheapController@check');
         Route::post('/domain/buy', 'NameCheapController@getDomainPayment');
         Route::delete('/domain/destroy/{uuid}', 'NameCheapController@postDelete');
-        
+
         Route::resource('/locals', 'LocalController',
             ['only' => ['index', 'store', 'update', 'destroy']]);
     });
@@ -138,9 +138,14 @@ $domain = new \Tendaz\Models\Domain\Domain();
             'uses' => 'PlanController@swap',
             'notMiddleware' => 'subscription'
         ]);
-        
+
         Route::post('checkout/finish/',[
             'uses' => 'SubscriptionController@doSubscription',
+            'notMiddleware' => 'subscription'
+        ]);
+
+        Route::post('checkout/stop-subscription',[
+            'uses' => 'SubscriptionController@stopSubscription',
             'notMiddleware' => 'subscription'
         ]);
 
@@ -161,4 +166,3 @@ $domain = new \Tendaz\Models\Domain\Domain();
         ]);
     });
 });
-

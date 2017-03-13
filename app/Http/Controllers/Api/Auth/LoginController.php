@@ -58,5 +58,5 @@ class LoginController extends Controller
         ]);
         return response()->json( fractal()->item($customer->cartsOpen->first(), new CartTransformer()), 201);
     }
-    
+
 }

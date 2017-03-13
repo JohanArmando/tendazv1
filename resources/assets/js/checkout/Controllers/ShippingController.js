@@ -22,8 +22,8 @@ myApp.controller("shippingController" , ["$scope" , "Shipping" , "$location" , "
        'getAddresses' : function () {
            Shipping.getAddresses();
        },
-        'getShippingValue' : function () {
-            Shipping.getShippingValue();
+        'getShippingValue' : function (id) {
+            Shipping.getShippingValue(id);
         },
         'addressCreate' : function () {
            $scope.newAddress = !$scope.newAddress;
@@ -53,11 +53,15 @@ myApp.controller("shippingController" , ["$scope" , "Shipping" , "$location" , "
               'shipping_method_id'  : $rootScope.carts.shippingMethod.data._id
             };
             Shipping.doShippingMethod(ordObject);
+        },
+        'changeAddress' : function (id) {
+          $scope.getShippingValue(id);
         }
+
     });
     /*GET TOTAL SHIPPING*/
-    $scope.getShippingValue();
-    
+    //$scope.getShippingValue();
+
     /*VARIABLES*/
     $scope.getStates();
     $scope.getAddresses();

@@ -5,7 +5,7 @@
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{asset('administrator/css/new_css_invoice.css')}}">
 @stop
-@section('content')	
+@section('content')
 <div class="page-header page-header-block">
 	<div class="page-header-section">
 		<h4 class="title semibold"><img src="{{asset('administrator/image/icons/icons-base/business-cards.png')}}" width="24">&nbsp; Mi Factura</h4>
@@ -37,30 +37,28 @@
 		<div class="col-sm-4 invoice-col">
 			<address>
 				De <br>
-				<strong>{{$shop->name}}</strong><br>
-				<strong>Direcci&oacute;n:</strong> {{$shop->store->address_2}}<br>
-				<strong>Phone:</strong> {{$shop->store->number_phone}}<br>
-				<strong>Email:</strong> {{$shop->store->address_1}}
+				<strong>Tendaz.com</strong>
+				<br>
+				<strong>Direcci&oacute;n:</strong> Carrera 58 No 137 a - 10 Piso 5
+				<br>
+				<strong>Telefono:</strong> 3104763183
+				<br>
+				<strong>Email:</strong> info@tendaz.com
 			</address>
 		</div>
 		<!-- /.col -->
 		<div class="col-sm-4 invoice-col">
-			To
+			Para
 			<address>
-				<strong>John Doe</strong><br>
-				795 Folsom Ave, Suite 600<br>
-				San Francisco, CA 94107<br>
-				Phone: (555) 539-1037<br>
-				Email: john.doe@example.com
+				<strong>{{ $result['sale']['customer']['cardholder_name'] }}</strong><br>
+				<strong>Direcci&oacute;n:</strong> {{ $result['sale']['customer']['address_1'] }},  {{ $result['sale']['customer']['city'] }},  {{ $result['sale']['customer']['country_name'] }}.<br>
+				<strong>Telefono:</strong> {{ $shop->user->phone }}<br>
+				<strong>Email:</strong> {{ $result['sale']['customer']['email_address'] }}
 			</address>
 		</div>
 		<!-- /.col -->
 		<div class="col-sm-4 invoice-col">
-			<b>Invoice #007612</b><br>
-			<br>
-			<b>Order ID:</b> 4F3S8J<br>
-			<b>Payment Due:</b> 2/22/2014<br>
-			<b>Account:</b> 968-34567
+			<b>Factura:</b> #{{ $result['sale']['invoices'][0]['invoice_id'] }}<br>
 		</div>
 		<!-- /.col -->
 	</div>
@@ -72,8 +70,8 @@
 			<table class="table table-striped">
 				<thead>
 				<tr>
-					<th>Qty</th>
-					<th>Product</th>
+					<th>Cantidad</th>
+					<th>Plan</th>
 					<th>Tiempo</th>
 					<th>Description</th>
 					<th>Subtotal</th>
@@ -84,8 +82,8 @@
 					<td>1</td>
 					<td>{{$invoice->plan->name}}</td>
 					<td>@if($invoice->plan->interval == 'monthly') 1 Mes @else @if($invoice->plan->interval == 'yearly')1 a&ntilde;o @endif @endif</td>
-					<td>{{$invoice->plan->description}}</td>
-					<td>{{$invoice->amount}}</td>
+					<td>{{ $invoice->plan->description }}</td>
+					<td>{{ $invoice->amount }}</td>
 				</tr>
 				</tbody>
 			</table>
@@ -104,7 +102,7 @@
 			<img src="{{asset('administrator/imagesMediosdePago/payment-5.png')}}" alt="Paypal">
 
 			<p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-				{{$invoice->plan->description}}
+				{{ $invoice->plan->description }}
 			</p>
 		</div>
 		<!-- /.col -->
@@ -113,21 +111,10 @@
 
 			<div class="table-responsive">
 				<table class="table">
-					<tbody><tr>
-						<th style="width:50%">Subtotal:</th>
-						<td>$250.30</td>
-					</tr>
-					<tr>
-						<th>Tax (9.3%)</th>
-						<td>$10.34</td>
-					</tr>
-					<tr>
-						<th>Shipping:</th>
-						<td>$5.80</td>
-					</tr>
+					<tbody>
 					<tr>
 						<th>Total:</th>
-						<td>$265.24</td>
+						<td>{{ $invoice->amount }}</td>
 					</tr>
 					</tbody></table>
 			</div>

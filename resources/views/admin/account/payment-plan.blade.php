@@ -135,7 +135,7 @@
             $('#card').payform('formatCardNumber');
             $('#expiry').payform('formatCardExpiry');
 
-            
+
             $('#card').keyup(function () {
                 var val =  $(this).val();
 
@@ -184,28 +184,28 @@
                 }
                 disabledButton();
             });
-            
+
             $('#name').keyup(function () {
                 var val =  $(this).val();
                 validateform(this);
-                
+
             });
             $('#email').keyup(function () {
                 var val =  $(this).val();
                 validateform(this);
-                
+
             });
 
             $('#city').keyup(function () {
                 var val =  $(this).val();
                 validateform(this);
-                
+
             });
 
             $('#country').keyup(function () {
                 var val =  $(this).val();
                 validateform(this);
-                
+
             });
 
             $('#state').keyup(function () {
@@ -239,11 +239,11 @@
         }
 
         function disabledButton() {
-            if ($.payform.validateCardCVC($('#cvc').val()) 
-                && $.payform.validateCardExpiry( $('#expiry').val().split('/')[0] , $('#expiry').val().split('/')[1]) 
-                && $.payform.validateCardNumber(  $('#card').val() ) 
-                && ($('#state').val() != '')  
-                && ($('#name').val() != '')  
+            if ($.payform.validateCardCVC($('#cvc').val())
+                && $.payform.validateCardExpiry( $('#expiry').val().split('/')[0] , $('#expiry').val().split('/')[1])
+                && $.payform.validateCardNumber(  $('#card').val() )
+                && ($('#state').val() != '')
+                && ($('#name').val() != '')
                 && ($('#country').val() != '')
                 && ($('#zipCode').val() != '')
                 && ($('#email').val() != ''))
@@ -295,7 +295,7 @@
                 return false;
             });
         });
-     
+
     </script>
 
 @stop

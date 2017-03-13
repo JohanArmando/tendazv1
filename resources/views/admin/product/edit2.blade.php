@@ -55,7 +55,7 @@ Editar {{ucfirst($product->name)}}
                                         <a class="list-group-item" href="#seo" aria-controls="seo" role="tab" data-toggle="tab">Configuraciones avanzadas para SEO</a>
                                         <a class="list-group-item" href="#visibity" aria-controls="visibity" role="tab" data-toggle="tab">Configuraciones para la visibilidad</a>
 
-                                        
+
                                     </div>
                                 </div>
                                 <div class="panel panel-default">
@@ -66,7 +66,7 @@ Editar {{ucfirst($product->name)}}
                                         <a href="{{ url('/admin/products/create') }}" class="list-group-item">Agregar otro productos</a>
                                         <a href="{{ url('/admin/products') }}" class="list-group-item"> Ir a Productos</a>
 
-                                        
+
                                     </div>
                                 </div>
                                 <div class="alert alert-info" v-show="messaje.show">
@@ -106,7 +106,7 @@ Editar {{ucfirst($product->name)}}
                                                          <span class="input-group-addon">cm</span>
                                                          <input type="text" v-model="product.height" class="form-control" id="" placeholder="">
                                                      </span>
-                                                         
+
                                                    </div>
                                                  </div>
                                                  <div class="col-md-3">
@@ -121,7 +121,7 @@ Editar {{ucfirst($product->name)}}
                                                  </div>
                                                  <div class="col-md-3">
                                                      <label class="control-label" style=" color: darkslategray">Visibilidad del producto en tu tienda</label>
-                                                     
+
                                                      <span class="checkbox custom-checkbox" style="margin-top: 8px;">
                                                          <input class="checkbox" v-model="product.publish" id="checkbox5" name="checkbox5" type="checkbox" value="1">
                                                          <label for="checkbox5" style="color: #7b7b7b">&nbsp;&nbsp;Quiero que este producto se muestre en mi tienda</label>
@@ -178,7 +178,7 @@ Editar {{ucfirst($product->name)}}
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <label class="control-label" style=" color: darkslategray">Envio</label>
-                                                        
+
                                                         <span class="checkbox custom-checkbox">
                                                             <input class="checkbox" v-model="product.collection.shipping_free" id="checkbox1" name="checkbox1" type="checkbox" value="1">
                                                             <label for="checkbox1" style="color: #7b7b7b">&nbsp;&nbsp;Este producto no tiene costo de envio</label>
@@ -187,7 +187,7 @@ Editar {{ucfirst($product->name)}}
                                                     </div>
                                                     <div class="col-md-6">
                                                         <label class="control-label" style=" color: darkslategray">Producto destacado</label>
-                                                        
+
                                                         <span class="checkbox custom-checkbox">
                                                             <input class="checkbox" v-model="product.collection.primary" id="checkbox2" name="checkbox2" type="checkbox" value="1">
                                                             <label for="checkbox2" style="color: #7b7b7b">&nbsp;&nbsp;Este producto es destacado</label>
@@ -196,7 +196,7 @@ Editar {{ucfirst($product->name)}}
                                                     </div>
                                                     <div class="col-md-6">
                                                         <label class="control-label" style=" color: darkslategray">Producto en oferta</label>
-                                                        
+
                                                         <span class="checkbox custom-checkbox">
                                                             <input class="checkbox" v-model="product.collection.promotion" id="checkbox3" name="checkbox3" type="checkbox" value="1">
                                                             <label for="checkbox3" style="color: #7b7b7b">&nbsp;&nbsp;Este producto esta en oferta</label>
@@ -277,14 +277,14 @@ Editar {{ucfirst($product->name)}}
                                                                 <div class="col-md-4">
                                                                     <label class="control-label" style=" color:darkslategray">Peso</label>
                                                                     <div class="input-group">
-                                                                        <span class="input-group-addon">kg</span>    
+                                                                        <span class="input-group-addon">kg</span>
                                                                         <input type="text" v-model="variant.weight" class="form-control" id="" placeholder="">
                                                                     </div>
                                                                     <br>
                                                                 </div>
                                                                 <div class="col-md-4">
                                                                     <label class="control-label" style=" color:darkslategray">Guardar</label>
-                                                                    
+
                                                                     <button type="button"
                                                                         v-bind:id="'btn-save-details-'+variant.id"
                                                                         data-loading-text="Guardando..."
@@ -401,7 +401,7 @@ Editar {{ucfirst($product->name)}}
         </div>
     </div>
 
-    
+
     <template id="variant-options" >
         <div>
             <button v-for="value in values_selected" type="button" title="remover propiedad" v-bind:class="'btn-remove-value-'+variant.id+'-'+value.id" data-loading-text="<i class='fa fa-spinner fa-spin'></i> eliminando..." v-on:click="removeValue(value)" class="btn btn-primary" style="margin-bottom: 5px; margin-right: 5px;">@{{ value.name }}</button>
@@ -433,14 +433,14 @@ Editar {{ucfirst($product->name)}}
                             <button type="button" id="btn-store-options" v-on:click="storeOptions()" data-loading-text="<i class='fa fa-spinner fa-spin'></i> procesando" class="btn btn-primary btn-block">Agregar propiedad</button>
                         </div>
 
-                        
+
 
                     </div>
                     <div class="col-md-9">
-                        
+
 
                         <label>Valores de la propiedad</label>
-                        
+
                         <div class="row" v-if="!loadingValues">
                             <div  v-for="value in values" class="col-md-3">
                                 <button v-if="!selectedValue(value)"
@@ -452,7 +452,7 @@ Editar {{ucfirst($product->name)}}
                                         @{{ value.name }}
                                 </button>
                                 <button v-else
-                                    type="button" 
+                                    type="button"
                                     title="remover propiedad"
                                     v-bind:class="'btn-remove-value-'+variant.id+'-'+value.id"
                                     data-loading-text="<i class='fa fa-spinner fa-spin'></i> procesando..."
@@ -469,7 +469,7 @@ Editar {{ucfirst($product->name)}}
                                     class="btn btn-block btn-default">
                                         <i class="fa fa-plus"></i> Nuevo
                                 </button>
-                                <button v-else 
+                                <button v-else
                                     type="button"
                                     v-on:click="valor_nuevo = false"
                                     class="btn btn-block btn-default">
@@ -499,7 +499,7 @@ Editar {{ucfirst($product->name)}}
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div> <!-- /col -->
                     <input type="hidden" v-model="ids_selected" name="values">
             </div> <!-- /row -->
@@ -549,7 +549,7 @@ Editar {{ucfirst($product->name)}}
     </script>
 
     <script>
-        var Base_Url = "{{ url('') }}"; 
+        var Base_Url = "{{ url('') }}";
         Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf_token"]').attr('content');
 
         Vue.component('variant-option', {
@@ -607,7 +607,7 @@ Editar {{ucfirst($product->name)}}
                         // error callback
                         })
                     }
-                    
+
                 },
                 storeOptions: function () {
                     $('#btn-store-options').button('loading');
@@ -660,7 +660,7 @@ Editar {{ucfirst($product->name)}}
                     }
                 },
                 addValue: function (value) {
-                        
+
                         $('#btn-add-value-'+this.variant.id+'-'+value.id).button('loading');
 
 
@@ -691,7 +691,7 @@ Editar {{ucfirst($product->name)}}
                            $('.btn-remove-value-'+this.variant.id+'-'+value.id).button('reset');
 
                         });
-                       
+
                 },
                 selectedValue: function (value) {
                     for (var i = this.values_selected.length - 1; i >= 0; i--) {
@@ -701,7 +701,7 @@ Editar {{ucfirst($product->name)}}
                         }
                     }
                     return false;
-                } 
+                }
             },
             computed:{
                 nueva_propiedad: function () {
@@ -729,7 +729,7 @@ Editar {{ucfirst($product->name)}}
                         }else{
                             text += this.values_selected[i].name+', ';
                         }
-                        
+
                     }
                     return text;
                 },
@@ -810,7 +810,7 @@ Editar {{ucfirst($product->name)}}
             },
             methods: {
                 freshProduct: function () {
-                    
+
                     this.$http.get(Base_Url+'/admin/products/'+product+'?client_secret='+client_secret+'&client_id='+client_id,this.product_new).
                     then((response) => {
                         var data = response.body;
@@ -825,7 +825,7 @@ Editar {{ucfirst($product->name)}}
                         $('#btn-store-product').button('reset');
 
                     })
-                    
+
                 },
                 storeVariant: function () {
                     $('#btn-store-variant').button('loading');
@@ -875,7 +875,7 @@ Editar {{ucfirst($product->name)}}
                         // error callback
                         })
                     }
-                    
+
                 },
                 storeOptions: function () {
                     $('#btn-store-options').button('loading');
@@ -965,7 +965,7 @@ Editar {{ucfirst($product->name)}}
                     });
                 },
                 updateGeneral: function () {
-                    
+
                     $('#btn-udate-general').button('loading');
 
                     var aux = {
@@ -986,14 +986,14 @@ Editar {{ucfirst($product->name)}}
                         console.log(data);
                         $('#btn-udate-general').button('reset');
                         toastr.success('La Informacion general del producto '+this.product.name+' fueron actulizadas correctamente');
-                        
+
 
                         console.log(data);
                     }, (response) => {
                     // error callback
                         $('#btn-udate-general').button('reset');
 
-                    })      
+                    })
                 },
                 updateSeo:function () {
                     $('#btn-udate-seo').button('loading');
@@ -1016,7 +1016,7 @@ Editar {{ucfirst($product->name)}}
                     // error callback
                         $('#btn-udate-seo').button('reset');
 
-                    })      
+                    })
                 },
                 deleteVariant: function () {
                     $('#btn-delete-variant').button('loading');
@@ -1040,7 +1040,7 @@ Editar {{ucfirst($product->name)}}
                     // error callback
                         $('#btn-delete-variant').button('reset');
 
-                    }) 
+                    })
                 },
                 updateVisibility:function () {
                     $('#btn-udate-visibility').button('loading');
@@ -1059,14 +1059,14 @@ Editar {{ucfirst($product->name)}}
                          console.log(data);
                         $('#btn-udate-visibility').button('reset');
                         toastr.success('Las opciones para la visilidad del producto en la tienda fueron actualizadas correctamente');
-                        
+
 
                         console.log(data);
                     }, (response) => {
                     // error callback
                         $('#btn-udate-visibility').button('reset');
 
-                    }) 
+                    })
                 },
                 messajeSuccess: function () {
                     this.messaje.type = 'Genial! ';
@@ -1098,13 +1098,13 @@ Editar {{ucfirst($product->name)}}
                         // error callback
                             $('#btn-udate-visibility').button('reset');
 
-                        }) 
+                        })
                     };
                     reader.readAsDataURL(files[0]);
                     //alert(files.length);
                 },
                 removeImageVariant: function (image ,variant) {
-                    
+
                     this.$http.delete(Base_Url+'/admin/variants/'+variant.id+'/images/'+image.id+'?client_secret='+client_secret+'&client_id='+client_id).
                     then((response) => {
                         var data = response.body;
@@ -1124,7 +1124,7 @@ Editar {{ucfirst($product->name)}}
                     // error callback
                         //$('#btn-udate-visibility').button('reset');
 
-                    }) 
+                    })
                 },
                 saveDetails: function (variant) {
                     $('#btn-save-details-'+variant.id).button('loading');
@@ -1159,7 +1159,7 @@ Editar {{ucfirst($product->name)}}
                         //$('#btn-udate-visibility').button('reset');
                         $('#btn-save-details-'+variant.id).button('reset');
 
-                    }) 
+                    })
 
                 }
             }

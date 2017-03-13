@@ -40,27 +40,32 @@ class HomeController extends Controller
 
     public function detail ($subdomain , $slug){
         $product = Product::where('slug',$slug)->first();
-        Trend::create([
-            'customer_id'       => Auth('web')->user(),
-            'trend_id'          => $product->id,
-            'hits'              => 1,
-            'trend_type'        => "product",
-        ]);
+        $this->trend($product, 'product');
         return view(Theme::current()->viewsPath.'.detail',compact('slug'));
     }
+    private function trend ($product, $type){
+      $id = null;
+      if (isset($_COOKIE["uuid"])) {
+          $user = Customer::where('uuid',$_COOKIE["uuid"])->first();
+          $id = $user->id;
+      }
+      $trend = Trend::create([
+          'customer_id'       => $id,
+          'trend_id'          => $product->id,
+          'hits'              => 1,
+          'trend_type'        => $type,
+      ]);
+      if ($trend) {
+          return true;
+      }else {
+          return false;
+      }
+    }
 
-    public function detail2 ($subdomain , $slug, $uuid){
+
+    public function detail2 (Request $request, $subdomain , $slug, $uuid){
         $product = Product::where('slug',$slug)->first();
-        if (Auth('web')->user()) {
-            Trend::create([
-                'customer_id'       => Auth('web')->user(),
-                'trend_id'          => $product->id,
-                'hits'              => 1,
-                'trend_type'        => "product",
-            ]);
-            return Auth('web')->user();
-        }
-        
+        $this->trend($product, 'product');
         return view(Theme::current()->viewsPath.'.detail',compact('slug','uuid'));
     }
 

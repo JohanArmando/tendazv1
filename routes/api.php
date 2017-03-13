@@ -121,6 +121,7 @@ Route::group(['domain' => env('APP_API_URL') , 'namespace' => 'Api'], function (
     //Routes address
     Route::group(['prefix' => '' , 'namespace' => 'Address'] , function (){
         Route::resource('carts.customers.addresses' , 'AddressesController');
+        Route::get('carts/{cart}/shippings/servientrega' , 'ShippingMethodsController@servientrega');
         Route::post('shipping/address/change','AddressesController@addressForServi');
         Route::get('carts/{cart}/shipping' , 'ShippingMethodsController@index');
     });
