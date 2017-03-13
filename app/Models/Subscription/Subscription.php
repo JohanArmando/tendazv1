@@ -24,7 +24,7 @@ class Subscription extends Model
      * @var array
      */
     protected $fillable = [
-        'uuid', 'amount', 'state', 'start_at', 'end_at', 'trial_at', 'shop_id', 'plan_id','recurrent', 'sale_id'
+        'uuid', 'amount', 'state', 'start_at', 'end_at', 'trial_at', 'shop_id', 'plan_id','recurrent', 'sale_id', 'payment_status'
     ];
 
 
