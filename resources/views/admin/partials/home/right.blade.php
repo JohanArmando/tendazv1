@@ -63,6 +63,24 @@
         </div>
       </div>
     </div>
-@else
 
+@endif
+@if ($subscription->payment_status == 'fail')
+    <div class="col-md-4">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="panel panel-danger sidebar-nav">
+                    <div class="panel-heading">
+                        <h5 class="panel-title"><i class="fa fa-remove"></i> Fallo la verificación de fraude en el pago que realizo</h5>
+                    </div>
+                    <div class="panel-collapse">
+                        <div class="panel-body listing">
+                          <p>Puede que la direccion de facturacion de su targeta haya sido ingresada correctamente,
+                            por favor comuniquese con nuestro soporte tecnico, con gusto sera atendido.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endif

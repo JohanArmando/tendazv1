@@ -9,6 +9,7 @@ use Tendaz\Models\Marketing\Trend;
 use Tendaz\Models\Order\Consult;
 use Tendaz\Models\Products\Product;
 use Tendaz\Models\Social\SocialLogin;
+use Tendaz\Models\Subscription\Subscription;
 use Tendaz\Models\Store\Shop;
 use Illuminate\Http\Request;
 
@@ -24,6 +25,41 @@ class HomeController extends Controller
         $sliders = Shop::all();
         return view(Theme::current()->viewsPath.'.index',compact('sliders'));
     }
+
+    public function twoCheckout(Request $request)
+    {
+        if ($request->message_type == 'FRAUD_STATUS_CHANGED') {
+            if ($request->fraud_status == "fail") {
+
+                 $subscription = Subscription::where('sale_id',$request->sale_id)->first();
+                 $subscription->update([
+                    'payment_status' => 'fail',
+                    'end_at' => \Carbon\Carbon::tomorrow(),
+                    'recurrent' => 0
+                 ]);
+
+                return ['message' => 'fail', 'subscription' => $subscription ];
+            }
+            if ($request->fraud_status == "pass") {
+              $subscription = Subscription::where('sale_id',$request->sale_id)->first();
+              $subscription->update([
+                 'payment_status' => 'pass'
+              ]);
+
+             return ['message' => 'fail', 'subscription' => $subscription ];
+            }
+            if ($request->fraud_status == "wait") {
+                $subscription = Subscription::where('sale_id',$request->sale_id)->first();
+                $subscription->update([
+                   'payment_status' => 'wait'
+                ]);
+
+                return ['message' => 'fail', 'subscription' => $subscription ];
+            }
+        }
+        //return $request->all();
+    }
+
     public function product (Request $request ,$subdomain , $slug = '')
     {
         if (!$request->has('search') && !is_null($request->search))
