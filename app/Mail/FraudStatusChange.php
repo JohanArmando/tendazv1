@@ -14,7 +14,10 @@ class FraudStatusChange extends Mailable
     public $subject;
     public $email;
     public $name;
-    public $messages;
+    public $messages = [];
+    public $text;
+    public $name_client;
+    public $url;
     /**
      * Create a new message instance.
      *
@@ -25,7 +28,9 @@ class FraudStatusChange extends Mailable
         $this->subject = $data['subject'];
         $this->email = $data['email'];
         $this->name = $data['name'];
-        $this->messages = $data['message'];
+        $this->text = $data['text'];
+        $this->name_client = $data['name_client'];
+        $this->url = $data['url'];
     }
 
     /**
@@ -35,8 +40,8 @@ class FraudStatusChange extends Mailable
      */
     public function build()
     {
-      return $this->view('emails.tendaz.FraudStatusChange')
+      return $this->view('emails.twocheckout.error-payment')
           ->from($this->email , $this->name)
-          ->subject('Contactenos de tendaz para '.$this->subject);
+          ->subject($this->subject);
     }
 }

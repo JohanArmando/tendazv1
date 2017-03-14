@@ -45,7 +45,12 @@ class HomeController extends Controller
                     'subject' => 'Su pago no paso la verificacion de fraude',
                     'name' => 'tendaz',
                     'email' => 'info@tendaz.com',
-                    'message' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+                    'name_client' => $subscription->shop->user->name,
+                    'text' =>   'La dirección de facturación que
+                                  suministro en el pago de su plan no son
+                                  correspondientes con los de su targeta,
+                                  por lo que el pago no ha sido efectuado con éxito',
+                    'url' =>  url('login')
                   ]));
 
                 return ['message' => 'fail', 'subscription' => $subscription ];
@@ -69,6 +74,16 @@ class HomeController extends Controller
         }
         if ($request->message_type == 'RECURRING_INSTALLMENT_FAILED') {
             $subscription = Subscription::where('sale_id',$request->sale_id)->first();
+            Mail::to($subscription->shop->user)->
+             send(new FraudStatusChange([
+               'subject' => 'No se pudo procesar el pago correspondiente con su subscripción',
+               'name' => 'tendaz',
+               'email' => 'info@tendaz.com',
+               'name_client' => $subscription->shop->user->name,
+               'text' =>   'No se puede efectuar el pago autom&aacute;tico de su subscripci&oacute;n, trend&aacute;s 3 dias de tu tienda activa.
+                Comuniquese con nosotros para solventar el problema',
+               'url' =>  url('login')
+             ]));
             $subscription->update([
                'payment_status' => 'recurring_failed',
                'end_at' => \Carbon\Carbon::tomorrow(),

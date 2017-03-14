@@ -21,14 +21,13 @@
                 <img src="https://tendaz.com/tendaz/img/logo_tendaz.png"  class="img-responsive max" alt="">
             </div>
             <div class="col-md-12">
-                <h3><strong>Hola Angeles</strong></h3><br>
+                <h3><strong>Hola {{ $name_client }}</strong></h3><br>
             </div>
             <div class="col-md-12">
-                <p>No se puede efectuar el pago autom&aacute;tico de su subscripci&oacute;n, trend&aacute;s 3 dias de tu tienda activa.
-                 Comuniquese con nosotros para solventar el problema, <strong>Revisa tu informaci&oacute;n:</strong></p><br>
+                <p>{{ $text }}, <strong>Revisa tu informaci&oacute;n:</strong></p><br>
             </div>
             <div class="col-md-12 text-center">
-                <a class="btn-ten">IR A MI TIENDA</a>
+                <a class="btn-ten" href="{{ $url }}">IR A MI TIENDA</a>
             </div>
             <div class="col-md-12">
                 <br>
