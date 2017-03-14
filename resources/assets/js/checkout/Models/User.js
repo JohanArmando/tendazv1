@@ -49,7 +49,7 @@ myApp.factory('User' ,['$http', '$location', '$cookies' , "$rootScope" , "Cart",
             angular.forEach(response.data , function (value , index) {
                 danger.find("ul").append("<li>" + value + "</li>");
             });
-        }).finally(function() {});  
+        }).finally(function() {});
     };
 
     userModel.getAuthStatus = function() {
@@ -68,8 +68,9 @@ myApp.factory('User' ,['$http', '$location', '$cookies' , "$rootScope" , "Cart",
 
     userModel.doUserLogout = function () {
         $cookies.remove('auth');
+        localStorage.setItem('cart_id', '');
     };
-    
+
     userModel.doEmail = function (email) {
         return $http({
             headers: {
@@ -85,14 +86,14 @@ myApp.factory('User' ,['$http', '$location', '$cookies' , "$rootScope" , "Cart",
             console.log(response);
         }).finally(function() {});
     };
-    
+
     userModel.getUserId = function () {
       if (userModel.getUserObject()){
           return userModel.getUserObject()._id;
       }else{
           return Cart.getItems(Cart.getCartId()).data.data.customer.data._id;
-      } 
+      }
     };
-   
+
     return userModel;
 }]);

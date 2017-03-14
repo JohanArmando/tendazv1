@@ -5,8 +5,10 @@ namespace Tendaz\Http\Controllers;
 
 use igaster\laravelTheme\Facades\Theme;
 use Tendaz\Models\Customer;
+use Illuminate\Support\Facades\Mail;
 use Tendaz\Models\Marketing\Trend;
 use Tendaz\Models\Order\Consult;
+use Tendaz\Mail\FraudStatusChange;
 use Tendaz\Models\Products\Product;
 use Tendaz\Models\Social\SocialLogin;
 use Tendaz\Models\Subscription\Subscription;
@@ -38,6 +40,13 @@ class HomeController extends Controller
                     'end_at' => \Carbon\Carbon::tomorrow(),
                     'recurrent' => 0
                  ]);
+                 Mail::to($subscription->shop->user)->
+                  send(new FraudStatusChange([
+                    'subject' => 'Su pago no paso la verificacion de fraude',
+                    'name' => 'tendaz',
+                    'email' => 'info@tendaz.com',
+                    'message' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+                  ]));
 
                 return ['message' => 'fail', 'subscription' => $subscription ];
             }
