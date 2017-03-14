@@ -51,7 +51,7 @@ class InvoiceController extends Controller
         Twocheckout::sandbox(env('SANBOX_TWO',false));
         Twocheckout::username(env('USER_TWO'));
         Twocheckout::password(env('PASSWORD_TWO'));
-        
+
         $args = array(
             'sale_id' => $Subscription->sale_id
         );
