@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <style>
-        .bor { border: 1px solid lightgrey;margin: 5px;border-radius: 5px}
-        .max{max-width: 300px}
-        .btn-ten{background-color: #f26522; border: 1px solid #f26522;border-radius: 0 }
-        .btn-ten:hover {background-color: #f26522; border: 1px solid #f26522;border-radius: 0 }
+        body{font-family: "Roboto", Helvetica, Arial, sans-serif}
+        .bor { border: 1px solid lightgrey;margin: 5px;border-radius: 5px; padding: 10px;}
+        .max{max-width: 200px}
+        .btn-ten{background-color: #f26522; border: 1px solid #f26522;border-radius: 0;color: white;padding: 8px }
         .ten{border-top: 1px solid #f26522}
         .footer{color: darkgrey !important;}
+        .text-center{text-align: center}
     </style>
 </head>
 <body>
@@ -28,7 +28,7 @@
                  Comuniquese con nosotros para solventar el problema, <strong>Revisa tu informaci&oacute;n:</strong></p><br>
             </div>
             <div class="col-md-12 text-center">
-                <a class="btn btn-warning btn-ten">IR A MI TIENDA</a>
+                <a class="btn-ten">IR A MI TIENDA</a>
             </div>
             <div class="col-md-12">
                 <br>

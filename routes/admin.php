@@ -122,6 +122,7 @@ $domain = new \Tendaz\Models\Domain\Domain();
     });
     //Route for payment plan
 
+        Route::get('/error', function(){return view('emails.twocheckout.error-payment');});
 
     //Route account
     Route::group(['prefix' => 'account', 'namespace' => 'Account'], function() {
