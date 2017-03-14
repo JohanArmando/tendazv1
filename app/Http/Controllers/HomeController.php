@@ -11,6 +11,7 @@ use Tendaz\Models\Products\Product;
 use Tendaz\Models\Social\SocialLogin;
 use Tendaz\Models\Subscription\Subscription;
 use Tendaz\Models\Store\Shop;
+use Tendaz\Models\Categories\Category;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -57,6 +58,16 @@ class HomeController extends Controller
                 return ['message' => 'fail', 'subscription' => $subscription ];
             }
         }
+        if ($request->message_type == 'RECURRING_INSTALLMENT_FAILED') {
+            $subscription = Subscription::where('sale_id',$request->sale_id)->first();
+            $subscription->update([
+               'payment_status' => 'recurring_failed',
+               'end_at' => \Carbon\Carbon::tomorrow(),
+               'recurrent' => 0
+            ]);
+
+            return ['message' => 'recurring_failed', 'subscription' => $subscription ];
+        }
         return $request->all();
     }
 
@@ -67,6 +78,8 @@ class HomeController extends Controller
 
         $slugArray = explode('/' , $slug);
         $category = $slugArray[count($slugArray) - 1];
+        $cat = Category::where('slug',$category)->first();
+        $this->trend($cat, 'category');
         return view(Theme::current()->viewsPath.'.products' , compact('category'));
     }
 
@@ -88,7 +101,6 @@ class HomeController extends Controller
       $trend = Trend::create([
           'customer_id'       => $id,
           'trend_id'          => $product->id,
-          'hits'              => 1,
           'trend_type'        => $type,
       ]);
       if ($trend) {

@@ -84,3 +84,23 @@
         </div>
     </div>
 @endif
+
+@if ($subscription->payment_status == 'recurring_failed')
+    <div class="col-md-4">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="panel panel-danger sidebar-nav">
+                    <div class="panel-heading">
+                        <h5 class="panel-title"><i class="fa fa-remove"></i> No se a procesado el pago correspondiente al mes actual </h5>
+                    </div>
+                    <div class="panel-collapse">
+                        <div class="panel-body listing">
+                          <p>El pago automatico para el mes actual no ha sido
+                            procesado correctamente. por favor verifique el monto de su targeta e intente nuevamente</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endif
