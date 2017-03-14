@@ -7,6 +7,7 @@ use Tendaz\Http\Requests;
 use Tendaz\Http\Controllers\Controller;
 use Tendaz\Models\Subscription\Plan;
 use Tendaz\Api\Twocheckout;
+use Tendaz\Api\Twocheckout\Api\Twocheckout_Sale;
 use Tendaz\Models\Subscription\Subscription;
 
 class InvoiceController extends Controller
@@ -43,8 +44,23 @@ class InvoiceController extends Controller
         return view('admin.account.my-invoice',compact('invoice','result'));
     }
 
-    public function edit(){
-        return view('admin.account.invoice-print');
+    public function edit($subdomain , $id){
+        $invoice = Subscription::where('uuid',$id)->first();
+        $Subscription = Subscription::find(Auth('admins')->user()->shop->subscription_id);
+        Twocheckout::verifySSL(false);
+        Twocheckout::sandbox(env('SANBOX_TWO',false));
+        Twocheckout::username(env('USER_TWO'));
+        Twocheckout::password(env('PASSWORD_TWO'));
+        
+        $args = array(
+            'sale_id' => $Subscription->sale_id
+        );
+        try {
+            $result = Twocheckout\Api\Twocheckout_Sale::retrieve($args);
+        } catch (Twocheckout_Error $e) {
+            $e->getMessage();
+        }
+        return view('admin.account.invoice-print',compact('invoice','result'));
     }
 
     public function postInvoice(Request $request){

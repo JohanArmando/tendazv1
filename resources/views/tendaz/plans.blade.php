@@ -1,6 +1,7 @@
 @extends('layouts.tendaz')
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{asset('administrator/css/plans-account2.css')}}">
+    <link rel="stylesheet" href="{{asset('components/js/toastr.min.css')}}">
 @stop
 @section('content')
 <div class="container" style="width: 100%; background-color: #f7f7f7;">
@@ -346,10 +347,9 @@
     @include('tendaz.partials.modalPaymentPlan')
 @endsection
 @section('script')
+    <script src="{{asset('components/js/toastr.min.js')}}"></script>
     <script src="{{asset('administrator/js/payform.js')}}"></script>
     <script type="text/javascript" src="https://www.2checkout.com/checkout/api/2co.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.2.0/vue-resource.js"></script>
     <script>
         $(document).on('ready' , function () {
             var price = $(".choose-period").find(".selection").data('price');
@@ -519,13 +519,13 @@
                  expMonth: '02',
                  expYear:'20'*/
             };
-            console.log(args);
             TCO.requestToken(successCallback, errorCallback, args);
         };
 
         $(function() {
 
             TCO.loadPubKey( @if (env('SANBOX_TWO',false)) 'sandbox' @else 'production' @endif );
+
             $("#enviar").click(function(e) {
                 $("#enviar").button('loading');
                 tokenRequest();
@@ -534,6 +534,7 @@
         });
 
     </script>
+    @include('admin.partials.message')
 @endsection
 
 

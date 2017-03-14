@@ -61,7 +61,7 @@
                                 <label for="">Nombre</label>
                                 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                                     <span class="input-group-addon"><i class="fa fa-etsy" aria-hidden="true"></i></span>
-                                    <input id="email" type="text"  name="name" placeholder="Mi tienda" class="form-control" required>
+                                    <input id="name" type="text"  name="shop_name" placeholder="Mi tienda" class="form-control" required>
                                 </div>
                                 <a class="conditions" style="color: grey" href="{{asset('tendaz/TERMINOSYCONDICIONES.pdf')}}" target="_black"> &nbsp; Acepto Termino y Condiciones</a>
                             </div>

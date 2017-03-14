@@ -94,7 +94,8 @@
 
 	<div class="row">
 		<!-- accepted payments column -->
-		<div class="col-xs-6">
+		<div class="col-xs-6"></div>
+		<div class="col-xs-6 hidden">
 			<p class="lead">Metodo de pago:</p>
 			<img src="{{asset('administrator/imagesMediosdePago/payment-1.png')}}" alt="Visa">
 			<img src="{{asset('administrator/imagesMediosdePago/payment-2.png')}}" alt="Mastercard">
@@ -126,8 +127,8 @@
 	<!-- this row will not appear when printing -->
 	<div class="row no-print">
 		<div class="col-md-12"></div>
-		<div class="col-xs-12 pull-right">
-			<a href="{{url('admin/account/invoices/55665/edit')}}" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Imprimir</a>
+		<div class="col-xs-12 pull-right"><br>
+			<a href="{{url('admin/account/invoices/'.$invoice->uuid.'/edit')}}" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Imprimir</a>
 		</div>
 	</div>
  </section>

@@ -139,7 +139,12 @@ class Domain extends Model
     public static function getShopByDomain($value)
     {
         if(!empty($value)){
-            return static::where('name' , $value)->first()->shop;
+            $value2 = static::where('name' , $value)->first();
+            if($value2 == null){
+                return 0;
+            }else {
+                return $value2->shop;
+            }
         }
         return 0;
     }
