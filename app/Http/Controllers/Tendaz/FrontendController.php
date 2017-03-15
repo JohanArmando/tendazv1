@@ -31,7 +31,7 @@ class FrontendController extends Controller
         $plans = Plan::where('interval' , NULL)->get();
         return view("$this->path.plans" , ['plans' => $plans]);
     }
-    
+
     public function contact(){
         return view("$this->path.contact");
     }
@@ -42,16 +42,16 @@ class FrontendController extends Controller
             ->send(new ContactEmail($request->all()));
         return redirect($this->redirectPath())->with('status' , trans('email.contact'));
     }
-    
+
     public function redirectPath(){
         return property_exists($this , 'redirectPath') ?
             $this->redirectPath : '/contacto';
     }
-    
+
     public function about(){
         return view("$this->path.about");
     }
-    
+
     public function validator(array  $data){
         return Validator::make($data, [
             'name' => 'required|max:255',
@@ -63,14 +63,20 @@ class FrontendController extends Controller
 
     public function payment(Request $request)
     {
+        $this->validate($request, [
+          'email' => 'required|unique:users',
+          'password' => 'required',
+        ]);
+
+        if($request->get('price')<15 || $request->get('recurrent')>12 ){
+          return redirect()->back()->with( 'message' , ['type' => 'error' , 'message' => 'hacker detected']);
+        }
         $privateKey = env('PRIVATE_KEY_TWO');
         $resellerId = env('SELLER_ID_TWO');
         Twocheckout::privateKey($privateKey);
         Twocheckout::sellerId($resellerId);
         Twocheckout::verifySSL(false);
         Twocheckout::sandbox(env('SANBOX_TWO',false));
-        Twocheckout::username('davidfigueroar9');
-        Twocheckout::password('D19979872f');
 
         $plan = Plan::whereUuid($request->get('plan'));
 
@@ -82,12 +88,12 @@ class FrontendController extends Controller
             "lineItems" => [
                 [
                     "type" => 'Plan',
-                    "price" => $plan->price,
+                    "price" => $request->get('price'),
                     "productId" => $plan->uuid,
                     "name" => $plan->name,
                     "quantity" => "1",
                     "tangible" => "N",
-                    "recurrence" => "One Month",
+                    "recurrence" => $request->get('recurrent')." Month",
                     "duration" => 'Forever',
                     "description" => $plan->description
                 ]

@@ -13,6 +13,17 @@
     </section>
     <section>
         <div class="row">
+          <div class="col-md-offset-2 col-md-8">
+            @if (count($errors) > 0)
+              <div class="alert alert-danger">
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+            @endif
+          </div>
             <div class="col-md-4 col-md-offset-2 text-center"><br><br>
                 <div class="btn-group" data-toggle="buttons">
                     <label rel="1" class="btn btn-sm btn-primary btn-checbox activeCheckbox planSelect">
@@ -374,12 +385,15 @@
               $('#plan').val($(this).attr('rel'));
                 var mes = $('#recurrent').val();
                 if (mes == 1) {
+                   $('#price').val(25);
                    $('#enviar').html('Pagar USD $25 por 1 mes');
                 }
                 if (mes == 6) {
+                   $('#price').val(144);
                    $('#enviar').html('Pagar USD $144 por 6 mes');
                 }
                 if (mes == 12) {
+                   $('#price').val(180);
                    $('#enviar').html('Pagar USD $180 por 12 mes');
                 }
                 $('#myModalPlan').modal('show');
@@ -388,12 +402,17 @@
               var mes = $('#recurrent').val();
               if (mes == 1) {
                  $('#enviar').html('Pagar USD $45 por 1 mes');
+                 $('#price').val(45);
               }
               if (mes == 6) {
                  $('#enviar').html('Pagar USD $240 por 6 mes');
+                 $('#price').val(240);
+
               }
               if (mes == 12) {
                  $('#enviar').html('Pagar USD $420 por 12 mes');
+                 $('#price').val(420);
+
               }
               $('#myModalPlan').modal('show');
             });
