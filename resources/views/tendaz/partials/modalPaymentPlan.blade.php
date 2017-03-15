@@ -14,7 +14,7 @@
                         <div class="col-md-6">
                             <legend>Datos personales</legend>
                             <div class="form-group">
-                                <label for="">Nombres</label>
+                                <label for="">Nombre</label>
                                 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                                     <span class="input-group-addon"><i aria-hidden="true" class="fa fa-user"></i></span>
                                     <input id="name" type="text" name="name"  placeholder="Pepito Perez" class="form-control" required>
@@ -24,7 +24,8 @@
                                 <label for="">Email</label>
                                 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                                     <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                                    <input id="email" type="text"  name="email" placeholder="email@email.com" class="form-control" required>
+                                    <input id="email" type="email"  name="email" placeholder="email@email.com" class="form-control" required>
+                                    <p id="result"></p>
                                 </div>
                             </div>
                         </div>
@@ -60,8 +61,8 @@
                             <div class="form-group col-md-6">
                                 <label for="">Nombre</label>
                                 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                    <span class="input-group-addon"><i class="fa fa-etsy" aria-hidden="true"></i></span>
-                                    <input id="name" type="text"  name="shop_name" placeholder="Mi tienda" class="form-control" required>
+                                    <span class="input-group-addon"><i class="fa fa-shopping-bag" aria-hidden="true"></i></span>
+                                    <input id="shop" type="text"  name="shop_name" placeholder="Mi tienda" class="form-control" required>
                                 </div>
                                 <a class="conditions" style="color: grey" href="{{asset('tendaz/TERMINOSYCONDICIONES.pdf')}}" target="_black"> &nbsp; Acepto Termino y Condiciones</a>
                             </div>
@@ -69,7 +70,7 @@
                                 <label for="">Contrase&ntilde;a</label>
                                 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                                     <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                                    <input id="email" type="password"  name="password" placeholder="- - - - - -" class="form-control" required>
+                                    <input id="password" type="password"  name="password" placeholder="- - - - - -" class="form-control" required>
                                 </div>
                             </div>
                         </div>

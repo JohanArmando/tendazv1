@@ -136,3 +136,6 @@
  .item-principal p {padding: 1px 1px 1px 5px;background-color: rgba(17, 17, 17, 0.68);color: white;}
  .space{margin-top: 15px; margin-bottom: 15px}
  .btn-primary{background-color: #f26522 !important;border: 1px solid #f26522 !important;margin-bottom: 15px}
+
+ .btn-checbox{background-color: white !important;color: black !important;}
+ .activeCheckbox{background-color: #f26522 !important;color: white !important;}

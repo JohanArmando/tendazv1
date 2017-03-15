@@ -56,13 +56,15 @@
 												<th class="text-center">Fecha Vencimiento</th>
 												<th class="text-center">Pago</th>
 												<th class="text-center">Monto</th>
+												<th>Ver Factura</th>
 											</tr>
 											</thead>
 											@foreach($invoices as $invoice)
+
 												<tr  class="text-center cu @if($invoice->id == $subscription) trSelect @endif">
 													<td>{{\Tendaz\components\DateGenerator::dateGenerate($invoice->start_at)}}</td>
 													<td>{{\Tendaz\components\DateGenerator::dateGenerate($invoice->end_at)}}</td>
-													<td><a href="{{url('/admin/account/invoices/'.$invoice->uuid)}}">{{$invoice->amount}}</a></td>
+													<td>{{$invoice->amount}}</td>
 													<td>
 														@foreach($plans as $plan)
 															@if($plan->id == $invoice->plan_id)
@@ -70,6 +72,7 @@
 															@endif
 														@endforeach
 													</td>
+													<td><a class="btn btn-tendaz" href="{{url('/admin/account/invoices/'.$invoice->uuid)}}"><i class="fa fa-info-circle"></i></a></td>
 												</tr>
 											@endforeach
 										</table>

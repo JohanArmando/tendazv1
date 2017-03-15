@@ -13,6 +13,22 @@
     </section>
     <section>
         <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 pull-right">
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-xs btn-primary btn-checbox activeCheckbox">
+                        <input type="checkbox" autocomplete="off" checked> Mensual
+                    </label>
+                    <label class="btn  btn-xs btn-primary btn-checbox">
+                        <input type="checkbox" autocomplete="off"> Semestral
+                    </label>
+                    <label class="btn  btn-xs btn-primary btn-checbox">
+                        <input type="checkbox" autocomplete="off"> Anual
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-3 col-md-offset-3"></div>
             <div class="col-md-4">
                 <div class="col-md-6 col-xs-6 space">
@@ -427,7 +443,31 @@
                 validateform(this);
 
             });
-            $('#email').keyup(function () {
+            function validateEmail(email) {
+                var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(email);
+            }
+
+            function validate() {
+                $("#result").text("");
+                var email = $("#email").val();
+                if (validateEmail(email)) {
+                    $("#result").text(email + " is valid :)");
+                    $("#result").css("color", "green");
+                } else {
+                    $("#result").text(email + " is not valid :(");
+                    $("#result").css("color", "red");
+                }
+                return false;
+            }
+
+            $('#shop').keyup(function () {
+                var val =  $(this).val();
+                validateform(this);
+
+            });
+
+            $('#password').keyup(function () {
                 var val =  $(this).val();
                 validateform(this);
 
