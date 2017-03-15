@@ -13,23 +13,22 @@
     </section>
     <section>
         <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4 pull-right">
+            <div class="col-md-12 text-center">
                 <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-xs btn-primary btn-checbox activeCheckbox">
+                    <label class="btn btn-md btn-primary btn-checbox activeCheckbox">
                         <input type="checkbox" autocomplete="off" checked> Mensual
                     </label>
-                    <label class="btn  btn-xs btn-primary btn-checbox">
+                    <label class="btn  btn-md btn-primary btn-checbox">
                         <input type="checkbox" autocomplete="off"> Semestral
                     </label>
-                    <label class="btn  btn-xs btn-primary btn-checbox">
+                    <label class="btn  btn-md btn-primary btn-checbox">
                         <input type="checkbox" autocomplete="off"> Anual
                     </label>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-3 col-md-offset-3"></div>
+            <div class="col-md-4 col-md-offset-2"></div>
             <div class="col-md-4">
                 <div class="col-md-6 col-xs-6 space">
                     <span class="name">Plan Estadar</span>
@@ -42,10 +41,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-7 col-md-offset-3 item-principal">
+            <div class="col-md-8 col-md-offset-2 item-principal">
                 <p>M&Oacute;DULO DE INICIO</p>
             </div>
-            <div class="col-md-3 col-xs-6 col-md-offset-3 items">
+            <div class="col-md-4 col-xs-6 col-md-offset-2 items">
                 <p>Resumen de ventas plan de ventas.</p>
                 <p>Plan de ordenes.</p>
                 <p>Ordenes pendientes.</p>
@@ -66,10 +65,10 @@
         </div>
 
         <div class="row">
-            <div class="col-md-7 col-md-offset-3 item-principal">
+            <div class="col-md-8 col-md-offset-2 item-principal">
                 <p>M&Oacute;DULO DE PRODUCTOS</p>
             </div>
-            <div class="col-md-3 col-xs-6 col-md-offset-3 items">
+            <div class="col-md-4 col-xs-6 col-md-offset-2 items">
                 <p>Cargue de productos ilimitados.</p>
                 <p>Creacion de categorias ilimitadas.</p>
                 <p>Importaci&oacute;n y exportaci&oacute;n masiva de productos.</p>
@@ -93,10 +92,10 @@
         </div>
 
         <div class="row">
-            <div class="col-md-7 col-md-offset-3 item-principal">
+            <div class="col-md-8 col-md-offset-2 item-principal">
                 <p>M&Oacute;DULO DE VENTAS</p>
             </div>
-            <div class="col-md-3 col-xs-6 col-md-offset-3 items">
+            <div class="col-md-4 col-xs-6 col-md-offset-2 items">
                 <p>Ordenes de pedido(fecha,total,comprador).</p>
             </div>
             <div class="col-md-2 col-xs-3 text-center items">
@@ -108,10 +107,10 @@
         </div>
 
         <div class="row">
-            <div class="col-md-7 col-md-offset-3 item-principal">
+            <div class="col-md-8 col-md-offset-2 item-principal">
                 <p>M&Oacute;DULO DE ClIENTES</p>
             </div>
-            <div class="col-md-3 col-xs-6 col-md-offset-3 items">
+            <div class="col-md-4 col-xs-6 col-md-offset-2 items">
                 <p>Administraci&oacute;n de clientes(total consumido).</p>
             </div>
             <div class="col-md-2 col-xs-3 text-center items">
@@ -123,10 +122,10 @@
         </div>
 
         <div class="row">
-            <div class="col-md-7 col-md-offset-3 item-principal">
+            <div class="col-md-8 col-md-offset-2 item-principal">
                 <p>M&Oacute;DULO DE MARKETING</p>
             </div>
-            <div class="col-md-3 col-xs-6 col-md-offset-3 items">
+            <div class="col-md-4 col-xs-6 col-md-offset-2 items">
                 <p>Inicio de sesion con redes sociales.</p>
                 <p>Cupones de descuento.</p>
                 <p>Email marketing.</p>
@@ -144,10 +143,10 @@
         </div>
 
         <div class="row">
-            <div class="col-md-7 col-md-offset-3 item-principal">
+            <div class="col-md-8 col-md-offset-2 item-principal">
                 <p>M&Oacute;DULO DE DISE&Ntilde;O</p>
             </div>
-            <div class="col-md-3 col-xs-6 col-md-offset-3 items">
+            <div class="col-md-4 col-xs-6 col-md-offset-2 items">
                 <p>Selecci&oacute;n m&uacute;ltiples templates.</p>
                 <p>Cambiar logo.</p>
                 <p>P&aacute;gina en construcci&oacute;n.</p>
@@ -186,10 +185,10 @@
         </div>
 
         <div class="row">
-            <div class="col-md-7 col-md-offset-3 item-principal">
+            <div class="col-md-8 col-md-offset-2 item-principal">
                 <p>M&Oacute;DULO DE CONFIGURACI&Oacute;N</p>
             </div>
-            <div class="col-md-3 col-xs-6 col-md-offset-3 items">
+            <div class="col-md-4 col-xs-6 col-md-offset-2 items">
                 <p>Pasarelas de pago(mercadopago o personalizada).</p>
                 <p>Envios a trav&eacute;s de servientrega.</p>
                 <p>Subdomio gratis de Tendaz.com.</p>
@@ -223,10 +222,10 @@
 
 
         <div class="row">
-            <div class="col-md-7 col-md-offset-3 item-principal">
+            <div class="col-md-8 col-md-offset-2 item-principal">
                 <p>M&Oacute;DULO DE ESTAD&Iacute;STICAS</p>
             </div>
-            <div class="col-md-3 col-xs-6 col-md-offset-3 items">
+            <div class="col-md-4 col-xs-6 col-md-offset-2 items">
                 <p>Estadisticas avanzadas.</p>
                 <p>Producto con mayor facturaci&oacute;n.</p>
                 <p>Productos m&aacute;s vendidos.</p>
@@ -244,10 +243,10 @@
         </div>
 
         <div class="row">
-            <div class="col-md-7 col-md-offset-3 item-principal">
+            <div class="col-md-8 col-md-offset-2 item-principal">
                 <p>BUSINESS INTELLIGENT</p>
             </div>
-            <div class="col-md-3 col-xs-6 col-md-offset-3 items">
+            <div class="col-md-4 col-xs-6 col-md-offset-2 items">
                 <p>An&aacute;lisis de tendencias, clientes y envio de emails con
                     promociones dependiendo las busquedas que realice el cliente
                     en el sitio.</p>
@@ -261,10 +260,10 @@
         </div>
 
         <div class="row">
-            <div class="col-md-7 col-md-offset-3 item-principal">
+            <div class="col-md-8 col-md-offset-2 item-principal">
                 <p>APLICATIVO MOVIL PARA SU TIENDA</p>
             </div>
-            <div class="col-md-3 col-xs-6 col-md-offset-3 items">
+            <div class="col-md-4 col-xs-6 col-md-offset-2 items">
                 <p>App movil de tienda.</p>
             </div>
             <div class="col-md-2 col-xs-3 text-center items">
@@ -276,10 +275,10 @@
         </div>
 
         <div class="row">
-            <div class="col-md-7 col-md-offset-3 item-principal">
+            <div class="col-md-8 col-md-offset-2 item-principal">
                 <p>M&Oacute;DULO DE HERRAMIENTAS Y AYUDA</p>
             </div>
-            <div class="col-md-3 col-xs-6 col-md-offset-3 items">
+            <div class="col-md-4 col-xs-6 col-md-offset-2 items">
                 <p>Temas generales.</p>
                 <p>Temas especificos con manuales.</p>
                 <p>Chat de soporte.</p>
