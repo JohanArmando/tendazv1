@@ -10,6 +10,7 @@
                     {!! Form::open(['url' => '/plans/payment' , 'method' => 'POST' , 'id'=>'formCardPayment' , 'class' => 'no-padding submit_form']) !!}
                     <input type="hidden" name="token" class="input_uuid" value="">
                     <input type="hidden" name="plan" id="plan" class="input_uuid" value="">
+                    <input type="hidden" name="recurrent" id="recurrent" class="" value="1">
                     <div class="row">
                         <div class="col-md-6">
                             <legend>Datos personales</legend>

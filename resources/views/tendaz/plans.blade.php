@@ -15,14 +15,14 @@
         <div class="row">
             <div class="col-md-12 text-center">
                 <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-md btn-primary btn-checbox activeCheckbox">
-                        <input type="checkbox" autocomplete="off" checked> Mensual
+                    <label rel="1" class="btn btn-lg btn-primary btn-checbox activeCheckbox planSelect">
+                        <input  type="checkbox" autocomplete="off" checked>Pago Mensual
                     </label>
-                    <label class="btn  btn-md btn-primary btn-checbox">
-                        <input type="checkbox" autocomplete="off"> Semestral
+                    <label rel="6" class="btn  btn-lg btn-primary btn-checbox planSelect">
+                        <input type="checkbox" autocomplete="off">Pago Semestral
                     </label>
-                    <label class="btn  btn-md btn-primary btn-checbox">
-                        <input type="checkbox" autocomplete="off"> Anual
+                    <label rel="12" class="btn  btn-lg btn-primary btn-checbox planSelect">
+                        <input type="checkbox" autocomplete="off">Pago Anual
                     </label>
                 </div>
             </div>
@@ -32,11 +32,11 @@
             <div class="col-md-4">
                 <div class="col-md-6 col-xs-6 space">
                     <span class="name">Plan Estadar</span>
-                    <span class="price">USD $25</span>
+                    <span class="price standar">USD $25 por mes</span>
                 </div>
                 <div class="col-md-6 col-xs-6 space">
                     <span class="name">Plan Avanzado</span>
-                    <span class="price">USD $40</span>
+                    <span class="price advance">USD $45 por mes</span>
                 </div>
             </div>
         </div>
@@ -171,14 +171,14 @@
             <div class="col-md-2 col-xs-3 text-center items">
                 @foreach($plans as $plan)
                     @if($plan->id == 2)
-                         <button rel="{{$plan->uuid}}" class="btn btn-primary paymetUuid">Comprar Estandar</button>
+                         <button rel="{{$plan->uuid}}" class="btn btn-primary paymetUuid_standar">Comprar Estandar</button>
                     @endif
                 @endforeach
             </div>
             <div class="col-md-2 col-xs-3 text-center items">
                 @foreach($plans as $plan)
                     @if($plan->id == 3)
-                        <button rel="{{$plan->uuid}}" class="btn btn-primary paymetUuid">Comprar Avanzado</button>
+                        <button rel="{{$plan->uuid}}" class="btn btn-primary paymetUuid_advance">Comprar Avanzado</button>
                     @endif
                 @endforeach
             </div>
@@ -306,14 +306,14 @@
             <div class="col-md-2 col-xs-3 text-center items">
                 @foreach($plans as $plan)
                     @if($plan->id == 2)
-                        <button rel="{{$plan->uuid}}" class="btn btn-primary paymetUuid">Comprar Estandar</button>
+                        <button rel="{{$plan->uuid}}" class="btn btn-primary paymetUuid_standar">Comprar Estandar</button>
                     @endif
                 @endforeach
             </div>
             <div class="col-md-2 col-xs-3 text-center items">
                 @foreach($plans as $plan)
                     @if($plan->id == 3)
-                        <button rel="{{$plan->uuid}}" class="btn btn-primary paymetUuid">Comprar Avanzado</button>
+                        <button rel="{{$plan->uuid}}" class="btn btn-primary paymetUuid_advance">Comprar Avanzado</button>
                     @endif
                 @endforeach
             </div>
@@ -369,11 +369,53 @@
         $(document).on('ready' , function () {
             var price = $(".choose-period").find(".selection").data('price');
             $('#enviar').html('Pagar Plan');
-            $('.paymetUuid').click(function (){
+            $('.paymetUuid_standar').click(function (){
+              $('#plan').val($(this).attr('rel'));
+                var mes = $('#recurrent').val();
+                if (mes == 1) {
+                   $('#enviar').html('Pagar USD $25 por 1 mes');
+                }
+                if (mes == 6) {
+                   $('#enviar').html('Pagar USD $144 por 6 mes');
+                }
+                if (mes == 12) {
+                   $('#enviar').html('Pagar USD $180 por 12 mes');
+                }
                 $('#myModalPlan').modal('show');
-                $('#plan').val($(this).attr('rel'));
             });
-
+            $('.paymetUuid_advance').click(function (){
+              var mes = $('#recurrent').val();
+              if (mes == 1) {
+                 $('#enviar').html('Pagar USD $45 por 1 mes');
+              }
+              if (mes == 6) {
+                 $('#enviar').html('Pagar USD $240 por 6 mes');
+              }
+              if (mes == 12) {
+                 $('#enviar').html('Pagar USD $420 por 12 mes');
+              }
+              $('#myModalPlan').modal('show');
+            });
+            $('.planSelect').click(function () {
+              $(".planSelect").removeClass("activeCheckbox");
+              $(this).addClass("activeCheckbox");
+              var mes = $(this).attr("rel");
+              if (mes == 1) {
+                 $('.advance').html('USD $45 por mes');
+                 $('.standar').html('USD $25 por mes');
+                 $('#recurrent').val($(this).attr("rel"));
+              }
+              if (mes == 6) {
+                 $('.advance').html('USD $40 por mes');
+                 $('.standar').html('USD $19 por mes');
+                 $('#recurrent').val($(this).attr("rel"));
+              }
+              if (mes == 12) {
+                 $('.advance').html('USD $35 por mes');
+                 $('.standar').html('USD $15 por mes');
+                 $('#recurrent').val($(this).attr("rel"));
+              }
+            });
             disabledButton()
 
             /*validateform('#name');
@@ -575,5 +617,3 @@
     </script>
     @include('admin.partials.message')
 @endsection
-
-
