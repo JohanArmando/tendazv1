@@ -5,9 +5,9 @@
     <title>Document</title>
     <style>
         body{font-family: "Roboto", Helvetica, Arial, sans-serif}
-        .bor { border: 1px solid lightgrey;margin: 5px;border-radius: 5px; padding: 10px;width: 50%}
+        .bor { border: 1px solid lightgrey;margin: 5px;border-radius: 5px; padding: 10px;width: 35%}
         .max{max-width: 200px}
-        .btn-ten{background-color: #f26522; border: 1px solid #f26522;border-radius: 0;color: white;padding: 8px }
+        .btn-ten{background-color: #f26522; text-decoration:none; border: 1px solid #f26522;border-radius: 0;color: white;padding: 8px }
         .ten{border-top: 1px solid #f26522}
         .footer{color: darkgrey !important;}
         .text-center{text-align: center}

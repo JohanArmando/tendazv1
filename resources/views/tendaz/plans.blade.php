@@ -13,30 +13,31 @@
     </section>
     <section>
         <div class="row">
-            <div class="col-md-12 text-center">
+            <div class="col-md-4 col-md-offset-2 text-center"><br><br>
                 <div class="btn-group" data-toggle="buttons">
-                    <label rel="1" class="btn btn-lg btn-primary btn-checbox activeCheckbox planSelect">
+                    <label rel="1" class="btn btn-sm btn-primary btn-checbox activeCheckbox planSelect">
                         <input  type="checkbox" autocomplete="off" checked>Pago Mensual
                     </label>
-                    <label rel="6" class="btn  btn-lg btn-primary btn-checbox planSelect">
+                    <label rel="6" class="btn  btn-sm btn-primary btn-checbox planSelect">
                         <input type="checkbox" autocomplete="off">Pago Semestral
                     </label>
-                    <label rel="12" class="btn  btn-lg btn-primary btn-checbox planSelect">
+                    <label rel="12" class="btn  btn-sm btn-primary btn-checbox planSelect">
                         <input type="checkbox" autocomplete="off">Pago Anual
                     </label>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 col-md-offset-2"></div>
             <div class="col-md-4">
                 <div class="col-md-6 col-xs-6 space">
-                    <span class="name">Plan Estadar</span>
-                    <span class="price standar">USD $25 por mes</span>
+                    <div class="btn-group-vertical pull-left" role="group" aria-label="...">
+                        <button type="button" class="btn btn-default name">Plan Estadar</button>
+                        <button type="button" class="btn btn-default price">USD <span class="standar one">$25</span> por mes</button>
+                    </div>
                 </div>
                 <div class="col-md-6 col-xs-6 space">
-                    <span class="name">Plan Avanzado</span>
-                    <span class="price advance">USD $45 por mes</span>
+                    <div class="btn-group-vertical pull-left" role="group" aria-label="...">
+                        <button type="button" class="btn btn-default name">Plan Avanzado</button>
+                        <button type="button" class="btn btn-default price">USD <span class="advance one">$45</span> por mes</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -401,18 +402,18 @@
               $(this).addClass("activeCheckbox");
               var mes = $(this).attr("rel");
               if (mes == 1) {
-                 $('.advance').html('USD $45 por mes');
-                 $('.standar').html('USD $25 por mes');
+                 $('.advance').html('$45');
+                 $('.standar').html('$25');
                  $('#recurrent').val($(this).attr("rel"));
               }
               if (mes == 6) {
-                 $('.advance').html('USD $40 por mes');
-                 $('.standar').html('USD $19 por mes');
+                 $('.advance').html('$40');
+                 $('.standar').html('$19');
                  $('#recurrent').val($(this).attr("rel"));
               }
               if (mes == 12) {
-                 $('.advance').html('USD $35 por mes');
-                 $('.standar').html('USD $15 por mes');
+                 $('.advance').html('$35');
+                 $('.standar').html('$15');
                  $('#recurrent').val($(this).attr("rel"));
               }
             });

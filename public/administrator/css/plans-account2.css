@@ -129,7 +129,7 @@
 }
 
  .name {background-color: #f26522;border-radius:5px 0 0 5px ;border: 1px solid #f26522;color: white;padding: 9px 4px 8px 4px;}
- .price {background-color: #3c3c3c; color: white;padding: 9px 5px 8px 5px;border-radius:0 5px 5px 0; margin-left: -3px}
+ .price {background-color: transparent; color: black;padding: 9px 5px 8px 5px;border-radius:0 5px 5px 0; margin-left: -3px;font-size: 20px}
  .items p{background-color: white;padding: 3px 3px 3px 3px}
  .ba {margin-top: 20px; margin-bottom: 20px}
   p .fa{color: green}
@@ -139,3 +139,4 @@
 
  .btn-checbox{background-color: white !important;color: black !important;}
  .activeCheckbox{background-color: #f26522 !important;color: white !important;}
+ .one{font-size: 28px}
