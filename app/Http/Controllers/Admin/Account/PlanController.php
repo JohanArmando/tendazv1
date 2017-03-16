@@ -32,7 +32,9 @@ class PlanController extends Controller
 
     public function index(Request $request)
     {
-        $plans = Plan::where('interval' , $request->get('frequency' , 'monthly'))->where('interval_count' , 1)->get();
+        $plans = Plan::with('plan')->where('interval' , $request->get('frequency' , 'monthly'))->where('interval_count' , 1)->get();
+        //$plans = Plan::where('id', '<=', 3)->get();
+        //return $plans;
         return view('admin.account.plans' , compact('plans'));
     }
 
