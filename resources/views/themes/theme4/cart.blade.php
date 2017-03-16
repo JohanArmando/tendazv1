@@ -66,7 +66,7 @@
 													<span class="minus-btn" ng-click="cart.quantity = cart.quantity - 1 ; updateQuantityCart(cartId  , cart)" ng-show="!showCart.loading"></span>
 													<i class="fa fa-cog fa-spin fa-5x fa-fw" ng-show="showCart.loading"></i>
 												    <input type="number"  name="quantity" ng-model="cart.quantity" value="<% cart.quantity %>" ng-show="!showCart.loading"/>
-												    <span class="plus-btn" ng-click="cart.quantity = cart.quantity + 1 ;updateQuantityCart(cartId , cart)" ng-show="!showCart.loading"></span>
+												    <span class="plus-btn" ng-click="cart.quantity = parseInt(cart.quantity)+parseInt('1');updateQuantityCart(cartId , cart)" ng-show="!showCart.loading"></span>
 												</div>
 											</div>
 										</td>

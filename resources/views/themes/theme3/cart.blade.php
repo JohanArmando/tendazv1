@@ -39,7 +39,7 @@
                                             <i style="margin-left: 40px" class="fa fa-cog fa-spin fa-2x fa-fw" ng-show="showCart.loading"></i>
                                             <input type="text" name="quantity" value="<% cart.quantity %>" ng-show="!showCart.loading" class="input-text qty text"/>
                                             <span class="input-group-addon bootstrap-touchspin-postfix" style="display: none;"></span>
-                                                    <span class="input-text qty text" ng-click="cart.quantity = cart.quantity + 1 ;updateQuantityCart(cartId , cart)"
+                                                    <span class="input-text qty text" ng-click="cart.quantity = parseInt(cart.quantity)+parseInt('1');updateQuantityCart(cartId , cart)"
                                                           ng-show="!showCart.loading">
                                                         <button class="btn btn-default bootstrap-touchspin-up" type="button">+</button>
                                                     </span>
