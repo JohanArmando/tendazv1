@@ -79,7 +79,13 @@
                                         </td>
                                         <td>{{ $customer->total_amount_orders }}</td>
                                         <td>{{ $customer->total_orders }}</td>
-                                        <td><a href="{{ url("admin/orders" , !$customer->latestOrder ?: $customer->latestOrder[0]->uuid ) }}"># {{ !$customer->latestOrder ?:$customer->latestOrder[0]->id + 100  }}</a> {{ $customer->latestOrder[0]->created_at_num }}</td>
+
+                                        @if (isset($customer->latestOrder[0]->uuid))
+                                          <td><a href="{{ url("admin/orders" , !$customer->latestOrder[0]->uuid ?: $customer->latestOrder[0]->uuid ) }}"># {{ !$customer->latestOrder ?:$customer->latestOrder[0]->id + 100  }}</a> {{ $customer->latestOrder[0]->created_at_num }}</td>
+                                        @else
+                                          <td><a href="#">#  Sin compras</a></td>
+
+                                        @endif
                                     </tr>
                                 @endforeach
                                 </tbody>

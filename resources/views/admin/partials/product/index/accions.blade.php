@@ -51,18 +51,13 @@
 
         <div class="col-md-3">
             <div class="col-md-8" style="padding-left: 8px;padding-right: 2px">
-<<<<<<< HEAD
-                <button data-tooltip="Ver Productos sin categoria" class="btn btn-default btn-category borderOrange" ng-click="category.data = []">Sin Categoria</button>
-            </div>
-            <div class="col-md-4" style="padding-left: 2px;padding-right: 2px">
-                <button data-tooltip="Ver Todos los Productos" class="btn btn-default btn-category borderOrange" ng-click="category = []">Todos</button>
-=======
+
                 <button data-tooltip="Ver Productos sin categoria" class="btn btn-default btn-block btn-category" ng-click="category.data = []">Sin Categoria</button>
             </div>
 
             <div class="col-md-3" style="padding-left: 2px;padding-right: 2px">
                 <button data-tooltip="Ver Todos los Productos" class="btn btn-default btn-block btn-category" ng-click="category = []">Todos</button>
->>>>>>> b4a4c9adc56802258c0c836cfa07d2ee30498a31
+
             </div>
         </div>
     </div>

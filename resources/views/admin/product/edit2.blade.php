@@ -1031,7 +1031,7 @@ Editar {{ucfirst($product->name)}}
                          console.log(data);
                         $('#btn-delete-variant').button('reset');
                         $('#modal-id').modal('hide');
-                        this.messajeSuccess();
+                        toastr.success('la variante del producto fue eliminada correctamente');
                         this.product.variants = this.product.variants.filter(function(el){
                             return el.id !== data.id;
                         });
@@ -1091,7 +1091,7 @@ Editar {{ucfirst($product->name)}}
                         then((response) => {
                             var data = response.body;
                             variant.images.push(data);
-                            this.messajeSuccess();
+                            toastr.success('Imagen agregada correctamente');
 
                             console.log(data);
                         }, (response) => {
@@ -1118,7 +1118,8 @@ Editar {{ucfirst($product->name)}}
                         $('#btn-udate-visibility').button('reset');
                         this.messajeSuccess();
                         */
-                        this.messajeSuccess();
+                        toastr.success('Imagen eliminada correctamente!');
+
                         console.log(data);
                     }, (response) => {
                     // error callback
@@ -1152,7 +1153,8 @@ Editar {{ucfirst($product->name)}}
                         this.messajeSuccess();
                         */
                         $('#btn-save-details-'+variant.id).button('reset');
-                        this.messajeSuccess();
+                        toastr.success('Datos guardados correctamente!');
+
                         console.log(data);
                     }, (response) => {
                     // error callback
