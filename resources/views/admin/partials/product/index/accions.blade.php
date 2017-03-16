@@ -105,14 +105,20 @@
             </div>
         </div>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 pull-right" style="margin-top: 10px">
-        <div class="col-md-9"></div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 10px">
+        <div class="col-md-3">
+          <a href="{{ url('admin/products/create') }}" class="btn btn-primary" name="button">Agregar producto</a>
+        </div>
+        <div class="col-md-6">
+        </div>
+
         <div class="col-md-3">
             <div class="col-md-8" style="padding-left: 8px;padding-right: 2px">
-                <button data-tooltip="Ver Productos sin categoria" class="btn btn-default btn-category" ng-click="category.data = []">Sin Categoria</button>
+                <button data-tooltip="Ver Productos sin categoria" class="btn btn-default btn-block btn-category" ng-click="category.data = []">Sin Categoria</button>
             </div>
-            <div class="col-md-4" style="padding-left: 2px;padding-right: 2px">
-                <button data-tooltip="Ver Todos los Productos" class="btn btn-default btn-category" ng-click="category = []">Todos</button>
+
+            <div class="col-md-3" style="padding-left: 2px;padding-right: 2px">
+                <button data-tooltip="Ver Todos los Productos" class="btn btn-default btn-block btn-category" ng-click="category = []">Todos</button>
             </div>
         </div>
     </div>

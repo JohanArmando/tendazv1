@@ -103,7 +103,9 @@ class HomeController extends Controller
         $slugArray = explode('/' , $slug);
         $category = $slugArray[count($slugArray) - 1];
         $cat = Category::where('slug',$category)->first();
-        $this->trend($cat, 'category');
+        if (!empty($cat)) {
+          $this->trend($cat, 'category');
+        }
         return view(Theme::current()->viewsPath.'.products' , compact('category'));
     }
 
