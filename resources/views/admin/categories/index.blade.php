@@ -22,7 +22,7 @@ Crear categorias
     @section('content')
         <div ng-app="MyApp">
             <div class="page-header page-header-block">
-                <div class="page-header-section">
+                <div class="page-header-section">12
                 <h4 class="title">
                     <img class="page-header-section-icon" src="{{asset('administrator/image/icons/icons-base/category.png')}}">
                     &nbsp; Categorias
@@ -37,7 +37,7 @@ Crear categorias
                     </div>
                 </div>
             </div>
-            
+
             @include('admin.partials.message')
             <div class="row">
                 <div class="col-md-12">
@@ -45,7 +45,7 @@ Crear categorias
                             <div class="panel-heading">
                                 <h3 class="panel-title"><strong>Organiza las categorias de tu tienda dependiendo de los productos que vayas a publicar.</strong></h3>
                             </div>
-                        
+
                             <div class="panel-body">
                             <form>
                                 <br>
@@ -96,7 +96,7 @@ Crear categorias
                                                 </div>
                                                 <div class="col-md-3 col-md-offset-2" style="margin-top: 2%" ng-if="mostrar == 1">
                                                     <a class="btn btn-default btn-block" style="background-color: #4f8ecc; color: white; border: 1px solid #4f8ecc;" ng-click="guardar()" ng-disabled="msj.disabled">
-                                                        <i class="fa fa-save" style="margin-right: 5%"></i>@{{ msj.title }}</a>
+                                                        <i class="fa f12a-save" style="margin-right: 5%"></i>@{{ msj.title }}</a>
                                                 </div>
                                             </div>
                                             <div ui-tree id="tree2-root" data-clone-enabled="true" ng-if="mensaje.show == 1">
@@ -125,12 +125,12 @@ Crear categorias
                             </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                {{--<div class="col-md-6">
                     <div class="panel panel-default" >
                             <div class="panel-heading">
                                 <h3 class="panel-title"><strong>Organiza las categorias de tu tienda dependiendo de los productos que vayas a publicar.</strong></h3>
                             </div>
-                        
+
                             <div class="panel-body">
                                 <p>(You can double click on an item to turn it into a folder.)</p>
 
@@ -145,6 +145,7 @@ Crear categorias
                             </div>
                     </div>
                 </div>
+                --}}
             </div>
 
         <div class="page-end-space"></div>
@@ -161,12 +162,12 @@ Crear categorias
           <li>
             <ul class="list-group"
                 v-show="!isRoot"
-                style="text-align: left; margin-bottom: 3px;" 
+                style="text-align: left; margin-bottom: 3px;"
                 >
                 <li class="list-group-item list-group-item-info">
                   <span v-if="open" class="bold" @click="toggle" title="Modificar categoria"><i class="fa fa-angle-down" aria-hidden="true"></i> @{{ model.name }}</span>
                   <span v-else class="bold" @click="toggle" title="Modificar categoria"><i class="fa fa-angle-right" aria-hidden="true"></i> @{{ model.name }}</span>
-                   
+
                   <span class="badge" @click="changeType"><i class="fa fa-remove"></i></span>
                   <span class="badge"><i  class="fa fa-edit"></i></span>
                   <span class="badge" @click="create = true"><i  class="fa fa-plus"></i></span>
@@ -175,22 +176,22 @@ Crear categorias
 
             <ul class="" v-show="open">
               <item
-                
+
                 v-for="model in model.children"
                 :model="model">
               </item>
               <li v-if="create"
-                  
+
                   style="text-align: left; margin-top: 3px; margin-bottom: 20px;">
                   <form action="" method="POST" class="form-inline" role="form">
-                  
+
                     <div class="form-group">
                       <label class="sr-only" for="">label</label>
                       <input  v-model="new_name" type="email" class="form-control" id="" placeholder="Nueva categoria">
                     </div>
-                  
-                    
-                  
+
+
+
                     <a href="#" @click="addChild" class="btn btn-primary">Guardar</a>
                     <a href="#" @click="create = false" class="btn btn-default">cancelar</a>
                   </form>
@@ -200,7 +201,7 @@ Crear categorias
           </li>
         </script>
         <script type="text/javascript">
-            var Base_Url = "{{ url('') }}"; 
+            var Base_Url = "{{ url('') }}";
             Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf_token"]').attr('content');
 
 
@@ -266,7 +267,7 @@ Crear categorias
               mounted() {
                   console.log('Component mounted 2.');
                   this.fetchCategories();
-                  
+
               },
               methods: {
                 fetchCategories: function () {
@@ -282,6 +283,6 @@ Crear categorias
                 }
               }
             })
-            
+
         </script>
     @stop
