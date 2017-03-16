@@ -29,14 +29,14 @@
             <div class="col-md-4">
                 <div class="col-md-6 col-xs-6 space">
                     <div class="btn-group-vertical pull-left" role="group" aria-label="...">
-                        <button type="button" class="btn btn-default name">Plan Estadar</button>
-                        <button type="button" class="btn btn-default price">USD <span class="standar one">$25</span> por mes</button>
+                        <button type="button" class="btn btn-default name paymetUuid_standar">Plan Estadar</button>
+                        <button type="button" class="btn btn-default price paymetUuid_standar">USD <span class="standar one">$25</span> por mes</button>
                     </div>
                 </div>
                 <div class="col-md-6 col-xs-6 space">
                     <div class="btn-group-vertical pull-left" role="group" aria-label="...">
-                        <button type="button" class="btn btn-default name">Plan Avanzado</button>
-                        <button type="button" class="btn btn-default price">USD <span class="advance one">$45</span> por mes</button>
+                        <button type="button" class="btn btn-default name paymetUuid_advance">Plan Avanzado</button>
+                        <button type="button" class="btn btn-default price paymetUuid_advance">USD <span class="advance one">$45</span> por mes</button>
                     </div>
                 </div>
             </div>
@@ -377,7 +377,7 @@
                    $('#enviar').html('Pagar USD $25 por 1 mes');
                 }
                 if (mes == 6) {
-                   $('#enviar').html('Pagar USD $144 por 6 mes');
+                   $('#enviar').html('Pagar USD $114 por 6 mes');
                 }
                 if (mes == 12) {
                    $('#enviar').html('Pagar USD $180 por 12 mes');

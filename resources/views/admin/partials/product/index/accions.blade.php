@@ -1,66 +1,3 @@
-<style>
-    [data-tooltip] {
-        position: relative;
-        z-index: 2;
-        cursor: pointer;
-    }
-
-    /* Hide the tooltip content by default */
-    [data-tooltip]:before,
-    [data-tooltip]:after {
-        visibility: hidden;
-        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-        filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=0);
-        opacity: 0;
-        pointer-events: none;
-    }
-
-    /* Position tooltip above the element */
-    [data-tooltip]:before {
-        position: absolute;
-        bottom: 150%;
-        left: 50%;
-        margin-bottom: 5px;
-        margin-left: -80px;
-        padding: 7px;
-        width: 200px;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        border-radius: 3px;
-        background-color: #000;
-        background-color: hsla(0, 0%, 20%, 0.9);
-        color: #fff;
-        content: attr(data-tooltip);
-        text-align: center;
-        font-size: 14px;
-        line-height: 1.2;
-    }
-
-    /* Triangle hack to make tooltip look like a speech bubble */
-    [data-tooltip]:after {
-        position: absolute;
-        bottom: 150%;
-        left: 50%;
-        margin-left: -5px;
-        width: 0;
-        border-top: 5px solid #000;
-        border-top: 5px solid hsla(0, 0%, 20%, 0.9);
-        border-right: 5px solid transparent;
-        border-left: 5px solid transparent;
-        content: " ";
-        font-size: 0;
-        line-height: 0;
-    }
-
-    /* Show tooltip content on hover */
-    [data-tooltip]:hover:before,
-    [data-tooltip]:hover:after {
-        visibility: visible;
-        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-        filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=100);
-        opacity: 1;
-    }
-</style>
 <div class="controls ">
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 p-all-half">
@@ -109,10 +46,10 @@
         <div class="col-md-9"></div>
         <div class="col-md-3">
             <div class="col-md-8" style="padding-left: 8px;padding-right: 2px">
-                <button data-tooltip="Ver Productos sin categoria" class="btn btn-default btn-category" ng-click="category.data = []">Sin Categoria</button>
+                <button data-tooltip="Ver Productos sin categoria" class="btn btn-default btn-category borderOrange" ng-click="category.data = []">Sin Categoria</button>
             </div>
             <div class="col-md-4" style="padding-left: 2px;padding-right: 2px">
-                <button data-tooltip="Ver Todos los Productos" class="btn btn-default btn-category" ng-click="category = []">Todos</button>
+                <button data-tooltip="Ver Todos los Productos" class="btn btn-default btn-category borderOrange" ng-click="category = []">Todos</button>
             </div>
         </div>
     </div>
