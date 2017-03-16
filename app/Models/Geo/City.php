@@ -12,4 +12,9 @@ class City extends Model
     public function provider(){
         return $this->hasOne(Provider::class);
     }
+
+    public function state()
+    {
+        return $this->belongsTo(State::class);
+    }
 }

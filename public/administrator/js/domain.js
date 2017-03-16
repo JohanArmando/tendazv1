@@ -1,8 +1,7 @@
 (function(){
     $(document).on('ready' , function () {
-        //funcion que al dar click en check domain toma solo la ultima parte del dominio para evirtar errores aparte
-        //de si el valor de slect no lo tiene  lo agrega con punto
         $('#buyer-domain').on('click' , function () {
+            $("#buyer-domain").button('loading');
             var input = $('#basic-url');
             var domain = input.val();
             var tld = $('#select-domain').val();
@@ -25,133 +24,47 @@
             }
             var data = {'domain' : stringToSend , 'tld' : $.unique(arrayTLD)};
             $.ajax({
-                url : url,
+                url : url + '/check?client_secret='  + client_secret + '&client_id=' + client_id,
                 headers : {'X-CSRF-TOKEN' : token },
                 type : 'POST',
                 dataType : 'json',
                 data : data,
                 beforeSend : function () {
-                    $('.preloader_general').removeClass('hidden');
+
                 },
                 success : function (response) {
                     var ul = $('.not-available').find('ul');
                     if(!response.available){
-                        $('.preloader_general').addClass('hidden');
+                        $('#search').addClass('hidden');
+                        $('#text').addClass('hidden');
                         $('.not-available').removeClass('hidden');
                         $.each(response[0] , function (key , value) {
                             if(value['@attributes']['Status'] == "OK"){
                                 if(value['CommandResponse']['DomainCheckResult']['@attributes']['Available'] == 'true')
-                                var li = '<li>' + value['CommandResponse']['DomainCheckResult']['@attributes']['Domain'] +'</li>'
+                                    var li = '<li>' + value['CommandResponse']['DomainCheckResult']['@attributes']['Domain'] +'</li>'
                             }
                             ul.append(li);
                         });
+                        $('#buyer-domain').removeClass('hidden');
+                        $("#buyer-domain").button('reset');
                     }else{
-                        $('.preloader_general').removeClass('hidden');
                         $('.not-available').addClass('hidden');
                         $('#bs-modal').modal('toggle');
                         $('#basic-url').val('');
-                        var setup = $('.setup-billing');
-                        setup.removeClass('hidden');
-                        ul.html('');
-                        //$('.payment-form').append(response.view);
-                        function addFormFields(form, data) {
-                            if (data != null) {
-                                $.each(data, function (name, value) {
-                                    if (value != null) {
-                                        var input = $("<input />").attr("type", "hidden").attr("name", name).val(value);
-                                        form.append(input);
-                                    }
-                                });
-                            }
-                        };
-
-                        $.getJSON("https://api.ipify.org?format=jsonp&callback=?",function(){
-                        }).success(function(json){
-                            $.getJSON( "https://freegeoip.net/json/"+json.ip, function(data) {
-                            })
-                                .done(function(API) {
-                                    data  = {
-                                        'sid' : response.sid ,
-                                        'mode' : '2CO' ,
-                                        'x_receipt_link_url'  : 'http://tendaz.local/check/payment',
-                                        "x_receipt_user" : response.user.uuid,
-                                        "x_domain_true" : 1 ,
-                                        "_domain_name" : response.domain,
-                                        "_uuid_name" :  response.tld.uuid,
-                                        'name' : response.user.name ,
-                                        'address' : response.shop.state,
-                                        'city' : API.city,
-                                        'zip' : API.zip_code ? API.zip_code : '111461',
-                                        'country' : API.country_name,
-                                        'state'  : response.shop.state,
-                                        'name_last' : response.user.last_name,
-                                        "currency_code" : "USD",
-                                        "lang" : "es_ib",
-                                        "demo" : "Y",
-                                        "card_holder_name" : "Domain Buy",
-                                        'li_0_type' :'product' ,
-                                        'li_0_name' : response.domain,
-                                        'li_0_price' : response.tld.price ,
-                                        'li_0_tangible' : 'Y' ,
-                                        'li_1_type' : 'shipping' ,
-                                        'li_1_name' : '' ,
-                                        'li_1_price' : '' ,
-                                        'card_holder_name' :'Domain' + response.domain ,
-                                        'street_address' : response.shop.address_contact == '' ? 'NONE' : response.shop.address_contact,
-                                        'street_address2' : '' ,
-                                        'city' : API.region_name ,
-                                        'state' :API.region_name     ,
-                                        'zip' : API.zip == '' ? '111461' : API.zip,
-                                        'country' : API.country_name ,
-                                        'ship_name' : response.shop.address_contact == '' ? 'NONE' : response.shop.address_contact,
-                                        'ship_street_address' : response.shop.address_contact == '' ? 'NONE' : response.shop.address_contact,
-                                        'ship_street_address2' : '' ,
-                                        'ship_city' : API.city ,
-                                        'ship_state' : API.region_name ,
-                                        'ship_zip' : API.zip_code == '' ? '111461' : API.zip_code,
-                                        'ship_country' : API.country_name,
-                                        'email' : response.user.email,
-                                        'phone' : response.shop.phone_contact ? esponse.shop.phone_contact : '5555555',
-                                        'tco_use_inline' : 1
-                                    }
-                                    var form = $('<form></form>');
-                                    form.attr("action", "https://www.johinsdev.com/checkout/purchase");
-                                    form.attr("method", "POST");
-                                    form.attr("target", "tco_lightbox_iframe");
-                                    form.attr("style", "display:none;");
-                                    addFormFields(form, data);
-                                    $("body").append(form);
-
-                                    $('.tco_lightbox').remove();
-                                    $.getScript( "https://www.johinsdev.com/static/checkout/javascript/direct.min.js", function( data, textStatus, jqxhr ) {
-                                        setTimeout(function() {
-                                            form.submit();
-                                            form.remove();
-                                        }, 1000);
-                                    });
-                                    setTimeout(function() {
-                                        $('.preloader_general').addClass('hidden');
-                                    }, 5500);
-                                    $('#tco_lightbox').on('click' , '#button-content' , function () {
-                                        alert('hola');
-                                    });
-                                })
-                                .fail(function() {
-                                    console.log( "error" );
-                                })
-                                .always(function() {
-                                    console.log( "complete" );
-                                });
-                        });
+                        //modal payment
+                        $('#namecheapPayment').modal('show');
+                        $('#domainAvailable').val(response.domain);
+                        $('#domainTld').val(response.tld.uuid);
+                        $('#d').html(response.domain);
+                        $('#p').html(response.tld.price);
                     }
                 },
                 error : function () {
-                    alert('Hay un error een els servidor');
-                    $('.preloader_general').addClass('hidden');
+                    alert('Hay un error en el servidor');
                 }
             });
         });
-        //funcion que cambian el select despues que en uno de los dominios sse de select
+        //funcion que cambian el select despues que en uno de los dominios se de select
         $('#basic-url').keyup(function(){
             var value = $(this).val();
             var lastCharacter = value.lastIndexOf('.');

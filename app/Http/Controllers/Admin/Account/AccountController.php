@@ -4,7 +4,7 @@ namespace Tendaz\Http\Controllers\Admin\Account;
 
 use Illuminate\Http\Request;
 use Tendaz\Http\Controllers\Controller;
-use Tendaz\Models\Country;
+use Tendaz\Models\Geo\Country;
 use Tendaz\Models\Store\Store;
 
 class AccountController extends Controller
@@ -20,7 +20,8 @@ class AccountController extends Controller
     public function index(Request $request)
     {
         $store = Store::where('shop_id',Auth('admins')->user()->id)->first();
-        return view('admin.account.myAccount',compact('store'));
+        $countries = Country::all();
+        return view('admin.account.myAccount',compact('store','countries'));
     }
 
     /**
@@ -50,9 +51,14 @@ class AccountController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($subdomian, $id)
     {
-        //
+        if ($id == 'self') {
+            $data = Auth('admins')->user()->shop->store;
+            $data->state_id = $data->city->state->id;
+            return $data;
+
+        }
     }
 
     /**

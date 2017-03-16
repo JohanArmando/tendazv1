@@ -5,7 +5,6 @@ $domain = new \Tendaz\Models\Domain\Domain();
     Route::get('/' ,[
         'uses'  =>  'HomeController@home',
     ]);
-
     //Routes statics
     Route::get('/stats' , 'StaticsController@basic');
     Route::get('/stats/advanced' , 'StaticsController@advanced')->middleware('plan:estandar,avanzado');
@@ -107,19 +106,23 @@ $domain = new \Tendaz\Models\Domain\Domain();
         Route::resource('shippings', 'ShippingController',
             ['only' => ['index', 'store', 'update', 'destroy']]);
         //meli
-        Route::get('/mercadolibre',function(){return redirect()->back();})->middleware('plan:estandar,avanzado');
+        Route::get('/mercadolibre',function(){return view('admin.setting.mercadolibre.index');})->middleware('plan:estandar,avanzado');
         //setting domain
         Route::get('/domain', 'NameCheapController@getIndex');
         Route::get('/domain/create', 'NameCheapController@store');
-        Route::delete('/domain/destroy/{account}', 'NameCheapController@postDelete');
-        Route::get('/domain/settings/{account}', 'NameCheapController@getVerify');
-        Route::get('/domain/verify/{account}', 'NameCheapController@postVerify');
-        
+        Route::get('/domain/main/{uuid}', 'NameCheapController@main');
+        Route::get('/domain/verify/{uuid}', 'NameCheapController@getVerify');
+        Route::post('/domain/verify/{uuid}', 'NameCheapController@postVerify');
+        Route::post('/domain/check', 'NameCheapController@check');
+        Route::post('/domain/buy', 'NameCheapController@getDomainPayment');
+        Route::delete('/domain/destroy/{uuid}', 'NameCheapController@postDelete');
+
         Route::resource('/locals', 'LocalController',
             ['only' => ['index', 'store', 'update', 'destroy']]);
     });
     //Route for payment plan
 
+        Route::get('/error', function(){return view('emails.twocheckout.error-payment');});
 
     //Route account
     Route::group(['prefix' => 'account', 'namespace' => 'Account'], function() {
@@ -136,14 +139,24 @@ $domain = new \Tendaz\Models\Domain\Domain();
             'uses' => 'PlanController@swap',
             'notMiddleware' => 'subscription'
         ]);
-        
+
         Route::post('checkout/finish/',[
             'uses' => 'SubscriptionController@doSubscription',
             'notMiddleware' => 'subscription'
         ]);
 
+        Route::post('checkout/stop-subscription',[
+            'uses' => 'SubscriptionController@stopSubscription',
+            'notMiddleware' => 'subscription'
+        ]);
+
         Route::get('checkout/finish/',[
             'uses' => 'SubscriptionController@finish',
+            'notMiddleware' => 'subscription'
+        ]);
+
+        Route::get('checkout/plans',[
+            'uses' => 'SubscriptionController@plans',
             'notMiddleware' => 'subscription'
         ]);
 
@@ -154,4 +167,3 @@ $domain = new \Tendaz\Models\Domain\Domain();
         ]);
     });
 });
-

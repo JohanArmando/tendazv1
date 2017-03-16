@@ -69,3 +69,10 @@
 		border-top-left-radius: 3px;
 		border-top-right-radius: 3px;
 	}
+
+	.trSelect{
+		background-color: rgba(242, 101, 34, 0.54) !important;
+	}
+	.cu{
+		cursor: pointer;
+	}

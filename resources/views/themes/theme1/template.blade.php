@@ -26,6 +26,8 @@
         var client_secret = "{{ $shop->uuid }}";
         var category = "{{ isset($category) ? $category : ''}}";
         var slug = "{{ isset($slug) ? $slug : ''}}";
+        var uuid = "{{ isset($uuid) ? $uuid : ''}}";
+        
     </script>
     <!--Fin-->
 </head>

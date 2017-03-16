@@ -29,9 +29,9 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{{asset('/administrator/image/icons/favicon/favicon-32x32.png')}}">
     <link rel="icon" type="image/png" sizes="96x96" href="{{asset('/administrator/image/icons/favicon/favicon-96x96.png')}}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('/administrator/image/icons/favicon/favicon-16x16.png')}}">
-    
+
     <link rel="manifest" href="/manifest.json">
-    
+
 
     <!--Inicio de los Estilos-->
     <link rel="stylesheet" href="{{ asset('administrator/plugins/summernote/css/summernote.css') }}">
@@ -41,7 +41,7 @@
 
     <!--Estilos Opcionales-->
     <link rel="stylesheet" href="{{asset('administrator/plugins/selectize/css/selectize.css')}}">
-    
+
     <!-- fin de los estilos opcionales-->
 
     <!--Estilo importantes del Dash-->
@@ -196,7 +196,7 @@ $(document).on('ready', function () {
     if (cookie_nav=='Mini') {
         $('.sidebar-minimize').trigger( "click" );
     }
-    
+
 });
 </script>
 <script type="text/javascript">

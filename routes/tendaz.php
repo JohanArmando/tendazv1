@@ -4,11 +4,14 @@ $domain = new \Tendaz\Models\Domain\Domain();
 
 $appRoute = function (){
 
+    Route::post('/notification/2checkout', 'HomeController@twoCheckout');
+
     //Route group for tendaz controller
     Route::group(['namespace' => 'Tendaz' , 'prefix' => ''] , function (){
         //Routes for frontend y global scope
         Route::get('/' ,'FrontendController@index');
         Route::get('/planes' ,'FrontendController@plans');
+        Route::post('/plans/payment' ,'FrontendController@payment');
         Route::get('/contacto' ,'FrontendController@contact');
         Route::get('/sobre-nosotros' ,'FrontendController@about');
         Route::post('/contact' ,'FrontendController@sendEmail');

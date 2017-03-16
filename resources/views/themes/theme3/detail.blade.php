@@ -14,6 +14,12 @@
                                         <img ng-src="<% product.images.data[0].url %>" style="max-height: 500px; min-height: 500px"
                                              id="matrix" alt="" height="400" width="350px" class="image-responsive" />
                                     </div>
+                                    <div class="col-md-12"><br><br>
+                                        <a class="col-md-3 image-click"ng-repeat="image in product.images.data | limitTo:3"
+                                           ng-if="image" href="#">
+                                            <img src="<% image.url %>" alt="" class="image-click img-thumbnail"
+                                                 style="max-height: 100px; min-height: 100px;width: 80px"></a>
+                                    </div>
                                 </div>
                                 <div class="summary entry-summary">
                                     <hr>
@@ -56,7 +62,7 @@
                                         </div>
                                     </div><hr>
                                 </span>
-                                        <span class="col-xs-6">Medios de Pago</span>
+                                        <span class="col-xs-6">Medios de Pago:</span>
                                 <span class="col-xs-6">
                                     <span class="green">
                                         <img src="{{asset('administrator/imagesMediosdePago/payment-1.png')}}" alt="">
@@ -65,6 +71,20 @@
                                         <img src="{{asset('administrator/imagesMediosdePago/payment-4.png')}}" alt="">
                                     </span><hr>
                                 </span>
+                                <span class="col-xs-6">Variantes:</span>
+                                <span class="col-xs-6">
+                                    <div ng-repeat="variant in product.variants.data" class="col-md-5" style="width: 100px; margin-right: 5px;">
+                                        <a href="{{ url('/') }}<% '/detail/' + product.slug + '/' +variant.id%>" >
+                                            <img ng-mousemove="updateImage(this)"  ng-src="<% variant.images.data[0].url %>"  alt=""  class="img-thumbnail img-clickEa"
+                                                 style="min-height: 120px;max-height: 120px;">
+                                        </a>
+                                    </div>
+                                    <div class="col-md-12"><hr></div>
+                                </span>
+                                <div ng-repeat="property in properties">
+                                    <div class="col-xs-6"><% property.name %>:</div>
+                                    <div class="col-xs-6"><span ng-repeat="value in property.values"><% value.name %>, </span><hr></div>
+                                </div>
                                 <span ng-repeat="filter in filters"  ng-if="filter.name != ''">
                                     <span class="col-xs-6"><% filter.name %> :</span>
                                     <span class="col-xs-6">
@@ -95,13 +115,6 @@
                                             <i class="fa fa-pinterest"></i>
                                         </a>
                                     </div>
-                                </div>
-
-                                <div class="col-md-12"><br><br>
-                                    <a class="image-click"ng-repeat="image in product.images.data | limitTo:3"
-                                       ng-if="image" href="#">
-                                        <img src="<% image.url %>" alt="" class="image-click img-thumbnail"
-                                             style="max-height: 100px; min-height: 100px;width: 80px"></a>
                                 </div>
 
                                 <div class="commerce-tabs" ng-if="product.description">

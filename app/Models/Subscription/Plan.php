@@ -37,7 +37,7 @@ class Plan extends Model
     
     public function getDiscount($price)
     {
-        return ( $price * ( $this->discount / 100 ) );
+        return round(( $price * ( $this->discount / 100 ) ), 2);
     }
     
     public function getPrice()

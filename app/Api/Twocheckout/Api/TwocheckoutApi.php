@@ -30,7 +30,8 @@ class Twocheckout_Api_Requester
             unset( $data['api'] );
             $data['privateKey'] = $this->privateKey;
             $data['sellerId'] = $this->sid;
-            $data = json_encode($data);
+            $data = json_encode($data,JSON_PRETTY_PRINT);
+            //dd($data);
             $header = array("content-type:application/json","content-length:".strlen($data));
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         } else {

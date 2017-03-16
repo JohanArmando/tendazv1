@@ -61,6 +61,7 @@
             </div>
         </div>
         @include('tendaz.partials.forgotPassword')
+        @include('admin.partials.message')
     @endsection
     @section('script')
     @stop

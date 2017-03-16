@@ -45,9 +45,9 @@ Configura tu dominio
 			<div id="new_tab" class="col-md-12">
 				<div class="border-content">
 				<ul class="nav nav-tabs nav-justified">
-					<li class="hidden custom_tab"><a class="link_tab tab1" href="#tabone" data-toggle="tab">Comprar Dominio</a></li>
-					<li class="custom_tab active"><a class="link_tab" href="#tabtwo" data-toggle="tab">Agregar Dominio</a></li>
-					<li class="custom_tab"><a class="link_tab tab3" href="#tabthree" data-toggle="tab">Mis Dominios</a></li>
+					<li class="custom_tab"><a class="link_tab tab1" href="#tabone" data-toggle="tab">Comprar Dominio</a></li>
+					<li class="custom_tab"><a class="link_tab" href="#tabtwo" data-toggle="tab">Agregar Dominio</a></li>
+					<li class="custom_tab active"><a class="link_tab tab3" href="#tabthree" data-toggle="tab">Mis Dominios</a></li>
 				</ul>
 				<div class="tab-content panel" style="margin-bottom: -8px !important;">
 					<div class="tab-pane" id="tabone">
@@ -58,7 +58,7 @@ Configura tu dominio
 							</div>
 						</div>
 					</div>
-						<div class="tab-pane active" id="tabtwo">
+						<div class="tab-pane" id="tabtwo">
 						<div class="row">
 							<div class="clearfix"></div>
 							<div class="col-sm-8 col-sm-offset-2">
@@ -66,7 +66,7 @@ Configura tu dominio
 							</div>
 							</div>
 							</div>
-							<div class="tab-pane" id="tabthree">
+							<div class="tab-pane active" id="tabthree">
 							<div class="row">
 							<div class="clearfix"></div>
 							<div class="col-md-10 col-md-offset-2 text-center">
@@ -82,35 +82,43 @@ Configura tu dominio
 									<table class="table table-bordered table-striped table-hover">
 										<thead>
 										<tr class="text-center">
-											<td style="background: #FF3D00; color: white;">Nombre Dominio</td>
-											<td style="background: #FF8C00; color: white;">Status</td>
+											<td style="background: #929292; color: white;">Nombre Dominio</td>
+											<td style="background: #929292; color: white;">Status</td>
+											<td style="background: #929292; color: white;">Principal</td>
 										</tr>
 										</thead>
 										<tbody>
 										@foreach($domains as $domain)
 											<tr class="text-center">
-												<td><a href="#">{{$domain->name}}</a></td>
-												@if($domain->state == 'OK')
+												<td><a href="{{url('admin/setting/domain/verify/'.$domain->uuid)}}">{{$domain->name}}</a></td>
+												@if($domain->state == 200)
 													<td>
 														<a href="#" data-tooltip="Dominio Activo">
 															<img src="{{asset('administrator/image/tick.png')}}">
 														</a>
 													</td>
 													@else
-														@if($domain->state == 'NOT')
+														@if($domain->state == 401)
 															<td>
-																<a href="#" data-tooltip="Dominio Activo">
+																<a href="#" data-tooltip="Dominio Inactivo , 'Completa la Instalaci&oacute;n'">
 																<img src="{{asset('administrator/image/forbidden.png')}}">
 																</a>
 															</td>
 															@else
 																<td>
-																	<a href="#" data-tooltip="Dominio Activo">
+																	<a href="#" data-tooltip="Ssl">
 																	<img src="{{asset('administrator/image/download.png')}}">
 																	</a>
 																</td>
 														@endif
 												@endif
+												<td>
+													@if($domain->main == 1 )
+														<a class="btn btn-primary" href="{{url('/admin/setting/domain/main/'.$domain->uuid)}}">Si</a>
+													@else
+														<a class="btn btn-default" href="{{url('/admin/setting/domain/main/'.$domain->uuid)}}">No</a>
+													@endif
+												</td>
 											</tr>
 										@endforeach
 										</tbody>
@@ -126,8 +134,185 @@ Configura tu dominio
 <div class="payment-form"></div>
 @include('admin.partials.domain.modalAddDomain')
 @include('admin.partials.domain.modalBuyDomain')
+@include('admin.partials.domain.modalPayment')
 @include('admin.partials.domain.modalDeleteDomain')
 @include('admin.partials.domain.modalCompleteInstall')
 @endsection
 @section('scripts')
+	<script src="https://www.2checkout.com/static/checkout/javascript/direct.min.js"></script>
+	<script src="{{asset('administrator/js/domain.js')}}"></script>
+
+	<!--payment-->
+
+	<script src="{{asset('administrator/js/payform.js')}}"></script>
+	<script type="text/javascript" src="https://www.2checkout.com/checkout/api/2co.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.2.0/vue-resource.js"></script>
+
+	<script>
+		$(document).on('ready' , function () {
+			$('#card').payform('formatCardNumber');
+			$('#expiry').payform('formatCardExpiry');
+
+			$('#card').keyup(function () {
+				var val =  $(this).val();
+
+				if ($.payform.validateCardNumber(val)){
+					$(this).parent().addClass('has-success').removeClass('has-error');
+					$(this).parent().find('span.glyphicon-remove').addClass('hidden');
+					$(this).parent().find('span.glyphicon-ok').removeClass('hidden');
+				}else{
+					$(this).parent().addClass('has-error');
+					$(this).parent().find('span.glyphicon-remove').removeClass('hidden');
+					$(this).parent().find('span.glyphicon-ok').addClass('hidden');
+				}
+
+				if ($.payform.parseCardType( val ) != null) {
+					$('#type-card').html("<strong>" + $.payform.parseCardType( val ) + "</strong>")
+				}
+				disabledButton();
+			});
+
+			$('#expiry').keyup(function () {
+				var val =  $(this).val().split('/');
+				var month = val[0];
+				var year = val[1];
+				if ($.payform.validateCardExpiry(month , year)){
+					$(this).parent().addClass('has-success').removeClass('has-error');
+					$(this).parent().find('span.glyphicon-remove').addClass('hidden');
+					$(this).parent().find('span.glyphicon-ok').removeClass('hidden');
+				}else{
+					$(this).parent().addClass('has-error');
+					$(this).parent().find('span.glyphicon-remove').removeClass('hidden');
+					$(this).parent().find('span.glyphicon-ok').addClass('hidden');
+				}
+				disabledButton();
+			});
+
+			$('#cvc').keyup(function () {
+				var val =  $(this).val();
+				if ($.payform.validateCardCVC(val)){
+					$(this).parent().addClass('has-success').removeClass('has-error');
+					$(this).parent().find('span.glyphicon-remove').addClass('hidden');
+					$(this).parent().find('span.glyphicon-ok').removeClass('hidden');
+				}else{
+					$(this).parent().addClass('has-error');
+					$(this).parent().find('span.glyphicon-remove').removeClass('hidden');
+					$(this).parent().find('span.glyphicon-ok').addClass('hidden');
+				}
+				disabledButton();
+			});
+
+			$('#name').keyup(function () {
+				var val =  $(this).val();
+				validateform(this);
+
+			});
+			$('#email').keyup(function () {
+				var val =  $(this).val();
+				validateform(this);
+
+			});
+
+			$('#city').keyup(function () {
+				var val =  $(this).val();
+				validateform(this);
+
+			});
+
+			$('#country').keyup(function () {
+				var val =  $(this).val();
+				validateform(this);
+
+			});
+
+			$('#state').keyup(function () {
+				validateform(this);
+			});
+
+			$('#zipCode').keyup(function () {
+				validateform(this);
+			});
+
+			$('#addrLine1').keyup(function () {
+				validateform(this);
+			});
+
+
+		});
+
+		function validateform(val) {
+			var value =  $(val).val();
+
+			if (value != ''){
+				$(val).parent().addClass('has-success').removeClass('has-error');
+				$(val).parent().find('span.glyphicon-remove').addClass('hidden');
+				$(val).parent().find('span.glyphicon-ok').removeClass('hidden');
+			}else{
+				$(val).parent().addClass('has-error');
+				$(val).parent().find('span.glyphicon-remove').removeClass('hidden');
+				$(val).parent().find('span.glyphicon-ok').addClass('hidden');
+			}
+			disabledButton();
+		}
+
+		function disabledButton() {
+			if ($.payform.validateCardCVC($('#cvc').val())
+					&& $.payform.validateCardExpiry( $('#expiry').val().split('/')[0] , $('#expiry').val().split('/')[1])
+					&& $.payform.validateCardNumber(  $('#card').val() )
+					&& ($('#state').val() != '')
+					&& ($('#name').val() != '')
+					&& ($('#country').val() != '')
+					&& ($('#zipCode').val() != '')
+					&& ($('#email').val() != ''))
+			{
+				$('#enviar').attr('disabled' , false);
+			}else{
+				$('#enviar').attr('disabled' , true);
+			}
+		}
+
+		var successCallback = function(data) {
+			var myForm = document.getElementById('formCardPayment');
+			//alert(data.response.token.token);
+			myForm.token.value = data.response.token.token;
+			//console.log(myForm.token.value);
+			myForm.submit();
+		};
+
+		var errorCallback = function(data) {
+			if (data.errorCode === 200) {
+			} else {
+				alert(data.errorMsg);
+			}
+		};
+
+		var tokenRequest = function() {
+			var args = {
+				sellerId: "{{ env('SELLER_ID_TWO') }}",
+				publishableKey: "{{ env('PUBLIC_KEY_TWO') }}",
+				ccNo: $("#card").val(),
+				cvv: $("#cvc").val(),
+				expMonth: $("#expiry").val().split('/')[0].trim(),
+				expYear: $("#expiry").val().split('/')[1].trim()
+				/*ccNo: '4000000000000002',
+				 cvv: '123',
+				 expMonth: '02',
+				 expYear:'20'*/
+			};
+
+			TCO.requestToken(successCallback, errorCallback, args);
+		};
+
+		$(function() {
+
+			TCO.loadPubKey( @if (env('SANBOX_TWO',false)) 'sandbox' @else 'production' @endif );
+			$("#enviar").click(function(e) {
+				$("#enviar").button('loading');
+				tokenRequest();
+				return false;
+			});
+		});
+
+	</script>
 @stop

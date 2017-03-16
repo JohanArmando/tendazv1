@@ -67,21 +67,30 @@ class Domain extends Model
      */
 
     public function setNameAttribute($value){
-        if(!empty($value)){
+        if(!empty($value) && $value[0]!= 'edit'){
             $val = $value.'.'.self::getDomain();
+            $this->attributes['name'] = $val;
+        }else{
+            $val = $value[1];
             $this->attributes['name'] = $val;
         }
     }
     public function setDomainAttribute($value){
-        if(!empty($value)){
+        if(!empty($value && $value[0]!= 'edit')){
             $val = 'http://'.$value.'.'.self::getDomainSubTendaz();
+            $this->attributes['domain'] = $val;
+        }else{
+            $val = 'http://'.$value[1];
             $this->attributes['domain'] = $val;
         }
     }
 
     public function setSslAttribute($value){
-        if(!empty($value)){
+        if(!empty($value && $value[0]!= 'edit')){
             $val = 'https://'.$value.'.'.self::getDomainSubTendaz();
+            $this->attributes['ssl'] = $val;
+        }else{
+            $val = 'https://'.$value[1];
             $this->attributes['ssl'] = $val;
         }
     }
@@ -130,9 +139,15 @@ class Domain extends Model
     public static function getShopByDomain($value)
     {
         if(!empty($value)){
-            return static::where('name' , $value)->first()->shop;
+            $value2 = static::where('name' , $value)->first();
+            if($value2 == null){
+                return 0;
+            }else {
+                return $value2->shop;
+            }
         }
         return 0;
     }
+
 
 }

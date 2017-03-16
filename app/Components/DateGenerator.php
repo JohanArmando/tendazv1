@@ -14,7 +14,7 @@ use Carbon\Carbon;
 class DateGenerator
 {
     public static function dateGenerate($date){
-        $meses = array('Diciembre' , 'Enero' , 'Feberero' , 'Marzo' , 'Abril' , 'Mayo' ,'Junio', 'Julio' , 'Agosto' ,'Septiembre' ,'Octubre' ,'Noviembre');
+        $meses = array('Diciembre' , 'Enero' , 'Febrero' , 'Marzo' , 'Abril' , 'Mayo' ,'Junio', 'Julio' , 'Agosto' ,'Septiembre' ,'Octubre' ,'Noviembre');
         if(!is_null($date)){
             $dateTime = Carbon::parse($date);
             $year = $dateTime->year;

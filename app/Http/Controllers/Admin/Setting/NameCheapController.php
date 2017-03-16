@@ -1,17 +1,18 @@
 <?php
 
 namespace Tendaz\Http\Controllers\Admin\Setting;
-
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Cookie;
+use Tendaz\Api\NameCheapApi;
 use Tendaz\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Routing\Route;
 use Illuminate\Http\Request;
 use Tendaz\Models\Domain\Domain;
 use Tendaz\Models\Domain\Tld;
-use Tendaz\Models\Store\Shop;
+use Tendaz\Models\User;
+use anlutro\cURL;
+use Tendaz\Api\Twocheckout;
 
 
 class NameCheapController extends Controller
@@ -21,27 +22,14 @@ class NameCheapController extends Controller
      *Get data
      */
     public function __construct(){
-        $this->user = Auth('admins')->user();
-        /*$this->beforeFilter('@findDomain', ['only' => ['postDelete', 'postVerify' , 'getVerify']]);
         $this->ip = env('IP');
-        $this->middleware('freeShop');
         $this->adapter = new NameCheapApi();
-        $this->adapter->setClientIp(env('IP_CLIENT'));*/
+        $this->adapter->setClientIp(env('IP_CLIENT'));
     }
 
-    /**
-     * @param Route $route
-     */
-    public function findDomain(Route $route){
-        $uuid = $route->getParameter('account');
-        $this->domain = Domain::where('uuid','=',$uuid)->first();
-    }
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
 
-
-    public function getIndex($subdomain , Request $request){
+    public function getIndex($subdomain , Request $request)
+    {
         $domains = Domain::where('shop_id',$request->shop->id)->get();
         $tlds = Cache::get('tlds');
         if(!$tlds)
@@ -52,16 +40,205 @@ class NameCheapController extends Controller
 
     public function store($subdomain, Request $request)
     {
-        Domain::create([
-            'domain' => 'http://'.$request->get('domain'),
-            'name' => $request->get('domain'),
-            'ssl' => 'http://'.$request->get('domain'),
-            'main' => 0,
-            'active' => 0,
-            'state' => 'OK',
+         $dom = ['edit',$request->get('domain')];
+         Domain::create([
+            'domain' => $dom,
+            'name' => $dom,
+            'ssl' => $dom,
+            'state' => 401,
             'shop_id' => $request->shop->id
-        ]);
+         ]);
+
         return redirect()->back()->with('message', array('type' => 'success', 'message' => 'El dominio ' . $request->get('domain') . '  fue agregado correctamente!'));
+    }
+
+    public function main($subdomain , Request $request , $uuid)
+    {
+        $domains = Domain::where('main',1)->where('shop_id',$request->shop->id)->first();
+        $domains->fill(['main'=> 0]);
+        $domains->save();
+
+        $domain = Domain::where('uuid',$uuid)->where('shop_id',$request->shop->id)->first();
+        $domain->fill(['main'=> 1]);
+        $domain->save();
+
+        return redirect()->back()->with('message', array('type' => 'success', 'message' => 'El dominio ' . $domain->name . '  es el principal!'));
+    }
+
+    public function getVerify($subdomain , Request $request , $uuid)
+    {
+        $domain = Domain::where('uuid',$uuid)->first();
+        if($domain) {
+            return view('admin.setting.verify_domain',compact('domain'));
+        }
+    }
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postVerify($subdomain,  Request $request , $uuid){
+        $domain = Domain::where('uuid',$uuid)->first();
+        if($domain){
+            $url = $domain->name;
+            if($url == NULL) return false;
+            $exist = $this->curlDNS($url);
+            $exist ?  $ip = gethostbyname($url) : $ip = false;
+            $ip && $ip == $this->ip ? $goodDns =  true : $goodDns =  false ;
+            if($exist){
+                $domain->state = $exist;
+                //$domain->status_id = 3;
+            }else{
+                $domain->state = 401;
+                //$domain->status_id = 2;
+            }
+            $domain->save();
+        }
+        return response()->json($domain->state);
+    }
+
+    public function check(Request $request){
+        if($request->ajax()){
+            $this->adapter->checkDomain($request->get('domain'));
+            $this->adapter->getResponse();
+            $json = $this->adapter->toResponse();
+            $tlds = $request->get('tld');
+            $response = $this->adapter->suggestions($json , $tlds , $request->get('domain') );
+            return response()->json($response);
+        }
+    }
+
+    public function getDomainPayment(Request $request)
+    {
+        $privateKey = env('PRIVATE_KEY_TWO');
+        $resellerId = env('SELLER_ID_TWO');
+        Twocheckout::privateKey($privateKey);
+        Twocheckout::sellerId($resellerId);
+        Twocheckout::verifySSL(false);
+
+        Twocheckout::sandbox(env('SANBOX_TWO',false));
+        Twocheckout::username('davidfigueroar9');
+        Twocheckout::password('D19979872f');
+
+        if(Auth('admins')->user()->phone == null){$phone = '+68 523 523 63';}else{$phone= Auth('admins')->user()->phone;}
+
+        $shop = Auth('admins')->user()->shop;
+        $tld = Tld::where('uuid' , $request->get('domainTld'))->first();
+        $position = null;
+
+
+        $data2 = [
+            "sellerId" => env('SELLER_ID_TWO'),
+            "merchantOrderId" => "123",
+            "token" => $request->get('token'),
+            "currency" => "USD",
+            "lineItems" => [
+                [
+                    "type" => 'product',
+                    "price" => $tld->price,
+                    "productId" => 1,
+                    "name" => $request->get('domain'),
+                    "quantity" => "1",
+                    "tangible" => "N",
+                    "recurrence" => "Anual",
+                    "duration" => 'Forever',
+                    "description" => $request->get('domain'),
+                ]
+            ],
+            "billingAddr" => [
+                "name" => !$shop->user->full_name == ' ' ?  $shop->user->full_name : $shop->name,
+                "addrLine1" => 'Bogota',
+                "city" => empty($position->cityName) ? 'Bogota': $position->cityName,
+                "state" =>  empty($position->regionCode) ? 'BOG': $position->regionCode,
+                "zipCode" => empty($position->zipCode) ? '111461': $position->zipCode,
+                "country" =>  empty($position->countryCode) ? 'CO': $position->countryCode,
+                "email" => $shop->user->email,
+                "phoneNumber" =>  $shop->user->phone
+            ]
+        ];
+        //return $data2;
+
+
+        //return $data;
+        if(Auth('admins')->user()->phone == null){$phone = 'Sin Numero';}else{$phone= Auth('admins')->user()->phone;}
+        try {
+            $charge = Twocheckout\Twocheckout_Charge::auth($data2);
+            //return $charge;
+
+        } catch (Twocheckout_Error $e) {
+
+            $this->assertEquals('Unauthorized', $e->getMessage());
+        }
+
+            if($data2){
+                $url = $this->adapter->createUrl($request->except(['_token' , 'token']));
+                $response = $this->adapter->create($url);
+                if(isset($response['error'])){
+                    return redirect()->back()->with('message',array('type' => 'warning' , 'message' => $response['error']));
+                }else{
+                    $dom = ['edit',$request->get('domain')];
+                     $this->adapter->toResponse();
+                    if(isset($response['has-error'])){
+                        Domain::create([
+                            'domain' => 'http://'.$dom,
+                            'name' => $dom,
+                            'ssl' => 'https://'.$dom,
+                            'state' => 401,
+                            'shop_id' => $shop->id
+                        ]);
+                        return redirect()->back()->with('message',array('type' => 'info' , 'message' => 'Se creo el dominio pero no el host error:'.$response['error-host']));
+                    }
+                    Domain::create([
+                        'domain' => $dom,
+                        'name' => $dom,
+                        'ssl' => $dom,
+                        'state' => 401,
+                        'shop_id' => $shop->id
+                    ]);
+                    return redirect()->to('admin/setting/domain')->with('message',array('type' => 'success' , 'message' => 'Dominio '. $request->get('domain') .' comprado correctamente. Activalo en tu tabla de Dominios'));
+                }
+            }else{
+                return redirect()->back()->with('message',array('type' => 'warning' , 'message' => 'No se pudo cargar la compra a tu tarjeta de credito'));
+            }
+
+        //no olvidar crear el dominio en nginx
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * @param Route $route
+     */
+    public function findDomain(Route $route){
+        $uuid = $route->getParameter('account');
+        $this->domain = Domain::where('uuid','=',$uuid)->first();
     }
 
     /**
@@ -114,30 +291,7 @@ class NameCheapController extends Controller
     /**
      * @return $this
      */
-    public function getVerify(){
-        if($this->domain) {
-            return view('admin.configuration.verify_domain')->with('domain' , $this->domain);
-        }
-    }
-    /**
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postVerify(){
-        if($this->domain){
-            $url = $this->domain->name;
-            if($url == NULL) return false;
-            $exist = $this->curlDNS($url);
-            $exist ?  $ip = gethostbyname($url) : $ip = false;
-            $ip && $ip == $this->ip ? $goodDns =  true : $goodDns =  false ;
-            if($goodDns){
-                $this->domain->status_id = 3;
-            }else{
-                $this->domain->status_id = 2;
-            }
-            $this->domain->save();
-        }
-            return response()->json($this->domain->status->code);
-    }
+
 
     /**
      * Create domain exist not buy

@@ -14,6 +14,10 @@ $appRoute = function (){
     //route home
     Route::get('/', 'HomeController@home');
 
+    //route notificacion
+
+
+
     //Routes checkout
     Route::get('checkout' , 'Checkout\CheckoutController@index');
 
@@ -32,15 +36,22 @@ $appRoute = function (){
     Route::get('cart/buy','HomeController@cart');
 
     //cart
+
+    //cart
     Route::get('detail/{slug}',[
         'uses' => 'HomeController@detail',
+        'as'  => 'product.store.show'
+    ]);
+
+    Route::get('detail/{slug}/{uuid}',[
+        'uses' => 'HomeController@detail2',
         'as'  => 'product.store.show'
     ]);
 
     //contact
     Route::get('contact', 'HomeController@contact');
     Route::post('contact/email', 'HomeController@email');
-    
+
     //Orders
     Route::get('orders', 'HomeController@getOrders');
     Route::get('orders/{order}', 'HomeController@showOrder');
@@ -59,7 +70,7 @@ $appRoute = function (){
     Route::get('checkout/success' , 'checkout\\CheckoutController@successMercadopago');
     Route::get('checkout/failure' , 'checkout\\CheckoutController@failureMercadopago');
     Route::get('checkout/pending' , 'checkout\\CheckoutController@pendingMercadopago');
-    
+
 
     //Route page build
     Route::get('build' ,'HomeController@build');

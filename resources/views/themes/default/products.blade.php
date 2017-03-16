@@ -60,8 +60,8 @@
                     <div class="col-md-3"  dir-paginate="product in filtered = (products  | itemsPerPage: itemsPerPage | filter:search | orderBy:propertyName:reverse)">
                         <div class="box-product-outer">
                             <div ng-include="'tpl.html'"></div>
-                            </div>
                         </div>
+                    </div>
                     <div class="col-xs-12 text-center">
                         <div class="filters-row__pagination">
                             <dir-pagination-controls></dir-pagination-controls>
