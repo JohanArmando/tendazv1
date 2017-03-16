@@ -2,6 +2,17 @@
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{asset('administrator/css/plans-account2.css')}}">
     <link rel="stylesheet" href="{{asset('components/js/toastr.min.css')}}">
+    <style media="screen">
+    .affix {
+      top: 0;
+      z-index: 2;
+      width: 100%;
+
+    }
+    .promotion {
+        background-color: #f7f7f7;
+    }
+    </style>
 @stop
 @section('content')
 <div class="container" style="width: 100%; background-color: #f7f7f7;">
@@ -11,47 +22,64 @@
             Sin obligaciones. Cambia de plan en cualquier momento. Incrementa tus ganancias!
         </p>
     </section>
-    <section>
-        <div class="row">
-          <div class="col-md-offset-2 col-md-8">
-            @if (count($errors) > 0)
-              <div class="alert alert-danger">
-                  <ul>
-                      @foreach ($errors->all() as $error)
-                          <li>{{ $error }}</li>
-                      @endforeach
-                  </ul>
-              </div>
-            @endif
+
+    <div class="row promotion text-center"  data-spy="affix" data-offset-top="173" >
+
+        <div class="col-md-4 col-xs-6 col-md-offset-2 items">
+          <div class="btn-group" data-toggle="buttons">
+              <label rel="1" class="btn btn-lg btn-primary btn-checbox activeCheckbox planSelect">
+                  <input  type="checkbox" autocomplete="off" checked>Pago Mensual
+              </label>
+              <label rel="6" class="btn  btn-lg btn-primary btn-checbox planSelect">
+                  <input type="checkbox" autocomplete="off">Pago Semestral
+              </label>
+              <label rel="12" class="btn  btn-lg btn-primary btn-checbox planSelect">
+                  <input type="checkbox" autocomplete="off">Pago Anual
+              </label>
           </div>
-            <div class="col-md-4 col-md-offset-2 text-center"><br><br>
-                <div class="btn-group" data-toggle="buttons">
-                    <label rel="1" class="btn btn-sm btn-primary btn-checbox activeCheckbox planSelect">
-                        <input  type="checkbox" autocomplete="off" checked>Pago Mensual
-                    </label>
-                    <label rel="6" class="btn  btn-sm btn-primary btn-checbox planSelect">
-                        <input type="checkbox" autocomplete="off">Pago Semestral
-                    </label>
-                    <label rel="12" class="btn  btn-sm btn-primary btn-checbox planSelect">
-                        <input type="checkbox" autocomplete="off">Pago Anual
-                    </label>
-                </div>
+        </div>
+        <div class="col-md-2 col-xs-3 text-center items">
+          <div class="btn-group-vertical" role="group" aria-label="...">
+              <button type="button" class="btn btn-default name paymetUuid_standar">Plan Estadar</button>
+              <button type="button" class="btn btn-default price paymetUuid_standar">USD <span class="standar one">$25</span> por mes</button>
+          </div>
+        </div>
+        <div class="col-md-2 col-xs-3 text-center items">
+          <div class="btn-group-vertical" role="group" aria-label="...">
+              <button type="button" class="btn btn-default name paymetUuid_advance">Plan Avanzado</button>
+              <button type="button" class="btn btn-default price paymetUuid_advance">USD <span class="advance one">$45</span> por mes</button>
+          </div>
+        </div>
+    </div>
+      <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+          @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
-            <div class="col-md-4">
-                <div class="col-md-6 col-xs-6 space">
-                    <div class="btn-group-vertical pull-left" role="group" aria-label="...">
-                        <button type="button" class="btn btn-default name paymetUuid_standar">Plan Estadar</button>
-                        <button type="button" class="btn btn-default price paymetUuid_standar">USD <span class="standar one">$25</span> por mes</button>
-                    </div>
-                </div>
-                <div class="col-md-6 col-xs-6 space">
-                    <div class="btn-group-vertical pull-left" role="group" aria-label="...">
-                        <button type="button" class="btn btn-default name paymetUuid_advance">Plan Avanzado</button>
-                        <button type="button" class="btn btn-default price paymetUuid_advance">USD <span class="advance one">$45</span> por mes</button>
-                    </div>
-                </div>
+          @endif
+        </div>
+
+        <div class="col-md-4 col-md-offset-2 text-center"><br><br>
+
+        </div>
+        <div class="col-md-4">
+            <div class="col-md-6 col-xs-6 space">
+
+            </div>
+            <div class="col-md-6 col-xs-6 space">
+
             </div>
         </div>
+    </div>
+
+
+    <section>
+
         <div class="row">
             <div class="col-md-8 col-md-offset-2 item-principal">
                 <p>M&Oacute;DULO DE INICIO</p>
@@ -379,6 +407,7 @@
     <script type="text/javascript" src="https://www.2checkout.com/checkout/api/2co.min.js"></script>
     <script>
         $(document).on('ready' , function () {
+            $('#myAffix').affix();
             var price = $(".choose-period").find(".selection").data('price');
             $('#enviar').html('Pagar Plan');
             $('.paymetUuid_standar').click(function (){
