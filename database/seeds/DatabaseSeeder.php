@@ -26,9 +26,8 @@ class DatabaseSeeder extends Seeder
         $this->call(PaymentMethodsSeeder::class);
         $this->call(CategoryTldSeeder::class);
         $this->call(TldSeeder::class);
+        $this->call(FeaturesTableSeeder::class);
         Model::unguard();
-
-        factory(\Tendaz\Models\Subscription\Feature::class, 50)->create();
         
         Model::reguard();
     }
