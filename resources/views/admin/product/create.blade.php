@@ -33,30 +33,33 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <ul class="nav nav-tabs" style="background-color: white; ">
+
                                     <li class="active">
                                         <a href="#popular" data-toggle="tab">
                                             <h2>
-                                                <i  class="fa fa-thumbs-o-up text-tendaz"></i>Publicaci&oacute;n Simple
+                                                <i  class="fa fa-thumbs-o-up text-tendaz"></i>Publicaci&oacute;n de producto
                                             </h2>
                                             <span class="media-meta" STYLE="margin-left: 15%">Publica de forma r&aacute;pida</span>
                                         </a>
                                     </li>
-                                    <li>
+
+                                    {{--
+                                    <li class="active">
                                         <a href="#comments" data-toggle="tab">
                                             <h2>
-                                                <i  class="fa fa-hand-peace-o text-tendaz"></i>Publicaci&oacute;n Avanzada
-                                            </h2>
+                                                <i  class="fa fa-hand-peace-o text-tendaz"></i>Publicaci&oacute;n de productos
                                             <span class="media-meta" style="margin-left: 15%"> Publica tu producto detalladamente</span>
                                         </a>
                                     </li>
+                                    --}}
                                 </ul>
                                 <div class="tab-content panel" style="padding: 2.5%">
-                                    <div class="tab-pane  np active" id="popular">
+                                    <div class="tab-pane  np " id="comments">
                                         <div class="media-list">
                                             @include('admin.partials.form-simple')
                                         </div>
                                     </div>
-                                    <div class="tab-pane np " id="comments">
+                                    <div class="tab-pane np active" id="popular">
                                         <div class="media-list">
                                             {{-- {!! Form::open(['url' => url ("admin/products?client_secret=".$shop->uuid."&client_id=".$shop->id)  , 'method' => 'POST' , 'class' => 'dropzone' ,'id' => 'my-dropzone-avanzado' , 'files' => true]) !!}
                                             @include('admin.partials.form-advanced')
@@ -128,7 +131,7 @@
             </div>
         </div>
     </div>
-    
+
 
 @endsection
 @section('scripts')
@@ -173,12 +176,12 @@
             }
         });
     </script>
-    
+
     <script>
-        var Base_Url = "{{ url('') }}"; 
+        var Base_Url = "{{ url('') }}";
         Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf_token"]').attr('content');
 
-        
+
         var app2 = new Vue({
             el: '#app-vue-simple',
             data: {
@@ -279,7 +282,7 @@
                     });
                 },
                 updateGeneral: function () {
-                    
+
                     $('#btn-udate-general').button('loading');
                     var aux = {
                         name: this.product.name,
@@ -305,7 +308,7 @@
                     // error callback
                         $('#btn-udate-general').button('reset');
 
-                    })      
+                    })
                 },
             }
         });
@@ -313,7 +316,7 @@
 
     </script>
     <script type="text/javascript">
-        
+
     </script>
 
 

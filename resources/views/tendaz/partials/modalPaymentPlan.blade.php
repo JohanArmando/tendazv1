@@ -11,6 +11,7 @@
                     <input type="hidden" name="token" class="input_uuid" value="">
                     <input type="hidden" name="plan" id="plan" class="input_uuid" value="">
                     <input type="hidden" name="recurrent" id="recurrent" class="" value="1">
+                    <input type="hidden" name="price" id="price" class="" value="1">
                     <div class="row">
                         <div class="col-md-6">
                             <legend>Datos personales</legend>
@@ -58,7 +59,10 @@
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <legend>Datos de la tienda</legend>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <legend>Datos de la tienda</legend>
+                            </div>
                             <div class="form-group col-md-6">
                                 <label for="">Nombre</label>
                                 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
@@ -73,6 +77,7 @@
                                     <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
                                     <input id="password" type="password"  name="password" placeholder="- - - - - -" class="form-control" required>
                                 </div>
+                            </div>
                             </div>
                         </div>
 
