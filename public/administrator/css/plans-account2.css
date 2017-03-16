@@ -140,3 +140,7 @@
  .btn-checbox{background-color: white !important;color: black !important;}
  .activeCheckbox{background-color: #f26522 !important;color: white !important;}
  .one{font-size: 28px}
+ .btn-group{margin-top: 12px}
+
+ .affix {  top: 0;  z-index: 2;  width: 100%; border-bottom: 1px solid #ccc }
+ .promotion {  background-color: #f7f7f7;  padding-top: 10px; padding-bottom: 10px}

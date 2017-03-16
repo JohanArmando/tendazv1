@@ -2,17 +2,6 @@
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{asset('administrator/css/plans-account2.css')}}">
     <link rel="stylesheet" href="{{asset('components/js/toastr.min.css')}}">
-    <style media="screen">
-    .affix {
-      top: 0;
-      z-index: 2;
-      width: 100%;
-
-    }
-    .promotion {
-        background-color: #f7f7f7;
-    }
-    </style>
 @stop
 @section('content')
 <div class="container" style="width: 100%; background-color: #f7f7f7;">
@@ -27,16 +16,17 @@
 
         <div class="col-md-4 col-xs-6 col-md-offset-2 items">
           <div class="btn-group" data-toggle="buttons">
-              <label rel="1" class="btn btn-lg btn-primary btn-checbox activeCheckbox planSelect">
+              <label rel="1" class="btn btn-md btn-primary btn-checbox activeCheckbox planSelect">
                   <input  type="checkbox" autocomplete="off" checked>Pago Mensual
               </label>
-              <label rel="6" class="btn  btn-lg btn-primary btn-checbox planSelect">
+              <label rel="6" class="btn  btn-md btn-primary btn-checbox planSelect">
                   <input type="checkbox" autocomplete="off">Pago Semestral
               </label>
-              <label rel="12" class="btn  btn-lg btn-primary btn-checbox planSelect">
+              <label rel="12" class="btn  btn-md btn-primary btn-checbox planSelect">
                   <input type="checkbox" autocomplete="off">Pago Anual
               </label>
           </div>
+            <p>Grandes descuentos por compra de planes semestrales y anuales.</p>
         </div>
         <div class="col-md-2 col-xs-3 text-center items">
           <div class="btn-group-vertical" role="group" aria-label="...">
@@ -76,10 +66,7 @@
             </div>
         </div>
     </div>
-
-
     <section>
-
         <div class="row">
             <div class="col-md-8 col-md-offset-2 item-principal">
                 <p>M&Oacute;DULO DE INICIO</p>
