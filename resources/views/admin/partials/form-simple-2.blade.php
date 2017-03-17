@@ -26,7 +26,7 @@
         <div class="media border-dotted">
             <span class="media-body box">
                 <div class="row">
-                    <div class="col-md-9 col-simple">                    
+                    <div class="col-md-9 col-simple">
                         <label class="control-label" style="font-size: 1.2em; color: black;">Imagenes
                             <small style="color: darkgray">(Opcional)</small>
                         </label>
@@ -39,7 +39,7 @@
                         </div>
                         <div class="col-md-3">
                           <div class="panel panel-default" style="height: 220px;">
-                              <div class="panel-body text-center" > 
+                              <div class="panel-body text-center" >
                                   <input type="file" id="file" class="hide" @change="onFileChange">
                                     <label for="file" style="cursor: pointer;">
                                         <h1 style="font-size: 80px !important; color: #F26522; margin: 20px;"><i class="ico-cloud-upload2"></i></h1>
@@ -58,7 +58,7 @@
                 <div class="col-md-12 col-simple">
                   <div class="form-group" >
                     <div class="row">
-                    
+
                       <label class="control-label" style="font-size: 1.2em; color: black;">Dimensiones
                       <small style="color: darkgray">(Es importante completar tus dimensiones para calcular el valor del envio)</small>
                       </label>
@@ -102,7 +102,7 @@
                           </div>
                       </div>
                     </div>
-                    
+
                   </div>
                 </div>
               </span>
@@ -114,7 +114,7 @@
               <div class="col-md-12  col-simple">
                 <div class="form-group" >
                   <div class="row">
-                  
+
                     <div class="col-md-3">
                         <div class="input-group">
                             <label class="col-md-6 control-label" id="label-precio">
@@ -155,17 +155,57 @@
           </div>
         </div>
         <div class="media border-dotted">
+            <div class="row" style="background-color: #F7F7F7;border-radius: 10px;padding: 25px;">
+              <span class="">
+                <div class="col-md-12 col-simple">
+                  <div class="form-group" >
+                    <div class="row">
+
+                      <label class="control-label" style="font-size: 1.2em; color: black;">Categorias
+                      <small style="color: darkgray">(Añade de las categorias que ya tiene asignadas)</small>
+                      </label>
+                      <br>
+                      <div class="form-group">
+                        <label class="control-label" style=" color: darkslategray">Añadir categorias <span data-loading-text="<i class='fa fa-spinner fa-spin'></i> " id="add-category" ></span></label><br>
+
+                        <a data-loading-text="<i class='fa fa-spinner fa-spin'></i> procesando" v-on:click="removeCategory(category)" v-bind:id="'remove-category-'+category.id" style="margin-right: 4px; cursor: pointer;" class="btn btn-default" v-for="category in product_new.categories" >@{{ category.name }} <i class='fa fa-remove'></i></a>
+                        <div role="presentation" class="dropdown" style="display: inline-block;">
+                          <a href="#" v-if="categoriesAdd.length != 0" class="dropdown-toggle btn-default btn" id="drop6" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                            <span class="glyphicon glyphicon-plus"></span> Agregar categoria <span class="caret"></span>
+                          </a>
+                          <a href="#" v-else class="btn-default btn" role="button">
+                            Sin categorias que agregar
+                          </a>
+                          <ul v-if="categoriesAdd.length != 0"   class="dropdown-menu" id="menu3" aria-labelledby="drop6">
+                              <li v-for="category in categoriesAdd">
+                                  <a v-on:click="addCategory(category)" style="cursor: pointer;">@{{ category.name }}</a>
+                              </li>
+                          </ul>
+                        </div>
+                        <br>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+              </span>
+            </div>
+        </div>
+
+
+        <div class="media border-dotted">
             <div class="row">
               <span class="media-body box">
                 <div class="col-sm-9 col-simple">
                   <div class="form-group">
                     <div class="row">
-                    
+
                         <label class="control-label" style="font-size: 1.2em; color: black;">Descripcion
                             <small style="color: darkgray">(Menciona todas las caracteristicas de tu producto)</small>
                         </label>
                         <br>
-                     
+
                          <textarea  class="form-control" name="description2" id="simple-description2" data-parsley-type="alphanum">
                          </textarea>
                     </div>

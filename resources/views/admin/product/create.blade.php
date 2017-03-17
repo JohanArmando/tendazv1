@@ -200,8 +200,10 @@
                         stock: '',
                         weight: '',
                         images: []
-                    }
+                    },
+                    categories: []
                 },
+                categories:[],
                 product:{
 
                 },
@@ -210,12 +212,35 @@
             },
             mounted() {
                 console.log('Component mounted 2.');
+                this.fetchCategories();
                 $('textarea').trumbowyg({
                     fullscreenable: true,
                     lang: 'es'
                 });
             },
             methods: {
+                fetchCategories: function () {
+                  this.$http.get(Base_Url+'/admin/categories/all?client_secret=' + client_secret + '&client_id=' + client_id).
+                  then((response) => {
+                      var data = response.body;
+                      this.categories = data;
+                      ///console.log(data);
+                  }, (response) => {
+                  // error callback
+
+                  })
+                },
+                addCategory: function (category) {
+                    this.product_new.categories.push(category);
+                },
+                removeCategory: function (category) {
+
+                    var vm = this;
+                    vm.product_new.categories = vm.product_new.categories.filter(function(el){
+                        return el.id !== category.id;
+                    });
+
+                },
                 storeProduct: function () {
                     $('#btn-store-product').button('loading');
                     this.product_new.description = $('#simple-description2').trumbowyg('html');
@@ -245,8 +270,10 @@
                                     stock: '',
                                     weight: '',
                                     images: []
-                                }
+                                },
+                                categories: []
                             };
+                            this.fetchCategories();
                             this.product_new.description = $('#simple-description2').trumbowyg('empty');
 
                             $('#btn-store-product').button('reset');
@@ -310,6 +337,26 @@
 
                     })
                 },
+            },
+            computed: {
+              categoriesAdd: function () {
+                var data = [];
+                var find = false;
+                for (var i = 0; i < this.categories.length; i++) {
+                    find = false;
+                    for (var j = 0; j < this.product_new.categories.length; j++) {
+                      if (this.categories[i].id == this.product_new.categories[j].id)
+                      {
+                        find = true;
+                        break;
+                      }
+                    }
+                    if (!find) {
+                      data.push(this.categories[i]);
+                    }
+                }
+                return data;
+              }
             }
         });
 

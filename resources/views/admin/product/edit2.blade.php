@@ -127,7 +127,30 @@ Editar {{ucfirst($product->name)}}
                                                          <label for="checkbox5" style="color: #7b7b7b">&nbsp;&nbsp;Quiero que este producto se muestre en mi tienda</label>
                                                      </span>
                                                      <br>
+
                                                  </div>
+                                                 <div class="col-md-12">
+                                                    <div class="form-group">
+                                                      <label class="control-label" style=" color: darkslategray">Categorias <span data-loading-text="<i class='fa fa-spinner fa-spin'></i> " id="add-category" ></span></label><br>
+
+                                                      <a href="#"  data-loading-text="<i class='fa fa-spinner fa-spin'></i> procesando" v-on:click="removeCategory(category)" v-bind:id="'remove-category-'+category.id" style="margin-right: 4px;" class="btn btn-default" v-for="category in product.categories" >@{{ category.name }} <i class='fa fa-remove'></i></a>
+                                                      <div role="presentation" class="dropdown open" style="display: inline-block;">
+                                                        <a href="#" v-if="categoriesAdd.length != 0" class="dropdown-toggle btn-default btn" id="drop6" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                                                          <span class="glyphicon glyphicon-plus"></span> Agregar categoria <span class="caret"></span>
+                                                        </a>
+                                                        <a href="#" v-else class="btn-default btn" role="button">
+                                                          Sin categorias que agregar
+                                                        </a>
+                                                        <ul v-if="categoriesAdd.length != 0"   class="dropdown-menu" id="menu3" aria-labelledby="drop6">
+                                                            <li v-for="category in categoriesAdd">
+                                                                <a v-on:click="addCategory(category)"  href="#">@{{ category.name }}</a>
+                                                            </li>
+                                                        </ul>
+                                                      </div>
+                                                      <br>
+                                                    </div>
+                                                 </div>
+
                                                  <div class="col-md-12">
                                                    <div class="form-group">
                                                      <label for="">Description</label>
@@ -169,6 +192,7 @@ Editar {{ucfirst($product->name)}}
                                             </div>
                                         </div>
                                     </div>
+
                                     <div role="tabpanel" class="tab-pane" id="visibity">
                                         <div class="panel panel-default">
                                             <div class="panel-heading-white" >
@@ -795,10 +819,12 @@ Editar {{ucfirst($product->name)}}
                         stock: '',
                         weight: '',
                         images: []
-                    }
+                    },
+                    categories: []
                 },
                 options: [],
                 aux: '',
+                categories: [],
             },
             mounted() {
                 console.log('Component mounted 2.');
@@ -807,8 +833,74 @@ Editar {{ucfirst($product->name)}}
                     lang: 'es'
                 });
                 this.freshProduct();
+                this.fetchCategories();
             },
             methods: {
+
+                fetchCategories: function () {
+                  this.$http.get(Base_Url+'/admin/categories/all?client_secret=' + client_secret + '&client_id=' + client_id).
+                  then((response) => {
+                      var data = response.body;
+                      this.categories = data;
+                      ///console.log(data);
+                  }, (response) => {
+                  // error callback
+
+                  })
+                },
+                addCategory: function (category) {
+
+                        $('#add-category').button('loading');
+
+
+                        this.$http.post(Base_Url+'/admin/products/'+this.product.uuid+'/categories/'+category.id+'?client_secret='+client_secret+'&client_id='+client_id,this.value_new).
+                        then((response) => {
+                          $('#add-category').button('reset');
+                          this.product.categories.push(category);
+
+                        }, (response) => {
+                        // error callback
+                           $('#add-category').button('reset');
+
+                        });
+                },
+                removeCategory: function (category) {
+
+                        $('#add-category').button('loading');
+
+
+                        this.$http.delete(Base_Url+'/admin/products/'+this.product.uuid+'/categories/'+category.id+'?client_secret='+client_secret+'&client_id='+client_id,this.value_new).
+                        then((response) => {
+                              $('#add-category').button('reset');
+
+                              var vm = this;
+                              vm.product.categories = vm.product.categories.filter(function(el){
+                                  return el.id !== category.id;
+                              });
+                              setTimeout(function(){
+                                var aux = vm.product.categories;
+                                vm.product.categories = [];
+                                vm.product.categories = aux;
+
+                              }, 2000);
+
+
+                        }, (response) => {
+                        // error callback
+                          $('#add-category').button('reset');
+
+
+                        });
+
+                },
+                /*addCategory: function (category) {
+                    this.product.categories.push(category);
+                },
+                removeCategory: function (category) {
+                    this.product.categories = this.product.categories.filter(function (el) {
+                        return el != category;
+                    });
+                },*/
                 freshProduct: function () {
 
                     this.$http.get(Base_Url+'/admin/products/'+product+'?client_secret='+client_secret+'&client_id='+client_id,this.product_new).
@@ -1065,8 +1157,7 @@ Editar {{ucfirst($product->name)}}
                     }, (response) => {
                     // error callback
                         $('#btn-udate-visibility').button('reset');
-
-                    })
+                    });
                 },
                 messajeSuccess: function () {
                     this.messaje.type = 'Genial! ';
@@ -1164,7 +1255,28 @@ Editar {{ucfirst($product->name)}}
                     })
 
                 }
+            },
+            computed:{
+              categoriesAdd: function () {
+                var data = [];
+                var find = false;
+                for (var i = 0; i < this.categories.length; i++) {
+                    find = false;
+                    for (var j = 0; j < this.product.categories.length; j++) {
+                      if (this.categories[i].id == this.product.categories[j].id)
+                      {
+                        find = true;
+                        break;
+                      }
+                    }
+                    if (!find) {
+                      data.push(this.categories[i]);
+                    }
+                }
+                return data;
+              }
             }
+
         });
 
 
