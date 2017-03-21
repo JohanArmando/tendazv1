@@ -7,7 +7,7 @@ $domain = new \Tendaz\Models\Domain\Domain();
     ]);
     //Routes statics
     Route::get('/stats' , 'StaticsController@basic');
-    Route::get('/stats/advanced' , 'StaticsController@advanced')->middleware('plan:estandar,avanzado');
+    Route::get('/stats/advanced' , 'StaticsController@advanced')->middleware('plan:avanzado');
     Route::get('/stats/advanced/map' , 'StaticsController@map');
     Route::get('/stats/update' , 'StaticsController@update');
 
@@ -106,9 +106,9 @@ $domain = new \Tendaz\Models\Domain\Domain();
         Route::resource('shippings', 'ShippingController',
             ['only' => ['index', 'store', 'update', 'destroy']]);
         //meli
-        Route::get('/mercadolibre',function(){return view('admin.setting.mercadolibre.index');})->middleware('plan:estandar,avanzado');
+        Route::get('/mercadolibre',function(){return view('admin.setting.mercadolibre.index');})->middleware('plan:avanzado');
         //setting domain
-        Route::get('/domain', 'NameCheapController@getIndex');
+        Route::get('/domain', 'NameCheapController@getIndex')->middleware('plan:avanzado');
         Route::get('/domain/create', 'NameCheapController@store');
         Route::get('/domain/main/{uuid}', 'NameCheapController@main');
         Route::get('/domain/verify/{uuid}', 'NameCheapController@getVerify');

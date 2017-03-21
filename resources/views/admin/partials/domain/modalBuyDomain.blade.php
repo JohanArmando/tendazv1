@@ -14,8 +14,9 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <span class="input-group-addon" style="background: #3C3C3C; color: white; ">http://</span>
-                                    <input type="text" name="domain" class="form-control" id="basic-url" aria-describedby="basic-addon3" style="width: 290px;">
-                                    <select class="form-control" style="width: 200px;" data-style="default" id="select-domain">
+                                    <input type="text" name="domain" class="form-control" id="basic-url" aria-describedby="basic-addon3" style="width: 70%">
+
+                                    <select class="form-control" style="width: 30%" data-style="default" id="select-domain">
                                         <optgroup label="Dominios Comunes">
                                             @foreach($tlds as $tld)
                                                 @if($tld->category_tld_id == 1)

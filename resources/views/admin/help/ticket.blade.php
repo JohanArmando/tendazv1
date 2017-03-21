@@ -96,42 +96,37 @@
 <div id="new_ticket" class="modal fade" tabindex="-1" role="dialog">
 	<div class="modal-dialog" role="document">
 		<div class="modal-dialog">
-			<div class="modal-content" style="background: #E6E7E9;width: 527px!important;height: 511px !important;">
-				<div class="">
-					<div style="margin-top: 20px;"></div>
-					</div>
+			<div class="modal-content" style="background: #E6E7E9;width:100% !important;height: 511px !important;">
+				<div class="row">
+					<div class="col-md-12" style="margin-bottom: 30px;"></div>
 					<div class="col-md-12 text-center" style="margin-top: 30px">
-						<div class="col-md-1 line-title" style="margin-left: 15px"></div>
+						<div class="hidden-xs hidden-sm col-md-1 line-title" style="margin-left: 15px"></div>
 						<div class="col-md-5"><span style="font-size: 25px">Crear Ticket</span></div>
-						<div class="col-md-1 line-title"></div>
+						<div class="hidden-xs hidden-sm col-md-1 line-title"></div>
 					</div>
 					<div class="col-md-12" style="margin-bottom: 30px;"></div>
-					<form method="post" action="{{url('admin/help/tickets')}}">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						<div class="row">
-							<div class="col-sm-12 col-md-10 col-md-offset-2">
-								<input id="ticket_input" type="text" class="form-control" name="subject" placeholder="Asunto" required="required">
-							</div>
-						</div>
-						<div class="clearfix"></div>
-						<div style="margin-bottom: 20px;"></div>
-						<div class="row">
-							<div class="col-sm-12 col-sm-offset-1 col-md-11">
-								<textarea name="description" style="width:430px ; height: 200px;"></textarea>
-								<div style="margin-bottom: 10px;"></div>
-								<div class="col-md-10">
-									<button type="button" class="btn btn-default hidden" style="background: #3C3C3C; color: white;">ADJUNTAR ARCHIVO</button>
-									<div style="margin-bottom: 10px;"></div>
+					<div class="col-md-12 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+						<form method="post" action="{{url('admin/help/tickets')}}">
+							<input type="hidden" name="_token" value="{{ csrf_token() }}">
+							<div class="row">
+								<div class="col-md-10 col-xs-12 col-sm-12" style="margin-bottom: 20px;">
+									<input id="ticket_input" type="text" class="form-control" name="subject" placeholder="Asunto" required="required">
+								</div>
+								<div class="col-md-10 col-xs-12 col-sm-12" style="margin-bottom: 20px;">
+									<div class="table-responsive">
+										<textarea name="description" style="width:480px !important; height: 200px;"></textarea>
+									</div>
+								</div>
+								<div class="col-md-10 col-xs-12 col-sm-12" style="margin-bottom: 20px;">
 									<button type="submit" class="btn btn-primary" style="width:100%;background: #FF3D00; color: white;">ENVIAR</button>
 								</div>
-								</div>
-						</div>
-					</form>
+							</div>
+						</form>
+					</div>
 				</div>
-
 			</div>
 		</div>
-
+	</div>
 </div>
 <!--END-->
 @endsection

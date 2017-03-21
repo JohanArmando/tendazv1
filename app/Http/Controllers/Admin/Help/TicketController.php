@@ -2,6 +2,7 @@
 
 namespace Tendaz\Http\Controllers\Admin\Help;
 
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Request;
 use Tendaz\Http\Controllers\Controller;
 use Tendaz\Models\Help\Ticket;
@@ -12,7 +13,7 @@ class TicketController extends Controller
 {
     public function index()
     {
-        $tickets = Ticket::all();
+        $tickets = Ticket::where('user_id',Auth('admins')->user()->id)->get();
         return view('admin.help.ticket',compact('tickets'));
     }
 

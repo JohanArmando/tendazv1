@@ -30,24 +30,22 @@ Medios de pago
                 <div class="col-xs-6 col-sm-4 col-md-6" ng-repeat="payment in payments">
                     <div class="panel panel-default">
                             <div class="caption">
-                                <h4 style="color: #f26522">Metodo de Pago  @{{ payment.name }}</h4>
-                                <p>
+                                <h4 class="hidden-xs" style="color: #f26522">Metodo de Pago  @{{ payment.name }}</h4>
+                                <span class="hidden-md hidden-lg" style="color: #f26522"><span class="hidden-xs">Metodo de Pago</span>  @{{ payment.name }}</span>
+                                <p class="hidden-xs">
                                     Costo por transaccion : <strong>@{{ payment.cost_by_trans_cre }}</strong>
                                     <br ng-if="payment.cost != '' ">
-                                    <!-- <strong  ng-if="payment.cost != '' ">
-                                        Costo minimio de la Transaccion es de : @{{ payment.cost }}
-                                    </strong> -->
                                     Tiempo para retirar el dinero : 
                                     <strong>@{{ payment.days }} Dias</strong>
                                 </p>
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPayment" ng-click="modal_payment(payment , true);create =  true" ng-if="payment.data == null || payment.data.avaliable == 0">
-                                    Activar medio de Pago
+                                    Activar <span class="hidden-xs">medio de Pago</span>
                                 </button>
                                 <button type="button" class="btn btn-danger"  ng-click="deactive(payment)" ng-if="payment.data != null && payment.data.avaliable == 1">
-                                    Desactivar medio de Pago
+                                    Desactivar <span class="hidden-xs">medio de Pago</span>
                                 </button>
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPayment" ng-click="modal_payment(payment , false) ; " ng-if="payment.data != null && payment.data.avaliable == 1">
-                                    Modificar datos
+                                    Modificar <span class="hidden-xs">datos</span>
                                 </button>
                             </div>
                             <img class="img-responsive" ng-src="@{{ BASEURL + '/administrator/image/payments/' + payment.path }}"  alt="...">

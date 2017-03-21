@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-        {{-- <div class="container">
+         <div class="container hidden">
             <div class="row">
                 <div class="col-md-12">
                     <!-- Plan 1 -->
@@ -71,7 +71,7 @@
                     <div class="col-md-12"><br></div>
                 </div>
             </div>
-        </div> --}}
+        </div>
         <div class="container" style="width: 100%; background-color: #f7f7f7;">
             <section class="text-center heading-description">
                 <h1>Cambiar Plan</h1>
@@ -228,6 +228,7 @@
                           @endif
 
                       @endforeach
+                          <br>
                     </div>
                 </div>
 
@@ -373,8 +374,8 @@
                                     </button>
                                 {!! Form::close() !!}
                           @endif
-
                       @endforeach
+                          <br>
                     </div>
                     <br>
                 </div>
