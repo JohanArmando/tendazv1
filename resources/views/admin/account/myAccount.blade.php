@@ -147,6 +147,7 @@
         </div>
     </div>
 <div class="page-end-space"></div>
+
 @endsection
     @section('scripts')
     <script type="text/javascript" src="{{asset('administrator/plugins/inputmask/js/inputmask.js')}}"></script>
@@ -157,7 +158,12 @@
         $('#editor').trumbowyg({
             fullscreenable: false
         });
-        var Api_Url = "{{ env('APP_API_URL') }}";
+        var pre = @if (App::environment('local'))
+          'http://';
+        @else
+          'https://';
+        @endif
+        var Api_Url = pre+"{{ env('APP_API_URL') }}";
         var Base_Url = "{{ url('') }}";
         Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf_token"]').attr('content');
         Vue.http.headers.common['Accept'] = 'application/json';
@@ -178,7 +184,7 @@
           },
           methods: {
             loadStates: function () {
-              this.$http.get('http://'+Api_Url+'/states?client_secret='+client_secret+'&client_id='+client_id,this.variant_new).
+              this.$http.get(Api_Url+'/states?client_secret='+client_secret+'&client_id='+client_id,this.variant_new).
               then((response) => {
                   var data = response.body;
                   //$('#btn-store-variant').button('reset');
@@ -199,7 +205,7 @@
 
             },
             loadCities: function (id) {
-              this.$http.get('http://'+Api_Url+'/cities/'+id+'?client_secret='+client_secret+'&client_id='+client_id,this.variant_new).
+              this.$http.get(Api_Url+'/cities/'+id+'?client_secret='+client_secret+'&client_id='+client_id,this.variant_new).
               then((response) => {
                   var data = response.body;
                   this.cities = data.cities;
