@@ -83,7 +83,7 @@
                     <div class="box-footer" ng-show="size(carts.products.data) >= 1">
                         <div class="pull-left">
                             <a  href="{{ url('/products') }}"  class="btn btn-default"><i class="fa fa-chevron-left"></i> Continar Comprando</a>
-                            <a class="btn btn-default" ng-click="emptyCart(cartId)">
+                            <a class="btn btn-default hidden-xs" ng-click="emptyCart(cartId)">
                                 <i class="fa fa-trash-o"></i> Limpiar Carrito
                             </a>
                         </div>

@@ -34,7 +34,7 @@ class StaticsController extends Controller
 
     public function advanced(){
         $products = Product::all();
-        $hits = Trend::where('trend_type','product')->selectRaw('*, sum(hits) as sum')->groupBy('trend_id')->get();
+        $hits = Trend::where('trend_type','product')->selectRaw('*, count(*) as sum')->groupBy('trend_id')->get();
         $totalOrders = Order::NotInitOrders()->count();
         $money = Order::NotInitOrders()->sum('total');
         if(!$totalOrders == 0) $avg = $money/$totalOrders; else $avg = 0;
@@ -56,7 +56,7 @@ class StaticsController extends Controller
         if(!$request->get('dateStart') == '' && !$request->get('dateEnd') == ''){
             $date = Carbon::parse($request->get('dateStart'))->format('d/m/Y').
                 ' - '.Carbon::parse($request->get('dateEnd'))->format('d/m/Y');
-            $hits = Trend::where('trend_type','product')->selectRaw('*, sum(hits) as sum')->groupBy('trend_id')
+            $hits = Trend::where('trend_type','product')->selectRaw('*, count(*) as sum')->groupBy('trend_id')
                 ->whereBetween('created_at',[Carbon::parse($request->get('dateStart')),Carbon::parse($request->get('dateEnd'))])->get();
             $totalOrders = Order::where('orders.shop_id' , $request->shop->id)->NotInitOrders()
                 ->whereBetween('created_at',[Carbon::parse($request->get('dateStart')),Carbon::parse($request->get('dateEnd'))])->count();
@@ -69,7 +69,7 @@ class StaticsController extends Controller
         //7 days
         if($request->get('dates') == 'a'){
             $date = 'Ultimos 7 Dias';
-            $hits = Trend::where('trend_type','product')->selectRaw('*, sum(hits) as sum')->groupBy('trend_id')
+            $hits = Trend::where('trend_type','product')->selectRaw('*, count(*) as sum')->groupBy('trend_id')
                 ->whereBetween('created_at',[Carbon::today()->subDays(8),Carbon::now()])->get();
             $totalOrders = Order::where('orders.shop_id' , $request->shop->id)->NotInitOrders()
                 ->whereBetween('created_at',[Carbon::today()->subDays(8),Carbon::now()])->count();
@@ -81,7 +81,7 @@ class StaticsController extends Controller
             //2 weeks
             if($request->get('dates') == 'b'){
                 $date = 'Ultimas 2 Semanas';
-                $hits = Trend::where('trend_type','product')->selectRaw('*, sum(hits) as sum')->groupBy('trend_id')
+                $hits = Trend::where('trend_type','product')->selectRaw('*, count(*) as sum')->groupBy('trend_id')
                     ->whereBetween('created_at',[Carbon::today()->subDays(16),Carbon::now()])->get();
                 $totalOrders = Order::where('orders.shop_id' , $request->shop->id)->NotInitOrders()
                     ->whereBetween('created_at',[Carbon::today()->subDays(16),Carbon::now()])->count();
@@ -93,7 +93,7 @@ class StaticsController extends Controller
                 //end month
                 if($request->get('dates') == 'c'){
                     $date = 'Ultimo Mes';
-                    $hits = Trend::where('trend_type','product')->selectRaw('*, sum(hits) as sum')->groupBy('trend_id')
+                    $hits = Trend::where('trend_type','product')->selectRaw('*, count(*) as sum')->groupBy('trend_id')
                         ->whereBetween('created_at',[Carbon::today()->subMonth(1),Carbon::now()])->get();
                     $totalOrders = Order::where('orders.shop_id' , $request->shop->id)->NotInitOrders()
                         ->whereBetween('created_at',[Carbon::today()->subMonth(1),Carbon::now()])->count();

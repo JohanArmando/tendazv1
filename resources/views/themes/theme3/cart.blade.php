@@ -55,7 +55,7 @@
                             </tr>
                             <tr>
                                 <td colspan="5" class="actions">
-                                    <a class="continue hidden-xs" href="{{url('/products')}}">Continuar comprando</a>
+                                    <a class="continue" href="{{url('/products')}}">Continuar comprando</a>
                                     <a class="continue hidden-xs" style="margin-left: 10px" ng-click="emptyCart(cartId)">
                                         <i class="fa fa-trash-o"></i> Limpiar Carrito
                                     </a>

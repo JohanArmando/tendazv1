@@ -66,11 +66,15 @@
                             </table>
                         </div>
                         <div ng-show="size(carts.products.data) >= 1">
-                            <a href="{{url('/products')}}" class="btn btn-primary"><i class="fa fa-arrow-circle-o-left"></i> Seguir comprando</a>
-                            <button type="button" class="btn btn-primary" ng-click="emptyCart(cartId)">
+                            <div class="col-xs-12">
+                                <a href="{{url('/products')}}" class="btn btn-primary"><i class="fa fa-arrow-circle-o-left"></i> Seguir comprando</a>
+                            </div>
+                            <div class="col-xs-12">
+                                <button type="button" class="btn btn-primary hidden-xs" ng-click="emptyCart(cartId)">
                                 <i class="fa fa-trash-o"></i> Limpiar Carrito
-                            </button>
-                            <div class="pull-right">
+                                </button>
+                            </div>
+                            <div class="pull-right col-xs-12">
                                 <a href="{{ url('/checkout') }}">
                                     <button type="button" class="btn btn-primary">Checkout <i class="fa fa-arrow-circle-o-right"></i></button>
                                 </a>

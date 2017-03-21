@@ -94,7 +94,7 @@
 										<span class="icon icon-keyboard_arrow_left"></span>CONTINUAR COMPRANDO  </a>
 								</div>
 								<div class="col-xs-12 col-sm-4 col-md-4">
-									<a class="btn btn--ys btn--light" ng-click="emptyCart(cartId)">
+									<a class="btn btn--ys btn--light hidden-xs" ng-click="emptyCart(cartId)">
 										<span class="icon icon-delete" ></span>BORRAR CARRITO DE COMPRAS</a>
 								</div>
 								<div class="divider divider--xs visible-xs"></div>
