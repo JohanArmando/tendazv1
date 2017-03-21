@@ -84,8 +84,8 @@ class ProductsController extends Controller
             }
         }
         $variant = $product->variants()->create([
-            'sku' => $request->sku, 
-            'price' => $request->price, 
+            'sku' => $request->sku,
+            'price' => $request->price,
             'promotional_price' => $request->promotional_price,
             'weight'=> $request->weight,
             'stock'=> $request->stock,
@@ -104,7 +104,7 @@ class ProductsController extends Controller
                 $variant->optionValue()->attach($value);
             }
         }
-        
+
         $product = $product->fresh();
         return response()->json($product, 200);
     }
@@ -140,10 +140,13 @@ class ProductsController extends Controller
             }
         }
         $variant = $product->variants()->create([
-            'price' => $request->variant['price'], 
+            'price' => $request->variant['price'],
             'stock'=> $request->variant['stock'],
             'weight'=> $request->variant['weight']
         ]);
+        foreach ($request->categories as $category) {
+            $product->categories()->attach($category['id']);
+        }
 
 
         if (isset($request->file) && count($request->file) > 0) {
@@ -167,7 +170,7 @@ class ProductsController extends Controller
                 $variant->optionValue()->attach($value);
             }
         }
-        
+
         $product = $product->fresh();
         return response()->json(Product::with(['collection','variants.images'])->find($product->id), 200);
     }
@@ -176,11 +179,11 @@ class ProductsController extends Controller
     {
         $product = Product::where('uuid',$id)->first();
         $variant = $product->variants()->create([
-            'price' => $request->price, 
-            'promotional_price' => $request->promotional_price, 
+            'price' => $request->price,
+            'promotional_price' => $request->promotional_price,
             'stock'=> $request->stock,
             'weight'=> $request->weight,
-            'sku' => $request->sku, 
+            'sku' => $request->sku,
         ]);
         $variant = Variant::with(['values','images'])->find($variant->id);
         return response()->json($variant, 200);
@@ -215,7 +218,7 @@ class ProductsController extends Controller
         $product->update($request->all());
         $product = $product->fresh();
         return $product;
-        
+
     }
     public function addValue($subdomain, $variant_id, $value_id)
     {
@@ -229,6 +232,20 @@ class ProductsController extends Controller
         $variant = Variant::find($variant_id);
         $variant->values()->detach($value_id);
         return $variant->values;
+
+    }
+    public function addCategory($subdomain, $product_id, $category_id)
+    {
+        $product = Product::where('uuid',$product_id)->first();
+        $product->categories()->attach($category_id);
+        return $product->categories;
+
+    }
+    public function removeCategory($subdomain, $product_id, $category_id)
+    {
+        $product = Product::where('uuid',$product_id)->first();
+        $product->categories()->detach($category_id);
+        return $product->categories;
 
     }
     public function storeImages($subdomain, $id, Request $request)
@@ -250,7 +267,7 @@ class ProductsController extends Controller
         return "error";
 
     }
-    
+
     public function updateVariant($subdomain, Variant $variant , Request $request)
     {
         if ($request->wantsJson()){
@@ -330,7 +347,7 @@ class ProductsController extends Controller
 
     public function postImport(ProductListImport $import){
         $reader = $import->first();
-        $fileName = $import->fileName; 
+        $fileName = $import->fileName;
         return view('admin.product.upload',compact('reader','fileName'));
     }
 
@@ -375,7 +392,7 @@ class ProductsController extends Controller
 
     public function import(){
         $categories = Category::orderBy('name','DESC')->pluck('name' , 'id');
-        
+
         return view('admin.product.import',compact('categories'));
     }
 
@@ -415,7 +432,7 @@ class ProductsController extends Controller
             'provider_id'     => $provider_id,
             'publish' => $publish
             ]);
-        
+
         $variant->update([
             'sku' => $request->sku,
             'price' => $request->price,
@@ -426,7 +443,7 @@ class ProductsController extends Controller
             'show'      => $request->show
             ]);
 
-        
+
         $section->update([
             'primary' => $request->primary,
             'shipping_free' => $request->shipping_free,
@@ -442,7 +459,7 @@ class ProductsController extends Controller
                         $product->categories()->detach($current_cat);
                     }
                 }
-                
+
             }
         }
         }else{
@@ -473,7 +490,7 @@ class ProductsController extends Controller
         ));*/
         $product = Product::where('uuid',$id)->first();
 
-        return Product::with(['collection','variants.images','variants.values'])->find($product->id);
+        return Product::with(['collection','variants.images','variants.values','categories'])->find($product->id);
         //return $id;
     }
     public function getImage($subdomain ,$id , Request $request){

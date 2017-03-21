@@ -22,7 +22,7 @@ Crear categorias
     @section('content')
         <div ng-app="MyApp">
             <div class="page-header page-header-block">
-                <div class="page-header-section">12
+                <div class="page-header-section">
                 <h4 class="title">
                     <img class="page-header-section-icon" src="{{asset('administrator/image/icons/icons-base/category.png')}}">
                     &nbsp; Categorias
@@ -125,28 +125,29 @@ Crear categorias
                             </div>
                     </div>
                 </div>
-                {{--<div class="col-md-6">
-                    <div class="panel panel-default" >
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><strong>Organiza las categorias de tu tienda dependiendo de los productos que vayas a publicar.</strong></h3>
-                            </div>
+              {{-- <div class="col-md-6">
+                      <div class="panel panel-default" >
+                          <div class="panel-heading">
+                              <h3 class="panel-title"><strong>Organiza las categorias de tu tienda dependiendo de los productos que vayas a publicar.</strong></h3>
+                          </div>
 
-                            <div class="panel-body">
-                                <p>(You can double click on an item to turn it into a folder.)</p>
+                          <div class="panel-body">
+                              <p>(You can double click on an item to turn it into a folder.)</p>
 
-                                <!-- the demo root element -->
-                                <ul id="demo">
-                                  <item
-                                    class="item"
-                                    :model="treeData">
-                                  </item>
-                                </ul>
+                              <!-- the demo root element -->
+                              <ul id="demo">
+                                <item
+                                  class="item"
+                                  :model="treeData">
+                                </item>
+                              </ul>
 
-                            </div>
+                          </div>
+                      </div>
                     </div>
-                </div>
-                --}}
-            </div>
+                    
+                  </div>--}}
+
 
         <div class="page-end-space"></div>
         </div>

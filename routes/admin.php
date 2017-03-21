@@ -23,12 +23,15 @@ $domain = new \Tendaz\Models\Domain\Domain();
     Route::post('products/import/upload' , 'ProductsController@postImport');
     Route::post('products/import/commit' , 'ProductsController@postCommit');
     Route::get('products/images/{product}' , 'ProductsController@images');
+    Route::post('products/{product_id}/categories/{category_id}' , 'ProductsController@addCategory');
+    Route::delete('products/{product_id}/categories/{category_id}' , 'ProductsController@removeCategory');
     Route::resource('products' , 'ProductsController');
     Route::get('products/edit/{id}' , 'ProductsController@editProduct');
     Route::put('products/edit/{id}' , 'ProductsController@putProduct');
     Route::get('products/images/add/{id}' , 'ProductsController@getImage');
     Route::post('products/refresh/{id}' , 'ProductsController@refreshProduct');
     //Route Categories
+    Route::get('categories/all' , 'CategoriesController@all');
     Route::resource('categories' , 'CategoriesController');
 
     //Route options variants

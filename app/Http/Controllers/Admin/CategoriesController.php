@@ -20,6 +20,11 @@ class CategoriesController extends Controller
         }
         return view('admin.categories.index');
     }
+    public function all()
+    {
+      $categories = Category::all();
+      return $categories;
+    }
     public function store(Request $request)
     {
         if($request->wantsJson()){
