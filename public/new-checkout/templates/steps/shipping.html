@@ -25,24 +25,23 @@
                         <label for="exampleInputPassword1">Elige una de las direcciones</label>
                     </div>
                     <div class="container-fluid ">
+
                         <div class="row">
-                            <div class="col-md-3 text-center" ng-if="addresses.length > 0" ng-repeat="address in addresses">
-
-                              <input type="radio" id="shippingAddress{{ address._id }}" name="shippingAddress"
-                              ng-model="carts.shippingAddress.data._id"  value="{{ address._id }}"  checked/>
-                              <label for="shippingAddress{{ address._id }}" ng-click="changeAddress(address._id)">
-                                  <span><i class="glyphicon glyphicon-ok"></i></span>
-                                      <div class="col-md-12">
-                                          {{ address.name }}
-                                      </div>
-                              </label>
-
+                            <div class="col-md-12">
+                              <div class="radio" ng-if="addresses.length > 0" ng-repeat="address in addresses">
+                                <label  ng-click="changeAddress(address._id)">
+                                  <input type="radio" name="optionsRadios" ng-model="carts.shippingAddress.data._id"  value="{{ address._id }}" id="optionsRadios1" checked>
+                                  <strong>{{ address.street }}</strong>
+                                </label>
+                              </div>
+                              <button ng-click="addressCreate()" type="button" class="btn-primary btn-xs"><span class="glyphicon glyphicon-plus"></span> Agregar otra direccion</button>
                             </div>
-                             <div class="col-md-3 text-center" ng-click="addressCreate()">
+
+                             <!-- <div class="col-md-3 text-center" ng-click="addressCreate()">
                                 <button data-tooltip="Agregar Direcci&oacute;n" class="btn_checkout btn_new_Dir">
                                     <i class="glyphicon glyphicon-plus"></i>
                                 </button>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <form ng-submit="doAddress(addressForm)" name="addressForm" novalidate ng-if="newAddress">
