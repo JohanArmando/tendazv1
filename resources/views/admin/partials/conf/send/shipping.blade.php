@@ -1,16 +1,16 @@
 <div class="col-md-12" id="local-send">
-    <div class="panel panel-default" style="margin-left: 5%; margin-right: 5%" >
+    <div class="panel panel-default" >
         <div class="panel-heading">
             <h4 class="panel-title">Configuracion de envios para <strong>Colombia </strong> <!--<img src="{{-- asset('flag/'.$country->image) --}}" alt="" title="">-->.</h4>
             <div class="panel-toolbar text-right">
                 <div class="option">
                     <a href="#" class="btn demo" data-toggle="modal" data-target="#shppingMethod" ng-click="shipping = {}; showEdit=false" style="color: white;">
-                    <i class="fa fa-plus" style="color: white;"></i> Agregar Envio Local</a>
+                    <i class="fa fa-plus" style="color: white;"></i> Agregar <span class="hidden-xs">Envio Local</span></a>
                 </div>
             </div>
         </div>
         <div class="panel-body ng-cloak">
-            <div class="table">
+            <div class="table-responsive">
                 <table class="table table-responsive table-bordered">
                     <thead>
                         <tr>

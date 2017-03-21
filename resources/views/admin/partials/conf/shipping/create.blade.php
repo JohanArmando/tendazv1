@@ -9,14 +9,14 @@
                 <form ng-submit="create()" name="shippingMethodForm" data-toggle="validator" role="form">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="row">
-                        <div class="col-sm-5">
+                        <div class="col-sm-6 col-xs-12">
                             <div class="from-group">
                                 <label for="nomb_opc">Nombre de la opcion</label>
                                 <input type="text" class="form-control" name="name" ng-model="shipping.name" required/>
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
-                        <div class="col-sm-5">
+                        <div class="col-sm-6 col-xs-12">
                             <div class="from-group">
                                 <label for="costo_envio">Costo envio</label>
                                 <div class="input-group">
@@ -27,23 +27,38 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-5">
+                        <div class="col-sm-6 col-xs-12 col-md-6">
                             <label>Rango de Peso</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">Kg</span>
-                                <input type="text" class="form-control" style="width: 125px;" name="min_weight" ng-model="shipping.min_weight"/>
-                                <span class="input-group-addon">Kg</span>
-                                <input type="text" class="form-control" style="width: 125px;" name="max_weight" ng-model="shipping.max_weight"/>
-                            </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Kg</span>
+                                            <input type="text" class="form-control"  placeholder="Desde" name="min_weight" ng-model="shipping.min_weight"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Kg</span>
+                                            <input type="text" class="form-control"  placeholder="Hasta" name="max_weight" ng-model="shipping.max_weight"/>
+                                        </div>
+                                    </div>
+                                </div>
                         </div>
-                        <div class="col-sm-5">
+                        <div class="col-sm-6 col-xs-12">
                             <label>Rango de Compra</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">$</span>
-                                <input type="text" class="form-control" style="width: 130px;" name="min_price" ng-model="shipping.min_price"/>
-
-                                <span class="input-group-addon">$</span>
-                                <input type="text" class="form-control" style="width: 140px;" name="max_price" ng-model="shipping.max_price"/>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">$</span>
+                                        <input type="text" class="form-control"  placeholder="Desde" name="min_price" ng-model="shipping.min_price"/>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">$</span>
+                                        <input type="text" class="form-control"  placeholder="Hasta" name="max_price" ng-model="shipping.max_price"/>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

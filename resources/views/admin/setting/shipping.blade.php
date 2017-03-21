@@ -15,13 +15,8 @@
     </div>
     <br>
     <div class="row" ng-app="appManual" ng-controller="shippingController">
-
         @include('admin.partials.conf.send.shipping')
-
-        <div class="row">
-            @include('admin.partials.conf.send.local')
-
-        </div>
+        @include('admin.partials.conf.send.local')
         <div class="page-end-space"></div>
     </div>
     @endsection
