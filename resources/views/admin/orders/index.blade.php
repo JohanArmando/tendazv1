@@ -2,18 +2,19 @@
     Mis ventas
 @stop
 @extends('layouts.administrator')
-    @section('css')
-        <link rel="stylesheet" href="{{asset('administrator/new_table/css/classic.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{asset('administrator/css/alternative/efecto-logo.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{asset('administrator/css/table-res.css')}}">
-        <link rel="stylesheet" href="{{asset('administrator/plugins/xeditable/css/xeditable.css')}}">
-        <link rel="stylesheet" href="{{asset('administrator/plugins/xeditable/inputs-ext/typeaheadjs/lib/typeahead.js-bootstrap.css')}}">
-        <link rel="stylesheet" href="{{asset('administrator/css/xeditable.min.css')}}">
-        <link rel="stylesheet" href="{{asset('administrator/plugins/datatables/css/tabletools.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{asset('administrator/plugins/datatables/css/datatables.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{asset('administrator/css/custom_tendaz.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{asset('administrator/css/stylePersonal.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{asset('administrator/css/styleDatabase.css')}}">
+@section('css')
+    <link rel="stylesheet" href="{{asset('administrator/new_table/css/classic.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('administrator/css/alternative/efecto-logo.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('administrator/css/table-res.css')}}">
+    <link rel="stylesheet" href="{{asset('administrator/plugins/xeditable/css/xeditable.css')}}">
+    <link rel="stylesheet" href="{{asset('administrator/plugins/xeditable/inputs-ext/typeaheadjs/lib/typeahead.js-bootstrap.css')}}">
+    <link rel="stylesheet" href="{{asset('administrator/css/xeditable.min.css')}}">
+    <link rel="stylesheet" href="{{asset('administrator/plugins/datatables/css/tabletools.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('administrator/plugins/datatables/css/datatables.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('administrator/css/custom_tendaz.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('administrator/css/stylePersonal.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('administrator/css/styleDatabase.css')}}">
+@endsection
     @section('content')
         <div class="page-header page-header-block">
             <div class="page-header-section">
@@ -70,7 +71,7 @@
                         <div class="panel-body">
                             <br>
                             <div class="table-responsive">
-                            <table id="table_orders" class="table table-bordered table-hover table-responsive list-table">
+                            <table id="table_orders" class="table table-hover">
                                     <thead>
                                         <tr>
                                             <th>Orden</th>

@@ -58,14 +58,15 @@
                             </div>
                         </div>
                         <div class="panel-body">
-                            <table id="table_clients" class="table table-responsive table-hover list-table table-products"  cellspacing="100%" width="100%">
+                            <div class="table-responsive">
+                                 <table id="table_clients" class="table table-hover" >
                                 <thead>
                                     <tr>
                                         <th><strong>Nombre</strong></th>
                                         <th><strong>Telefono</strong></th>
                                         <th><strong>Total Consumido</strong></th>
-                                        <th class="hidden-sm hidden-xs"><strong>Cantidad de compras</strong></th>
-                                        <th class="hidden-sm hidden-xs"><strong>Ultimas Compras</strong></th>
+                                        <th><strong>Cantidad de compras</strong></th>
+                                        <th><strong>Ultimas Compras</strong></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -90,6 +91,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
+                            </div>
                                 <div class="col-md-2 col-md-offset-5 hidden spin">
                                     <i class="fa fa-spinner fa-pulse fa-4x fa-fw " style="color: #F26522"></i>
                                 </div>

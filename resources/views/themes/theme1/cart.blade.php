@@ -98,7 +98,7 @@
                                 <i class="fa fa-arrow-circle-left"></i> Continuar Comprando
                             </button>
                             </a>
-                            <button type="button" class="btn btn-primary" ng-click="emptyCart(cartId)">
+                            <button type="button" class="btn btn-primary hidden-xs" ng-click="emptyCart(cartId)">
                                 <i class="fa fa-trash-o"></i> Limpiar Carrito
                             </button>
                             <a href="{{ url('/checkout') }}">
