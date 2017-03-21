@@ -27,71 +27,72 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-6">
-                            {!! Form::model($store,['url' => url("admin/account/preferences/$store->id") , 'method'=> 'put']) !!}
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-sm-2">
-                                        <label class="control-label">Telefono</label>
-                                        {!! Form::select('phone_type',['mobile' => 'Celular', 'home' => 'Casa', 'work' => 'Trabajo', 'fax' => 'Fax'],$shop->phone_type,['class' => 'form-control']) !!}
+                      {!! Form::model($store,['url' => url("admin/account/preferences/$store->id") , 'method'=> 'put']) !!}
+                           <div class="col-md-12">
+                             <div class="form-group">
+                                 <div class="row">
+                                     <div class="col-sm-2">
+                                         <label class="control-label">Telefono</label>
+                                         {!! Form::select('phone_type',['mobile' => 'Celular', 'home' => 'Casa', 'work' => 'Trabajo', 'fax' => 'Fax'],$shop->phone_type,['class' => 'form-control']) !!}
+                                     </div>
+                                     <div class="col-sm-2">
+                                         <label class="control-label">COD</label>
+                                         <input class="form-control" value="{{$store->code_country}}" type="text" name="code_country" />
+                                     </div>
+                                     <div class="col-sm-2">
+                                         <label class="control-label">Telefono</label>
+                                         {!! Form::text('number_phone',$shop->phone_nummber,['class' => 'form-control', 'placeholder' => 'Telefono ', 'data-mask' => '999-999-9999']) !!}
+                                     </div>
+                                     <div class="col-sm-3">
+                                         <label class="control-label">Estado</label>
+                                         <select class="form-control" name="state" v-model="selected_state" v-on:change="getState()">
+                                             <option v-for="state in states" v-bind:value="state.id" >@{{ state.name }}</option>
+                                         </select>
+                                     </div>
+                                     <div class="col-sm-3">
+                                         <label class="control-label">Ciudad</label>
+                                         <select class="form-control" v-model="selected_city" name="city_id">
+                                             <option v-for="city in cities" v-bind:value="city.id" >@{{ city.name }}</option>
+                                         </select>
+                                     </div>
+                                 </div>
+                             </div>
+                             <hr/>
+                           </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <label class="" class="control-label">Nombre de tu tienda</label>
+                                            {!! Form::text('name',null,['class' => 'form-control']) !!}
+                                        </div>
                                     </div>
-                                    <div class="col-sm-2">
-                                        <label class="control-label">COD</label>
-                                        <input class="form-control" value="{{$store->code_country}}" type="text" name="code_country" />
+                                </div>
+                                <hr/>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <label class="col-sm-12control-label">Descripcion de tu negocio</label>
+                                            {!! Form::textarea('message',null,['id' => 'editor', 'class' => 'form-control']) !!}
+                                        </div>
                                     </div>
-                                    <div class="col-sm-2">
-                                        <label class="control-label">Telefono</label>
-                                        {!! Form::text('number_phone',$shop->phone_nummber,['class' => 'form-control', 'placeholder' => 'Telefono ', 'data-mask' => '999-999-9999']) !!}
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <label class="control-label">Estado</label>
-                                        <select class="form-control" name="state" v-model="selected_state" v-on:change="getState()">
-                                            <option v-for="state in states" v-bind:value="state.id" >@{{ state.name }}</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <label class="control-label">Ciudad</label>
-                                        <select class="form-control" v-model="selected_city" name="city_id">
-                                            <option v-for="city in cities" v-bind:value="city.id" >@{{ city.name }}</option>
-                                        </select>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                          <span class="checkbox custom-checkbox custom-checkbox-inverse">
+                                              @if($shop->use == 1)
+                                                  <input type="checkbox" name="use" id="use"  checked>
+                                              @else
+                                                  <input type="checkbox" name="use" id="use" >
+                                              @endif
+                                              <label for="use">&nbsp;&nbsp;<strong>Usar el nombre y la descripsion del negocio para el SEO de su tienda.</strong></label>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <hr/>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <label class="" class="control-label">Nombre de tu tienda</label>
-                                        {!! Form::text('name',null,['class' => 'form-control']) !!}
-                                    </div>
-                                </div>
-                            </div>
-                            <hr/>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <label class="col-sm-12control-label">Descripcion de tu negocio</label>
-                                        {!! Form::textarea('message',null,['id' => 'editor', 'class' => 'form-control']) !!}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                            <span class="checkbox custom-checkbox custom-checkbox-inverse">
-                             @if($shop->use == 1)
-                                    <input type="checkbox" name="use" id="use"  checked>
-                                @else
-                                    <input type="checkbox" name="use" id="use" >
-                                @endif
-                                <label for="use">&nbsp;&nbsp;<strong>Usar el nombre y la descripsion del negocio para el SEO de su tienda.</strong></label>
-                            </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <hr/>
+                            <div class="col-md-6">
                             <div class="clearfix"></div>
                             <div class="form-group">
                                 <div class="row">
@@ -123,26 +124,24 @@
                                 <a href="{{ url('admin') }}" type="reset" class="btn btn-default"><i class="fa fa-times"></i> Cancelar</a>
                                 <button type="submit" class="btn btn-primary"> Guardar Cambios</button>
                             </div>
-                            {!! Form::close() !!}
-
-
-                            <div class="col-md-12">
-                                <div class="text-center" style="margin-top: 100px">
-                                    <small><strong>Al cancelar tu cuenta, tu tienda será cerrada y no recibirás más notificaciones de Tendaz.</strong></small>
-                                </div>
-                                <div style="margin-bottom: 20px;"></div>
-                                {!! Form::open(['url' => "admin/account/preferences/$store->id" ]) !!}
-                                <input type="hidden" value="DELETE" name="_method">
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary" onclick="return confirm('Seguro que quieres cancelar tu tienda?')">
-                                        <i class="fa fa-exclamation-triangle"></i> Cerrar tienda
-                                    </button>
-                                </div>
-                                {!! Form::close() !!}
-                            </div>
                         </div>
-                        </div>
+                      {!! Form::close() !!}
+                      <div class="col-md-12">
+                          <div class="text-center" style="margin-top: 100px">
+                              <small><strong>Al cancelar tu cuenta, tu tienda será cerrada y no recibirás más notificaciones de Tendaz.</strong></small>
+                          </div>
+                          <div style="margin-bottom: 20px;"></div>
+                          {!! Form::open(['url' => "admin/account/preferences/$store->id" ]) !!}
+                          <input type="hidden" value="DELETE" name="_method">
+                          <div class="text-center">
+                              <button type="submit" class="btn btn-primary" onclick="return confirm('Seguro que quieres cancelar tu tienda?')">
+                                  <i class="fa fa-exclamation-triangle"></i> Cerrar tienda
+                              </button>
+                          </div>
+                          {!! Form::close() !!}
+                      </div>
                     </div>
+               </div>
             </div>
         </div>
     </div>
