@@ -66,17 +66,17 @@
                             </table>
                         </div>
                         <div ng-show="size(carts.products.data) >= 1">
-                            <div class="col-xs-12">
+                            <div class="col-xs-12 col-md-4">
                                 <a href="{{url('/products')}}" class="btn btn-primary"><i class="fa fa-arrow-circle-o-left"></i> Seguir comprando</a>
                             </div>
-                            <div class="col-xs-12">
+                            <div class="col-xs-12 col-md-4 col-not-margin">
                                 <button type="button" class="btn btn-primary hidden-xs" ng-click="emptyCart(cartId)">
                                 <i class="fa fa-trash-o"></i> Limpiar Carrito
                                 </button>
                             </div>
-                            <div class="pull-right col-xs-12">
+                            <div class="col-xs-12 col-md-4 col-not-margin">
                                 <a href="{{ url('/checkout') }}">
-                                    <button type="button" class="btn btn-primary">Checkout <i class="fa fa-arrow-circle-o-right"></i></button>
+                                    <button type="button" class="btn btn-primary">Comprar <i class="fa fa-arrow-circle-o-right"></i></button>
                                 </a>
                             </div>
                         </div>
@@ -91,6 +91,7 @@
                 </div>
 
                     <div class="col-sm-12 col-md-3" ng-show="size(carts.products.data) >= 1">
+                        <div class="hidden-md hidden-lg hidden-sm" style="margin-top: 150px"></div>
                         <div class="title"><span><a href="#">Resumen de la Orden</a></span></div>
                         <div class="table-responsive">
                             <table class="table">
