@@ -5,7 +5,7 @@
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{asset('administrator/css/new_css_invoice.css')}}">
 @stop
-@section('content')	
+@section('content')
 <div class="page-header page-header-block">
 	<div class="page-header-section">
 		<h4 class="title semibold"><img src="{{asset('administrator/image/icons/icons-base/business-cards.png')}}" width="24">&nbsp; Mis Facturas</h4>
@@ -60,20 +60,22 @@
 											</tr>
 											</thead>
 											@foreach($invoices as $invoice)
+													@if ($invoice->trial_at == null)
+													<tr  class="text-center cu @if($invoice->id == $subscription) trSelect @endif">
+														<td>{{\Tendaz\Components\DateGenerator::dateGenerate($invoice->start_at)}}</td>
+														<td>{{\Tendaz\Components\DateGenerator::dateGenerate($invoice->end_at)}}</td>
+														<td>{{$invoice->amount}}</td>
+														<td>
+															@foreach($plans as $plan)
+																@if($plan->id == $invoice->plan_id)
+																	{{$plan->name}}
+																@endif
+															@endforeach
+														</td>
+														<td><a class="btn btn-tendaz" href="{{url('/admin/account/invoices/'.$invoice->uuid)}}"><i class="fa fa-info-circle"></i></a></td>
+													</tr>
+													@endif
 
-												<tr  class="text-center cu @if($invoice->id == $subscription) trSelect @endif">
-													<td>{{\Tendaz\components\DateGenerator::dateGenerate($invoice->start_at)}}</td>
-													<td>{{\Tendaz\components\DateGenerator::dateGenerate($invoice->end_at)}}</td>
-													<td>{{$invoice->amount}}</td>
-													<td>
-														@foreach($plans as $plan)
-															@if($plan->id == $invoice->plan_id)
-																{{$plan->name}}
-															@endif
-														@endforeach
-													</td>
-													<td><a class="btn btn-tendaz" href="{{url('/admin/account/invoices/'.$invoice->uuid)}}"><i class="fa fa-info-circle"></i></a></td>
-												</tr>
 											@endforeach
 										</table>
 									</div>
@@ -93,7 +95,7 @@
 
 	</div>
 </div>
-</div>						
+</div>
 @include('admin.partials.account.modal-view-invoice')
 @stop
 @section('scripts')
