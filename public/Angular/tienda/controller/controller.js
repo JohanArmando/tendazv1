@@ -129,7 +129,7 @@
                            toastr.info('Producto '+ data.Name + ' Agregado al carrito, puedes verlo  <a href=' + BASEURL + "/cart/show" + ' ><strong>Aqui</strong></a>');
                         }
                        if(data.Success == 'Actualizado'){
-                            toastr.success('Tu producto  '+ data.Name + ' tiene un item mas mirarlo  <a href='+ BASEURL + "/cart/show" + '><strong>Aqui</strong></a>');
+                            toastr.success('Tu producto  '+ data.Name + ' tiene un 4item mas mirarlo  <a href='+ BASEURL + "/cart/show" + '><strong>Aqui</strong></a>');
                        }
                        $('#cart-product').html('');
                        $('#view-total-cart').html(numeral(data['subtotal']).format('$0,0.00'));

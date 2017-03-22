@@ -35,26 +35,26 @@ Route::group(['domain' => env('APP_API_URL') , 'namespace' => 'Api'], function (
     Route::post('carts/{cart}/payments/{payment}' , [
         'uses' => 'Checkout\\PaymentMethodController@doPayment'
     ]);
-    
+
     Route::get('carts/{cart}/payments/{payment}' , [
         'uses' => 'Checkout\\PaymentMethodController@checkPayment'
     ]);
-    
+
     Route::post('password/email' , [
         'uses' => 'Auth\\ForgotPasswordController@sendResetLinkEmail'
-    ]);  
-    
+    ]);
+
     Route::post('password/reset' , [
         'uses' => 'Auth\\ResetPasswordController@reset'
     ]);
-    
-    Route::get('customers/{customer}/addresses/{address}/main' , [
+
+    Route::get('customers/{customer_id}/addresses/{address_id}/main' , [
         'uses' => 'Auth\\AddressesController@main'
     ]);
     Route::resource('customers.orders' , 'Auth\\Orders\\OrdersController' ,[
         'only' => ['index' , 'show']
     ]);
-    
+
     Route::resource('customers.addresses' , 'Auth\\AddressesController', [
         'only' => ['index' , 'store' , 'show' , 'update' , 'destroy']
     ]);
@@ -92,7 +92,7 @@ Route::group(['domain' => env('APP_API_URL') , 'namespace' => 'Api'], function (
         Route::resource('carts' , 'CartController' , [
             'only' => ['destroy' , 'store' ,'update']
         ]);
-        
+
         Route::resource('carts.items' , 'InShoppingCartController' , [
             'only' => ['store' , 'destroy' , 'index']
         ]);
@@ -135,7 +135,7 @@ Route::group(['domain' => env('APP_API_URL') , 'namespace' => 'Api'], function (
     Route::resource('payments' , 'Payment\\PaymentsController' ,[
         'only' => ['index' , 'update' , 'store']
     ]);
-    
+
     //Routes coupons
     Route::group(['prefix' => '' , 'namespace' => 'Coupon'] , function (){
         Route::resource('carts.coupons' , 'CouponsController' , [
@@ -147,10 +147,10 @@ Route::group(['domain' => env('APP_API_URL') , 'namespace' => 'Api'], function (
     Route::group(['prefix' => '' , 'namespace' => 'Geo'] , function (){
         Route::resource('countries.states' , 'StatesController' , [
             'only'  => ['index']
-        ]);  
+        ]);
         Route::resource('states.cities' , 'CitiesController' , [
             'only'  => ['index']
         ]);
     });
-    
+
 });

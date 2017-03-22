@@ -18,8 +18,8 @@ class AddressesController extends Controller
     public function index(Customer $customer)
     {
         return $this->response($customer);
-    } 
-    
+    }
+
     public function store(Customer $customer , Request $request)
     {
         foreach ($customer->addresses as $address){
@@ -61,20 +61,19 @@ class AddressesController extends Controller
         return $this->response($customer);
     }
 
-    public function main(Customer $customer , Address $address)
+    public function main(Customer $customer_id, Address $address_id)
     {
-        foreach ($customer->addresses as $address){
+        foreach ($customer_id->addresses as $address){
             $address->pivot->isPrimary = 0;
             $address->pivot->save();
         }
 
         //revisar metodos estaicos scope y normales.revisar eventos loquen cuando se cumple una condicion
-       $customer->addresses()
-            ->where('address_id' , $address->id)
+       $customer_id->addresses()
+            ->where('address_id' , $address_id->id)
             ->first()->pivot->update([
                'isPrimary' => 1
            ]);
-
-        return $this->response($customer);
+        return $address_id;
     }
 }

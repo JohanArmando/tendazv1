@@ -9,7 +9,7 @@
           <div class="panel panel-primary">
             <div class="panel-heading">
               <h3 class="panel-title text-center">Perfil</h3>
-            
+
             </div>
             <div class="panel-body">
               <div class="row">
@@ -80,7 +80,7 @@
 									</p>
 								</td>
 								<td class="text-center">
-									<a class="btn btn-xs" ng-class=" address.isPrimary ? 'btn-primary' : 'btn-default'" href="">
+									<a class="btn btn-xs" ng-click="main( $index)" ng-class=" address.isPrimary ? 'btn-primary' : 'btn-default'" href="">
 										<i class="fa" ng-class=" address.isPrimary ? 'fa-eye' : 'fa-eye-slash'"></i>
 									</a>
 								</td>

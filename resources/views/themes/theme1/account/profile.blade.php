@@ -84,7 +84,7 @@
 												</p>
 											</td>
 											<td class="text-center">
-												<a class="btn btn-xs" ng-class=" address.isPrimary ? 'btn-primary' : 'btn-default'" href="">
+												<a class="btn btn-xs" ng-click="main( $index)" ng-class=" address.isPrimary ? 'btn-primary' : 'btn-default'" href="">
 													<i class="fa" ng-class=" address.isPrimary ? 'fa-eye' : 'fa-eye-slash'"></i>
 												</a>
 											</td>

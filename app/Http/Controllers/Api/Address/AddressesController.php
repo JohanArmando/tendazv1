@@ -22,20 +22,25 @@ class AddressesController extends Controller
             fractal()
             ->collection(  $customer->addresses, new AddressTransformer())
             ->withResourceName('addresses')    , 200);
-    } 
-    
+    }
+
     public function store(Cart $cart ,Customer $customer , Request $request)
     {
+        foreach ($customer->addresses as $address){
+            $address->pivot->isPrimary = 0;
+            $address->pivot->save();
+        }
         $address = Address::create($request->all());
         $pivot = CustomerAddress::create([
             'customer_id' => $customer->id,
             'address_id' => $address->id,
             'isPrimary' => 1
         ]);
+
         $cart->order->shipping_address_id = $pivot->id;
         $cart->order->billing_address_id = $pivot->id;
         $cart->order->save();
-        
+
         return response()->json([
                 'addresses' => fractal()
                 ->collection(  $customer->addresses, new AddressTransformer())
@@ -50,7 +55,7 @@ class AddressesController extends Controller
         $states = State::where('country_id' , 50)->get(['id' , 'name']);
         return response()->json(['states' => $states] , 200);
     }
-    
+
     public function getCities(State $state)
     {
         $cities = $state->cities()->get(['id' , 'name']);

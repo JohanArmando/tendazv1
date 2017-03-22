@@ -34,7 +34,7 @@ myApp.controller('AddressController' , ['$scope' , 'Address' , 'Account' , funct
             $scope.address.city['id'] = $scope.address.city._id;
             $scope.city = $scope.address.city;
         },
-        
+
         'getStates' : function () {
             Address.getStates()
                 .then(function(response) {
@@ -45,7 +45,7 @@ myApp.controller('AddressController' , ['$scope' , 'Address' , 'Account' , funct
                 console.log(response);
             }).finally(function() {});
         },
-        
+
         'changeState' : function () {
             Address.getCities($scope.state.id)
                 .then(function(response) {
@@ -84,6 +84,25 @@ myApp.controller('AddressController' , ['$scope' , 'Address' , 'Account' , funct
                         console.log(response);
                 });
             }
+        },
+
+        'main' : function (i) {
+          $scope.index = i;
+          $scope.address = $scope.addresses[i];
+          Address.main(Account.getUserObject()._id ,$scope.address._id)
+                .then(function (response) {
+                  Address.get(Account.getUserObject()._id)
+                      .then(function (response) {
+                          $scope.addresses = response.data.data;
+                          console.log(response);
+                      }).catch(function (response) {
+                          console.log(response);
+                  });
+                  toastr["info"]("Direccion actualizada");
+
+              }).catch(function () {
+                  console.log(response);
+          });
         }
     });
 
