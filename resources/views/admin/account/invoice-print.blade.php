@@ -17,7 +17,7 @@
             <div class="col-xs-12">
                 <h2 class="page-header">
                     <i class="fa fa-globe"></i> {{$shop->name}}.
-                    <small class="pull-right">Fecha: {{\Tendaz\components\DateGenerator::dateGenerate($invoice->start_at)}}</small>
+                    <small class="pull-right">Fecha: {{\Tendaz\Components\DateGenerator::dateGenerate($invoice->start_at)}}</small>
                 </h2>
             </div>
             <!-- /.col -->

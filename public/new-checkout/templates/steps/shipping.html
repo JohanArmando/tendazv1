@@ -45,20 +45,24 @@
                         </div>
                     </div>
                     <form ng-submit="doAddress(addressForm)" name="addressForm" novalidate ng-if="newAddress">
-
+                        <!--
                         <div class="form-group col-md-12">
                             <label for="exampleInputPassword1">Nombre</label>
                             <input type="text" class="form-control" name=""  ng-model="address.name" placeholder="(*)">
                         </div>
+                      -->
+                      <br><br>
+
+                        <hr>
                         <div class="form-group col-md-12">
                             <label for="exampleInputPassword1">Direcci&oacute;n</label>
                             <input type="text" class="form-control" name="street"  ng-model="address.street" placeholder="(*)">
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-12">
                             <label for="exampleInputPassword1">Piso o apartamento (ej: B201)</label>
                             <input type="text" class="form-control" name="complement"  ng-model="address.complement" placeholder="Opcional">
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-12">
                             <label for="exampleInputPassword1">Barrio</label>
                             <input type="text" class="form-control"  ng-model="address.neighborhood" name="neighborhood" id="exampleInputPassword1" placeholder="Opcional">
                         </div>
@@ -76,6 +80,7 @@
                         </div>
                         <div class="col-md-12">
                             <button  type="submit" class="btn btn_checkout ">Guardar Direcci&oacute;n</button>
+                            <hr>
                         </div>
                     </form>
                     <br><br>
