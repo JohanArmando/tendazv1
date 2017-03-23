@@ -22,7 +22,7 @@ class CheckoutController extends Controller
                     $product->stock = $product->stock - $product->pivot->quantity;
                     $product->save();
                 }
-            }       
+            }
 
             $order->cart->update([
                 'status' => 'closed'

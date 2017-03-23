@@ -27,7 +27,7 @@ class CartTransformer extends  TransformerAbstract
     protected $defaultIncludes = [
         'products' , 'customer' , 'shippingAddress' , 'order' , 'shippingMethod' , 'coupon' , 'shop' , 'paymentPreferences' ,'paymentsMethods'
     ];
-    
+
     public function transform(Cart $cart)
     {
             return [
@@ -62,34 +62,34 @@ class CartTransformer extends  TransformerAbstract
         $customer = $cart->customer ? $cart->customer : new Customer;
         return $this->item($customer, new  CustomerTransformer());
     }
-    
+
     public function includeShippingAddress(Cart $cart){
         $address = $cart->order->shippingAddress ? $cart->order->shippingAddress->address : new Address;
         return $this->item($address, new  AddressTransformer());
     }
-    
+
     public function includeShippingMethod(Cart $cart){
         $shippingMethod = $cart->order->shippingMethod ? $cart->order->shippingMethod : new ShippingMethod;
         return $this->item($shippingMethod, new  ShippingMethodTransformer());
     }
-    
+
     public function includeOrder(Cart $cart){
         $order = $cart->order;
         return $this->item($order, new  OrderTransformer());
-    } 
-    
+    }
+
     public function includeCoupon(Cart $cart){
         return $cart->coupon ?
                 $this->item($cart->coupon, new  CouponTransformer())
             : $this->null();
-    }  
-    
+    }
+
     public function includeShop(Cart $cart){
         return $cart->shop ?
                 $this->item($cart->shop, new  ShopTransformer())
             : $this->null();
-    }  
-    
+    }
+
     public function includePaymentPreferences(Cart $cart){
         return $cart->order->payment ?
                 $this->item($cart->order->payment, new  PaymentValueTransformer($this->token))

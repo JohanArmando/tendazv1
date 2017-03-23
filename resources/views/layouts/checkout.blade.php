@@ -61,10 +61,10 @@
                </div>
                <div class="modal-footer">
                   <div>
-                     <button type="submit" class="btn btn-primary btn-lg btn-block">Entrar</button>
+                     <button type="submit"  data-loading-text="<i class='fa fa-spinner fa-spin'></i> procesando..." id="btn-login" class="btn btn-primary btn-lg btn-block">Entrar</button>
                   </div>
                   <div>
-                     <button id="login_register_btn" type="button" class="btn btn-link" ng-click="showFormRegister()">Registrate</button>
+                     <button id="login_register_bt" data-loading-text="<i class='fa fa-spinner fa-spin'></i> procesando..." type="button" class="btn btn-link" ng-click="showFormRegister()">Registrate</button>
                   </div>
                </div>
             </form>
@@ -95,7 +95,7 @@
                      </div>
                      <div class="modal-footer">
                         <div>
-                              <button type="submit" class="btn btn-primary btn-lg btn-block">Entrar</button>
+                              <button  type="submit" class="btn btn-primary btn-lg btn-block">Entrar</button>
                         </div>
                         <div>
                            <button id="login_register_btn" type="button" class="btn btn-link" ng-click="showFormRegister()">Registrate</button>
@@ -144,10 +144,10 @@
                </div>
                <div class="modal-footer">
                   <div>
-                     <button type="submit" class="btn btn-primary btn-lg btn-block">Registrar</button>
+                     <button type="submit" id="btn-register" data-loading-text="<i class='fa fa-spinner fa-spin'></i> procesando..." class="btn btn-primary btn-lg btn-block">Registrar</button>
                   </div>
                   <div>
-                     <button id="register_login_btn" type="button" class="btn btn-link" ng-click="showFormLogin()">Inicia Sesion</button>
+                     <button  type="button" class="btn btn-link" ng-click="showFormLogin()">Inicia Sesion</button>
                   </div>
                </div>
             </form>

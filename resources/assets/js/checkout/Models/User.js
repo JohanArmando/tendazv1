@@ -2,6 +2,8 @@ myApp.factory('User' ,['$http', '$location', '$cookies' , "$rootScope" , "Cart",
     var userModel = {};
 
     userModel.doLogin = function (data) {
+        $('#btn-login').button('loading');
+
         var cartId = localStorage.getItem('cart_id') ? '/'+localStorage.getItem('cart_id') : '';
         return $http({
             headers: {
@@ -20,13 +22,17 @@ myApp.factory('User' ,['$http', '$location', '$cookies' , "$rootScope" , "Cart",
             $cookies.put('auth' , JSON.stringify(response.data));
             Cart.setCartId(response.data.cart_id);
             $('#sign-up').modal('toggle');
+            $('#btn-login').button('reset');
+
             location.reload();
         }).catch(function(response) {
-                $('.bg-danger').removeClass('hidden').text(response.data);
+          $('#btn-login').button('reset');
+          $('.bg-danger').removeClass('hidden').text(response.data);
         })
     };
 
     userModel.doRegister = function (data) {
+        $('#btn-register').button('loading');
         var cartId = localStorage.getItem('cart_id') ? '/'+localStorage.getItem('cart_id') : '';
         return $http({
             headers: {
@@ -41,6 +47,8 @@ myApp.factory('User' ,['$http', '$location', '$cookies' , "$rootScope" , "Cart",
             $cookies.put('auth' , JSON.stringify(response.data));
             Cart.setCartId(response.data.cart_id);
             $('#sign-up').modal('toggle');
+            $('#btn-register').button('reset');
+
             location.reload();
         }).catch(function(response) {
             var danger = $('.bg-danger');
@@ -49,6 +57,8 @@ myApp.factory('User' ,['$http', '$location', '$cookies' , "$rootScope" , "Cart",
             angular.forEach(response.data , function (value , index) {
                 danger.find("ul").append("<li>" + value + "</li>");
             });
+            $('#btn-register').button('reset');
+
         }).finally(function() {});
     };
 
