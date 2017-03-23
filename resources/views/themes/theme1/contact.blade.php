@@ -82,6 +82,7 @@
                             <div class="btn-group btns-cart pull-right">
                                 <button type="submit" class="btn btn-primary">Enviar</button>
                                 <button type="reset" class="btn btn-default">Cancelar</button>
+                                <hr>
                             </div>
                             </form>
                         </div>
