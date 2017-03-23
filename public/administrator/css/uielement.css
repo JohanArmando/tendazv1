@@ -15556,6 +15556,8 @@ hr {
 .btn-category{
   background-color: #f26522;
   color: white;
+  border-color: #f26522;
+  margin-left: 5px !important;
 }
 .btn-category:hover {
   background-color: #BFBFBA;

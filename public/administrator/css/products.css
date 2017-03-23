@@ -2,7 +2,7 @@ th.image {
     width: 12px;
 }
 th.variants {
-    min-width: 475px;
+    min-width: 300px;
 }
 .sub-col {
     display: inline-block;

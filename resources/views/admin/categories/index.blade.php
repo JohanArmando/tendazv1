@@ -1,19 +1,5 @@
 @section('css')
     <link rel="stylesheet" href="{{asset('administrator/css/categories.css')}}">
-    <style type="text/css">
-
-        .item {
-          cursor: pointer;
-        }
-        .bold {
-          font-weight: bold;
-        }
-        ul {
-          padding-left: 1em;
-          line-height: 1.5em;
-          list-style-type: dot;
-        }
-    </style>
 @stop
 @section('title')
 Crear categorias
