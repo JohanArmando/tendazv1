@@ -82,14 +82,11 @@ class NameCheapController extends Controller
             if($url == NULL) return false;
             $exist = $this->curlDNS($url);
             $exist ?  $ip = gethostbyname($url) : $ip = false;
-            $ip && $ip == $this->ip ? $goodDns =  true : $goodDns =  false ;
-            if($exist){
-                $domain->state = $exist;
-                //$domain->status_id = 3;
-            }else{
-                $domain->state = 401;
-                //$domain->status_id = 2;
+            $ip == $this->ip ? $goodDns =  true : $goodDns =  false ;
+            if($goodDns == false) {$domain->state = 300;}else{
+                if($goodDns == true){$domain->state = 200;}else{$domain->state = 401;}
             }
+
             $domain->save();
         }
         return response()->json($domain->state);

@@ -81,6 +81,9 @@
                         }else if(response == 402){
                             var html = '<span class="label label-info">Certificado ssl requerido</span>';
                             alert('Aunque no tengas certificado ssl, puedes usar tu domminio');
+                        }else if(response == 300){
+                            var html = '<span class="label label-warning">Dominio no apuntado</span>';
+                            alert('El dominio no esta apuntado');
                         }
                         $('#status_code').html(html);
                     }

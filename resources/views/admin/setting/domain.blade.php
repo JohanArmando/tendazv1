@@ -91,26 +91,34 @@ Configura tu dominio
 										@foreach($domains as $domain)
 											<tr class="text-center">
 												<td><a href="{{url('admin/setting/domain/verify/'.$domain->uuid)}}">{{$domain->name}}</a></td>
-												@if($domain->state == 200)
+												@if($domain->state == "OK")
 													<td>
 														<a href="#" data-tooltip="Dominio Activo">
 															<img src="{{asset('administrator/image/tick.png')}}">
 														</a>
 													</td>
-													@else
-														@if($domain->state == 401)
-															<td>
-																<a href="#" data-tooltip="Dominio Inactivo , 'Completa la Instalaci&oacute;n'">
-																<img src="{{asset('administrator/image/forbidden.png')}}">
-																</a>
-															</td>
-															@else
+												@else
+													@if($domain->state == 200)
+														<td>
+															<a href="#" data-tooltip="Dominio Activo">
+																<img src="{{asset('administrator/image/tick.png')}}">
+															</a>
+														</td>
+														@else
+															@if($domain->state == 401)
 																<td>
-																	<a href="#" data-tooltip="Ssl">
-																	<img src="{{asset('administrator/image/download.png')}}">
+																	<a href="#" data-tooltip="Dominio Inactivo , 'Completa la Instalaci&oacute;n'">
+																	<img src="{{asset('administrator/image/forbidden.png')}}">
 																	</a>
 																</td>
-														@endif
+																@else
+																	<td>
+																		<a href="#" data-tooltip="Ssl">
+																		<img src="{{asset('administrator/image/download.png')}}">
+																		</a>
+																	</td>
+															@endif
+													@endif
 												@endif
 												<td>
 													@if($domain->main == 1 )
