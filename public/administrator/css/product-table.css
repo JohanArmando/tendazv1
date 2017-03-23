@@ -20,7 +20,7 @@
             margin-left: 15px !important;
         }
         th.variants {
-            min-width: 180px;
+            min-width: 100px;
         }
         #t_misproductos tbody tr td ul{
             list-style: none;
