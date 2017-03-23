@@ -47,8 +47,8 @@
             <form id="login-form" name="loginForm" accept-charset="utf-8" autocomplete="off" role="form" class="form-horizontal" ng-submit="doLogin(loginForm)" novalidate>
                <div class="modal-body">
                   <div id="div-login-msg">
-                     <div id="icon-lo|gin-msg" style="color: orange" class="glyphicon glyphicon-chevron-right"></div>
-                     <span id="text-login-msg">Escribe tu email y contraseña.</span>
+                     <div id="icon-lo|gin-msg" style="color: #f26522" class="glyphicon glyphicon-chevron-right"></div>
+                     <span id="text-login-msg">Escribe tu correo y contraseña.</span>
                   </div>
                   <div class="form-group" ng-class="{'has-error has-feedback' : loginForm.email.$invalid && formSubmited }">
                      <input id="login_username" name="email" ng-model="login.email" class="form-control" type="text" placeholder="email" required>
@@ -64,7 +64,7 @@
                      <button type="submit" class="btn btn-primary btn-lg btn-block">Entrar</button>
                   </div>
                   <div>
-                     <button id="login_register_btn" type="button" class="btn btn-link" ng-click="showFormRegister()">Registrate</button>
+                     <button id="login_register_btn"  type="button" class="btn btn-link" ng-click="showFormRegister()">Registrate</button>
                   </div>
                </div>
             </form>
@@ -95,10 +95,10 @@
                      </div>
                      <div class="modal-footer">
                         <div>
-                              <button type="submit" class="btn btn-primary btn-lg btn-block">Entrar</button>
+                              <button id="login_login_btn" type="submit" class="btn btn-primary btn-lg btn-block">Entrar</button>
                         </div>
                         <div>
-                           <button id="login_register_btn" type="button" class="btn btn-link" ng-click="showFormRegister()">Registrate</button>
+                           <button id="login_register_btn" type="button"  class="btn btn-link" ng-click="showFormRegister()">Registrate</button>
                         </div>
                      </div>
                   </form>
@@ -110,8 +110,8 @@
             <form id="register-form"  style="display:none;" name="registerForm"  accept-charset="utf-8" autocomplete="off" role="form" class="form-horizontal" ng-submit="doRegister(registerForm)" novalidate>
                <div class="modal-body">
                   <div id="div-register-msg">
-                     <div id="icon-register-msg" class="glyphicon glyphicon-chevron-right"></div>
-                     <span id="text-register-msg">Crea un usuario y se feliz.</span>
+                     <div id="icon-lo|gin-msg" style="color: #f26522" class="glyphicon glyphicon-chevron-right"></div>
+                     <span id="text-register-msg">Completa los siguientes datos.</span>
                   </div>
                   <div class="row">
                      <div class="form-group col-md-6" ng-class="{'has-error has-feedback' : registerForm.name.$invalid && formSubmited }">
