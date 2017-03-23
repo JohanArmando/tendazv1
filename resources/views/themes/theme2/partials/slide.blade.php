@@ -85,11 +85,11 @@
         <div class="product">
         <div class="flip-container">
             <div class="flipper">
-                <div class="front">
+                <div class="front text-center">
                     <a href="<% BASEURL + '/detail/' + randomProduct.slug %>">
-                        <img ng-src="<% randomProduct.images.data[0].url %>" alt="" ng-show="product.images.data" class="img-responsive"
+                        <img ng-src="<% randomProduct.images.data[0].url %>" ng-show="product.images.data" class="img-responsive"
                              style="min-height:250px ;max-height: 250px" alt="">
-                        <img ng-src="<% randomProduct.images.data[0].url %>" alt="" class="img-responsive"
+                        <img ng-src="<% randomProduct.images.data[0].url %>" class="img-responsive"
                              style="min-height:200px ;max-height: 200px" alt="">
                     </a>
                 </div>

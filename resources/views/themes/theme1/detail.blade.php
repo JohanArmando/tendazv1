@@ -13,14 +13,14 @@
                             </ol>
                         </div>
                     </div>
-                    <div class="col-lg-9 col-md-9 col-sm-12">
+                    <div  class="col-sm-12 col-md-12" ng-class="{'col-lg-9': size(relations) >= 1}">
                         <div class="col-lg-12 col-sm-12">
-                            <span class="title"><strong><% detail.product.name%></strong></span>
+                            <span class="title"><strong><% product.name%></strong></span>
                         </div>
-                        <div class="col-lg-12 col-sm-12 hero-feature">
+                        <div class="col-lg-12 col-sm-12 hero-feature" >
 
                             <div class="row">
-                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
                                     <!-- Main Image -->
                                     <div class="product-main-image-container">
                                         <img id="matrix" ng-src="<% product.images.data[0].url %>"
@@ -28,11 +28,13 @@
                                     </div>
                                     <!-- End Main Image -->
                                     <!-- Thumbnail Image -->
-                                    <div class="product-thumb-image" ng-repeat="image in product.images.data | limitTo:3" ng-if="image" style="margin-top: 10px">
-                                        <a class="image-click thumbnail col-xs-3">
-                                            <img ng-src="<% image.url %>" alt=""
-                                                 style="max-height: 100px; min-height: 100px; width: 80px">
-                                        </a>
+                                    <div class="product-thumb-image" style="margin-top: 10px;margin-bottom: 10px">
+                                        <div class="col-xs-6 col-md-4" ng-repeat="image in product.images.data | limitTo:3" ng-if="image">
+                                            <a class="image-click thumbnail">
+                                                <img ng-src="<% image.url %>" alt=""
+                                                     style="max-height: 100px; min-height: 100px; width: 80px">
+                                            </a>
+                                        </div>
                                     </div>
                                     <!-- End Thumbnail Image -->
                                 </div>
@@ -41,7 +43,7 @@
                                     <div class="clearfix"></div>
                                 </div>
 
-                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="well product-short-detail">
                                         <div class="row">
                                             <div class="the-list">
@@ -92,7 +94,7 @@
                                                 <div>
                                                     <div class="col-xs-4"><strong>Variantes:</strong></div>
                                                     <div class="col-xs-8">
-                                                        <div ng-repeat="variant in product.variants.data" class="col-md-5 pull-right" style="width: 100px; margin-right: 5px;">
+                                                        <div ng-repeat="variant in product.variants.data" class="col-md-6 col-xs-12 pull-right" style="width: 100px; margin-right: 2px;">
                                                             <a href="{{ url('/') }}<% '/detail/' + product.slug + '/' +variant.id%>" >
                                                                 <img ng-mousemove="updateImage(this)"  ng-src="<% variant.images.data[0].url %>"  alt=""  class="img-thumbnail img-clickEa"
                                                                      style="min-height: 120px;max-height: 120px;">

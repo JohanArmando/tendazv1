@@ -15,12 +15,11 @@
                     <div class="box col-xs-12" style="display: inline-block">
                         <div class="col-xs-4" ng-repeat="image in product.images.data | limitTo:3"
                              ng-if="image" style="margin-top: 10px">
-                            <a href="#" class="image-click thumb active">
+                            <a href="#" class="image-click img-thumbnail thumb active">
                                 <img ng-src="<% image.url %>" alt="" class="img-responsive">
                             </a>
                         </div>
                     </div>
-
                 </div>
                 <div class="col-md-7">
                     <div class="box">
@@ -36,44 +35,56 @@
                         <hr>
                         <br><br>
                         <div class="the-list">
-                            <div class="col-xs-6 text-center"><strong>SKU</strong></div>
-                            <div class="col-xs-6 text-center">
+                            <div class="col-xs-5 text-center"><strong>SKU</strong></div>
+                            <div class="col-xs-7 text-center">
                                 <span class="green"><% product.sku ? product.sku : 'NONE' %></span><hr>
                             </div>
-                            <div class="col-xs-6 text-center"><strong>Disponible</strong></div>
-                            <div class="col-xs-6 text-center">
+                            <div class="col-xs-5 text-center"><strong>Disponible</strong></div>
+                            <div class="col-xs-7 text-center">
                                 <span class="green">
                                     <% product.stock == none || product.stock > 0 || product.stock == unlimite ? 'En Stock ' + '(' + product.stock + ')' : 'Sin Stock' %>
 
                                 </span><hr>
                             </div>
-                            <div class="col-xs-6 text-center"><strong>Medios de Pago</strong></div>
-                            <div class="col-xs-6 text-center">
-                                                    <span class="green">
-                                                        <img src="{{asset('administrator/imagesMediosdePago/payment-1.png')}}" alt="">
-                                                        <img src="{{asset('administrator/imagesMediosdePago/payment-2.png')}}" alt="">
-                                                        <img src="{{asset('administrator/imagesMediosdePago/payment-3.png')}}" alt="">
-                                                        <img src="{{asset('administrator/imagesMediosdePago/payment-4.png')}}" alt="">
-                                                    </span><hr>
+                            <div class="col-xs-5 text-center"><strong>Medios de Pago</strong></div>
+                            <div class="col-xs-7 text-center">
+                                <span class="green">
+                                    <img src="{{asset('administrator/imagesMediosdePago/payment-1.png')}}" alt="">
+                                    <img src="{{asset('administrator/imagesMediosdePago/payment-2.png')}}" alt="">
+                                    <img src="{{asset('administrator/imagesMediosdePago/payment-3.png')}}" alt="">
+                                    <img src="{{asset('administrator/imagesMediosdePago/payment-4.png')}}" alt="">
+                                </span><hr>
                             </div>
-                            <div>
-                                <div class="col-xs-6 text-center"><strong>Variantes:</strong></div>
-                                <div class="col-xs-6 text-center">
-                                        <div ng-repeat="variant in product.variants.data" class="col-md-5" style="width: 100px; margin-right: 5px;">
-                                            <a href="{{ url('/') }}<% '/detail/' + product.slug + '/' +variant.id%>" >
-                                                <img ng-mousemove="updateImage(this)"  ng-src="<% variant.images.data[0].url %>"  alt=""  class="img-thumbnail img-clickEa"
-                                                     style="min-height: 120px;max-height: 120px;">
-                                            </a>
-                                        </div>
-                                    <div class="col-md-12"><hr></div>
+                            <!-- not responsive -->
+                            <div class="hidden-xs col-xs-5 col-md-5 col-lg-6 col-sm-5 text-center"><strong>Variantes:</strong></div>
+                            <div class="hidden-xs col-xs-6 col-sm-3 col-md-3 col-lg-3 text-center" ng-repeat="variant in product.variants.data">
+                                <div  style="width: 100px; margin-right: 5px;">
+                                    <a href="{{ url('/') }}<% '/detail/' + product.slug + '/' +variant.id%>" >
+                                        <img ng-mousemove="updateImage(this)"  ng-src="<% variant.images.data[0].url %>"  alt=""  class="img-thumbnail img-clickEa"
+                                             style="min-height: 120px;max-height: 120px;">
+                                    </a>
                                 </div>
+                                <div class="col-md-12"><hr></div>
                             </div>
+                            <!-- end not responsive -->
+                            <!-- yes responsive -->
+                            <div class="hidden-sm hidden-md hidden-lg col-xs-12 text-center"><strong>Variantes:</strong></div>
+                            <div class="hidden-sm hidden-md hidden-lg col-xs-6 text-center" ng-repeat="variant in product.variants.data">
+                                <div  style="width: 100px; margin-right: 5px;">
+                                    <a href="{{ url('/') }}<% '/detail/' + product.slug + '/' +variant.id%>" >
+                                        <img ng-mousemove="updateImage(this)"  ng-src="<% variant.images.data[0].url %>"  alt=""  class="img-thumbnail img-clickEa"
+                                             style="min-height: 120px;max-height: 120px;">
+                                    </a>
+                                </div>
+                                <div class="col-md-12"><hr></div>
+                            </div>
+                            <!-- end yes responsive -->
                             <div ng-repeat="property in properties">
-                                <div class="col-xs-6 text-center"><strong><% property.name %>:</strong></div>
-                                <div class="col-xs-6 text-center"><span ng-repeat="value in property.values"><% value.name %>, </span><hr></div>
+                                <div class="col-xs-5 text-center"><strong><% property.name %>:</strong></div>
+                                <div class="col-xs-7 text-center"><span ng-repeat="value in property.values"><% value.name %>, </span><hr></div>
                             </div>
-                            <div class="col-xs-6 text-center"><strong>Cantidad</strong></div>
-                            <div class="col-xs-6 text-center">
+                            <div class="col-xs-5 text-center"><strong>Cantidad</strong></div>
+                            <div class="col-xs-7 text-center">
                                     <span class="green">
                                     <div class="input-group">
                                             <span>
@@ -90,8 +101,8 @@
                                     </span><hr>
                             </div>
                             <div ng-repeat="filter in filters"  ng-if="filter.name != ''">
-                                <div class="col-xs-6 text-center" ><strong><% filter.name %></strong></div>
-                                <div class="col-xs-6 text-center">
+                                <div class="col-xs-5 text-center" ><strong><% filter.name %></strong></div>
+                                <div class="col-xs-7 text-center">
                                         <span class="green">
                                             <select class="form-control" style="width: 100px">
                                                 <option ng-repeat="value in filter.options"><% value.value %></option>
@@ -99,8 +110,8 @@
                                         </span><hr>
                                 </div>
                             </div>
-                            <div class="col-xs-6 text-center" ><strong>Compartir</strong></div>
-                            <div class="col-xs-6 text-center">
+                            <div class="col-xs-5 text-center" ><strong>Compartir</strong></div>
+                            <div class="col-xs-7 text-center">
                                     <span class="green">
                                         <a href="http://www.facebook.com/sharer.php?" class="noo-share text-center" title="Share on Facebook">
                                             <i class="fa fa-facebook"></i>
@@ -115,33 +126,33 @@
                             </div>
                         </div>
 
-                        <p class="text-center buttons" ng-controller="productIndexController" ng-cloak="">
+                        <div class="text-center">
+                            <strong class="text-center buttons" ng-controller="productIndexController" ng-cloak="">
+                                <a href="#" ng-hide="product.stock == 0" ng-click="add(cartId , product)" class="btn btn-primary">
+                                    <i class="fa fa-shopping-cart"></i> Agregar al carrito</a>
+                                <a href="#" ng-if="product.stock == 0" class="btn btn-primary">Producto Agotado</a>
+                            </strong>
+                        </div>
+                        <div class="row hidden" id="thumbs">
+                            <div class="col-xs-4">
+                                <a href="{{asset('tema2/img/detailbig1.jpg')}}" class="thumb">
+                                    <img src="{{asset('tema2/img/detailsquare.jpg')}}" alt="" class="img-responsive">
+                                </a>
+                            </div>
+                            <div class="col-xs-4">
+                                <a href="{{asset('tema2/img/detailbig2.jpg')}}" class="thumb">
+                                    <img src="{{asset('tema2/img/detailsquare2.jpg')}}" alt="" class="img-responsive">
+                                </a>
+                            </div>
+                            <div class="col-xs-4">
+                                <a href="{{asset('tema2/img/detailbig3.jpg')}}" class="thumb">
+                                    <img src="{{asset('tema2/img/detailsquare3.jpg')}}" alt="" class="img-responsive">
+                                </a>
+                            </div>
+                        </div>
 
-                            <a href="#" ng-hide="product.stock == 0" ng-click="add(cartId , product)" class="btn btn-primary">
-                                <i class="fa fa-shopping-cart"></i> Agregar al carrito</a>
-                            <a href="#" ng-if="product.stock == 0" class="btn btn-primary">Producto Agotado</a>
-                        </p>
-                    </div>
-
-                    <div class="row hidden" id="thumbs">
-                        <div class="col-xs-4">
-                            <a href="{{asset('tema2/img/detailbig1.jpg')}}" class="thumb">
-                                <img src="{{asset('tema2/img/detailsquare.jpg')}}" alt="" class="img-responsive">
-                            </a>
-                        </div>
-                        <div class="col-xs-4">
-                            <a href="{{asset('tema2/img/detailbig2.jpg')}}" class="thumb">
-                                <img src="{{asset('tema2/img/detailsquare2.jpg')}}" alt="" class="img-responsive">
-                            </a>
-                        </div>
-                        <div class="col-xs-4">
-                            <a href="{{asset('tema2/img/detailbig3.jpg')}}" class="thumb">
-                                <img src="{{asset('tema2/img/detailsquare3.jpg')}}" alt="" class="img-responsive">
-                            </a>
-                        </div>
                     </div>
                 </div>
-
             </div>
             <div class="box" id="details" ng-if="product.description">
                 <p>
