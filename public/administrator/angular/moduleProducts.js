@@ -16,7 +16,7 @@
             },
             update: function(id , data){
                 return $http.put( BASEURL + '/admin/products/'+id + '?client_secret='  + client_secret + '&client_id=' + client_id, data ,  config);
-            },   
+            },
             updateVariant: function(id , data){
                 return $http.put( BASEURL + '/admin/products/'+id+'/variant' + '?client_secret='  + client_secret + '&client_id=' + client_id, data ,  config);
             },

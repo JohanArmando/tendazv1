@@ -9,7 +9,7 @@ Mis productos
         <div class="page-header page-header-block">
             <div class="page-header-section">
                 <h4 class="title">
-                    <img class="page-header-section-icon" src="{{asset('administrator/image/icons/icons-base/products.png')}}">&nbsp; Productos 
+                    <img class="page-header-section-icon" src="{{asset('administrator/image/icons/icons-base/products.png')}}">&nbsp; Productos
                 </h4>
             </div>
             <div class="page-header-section">
@@ -33,7 +33,7 @@ Mis productos
                     </div>
                     <div class="panel-body">
                             @include('admin.partials.product.index.accions')
-                            <span id="product-count" class="note count ng-cloak" ng-show="selecteds() > 0">@{{ selecteds() }} producto@{{ selecteds() > 1 ? 's' : '' }} seleccionado@{{ selecteds() > 1 ? 's' : '' }} 
+                            <span id="product-count" class="note count ng-cloak" ng-show="selecteds() > 0">@{{ selecteds() }} producto@{{ selecteds() > 1 ? 's' : '' }} seleccionado@{{ selecteds() > 1 ? 's' : '' }}
                             </span>
                             <br>
                             <table class="hidden-xs hidden-sm table table-striped" id="product-table"  ng-hide="preload">
@@ -219,7 +219,6 @@ Mis productos
                                     <tr dir-paginate="product in products
                                         | filter:search
                                         | orderBy:order
-                                        | filter : { categories : category }
                                         | filter : { stock : stock }
                                         | itemsPerPage: pageSize
                                         | filter: { price_promotion : price_promotion}

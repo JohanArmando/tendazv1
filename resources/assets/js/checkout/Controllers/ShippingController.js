@@ -46,6 +46,7 @@ myApp.controller("shippingController" , ["$scope" , "Shipping" , "$location" , "
             };
             Shipping.create(addrObject).then(function () {
                 $scope.addressCreate();
+                Shipping.getAddresses();
             });
         },
         'changeShipping' : function () {
