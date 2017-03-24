@@ -55,7 +55,7 @@ class AccountController extends Controller
     {
         if ($id == 'self') {
             $data = Auth('admins')->user()->shop->store;
-            if($data->city->state->id == null)
+            if($data->city == null)
               $data->state_id = 709;
             else
               $data->state_id = $data->city->state->id;
