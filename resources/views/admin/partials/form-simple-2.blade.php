@@ -246,6 +246,7 @@
                     Puede agregar mas atributos al producto yendo a opciones avanzadas, o puede seguir agregando productos.
                 </div>
                 <div class="modal-footer">
+                    <a href="{{asset('admin/products')}}" class="btn btn-primary">Ver Mis Productos</a>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Seguir agregando</button>
                     <a v-bind:href="edit_url" class="btn btn-primary">Opciones avanzadas</a>
                 </div>

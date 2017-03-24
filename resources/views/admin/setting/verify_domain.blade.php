@@ -76,14 +76,14 @@
                         $('#status_code').html();
                         if(response == 200){
                             var html = '<span class="label label-success">OK</span>'
-                        }else if(response == 401){
-                            var html = '<span class="label label-warning">Completar instalacion</span>'
+                        }else if(response == 300){
+                            var html = '<span class="label label-danger">Dominio no existe</span>'
                         }else if(response == 402){
                             var html = '<span class="label label-info">Certificado ssl requerido</span>';
-                            alert('Aunque no tengas certificado ssl, puedes usar tu domminio');
-                        }else if(response == 300){
+                            alert('Aunque no tengas certificado ssl, puedes usar tu domminio.');
+                        }else if(response == 401){
                             var html = '<span class="label label-warning">Dominio no apuntado</span>';
-                            alert('El dominio no esta apuntado');
+                            alert('El dominio no esta apuntado, o esta mal configurado.');
                         }
                         $('#status_code').html(html);
                     }

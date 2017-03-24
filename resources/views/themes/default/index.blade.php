@@ -29,7 +29,7 @@
             <!-- products news -->
             <div class="col-md-9" ng-if="news.length > 0">
                 <div class="title"><span><a href="{{url('/')}}">Nuevos Productos</a></span></div>
-                <div class="col-sm-4 col-md-3 box-product-outer" ng-repeat="product in news | limitTo:4">
+                <div class="col-sm-4 col-md-3 box-product-outer" ng-repeat="product in news | limitTo:8">
                     <div ng-include="'tpl.html'"></div>
                 </div>
             </div>
