@@ -48,7 +48,7 @@
           <a href="{{ url('admin/products/create') }}" class="btn btn-primary" name="button">Agregar producto</a>
         </div>
         <div class="col-md-6">
-            <button data-tooltip="Ver Productos sin categoria" class="btn btn-default btn-category pull-right" ng-click="category.data = []">Sin Categoria</button>
+            <button data-tooltip="Ver Productos sin categoria" class="btn btn-default btn-category pull-right" ng-click="category.data = { data: []}">Sin Categoria</button>
             <button data-tooltip="Ver Todos los Productos" class="btn btn-default btn-category pull-right" ng-click="category = []">Todos</button>
         </div>
     </div>
