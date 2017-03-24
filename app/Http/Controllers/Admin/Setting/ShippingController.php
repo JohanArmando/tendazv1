@@ -19,21 +19,21 @@ class ShippingController extends Controller
         }
         return view('admin.setting.shipping');
     }
-    
+
     public function destroy($subdomain , ShippingMethod $shipping)
     {
         $shipping->delete();
         return ['' , 200];
     }
-    
+
     public function store(Request $request)
     {
         $shippingMethod = ShippingMethod::create($request->all());
         return fractal()
             ->item($shippingMethod, new ShippingMethodTransformer())
             ->toJson();
-    } 
-    
+    }
+
     public function update($subdomain , ShippingMethod $shipping , Request $request)
     {
         $shipping->update($request->all());
@@ -41,5 +41,5 @@ class ShippingController extends Controller
             ->item($shipping, new ShippingMethodTransformer())
             ->toJson();
     }
-    
+
 }
