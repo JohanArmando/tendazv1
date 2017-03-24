@@ -74,7 +74,7 @@ class ShippingMethodsController extends Controller
             'cart' => fractal()->item($cart, new CartTransformer())
             ], 201);
       }else{
-        $this->index($cart);
+        return ShippingMethod::OptionsByCart($cart);
         //return response()->json(
           //['message' => 'la tienda no tiene envio disponible.' , 'cart' => fractal()->item($cart, new CartTransformer()) ] , 404);
       }
