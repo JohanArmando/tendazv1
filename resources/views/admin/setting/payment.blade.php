@@ -38,7 +38,10 @@ Medios de pago
                                     Tiempo para retirar el dinero : 
                                     <strong>@{{ payment.days }} Dias</strong>
                                 </p>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPayment" ng-click="modal_payment(payment , true);create =  true" ng-if="payment.data == null || payment.data.avaliable == 0">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPayment" ng-click="modal_payment(payment , false) ; "  ng-if=" payment.data.avaliable == 0">
+                                    Activar <span class="hidden-xs">medio de Pago</span>
+                                </button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPayment" ng-click="modal_payment(payment , true);create =  true" ng-if="payment.data == null">
                                     Activar <span class="hidden-xs">medio de Pago</span>
                                 </button>
                                 <button type="button" class="btn btn-danger"  ng-click="deactive(payment)" ng-if="payment.data != null && payment.data.avaliable == 1">

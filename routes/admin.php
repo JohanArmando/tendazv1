@@ -104,6 +104,7 @@ $domain = new \Tendaz\Models\Domain\Domain();
 
     //Route Setting
     Route::group(['prefix' => 'setting', 'namespace' => 'Setting'], function() {
+        Route::get('/payments/desactivar/{payment_value_id}', 'PaymentController@disable');
         Route::resource('/payments','PaymentController');
 
         Route::resource('shippings', 'ShippingController',

@@ -55,11 +55,13 @@
                 .success(function(response){
                     spinner(false);
                     $scope.payments = response.data;
-                    toas('error' , '<h4><strong>' + payment.name + '</strong> desactivado correctamente.</h4>');
+                    toas('info' , '<h4><strong>' + payment.name + '</strong> desactivado correctamente.</h4>');
+                    location.reload();
                 })
                 .error(function(){
                     spinner(false);
                     toas('error' , '<h4>hubo un error al desactivar <strong>' + payment.name + '</strong>.</h4>');
+                    location.reload();
                 });
         }
         $scope.modal_payment = function (payment , active) {
