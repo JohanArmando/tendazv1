@@ -108,13 +108,13 @@ Configura tu dominio
 															@if($domain->state == 401)
 																<td>
 																	<a href="#" data-tooltip="Dominio Inactivo , 'Completa la Instalaci&oacute;n'">
-																	<img src="{{asset('administrator/image/forbidden.png')}}">
+																		<img src="{{asset('administrator/image/download.png')}}">
 																	</a>
 																</td>
 																@else
 																	<td>
-																		<a href="#" data-tooltip="Ssl">
-																		<img src="{{asset('administrator/image/download.png')}}">
+																		<a href="#" data-tooltip="Dominio no existe">
+																			<img src="{{asset('administrator/image/forbidden.png')}}">
 																		</a>
 																	</td>
 															@endif
@@ -131,6 +131,9 @@ Configura tu dominio
 										@endforeach
 										</tbody>
 									</table>
+									<div class="panel-footer">
+										<p>Antes de cambiar de dominio verifica que este apuntando correctamente, dando clic sobre el nombre del dominio.</p>
+									</div>
 								</div>
 							</div>
 						</div>

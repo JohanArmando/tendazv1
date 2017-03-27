@@ -10,7 +10,7 @@
 
     <div class="container">
         <div class="row products">
-            <div class="col-md-3 col-sm-6" ng-repeat="product in news | limitTo:4">
+            <div class="col-md-3 col-sm-6" ng-repeat="product in news | limitTo:8">
                 <div ng-include="'tpl.html'"></div>
             </div>
         </div>
