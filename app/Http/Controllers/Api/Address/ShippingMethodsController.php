@@ -4,6 +4,7 @@ namespace Tendaz\Http\Controllers\Api\Address;
 
 use Illuminate\Http\Request;
 use Tendaz\Models\Cart\Cart;
+use Tendaz\Models\store\Shop;
 use Tendaz\Http\Controllers\Controller;
 use Tendaz\Models\Shipping\ShippingMethod;
 use Tendaz\Events\updateShippingOrderEvent;
@@ -20,7 +21,9 @@ class ShippingMethodsController extends Controller
 
    	public function servientrega(Cart $cart, Request $request)
    	{
-     		if ($shop->servientrega) {
+        $shop = Shop::find($request->client_id);
+
+        if ($shop->servientrega) {
             $Shipping = [];
 
             foreach ($cart->products as $variant) {
@@ -90,7 +93,7 @@ class ShippingMethodsController extends Controller
             }
         }else
         {
-          return ShippingMethod::OptionsByCart($cart);
+            return ShippingMethod::OptionsByCart($cart);
         }
       
     }
