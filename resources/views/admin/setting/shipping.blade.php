@@ -11,6 +11,50 @@
         .nav-tabs.nav-justified > li > a {  border-bottom: 1px solid #f26522;  }
         .tab-content {border-radius: 0 0 20px 20px}
         /*.border-content {background-color: #3C3C3C; padding: 5px 5px 10px 5px;border-radius: 20px 20px 20px 20px}*/
+        .material-switch > input[type="checkbox"] {
+            display: none;   
+        }
+
+        .material-switch > label {
+            cursor: pointer;
+            height: 0px;
+            position: relative; 
+            width: 40px;  
+        }
+
+        .material-switch > label::before {
+            background: rgb(0, 0, 0);
+            box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            content: '';
+            height: 16px;
+            margin-top: -8px;
+            position:absolute;
+            opacity: 0.3;
+            transition: all 0.4s ease-in-out;
+            width: 40px;
+        }
+        .material-switch > label::after {
+            background: rgb(255, 255, 255);
+            border-radius: 16px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+            content: '';
+            height: 24px;
+            left: -4px;
+            margin-top: -8px;
+            position: absolute;
+            top: -4px;
+            transition: all 0.3s ease-in-out;
+            width: 24px;
+        }
+        .material-switch > input[type="checkbox"]:checked + label::before {
+            background: inherit;
+            opacity: 0.5;
+        }
+        .material-switch > input[type="checkbox"]:checked + label::after {
+            background: inherit;
+            left: 20px;
+        }
     </style>
     <link rel="stylesheet" href="{{asset('administrator/css/categories.css')}}">
 @stop
@@ -44,22 +88,25 @@
             <div class="tab-content panel">
                 <div role="tabpanel" class="tab-pane active" id="Servientrega">
                     <div class="row">
-                         <div class="col-md-8 col-md-offset-2">
+                         <div class="col-md-4 col-md-offset-4">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">Envios Servientrega</h3>
                                 </div>
-                                <div class="panel-body">
-                                    <form action="" method="POST" role="form">
-                                        <div class="checkbox">
-                                            <label>
-                                              <input type="checkbox" @if ($shop->servientrega)
-                                                  checked="" 
-                                              @endif> Activar servientrega
-                                            </label>
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        Servientrega activo
+                                        <div class="material-switch pull-right">
+                                            <input id="servientrega" name="someSwitchOption001" type="checkbox"
+                                                @if ($shop->fresh()->servientrega == 1)
+                                                    checked 
+                                                @endif
+                                            />
+                                            <label for="servientrega" class="label-success"></label>
                                         </div>
-                                    </form>
-                                </div>  
+                                    </li>
+                                    
+                                </ul>
                             </div>
                         </div> 
                     </div>
@@ -87,4 +134,46 @@
         <script src="{{ asset('administrator/angular/angular.min.js') }}"></script>
         <script src="{{ asset('administrator/angular/pagination.js') }}"></script>
         <script src="{{ asset('administrator/angular/moduloManual.js') }}"></script>
+        <script type="text/javascript">
+            $('#servientrega').change(function(){
+                if ($(this).is(":checked")){
+                   console.log('prendido');
+                   updateServientrega(1);
+                }else{
+                   console.log('apagado');
+                   updateServientrega(0);
+
+                }
+
+
+
+            });
+            function updateServientrega(set){
+                $.ajax({
+                    url: '{{ url('admin/setting/servientrega') }}?client_secret='+client_secret+'&client_id='+client_id,
+                    data : {
+                        set: set
+                    },
+                    type : 'GET',
+                    dataType : 'json',
+                    success : function(response) {
+                        if(set){
+                            toastr["success"]("Envios con servientrega ha sido activado");
+                        }else
+                        {
+                             toastr["success"]("Envios con servientrega ha sido desactivado");
+
+                        }
+                    },
+                    error : function(xhr, status) {
+                        toastr["success"]("No se pudo cambiar la configuracion servientrega");
+                       
+                    },
+                    complete : function(xhr, status) {
+                    
+                    }
+                });
+            }
+
+        </script>
     @stop

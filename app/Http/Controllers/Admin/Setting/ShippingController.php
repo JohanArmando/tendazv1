@@ -5,6 +5,7 @@ namespace Tendaz\Http\Controllers\Admin\Setting;
 use Illuminate\Http\Request;
 use Tendaz\Http\Controllers\Controller;
 use Tendaz\Models\Shipping\ShippingMethod;
+use Tendaz\Models\Store\Shop;
 use Tendaz\Transformers\ShippingMethodTransformer;
 
 class ShippingController extends Controller
@@ -40,6 +41,14 @@ class ShippingController extends Controller
         return fractal()
             ->item($shipping, new ShippingMethodTransformer())
             ->toJson();
+    }
+
+    public function updateServientrega($subdomain, Request $request)
+    {
+        $shop = Shop::find($request->client_id);
+        $shop->servientrega = $request->set;
+        $shop->save();
+        return $shop;
     }
 
 }
