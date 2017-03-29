@@ -6,7 +6,7 @@
             </div>
         </div>
         <div class="panel-body">
-            <p align="justify">
+            <p align="left">
                 Cuando est&eacute;n disponibles , los dominios comprados a tendaz.com incluyen la privacidad de WHOIS ( valor aproximado de USD 15 $ / a&ntilde;o) . Su informaci&otilde;n personal no se mostrar&acute; en los registros de inscripci&oacute;n de dominio p&uacute;blico.
             </p>
             <br>
