@@ -30,7 +30,7 @@ class PaymentController extends Controller
         }
         return view('admin.setting.payment');
     }
-    
+
     public function show($subdomain , $uuid ,Request $request)
     {
 
@@ -40,5 +40,13 @@ class PaymentController extends Controller
             }
             return  [];
         }
+    }
+
+    public function disable($subdomain, $payment_value_id)
+    {
+        $payment = PaymentValue::where('uuid',$payment_value_id)->first();
+        $payment->avaliable = 0;
+        $payment->save();
+        return $payment;
     }
 }
