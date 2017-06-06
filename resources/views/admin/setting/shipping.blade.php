@@ -3,14 +3,7 @@
     @stop
     @section('css')
     <style type="text/css">
-        .tab1 {  border-radius: 20px 0 0 0 !important;  }
-        .tab3 {  border-radius: 0 20px 0 0 !important;  }
-        .nav-tabs.nav-justified {  background-color: transparent;  }
-        .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {background-color: #f26522; color: white}
-        .nav-tabs > li > a, .nav-tabs > li > a:hover, .nav-tabs > li > a:focus {background-color: #9b9b9b; color: white}
-        .nav-tabs.nav-justified > li > a {  border-bottom: 1px solid #f26522;  }
-        .tab-content {border-radius: 0 0 20px 20px}
-        /*.border-content {background-color: #3C3C3C; padding: 5px 5px 10px 5px;border-radius: 20px 20px 20px 20px}*/
+
         .material-switch > input[type="checkbox"] {
             display: none;   
         }
@@ -71,11 +64,16 @@
         </div>
     </div>
     <br>
-    <div class="row" ng-app="appManual" ng-controller="shippingController">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Panel title</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row" ng-app="appManual" ng-controller="shippingController">
         <div class="col-md-12">
             <div role="tabpanel">
             <!-- Nav tabs -->
-            <ul class="nav nav-tabs  nav-justified" role="tablist">
+            <ul class="nav nav-tabs nav-justified " role="tablist">
                 <li role="presentation" class="active">
                     <a href="#Servientrega" class="link_tab tab1"  aria-controls="Servientrega" role="tab" data-toggle="tab">Servientrega</a>
                 </li>
@@ -95,16 +93,28 @@
                                 </div>
                                 <ul class="list-group">
                                     <li class="list-group-item">
-                                        Servientrega activo
-                                        <div class="material-switch pull-right">
-                                            <input id="servientrega" name="someSwitchOption001" type="checkbox"
-                                                @if ($shop->fresh()->servientrega == 1)
-                                                    checked 
-                                                @endif
-                                            />
-                                            <label for="servientrega" class="label-success"></label>
+                                        <div class="row">
+                                          <div class="col-md-4">
+                                            <img src="{{ url('servientrega/image/logo.png') }}" class="img-responsive " style="margin-top: 28px;">
+                                          </div>
+                                          <div class="col-md-8">
+                                              <h4><strong>Servientrega</strong></h4>
+                                              <p>Activando servientrega generara una guia automatica con la que enviara el producto de manera facil</p>
+                                              <div>
+                                                      <strong>Servientrega activo</strong>
+                                                      <div class="material-switch pull-right">
+                                                          <input id="servientrega" name="someSwitchOption001" type="checkbox"
+                                                              @if ($shop->fresh()->servientrega == 1)
+                                                                  checked 
+                                                              @endif
+                                                          />
+                                                          <label for="servientrega" class="label-success"></label>
+                                                      </div>
+                                              </div>
+                                          </div>
                                         </div>
                                     </li>
+                                    
                                     
                                 </ul>
                             </div>
@@ -128,6 +138,9 @@
 
         <div class="page-end-space"></div>
     </div>
+        </div>
+    </div>
+    
     @endsection
 
     @section('scripts')

@@ -16,6 +16,8 @@ $appRoute = function (){
 
     //route notificacion
 
+    Route::get('/soap', 'SoapController@soap');
+
 
 
     //Routes checkout

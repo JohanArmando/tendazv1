@@ -45,6 +45,6 @@ class RegisterController extends Controller
             ->withResourceName('users')
             ->toJson() , 201);
     }
-        
+
 
 }
