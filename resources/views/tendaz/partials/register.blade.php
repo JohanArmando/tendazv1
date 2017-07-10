@@ -1,4 +1,4 @@
-{!! Form::open(['url' => url('auth/register') , 'method' => 'POST' , 'name' => "form-register" , 'data-toggle'=> "validator" , 'role'=>"form"]) !!}
+{!! Form::open(['route' => 'tendaz.register' , 'method' => 'POST' , 'name' => "form-register" , 'data-toggle'=> "validator" , 'role'=>"form"]) !!}
     <div class="form-group">
         <div class="input-group">
        <span class="input-group-addon">

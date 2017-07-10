@@ -22,7 +22,10 @@ $appRoute = function (){
 
         //Route for create store
         Route::get('/crea-tu-tienda' ,'RegisterController@showRegistrationForm');
-        Route::post('auth/register' ,'RegisterController@register');
+        Route::post('auth/register' ,[
+            'uses' => 'RegisterController@register',
+            'as' => 'tendaz.register'
+        ]);
 
         //Route for reset and send email password
         Route::post('/password/email' ,'ForgotPasswordController@sendResetLinkEmail');
